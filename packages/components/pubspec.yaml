@@ -1,0 +1,6 @@
+name: wds_components
+version: 0.1.0
+publish_to: "none"
+description: WINC Design System components package
+environment:
+  sdk: ">=3.2.0 <4.0.0"

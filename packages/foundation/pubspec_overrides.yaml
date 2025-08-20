@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: wds_tokens
+dependency_overrides:
+  wds_tokens:
+    path: ../tokens

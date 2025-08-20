@@ -1,0 +1,13 @@
+name: wds_flutter
+packages:
+  - packages/**
+  - tools/**
+ide:
+  intellij: false
+  vscode:
+    useWorkspaces: true
+scripts:
+  # flutter pub get
+  install:
+    description: "Install all the dependencies"
+    run: flutter pub get && melos exec -c 2 -- "flutter pub get"
