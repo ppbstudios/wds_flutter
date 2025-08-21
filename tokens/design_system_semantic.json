@@ -1,0 +1,168 @@
+{
+    "cta": {
+      "$type": "color",
+      "$value": "{color.neutral.900}"
+    },
+    "primary": {
+      "$type": "color",
+      "$value": "{color.blue.400}"
+    },
+    "secondary": {
+      "$type": "color",
+      "$value": "{color.pink.500}"
+    },
+    "color": {
+      "backgroud": {
+        "normal": {
+          "$type": "color",
+          "$value": "{color.common.white}"
+        },
+        "alternative": {
+          "$type": "color",
+          "$value": "{color.cool-Neutral.50}"
+        }
+      },
+      "border": {
+        "divider": {
+          "$type": "color",
+          "$value": "{color.cool-Neutral.100}"
+        },
+        "button": {
+          "$type": "color",
+          "$value": "{color.neutral.200}"
+        }
+      },
+      "text": {
+        "normal": {
+          "$type": "color",
+          "$value": "{color.neutral.900}"
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{color.common.black}"
+        },
+        "neutral": {
+          "$type": "color",
+          "$value": "{color.neutral.600}"
+        },
+        "alternative": {
+          "$type": "color",
+          "$value": "{color.neutral.400}"
+        },
+        "assistive": {
+          "$type": "color",
+          "$value": "{color.neutral.300}"
+        },
+        "disable": {
+          "$type": "color",
+          "$value": "{color.neutral.100}"
+        }
+      },
+      "status": {
+        "positive": {
+          "$type": "color",
+          "$value": "{color.blue.400}"
+        },
+        "cautionaty": {
+          "$type": "color",
+          "$value": "{color.orange.500}"
+        },
+        "destructive": {
+          "$type": "color",
+          "$value": "{color.orange.600}"
+        }
+      },
+      "material": {
+        "dimmer": {
+          "$type": "color",
+          "$value": "#000000cc"
+        },
+        "pressed": {
+          "$type": "color",
+          "$value": "#0000001a"
+        }
+      }
+    },
+    "Typography": {
+      "Heading18": {
+        "extrabold": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.Pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.extrabold}"
+          },
+          "lineheight": {
+            "$type": "number",
+            "$value": "{font.lineheight.26}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.18}"
+          },
+          "letterSpacing": {
+            "$type": "number",
+            "$value": -0.02
+          }
+        },
+        "bold": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.Pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.bold}"
+          },
+          "lineheight": {
+            "$type": "number",
+            "$value": "{font.lineheight.26}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.18}"
+          },
+          "letterSpacing": {
+            "$type": "number",
+            "$value": -0.02
+          }
+        }
+      }
+    },
+    "width": {
+      "web": {
+        "$type": "number",
+        "$value": 1440
+      },
+      "ios": {
+        "$type": "number",
+        "$value": 375
+      },
+      "android": {
+        "$type": "number",
+        "$value": 375
+      },
+      "xs": {
+        "$type": "number",
+        "$value": 767
+      },
+      "\bsm": {
+        "$type": "number",
+        "$value": 991
+      },
+      "md": {
+        "$type": "number",
+        "$value": 1199
+      },
+      "lg": {
+        "$type": "number",
+        "$value": 1200
+      },
+      "xl": {
+        "$type": "number",
+        "$value": 1600
+      }
+    }
+  }

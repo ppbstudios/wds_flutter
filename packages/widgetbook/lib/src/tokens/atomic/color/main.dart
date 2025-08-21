@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:wds_tokens/wds_tokens.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-@widgetbook.UseCase(name: 'Atomic Colors', type: WdsAtomicColors)
+@widgetbook.UseCase(
+  name: 'Atomic Color',
+  type: Color,
+  path: 'color/colors',
+  designLink:
+      'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
+)
 Widget buildWdsAtomicColorsUseCase(BuildContext context) {
   return const _AtomicColorShowcase();
 }
@@ -19,67 +25,67 @@ class _AtomicColorShowcase extends StatelessWidget {
       _buildPaletteSection(
           'Pink',
           _shadesFrom([
-            Pink.s100,
-            Pink.s200,
-            Pink.s300,
-            Pink.s400,
-            Pink.s500,
-            Pink.s600,
-            Pink.s700,
-            Pink.s800,
-            Pink.s900,
+            WdsColorPink.v100,
+            WdsColorPink.v200,
+            WdsColorPink.v300,
+            WdsColorPink.v400,
+            WdsColorPink.v500,
+            WdsColorPink.v600,
+            WdsColorPink.v700,
+            WdsColorPink.v800,
+            WdsColorPink.v900,
           ])),
       _buildPaletteSection(
           'Orange',
           _shadesFrom([
-            Orange.s100,
-            Orange.s200,
-            Orange.s300,
-            Orange.s400,
-            Orange.s500,
-            Orange.s600,
-            Orange.s700,
-            Orange.s800,
-            Orange.s900,
+            WdsColorOrange.v100,
+            WdsColorOrange.v200,
+            WdsColorOrange.v300,
+            WdsColorOrange.v400,
+            WdsColorOrange.v500,
+            WdsColorOrange.v600,
+            WdsColorOrange.v700,
+            WdsColorOrange.v800,
+            WdsColorOrange.v900,
           ])),
       _buildPaletteSection(
           'Yellow',
           _shadesFrom([
-            Yellow.s100,
-            Yellow.s200,
-            Yellow.s300,
-            Yellow.s400,
-            Yellow.s500,
-            Yellow.s600,
-            Yellow.s700,
-            Yellow.s800,
-            Yellow.s900,
+            WdsColorYellow.v100,
+            WdsColorYellow.v200,
+            WdsColorYellow.v300,
+            WdsColorYellow.v400,
+            WdsColorYellow.v500,
+            WdsColorYellow.v600,
+            WdsColorYellow.v700,
+            WdsColorYellow.v800,
+            WdsColorYellow.v900,
           ])),
       _buildPaletteSection(
           'Blue',
           _shadesFrom([
-            Blue.s100,
-            Blue.s200,
-            Blue.s300,
-            Blue.s400,
-            Blue.s500,
-            Blue.s600,
-            Blue.s700,
-            Blue.s800,
-            Blue.s900,
+            WdsColorBlue.v100,
+            WdsColorBlue.v200,
+            WdsColorBlue.v300,
+            WdsColorBlue.v400,
+            WdsColorBlue.v500,
+            WdsColorBlue.v600,
+            WdsColorBlue.v700,
+            WdsColorBlue.v800,
+            WdsColorBlue.v900,
           ])),
       _buildPaletteSection(
           'Sky',
           _shadesFrom([
-            Indigo.s100,
-            Indigo.s200,
-            Indigo.s300,
-            Indigo.s400,
-            Indigo.s500,
-            Indigo.s600,
-            Indigo.s700,
-            Indigo.s800,
-            Indigo.s900,
+            WdsColorSky.v100,
+            WdsColorSky.v200,
+            WdsColorSky.v300,
+            WdsColorSky.v400,
+            WdsColorSky.v500,
+            WdsColorSky.v600,
+            WdsColorSky.v700,
+            WdsColorSky.v800,
+            WdsColorSky.v900,
           ])),
       _buildBrandSection(),
       _buildOpacitySection(),
@@ -112,8 +118,8 @@ class _AtomicColorShowcase extends StatelessWidget {
 
   static _Section _buildCommonSection() {
     final items = <_ColorItem>[
-      _ColorItem(label: 'White', color: WdsAtomicColors.white),
-      _ColorItem(label: 'Black', color: WdsAtomicColors.black),
+      _ColorItem(label: 'White', color: WdsColorCommon.white),
+      _ColorItem(label: 'Black', color: WdsColorCommon.black),
     ];
     return _Section(
       title: 'Common',
@@ -125,15 +131,15 @@ class _AtomicColorShowcase extends StatelessWidget {
     return _buildPaletteSection(
         'Neutral',
         _shadesFrom([
-          Gray.s100,
-          Gray.s200,
-          Gray.s300,
-          Gray.s400,
-          Gray.s500,
-          Gray.s600,
-          Gray.s700,
-          Gray.s800,
-          Gray.s900,
+          WdsColorNeutral.v100,
+          WdsColorNeutral.v200,
+          WdsColorNeutral.v300,
+          WdsColorNeutral.v400,
+          WdsColorNeutral.v500,
+          WdsColorNeutral.v600,
+          WdsColorNeutral.v700,
+          WdsColorNeutral.v800,
+          WdsColorNeutral.v900,
         ]));
   }
 
@@ -142,34 +148,47 @@ class _AtomicColorShowcase extends StatelessWidget {
     return _buildPaletteSection(
         'Cool Neutral',
         _shadesFrom([
-          Indigo.s100,
-          Indigo.s200,
-          Indigo.s300,
-          Indigo.s400,
-          Indigo.s500,
-          Indigo.s600,
-          Indigo.s700,
-          Indigo.s800,
-          Indigo.s900,
+          WdsColorCoolNeutral.v100,
+          WdsColorCoolNeutral.v200,
+          WdsColorCoolNeutral.v300,
+          WdsColorCoolNeutral.v400,
+          WdsColorCoolNeutral.v500,
+          WdsColorCoolNeutral.v600,
+          WdsColorCoolNeutral.v700,
+          WdsColorCoolNeutral.v800,
+          WdsColorCoolNeutral.v900,
         ]));
   }
 
   static _Section _buildBrandSection() {
     // Placeholder brand trio using token colors. Replace with brand tokens when available.
     final items = <_ColorItem>[
-      _ColorItem(label: 'Brand A', color: Pink.s500),
-      _ColorItem(label: 'Brand B', color: Pink.s400),
-      _ColorItem(label: 'Brand C', color: Purple.s900),
+      _ColorItem(label: 'Hapa Kristin', color: WdsColorBrand.hapakristin),
+      _ColorItem(label: 'Chuu', color: WdsColorBrand.chuu),
+      _ColorItem(label: 'Gemhour', color: WdsColorBrand.gemhour),
     ];
     return _Section(title: 'Brand', body: _SwatchRow(items: items));
   }
 
   static _Section _buildOpacitySection() {
+    final opacities = [
+      WdsAtomicOpacity.v5,
+      WdsAtomicOpacity.v10,
+      WdsAtomicOpacity.v20,
+      WdsAtomicOpacity.v30,
+      WdsAtomicOpacity.v40,
+      WdsAtomicOpacity.v50,
+      WdsAtomicOpacity.v60,
+      WdsAtomicOpacity.v70,
+      WdsAtomicOpacity.v80,
+      WdsAtomicOpacity.v90,
+    ];
+
     final items = <_ColorItem>[];
-    for (int percent = 5; percent <= 90; percent += 5) {
-      final opacity = percent / 100.0;
+    for (final opacity in opacities) {
       items.add(_ColorItem(
-          label: '$percent', color: Colors.black.withOpacity(opacity)));
+          label: '$opacity',
+          color: WdsColorCommon.black.withValues(alpha: opacity)));
     }
     return _Section(
       title: 'Opacity',
@@ -240,21 +259,19 @@ class _ColorSwatch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hex =
-        '#${item.color.value.toRadixString(16).padLeft(8, '0').toUpperCase()}';
+        '#${item.color.toARGB32().toRadixString(16).padLeft(8, '0').toUpperCase()}';
     final valueText =
         showHex ? hex.substring(2) : '${item.label}${valueSuffix ?? ''}';
 
     return SizedBox(
       width: 96,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             height: 56,
             decoration: BoxDecoration(
               color: item.color,
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: Colors.black12),
             ),
           ),
           const SizedBox(height: 8),
