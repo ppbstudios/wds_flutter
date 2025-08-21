@@ -1,0 +1,16 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+part of '../color.dart';
+
+class WdsColorPink {
+  const WdsColorPink._();
+  static const Color v50 = Color(0xFFFFE6F0);
+  static const Color v100 = Color(0xFFFFCBDF);
+  static const Color v200 = Color(0xFFFFB2D0);
+  static const Color v300 = Color(0xFFFF98BF);
+  static const Color v400 = Color(0xFFFF79AC);
+  static const Color v500 = Color(0xFFFF5898);
+  static const Color v600 = Color(0xFFD4467C);
+  static const Color v700 = Color(0xFF902D53);
+  static const Color v800 = Color(0xFF651B37);
+  static const Color v900 = Color(0xFF520724);
+}

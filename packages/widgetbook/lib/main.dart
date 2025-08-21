@@ -27,7 +27,9 @@ class WidgetbookApp extends StatelessWidget {
           IosViewports.iPhone13,
           AndroidViewports.samsungGalaxyNote20,
           AndroidViewports.samsungGalaxyS20,
-        ])
+        ]),
+        SemanticsAddon(),
+        TextScaleAddon(),
       ],
     );
   }
