@@ -318,6 +318,37 @@ export 'color.dart';
 export 'typography.dart';
 ```
 
+### Body 계열 예외 처리 규칙
+
+일반적인 Typography 구조는 `Heading18 > bold | medium | regular` 처럼 2단계입니다. 그러나 Body는 예외적으로 3단계 중첩을 가질 수 있습니다.
+
+예시(JSON)
+```json
+{
+  "Typography": {
+    "Body15": {
+      "Normal": {
+        "bold": { "family": {...}, "weight": {...}, "lineheight": {...}, "size": {...}, "letterSpacing": {...} },
+        "medium": { ... },
+        "regular": { ... }
+      },
+      "Reading": {
+        "bold": { ... },
+        "medium": { ... },
+        "regular": { ... }
+      }
+    }
+  }
+}
+```
+
+생성기는 다음과 같이 중첩 그룹 이름을 포함해 필드명을 생성합니다.
+- `Body15 > Normal > bold` → `body15NormalBold`
+- `Body15 > Normal > medium` → `body15NormalMedium`
+- `Body15 > Reading > regular` → `body15ReadingRegular`
+
+즉, 3단계인 경우 `style_group_variant`를 연결하여 카멜케이스로 필드명을 만듭니다. 2단계(일반) 구조는 기존과 동일하게 `style_variant`를 사용합니다.
+
 ---
 
 Written by [seunghwanly](https://github.com/seunghwanly)
