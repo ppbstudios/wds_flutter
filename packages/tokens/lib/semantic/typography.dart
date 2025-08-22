@@ -19,4 +19,221 @@ class WdsSemanticTypography {
     height: WdsFontLineheight.v26,
     letterSpacing: -0.02,
   );
+  static const TextStyle heading18Medium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v18,
+    height: WdsFontLineheight.v26,
+    letterSpacing: -0.02,
+  );
+  static const TextStyle heading18Regular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v18,
+    height: WdsFontLineheight.v26,
+    letterSpacing: -0.02,
+  );
+  static const TextStyle title32Medium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v32,
+    height: WdsFontLineheight.v42,
+    letterSpacing: -2.4,
+  );
+  static const TextStyle title32Bold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v32,
+    height: WdsFontLineheight.v42,
+    letterSpacing: -2.4,
+  );
+  static const TextStyle title32Regular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v32,
+    height: WdsFontLineheight.v42,
+    letterSpacing: -2.4,
+  );
+  static const TextStyle title22Bold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v22,
+    height: WdsFontLineheight.v30,
+    letterSpacing: -1.4,
+  );
+  static const TextStyle title22Medium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v22,
+    height: WdsFontLineheight.v30,
+    letterSpacing: -1.4,
+  );
+  static const TextStyle title22Regular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v22,
+    height: WdsFontLineheight.v30,
+    letterSpacing: -1.4,
+  );
+  static const TextStyle title20Bold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v20,
+    height: WdsFontLineheight.v28,
+    letterSpacing: -1.2,
+  );
+  static const TextStyle title20Medium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v20,
+    height: WdsFontLineheight.v28,
+    letterSpacing: -1.2,
+  );
+  static const TextStyle title20Regular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v20,
+    height: WdsFontLineheight.v28,
+    letterSpacing: -1.2,
+  );
+  static const TextStyle heading17Extrabold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.extrabold,
+    fontSize: WdsFontSize.v17,
+    height: WdsFontLineheight.v24,
+    letterSpacing: 0.0,
+  );
+  static const TextStyle heading17Bold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v17,
+    height: WdsFontLineheight.v24,
+    letterSpacing: 0.0,
+  );
+  static const TextStyle heading17Medium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v17,
+    height: WdsFontLineheight.v24,
+    letterSpacing: 0.0,
+  );
+  static const TextStyle heading17Regular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v17,
+    height: WdsFontLineheight.v24,
+    letterSpacing: 0.0,
+  );
+  static const TextStyle heading16Extrabold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.extrabold,
+    fontSize: WdsFontSize.v16,
+    height: WdsFontLineheight.v24,
+    letterSpacing: -0.57,
+  );
+  static const TextStyle heading16Bold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v16,
+    height: WdsFontLineheight.v24,
+    letterSpacing: -0.57,
+  );
+  static const TextStyle heading16Medium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v16,
+    height: WdsFontLineheight.v24,
+    letterSpacing: -0.57,
+  );
+  static const TextStyle heading16Regular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v16,
+    height: WdsFontLineheight.v24,
+    letterSpacing: 0.0,
+  );
+  static const TextStyle body15NormalBold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v15,
+    height: WdsFontLineheight.v22,
+    letterSpacing: -0.96,
+  );
+  static const TextStyle body15NormalMedium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v15,
+    height: WdsFontLineheight.v22,
+    letterSpacing: -0.96,
+  );
+  static const TextStyle body15NormalRegular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v15,
+    height: WdsFontLineheight.v22,
+    letterSpacing: -0.96,
+  );
+  static const TextStyle body15ReadingBold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v15,
+    height: WdsFontLineheight.v24,
+    letterSpacing: -0.57,
+  );
+  static const TextStyle body15ReadingMedium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v15,
+    height: WdsFontLineheight.v24,
+    letterSpacing: -0.96,
+  );
+  static const TextStyle body15ReadingRegular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v15,
+    height: WdsFontLineheight.v24,
+    letterSpacing: -0.96,
+  );
+  static const TextStyle body14NormalBold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v14,
+    height: WdsFontLineheight.v20,
+    letterSpacing: 1.45,
+  );
+  static const TextStyle body14NormalMedium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v14,
+    height: WdsFontLineheight.v20,
+    letterSpacing: 1.45,
+  );
+  static const TextStyle body14NormalRegular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v14,
+    height: WdsFontLineheight.v20,
+    letterSpacing: 1.45,
+  );
+  static const TextStyle body14ReadingBold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v14,
+    height: WdsFontLineheight.v22,
+    letterSpacing: -0.14,
+  );
+  static const TextStyle body14ReadingMedium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v14,
+    height: WdsFontLineheight.v22,
+    letterSpacing: 1.45,
+  );
+  static const TextStyle body14ReadingRegular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v14,
+    height: WdsFontLineheight.v22,
+    letterSpacing: 1.45,
+  );
 }

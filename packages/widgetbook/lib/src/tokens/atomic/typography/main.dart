@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wds_tokens/semantic/semantic.dart';
 import 'package:wds_tokens/wds_tokens.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
@@ -7,7 +6,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 @widgetbook.UseCase(
   name: 'Typography',
   type: TextStyle,
-  path: 'typography/typography',
+  path: 'typography/',
   designLink:
       'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
 )
@@ -196,7 +195,129 @@ class _StylesSection extends StatelessWidget {
         const SizedBox(height: 12),
         _StyleTableHeader(),
         const Divider(height: 1),
-        _Heading18Row(previewText: _previewText),
+        // Title 32
+        _TypographyRow(
+          label: 'Title 32',
+          fontSize: WdsFontSize.v32,
+          lineHeightPx: WdsFontLineheight.v42,
+          styles: const [
+            WdsSemanticTypography.title32Medium,
+            WdsSemanticTypography.title32Bold,
+            WdsSemanticTypography.title32Regular,
+          ],
+          previewText: _previewText,
+        ),
+        // Title 22
+        _TypographyRow(
+          label: 'Title 22',
+          fontSize: WdsFontSize.v22,
+          lineHeightPx: WdsFontLineheight.v30,
+          styles: const [
+            WdsSemanticTypography.title22Bold,
+            WdsSemanticTypography.title22Medium,
+            WdsSemanticTypography.title22Regular,
+          ],
+          previewText: _previewText,
+        ),
+        // Title 20
+        _TypographyRow(
+          label: 'Title 20',
+          fontSize: WdsFontSize.v20,
+          lineHeightPx: WdsFontLineheight.v28,
+          styles: const [
+            WdsSemanticTypography.title20Bold,
+            WdsSemanticTypography.title20Medium,
+            WdsSemanticTypography.title20Regular,
+          ],
+          previewText: _previewText,
+        ),
+        // Heading 18
+        _TypographyRow(
+          label: 'Heading 18',
+          fontSize: WdsFontSize.v18,
+          lineHeightPx: WdsFontLineheight.v26,
+          styles: const [
+            WdsSemanticTypography.heading18Extrabold,
+            WdsSemanticTypography.heading18Bold,
+            WdsSemanticTypography.heading18Medium,
+            WdsSemanticTypography.heading18Regular,
+          ],
+          previewText: _previewText,
+        ),
+        // Heading 17
+        _TypographyRow(
+          label: 'Heading 17',
+          fontSize: WdsFontSize.v17,
+          lineHeightPx: WdsFontLineheight.v24,
+          styles: const [
+            WdsSemanticTypography.heading17Extrabold,
+            WdsSemanticTypography.heading17Bold,
+            WdsSemanticTypography.heading17Medium,
+            WdsSemanticTypography.heading17Regular,
+          ],
+          previewText: _previewText,
+        ),
+        // Heading 16
+        _TypographyRow(
+          label: 'Heading 16',
+          fontSize: WdsFontSize.v16,
+          lineHeightPx: WdsFontLineheight.v24,
+          styles: const [
+            WdsSemanticTypography.heading16Extrabold,
+            WdsSemanticTypography.heading16Bold,
+            WdsSemanticTypography.heading16Medium,
+            WdsSemanticTypography.heading16Regular,
+          ],
+          previewText: _previewText,
+        ),
+        // Body 15 Normal
+        _TypographyRow(
+          label: 'Body 15 Normal',
+          fontSize: WdsFontSize.v15,
+          lineHeightPx: WdsFontLineheight.v22,
+          styles: const [
+            WdsSemanticTypography.body15NormalBold,
+            WdsSemanticTypography.body15NormalMedium,
+            WdsSemanticTypography.body15NormalRegular,
+          ],
+          previewText: _previewText,
+        ),
+        // Body 15 Reading
+        _TypographyRow(
+          label: 'Body 15 Reading',
+          fontSize: WdsFontSize.v15,
+          lineHeightPx: WdsFontLineheight.v24,
+          styles: const [
+            WdsSemanticTypography.body15ReadingBold,
+            WdsSemanticTypography.body15ReadingMedium,
+            WdsSemanticTypography.body15ReadingRegular,
+          ],
+          previewText: _previewText,
+        ),
+        // Body 14 Normal
+        _TypographyRow(
+          label: 'Body 14 Normal',
+          fontSize: WdsFontSize.v14,
+          lineHeightPx: WdsFontLineheight.v20,
+          styles: const [
+            WdsSemanticTypography.body14NormalBold,
+            WdsSemanticTypography.body14NormalMedium,
+            WdsSemanticTypography.body14NormalRegular,
+          ],
+          previewText: _previewText,
+        ),
+        // Body 14 Reading
+        _TypographyRow(
+          label: 'Body 14 Reading',
+          fontSize: WdsFontSize.v14,
+          lineHeightPx: WdsFontLineheight.v22,
+          styles: const [
+            WdsSemanticTypography.body14ReadingBold,
+            WdsSemanticTypography.body14ReadingMedium,
+            WdsSemanticTypography.body14ReadingRegular,
+          ],
+          previewText: _previewText,
+        ),
       ],
     );
   }
@@ -213,7 +334,7 @@ class _StyleTableHeader extends StatelessWidget {
         3: FixedColumnWidth(80), // 자간
         4: FlexColumnWidth(), // 미리보기
       },
-      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+      defaultVerticalAlignment: TableCellVerticalAlignment.top,
       children: [
         TableRow(
           children: [
@@ -221,7 +342,7 @@ class _StyleTableHeader extends StatelessWidget {
             _HeaderCell('크기'),
             _HeaderCell('행간'),
             _HeaderCell('자간'),
-            _HeaderCell('미리보기'),
+            _PreviewHeaderCell(),
           ],
         ),
       ],
@@ -229,12 +350,42 @@ class _StyleTableHeader extends StatelessWidget {
   }
 }
 
-class _Heading18Row extends StatelessWidget {
-  const _Heading18Row({required this.previewText});
+class _TypographyRow extends StatelessWidget {
+  const _TypographyRow({
+    required this.label,
+    required this.fontSize,
+    required this.lineHeightPx,
+    required this.styles,
+    required this.previewText,
+  });
+
+  final String label;
+  final double fontSize;
+  final double lineHeightPx;
+  final List<TextStyle> styles;
   final String previewText;
+
+  String _formatLetterSpacing(double value) {
+    return '${value.toStringAsFixed(2)}em';
+  }
 
   @override
   Widget build(BuildContext context) {
+    final ratio = lineHeightPx / fontSize;
+
+    final uniqueSpacings = styles
+        .map((s) => s.letterSpacing ?? 0.0)
+        .toSet()
+        .toList(growable: false);
+    final letterSpacingLabel = uniqueSpacings.length == 1
+        ? _formatLetterSpacing(uniqueSpacings.first)
+        : 'varies';
+
+    final Map<FontWeight, TextStyle> _styleByWeight = {
+      for (final s in styles)
+        if (s.fontWeight != null) s.fontWeight!: s,
+    };
+
     return Table(
       columnWidths: const {
         0: FixedColumnWidth(140),
@@ -247,21 +398,23 @@ class _Heading18Row extends StatelessWidget {
       children: [
         TableRow(
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 12),
-              child: Text('Heading 18'),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(label),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 12),
-              child: Text('18px'),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text('${fontSize.toStringAsFixed(0)}px'),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 12),
-              child: Text('26px (1.44)'),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                '${lineHeightPx.toStringAsFixed(0)}px (${ratio.toStringAsFixed(2)})',
+              ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 12),
-              child: Text('-0.02em'),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(letterSpacingLabel),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -271,26 +424,51 @@ class _Heading18Row extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: Text(
-                        previewText,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style:
-                            WdsSemanticTypography.heading18Extrabold.copyWith(
-                          height: WdsFontLineheight.v26 / WdsFontSize.v18,
-                        ),
-                      ),
+                      child: _styleByWeight[WdsFontWeight.extrabold] != null
+                          ? Text(
+                              previewText,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: _styleByWeight[WdsFontWeight.extrabold]!
+                                  .copyWith(height: ratio),
+                            )
+                          : const SizedBox.shrink(),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: Text(
-                        previewText,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: WdsSemanticTypography.heading18Bold.copyWith(
-                          height: WdsFontLineheight.v26 / WdsFontSize.v18,
-                        ),
-                      ),
+                      child: _styleByWeight[WdsFontWeight.bold] != null
+                          ? Text(
+                              previewText,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: _styleByWeight[WdsFontWeight.bold]!
+                                  .copyWith(height: ratio),
+                            )
+                          : const SizedBox.shrink(),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _styleByWeight[WdsFontWeight.medium] != null
+                          ? Text(
+                              previewText,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: _styleByWeight[WdsFontWeight.medium]!
+                                  .copyWith(height: ratio),
+                            )
+                          : const SizedBox.shrink(),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _styleByWeight[WdsFontWeight.regular] != null
+                          ? Text(
+                              previewText,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: _styleByWeight[WdsFontWeight.regular]!
+                                  .copyWith(height: ratio),
+                            )
+                          : const SizedBox.shrink(),
                     ),
                   ],
                 ),
@@ -335,6 +513,60 @@ class _Chip extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Text(label, style: Theme.of(context).textTheme.labelMedium),
+    );
+  }
+}
+
+class _PreviewHeaderCell extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            '미리보기',
+            style: Theme.of(context)
+                .textTheme
+                .labelLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 4),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Text(
+                  'ExtraBold',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  'Bold',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  'Medium',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  'Regular',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
