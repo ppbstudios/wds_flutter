@@ -286,22 +286,62 @@ Future<void> _generateSemantic({
 
     for (final MapEntry(:key, :value)
         in tyMap.entries.where((e) => e.value is Map<String, dynamic>)) {
-      final styleName = key; // e.g., Heading18
+      final styleName = key; // e.g., Heading18, Body15
       final variants = value as Map<String, dynamic>;
+
       for (final MapEntry(:key, :value)
           in variants.entries.where((e) => e.value is Map<String, dynamic>)) {
-        final variantName = key; // e.g., bold
-        final props = value as Map<String, dynamic>;
-        final fieldName = _camelCase('${styleName}_${variantName}');
+        final variantOrGroupName = key; // e.g., bold or Normal/Reading
+        final propsOrGroup = value as Map<String, dynamic>;
 
-        final familyExpr = _resolveTypographyFamily(props['family']);
-        final weightExpr = _resolveTypographyWeight(props['weight']);
-        final sizeExpr =
-            _resolveTypographyNumberClassed(props['size'], 'WdsFontSize');
+        // Body 계열 예외: Normal/Reading과 같은 중첩 그룹 지원
+        if (!_isTypographyLeafNode(propsOrGroup)) {
+          for (final MapEntry(:key, :value) in propsOrGroup.entries
+              .where((e) => e.value is Map<String, dynamic>)) {
+            final innerVariantName = key; // e.g., bold/medium/regular
+            final innerProps = value as Map<String, dynamic>;
+            if (!_isTypographyLeafNode(innerProps)) continue;
+
+            final fieldName = _camelCase(
+                '${styleName}_${variantOrGroupName}_${innerVariantName}');
+
+            final familyExpr = _resolveTypographyFamily(innerProps['family']);
+            final weightExpr = _resolveTypographyWeight(innerProps['weight']);
+            final sizeExpr = _resolveTypographyNumberClassed(
+                innerProps['size'], 'WdsFontSize');
+            final lineHeightExpr = _resolveTypographyNumberClassed(
+                innerProps['lineheight'], 'WdsFontLineheight');
+            final letterSpacingExpr =
+                _resolveTypographyLetterSpacing(innerProps['letterSpacing']);
+
+            final lines = <String>[];
+            if (familyExpr != null) lines.add('fontFamily: $familyExpr');
+            if (weightExpr != null) lines.add('fontWeight: $weightExpr');
+            if (sizeExpr != null) lines.add('fontSize: $sizeExpr');
+            if (lineHeightExpr != null) lines.add('height: $lineHeightExpr');
+            if (letterSpacingExpr != null)
+              lines.add('letterSpacing: $letterSpacingExpr');
+
+            sb.writeln('  static const TextStyle $fieldName = TextStyle(');
+            for (int i = 0; i < lines.length; i++) {
+              sb.writeln('    ${lines[i]},');
+            }
+            sb.writeln('  );');
+          }
+          continue;
+        }
+
+        // 일반(2단계) 구조 처리
+        final fieldName = _camelCase('${styleName}_${variantOrGroupName}');
+
+        final familyExpr = _resolveTypographyFamily(propsOrGroup['family']);
+        final weightExpr = _resolveTypographyWeight(propsOrGroup['weight']);
+        final sizeExpr = _resolveTypographyNumberClassed(
+            propsOrGroup['size'], 'WdsFontSize');
         final lineHeightExpr = _resolveTypographyNumberClassed(
-            props['lineheight'], 'WdsFontLineheight');
+            propsOrGroup['lineheight'], 'WdsFontLineheight');
         final letterSpacingExpr =
-            _resolveTypographyLetterSpacing(props['letterSpacing']);
+            _resolveTypographyLetterSpacing(propsOrGroup['letterSpacing']);
 
         final lines = <String>[];
         if (familyExpr != null) lines.add('fontFamily: $familyExpr');
@@ -802,25 +842,7 @@ String? _resolveTypographyWeight(dynamic node) {
   return weight != null ? 'FontWeight.w$weight' : null;
 }
 
-String? _resolveTypographyNumber(dynamic node, {required String root}) {
-  if (node is Map<String, dynamic> && node.containsKey(r'$value')) {
-    final v = node[r'$value'];
-    if (v is String && v.startsWith('{') && v.endsWith('}')) {
-      final path = v.substring(1, v.length - 1);
-      final parts = path.split('.');
-      if (parts.length >= 3) {
-        final group = parts[1];
-        final key = parts[2];
-        final groupField = _camelCase(group);
-        final tokenField = _identifierFromKey(key);
-        return 'WdsFont.$groupField.$tokenField';
-      }
-    } else if (v is num) {
-      return v.toDouble().toString();
-    }
-  }
-  return null;
-}
+// _resolveTypographyNumber: 미사용 제거
 
 String? _resolveTypographyNumberClassed(dynamic node, String className) {
   if (node is Map<String, dynamic> && node.containsKey(r'$value')) {
@@ -850,6 +872,22 @@ String? _resolveTypographyLetterSpacing(dynamic node) {
     }
   }
   return null;
+}
+
+bool _isTypographyLeafNode(dynamic node) {
+  if (node is! Map<String, dynamic>) return false;
+  // Leaf props for a TextStyle
+  const keys = {
+    'family',
+    'weight',
+    'size',
+    'lineheight',
+    'letterSpacing',
+  };
+  for (final k in keys) {
+    if (node.containsKey(k)) return true;
+  }
+  return false;
 }
 
 String? _convertToFontWeight(dynamic raw) {
@@ -995,25 +1033,12 @@ Future<void> _generateFontLibrary({
         String partFileName
       )> partsMeta = [];
 
-  // family는 단일 leaf일 수 있어 별도 처리
-  String? familyConstType;
-  String? familyConstValue;
-
   for (final key in keys) {
     final value = rootMap[key];
     if (value is! Map<String, dynamic>) continue;
 
     final isLeaf = value.containsKey(r'$type') && value.containsKey(r'$value');
-    if (isLeaf) {
-      // 예: font.family
-      final type = value[r'$type'] as String;
-      final converted = _convertValueByType(type, value[r'$value']);
-      if (converted != null) {
-        familyConstType = _getDartTypeForToken(type);
-        familyConstValue = converted;
-      }
-      continue;
-    }
+    if (isLeaf) continue;
 
     // 그룹(예: size, weight, lineheight) → part 파일 생성
     final classNameBase = _pascalCase(key);
