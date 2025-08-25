@@ -187,7 +187,7 @@
         "$type": "color",
         "$value": "#eb7993"
       },
-      "Gemhour": {
+      "gemhour": {
         "$type": "color",
         "$value": "#611161"
       }
@@ -276,7 +276,7 @@
         "$value": "#3e2c00"
       }
     },
-    "cool-Neutral": {
+    "coolNeutral": {
       "50": {
         "$type": "color",
         "$value": "#f8f9fb"
@@ -394,7 +394,7 @@
         "$value": 800
       }
     },
-    "lineheight": {
+    "lineHeight": {
       "13": {
         "$type": "number",
         "$value": 13

@@ -319,7 +319,7 @@ Future<void> _generateSemantic({
             final sizeExpr = _resolveTypographyNumberClassed(
                 innerProps['size'], 'WdsFontSize');
             final lineHeightExpr = _resolveTypographyNumberClassed(
-                innerProps['lineheight'], 'WdsFontLineheight');
+                innerProps['lineHeight'], 'WdsFontLineHeight');
             final letterSpacingExpr = _resolveTypographyLetterSpacing(
                 innerProps['letterSpacing'],
                 sizeExpr: sizeExpr,
@@ -329,7 +329,9 @@ Future<void> _generateSemantic({
             if (familyExpr != null) lines.add('fontFamily: $familyExpr');
             if (weightExpr != null) lines.add('fontWeight: $weightExpr');
             if (sizeExpr != null) lines.add('fontSize: $sizeExpr');
-            if (lineHeightExpr != null) lines.add('height: $lineHeightExpr');
+            final heightExpr = _composeFlutterHeight(
+                lineHeightExpr: lineHeightExpr, sizeExpr: sizeExpr);
+            if (heightExpr != null) lines.add('height: $heightExpr');
             if (letterSpacingExpr != null)
               lines.add('letterSpacing: $letterSpacingExpr');
 
@@ -350,7 +352,7 @@ Future<void> _generateSemantic({
         final sizeExpr = _resolveTypographyNumberClassed(
             propsOrGroup['size'], 'WdsFontSize');
         final lineHeightExpr = _resolveTypographyNumberClassed(
-            propsOrGroup['lineheight'], 'WdsFontLineheight');
+            propsOrGroup['lineHeight'], 'WdsFontLineHeight');
         final letterSpacingExpr = _resolveTypographyLetterSpacing(
             propsOrGroup['letterSpacing'],
             sizeExpr: sizeExpr,
@@ -360,7 +362,9 @@ Future<void> _generateSemantic({
         if (familyExpr != null) lines.add('fontFamily: $familyExpr');
         if (weightExpr != null) lines.add('fontWeight: $weightExpr');
         if (sizeExpr != null) lines.add('fontSize: $sizeExpr');
-        if (lineHeightExpr != null) lines.add('height: $lineHeightExpr');
+        final heightExpr = _composeFlutterHeight(
+            lineHeightExpr: lineHeightExpr, sizeExpr: sizeExpr);
+        if (heightExpr != null) lines.add('height: $heightExpr');
         if (letterSpacingExpr != null)
           lines.add('letterSpacing: $letterSpacingExpr');
 
@@ -458,7 +462,10 @@ Future<void> _generateTokenFamily(
       if (child.containsKey(r'$value') && child.containsKey(r'$type')) {
         final type = child[r'$type'] as String;
         final value = child[r'$value'];
-        final convertedValue = _convertValueByType(type, value);
+        String? convertedValue = _convertValueByType(type, value);
+        final normalizedOpacity =
+            _normalizeOpacityIfNeeded(rootKey, type, value);
+        if (normalizedOpacity != null) convertedValue = normalizedOpacity;
         final identifier = _identifierFromKey(k);
         if (convertedValue != null && exposedTopLevelNames.add(identifier)) {
           buf.writeln(
@@ -504,7 +511,10 @@ Future<void> _generateTokenFamily(
             v.containsKey(r'$value')) {
           final type = v[r'$type'] as String;
           final value = v[r'$value'];
-          final convertedValue = _convertValueByType(type, value);
+          String? convertedValue = _convertValueByType(type, value);
+          final normalizedOpacity =
+              _normalizeOpacityIfNeeded(rootKey, type, value);
+          if (normalizedOpacity != null) convertedValue = normalizedOpacity;
           final identifier = _identifierFromKey(e.key);
           if (convertedValue != null && fieldNames.add(identifier)) {
             cb.writeln(
@@ -682,7 +692,6 @@ String _getDartTypeForToken(String type) => switch (type) {
       'fontSize' ||
       'fontSizes' ||
       'lineHeight' ||
-      'lineHeights' ||
       'letterSpacing' =>
         'double',
       'text' => 'String',
@@ -696,8 +705,8 @@ String? _convertValueByType(String type, dynamic value) => switch (type) {
       'number' => _convertNumberValue(value),
       'text' => _convertTextValue(value),
       'boxShadow' => _convertBoxShadowValue(value),
-      'lineHeight' || 'lineHeights' => _convertLineHeightValue(value),
-      'fontSize' || 'fontSizes' => _convertFontSizeValue(value),
+      'lineHeight' => _convertLineHeightValue(value),
+      'fontSize' => _convertFontSizeValue(value),
       'letterSpacing' => _convertLetterSpacingValue(value),
       // 무시 대상
       'paragraphSpacing' => null,
@@ -811,6 +820,19 @@ String? _convertSemanticColorValue(dynamic raw) {
   return null;
 }
 
+String? _composeFlutterHeight({String? lineHeightExpr, String? sizeExpr}) {
+  // Flutter TextStyle.height expects a multiple of font size.
+  if (lineHeightExpr == null || lineHeightExpr.isEmpty) return null;
+  // If AUTO was mapped to 1.0 already, respect it.
+  if (lineHeightExpr == '1.0') return '1.0';
+  // If font size is known, convert px lineHeight to ratio.
+  if (sizeExpr != null && sizeExpr.isNotEmpty) {
+    return '(${lineHeightExpr}) / (${sizeExpr})';
+  }
+  // Without font size, we cannot compute a reliable ratio. Omit height.
+  return null;
+}
+
 String? _resolveTypographyFamily(dynamic node) {
   if (node is Map<String, dynamic> && node.containsKey(r'$value')) {
     final v = node[r'$value'];
@@ -877,33 +899,23 @@ String? _resolveTypographyNumberClassed(dynamic node, String className) {
 
 String? _resolveTypographyLetterSpacing(dynamic node,
     {String? sizeExpr, required double baseFontSize}) {
+  // Flutter TextStyle.letterSpacing expects logical pixels.
+  // 규칙 변경: 넘어온 값이 숫자면 px로 그대로 사용, 문자열 %면 em으로 변환만 수행(-2.4% → -0.024).
   if (node is Map<String, dynamic> && node.containsKey(r'$value')) {
     final v = node[r'$value'];
-    // em → px: px = em * fontSize
     if (v is num) {
-      final em = v.toDouble();
-      final multiplier = (sizeExpr != null && sizeExpr.isNotEmpty)
-          ? sizeExpr
-          : baseFontSize.toString();
-      return '(${em.toString()}) * (${multiplier})';
+      return v.toDouble().toString();
     }
     if (v is String) {
       final asNumber = double.tryParse(v);
       if (asNumber != null) {
-        final multiplier = (sizeExpr != null && sizeExpr.isNotEmpty)
-            ? sizeExpr
-            : baseFontSize.toString();
-        return '(${asNumber.toString()}) * (${multiplier})';
+        return asNumber.toString();
       }
       if (v.endsWith('%')) {
-        // percentage → em → px
         final percentValue = double.tryParse(v.replaceAll('%', ''));
         if (percentValue != null) {
-          final em = percentValue / 100.0; // -2.4% → -0.024em
-          final multiplier = (sizeExpr != null && sizeExpr.isNotEmpty)
-              ? sizeExpr
-              : baseFontSize.toString();
-          return '(${em.toString()}) * (${multiplier})';
+          final em = percentValue / 100.0; // -2.4% → -0.024
+          return em.toString();
         }
       }
     }
@@ -918,7 +930,7 @@ bool _isTypographyLeafNode(dynamic node) {
     'family',
     'weight',
     'size',
-    'lineheight',
+    'lineHeight',
     'letterSpacing',
   };
   for (final k in keys) {
@@ -1077,7 +1089,7 @@ Future<void> _generateFontLibrary({
     final isLeaf = value.containsKey(r'$type') && value.containsKey(r'$value');
     if (isLeaf) continue;
 
-    // 그룹(예: size, weight, lineheight) → part 파일 생성
+    // 그룹(예: size, weight, lineHeight) → part 파일 생성
     final classNameBase = _pascalCase(key);
     if (classNameBase.isEmpty) continue;
     final className = 'WdsFont$classNameBase';
@@ -1274,4 +1286,17 @@ String _hexToColorLiteral(String hex) {
     return 'Color(0x$aa$rrggbb)';
   }
   return 'Color(0xFF000000)';
+}
+
+String? _normalizeOpacityIfNeeded(String rootKey, String type, dynamic raw) {
+  // If root is 'opacity' and type is number, treat value as percentage and normalize to 0.0~1.0
+  if (rootKey.toLowerCase() == 'opacity' && type == 'number') {
+    double? n;
+    if (raw is num) n = raw.toDouble();
+    if (raw is String) n = double.tryParse(raw);
+    if (n != null) {
+      return (n / 100.0).toString();
+    }
+  }
+  return null;
 }

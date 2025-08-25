@@ -1,8 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 part of '../font.dart';
 
-class WdsFontLineheight {
-  const WdsFontLineheight._();
+class WdsFontLineHeight {
+  const WdsFontLineHeight._();
   static const double v13 = 13.0;
   static const double v14 = 14.0;
   static const double v16 = 16.0;

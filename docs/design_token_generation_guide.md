@@ -120,7 +120,7 @@ This document outlines the conversion rules for DTCG (Design Tokens Community Gr
   | boxShadow        | List<BoxShadow>  | Convert to Flutter BoxShadow objects (see details below)                       |
   | lineHeight       | double           | Handle "AUTO" as 1.0, otherwise convert number to double                       |
   | fontSize         | double           | Convert string numbers to double                                               |
-  | letterSpacing    | double           | Convert percentage to logical pixels (see formula below)                       |
+  | letterSpacing    | double           | Use px if number; percentage to em only (no fontSize multiply)                 |
   | paragraphSpacing | Ignored          | Skip this type (could be used in StrutStyle later)                             |
 
 **For "font relevant keys**:
@@ -128,7 +128,7 @@ This document outlines the conversion rules for DTCG (Design Tokens Community Gr
 - DO parse "family" for map key
 - DO parse "size" for map key
 - DO parse "weight" for map key
-- DO parse "lineheight" for map key
+- DO parse "lineHeight" for map key
 - DO NOT parse "lineHeights" for root key
 - DO NOT parse "fontSize" for root key
 - DO NOT parse "letterSpacing" for root key
@@ -183,10 +183,15 @@ This document outlines the conversion rules for DTCG (Design Tokens Community Gr
 
 **letterSpacing Type**
   - Input: em number (e.g., -0.02), or percentage string (e.g., -2.4%)
-  - Formula (percentage → em): `em = percentage / 100.0`
-  - Formula (em → px): `px = em * fontSize`
-  - Example: fontSize=18.0, letterSpacing=-2.4% → em=-0.024 → px=-0.432
-  - Output: double in logical pixels
+  - 규칙(업데이트):
+    - 숫자(예: -0.4)로 오면 px(논리 픽셀)로 간주해 그대로 사용합니다.
+    - 문자열 퍼센트(예: "-2.4%")로 오면 em으로 변환만 합니다: `em = percentage / 100.0` → `-0.024`.
+    - 더 이상 fontSize를 곱하지 않습니다. 사용처(Flutter)는 px 또는 em을 그대로 받습니다.
+
+**opacity Type (atomic/opacity)**
+  - Input: number in percentage (e.g., 5, 10, 60)
+  - 규칙: 0.0~1.0으로 정규화해서 출력합니다. `normalized = value / 100.0`
+  - 예: `5 → 0.05`, `60 → 0.6`
 
   - Base font size fallback: fontSize가 명시되지 않은 경우, CLI 옵션 `--base-font-size`(기본 16.0)를 곱해 px를 계산합니다.
     - 사용 예: `dart run bin/main.dart -k semantic -i tokens/design_system_semantic.json -o packages/tokens --base-font-size 16.0`
@@ -294,7 +299,7 @@ class WdsSemanticColorBackground {
 
 각 key에 해당되는 값들은 `WdsFontXXX`과 mapping 되어야 합니다.
 
-예시
+예시 (업데이트된 규칙 반영)
 ``` dart
 import '../atomic/atomic.dart';
 
@@ -303,14 +308,18 @@ class WdsSemanticTypography {
   static const TextStyle bold = TextStyle(
     fontFamily: WdsFontFamily.pretendard,
     fontWeight: WdsFontWeight.bold,
-    lineheight: WdsFontLineheight.v26,
     fontSize: WdsFontSize.v18,
-    letterSpacing: -0.02,
+    // height는 배수로 변환되어 출력됩니다: height = lineHeight / fontSize
+    height: WdsFontLineHeight.v26 / WdsFontSize.v18,
+    // letterSpacing은 숫자(px)는 그대로, %는 em으로만 변환해 출력됩니다
+    letterSpacing: -0.024, // 예: -2.4% → -0.024
   );
 }
 ```
 
-여기서 `letterSpacing`은 atomic에 정의된 것이 없을 수 있으니 "{ }" reference 값으로 전달되지 않을 가능성이 큽니다. 또한 Figma export JSON에서 `letterSpacing` 값이 em(number)로 제공되면 해당 텍스트 스타일의 `size`(fontSize)를 기준으로 px(논리 픽셀)로 변환합니다. `size`가 없으면 기존 number를 그대로 사용합니다.
+여기서 height는 Flutter의 요구사항대로 배수 값으로 생성됩니다. JSON에서 제공되는 lineHeight가 px(숫자)라면 생성기는 `height = lineHeight / fontSize`로 변환합니다. 만약 `lineHeight`가 `AUTO`면 1.0을 사용합니다.
+
+또한 `letterSpacing` 값이 숫자면 px로 간주해 그대로 사용하고, 문자열 %면 em으로만 변환합니다. 폰트 크기는 더 이상 곱하지 않습니다.
 
 @design_system_semantic.json 에 해당합니다. semantic 디렉토리 내 생성된 모든 파일은 `semantic/semantic.dart` 안에서 export 되어야 합니다.
 
@@ -332,7 +341,7 @@ export 'typography.dart';
   "Typography": {
     "Body15": {
       "Normal": {
-        "bold": { "family": {...}, "weight": {...}, "lineheight": {...}, "size": {...}, "letterSpacing": {...} },
+        "bold": { "family": {...}, "weight": {...}, "lineHeight": {...}, "size": {...}, "letterSpacing": {...} },
         "medium": { ... },
         "regular": { ... }
       },

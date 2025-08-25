@@ -1,17 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 library wds_tokens;
+import 'package:flutter/material.dart';
 
 class WdsAtomicOpacity {
   const WdsAtomicOpacity._();
-  static const double v10 = 10.0;
-  static const double v20 = 20.0;
-  static const double v30 = 30.0;
-  static const double v40 = 40.0;
-  static const double v5 = 5.0;
-  static const double v50 = 50.0;
-  static const double v60 = 60.0;
-  static const double v70 = 70.0;
-  static const double v80 = 80.0;
-  static const double v90 = 90.0;
+  static const double v10 = 0.1;
+  static const double v20 = 0.2;
+  static const double v30 = 0.3;
+  static const double v40 = 0.4;
+  static const double v5 = 0.05;
+  static const double v50 = 0.5;
+  static const double v60 = 0.6;
+  static const double v70 = 0.7;
+  static const double v80 = 0.8;
+  static const double v90 = 0.9;
 }
+
