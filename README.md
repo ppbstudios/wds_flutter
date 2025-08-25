@@ -16,6 +16,38 @@ Flutter를 위한 WDS(WINC Design System)
 - `-f, --overwrite`: 덮어쓰기 (기본값: true)
 - `-v, --verbose`: 로그 출력 (기본값: true)
 
+### 🚀 간편한 Shell Script 사용법
+
+`tokens/` 폴더의 JSON 파일을 수정할 때마다 사용할 수 있는 간편한 shell script가 제공됩니다.
+
+**기본 사용:**
+```bash
+./generate_tokens.sh                    # 모든 토큰 생성 (atomic + semantic)
+./generate_tokens.sh atomic             # atomic 토큰만 생성
+./generate_tokens.sh semantic           # semantic 토큰만 생성
+```
+
+**옵션과 함께 사용:**
+```bash
+./generate_tokens.sh -v semantic        # verbose 출력과 함께 semantic 토큰 생성
+./generate_tokens.sh --base-font-size 18.0 semantic  # 커스텀 폰트 크기로 semantic 토큰 생성
+./generate_tokens.sh -n atomic          # 동기화 없이 atomic 토큰만 생성
+```
+
+**도움말 보기:**
+```bash
+./generate_tokens.sh --help
+```
+
+**주요 기능:**
+- ✨ 간단한 명령어로 긴 `dart run` 명령어 대체
+- 🎨 컬러 출력으로 성공/실패/경고 구분
+- 🔍 자동 검증으로 입력/출력 디렉터리 확인
+- ⚙️ verbose, sync, base-font-size 등 모든 옵션 지원
+- 🚨 명확한 에러 메시지와 도움말 제공
+
+### 기존 실행 방법
+
 실행 방법 1) 로컬에서 직접 실행
 
 ```bash

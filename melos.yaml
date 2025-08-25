@@ -11,3 +11,8 @@ scripts:
   install:
     description: "Install all the dependencies"
     run: flutter pub get && melos exec -c 2 -- "flutter pub get"
+
+  # Build Widgetbook
+  build-widgetbook:
+    description: "Build Widgetbook"
+    run: cd packages/widgetbook && fvm exec dart run build_runner build --delete-conflicting-outputs && cd ../..
