@@ -70,7 +70,7 @@ jobs:
         
       - name: Build web app
         working-directory: packages/widgetbook
-        run: flutter build web --release --web-renderer canvaskit
+        run: flutter build web --release
         
       - name: Deploy to Netlify (Production)
         if: inputs.environment == 'production'
