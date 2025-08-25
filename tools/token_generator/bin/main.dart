@@ -296,27 +296,12 @@ Future<void> _generateSemantic({
     for (final MapEntry(:key, :value)
         in tyMap.entries.where((e) => e.value is Map<String, dynamic>)) {
       final styleName = key; // e.g., Heading18, Body15
-      final styleName = key; // e.g., Heading18, Body15
       final variants = value as Map<String, dynamic>;
-
 
       for (final MapEntry(:key, :value)
           in variants.entries.where((e) => e.value is Map<String, dynamic>)) {
         final variantOrGroupName = key; // e.g., bold or Normal/Reading
         final propsOrGroup = value as Map<String, dynamic>;
-
-        // Body 계열 예외: Normal/Reading과 같은 중첩 그룹 지원
-        if (!_isTypographyLeafNode(propsOrGroup)) {
-          for (final MapEntry(:key, :value) in propsOrGroup.entries
-              .where((e) => e.value is Map<String, dynamic>)) {
-            final innerVariantName = key; // e.g., bold/medium/regular
-            final innerProps = value as Map<String, dynamic>;
-            if (!_isTypographyLeafNode(innerProps)) continue;
-
-            final fieldName = _camelCase(
-                '${styleName}_${variantOrGroupName}_${innerVariantName}');
-        final variantOrGroupName = key; // e.g., bold or Normal/Reading
-        final propsOrGroup = value;
 
         // Body 계열 예외: Normal/Reading과 같은 중첩 그룹 지원
         if (!_isTypographyLeafNode(propsOrGroup)) {
@@ -871,7 +856,6 @@ String? _resolveTypographyWeight(dynamic node) {
 }
 
 // _resolveTypographyNumber: 미사용 제거
-// _resolveTypographyNumber: 미사용 제거
 
 String? _resolveTypographyNumberClassed(dynamic node, String className) {
   if (node is Map<String, dynamic> && node.containsKey(r'$value')) {
@@ -925,22 +909,6 @@ String? _resolveTypographyLetterSpacing(dynamic node,
     }
   }
   return null;
-}
-
-bool _isTypographyLeafNode(dynamic node) {
-  if (node is! Map<String, dynamic>) return false;
-  // Leaf props for a TextStyle
-  const keys = {
-    'family',
-    'weight',
-    'size',
-    'lineheight',
-    'letterSpacing',
-  };
-  for (final k in keys) {
-    if (node.containsKey(k)) return true;
-  }
-  return false;
 }
 
 bool _isTypographyLeafNode(dynamic node) {
@@ -1107,7 +1075,6 @@ Future<void> _generateFontLibrary({
     if (value is! Map<String, dynamic>) continue;
 
     final isLeaf = value.containsKey(r'$type') && value.containsKey(r'$value');
-    if (isLeaf) continue;
     if (isLeaf) continue;
 
     // 그룹(예: size, weight, lineheight) → part 파일 생성
