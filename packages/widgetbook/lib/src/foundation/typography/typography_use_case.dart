@@ -18,6 +18,14 @@ Widget buildWdsTypographyUseCase(BuildContext context) {
 const String kDefaultTypographyText = '모든 국민은 소급입법에 의하여 참정권을 제한받지 아니한다. '
     '이 헌법에 의한 최종의 대법원 재판을 받기 전에는 유죄로 인정되지 아니한다.';
 
+const _tableDimensions = const {
+  0: FixedColumnWidth(240),
+  1: FixedColumnWidth(84),
+  2: FixedColumnWidth(84),
+  3: FixedColumnWidth(84),
+  4: FlexColumnWidth(),
+};
+
 class _TypographyShowcase extends StatelessWidget {
   const _TypographyShowcase();
 
@@ -161,6 +169,7 @@ class _StylesSection extends StatelessWidget {
         // Title 32
         _TypographyRow(
           label: 'Title 32',
+          tokenName: 'WdsSemanticTypography.title32Medium',
           fontSize: WdsFontSize.v32,
           lineHeightPx: WdsFontLineHeight.v42,
           styles: const [
@@ -173,6 +182,7 @@ class _StylesSection extends StatelessWidget {
         // Title 22
         _TypographyRow(
           label: 'Title 22',
+          tokenName: 'WdsSemanticTypography.title22Medium',
           fontSize: WdsFontSize.v22,
           lineHeightPx: WdsFontLineHeight.v30,
           styles: const [
@@ -185,6 +195,7 @@ class _StylesSection extends StatelessWidget {
         // Title 20
         _TypographyRow(
           label: 'Title 20',
+          tokenName: 'WdsSemanticTypography.title20Medium',
           fontSize: WdsFontSize.v20,
           lineHeightPx: WdsFontLineHeight.v28,
           styles: const [
@@ -197,6 +208,7 @@ class _StylesSection extends StatelessWidget {
         // Heading 18
         _TypographyRow(
           label: 'Heading 18',
+          tokenName: 'WdsSemanticTypography.heading18Medium',
           fontSize: WdsFontSize.v18,
           lineHeightPx: WdsFontLineHeight.v26,
           styles: const [
@@ -210,6 +222,7 @@ class _StylesSection extends StatelessWidget {
         // Heading 17
         _TypographyRow(
           label: 'Heading 17',
+          tokenName: 'WdsSemanticTypography.heading17Medium',
           fontSize: WdsFontSize.v17,
           lineHeightPx: WdsFontLineHeight.v24,
           styles: const [
@@ -223,6 +236,7 @@ class _StylesSection extends StatelessWidget {
         // Heading 16
         _TypographyRow(
           label: 'Heading 16',
+          tokenName: 'WdsSemanticTypography.heading16Medium',
           fontSize: WdsFontSize.v16,
           lineHeightPx: WdsFontLineHeight.v24,
           styles: const [
@@ -236,6 +250,7 @@ class _StylesSection extends StatelessWidget {
         // Body 15 Normal
         _TypographyRow(
           label: 'Body 15 Normal',
+          tokenName: 'WdsSemanticTypography.body15NormalMedium',
           fontSize: WdsFontSize.v15,
           lineHeightPx: WdsFontLineHeight.v22,
           styles: const [
@@ -248,6 +263,7 @@ class _StylesSection extends StatelessWidget {
         // Body 15 Reading
         _TypographyRow(
           label: 'Body 15 Reading',
+          tokenName: 'WdsSemanticTypography.body15ReadingMedium',
           fontSize: WdsFontSize.v15,
           lineHeightPx: WdsFontLineHeight.v24,
           styles: const [
@@ -260,6 +276,7 @@ class _StylesSection extends StatelessWidget {
         // Body 14 Normal
         _TypographyRow(
           label: 'Body 14 Normal',
+          tokenName: 'WdsSemanticTypography.body14NormalMedium',
           fontSize: WdsFontSize.v14,
           lineHeightPx: WdsFontLineHeight.v20,
           styles: const [
@@ -272,6 +289,7 @@ class _StylesSection extends StatelessWidget {
         // Body 14 Reading
         _TypographyRow(
           label: 'Body 14 Reading',
+          tokenName: 'WdsSemanticTypography.body14ReadingMedium',
           fontSize: WdsFontSize.v14,
           lineHeightPx: WdsFontLineHeight.v22,
           styles: const [
@@ -284,6 +302,7 @@ class _StylesSection extends StatelessWidget {
         // Body 13 Normal
         _TypographyRow(
           label: 'Body 13 Normal',
+          tokenName: 'WdsSemanticTypography.body13NormalMedium',
           fontSize: WdsFontSize.v13,
           lineHeightPx: WdsFontLineHeight.v18,
           styles: const [
@@ -296,6 +315,7 @@ class _StylesSection extends StatelessWidget {
         // Body 13 Reading
         _TypographyRow(
           label: 'Body 13 Reading',
+          tokenName: 'WdsSemanticTypography.body13ReadingMedium',
           fontSize: WdsFontSize.v13,
           lineHeightPx: WdsFontLineHeight.v20,
           styles: const [
@@ -308,6 +328,7 @@ class _StylesSection extends StatelessWidget {
         // Caption 12
         _TypographyRow(
           label: 'Caption 12',
+          tokenName: 'WdsSemanticTypography.caption12Medium',
           fontSize: WdsFontSize.v12,
           lineHeightPx: WdsFontLineHeight.v16,
           styles: const [
@@ -320,6 +341,7 @@ class _StylesSection extends StatelessWidget {
         // Caption 11
         _TypographyRow(
           label: 'Caption 11',
+          tokenName: 'WdsSemanticTypography.caption11Medium',
           fontSize: WdsFontSize.v11,
           lineHeightPx: WdsFontLineHeight.v14,
           styles: const [
@@ -332,6 +354,7 @@ class _StylesSection extends StatelessWidget {
         // Caption 10
         _TypographyRow(
           label: 'Caption 10',
+          tokenName: 'WdsSemanticTypography.caption10Medium',
           fontSize: WdsFontSize.v10,
           lineHeightPx: WdsFontLineHeight.v13,
           styles: const [
@@ -350,13 +373,7 @@ class _StyleTableHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Table(
-      columnWidths: const {
-        0: FixedColumnWidth(120), // 명칭
-        1: FixedColumnWidth(100), // 크기
-        2: FixedColumnWidth(100), // 행간
-        3: FixedColumnWidth(100), // 자간
-        4: FlexColumnWidth(), // 미리보기
-      },
+      columnWidths: _tableDimensions,
       defaultVerticalAlignment: TableCellVerticalAlignment.top,
       children: [
         TableRow(
@@ -376,6 +393,7 @@ class _StyleTableHeader extends StatelessWidget {
 class _TypographyRow extends StatelessWidget {
   const _TypographyRow({
     required this.label,
+    required this.tokenName,
     required this.fontSize,
     required this.lineHeightPx,
     required this.styles,
@@ -383,6 +401,7 @@ class _TypographyRow extends StatelessWidget {
   });
 
   final String label;
+  final String tokenName;
   final double fontSize;
   final double lineHeightPx;
   final List<TextStyle> styles;
@@ -410,20 +429,25 @@ class _TypographyRow extends StatelessWidget {
     };
 
     return Table(
-      columnWidths: const {
-        0: FixedColumnWidth(120),
-        1: FixedColumnWidth(100),
-        2: FixedColumnWidth(100),
-        3: FixedColumnWidth(100),
-        4: FlexColumnWidth(),
-      },
+      columnWidths: _tableDimensions,
       defaultVerticalAlignment: TableCellVerticalAlignment.top,
       children: [
         TableRow(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(label),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label),
+                  Text(
+                    tokenName,
+                    style: WdsSemanticTypography.caption10Regular.copyWith(
+                      color: WdsColorNeutral.v300,
+                    ),
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -432,7 +456,7 @@ class _TypographyRow extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Text(
-                '${lineHeightPx.toStringAsFixed(0)}px(${ratio.toStringAsFixed(2)}%)',
+                '${lineHeightPx.toStringAsFixed(0)}px\n(${ratio.toStringAsFixed(2)}%)',
               ),
             ),
             Padding(
