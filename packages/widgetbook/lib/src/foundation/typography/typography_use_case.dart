@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wds_tokens/wds_tokens.dart';
+import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_page_layout.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -22,49 +23,19 @@ class _TypographyShowcase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 상단: 제목 + Divider
-    final title = Text(
-      'Typography',
-      style: Theme.of(context)
-          .textTheme
-          .titleLarge
-          ?.copyWith(fontWeight: FontWeight.w700),
-    );
-
-    // 상단: Knobs 플레이그라운드
-    final playground = _TypographyPlayground();
-
-    // 하단: 스타일 표 (현재는 Heading 18의 Extrabold/Bold만 제공)
-    final stylesTable = _StylesSection();
-
-    return Material(
-      child: SafeArea(
-        child: InteractiveViewer(
-          maxScale: 6,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              spacing: 16,
-              children: [
-                title,
-                const Divider(
-                  height: 1,
-                  thickness: 8,
-                ),
-                playground,
-                stylesTable,
-              ],
-            ),
-          ),
-        ),
-      ),
+    return WidgetbookPageLayout(
+      title: 'Typography',
+      children: [
+        _TypographyPlayground(),
+        SizedBox(height: 32),
+        _StylesSection(),
+      ],
     );
   }
 }
 
 class _TypographyPlayground extends StatelessWidget {
-  _TypographyPlayground();
+  const _TypographyPlayground();
 
   @override
   Widget build(BuildContext context) {
@@ -145,10 +116,8 @@ class _TypographyPlayground extends StatelessWidget {
             children: [
               Text(
                 'Playground',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: WdsSemanticTypography.title20Bold
+                    .copyWith(color: WdsColorBlue.v400),
               ),
               Text(
                 sampleText,
@@ -175,7 +144,7 @@ class _TypographyPlayground extends StatelessWidget {
 }
 
 class _StylesSection extends StatelessWidget {
-  _StylesSection();
+  const _StylesSection();
 
   @override
   Widget build(BuildContext context) {
@@ -184,10 +153,7 @@ class _StylesSection extends StatelessWidget {
       children: [
         Text(
           '스타일',
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium
-              ?.copyWith(fontWeight: FontWeight.bold),
+          style: WdsSemanticTypography.title20Bold,
         ),
         const SizedBox(height: 12),
         _StyleTableHeader(),
@@ -196,7 +162,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Title 32',
           fontSize: WdsFontSize.v32,
-          lineHeightPx: WdsFontLineheight.v42,
+          lineHeightPx: WdsFontLineHeight.v42,
           styles: const [
             WdsSemanticTypography.title32Medium,
             WdsSemanticTypography.title32Bold,
@@ -208,7 +174,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Title 22',
           fontSize: WdsFontSize.v22,
-          lineHeightPx: WdsFontLineheight.v30,
+          lineHeightPx: WdsFontLineHeight.v30,
           styles: const [
             WdsSemanticTypography.title22Bold,
             WdsSemanticTypography.title22Medium,
@@ -220,7 +186,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Title 20',
           fontSize: WdsFontSize.v20,
-          lineHeightPx: WdsFontLineheight.v28,
+          lineHeightPx: WdsFontLineHeight.v28,
           styles: const [
             WdsSemanticTypography.title20Bold,
             WdsSemanticTypography.title20Medium,
@@ -232,9 +198,9 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Heading 18',
           fontSize: WdsFontSize.v18,
-          lineHeightPx: WdsFontLineheight.v26,
+          lineHeightPx: WdsFontLineHeight.v26,
           styles: const [
-            WdsSemanticTypography.heading18Extrabold,
+            WdsSemanticTypography.heading18ExtraBold,
             WdsSemanticTypography.heading18Bold,
             WdsSemanticTypography.heading18Medium,
             WdsSemanticTypography.heading18Regular,
@@ -245,9 +211,9 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Heading 17',
           fontSize: WdsFontSize.v17,
-          lineHeightPx: WdsFontLineheight.v24,
+          lineHeightPx: WdsFontLineHeight.v24,
           styles: const [
-            WdsSemanticTypography.heading17Extrabold,
+            WdsSemanticTypography.heading17ExtraBold,
             WdsSemanticTypography.heading17Bold,
             WdsSemanticTypography.heading17Medium,
             WdsSemanticTypography.heading17Regular,
@@ -258,9 +224,9 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Heading 16',
           fontSize: WdsFontSize.v16,
-          lineHeightPx: WdsFontLineheight.v24,
+          lineHeightPx: WdsFontLineHeight.v24,
           styles: const [
-            WdsSemanticTypography.heading16Extrabold,
+            WdsSemanticTypography.heading16ExtraBold,
             WdsSemanticTypography.heading16Bold,
             WdsSemanticTypography.heading16Medium,
             WdsSemanticTypography.heading16Regular,
@@ -271,7 +237,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Body 15 Normal',
           fontSize: WdsFontSize.v15,
-          lineHeightPx: WdsFontLineheight.v22,
+          lineHeightPx: WdsFontLineHeight.v22,
           styles: const [
             WdsSemanticTypography.body15NormalBold,
             WdsSemanticTypography.body15NormalMedium,
@@ -283,7 +249,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Body 15 Reading',
           fontSize: WdsFontSize.v15,
-          lineHeightPx: WdsFontLineheight.v24,
+          lineHeightPx: WdsFontLineHeight.v24,
           styles: const [
             WdsSemanticTypography.body15ReadingBold,
             WdsSemanticTypography.body15ReadingMedium,
@@ -295,7 +261,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Body 14 Normal',
           fontSize: WdsFontSize.v14,
-          lineHeightPx: WdsFontLineheight.v20,
+          lineHeightPx: WdsFontLineHeight.v20,
           styles: const [
             WdsSemanticTypography.body14NormalBold,
             WdsSemanticTypography.body14NormalMedium,
@@ -307,7 +273,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Body 14 Reading',
           fontSize: WdsFontSize.v14,
-          lineHeightPx: WdsFontLineheight.v22,
+          lineHeightPx: WdsFontLineHeight.v22,
           styles: const [
             WdsSemanticTypography.body14ReadingBold,
             WdsSemanticTypography.body14ReadingMedium,
@@ -319,7 +285,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Body 13 Normal',
           fontSize: WdsFontSize.v13,
-          lineHeightPx: WdsFontLineheight.v18,
+          lineHeightPx: WdsFontLineHeight.v18,
           styles: const [
             WdsSemanticTypography.body13NormalBold,
             WdsSemanticTypography.body13NormalMedium,
@@ -331,7 +297,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Body 13 Reading',
           fontSize: WdsFontSize.v13,
-          lineHeightPx: WdsFontLineheight.v20,
+          lineHeightPx: WdsFontLineHeight.v20,
           styles: const [
             WdsSemanticTypography.body13ReadingBold,
             WdsSemanticTypography.body13ReadingMedium,
@@ -343,7 +309,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Caption 12',
           fontSize: WdsFontSize.v12,
-          lineHeightPx: WdsFontLineheight.v16,
+          lineHeightPx: WdsFontLineHeight.v16,
           styles: const [
             WdsSemanticTypography.caption12Bold,
             WdsSemanticTypography.caption12Medium,
@@ -355,7 +321,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Caption 11',
           fontSize: WdsFontSize.v11,
-          lineHeightPx: WdsFontLineheight.v14,
+          lineHeightPx: WdsFontLineHeight.v14,
           styles: const [
             WdsSemanticTypography.caption11Bold,
             WdsSemanticTypography.caption11Medium,
@@ -367,7 +333,7 @@ class _StylesSection extends StatelessWidget {
         _TypographyRow(
           label: 'Caption 10',
           fontSize: WdsFontSize.v10,
-          lineHeightPx: WdsFontLineheight.v13,
+          lineHeightPx: WdsFontLineHeight.v13,
           styles: const [
             WdsSemanticTypography.caption10Bold,
             WdsSemanticTypography.caption10Medium,
@@ -423,15 +389,7 @@ class _TypographyRow extends StatelessWidget {
   final String previewText;
 
   String _formatLetterSpacing(double valuePx) {
-    final em = valuePx / fontSize;
-    return '${em.toStringAsFixed(4).replaceFirst(RegExp(r'([.]*0+)(?!.*\d)'), '')}em';
-  }
-
-  double _normalizedLetterSpacingPx(double? valuePx) {
-    if (valuePx == null) return 0.0;
-    final em = valuePx / fontSize;
-    final num clampedEm = em.clamp(-0.05, 0.05);
-    return (clampedEm as double) * fontSize;
+    return '${(valuePx * 0.01).toStringAsFixed(4).replaceFirst(RegExp(r'([.]*0+)(?!.*\d)'), '')}em';
   }
 
   @override
@@ -494,14 +452,7 @@ class _TypographyRow extends StatelessWidget {
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: _styleByWeight[WdsFontWeight.extrabold]!
-                                  .copyWith(
-                                height: ratio,
-                                letterSpacing: _normalizedLetterSpacingPx(
-                                  _styleByWeight[WdsFontWeight.extrabold]!
-                                      .letterSpacing,
-                                ),
-                              ),
+                              style: _styleByWeight[WdsFontWeight.extrabold]!,
                             )
                           : const SizedBox.shrink(),
                     ),
@@ -512,14 +463,7 @@ class _TypographyRow extends StatelessWidget {
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style:
-                                  _styleByWeight[WdsFontWeight.bold]!.copyWith(
-                                height: ratio,
-                                letterSpacing: _normalizedLetterSpacingPx(
-                                  _styleByWeight[WdsFontWeight.bold]!
-                                      .letterSpacing,
-                                ),
-                              ),
+                              style: _styleByWeight[WdsFontWeight.bold]!,
                             )
                           : const SizedBox.shrink(),
                     ),
@@ -530,14 +474,7 @@ class _TypographyRow extends StatelessWidget {
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: _styleByWeight[WdsFontWeight.medium]!
-                                  .copyWith(
-                                height: ratio,
-                                letterSpacing: _normalizedLetterSpacingPx(
-                                  _styleByWeight[WdsFontWeight.medium]!
-                                      .letterSpacing,
-                                ),
-                              ),
+                              style: _styleByWeight[WdsFontWeight.medium]!,
                             )
                           : const SizedBox.shrink(),
                     ),
@@ -548,14 +485,7 @@ class _TypographyRow extends StatelessWidget {
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: _styleByWeight[WdsFontWeight.regular]!
-                                  .copyWith(
-                                height: ratio,
-                                letterSpacing: _normalizedLetterSpacingPx(
-                                  _styleByWeight[WdsFontWeight.regular]!
-                                      .letterSpacing,
-                                ),
-                              ),
+                              style: _styleByWeight[WdsFontWeight.regular]!,
                             )
                           : const SizedBox.shrink(),
                     ),
@@ -580,10 +510,7 @@ class _HeaderCell extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Text(
         label,
-        style: Theme.of(context)
-            .textTheme
-            .labelLarge
-            ?.copyWith(fontWeight: FontWeight.bold),
+        style: WdsSemanticTypography.heading17Bold,
       ),
     );
   }
@@ -598,10 +525,10 @@ class _Chip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.04),
+        color: WdsColorCommon.black.withValues(alpha: 0.04),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Text(label, style: Theme.of(context).textTheme.labelMedium),
+      child: Text(label, style: WdsSemanticTypography.caption11Bold),
     );
   }
 }
@@ -616,10 +543,7 @@ class _PreviewHeaderCell extends StatelessWidget {
         children: [
           Text(
             '미리보기',
-            style: Theme.of(context)
-                .textTheme
-                .labelLarge
-                ?.copyWith(fontWeight: FontWeight.bold),
+            style: WdsSemanticTypography.heading17Bold,
           ),
           const SizedBox(height: 4),
           Row(
@@ -628,28 +552,28 @@ class _PreviewHeaderCell extends StatelessWidget {
               Expanded(
                 child: Text(
                   'ExtraBold (800)',
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: WdsSemanticTypography.caption11Bold,
                 ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: Text(
                   'Bold (600)',
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: WdsSemanticTypography.caption11Bold,
                 ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: Text(
                   'Medium (500)',
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: WdsSemanticTypography.caption11Bold,
                 ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: Text(
                   'Regular (400)',
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: WdsSemanticTypography.caption11Bold,
                 ),
               ),
             ],

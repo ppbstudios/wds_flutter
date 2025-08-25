@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wds_tokens/wds_tokens.dart';
+import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_page_layout.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(
@@ -91,28 +92,18 @@ class _AtomicColorShowcase extends StatelessWidget {
       _buildOpacitySection(),
     ];
 
-    return Material(
-      child: SafeArea(
-        child: InteractiveViewer(
-          maxScale: 10,
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  for (final section in sections) ...[
-                    _SectionHeader(title: section.title),
-                    const SizedBox(height: 12),
-                    section.body,
-                    const SizedBox(height: 32),
-                  ],
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+    return WidgetbookPageLayout(
+      title: 'WINC Colors',
+      description:
+          '컬러는 WINC 브랜드의 아이덴티티를 표현하는 중요한 요소입니다. 지정된 색상과 사용 규정을 숙지하여 브랜드 아이덴티티의 일관성을 유지할 수 있도록 합니다.',
+      children: [
+        for (final section in sections) ...[
+          _SectionHeader(title: section.title),
+          const SizedBox(height: 12),
+          section.body,
+          const SizedBox(height: 32),
+        ],
+      ],
     );
   }
 
@@ -186,8 +177,9 @@ class _AtomicColorShowcase extends StatelessWidget {
 
     final items = <_ColorItem>[];
     for (final opacity in opacities) {
+      final percentLabel = (opacity * 100).toStringAsFixed(0);
       items.add(_ColorItem(
-          label: '$opacity',
+          label: percentLabel,
           color: WdsColorCommon.black.withValues(alpha: opacity)));
     }
     return _Section(
@@ -215,10 +207,7 @@ class _SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: Theme.of(context)
-          .textTheme
-          .titleMedium
-          ?.copyWith(fontWeight: FontWeight.bold),
+      style: WdsSemanticTypography.title20Bold,
     );
   }
 }
@@ -234,7 +223,6 @@ class _SwatchRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 12,
       runSpacing: 12,
       children: [
         for (final item in items)
@@ -277,15 +265,12 @@ class _ColorSwatch extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             item.label,
-            style: Theme.of(context).textTheme.bodySmall,
+            style: WdsSemanticTypography.caption11Bold,
           ),
           if (showHex)
             Text(
               valueText,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelSmall
-                  ?.copyWith(color: Colors.black54),
+              style: WdsSemanticTypography.caption11Bold,
             ),
         ],
       ),
