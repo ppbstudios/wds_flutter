@@ -75,7 +75,7 @@ class _TypographyPlayground extends StatelessWidget {
     );
 
     final fontSize = context.knobs.double.slider(
-      label: 'fontSize',
+      label: 'fontSize(px)',
       initialValue: 18,
       min: 10,
       max: 48,
@@ -91,7 +91,7 @@ class _TypographyPlayground extends StatelessWidget {
     );
 
     final letterSpacing = context.knobs.double.slider(
-      label: 'letterSpacing',
+      label: 'letterSpacing(= em * fontSize)',
       initialValue: -0.02,
       min: -0.1,
       max: 0.1,
@@ -130,7 +130,7 @@ class _TypographyPlayground extends StatelessWidget {
     );
 
     return SizedBox(
-      height: 200,
+      height: 280,
       child: Card(
         shape: RoundedRectangleBorder(
           side: const BorderSide(color: Colors.black12),
@@ -365,8 +365,16 @@ class _TypographyRow extends StatelessWidget {
   final List<TextStyle> styles;
   final String previewText;
 
-  String _formatLetterSpacing(double value) {
-    return '${value.toStringAsFixed(2)}em';
+  String _formatLetterSpacing(double valuePx) {
+    final em = valuePx / fontSize;
+    return '${em.toStringAsFixed(4)}em';
+  }
+
+  double _normalizedLetterSpacingPx(double? valuePx) {
+    if (valuePx == null) return 0.0;
+    final em = valuePx / fontSize;
+    final num clampedEm = em.clamp(-0.05, 0.05);
+    return (clampedEm as double) * fontSize;
   }
 
   @override
@@ -379,7 +387,7 @@ class _TypographyRow extends StatelessWidget {
         .toList(growable: false);
     final letterSpacingLabel = uniqueSpacings.length == 1
         ? _formatLetterSpacing(uniqueSpacings.first)
-        : 'varies';
+        : '다수';
 
     final Map<FontWeight, TextStyle> _styleByWeight = {
       for (final s in styles)
@@ -430,7 +438,13 @@ class _TypographyRow extends StatelessWidget {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: _styleByWeight[WdsFontWeight.extrabold]!
-                                  .copyWith(height: ratio),
+                                  .copyWith(
+                                height: ratio,
+                                letterSpacing: _normalizedLetterSpacingPx(
+                                  _styleByWeight[WdsFontWeight.extrabold]!
+                                      .letterSpacing,
+                                ),
+                              ),
                             )
                           : const SizedBox.shrink(),
                     ),
@@ -441,8 +455,14 @@ class _TypographyRow extends StatelessWidget {
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: _styleByWeight[WdsFontWeight.bold]!
-                                  .copyWith(height: ratio),
+                              style:
+                                  _styleByWeight[WdsFontWeight.bold]!.copyWith(
+                                height: ratio,
+                                letterSpacing: _normalizedLetterSpacingPx(
+                                  _styleByWeight[WdsFontWeight.bold]!
+                                      .letterSpacing,
+                                ),
+                              ),
                             )
                           : const SizedBox.shrink(),
                     ),
@@ -454,7 +474,13 @@ class _TypographyRow extends StatelessWidget {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: _styleByWeight[WdsFontWeight.medium]!
-                                  .copyWith(height: ratio),
+                                  .copyWith(
+                                height: ratio,
+                                letterSpacing: _normalizedLetterSpacingPx(
+                                  _styleByWeight[WdsFontWeight.medium]!
+                                      .letterSpacing,
+                                ),
+                              ),
                             )
                           : const SizedBox.shrink(),
                     ),
@@ -466,7 +492,13 @@ class _TypographyRow extends StatelessWidget {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: _styleByWeight[WdsFontWeight.regular]!
-                                  .copyWith(height: ratio),
+                                  .copyWith(
+                                height: ratio,
+                                letterSpacing: _normalizedLetterSpacingPx(
+                                  _styleByWeight[WdsFontWeight.regular]!
+                                      .letterSpacing,
+                                ),
+                              ),
                             )
                           : const SizedBox.shrink(),
                     ),

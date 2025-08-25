@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wds_tokens/atomic/font.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as wb;
 
@@ -16,18 +17,15 @@ class WidgetbookApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Widgetbook.material(
       directories: directories,
+      themeMode: ThemeMode.light,
+      lightTheme: ThemeData(
+        fontFamily: WdsFontFamily.pretendard,
+      ),
       addons: [
         GridAddon(),
         InspectorAddon(),
         ZoomAddon(),
-        ViewportAddon([
-          Viewports.none,
-          IosViewports.iPad,
-          IosViewports.iPhone13ProMax,
-          IosViewports.iPhone13,
-          AndroidViewports.samsungGalaxyNote20,
-          AndroidViewports.samsungGalaxyS20,
-        ]),
+        ViewportAddon(Viewports.all),
         SemanticsAddon(),
         TextScaleAddon(),
       ],
