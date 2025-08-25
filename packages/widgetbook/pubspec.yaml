@@ -8,13 +8,39 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  widgetbook: ^3.3.0
+  widgetbook: ^3.16.0
+  wds_foundation:
+    path: ../foundation
   wds_tokens:
     path: ../tokens
   widgetbook_annotation: ^3.7.0
 
-flutter:
-  uses-material-design: true
+
 dev_dependencies:
   widgetbook_generator: ^3.16.0
   build_runner: ^2.7.0
+
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: packages/wds_foundation/fonts/Pretendard-Black.ttf
+          weight: 900
+        - asset: packages/wds_foundation/fonts/Pretendard-ExtraBold.ttf
+          weight: 800
+        - asset: packages/wds_foundation/fonts/Pretendard-Bold.ttf
+          weight: 700
+        - asset: packages/wds_foundation/fonts/Pretendard-SemiBold.ttf
+          weight: 600
+        - asset: packages/wds_foundation/fonts/Pretendard-Medium.ttf
+          weight: 500
+        - asset: packages/wds_foundation/fonts/Pretendard-Regular.ttf
+          weight: 400
+        - asset: packages/wds_foundation/fonts/Pretendard-Light.ttf
+          weight: 300
+        - asset: packages/wds_foundation/fonts/Pretendard-ExtraLight.ttf
+          weight: 200
+        - asset: packages/wds_foundation/fonts/Pretendard-Thin.ttf
+          weight: 100

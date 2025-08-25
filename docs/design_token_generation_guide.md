@@ -182,11 +182,15 @@ This document outlines the conversion rules for DTCG (Design Tokens Community Gr
   - Output: double
 
 **letterSpacing Type**
-  - Input: Percentage string (e.g., "-0.19%")
-  - Formula: (percentage / 100.0) * 16.0
-  - Example: "-0.19%" → (-0.19 / 100.0) * 16.0 = -0.0304
+  - Input: em number (e.g., -0.02), or percentage string (e.g., -2.4%)
+  - Formula (percentage → em): `em = percentage / 100.0`
+  - Formula (em → px): `px = em * fontSize`
+  - Example: fontSize=18.0, letterSpacing=-2.4% → em=-0.024 → px=-0.432
   - Output: double in logical pixels
-  
+
+  - Base font size fallback: fontSize가 명시되지 않은 경우, CLI 옵션 `--base-font-size`(기본 16.0)를 곱해 px를 계산합니다.
+    - 사용 예: `dart run bin/main.dart -k semantic -i tokens/design_system_semantic.json -o packages/tokens --base-font-size 16.0`
+
 **weight Type**
   - Input: number (e.g. 600)
   - Conversion:
@@ -306,7 +310,7 @@ class WdsSemanticTypography {
 }
 ```
 
-여기서 `letterSpacing`은 atomic에 정의된 것이 없을 수 있으니 "{ }" reference 값으로 전달되지 않을 가능성이 큽니다. raw number로 JSON 데이터가 작성되어있는 경우에는 바로 적용해주면 됩니다.
+여기서 `letterSpacing`은 atomic에 정의된 것이 없을 수 있으니 "{ }" reference 값으로 전달되지 않을 가능성이 큽니다. 또한 Figma export JSON에서 `letterSpacing` 값이 em(number)로 제공되면 해당 텍스트 스타일의 `size`(fontSize)를 기준으로 px(논리 픽셀)로 변환합니다. `size`가 없으면 기존 number를 그대로 사용합니다.
 
 @design_system_semantic.json 에 해당합니다. semantic 디렉토리 내 생성된 모든 파일은 `semantic/semantic.dart` 안에서 export 되어야 합니다.
 

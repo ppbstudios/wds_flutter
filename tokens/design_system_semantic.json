@@ -30,6 +30,14 @@
       "button": {
         "$type": "color",
         "$value": "{color.neutral.200}"
+      },
+      "alternative": {
+        "$type": "color",
+        "$value": "{color.cool-Neutral.100}"
+      },
+      "neutral": {
+        "$type": "color",
+        "$value": "{color.neutral.200}"
       }
     },
     "text": {
@@ -717,7 +725,7 @@
           },
           "letterSpacing": {
             "$type": "number",
-            "$value": 1.45
+            "$value": -0.11
           }
         },
         "medium": {
@@ -739,7 +747,7 @@
           },
           "letterSpacing": {
             "$type": "number",
-            "$value": 1.45
+            "$value": -0.11
           }
         },
         "regular": {
@@ -761,7 +769,7 @@
           },
           "letterSpacing": {
             "$type": "number",
-            "$value": 1.45
+            "$value": -0.11
           }
         }
       },
@@ -785,7 +793,7 @@
           },
           "letterSpacing": {
             "$type": "number",
-            "$value": -0.14
+            "$value": -0.11
           }
         },
         "medium": {
@@ -807,7 +815,7 @@
           },
           "letterSpacing": {
             "$type": "number",
-            "$value": 1.45
+            "$value": -0.11
           }
         },
         "regular": {
@@ -829,8 +837,350 @@
           },
           "letterSpacing": {
             "$type": "number",
-            "$value": 1.45
+            "$value": -0.11
           }
+        }
+      }
+    },
+    "Body13": {
+      "Normal": {
+        "bold": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.Pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.bold}"
+          },
+          "lineheight": {
+            "$type": "number",
+            "$value": "{font.lineheight.18}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.13}"
+          },
+          "letterSpacing": {
+            "$type": "number",
+            "$value": -0.1
+          }
+        },
+        "medium": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.Pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.medium}"
+          },
+          "lineheight": {
+            "$type": "number",
+            "$value": "{font.lineheight.18}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.13}"
+          },
+          "letterSpacing": {
+            "$type": "number",
+            "$value": -0.1
+          }
+        },
+        "regular": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.Pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.regular}"
+          },
+          "lineheight": {
+            "$type": "number",
+            "$value": "{font.lineheight.18}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.13}"
+          },
+          "letterSpacing": {
+            "$type": "number",
+            "$value": -0.1
+          }
+        }
+      },
+      "Reading": {
+        "bold": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.Pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.bold}"
+          },
+          "lineheight": {
+            "$type": "number",
+            "$value": "{font.lineheight.20}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.13}"
+          },
+          "letterSpacing": {
+            "$type": "number",
+            "$value": -0.1
+          }
+        },
+        "medium": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.Pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.medium}"
+          },
+          "lineheight": {
+            "$type": "number",
+            "$value": "{font.lineheight.20}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.13}"
+          },
+          "letterSpacing": {
+            "$type": "number",
+            "$value": -0.1
+          }
+        },
+        "regular": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.Pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.regular}"
+          },
+          "lineheight": {
+            "$type": "number",
+            "$value": "{font.lineheight.20}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.13}"
+          },
+          "letterSpacing": {
+            "$type": "number",
+            "$value": -0.1
+          }
+        }
+      }
+    },
+    "Caption12": {
+      "bold": {
+        "family": {
+          "$type": "text",
+          "$value": "{font.family.Pretendard}"
+        },
+        "weight": {
+          "$type": "number",
+          "$value": "{font.weight.bold}"
+        },
+        "lineheight": {
+          "$type": "number",
+          "$value": "{font.lineheight.16}"
+        },
+        "size": {
+          "$type": "number",
+          "$value": "{font.size.12}"
+        },
+        "letterSpacing": {
+          "$type": "number",
+          "$value": -0.09
+        }
+      },
+      "medium": {
+        "family": {
+          "$type": "text",
+          "$value": "{font.family.Pretendard}"
+        },
+        "weight": {
+          "$type": "number",
+          "$value": "{font.weight.medium}"
+        },
+        "lineheight": {
+          "$type": "number",
+          "$value": "{font.lineheight.16}"
+        },
+        "size": {
+          "$type": "number",
+          "$value": "{font.size.12}"
+        },
+        "letterSpacing": {
+          "$type": "number",
+          "$value": -0.09
+        }
+      },
+      "regular": {
+        "family": {
+          "$type": "text",
+          "$value": "{font.family.Pretendard}"
+        },
+        "weight": {
+          "$type": "number",
+          "$value": "{font.weight.regular}"
+        },
+        "lineheight": {
+          "$type": "number",
+          "$value": "{font.lineheight.16}"
+        },
+        "size": {
+          "$type": "number",
+          "$value": "{font.size.12}"
+        },
+        "letterSpacing": {
+          "$type": "number",
+          "$value": -0.09
+        }
+      }
+    },
+    "Caption11": {
+      "bold": {
+        "family": {
+          "$type": "text",
+          "$value": "{font.family.Pretendard}"
+        },
+        "weight": {
+          "$type": "number",
+          "$value": "{font.weight.bold}"
+        },
+        "lineheight": {
+          "$type": "number",
+          "$value": "{font.lineheight.14}"
+        },
+        "size": {
+          "$type": "number",
+          "$value": "{font.size.11}"
+        },
+        "letterSpacing": {
+          "$type": "number",
+          "$value": -0.08
+        }
+      },
+      "medium": {
+        "family": {
+          "$type": "text",
+          "$value": "{font.family.Pretendard}"
+        },
+        "weight": {
+          "$type": "number",
+          "$value": "{font.weight.medium}"
+        },
+        "lineheight": {
+          "$type": "number",
+          "$value": "{font.lineheight.14}"
+        },
+        "size": {
+          "$type": "number",
+          "$value": "{font.size.11}"
+        },
+        "letterSpacing": {
+          "$type": "number",
+          "$value": -0.08
+        }
+      },
+      "regular": {
+        "family": {
+          "$type": "text",
+          "$value": "{font.family.Pretendard}"
+        },
+        "weight": {
+          "$type": "number",
+          "$value": "{font.weight.regular}"
+        },
+        "lineheight": {
+          "$type": "number",
+          "$value": "{font.lineheight.14}"
+        },
+        "size": {
+          "$type": "number",
+          "$value": "{font.size.11}"
+        },
+        "letterSpacing": {
+          "$type": "number",
+          "$value": -0.08
+        }
+      }
+    },
+    "Caption10": {
+      "bold": {
+        "family": {
+          "$type": "text",
+          "$value": "{font.family.Pretendard}"
+        },
+        "weight": {
+          "$type": "number",
+          "$value": "{font.weight.bold}"
+        },
+        "lineheight": {
+          "$type": "number",
+          "$value": "{font.lineheight.13}"
+        },
+        "size": {
+          "$type": "number",
+          "$value": "{font.size.10}"
+        },
+        "letterSpacing": {
+          "$type": "number",
+          "$value": -0.08
+        }
+      },
+      "medium": {
+        "family": {
+          "$type": "text",
+          "$value": "{font.family.Pretendard}"
+        },
+        "weight": {
+          "$type": "number",
+          "$value": "{font.weight.medium}"
+        },
+        "lineheight": {
+          "$type": "number",
+          "$value": "{font.lineheight.13}"
+        },
+        "size": {
+          "$type": "number",
+          "$value": "{font.size.10}"
+        },
+        "letterSpacing": {
+          "$type": "number",
+          "$value": -0.08
+        }
+      },
+      "regular": {
+        "family": {
+          "$type": "text",
+          "$value": "{font.family.Pretendard}"
+        },
+        "weight": {
+          "$type": "number",
+          "$value": "{font.weight.regular}"
+        },
+        "lineheight": {
+          "$type": "number",
+          "$value": "{font.lineheight.13}"
+        },
+        "size": {
+          "$type": "number",
+          "$value": "{font.size.10}"
+        },
+        "letterSpacing": {
+          "$type": "number",
+          "$value": -0.08
         }
       }
     }

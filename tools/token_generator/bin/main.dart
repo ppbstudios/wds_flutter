@@ -22,7 +22,11 @@ void main(List<String> arguments) async {
     ..addFlag('sync',
         abbr: 's',
         help: 'JSON 기준으로 출력 디렉터리 동기화(불필요 파일 삭제 + export 인덱스 생성)',
-        defaultsTo: true);
+        defaultsTo: true)
+    ..addOption('base-font-size',
+        help: 'letterSpacing 계산 시 사용할 기본 폰트 크기(px)',
+        valueHelp: '16.0',
+        defaultsTo: '16.0');
 
   final argResult = parser.parse(arguments);
   final inputPath = argResult['input'] as String?;
@@ -31,6 +35,9 @@ void main(List<String> arguments) async {
   final kind = argResult['kind'] as String;
   final verbose = argResult['verbose'] as bool;
   final sync = argResult['sync'] as bool;
+  final baseFontSize =
+      double.tryParse((argResult['base-font-size'] as String?) ?? '16.0') ??
+          16.0;
 
   if (inputPath == null || outDir == null) {
     stderr.writeln('사용법: wds_tokens -i <tokens.json> -o <outputDir>');
@@ -62,7 +69,8 @@ void main(List<String> arguments) async {
         outDir: outDir,
         libraryName: libraryName,
         verbose: verbose,
-        sync: sync);
+        sync: sync,
+        baseFontSize: baseFontSize);
   }
 }
 
@@ -158,6 +166,7 @@ Future<void> _generateSemantic({
   required String libraryName,
   required bool verbose,
   required bool sync,
+  required double baseFontSize,
 }) async {
   // semantic/color
   final semanticDir = Directory(p.join(outDir, 'lib', 'semantic'));
@@ -311,8 +320,10 @@ Future<void> _generateSemantic({
                 innerProps['size'], 'WdsFontSize');
             final lineHeightExpr = _resolveTypographyNumberClassed(
                 innerProps['lineheight'], 'WdsFontLineheight');
-            final letterSpacingExpr =
-                _resolveTypographyLetterSpacing(innerProps['letterSpacing']);
+            final letterSpacingExpr = _resolveTypographyLetterSpacing(
+                innerProps['letterSpacing'],
+                sizeExpr: sizeExpr,
+                baseFontSize: baseFontSize);
 
             final lines = <String>[];
             if (familyExpr != null) lines.add('fontFamily: $familyExpr');
@@ -340,8 +351,10 @@ Future<void> _generateSemantic({
             propsOrGroup['size'], 'WdsFontSize');
         final lineHeightExpr = _resolveTypographyNumberClassed(
             propsOrGroup['lineheight'], 'WdsFontLineheight');
-        final letterSpacingExpr =
-            _resolveTypographyLetterSpacing(propsOrGroup['letterSpacing']);
+        final letterSpacingExpr = _resolveTypographyLetterSpacing(
+            propsOrGroup['letterSpacing'],
+            sizeExpr: sizeExpr,
+            baseFontSize: baseFontSize);
 
         final lines = <String>[];
         if (familyExpr != null) lines.add('fontFamily: $familyExpr');
@@ -862,13 +875,37 @@ String? _resolveTypographyNumberClassed(dynamic node, String className) {
   return null;
 }
 
-String? _resolveTypographyLetterSpacing(dynamic node) {
+String? _resolveTypographyLetterSpacing(dynamic node,
+    {String? sizeExpr, required double baseFontSize}) {
   if (node is Map<String, dynamic> && node.containsKey(r'$value')) {
     final v = node[r'$value'];
-    if (v is num) return v.toDouble().toString();
+    // em → px: px = em * fontSize
+    if (v is num) {
+      final em = v.toDouble();
+      final multiplier = (sizeExpr != null && sizeExpr.isNotEmpty)
+          ? sizeExpr
+          : baseFontSize.toString();
+      return '(${em.toString()}) * (${multiplier})';
+    }
     if (v is String) {
-      final d = double.tryParse(v);
-      if (d != null) return d.toString();
+      final asNumber = double.tryParse(v);
+      if (asNumber != null) {
+        final multiplier = (sizeExpr != null && sizeExpr.isNotEmpty)
+            ? sizeExpr
+            : baseFontSize.toString();
+        return '(${asNumber.toString()}) * (${multiplier})';
+      }
+      if (v.endsWith('%')) {
+        // percentage → em → px
+        final percentValue = double.tryParse(v.replaceAll('%', ''));
+        if (percentValue != null) {
+          final em = percentValue / 100.0; // -2.4% → -0.024em
+          final multiplier = (sizeExpr != null && sizeExpr.isNotEmpty)
+              ? sizeExpr
+              : baseFontSize.toString();
+          return '(${em.toString()}) * (${multiplier})';
+        }
+      }
     }
   }
   return null;
