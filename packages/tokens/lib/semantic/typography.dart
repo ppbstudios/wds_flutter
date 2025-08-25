@@ -199,41 +199,146 @@ class WdsSemanticTypography {
     fontWeight: WdsFontWeight.bold,
     fontSize: WdsFontSize.v14,
     height: WdsFontLineheight.v20,
-    letterSpacing: (1.45) * (WdsFontSize.v14),
+    letterSpacing: (-0.11) * (WdsFontSize.v14),
   );
   static const TextStyle body14NormalMedium = TextStyle(
     fontFamily: WdsFontFamily.pretendard,
     fontWeight: WdsFontWeight.medium,
     fontSize: WdsFontSize.v14,
     height: WdsFontLineheight.v20,
-    letterSpacing: (1.45) * (WdsFontSize.v14),
+    letterSpacing: (-0.11) * (WdsFontSize.v14),
   );
   static const TextStyle body14NormalRegular = TextStyle(
     fontFamily: WdsFontFamily.pretendard,
     fontWeight: WdsFontWeight.regular,
     fontSize: WdsFontSize.v14,
     height: WdsFontLineheight.v20,
-    letterSpacing: (1.45) * (WdsFontSize.v14),
+    letterSpacing: (-0.11) * (WdsFontSize.v14),
   );
   static const TextStyle body14ReadingBold = TextStyle(
     fontFamily: WdsFontFamily.pretendard,
     fontWeight: WdsFontWeight.bold,
     fontSize: WdsFontSize.v14,
     height: WdsFontLineheight.v22,
-    letterSpacing: (-0.14) * (WdsFontSize.v14),
+    letterSpacing: (-0.11) * (WdsFontSize.v14),
   );
   static const TextStyle body14ReadingMedium = TextStyle(
     fontFamily: WdsFontFamily.pretendard,
     fontWeight: WdsFontWeight.medium,
     fontSize: WdsFontSize.v14,
     height: WdsFontLineheight.v22,
-    letterSpacing: (1.45) * (WdsFontSize.v14),
+    letterSpacing: (-0.11) * (WdsFontSize.v14),
   );
   static const TextStyle body14ReadingRegular = TextStyle(
     fontFamily: WdsFontFamily.pretendard,
     fontWeight: WdsFontWeight.regular,
     fontSize: WdsFontSize.v14,
     height: WdsFontLineheight.v22,
-    letterSpacing: (1.45) * (WdsFontSize.v14),
+    letterSpacing: (-0.11) * (WdsFontSize.v14),
+  );
+  static const TextStyle body13NormalBold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v13,
+    height: WdsFontLineheight.v18,
+    letterSpacing: (-0.1) * (WdsFontSize.v13),
+  );
+  static const TextStyle body13NormalMedium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v13,
+    height: WdsFontLineheight.v18,
+    letterSpacing: (-0.1) * (WdsFontSize.v13),
+  );
+  static const TextStyle body13NormalRegular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v13,
+    height: WdsFontLineheight.v18,
+    letterSpacing: (-0.1) * (WdsFontSize.v13),
+  );
+  static const TextStyle body13ReadingBold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v13,
+    height: WdsFontLineheight.v20,
+    letterSpacing: (-0.1) * (WdsFontSize.v13),
+  );
+  static const TextStyle body13ReadingMedium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v13,
+    height: WdsFontLineheight.v20,
+    letterSpacing: (-0.1) * (WdsFontSize.v13),
+  );
+  static const TextStyle body13ReadingRegular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v13,
+    height: WdsFontLineheight.v20,
+    letterSpacing: (-0.1) * (WdsFontSize.v13),
+  );
+  static const TextStyle caption12Bold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v12,
+    height: WdsFontLineheight.v16,
+    letterSpacing: (-0.09) * (WdsFontSize.v12),
+  );
+  static const TextStyle caption12Medium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v12,
+    height: WdsFontLineheight.v16,
+    letterSpacing: (-0.09) * (WdsFontSize.v12),
+  );
+  static const TextStyle caption12Regular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v12,
+    height: WdsFontLineheight.v16,
+    letterSpacing: (-0.09) * (WdsFontSize.v12),
+  );
+  static const TextStyle caption11Bold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v11,
+    height: WdsFontLineheight.v14,
+    letterSpacing: (-0.08) * (WdsFontSize.v11),
+  );
+  static const TextStyle caption11Medium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v11,
+    height: WdsFontLineheight.v14,
+    letterSpacing: (-0.08) * (WdsFontSize.v11),
+  );
+  static const TextStyle caption11Regular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v11,
+    height: WdsFontLineheight.v14,
+    letterSpacing: (-0.08) * (WdsFontSize.v11),
+  );
+  static const TextStyle caption10Bold = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.bold,
+    fontSize: WdsFontSize.v10,
+    height: WdsFontLineheight.v13,
+    letterSpacing: (-0.08) * (WdsFontSize.v10),
+  );
+  static const TextStyle caption10Medium = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.medium,
+    fontSize: WdsFontSize.v10,
+    height: WdsFontLineheight.v13,
+    letterSpacing: (-0.08) * (WdsFontSize.v10),
+  );
+  static const TextStyle caption10Regular = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: WdsFontWeight.regular,
+    fontSize: WdsFontSize.v10,
+    height: WdsFontLineheight.v13,
+    letterSpacing: (-0.08) * (WdsFontSize.v10),
   );
 }
