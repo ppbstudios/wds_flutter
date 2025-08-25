@@ -14,33 +14,25 @@ class WidgetbookTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return SizedBox(
-        width: constraints.maxWidth,
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 64),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            spacing: 16,
-            children: [
-              Text(
-                title,
-                style: WdsSemanticTypography.title32Bold,
-              ),
-              if (description != null && description!.isNotEmpty)
-                Text(
-                  description!,
-                  style: WdsSemanticTypography.heading16Regular,
-                ),
-              Divider(
-                height: 4,
-                thickness: 4,
-                color: WdsColorCommon.black,
-              ),
-            ],
-          ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      spacing: 16,
+      children: [
+        Text(
+          title,
+          style: WdsSemanticTypography.title32Bold,
         ),
-      );
-    });
+        if (description != null && description!.isNotEmpty)
+          Text(
+            description!,
+            style: WdsSemanticTypography.heading16Regular,
+          ),
+        Divider(
+          height: 4,
+          thickness: 4,
+          color: WdsColorCommon.black,
+        ),
+      ],
+    );
   }
 }

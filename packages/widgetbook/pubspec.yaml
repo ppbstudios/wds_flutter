@@ -9,6 +9,8 @@ dependencies:
   flutter:
     sdk: flutter
   widgetbook: ^3.16.0
+  wds_components:
+    path: ../components
   wds_foundation:
     path: ../foundation
   wds_tokens:
