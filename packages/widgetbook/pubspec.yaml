@@ -8,7 +8,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  widgetbook: ^3.3.0
+  widgetbook: ^3.16.0
   wds_foundation:
     path: ../foundation
   wds_tokens:
