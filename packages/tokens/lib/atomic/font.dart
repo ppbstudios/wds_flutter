@@ -3,6 +3,6 @@
 import "package:flutter/material.dart";
 
 part 'font/wds_font_family.dart';
-part 'font/wds_font_lineheight.dart';
+part 'font/wds_font_line_height.dart';
 part 'font/wds_font_size.dart';
 part 'font/wds_font_weight.dart';

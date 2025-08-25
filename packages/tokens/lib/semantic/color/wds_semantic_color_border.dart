@@ -4,7 +4,5 @@ part of '../color.dart';
 class WdsSemanticColorBorder {
   const WdsSemanticColorBorder._();
   static const Color alternative = WdsColorCoolNeutral.v100;
-  static const Color button = WdsColorNeutral.v200;
-  static const Color divider = WdsColorCoolNeutral.v100;
   static const Color neutral = WdsColorNeutral.v200;
 }
