@@ -1,0 +1,107 @@
+name: Manual Deploy Widgetbook
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+      message:
+        description: 'Deployment message'
+        required: false
+        default: 'Manual deployment'
+        type: string
+
+env:
+  FLUTTER_VERSION: '3.35.1'
+
+jobs:
+  check-permissions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if user is maintainer
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get user permission level
+          PERMISSION=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/collaborators/${{ github.actor }}/permission" \
+            | jq -r '.permission')
+          
+          echo "User: ${{ github.actor }}"
+          echo "Permission: $PERMISSION"
+          
+          # Check if user has admin or maintain permissions
+          if [[ "$PERMISSION" == "admin" || "$PERMISSION" == "maintain" ]]; then
+            echo "✅ User has sufficient permissions to deploy"
+          else
+            echo "❌ User does not have sufficient permissions to deploy"
+            echo "Required: admin or maintain permissions"
+            echo "Current: $PERMISSION"
+            exit 1
+          fi
+
+  manual-deploy:
+    needs: check-permissions
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'master'
+          cache: true
+          
+      - name: Enable Flutter web
+        run: flutter config --enable-web
+        
+      - name: Get dependencies for widgetbook
+        working-directory: packages/widgetbook
+        run: flutter pub get
+        
+      - name: Build web app
+        working-directory: packages/widgetbook
+        run: flutter build web --release --web-renderer canvaskit
+        
+      - name: Deploy to Netlify (Production)
+        if: inputs.environment == 'production'
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --prod --dir=packages/widgetbook/build/web --message="${{ inputs.message }} by ${{ github.actor }}"
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+          
+      - name: Deploy to Netlify (Staging)
+        if: inputs.environment == 'staging'
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STAGING_SITE_ID }}
+        with:
+          args: deploy --dir=packages/widgetbook/build/web --message="${{ inputs.message }} by ${{ github.actor }}"
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_STAGING_SITE_ID"]'
+          
+      - name: Create deployment summary
+        run: |
+          echo "## 🚀 Manual Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment**: ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Deployed by**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Message**: ${{ inputs.message }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          if [[ "${{ inputs.environment }}" == "production" ]]; then
+            echo "- **URL**: https://${{ secrets.NETLIFY_SITE_ID }}.netlify.app" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **URL**: https://${{ secrets.NETLIFY_STAGING_SITE_ID }}.netlify.app" >> $GITHUB_STEP_SUMMARY
+          fi

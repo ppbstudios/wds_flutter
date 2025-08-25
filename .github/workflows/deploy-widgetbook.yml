@@ -1,0 +1,68 @@
+name: Deploy Widgetbook to Netlify
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/widgetbook/**'
+      - 'packages/foundation/**'
+      - 'packages/tokens/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'packages/widgetbook/**'
+      - 'packages/foundation/**'
+      - 'packages/tokens/**'
+  workflow_dispatch:  # Manual trigger for maintainers
+
+env:
+  FLUTTER_VERSION: '3.35.1'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'master'  # 3.35.1 is from master channel
+          cache: true
+          
+      - name: Enable Flutter web
+        run: flutter config --enable-web
+        
+      - name: Get dependencies for widgetbook
+        working-directory: packages/widgetbook
+        run: flutter pub get
+        
+      - name: Build web app
+        working-directory: packages/widgetbook
+        run: flutter build web --release --web-renderer canvaskit
+        
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --prod --dir=packages/widgetbook/build/web --message="Deploy from GitHub Actions"
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+          
+      - name: Comment PR with preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🎨 **Widgetbook Preview**: Your changes have been deployed!\n\n📱 [View Widgetbook Preview](https://${{ secrets.NETLIFY_SITE_ID }}.netlify.app)'
+            })
