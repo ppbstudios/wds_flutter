@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 library wds_tokens;
-import 'package:flutter/material.dart';
+
 
 class WdsAtomicRadius {
   const WdsAtomicRadius._();
@@ -14,4 +14,3 @@ class WdsAtomicRadius {
   static const double v8 = 8.0;
   static const double full = 9999.0;
 }
-
