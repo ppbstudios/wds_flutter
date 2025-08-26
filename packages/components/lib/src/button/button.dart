@@ -209,11 +209,11 @@ class WdsPillButton extends StatefulWidget {
     Key? key,
   })  : onTap = onTap,
         isEnabled = isEnabled,
-        backgroundColor = secondary,
-        color = WdsColorCommon.white,
+        backgroundColor = WdsColorCommon.white,
+        color = WdsSemanticColorText.normal,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.xLarge,
-        borderSide = null,
+        borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
         child = child,
         super(key: key);
 
@@ -224,11 +224,11 @@ class WdsPillButton extends StatefulWidget {
     Key? key,
   })  : onTap = onTap,
         isEnabled = isEnabled,
-        backgroundColor = secondary,
-        color = WdsColorCommon.white,
+        backgroundColor = WdsColorCommon.white,
+        color = WdsSemanticColorText.normal,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.large,
-        borderSide = null,
+        borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
         child = child,
         super(key: key);
 
@@ -239,11 +239,11 @@ class WdsPillButton extends StatefulWidget {
     Key? key,
   })  : onTap = onTap,
         isEnabled = isEnabled,
-        backgroundColor = secondary,
-        color = WdsColorCommon.white,
+        backgroundColor = WdsColorCommon.white,
+        color = WdsSemanticColorText.normal,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.medium,
-        borderSide = null,
+        borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
         child = child,
         super(key: key);
 
@@ -254,11 +254,11 @@ class WdsPillButton extends StatefulWidget {
     Key? key,
   })  : onTap = onTap,
         isEnabled = isEnabled,
-        backgroundColor = secondary,
-        color = WdsColorCommon.white,
+        backgroundColor = WdsColorCommon.white,
+        color = WdsSemanticColorText.normal,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.small,
-        borderSide = null,
+        borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
         child = child,
         super(key: key);
 
@@ -269,11 +269,11 @@ class WdsPillButton extends StatefulWidget {
     Key? key,
   })  : onTap = onTap,
         isEnabled = isEnabled,
-        backgroundColor = secondary,
-        color = WdsColorCommon.white,
+        backgroundColor = WdsColorCommon.white,
+        color = WdsSemanticColorText.normal,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.tiny,
-        borderSide = null,
+        borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
         child = child,
         super(key: key);
 
