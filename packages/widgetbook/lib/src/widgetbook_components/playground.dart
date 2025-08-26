@@ -4,46 +4,52 @@ class WidgetbookPlayground extends StatelessWidget {
   const WidgetbookPlayground({
     required this.child,
     this.info = const [],
-    this.height,
+    this.height = 280,
     this.padding = const EdgeInsets.all(24),
     super.key,
   });
 
   final Widget child;
   final List<String> info;
-  final double? height;
+  final double height;
   final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      padding: padding,
+    return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: WdsColorNeutral.v200),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'Playground',
-            style: WdsSemanticTypography.title20Bold.copyWith(
-              color: WdsColorBlue.v500,
-            ),
+      child: Padding(
+        padding: padding,
+        child: LimitedBox(
+          maxHeight: height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            spacing: 24,
+            children: [
+              Text(
+                'Playground',
+                style: WdsSemanticTypography.title20Bold.copyWith(
+                  color: WdsColorBlue.v500,
+                ),
+              ),
+              UnconstrainedBox(
+                alignment: Alignment.center,
+                constrainedAxis: Axis.vertical,
+                child: child,
+              ),
+              if (info.isNotEmpty)
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: info.map((text) => _InfoChip(text)).toList(),
+                ),
+            ],
           ),
-          const SizedBox(height: 24),
-          Expanded(child: Center(child: child)),
-          if (info.isNotEmpty) ...[
-            const SizedBox(height: 24),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: info.map((text) => _InfoChip(text)).toList(),
-            ),
-          ],
-        ],
+        ),
       ),
     );
   }

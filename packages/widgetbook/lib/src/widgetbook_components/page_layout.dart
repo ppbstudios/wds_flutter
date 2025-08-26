@@ -24,7 +24,7 @@ class WidgetbookPageLayout extends StatelessWidget {
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 32),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               spacing: childrenSpacing,
               children: [
                 WidgetbookTitle(

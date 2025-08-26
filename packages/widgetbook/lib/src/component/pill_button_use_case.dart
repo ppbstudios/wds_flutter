@@ -30,38 +30,37 @@ Widget buildWdsPillButtonUseCase(BuildContext context) {
       _buildPlaygroundSection(context),
       const SizedBox(height: 32),
       _buildDemonstrationSection(context),
-      const SizedBox(height: 32),
-      _buildResourceSection(context),
     ],
   );
 }
 
 Widget _buildPlaygroundSection(BuildContext context) {
-  final type = context.knobs.object.dropdown<String>(
-    label: 'Type',
-    options: ['Cta', 'Primary', 'Secondary', 'Custom'],
-    initialOption: 'Cta',
+  final backgroundColor = context.knobs.object.dropdown<String>(
+    label: 'backgroundColor',
+    options: ['cta', 'primary', 'secondary', 'custom'],
+    initialOption: 'cta',
+    description: '버튼의 배경 색상을 정의해요',
   );
 
   final size = context.knobs.object.dropdown<String>(
-    label: 'Size',
+    label: 'size',
     options: ['XLarge', 'Large', 'Medium', 'Small', 'Tiny'],
     initialOption: 'Medium',
   );
 
   final isEnabled = context.knobs.boolean(
-    label: 'Enabled',
+    label: 'isEnabled',
     initialValue: true,
   );
 
   final text = context.knobs.string(
-    label: 'Text',
+    label: 'label',
     initialValue: '텍스트',
   );
 
   Color? customBackgroundColor;
   Color? customTextColor;
-  if (type == 'Custom') {
+  if (backgroundColor == 'custom') {
     customBackgroundColor = context.knobs.color(
       label: 'Background Color',
       initialValue: WdsColorPink.v500,
@@ -72,120 +71,103 @@ Widget _buildPlaygroundSection(BuildContext context) {
     );
   }
 
-  Widget buildButton() {
-    final styleBySize = <String, TextStyle>{
-      'XLarge': WdsSemanticTypography.body15NormalBold,
-      'Large': WdsSemanticTypography.body15NormalBold,
-      'Medium': WdsSemanticTypography.body13NormalMedium,
-      'Small': WdsSemanticTypography.caption12Medium,
-      'Tiny': WdsSemanticTypography.caption12Medium,
-    };
+  final styleBySize = <String, TextStyle>{
+    'XLarge': WdsSemanticTypography.body15NormalBold,
+    'Large': WdsSemanticTypography.body15NormalBold,
+    'Medium': WdsSemanticTypography.body13NormalMedium,
+    'Small': WdsSemanticTypography.caption12Medium,
+    'Tiny': WdsSemanticTypography.caption12Medium,
+  };
 
-    final child = Text(text, style: styleBySize[size]!);
-    final onTap = () => print('PillButton pressed: $type $size');
+  final child = Text(text, style: styleBySize[size]!);
+  final onTap = () => print('PillButton pressed: $backgroundColor $size');
 
-    switch (type) {
-      case 'Cta':
-        switch (size) {
-          case 'XLarge':
-            return WdsPillButton.xlCta(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Large':
-            return WdsPillButton.lCta(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Medium':
-            return WdsPillButton.mCta(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Small':
-            return WdsPillButton.sCta(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Tiny':
-            return WdsPillButton.tyCta(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-        }
-      case 'Primary':
-        switch (size) {
-          case 'XLarge':
-            return WdsPillButton.xlPrimary(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Large':
-            return WdsPillButton.lPrimary(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Medium':
-            return WdsPillButton.mPrimary(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Small':
-            return WdsPillButton.sPrimary(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Tiny':
-            return WdsPillButton.tyPrimary(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-        }
-      case 'Secondary':
-        switch (size) {
-          case 'XLarge':
-            return WdsPillButton.xlSecondary(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Large':
-            return WdsPillButton.lSecondary(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Medium':
-            return WdsPillButton.mSecondary(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Small':
-            return WdsPillButton.sSecondary(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-          case 'Tiny':
-            return WdsPillButton.tySecondary(
-                onTap: onTap, child: child, isEnabled: isEnabled);
-        }
-      case 'Custom':
-        switch (size) {
-          case 'XLarge':
-            return WdsPillButton.xlCustom(
-                onTap: onTap,
-                child: child,
-                backgroundColor: customBackgroundColor!,
-                color: customTextColor!,
-                isEnabled: isEnabled);
-          case 'Large':
-            return WdsPillButton.lCustom(
-                onTap: onTap,
-                child: child,
-                backgroundColor: customBackgroundColor!,
-                color: customTextColor!,
-                isEnabled: isEnabled);
-          case 'Medium':
-            return WdsPillButton.mCustom(
-                onTap: onTap,
-                child: child,
-                backgroundColor: customBackgroundColor!,
-                color: customTextColor!,
-                isEnabled: isEnabled);
-          case 'Small':
-            return WdsPillButton.sCustom(
-                onTap: onTap,
-                child: child,
-                backgroundColor: customBackgroundColor!,
-                color: customTextColor!,
-                isEnabled: isEnabled);
-          case 'Tiny':
-            return WdsPillButton.tyCustom(
-                onTap: onTap,
-                child: child,
-                backgroundColor: customBackgroundColor!,
-                color: customTextColor!,
-                isEnabled: isEnabled);
-        }
-    }
-    return const SizedBox.shrink();
-  }
+  final button = switch (backgroundColor) {
+    'cta' => switch (size) {
+        'XLarge' =>
+          WdsPillButton.xlCta(onTap: onTap, child: child, isEnabled: isEnabled),
+        'Large' =>
+          WdsPillButton.lCta(onTap: onTap, child: child, isEnabled: isEnabled),
+        'Medium' =>
+          WdsPillButton.mCta(onTap: onTap, child: child, isEnabled: isEnabled),
+        'Small' =>
+          WdsPillButton.sCta(onTap: onTap, child: child, isEnabled: isEnabled),
+        'Tiny' =>
+          WdsPillButton.tyCta(onTap: onTap, child: child, isEnabled: isEnabled),
+        _ => const SizedBox.shrink(),
+      },
+    'primary' => switch (size) {
+        'XLarge' => WdsPillButton.xlPrimary(
+            onTap: onTap, child: child, isEnabled: isEnabled),
+        'Large' => WdsPillButton.lPrimary(
+            onTap: onTap, child: child, isEnabled: isEnabled),
+        'Medium' => WdsPillButton.mPrimary(
+            onTap: onTap, child: child, isEnabled: isEnabled),
+        'Small' => WdsPillButton.sPrimary(
+            onTap: onTap, child: child, isEnabled: isEnabled),
+        'Tiny' => WdsPillButton.tyPrimary(
+            onTap: onTap, child: child, isEnabled: isEnabled),
+        _ => const SizedBox.shrink(),
+      },
+    'secondary' => switch (size) {
+        'XLarge' => WdsPillButton.xlSecondary(
+            onTap: onTap, child: child, isEnabled: isEnabled),
+        'Large' => WdsPillButton.lSecondary(
+            onTap: onTap, child: child, isEnabled: isEnabled),
+        'Medium' => WdsPillButton.mSecondary(
+            onTap: onTap, child: child, isEnabled: isEnabled),
+        'Small' => WdsPillButton.sSecondary(
+            onTap: onTap, child: child, isEnabled: isEnabled),
+        'Tiny' => WdsPillButton.tySecondary(
+            onTap: onTap, child: child, isEnabled: isEnabled),
+        _ => const SizedBox.shrink(),
+      },
+    'custom' => switch (size) {
+        'XLarge' => WdsPillButton.xlCustom(
+            onTap: onTap,
+            child: child,
+            backgroundColor: customBackgroundColor!,
+            color: customTextColor!,
+            isEnabled: isEnabled,
+          ),
+        'Large' => WdsPillButton.lCustom(
+            onTap: onTap,
+            child: child,
+            backgroundColor: customBackgroundColor!,
+            color: customTextColor!,
+            isEnabled: isEnabled,
+          ),
+        'Medium' => WdsPillButton.mCustom(
+            onTap: onTap,
+            child: child,
+            backgroundColor: customBackgroundColor!,
+            color: customTextColor!,
+            isEnabled: isEnabled,
+          ),
+        'Small' => WdsPillButton.sCustom(
+            onTap: onTap,
+            child: child,
+            backgroundColor: customBackgroundColor!,
+            color: customTextColor!,
+            isEnabled: isEnabled,
+          ),
+        'Tiny' => WdsPillButton.tyCustom(
+            onTap: onTap,
+            child: child,
+            backgroundColor: customBackgroundColor!,
+            color: customTextColor!,
+            isEnabled: isEnabled,
+          ),
+        _ => const SizedBox.shrink(),
+      },
+    _ => const SizedBox.shrink(),
+  };
 
   return WidgetbookPlayground(
     height: 200,
-    child: buildButton(),
+    child: button,
     info: [
-      'Type: $type',
+      'Type: $backgroundColor',
       'Size: $size',
       'State: ${isEnabled ? 'Enabled' : 'Disabled'}',
     ],
@@ -320,222 +302,6 @@ Widget _buildDemonstrationSection(BuildContext context) {
                 WdsPillButton.mCustom(
                     onTap: () => print('Custom disabled'),
                     child: Text('텍스트', style: _textStyleFor('Medium')),
-                    backgroundColor: WdsColorPink.v500,
-                    isEnabled: false),
-              ],
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
-}
-
-Widget _buildResourceSection(BuildContext context) {
-  return WidgetbookSection(
-    title: 'Resource',
-    children: [
-      Container(
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          border: Border.all(color: WdsColorBlue.v300, width: 2),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                WdsPillButton.xlCta(
-                    onTap: () => print('XL CTA'),
-                    child: Text('텍스트', style: _textStyleFor('XLarge'))),
-                WdsPillButton.lCta(
-                    onTap: () => print('L CTA'),
-                    child: Text('텍스트', style: _textStyleFor('Large'))),
-                WdsPillButton.mCta(
-                    onTap: () => print('M CTA'),
-                    child: Text('텍스트', style: _textStyleFor('Medium'))),
-                WdsPillButton.sCta(
-                    onTap: () => print('S CTA'),
-                    child: Text('텍스트', style: _textStyleFor('Small'))),
-                WdsPillButton.tyCta(
-                    onTap: () => print('TY CTA'),
-                    child: Text('텍스트', style: _textStyleFor('Tiny'))),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                WdsPillButton.xlPrimary(
-                    onTap: () => print('XL Primary'),
-                    child: Text('텍스트', style: _textStyleFor('XLarge'))),
-                WdsPillButton.lPrimary(
-                    onTap: () => print('L Primary'),
-                    child: Text('텍스트', style: _textStyleFor('Large'))),
-                WdsPillButton.mPrimary(
-                    onTap: () => print('M Primary'),
-                    child: Text('텍스트', style: _textStyleFor('Medium'))),
-                WdsPillButton.sPrimary(
-                    onTap: () => print('S Primary'),
-                    child: Text('텍스트', style: _textStyleFor('Small'))),
-                WdsPillButton.tyPrimary(
-                    onTap: () => print('TY Primary'),
-                    child: Text('텍스트', style: _textStyleFor('Tiny'))),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                WdsPillButton.xlSecondary(
-                    onTap: () => print('XL Secondary'),
-                    child: Text('텍스트', style: _textStyleFor('XLarge'))),
-                WdsPillButton.lSecondary(
-                    onTap: () => print('L Secondary'),
-                    child: Text('텍스트', style: _textStyleFor('Large'))),
-                WdsPillButton.mSecondary(
-                    onTap: () => print('M Secondary'),
-                    child: Text('텍스트', style: _textStyleFor('Medium'))),
-                WdsPillButton.sSecondary(
-                    onTap: () => print('S Secondary'),
-                    child: Text('텍스트', style: _textStyleFor('Small'))),
-                WdsPillButton.tySecondary(
-                    onTap: () => print('TY Secondary'),
-                    child: Text('텍스트', style: _textStyleFor('Tiny'))),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                WdsPillButton.xlCustom(
-                    onTap: () => print('XL Custom'),
-                    child: Text('텍스트', style: _textStyleFor('XLarge')),
-                    backgroundColor: WdsColorPink.v500),
-                WdsPillButton.lCustom(
-                    onTap: () => print('L Custom'),
-                    child: Text('텍스트', style: _textStyleFor('Large')),
-                    backgroundColor: WdsColorPink.v500),
-                WdsPillButton.mCustom(
-                    onTap: () => print('M Custom'),
-                    child: Text('텍스트', style: _textStyleFor('Medium')),
-                    backgroundColor: WdsColorPink.v500),
-                WdsPillButton.sCustom(
-                    onTap: () => print('S Custom'),
-                    child: Text('텍스트', style: _textStyleFor('Small')),
-                    backgroundColor: WdsColorPink.v500),
-                WdsPillButton.tyCustom(
-                    onTap: () => print('TY Custom'),
-                    child: Text('텍스트', style: _textStyleFor('Tiny')),
-                    backgroundColor: WdsColorPink.v500),
-              ],
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                WdsPillButton.xlCta(
-                    onTap: () => print('XL CTA disabled'),
-                    child: Text('텍스트', style: _textStyleFor('XLarge')),
-                    isEnabled: false),
-                WdsPillButton.lCta(
-                    onTap: () => print('L CTA disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Large')),
-                    isEnabled: false),
-                WdsPillButton.mCta(
-                    onTap: () => print('M CTA disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Medium')),
-                    isEnabled: false),
-                WdsPillButton.sCta(
-                    onTap: () => print('S CTA disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Small')),
-                    isEnabled: false),
-                WdsPillButton.tyCta(
-                    onTap: () => print('TY CTA disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Tiny')),
-                    isEnabled: false),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                WdsPillButton.xlPrimary(
-                    onTap: () => print('XL Primary disabled'),
-                    child: Text('텍스트', style: _textStyleFor('XLarge')),
-                    isEnabled: false),
-                WdsPillButton.lPrimary(
-                    onTap: () => print('L Primary disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Large')),
-                    isEnabled: false),
-                WdsPillButton.mPrimary(
-                    onTap: () => print('M Primary disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Medium')),
-                    isEnabled: false),
-                WdsPillButton.sPrimary(
-                    onTap: () => print('S Primary disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Small')),
-                    isEnabled: false),
-                WdsPillButton.tyPrimary(
-                    onTap: () => print('TY Primary disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Tiny')),
-                    isEnabled: false),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                WdsPillButton.xlSecondary(
-                    onTap: () => print('XL Secondary disabled'),
-                    child: Text('텍스트', style: _textStyleFor('XLarge')),
-                    isEnabled: false),
-                WdsPillButton.lSecondary(
-                    onTap: () => print('L Secondary disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Large')),
-                    isEnabled: false),
-                WdsPillButton.mSecondary(
-                    onTap: () => print('M Secondary disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Medium')),
-                    isEnabled: false),
-                WdsPillButton.sSecondary(
-                    onTap: () => print('S Secondary disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Small')),
-                    isEnabled: false),
-                WdsPillButton.tySecondary(
-                    onTap: () => print('TY Secondary disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Tiny')),
-                    isEnabled: false),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                WdsPillButton.xlCustom(
-                    onTap: () => print('XL Custom disabled'),
-                    child: Text('텍스트', style: _textStyleFor('XLarge')),
-                    backgroundColor: WdsColorPink.v500,
-                    isEnabled: false),
-                WdsPillButton.lCustom(
-                    onTap: () => print('L Custom disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Large')),
-                    backgroundColor: WdsColorPink.v500,
-                    isEnabled: false),
-                WdsPillButton.mCustom(
-                    onTap: () => print('M Custom disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Medium')),
-                    backgroundColor: WdsColorPink.v500,
-                    isEnabled: false),
-                WdsPillButton.sCustom(
-                    onTap: () => print('S Custom disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Small')),
-                    backgroundColor: WdsColorPink.v500,
-                    isEnabled: false),
-                WdsPillButton.tyCustom(
-                    onTap: () => print('TY Custom disabled'),
-                    child: Text('텍스트', style: _textStyleFor('Tiny')),
                     backgroundColor: WdsColorPink.v500,
                     isEnabled: false),
               ],
