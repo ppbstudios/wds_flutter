@@ -1,31 +1,5 @@
 part of '../../wds_components.dart';
 
-/*
-Pill Button Specs:
-
-# Type: `Color`
-- cta
-- primary
-- secondary
-- custom
-
-# ~~Size~~ Padding: Left, Top, Right, Bottom
-- XLarge: 16px, 13px, 16px, 13px
-- Large: 16px, 11px, 16px, 11px
-- Medium: 16px, 10px, 16px, 10px
-- Small: 16px, 7px, 16px, 7px
-- Tiny: 12px, 6px, 12px, 6px
-
-# State
-- Default: None
-- Pressed: hover, pressed -> Color combined: WdsColorCommon.white + WdsSemanticColorMaterial.pressed
-- Disabled: onTap = null + backgroundColor.opacity = 0.4
-
-# Label
-- Text (maxlines: 1)
-- Icon + Text
- */
-
 class _WdsPillButtonPadding {
   const _WdsPillButtonPadding._();
 
@@ -36,16 +10,42 @@ class _WdsPillButtonPadding {
   static const EdgeInsets tiny = EdgeInsets.fromLTRB(12, 6, 12, 6);
 }
 
-/// Pill Button
+class _WdsPillButtonHeight {
+  const _WdsPillButtonHeight._();
+
+  static const double xLarge = 48;
+  static const double large = 40;
+  static const double medium = 36;
+  static const double small = 30;
+  static const double tiny = 28;
+}
+
+class _WdsPillButtonTypography {
+  const _WdsPillButtonTypography._();
+
+  static TextStyle forHeight(double height) {
+    // 크기별 고정 타이포그래피 적용
+    return switch (height) {
+      _WdsPillButtonHeight.xLarge => WdsSemanticTypography.body15NormalBold,
+      _WdsPillButtonHeight.large => WdsSemanticTypography.body15NormalBold,
+      _WdsPillButtonHeight.medium => WdsSemanticTypography.body13NormalMedium,
+      _WdsPillButtonHeight.small => WdsSemanticTypography.caption12Medium,
+      _ => WdsSemanticTypography.caption12Medium,
+    };
+  }
+}
+
+/// 필 버튼
 ///
 /// WdsPillButton.{size}{type}
 ///
-/// ### type
+/// ### 타입
 /// - cta
 /// - primary
 /// - secondary
+/// - custom
 ///
-/// ### size
+/// ### 크기
 /// - XL
 /// - L
 /// - M
@@ -63,6 +63,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsColorCommon.white,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.xLarge,
+        height = _WdsPillButtonHeight.xLarge,
         borderSide = null,
         child = child,
         super(key: key);
@@ -78,6 +79,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsColorCommon.white,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.large,
+        height = _WdsPillButtonHeight.large,
         borderSide = null,
         child = child,
         super(key: key);
@@ -93,6 +95,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsColorCommon.white,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.medium,
+        height = _WdsPillButtonHeight.medium,
         borderSide = null,
         child = child,
         super(key: key);
@@ -108,6 +111,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsColorCommon.white,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.small,
+        height = _WdsPillButtonHeight.small,
         borderSide = null,
         child = child,
         super(key: key);
@@ -123,6 +127,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsColorCommon.white,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.tiny,
+        height = _WdsPillButtonHeight.tiny,
         borderSide = null,
         child = child,
         super(key: key);
@@ -138,6 +143,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsColorCommon.white,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.xLarge,
+        height = _WdsPillButtonHeight.xLarge,
         borderSide = null,
         child = child,
         super(key: key);
@@ -153,6 +159,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsColorCommon.white,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.large,
+        height = _WdsPillButtonHeight.large,
         borderSide = null,
         child = child,
         super(key: key);
@@ -168,6 +175,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsColorCommon.white,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.medium,
+        height = _WdsPillButtonHeight.medium,
         borderSide = null,
         child = child,
         super(key: key);
@@ -183,6 +191,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsColorCommon.white,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.small,
+        height = _WdsPillButtonHeight.small,
         borderSide = null,
         child = child,
         super(key: key);
@@ -198,6 +207,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsColorCommon.white,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.tiny,
+        height = _WdsPillButtonHeight.tiny,
         borderSide = null,
         child = child,
         super(key: key);
@@ -213,6 +223,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsSemanticColorText.normal,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.xLarge,
+        height = _WdsPillButtonHeight.xLarge,
         borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
         child = child,
         super(key: key);
@@ -228,6 +239,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsSemanticColorText.normal,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.large,
+        height = _WdsPillButtonHeight.large,
         borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
         child = child,
         super(key: key);
@@ -243,6 +255,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsSemanticColorText.normal,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.medium,
+        height = _WdsPillButtonHeight.medium,
         borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
         child = child,
         super(key: key);
@@ -258,6 +271,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsSemanticColorText.normal,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.small,
+        height = _WdsPillButtonHeight.small,
         borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
         child = child,
         super(key: key);
@@ -273,6 +287,7 @@ class WdsPillButton extends StatefulWidget {
         color = WdsSemanticColorText.normal,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.tiny,
+        height = _WdsPillButtonHeight.tiny,
         borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
         child = child,
         super(key: key);
@@ -290,6 +305,7 @@ class WdsPillButton extends StatefulWidget {
         color = color,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.xLarge,
+        height = _WdsPillButtonHeight.xLarge,
         borderSide = null,
         child = child,
         super(key: key);
@@ -307,6 +323,7 @@ class WdsPillButton extends StatefulWidget {
         color = color,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.large,
+        height = _WdsPillButtonHeight.large,
         borderSide = null,
         child = child,
         super(key: key);
@@ -324,6 +341,7 @@ class WdsPillButton extends StatefulWidget {
         color = color,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.medium,
+        height = _WdsPillButtonHeight.medium,
         borderSide = null,
         child = child,
         super(key: key);
@@ -341,6 +359,7 @@ class WdsPillButton extends StatefulWidget {
         color = color,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.small,
+        height = _WdsPillButtonHeight.small,
         borderSide = null,
         child = child,
         super(key: key);
@@ -358,6 +377,7 @@ class WdsPillButton extends StatefulWidget {
         color = color,
         radius = WdsAtomicRadius.full,
         padding = _WdsPillButtonPadding.tiny,
+        height = _WdsPillButtonHeight.tiny,
         borderSide = null,
         child = child,
         super(key: key);
@@ -376,6 +396,8 @@ class WdsPillButton extends StatefulWidget {
   final BorderSide? borderSide;
 
   final EdgeInsets padding;
+
+  final double height;
 
   final bool isEnabled;
 
@@ -471,15 +493,51 @@ class _WdsPillButtonState extends State<WdsPillButton>
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.all(Radius.circular(widget.radius));
 
-    // Content
-    final Widget content = DefaultTextStyle.merge(
-      // Propagate text color while allowing child overrides
-      style: TextStyle(color: widget.color),
-      child: IconTheme(
-        data: IconThemeData(color: widget.color),
-        child: Padding(padding: widget.padding, child: widget.child),
-      ),
+    // 콘텐츠 (텍스트/아이콘)
+    final TextStyle fixedTypography =
+        _WdsPillButtonTypography.forHeight(widget.height).copyWith(
+      color: widget.color,
     );
+
+    Widget content = IconTheme(
+      data: IconThemeData(color: widget.color),
+      child: Padding(padding: widget.padding, child: widget.child),
+    );
+
+    // Text 자식일 경우 강제 타이포그래피 적용
+    if (widget.child is Text) {
+      final Text childText = widget.child as Text;
+      final TextStyle? merged =
+          childText.style?.merge(fixedTypography) ?? fixedTypography;
+      content = IconTheme(
+        data: IconThemeData(color: widget.color),
+        child: Padding(
+          padding: widget.padding,
+          child: Text(
+            childText.data ?? '',
+            key: childText.key,
+            style: merged,
+            strutStyle: childText.strutStyle,
+            textAlign: childText.textAlign,
+            textDirection: childText.textDirection,
+            locale: childText.locale,
+            softWrap: childText.softWrap,
+            overflow: childText.overflow,
+            textScaleFactor: childText.textScaleFactor,
+            maxLines: 1, // 스펙: 최대 1줄
+            semanticsLabel: childText.semanticsLabel,
+            textWidthBasis: childText.textWidthBasis,
+            textHeightBehavior: childText.textHeightBehavior,
+            selectionColor: childText.selectionColor,
+          ),
+        ),
+      );
+    } else {
+      content = DefaultTextStyle.merge(
+        style: fixedTypography,
+        child: content,
+      );
+    }
 
     // Overlay animation
     final overlay = TweenAnimationBuilder<Color?>(
@@ -524,7 +582,7 @@ class _WdsPillButtonState extends State<WdsPillButton>
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Background + optional border
+            // 배경 + 선택적 테두리
             DecoratedBox(
               decoration: ShapeDecoration(
                 color: _effectiveBackgroundColor(),
@@ -533,15 +591,18 @@ class _WdsPillButtonState extends State<WdsPillButton>
                   side: widget.borderSide ?? BorderSide.none,
                 ),
               ),
-              child: content,
+              child: SizedBox(
+                height: widget.height,
+                child: Center(child: content),
+              ),
             ),
-            // Hover/Pressed overlay (animated)
+            // 호버/눌림 오버레이 (애니메이션)
             Positioned.fill(
               child: IgnorePointer(
                 child: RepaintBoundary(child: overlay),
               ),
             ),
-            // Ripple feedback
+            // 리플 피드백
             Positioned.fill(
               child: IgnorePointer(
                 child: RepaintBoundary(child: ripple),
