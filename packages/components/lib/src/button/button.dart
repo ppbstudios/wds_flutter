@@ -1,436 +1,127 @@
 part of '../../wds_components.dart';
 
-class _WdsPillButtonPadding {
-  const _WdsPillButtonPadding._();
+enum WdsButtonVariant { cta, primary, secondary, square }
 
-  static const EdgeInsets xLarge = EdgeInsets.fromLTRB(16, 13, 16, 13);
-  static const EdgeInsets large = EdgeInsets.fromLTRB(16, 11, 16, 11);
-  static const EdgeInsets medium = EdgeInsets.fromLTRB(16, 10, 16, 10);
-  static const EdgeInsets small = EdgeInsets.fromLTRB(16, 7, 16, 7);
-  static const EdgeInsets tiny = EdgeInsets.fromLTRB(12, 6, 12, 6);
-}
+enum WdsButtonSize { xlarge, large, medium, small, tiny }
 
-class _WdsPillButtonHeight {
-  const _WdsPillButtonHeight._();
+class _ButtonPaddingBySize {
+  const _ButtonPaddingBySize._();
 
-  static const double xLarge = 48;
-  static const double large = 40;
-  static const double medium = 36;
-  static const double small = 30;
-  static const double tiny = 28;
-}
-
-class _WdsPillButtonTypography {
-  const _WdsPillButtonTypography._();
-
-  static TextStyle forHeight(double height) {
-    // 크기별 고정 타이포그래피 적용
-    return switch (height) {
-      _WdsPillButtonHeight.xLarge => WdsSemanticTypography.body15NormalBold,
-      _WdsPillButtonHeight.large => WdsSemanticTypography.body15NormalBold,
-      _WdsPillButtonHeight.medium => WdsSemanticTypography.body13NormalMedium,
-      _WdsPillButtonHeight.small => WdsSemanticTypography.caption12Medium,
-      _ => WdsSemanticTypography.caption12Medium,
+  static EdgeInsets of(WdsButtonSize size) {
+    // 문서 기준: xL(16,13), L(16,11), M(16,10), S(16,7), TY(16,6)
+    return switch (size) {
+      WdsButtonSize.xlarge => const EdgeInsets.fromLTRB(16, 13, 16, 13),
+      WdsButtonSize.large => const EdgeInsets.fromLTRB(16, 11, 16, 11),
+      WdsButtonSize.medium => const EdgeInsets.fromLTRB(16, 10, 16, 10),
+      WdsButtonSize.small => const EdgeInsets.fromLTRB(16, 7, 16, 7),
+      WdsButtonSize.tiny => const EdgeInsets.fromLTRB(16, 6, 16, 6),
     };
   }
 }
 
-/// 필 버튼
-///
-/// WdsPillButton.{size}{type}
-///
-/// ### 타입
-/// - cta
-/// - primary
-/// - secondary
-/// - custom
-///
-/// ### 크기
-/// - XL
-/// - L
-/// - M
-/// - S
-/// - TY
-class WdsPillButton extends StatefulWidget {
-  const WdsPillButton.xlCta({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = cta,
-        color = WdsColorCommon.white,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.xLarge,
-        height = _WdsPillButtonHeight.xLarge,
-        borderSide = null,
-        child = child,
-        super(key: key);
+class _ButtonHeightBySize {
+  const _ButtonHeightBySize._();
 
-  const WdsPillButton.lCta({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = cta,
-        color = WdsColorCommon.white,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.large,
-        height = _WdsPillButtonHeight.large,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.mCta({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = cta,
-        color = WdsColorCommon.white,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.medium,
-        height = _WdsPillButtonHeight.medium,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.sCta({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = cta,
-        color = WdsColorCommon.white,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.small,
-        height = _WdsPillButtonHeight.small,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.tyCta({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = cta,
-        color = WdsColorCommon.white,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.tiny,
-        height = _WdsPillButtonHeight.tiny,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.xlPrimary({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = primary,
-        color = WdsColorCommon.white,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.xLarge,
-        height = _WdsPillButtonHeight.xLarge,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.lPrimary({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = primary,
-        color = WdsColorCommon.white,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.large,
-        height = _WdsPillButtonHeight.large,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.mPrimary({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = primary,
-        color = WdsColorCommon.white,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.medium,
-        height = _WdsPillButtonHeight.medium,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.sPrimary({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = primary,
-        color = WdsColorCommon.white,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.small,
-        height = _WdsPillButtonHeight.small,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.tyPrimary({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = primary,
-        color = WdsColorCommon.white,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.tiny,
-        height = _WdsPillButtonHeight.tiny,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.xlSecondary({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = WdsColorCommon.white,
-        color = WdsSemanticColorText.normal,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.xLarge,
-        height = _WdsPillButtonHeight.xLarge,
-        borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.lSecondary({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = WdsColorCommon.white,
-        color = WdsSemanticColorText.normal,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.large,
-        height = _WdsPillButtonHeight.large,
-        borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.mSecondary({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = WdsColorCommon.white,
-        color = WdsSemanticColorText.normal,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.medium,
-        height = _WdsPillButtonHeight.medium,
-        borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.sSecondary({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = WdsColorCommon.white,
-        color = WdsSemanticColorText.normal,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.small,
-        height = _WdsPillButtonHeight.small,
-        borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.tySecondary({
-    required VoidCallback onTap,
-    required Widget child,
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = WdsColorCommon.white,
-        color = WdsSemanticColorText.normal,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.tiny,
-        height = _WdsPillButtonHeight.tiny,
-        borderSide = const BorderSide(color: WdsSemanticColorBorder.neutral),
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.xlCustom({
-    required VoidCallback onTap,
-    required Widget child,
-    required Color backgroundColor,
-    Color color = const Color(0xFFFFFFFF),
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = backgroundColor,
-        color = color,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.xLarge,
-        height = _WdsPillButtonHeight.xLarge,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.lCustom({
-    required VoidCallback onTap,
-    required Widget child,
-    required Color backgroundColor,
-    Color color = const Color(0xFFFFFFFF),
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = backgroundColor,
-        color = color,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.large,
-        height = _WdsPillButtonHeight.large,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.mCustom({
-    required VoidCallback onTap,
-    required Widget child,
-    required Color backgroundColor,
-    Color color = const Color(0xFFFFFFFF),
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = backgroundColor,
-        color = color,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.medium,
-        height = _WdsPillButtonHeight.medium,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.sCustom({
-    required VoidCallback onTap,
-    required Widget child,
-    required Color backgroundColor,
-    Color color = const Color(0xFFFFFFFF),
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = backgroundColor,
-        color = color,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.small,
-        height = _WdsPillButtonHeight.small,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  const WdsPillButton.tyCustom({
-    required VoidCallback onTap,
-    required Widget child,
-    required Color backgroundColor,
-    Color color = const Color(0xFFFFFFFF),
-    bool isEnabled = true,
-    Key? key,
-  })  : onTap = onTap,
-        isEnabled = isEnabled,
-        backgroundColor = backgroundColor,
-        color = color,
-        radius = WdsAtomicRadius.full,
-        padding = _WdsPillButtonPadding.tiny,
-        height = _WdsPillButtonHeight.tiny,
-        borderSide = null,
-        child = child,
-        super(key: key);
-
-  /// 버튼 클릭 이벤트, 버튼 비활성화 시 이벤트 없음
-  final VoidCallback? onTap;
-
-  /// 버튼 배경 색상
-  final Color backgroundColor;
-
-  /// 텍스트 색상
-  final Color color;
-
-  final double radius;
-
-  final BorderSide? borderSide;
-
-  final EdgeInsets padding;
-
-  final double height;
-
-  final bool isEnabled;
-
-  final Widget child;
-
-  @override
-  State<WdsPillButton> createState() => _WdsPillButtonState();
+  static double of(WdsButtonSize size) {
+    return switch (size) {
+      WdsButtonSize.xlarge => 48,
+      WdsButtonSize.large => 40,
+      WdsButtonSize.medium => 36,
+      WdsButtonSize.small => 30,
+      WdsButtonSize.tiny => 28,
+    };
+  }
 }
 
-class _WdsPillButtonState extends State<WdsPillButton>
+class _ButtonTypographyBySize {
+  const _ButtonTypographyBySize._();
+
+  static TextStyle of(WdsButtonSize size) {
+    return switch (size) {
+      WdsButtonSize.xlarge => WdsSemanticTypography.body15NormalBold,
+      WdsButtonSize.large => WdsSemanticTypography.body15NormalBold,
+      WdsButtonSize.medium => WdsSemanticTypography.body13NormalMedium,
+      WdsButtonSize.small => WdsSemanticTypography.caption12Medium,
+      WdsButtonSize.tiny => WdsSemanticTypography.caption12Medium,
+    };
+  }
+}
+
+class _ButtonStyleByVariant {
+  const _ButtonStyleByVariant._();
+
+  static ({
+    Color background,
+    Color foreground,
+    double radius,
+    BorderSide? border
+  }) of(
+    WdsButtonVariant variant,
+  ) {
+    return switch (variant) {
+      WdsButtonVariant.cta => (
+          background: cta,
+          foreground: WdsColorCommon.white,
+          radius: WdsAtomicRadius.full,
+          border: null,
+        ),
+      WdsButtonVariant.primary => (
+          background: primary,
+          foreground: WdsColorCommon.white,
+          radius: WdsAtomicRadius.full,
+          border: null,
+        ),
+      WdsButtonVariant.secondary => (
+          background: WdsColorCommon.white,
+          foreground: WdsSemanticColorText.normal,
+          radius: WdsAtomicRadius.full,
+          border: const BorderSide(color: WdsSemanticColorBorder.neutral),
+        ),
+      WdsButtonVariant.square => (
+          background: WdsColorCommon.white,
+          foreground: WdsColorNeutral.v600,
+          radius: WdsAtomicRadius.v4,
+          border: const BorderSide(color: WdsSemanticColorBorder.alternative),
+        ),
+    };
+  }
+}
+
+/// 디자인 시스템 규칙을 따르는 버튼
+class WdsButton extends StatefulWidget {
+  const WdsButton({
+    required this.onTap,
+    required this.child,
+    this.isEnabled = true,
+    this.variant = WdsButtonVariant.cta,
+    this.size = WdsButtonSize.medium,
+    Key? key,
+  }) : super(key: key);
+
+  final VoidCallback? onTap;
+  final Widget child;
+  final bool isEnabled;
+  final WdsButtonVariant variant;
+  final WdsButtonSize size;
+
+  @override
+  State<WdsButton> createState() => _WdsButtonState();
+}
+
+class _WdsButtonState extends State<WdsButton>
     with SingleTickerProviderStateMixin {
   bool _isHovered = false;
   bool _isPressed = false;
 
-  // Ripple
-  late final AnimationController _rippleController;
-  Offset? _rippleOrigin;
-
   static const Duration _hoverAnimationDuration = Duration(milliseconds: 150);
-  static const Duration _rippleDuration = Duration(milliseconds: 300);
 
   @override
   void initState() {
     super.initState();
-    _rippleController = AnimationController(
-      vsync: this,
-      duration: _rippleDuration,
-    );
   }
 
   @override
   void dispose() {
-    _rippleController.dispose();
     super.dispose();
   }
 
@@ -438,14 +129,11 @@ class _WdsPillButtonState extends State<WdsPillButton>
   void _handleTapDown(TapDownDetails details) {
     if (!widget.isEnabled) return;
     if (!mounted) return;
-    _rippleOrigin = details.localPosition;
     if (!_isPressed) {
       setState(() {
         _isPressed = true;
       });
     }
-    if (!mounted) return;
-    _rippleController.forward(from: 0);
   }
 
   void _handleTapUp(TapUpDetails details) {
@@ -473,35 +161,24 @@ class _WdsPillButtonState extends State<WdsPillButton>
     // Base token overlay color for feedback
     final Color base =
         WdsSemanticColorMaterial.pressed; // semi-transparent black
-    if (_isPressed) {
-      return base.withValues(alpha: (base.a * 1.5).clamp(0.0, 1.0));
-    }
-    if (_isHovered) {
+    if (_isPressed || _isHovered) {
       return base;
     }
     return const Color(0x00000000);
   }
 
-  Color _effectiveBackgroundColor() {
-    if (!widget.isEnabled) {
-      return widget.backgroundColor.withValues(alpha: 0.4);
-    }
-    return widget.backgroundColor;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final borderRadius = BorderRadius.all(Radius.circular(widget.radius));
-
-    // 콘텐츠 (텍스트/아이콘)
-    final TextStyle fixedTypography =
-        _WdsPillButtonTypography.forHeight(widget.height).copyWith(
-      color: widget.color,
-    );
+    final style = _ButtonStyleByVariant.of(widget.variant);
+    final double height = _ButtonHeightBySize.of(widget.size);
+    final EdgeInsets padding = _ButtonPaddingBySize.of(widget.size);
+    final TextStyle fixedTypography = _ButtonTypographyBySize.of(widget.size)
+        .copyWith(color: style.foreground);
+    final borderRadius = BorderRadius.all(Radius.circular(style.radius));
 
     Widget content = IconTheme(
-      data: IconThemeData(color: widget.color),
-      child: Padding(padding: widget.padding, child: widget.child),
+      data: IconThemeData(color: style.foreground),
+      child: Padding(padding: padding, child: widget.child),
     );
 
     // Text 자식일 경우 강제 타이포그래피 적용
@@ -510,9 +187,9 @@ class _WdsPillButtonState extends State<WdsPillButton>
       final TextStyle? merged =
           childText.style?.merge(fixedTypography) ?? fixedTypography;
       content = IconTheme(
-        data: IconThemeData(color: widget.color),
+        data: IconThemeData(color: style.foreground),
         child: Padding(
-          padding: widget.padding,
+          padding: padding,
           child: Text(
             childText.data ?? '',
             key: childText.key,
@@ -554,21 +231,7 @@ class _WdsPillButtonState extends State<WdsPillButton>
       },
     );
 
-    // Ripple painter
-    final ripple = AnimatedBuilder(
-      animation: _rippleController,
-      builder: (context, _) {
-        return CustomPaint(
-          painter: _RipplePainter(
-            progress: _rippleController.value,
-            origin: _rippleOrigin,
-            color: WdsColorCommon.white
-                .withValues(alpha: 0.25 * (1 - _rippleController.value)),
-            borderRadius: borderRadius,
-          ),
-        );
-      },
-    );
+    // Ripple 제거됨 (hover/pressed는 동일 overlay 처리)
 
     // Gestures and hover (MouseRegion only on web)
     final coreGesture = GestureDetector(
@@ -585,14 +248,14 @@ class _WdsPillButtonState extends State<WdsPillButton>
             // 배경 + 선택적 테두리
             DecoratedBox(
               decoration: ShapeDecoration(
-                color: _effectiveBackgroundColor(),
+                color: style.background,
                 shape: RoundedRectangleBorder(
                   borderRadius: borderRadius,
-                  side: widget.borderSide ?? BorderSide.none,
+                  side: style.border ?? BorderSide.none,
                 ),
               ),
               child: SizedBox(
-                height: widget.height,
+                height: height,
                 child: Center(child: content),
               ),
             ),
@@ -600,12 +263,6 @@ class _WdsPillButtonState extends State<WdsPillButton>
             Positioned.fill(
               child: IgnorePointer(
                 child: RepaintBoundary(child: overlay),
-              ),
-            ),
-            // 리플 피드백
-            Positioned.fill(
-              child: IgnorePointer(
-                child: RepaintBoundary(child: ripple),
               ),
             ),
           ],
@@ -633,69 +290,14 @@ class _WdsPillButtonState extends State<WdsPillButton>
           )
         : coreGesture;
 
-    return IgnorePointer(
+    final Widget result = IgnorePointer(
       ignoring: !widget.isEnabled,
       child: gestureChild,
     );
-  }
-}
 
-class _RipplePainter extends CustomPainter {
-  final double progress; // 0.0 -> 1.0
-  final Offset? origin;
-  final Color color;
-  final BorderRadius borderRadius;
-
-  _RipplePainter({
-    required this.progress,
-    required this.origin,
-    required this.color,
-    required this.borderRadius,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (origin == null) return;
-    if (color.a == 0) return;
-
-    // Clip to rounded rect so ripple doesn't overflow
-    final rect = Offset.zero & size;
-    final rrect = RRect.fromRectAndCorners(
-      rect,
-      topLeft: borderRadius.topLeft,
-      topRight: borderRadius.topRight,
-      bottomLeft: borderRadius.bottomLeft,
-      bottomRight: borderRadius.bottomRight,
-    );
-    canvas.save();
-    canvas.clipRRect(rrect);
-
-    // Compute max radius to farthest corner
-    final corners = <Offset>[
-      rect.topLeft,
-      rect.topRight,
-      rect.bottomLeft,
-      rect.bottomRight,
-    ];
-    final double maxRadius = corners
-        .map((c) => (c - origin!).distance)
-        .fold<double>(0.0, (prev, d) => d > prev ? d : prev);
-
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    final radius = maxRadius * Curves.easeOut.transform(progress);
-    canvas.drawCircle(origin!, radius, paint);
-
-    canvas.restore();
-  }
-
-  @override
-  bool shouldRepaint(covariant _RipplePainter oldDelegate) {
-    return oldDelegate.progress != progress ||
-        oldDelegate.origin != origin ||
-        oldDelegate.color != color ||
-        oldDelegate.borderRadius != borderRadius;
+    if (!widget.isEnabled) {
+      return Opacity(opacity: 0.4, child: result);
+    }
+    return result;
   }
 }
