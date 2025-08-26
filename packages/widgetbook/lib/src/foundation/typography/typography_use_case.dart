@@ -52,24 +52,24 @@ Widget _buildTypographyPlayground(BuildContext context) {
 
   final fontSize = context.knobs.double.slider(
     label: 'fontSize(px)',
-    initialValue: 18,
-    min: 10,
-    max: 48,
-    divisions: 38,
+    initialValue: WdsFontSize.v18,
+    min: WdsFontSize.v10,
+    max: WdsFontSize.v32,
+    divisions: 11,
   );
 
   final lineHeight = context.knobs.double.slider(
     label: 'lineHeight(px)',
-    initialValue: 26,
+    initialValue: WdsFontLineHeight.v30,
     min: 12,
     max: 56,
     divisions: 44,
   );
 
   final letterSpacing = context.knobs.double.slider(
-    label: 'letterSpacing(= em * fontSize)',
-    initialValue: -0.02,
-    min: -0.1,
+    label: 'letterSpacing',
+    initialValue: 0,
+    min: -0.2,
     max: 0.1,
     divisions: 40,
   );
@@ -106,11 +106,9 @@ Widget _buildTypographyPlayground(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    height: 280,
     child: Text(
       sampleText,
       maxLines: 2,
-      overflow: TextOverflow.ellipsis,
       style: style,
       textAlign: TextAlign.start,
     ),
@@ -215,7 +213,6 @@ class _StylesSection extends StatelessWidget {
           fontSize: WdsFontSize.v16,
           lineHeightPx: WdsFontLineHeight.v24,
           styles: const [
-            WdsSemanticTypography.heading16ExtraBold,
             WdsSemanticTypography.heading16Bold,
             WdsSemanticTypography.heading16Medium,
             WdsSemanticTypography.heading16Regular,

@@ -5,7 +5,7 @@ class WidgetbookPageLayout extends StatelessWidget {
     required this.title,
     required this.children,
     this.description,
-    this.childrenSpacing = 16,
+    this.childrenSpacing = 24,
     super.key,
   });
 
@@ -16,9 +16,9 @@ class WidgetbookPageLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: WdsColorCommon.white,
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: WdsColorCommon.white,
+      body: SafeArea(
         child: InteractiveViewer(
           maxScale: 6,
           child: SingleChildScrollView(

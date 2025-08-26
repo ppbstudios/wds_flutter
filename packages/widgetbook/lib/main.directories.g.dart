@@ -10,7 +10,7 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:wds_widgetbook/src/component/pill_button_use_case.dart'
+import 'package:wds_widgetbook/src/component/button_use_case.dart'
     as _wds_widgetbook_src_component_pill_button_use_case;
 import 'package:wds_widgetbook/src/cover.dart' as _wds_widgetbook_src_cover;
 import 'package:wds_widgetbook/src/foundation/color/atomic_color_use_case.dart'
@@ -43,11 +43,11 @@ final directories = <_widgetbook.WidgetbookNode>[
         name: 'button',
         children: [
           _widgetbook.WidgetbookLeafComponent(
-            name: 'WdsPillButton',
+            name: 'WdsButton',
             useCase: _widgetbook.WidgetbookUseCase(
-              name: 'Pill Button',
+              name: 'Button',
               builder: _wds_widgetbook_src_component_pill_button_use_case
-                  .buildWdsPillButtonUseCase,
+                  .buildWdsButtonUseCase,
             ),
           )
         ],
