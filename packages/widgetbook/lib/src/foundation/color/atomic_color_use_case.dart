@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:wds_tokens/wds_tokens.dart';
-import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_page_layout.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
+
+import '../../widgetbook_components/widgetbook_components.dart';
 
 @widgetbook.UseCase(
   name: 'Atomic Color',
   type: Color,
-  path: 'color/',
+  path: 'foundation/color/',
   designLink:
       'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
 )

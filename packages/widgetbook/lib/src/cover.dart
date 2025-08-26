@@ -7,7 +7,7 @@ class WincDesginSystem {}
 @widgetbook.UseCase(
   name: 'Cover',
   type: WincDesginSystem,
-  path: '/',
+  path: '_about',
 )
 Widget buildWdsCover(BuildContext context) {
   return LayoutBuilder(

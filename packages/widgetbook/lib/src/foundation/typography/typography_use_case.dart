@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:wds_tokens/wds_tokens.dart';
-import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_page_layout.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
+
+import '../../widgetbook_components/widgetbook_components.dart';
 
 @widgetbook.UseCase(
   name: 'Typography',
   type: TextStyle,
-  path: 'typography/',
+  path: 'foundation/typography/',
   designLink:
       'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
 )
@@ -34,7 +35,7 @@ class _TypographyShowcase extends StatelessWidget {
     return WidgetbookPageLayout(
       title: 'Typography',
       children: [
-        _TypographyPlayground(),
+        _buildTypographyPlayground(context),
         SizedBox(height: 32),
         _StylesSection(),
       ],
@@ -42,113 +43,91 @@ class _TypographyShowcase extends StatelessWidget {
   }
 }
 
-class _TypographyPlayground extends StatelessWidget {
-  const _TypographyPlayground();
+Widget _buildTypographyPlayground(BuildContext context) {
+  final sampleText = context.knobs.string(
+    label: 'text',
+    initialValue: kDefaultTypographyText,
+    maxLines: 2,
+  );
 
-  @override
-  Widget build(BuildContext context) {
-    final sampleText = context.knobs.string(
-      label: 'text',
-      initialValue: kDefaultTypographyText,
+  final fontSize = context.knobs.double.slider(
+    label: 'fontSize(px)',
+    initialValue: 18,
+    min: 10,
+    max: 48,
+    divisions: 38,
+  );
+
+  final lineHeight = context.knobs.double.slider(
+    label: 'lineHeight(px)',
+    initialValue: 26,
+    min: 12,
+    max: 56,
+    divisions: 44,
+  );
+
+  final letterSpacing = context.knobs.double.slider(
+    label: 'letterSpacing(= em * fontSize)',
+    initialValue: -0.02,
+    min: -0.1,
+    max: 0.1,
+    divisions: 40,
+  );
+
+  final weight = context.knobs.object.dropdown<FontWeight>(
+    label: 'fontWeight',
+    initialOption: WdsFontWeight.extrabold,
+    options: const [
+      WdsFontWeight.extrabold,
+      WdsFontWeight.bold,
+      WdsFontWeight.medium,
+      WdsFontWeight.regular,
+    ],
+    labelBuilder: (w) {
+      if (w == WdsFontWeight.extrabold) return 'extrabold';
+      if (w == WdsFontWeight.bold) return 'bold';
+      if (w == WdsFontWeight.medium) return 'medium';
+      return 'regular';
+    },
+  );
+
+  final color = context.knobs.color(
+    label: 'color',
+    initialValue: Colors.black,
+  );
+
+  final style = TextStyle(
+    fontFamily: WdsFontFamily.pretendard,
+    fontWeight: weight,
+    fontSize: fontSize,
+    height: lineHeight / fontSize,
+    letterSpacing: letterSpacing,
+    color: color,
+  );
+
+  return WidgetbookPlayground(
+    height: 280,
+    child: Text(
+      sampleText,
       maxLines: 2,
-    );
+      overflow: TextOverflow.ellipsis,
+      style: style,
+      textAlign: TextAlign.start,
+    ),
+    info: [
+      'size: ${fontSize.toStringAsFixed(0)}px',
+      'lineHeight: ${lineHeight.toStringAsFixed(0)}px',
+      'letterSpacing: ${letterSpacing.toStringAsFixed(2)}',
+      'weight: ${_getWeightLabel(weight)}',
+    ],
+  );
+}
 
-    final fontSize = context.knobs.double.slider(
-      label: 'fontSize(px)',
-      initialValue: 18,
-      min: 10,
-      max: 48,
-      divisions: 38,
-    );
-
-    final lineHeight = context.knobs.double.slider(
-      label: 'lineHeight(px)',
-      initialValue: 26,
-      min: 12,
-      max: 56,
-      divisions: 44,
-    );
-
-    final letterSpacing = context.knobs.double.slider(
-      label: 'letterSpacing(= em * fontSize)',
-      initialValue: -0.02,
-      min: -0.1,
-      max: 0.1,
-      divisions: 40,
-    );
-
-    final weight = context.knobs.object.dropdown<FontWeight>(
-      label: 'fontWeight',
-      initialOption: WdsFontWeight.extrabold,
-      options: const [
-        WdsFontWeight.extrabold,
-        WdsFontWeight.bold,
-        WdsFontWeight.medium,
-        WdsFontWeight.regular,
-      ],
-      labelBuilder: (w) {
-        if (w == WdsFontWeight.extrabold) return 'extrabold';
-        if (w == WdsFontWeight.bold) return 'bold';
-        if (w == WdsFontWeight.medium) return 'medium';
-        return 'regular';
-      },
-    );
-
-    final color = context.knobs.color(
-      label: 'color',
-      initialValue: Colors.black,
-    );
-
-    final style = TextStyle(
-      fontFamily: WdsFontFamily.pretendard,
-      fontWeight: weight,
-      fontSize: fontSize,
-      height: lineHeight / fontSize,
-      letterSpacing: letterSpacing,
-      color: color,
-    );
-
-    return SizedBox(
-      height: 280,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Colors.black12),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            spacing: 16,
-            children: [
-              Text(
-                'Playground',
-                style: WdsSemanticTypography.title20Bold
-                    .copyWith(color: WdsColorBlue.v400),
-              ),
-              Text(
-                sampleText,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: style,
-              ),
-              Spacer(),
-              Wrap(
-                spacing: 12,
-                runSpacing: 8,
-                children: [
-                  _Chip('size: ${fontSize.toStringAsFixed(0)}'),
-                  _Chip('lineHeight: ${lineHeight.toStringAsFixed(0)}'),
-                  _Chip('letterSpacing: ${letterSpacing.toStringAsFixed(2)}'),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+String _getWeightLabel(FontWeight weight) {
+  if (weight == WdsFontWeight.extrabold) return 'extrabold';
+  if (weight == WdsFontWeight.bold) return 'bold';
+  if (weight == WdsFontWeight.medium) return 'medium';
+  return 'regular';
 }
 
 class _StylesSection extends StatelessWidget {
@@ -156,14 +135,10 @@ class _StylesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return WidgetbookSection(
+      title: '스타일',
+      spacing: 12,
       children: [
-        Text(
-          '스타일',
-          style: WdsSemanticTypography.title20Bold,
-        ),
-        const SizedBox(height: 12),
         _StyleTableHeader(),
         const Divider(height: 1),
         // Title 32
@@ -536,23 +511,6 @@ class _HeaderCell extends StatelessWidget {
         label,
         style: WdsSemanticTypography.heading17Bold,
       ),
-    );
-  }
-}
-
-class _Chip extends StatelessWidget {
-  const _Chip(this.label);
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: WdsColorCommon.black.withValues(alpha: 0.04),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Text(label, style: WdsSemanticTypography.caption11Bold),
     );
   }
 }

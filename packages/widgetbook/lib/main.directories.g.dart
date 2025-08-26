@@ -25,7 +25,7 @@ import 'package:widgetbook/widgetbook.dart' as _widgetbook;
 
 final directories = <_widgetbook.WidgetbookNode>[
   _widgetbook.WidgetbookFolder(
-    name: '/',
+    name: '_about',
     children: [
       _widgetbook.WidgetbookLeafComponent(
         name: 'WincDesginSystem',
@@ -37,67 +37,81 @@ final directories = <_widgetbook.WidgetbookNode>[
     ],
   ),
   _widgetbook.WidgetbookFolder(
-    name: 'button',
+    name: 'component',
     children: [
-      _widgetbook.WidgetbookLeafComponent(
-        name: 'WdsPillButton',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'default',
-          builder: _wds_widgetbook_src_component_pill_button_use_case
-              .buildWdsPillButtonUseCase,
-        ),
-      )
-    ],
-  ),
-  _widgetbook.WidgetbookFolder(
-    name: 'color',
-    children: [
-      _widgetbook.WidgetbookComponent(
-        name: 'Color',
-        useCases: [
-          _widgetbook.WidgetbookUseCase(
-            name: 'Atomic Color',
-            builder: _wds_widgetbook_src_foundation_color_atomic_color_use_case
-                .buildWdsAtomicColorsUseCase,
-            designLink:
-                'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
-          ),
-          _widgetbook.WidgetbookUseCase(
-            name: 'Semantic Color',
-            builder:
-                _wds_widgetbook_src_foundation_color_semantic_color_use_case
-                    .buildWdsSemanticColorUseCase,
-          ),
+      _widgetbook.WidgetbookFolder(
+        name: 'button',
+        children: [
+          _widgetbook.WidgetbookLeafComponent(
+            name: 'WdsPillButton',
+            useCase: _widgetbook.WidgetbookUseCase(
+              name: 'Pill Button',
+              builder: _wds_widgetbook_src_component_pill_button_use_case
+                  .buildWdsPillButtonUseCase,
+            ),
+          )
         ],
       )
     ],
   ),
   _widgetbook.WidgetbookFolder(
-    name: 'radius',
+    name: 'foundation',
     children: [
-      _widgetbook.WidgetbookLeafComponent(
-        name: 'BorderRadius',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'Radius',
-          builder: _wds_widgetbook_src_foundation_radius_radius_use_case
-              .buildWdsRadiusUseCase,
-        ),
-      )
-    ],
-  ),
-  _widgetbook.WidgetbookFolder(
-    name: 'typography',
-    children: [
-      _widgetbook.WidgetbookLeafComponent(
-        name: 'TextStyle',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'Typography',
-          builder: _wds_widgetbook_src_foundation_typography_typography_use_case
-              .buildWdsTypographyUseCase,
-          designLink:
-              'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
-        ),
-      )
+      _widgetbook.WidgetbookFolder(
+        name: 'color',
+        children: [
+          _widgetbook.WidgetbookComponent(
+            name: 'Color',
+            useCases: [
+              _widgetbook.WidgetbookUseCase(
+                name: 'Atomic Color',
+                builder:
+                    _wds_widgetbook_src_foundation_color_atomic_color_use_case
+                        .buildWdsAtomicColorsUseCase,
+                designLink:
+                    'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
+              ),
+              _widgetbook.WidgetbookUseCase(
+                name: 'Semantic Color',
+                builder:
+                    _wds_widgetbook_src_foundation_color_semantic_color_use_case
+                        .buildWdsSemanticColorUseCase,
+              ),
+            ],
+          )
+        ],
+      ),
+      _widgetbook.WidgetbookFolder(
+        name: 'radius',
+        children: [
+          _widgetbook.WidgetbookLeafComponent(
+            name: 'BorderRadius',
+            useCase: _widgetbook.WidgetbookUseCase(
+              name: 'Radius',
+              builder: _wds_widgetbook_src_foundation_radius_radius_use_case
+                  .buildWdsRadiusUseCase,
+              designLink:
+                  'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=232-4326&m=dev',
+            ),
+          )
+        ],
+      ),
+      _widgetbook.WidgetbookFolder(
+        name: 'typography',
+        children: [
+          _widgetbook.WidgetbookLeafComponent(
+            name: 'TextStyle',
+            useCase: _widgetbook.WidgetbookUseCase(
+              name: 'Typography',
+              builder:
+                  _wds_widgetbook_src_foundation_typography_typography_use_case
+                      .buildWdsTypographyUseCase,
+              designLink:
+                  'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
+            ),
+          )
+        ],
+      ),
     ],
   ),
 ];

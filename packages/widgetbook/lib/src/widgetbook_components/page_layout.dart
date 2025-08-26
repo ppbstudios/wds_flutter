@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_title.dart';
+part of 'widgetbook_components.dart';
 
 class WidgetbookPageLayout extends StatelessWidget {
   const WidgetbookPageLayout({
@@ -11,16 +10,14 @@ class WidgetbookPageLayout extends StatelessWidget {
   });
 
   final String title;
-
   final String? description;
-
   final List<Widget> children;
-
   final double childrenSpacing;
 
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: WdsColorCommon.white,
       child: SafeArea(
         child: InteractiveViewer(
           maxScale: 6,

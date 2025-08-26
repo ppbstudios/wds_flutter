@@ -1,6 +1,119 @@
 # Widgetbook Use-Case Generation Instructions
 
-Generate comprehensive Widgetbook use cases for Flutter components that showcase different variants and configurations effectively.
+Generate comprehensive Widgetbook use cases for Flutter components that showcase different variants and configurations effectively using standardized layout components.
+
+## Standardized Layout Components
+
+### Required Imports
+
+All use cases must import the standardized widgetbook components:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:widgetbook_annotation/widgetbook_annotation.dart';
+import 'package:widgetbook/widgetbook.dart';
+import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.dart';
+```
+
+### Layout Structure
+
+Use `WidgetbookPageLayout` as the root container for all use cases:
+
+```dart
+@UseCase(name: 'default', type: ComponentType)
+Widget buildComponentNameUseCase(BuildContext context) {
+  return WidgetbookPageLayout(
+    title: 'Component Name',
+    description: 'Brief description of the component purpose',
+    children: [
+      // Playground section
+      _buildPlaygroundSection(context),
+      const SizedBox(height: 32),
+      // Demonstration sections
+      _buildDemonstrationSection(context),
+      const SizedBox(height: 32),
+      // Resource section (optional)
+      _buildResourceSection(context),
+    ],
+  );
+}
+```
+
+### Playground Section
+
+Use `WidgetbookPlayground` for interactive component testing:
+
+```dart
+Widget _buildPlaygroundSection(BuildContext context) {
+  // Knob configurations
+  final parameter1 = context.knobs.string(label: 'Parameter1', initialValue: 'Default');
+  final parameter2 = context.knobs.boolean(label: 'Parameter2', initialValue: true);
+  
+  return WidgetbookPlayground(
+    height: 200, // Optional fixed height
+    child: YourComponent(
+      parameter1: parameter1,
+      parameter2: parameter2,
+      onAction: () => print('Component action triggered'),
+    ),
+    info: [
+      'Parameter1: $parameter1',
+      'Parameter2: $parameter2',
+    ],
+  );
+}
+```
+
+### Demonstration Sections
+
+Use `WidgetbookSection` and `WidgetbookSubsection` for organized demonstrations:
+
+```dart
+Widget _buildDemonstrationSection(BuildContext context) {
+  return WidgetbookSection(
+    title: 'Component Variants',
+    children: [
+      WidgetbookSubsection(
+        title: 'Types',
+        labels: ['Primary', 'Secondary', 'Tertiary'],
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            YourComponent.primary(onPressed: () => print('Primary')),
+            const SizedBox(width: 16),
+            YourComponent.secondary(onPressed: () => print('Secondary')),
+            const SizedBox(width: 16),
+            YourComponent.tertiary(onPressed: () => print('Tertiary')),
+          ],
+        ),
+      ),
+      const SizedBox(height: 32),
+      WidgetbookSubsection(
+        title: 'Sizes',
+        labels: ['Large', 'Medium', 'Small'],
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            YourComponent.large(onPressed: () => print('Large')),
+            const SizedBox(width: 16),
+            YourComponent.medium(onPressed: () => print('Medium')),
+            const SizedBox(width: 16),
+            YourComponent.small(onPressed: () => print('Small')),
+          ],
+        ),
+      ),
+    ],
+  );
+}
+```
+
+### Theme Integration
+
+The widgetbook automatically uses `WidgetbookTheme` which provides:
+- Consistent WDS typography styles
+- WDS color scheme integration
+- Proper Material Design 3 theming
+- Both light and dark theme support
 
 ## Core Requirements
 
@@ -244,43 +357,86 @@ final progress = context.knobs.double.slider(
 ```dart
 import 'package:flutter/material.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart';
+import 'package:widgetbook/widgetbook.dart';
+import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.dart';
 
 @UseCase(
-  name: 'interactive',
+  name: 'default',
   type: CustomSlider,
 )
-Widget buildCustomSliderInteractiveUseCase(BuildContext context) {
-  return CustomSlider(
-    value: context.knobs.double.slider(
-      label: 'value',
-      initialValue: 0.5,
-      min: 0.0,
-      max: 1.0,
-      divisions: 20,
+Widget buildCustomSliderUseCase(BuildContext context) {
+  return WidgetbookPageLayout(
+    title: 'Custom Slider',
+    description: 'Interactive slider component with customizable properties',
+    children: [
+      _buildPlaygroundSection(context),
+      const SizedBox(height: 32),
+      _buildVariantsSection(context),
+    ],
+  );
+}
+
+Widget _buildPlaygroundSection(BuildContext context) {
+  final value = context.knobs.double.slider(
+    label: 'value',
+    initialValue: 0.5,
+    min: 0.0,
+    max: 1.0,
+    divisions: 20,
+  );
+  
+  final enabled = context.knobs.boolean(
+    label: 'enabled',
+    initialValue: true,
+  );
+  
+  final showLabels = context.knobs.boolean(
+    label: 'showLabels',
+    initialValue: true,
+  );
+
+  return WidgetbookPlayground(
+    height: 150,
+    child: CustomSlider(
+      value: value,
+      enabled: enabled,
+      showLabels: showLabels,
+      onChanged: (value) => print('Slider value changed to: $value'),
+      onChangeStart: (value) => print('Slider interaction started at: $value'),
+      onChangeEnd: (value) => print('Slider interaction ended at: $value'),
     ),
-    min: context.knobs.double.input(
-      label: 'min',
-      initialValue: 0.0,
-    ),
-    max: context.knobs.double.input(
-      label: 'max',
-      initialValue: 1.0,
-    ),
-    enabled: context.knobs.boolean(
-      label: 'enabled',
-      initialValue: true,
-    ),
-    showLabels: context.knobs.boolean(
-      label: 'showLabels',
-      initialValue: true,
-    ),
-    activeColor: context.knobs.color(
-      label: 'activeColor',
-      initialValue: Colors.blue,
-    ),
-    onChanged: (value) => print('Slider value changed to: $value'),
-    onChangeStart: (value) => print('Slider interaction started at: $value'),
-    onChangeEnd: (value) => print('Slider interaction ended at: $value'),
+    info: [
+      'Value: ${value.toStringAsFixed(2)}',
+      'Enabled: $enabled',
+      'Show Labels: $showLabels',
+    ],
+  );
+}
+
+Widget _buildVariantsSection(BuildContext context) {
+  return WidgetbookSection(
+    title: 'Slider Variants',
+    children: [
+      WidgetbookSubsection(
+        title: 'States',
+        labels: ['Enabled', 'Disabled'],
+        content: Column(
+          spacing: 16,
+          children: [
+            CustomSlider(
+              value: 0.3,
+              enabled: true,
+              onChanged: (value) => print('Enabled slider: $value'),
+            ),
+            CustomSlider(
+              value: 0.7,
+              enabled: false,
+              onChanged: null,
+            ),
+          ],
+        ),
+      ),
+    ],
   );
 }
 ```

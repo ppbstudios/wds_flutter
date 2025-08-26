@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:wds_tokens/wds_tokens.dart';
+part of 'widgetbook_components.dart';
 
 class WidgetbookTitle extends StatelessWidget {
   const WidgetbookTitle({
@@ -9,7 +8,6 @@ class WidgetbookTitle extends StatelessWidget {
   });
 
   final String title;
-
   final String? description;
 
   @override
