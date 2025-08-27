@@ -71,7 +71,7 @@ class WidgetbookCustomTheme {
       ),
     ),
     textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
+      style: FilledButton.styleFrom(
         foregroundColor: WdsColorBlue.v400,
         textStyle: WdsSemanticTypography.body14NormalMedium,
         shape: RoundedRectangleBorder(

@@ -12,6 +12,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:wds_widgetbook/src/component/button_use_case.dart'
     as _wds_widgetbook_src_component_button_use_case;
+import 'package:wds_widgetbook/src/component/text_button_use_case.dart'
+    as _wds_widgetbook_src_component_text_button_use_case;
 import 'package:wds_widgetbook/src/cover.dart' as _wds_widgetbook_src_cover;
 import 'package:wds_widgetbook/src/foundation/color/atomic_color_use_case.dart'
     as _wds_widgetbook_src_foundation_color_atomic_color_use_case;
@@ -34,7 +36,15 @@ final directories = <_widgetbook.WidgetbookNode>[
           builder: _wds_widgetbook_src_component_button_use_case
               .buildWdsButtonUseCase,
         ),
-      )
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'TextButton',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'TextButton',
+          builder: _wds_widgetbook_src_component_text_button_use_case
+              .buildWdsTextButtonUseCase,
+        ),
+      ),
     ],
   ),
   _widgetbook.WidgetbookCategory(

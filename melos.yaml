@@ -7,12 +7,17 @@ ide:
   vscode:
     useWorkspaces: true
 scripts:
-  # flutter pub get
+  # Install: flutter pub get
   install:
     description: "Install all the dependencies"
     run: flutter pub get && melos exec -c 2 -- "flutter pub get"
 
-  # Build Widgetbook
+  # Build: Widgetbook
   build-widgetbook:
     description: "Build Widgetbook"
     run: cd packages/widgetbook && fvm exec dart run build_runner build --delete-conflicting-outputs && cd ../..
+
+  # Format: All
+  format:
+    description: "Format all the files"
+    run: fvm exec melos exec -c 2 -- "dart fix --apply && dart format ."

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart' hide Typography;
-import 'package:wds_tokens/wds_tokens.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 

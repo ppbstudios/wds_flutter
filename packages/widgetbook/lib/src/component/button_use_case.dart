@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:wds_components/wds_components.dart';
-import 'package:wds_tokens/wds_tokens.dart';
 import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
@@ -60,11 +57,11 @@ Widget _buildPlaygroundSection(BuildContext context) {
   final onTap = () => print('Button pressed: $variant $size');
 
   final sizeValue = switch (size) {
-    'XLarge' => WdsButtonSize.xlarge,
-    'Large' => WdsButtonSize.large,
-    'Medium' => WdsButtonSize.medium,
-    'Small' => WdsButtonSize.small,
-    'Tiny' => WdsButtonSize.tiny,
+    'xlarge' => WdsButtonSize.xlarge,
+    'large' => WdsButtonSize.large,
+    'medium' => WdsButtonSize.medium,
+    'small' => WdsButtonSize.small,
+    'tiny' => WdsButtonSize.tiny,
     _ => WdsButtonSize.medium,
   };
 
@@ -98,31 +95,30 @@ Widget _buildPlaygroundSection(BuildContext context) {
 Widget _buildDemonstrationSection(BuildContext context) {
   return WidgetbookSection(
     title: 'Button',
+    spacing: 32,
     children: [
       WidgetbookSubsection(
         title: 'variant',
         labels: ['cta', 'primary', 'secondary', 'square'],
         content: Row(
           mainAxisSize: MainAxisSize.min,
+          spacing: 16,
           children: [
             WdsButton(
                 onTap: () => print('CTA pressed'),
                 variant: WdsButtonVariant.cta,
                 size: WdsButtonSize.medium,
                 child: Text('텍스트')),
-            const SizedBox(width: 16),
             WdsButton(
                 onTap: () => print('Primary pressed'),
                 variant: WdsButtonVariant.primary,
                 size: WdsButtonSize.medium,
                 child: Text('텍스트')),
-            const SizedBox(width: 16),
             WdsButton(
                 onTap: () => print('Secondary pressed'),
                 variant: WdsButtonVariant.secondary,
                 size: WdsButtonSize.medium,
                 child: Text('텍스트')),
-            const SizedBox(width: 16),
             WdsButton(
                 onTap: () => print('Square pressed'),
                 variant: WdsButtonVariant.square,
@@ -137,31 +133,28 @@ Widget _buildDemonstrationSection(BuildContext context) {
         labels: ['xlarge', 'large', 'medium', 'small', 'tiny'],
         content: Row(
           mainAxisSize: MainAxisSize.min,
+          spacing: 16,
           children: [
             WdsButton(
                 onTap: () => print('XL pressed'),
                 variant: WdsButtonVariant.cta,
                 size: WdsButtonSize.xlarge,
                 child: Text('텍스트')),
-            const SizedBox(width: 16),
             WdsButton(
                 onTap: () => print('L pressed'),
                 variant: WdsButtonVariant.cta,
                 size: WdsButtonSize.large,
                 child: Text('텍스트')),
-            const SizedBox(width: 16),
             WdsButton(
                 onTap: () => print('M pressed'),
                 variant: WdsButtonVariant.cta,
                 size: WdsButtonSize.medium,
                 child: Text('텍스트')),
-            const SizedBox(width: 16),
             WdsButton(
                 onTap: () => print('S pressed'),
                 variant: WdsButtonVariant.cta,
                 size: WdsButtonSize.small,
                 child: Text('텍스트')),
-            const SizedBox(width: 16),
             WdsButton(
                 onTap: () => print('TY pressed'),
                 variant: WdsButtonVariant.cta,
@@ -170,7 +163,6 @@ Widget _buildDemonstrationSection(BuildContext context) {
           ],
         ),
       ),
-      const SizedBox(height: 32),
       WidgetbookSubsection(
         title: 'state',
         labels: ['enabled', 'pressed', 'disabled'],
@@ -179,25 +171,23 @@ Widget _buildDemonstrationSection(BuildContext context) {
           children: [
             Row(
               mainAxisSize: MainAxisSize.min,
+              spacing: 16,
               children: [
                 WdsButton(
                     onTap: () => print('CTA default'),
                     variant: WdsButtonVariant.cta,
                     size: WdsButtonSize.medium,
                     child: Text('텍스트')),
-                const SizedBox(width: 16),
                 WdsButton(
                     onTap: () => print('Primary default'),
                     variant: WdsButtonVariant.primary,
                     size: WdsButtonSize.medium,
                     child: Text('텍스트')),
-                const SizedBox(width: 16),
                 WdsButton(
                     onTap: () => print('Secondary default'),
                     variant: WdsButtonVariant.secondary,
                     size: WdsButtonSize.medium,
                     child: Text('텍스트')),
-                const SizedBox(width: 16),
                 WdsButton(
                     onTap: () => print('Square default'),
                     variant: WdsButtonVariant.square,
@@ -207,25 +197,23 @@ Widget _buildDemonstrationSection(BuildContext context) {
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
+              spacing: 16,
               children: [
                 WdsButton(
                     onTap: () => print('CTA pressed'),
                     variant: WdsButtonVariant.cta,
                     size: WdsButtonSize.medium,
                     child: Text('텍스트')),
-                const SizedBox(width: 16),
                 WdsButton(
                     onTap: () => print('Primary pressed'),
                     variant: WdsButtonVariant.primary,
                     size: WdsButtonSize.medium,
                     child: Text('텍스트')),
-                const SizedBox(width: 16),
                 WdsButton(
                     onTap: () => print('Secondary pressed'),
                     variant: WdsButtonVariant.secondary,
                     size: WdsButtonSize.medium,
                     child: Text('텍스트')),
-                const SizedBox(width: 16),
                 WdsButton(
                     onTap: () => print('Square pressed'),
                     variant: WdsButtonVariant.square,
@@ -235,6 +223,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
+              spacing: 16,
               children: [
                 WdsButton(
                     onTap: () => print('CTA disabled'),
@@ -242,21 +231,18 @@ Widget _buildDemonstrationSection(BuildContext context) {
                     size: WdsButtonSize.medium,
                     child: Text('텍스트'),
                     isEnabled: false),
-                const SizedBox(width: 16),
                 WdsButton(
                     onTap: () => print('Primary disabled'),
                     variant: WdsButtonVariant.primary,
                     size: WdsButtonSize.medium,
                     child: Text('텍스트'),
                     isEnabled: false),
-                const SizedBox(width: 16),
                 WdsButton(
                     onTap: () => print('Secondary disabled'),
                     variant: WdsButtonVariant.secondary,
                     size: WdsButtonSize.medium,
                     child: Text('텍스트'),
                     isEnabled: false),
-                const SizedBox(width: 16),
                 WdsButton(
                   onTap: () => print('Square disabled'),
                   variant: WdsButtonVariant.square,
