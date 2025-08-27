@@ -128,30 +128,45 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
       behavior: HitTestBehavior.opaque,
       child: ClipRRect(
         borderRadius: borderRadius,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            DecoratedBox(
-              decoration: ShapeDecoration(
-                color: WdsColorCommon.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius,
-                  side: const BorderSide(
-                    color: WdsSemanticColorBorder.alternative,
+        child: SizedBox(
+          height: height,
+          child: Center(
+            child: Align(
+              alignment: Alignment.center,
+              widthFactor: 1,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // 배경 + 테두리 (컨텐츠 폭 기준)
+                  Positioned.fill(
+                    child: RepaintBoundary(
+                      child: DecoratedBox(
+                        decoration: ShapeDecoration(
+                          color: WdsColorCommon.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: borderRadius,
+                            side: const BorderSide(
+                              color: WdsSemanticColorBorder.alternative,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              child: SizedBox(
-                height: height,
-                child: Center(child: content),
+                  // 높이 유지, 폭은 컨텐츠 폭 기준
+                  SizedBox(height: height),
+                  // 오버레이 (컨텐츠 폭 기준)
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: RepaintBoundary(child: overlay),
+                    ),
+                  ),
+                  // 컨텐츠
+                  RepaintBoundary(child: content),
+                ],
               ),
             ),
-            Positioned.fill(
-              child: IgnorePointer(
-                child: RepaintBoundary(child: overlay),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
