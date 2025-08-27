@@ -1,11 +1,15 @@
 part of 'widgetbook_components.dart';
 
+enum PlaygroundLayout { center, stretch }
+
 class WidgetbookPlayground extends StatelessWidget {
   const WidgetbookPlayground({
     required this.child,
     this.info = const [],
     this.height = 280,
     this.padding = const EdgeInsets.all(24),
+    this.layout = PlaygroundLayout.center,
+    this.backgroundColor = WdsColorCommon.white,
     super.key,
   });
 
@@ -13,6 +17,8 @@ class WidgetbookPlayground extends StatelessWidget {
   final List<String> info;
   final double height;
   final EdgeInsetsGeometry padding;
+  final PlaygroundLayout layout;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +67,7 @@ class WidgetbookPlayground extends StatelessWidget {
 
         return DecoratedBox(
           decoration: BoxDecoration(
+            color: backgroundColor,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: WdsColorNeutral.v200),
           ),
@@ -79,17 +86,23 @@ class WidgetbookPlayground extends StatelessWidget {
                       color: WdsColorBlue.v500,
                     ),
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Center(
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: constraints.maxWidth,
-                        ),
-                        child: IntrinsicWidth(child: content),
+                  switch (layout) {
+                    PlaygroundLayout.stretch => SizedBox(
+                        width: double.infinity,
+                        child: content,
                       ),
-                    ),
-                  ),
+                    PlaygroundLayout.center => SizedBox(
+                        width: double.infinity,
+                        child: Center(
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth: constraints.maxWidth,
+                            ),
+                            child: IntrinsicWidth(child: content),
+                          ),
+                        ),
+                      ),
+                  },
                   if (info.isNotEmpty)
                     Wrap(
                       spacing: 8,
