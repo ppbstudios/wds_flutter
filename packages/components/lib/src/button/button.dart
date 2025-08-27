@@ -1,6 +1,6 @@
 part of '../../wds_components.dart';
 
-enum WdsButtonVariant { cta, primary, secondary, square }
+enum WdsButtonVariant { cta, primary, secondary }
 
 enum WdsButtonSize { xlarge, large, medium, small, tiny }
 
@@ -76,12 +76,6 @@ class _ButtonStyleByVariant {
           foreground: WdsSemanticColorText.normal,
           radius: WdsAtomicRadius.full,
           border: const BorderSide(color: WdsSemanticColorBorder.neutral),
-        ),
-      WdsButtonVariant.square => (
-          background: WdsColorCommon.white,
-          foreground: WdsColorNeutral.v600,
-          radius: WdsAtomicRadius.v4,
-          border: const BorderSide(color: WdsSemanticColorBorder.alternative),
         ),
     };
   }
