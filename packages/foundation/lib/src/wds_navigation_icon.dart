@@ -37,5 +37,6 @@ enum WdsNavigationIcon {
   }) =>
       SvgPicture.asset(
         isActive ? activePath : inactivePath,
+        package: 'wds_foundation',
       );
 }
