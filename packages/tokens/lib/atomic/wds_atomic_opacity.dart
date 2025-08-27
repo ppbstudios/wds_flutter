@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 library wds_tokens;
-import 'package:flutter/material.dart';
 
 class WdsAtomicOpacity {
   const WdsAtomicOpacity._();
@@ -16,4 +15,3 @@ class WdsAtomicOpacity {
   static const double v80 = 0.8;
   static const double v90 = 0.9;
 }
-

@@ -83,7 +83,7 @@
       }
     }
   },
-  "typoGraphy": {
+  "typography": {
     "title32": {
       "medium": {
         "family": {
@@ -101,10 +101,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.32}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -2.4
         }
       },
       "bold": {
@@ -123,10 +119,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.32}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -2.4
         }
       },
       "regular": {
@@ -145,10 +137,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.32}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -2.4
         }
       }
     },
@@ -169,10 +157,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.22}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -1.4
         }
       },
       "medium": {
@@ -191,10 +175,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.22}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -1.4
         }
       },
       "regular": {
@@ -213,10 +193,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.22}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -1.4
         }
       }
     },
@@ -237,10 +213,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.20}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -1.2
         }
       },
       "medium": {
@@ -259,10 +231,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.20}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -1.2
         }
       },
       "regular": {
@@ -281,10 +249,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.20}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -1.2
         }
       }
     },
@@ -305,10 +269,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.18}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.02
         }
       },
       "bold": {
@@ -327,10 +287,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.18}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.02
         }
       },
       "medium": {
@@ -349,10 +305,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.18}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.02
         }
       },
       "regular": {
@@ -371,10 +323,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.18}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.02
         }
       }
     },
@@ -395,10 +343,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.17}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": 0
         }
       },
       "bold": {
@@ -417,10 +361,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.17}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": 0
         }
       },
       "medium": {
@@ -439,10 +379,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.17}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": 0
         }
       },
       "regular": {
@@ -461,36 +397,10 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.17}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": 0
         }
       }
     },
     "heading16": {
-      "extraBold": {
-        "family": {
-          "$type": "text",
-          "$value": "{font.family.Pretendard}"
-        },
-        "weight": {
-          "$type": "number",
-          "$value": "{font.weight.extrabold}"
-        },
-        "lineHeight": {
-          "$type": "number",
-          "$value": "{font.lineHeight.24}"
-        },
-        "size": {
-          "$type": "number",
-          "$value": "{font.size.16}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.57
-        }
-      },
       "bold": {
         "family": {
           "$type": "text",
@@ -507,10 +417,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.16}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.57
         }
       },
       "medium": {
@@ -529,10 +435,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.16}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.57
         }
       },
       "regular": {
@@ -551,10 +453,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.16}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.57
         }
       }
     },
@@ -576,10 +474,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.15}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.96
           }
         },
         "medium": {
@@ -598,10 +492,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.15}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.96
           }
         },
         "regular": {
@@ -620,10 +510,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.15}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.96
           }
         }
       },
@@ -644,10 +530,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.15}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.96
           }
         },
         "medium": {
@@ -666,10 +548,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.15}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.96
           }
         },
         "regular": {
@@ -688,15 +566,11 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.15}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.96
           }
         }
       }
     },
-    "Body14": {
+    "body14": {
       "Normal": {
         "bold": {
           "family": {
@@ -714,10 +588,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.14}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.11
           }
         },
         "medium": {
@@ -736,10 +606,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.14}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.11
           }
         },
         "regular": {
@@ -758,10 +624,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.14}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.11
           }
         }
       },
@@ -782,10 +644,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.14}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.11
           }
         },
         "medium": {
@@ -804,10 +662,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.14}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.11
           }
         },
         "regular": {
@@ -826,10 +680,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.14}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.11
           }
         }
       }
@@ -852,10 +702,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.13}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.1
           }
         },
         "medium": {
@@ -874,10 +720,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.13}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.1
           }
         },
         "regular": {
@@ -896,10 +738,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.13}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.1
           }
         }
       },
@@ -920,10 +758,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.13}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.1
           }
         },
         "medium": {
@@ -942,10 +776,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.13}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.1
           }
         },
         "regular": {
@@ -964,10 +794,6 @@
           "size": {
             "$type": "number",
             "$value": "{font.size.13}"
-          },
-          "letterSpacing": {
-            "$type": "number",
-            "$value": -0.1
           }
         }
       }
@@ -989,10 +815,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.12}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.09
         }
       },
       "medium": {
@@ -1011,10 +833,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.12}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.09
         }
       },
       "regular": {
@@ -1033,10 +851,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.12}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.09
         }
       }
     },
@@ -1057,10 +871,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.11}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.08
         }
       },
       "medium": {
@@ -1079,10 +889,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.11}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.08
         }
       },
       "regular": {
@@ -1101,10 +907,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.11}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.08
         }
       }
     },
@@ -1125,10 +927,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.10}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.08
         }
       },
       "medium": {
@@ -1147,10 +945,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.10}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.08
         }
       },
       "regular": {
@@ -1169,10 +963,6 @@
         "size": {
           "$type": "number",
           "$value": "{font.size.10}"
-        },
-        "letterSpacing": {
-          "$type": "number",
-          "$value": -0.08
         }
       }
     }

@@ -1,13 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:wds_tokens/wds_tokens.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-class WincDesginSystem {}
+import 'widgetbook_components/widgetbook_components.dart';
 
 @widgetbook.UseCase(
   name: 'Cover',
-  type: WincDesginSystem,
-  path: '/',
+  type: Cover,
+  path: 'about',
 )
 Widget buildWdsCover(BuildContext context) {
   return LayoutBuilder(

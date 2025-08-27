@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:wds_tokens/wds_tokens.dart';
-import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_page_layout.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
+import '../../widgetbook_components/widgetbook_components.dart';
+
 @widgetbook.UseCase(
-  name: 'Semantic Color',
+  name: 'Semantic',
   type: Color,
-  path: 'color/',
+  path: '[foundation]/',
 )
 Widget buildWdsSemanticColorUseCase(BuildContext context) {
   return const _SemanticColorShowcase();
@@ -25,25 +24,25 @@ class _SemanticColorShowcase extends StatelessWidget {
         const SizedBox(height: 24),
         _SectionTitle('Color'),
         _SwatchGroup(
-          label: 'Cta',
+          label: 'cta',
           items: const [
             _SwatchItem('Normal', cta),
           ],
         ),
         _SwatchGroup(
-          label: 'Primary',
+          label: 'primary',
           items: const [
             _SwatchItem('Normal', primary),
           ],
         ),
         _SwatchGroup(
-          label: 'Secondary',
+          label: 'secondary',
           items: const [
             _SwatchItem('Normal', secondary),
           ],
         ),
         const SizedBox(height: 12),
-        _SectionTitle('Text'),
+        _SectionTitle('Text: WdsSemanticColorText'),
         _SwatchGroup(
           items: const [
             _SwatchItem('Normal', WdsSemanticColorText.normal),
@@ -55,7 +54,7 @@ class _SemanticColorShowcase extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        _SectionTitle('Background'),
+        _SectionTitle('Background: WdsSemanticColorBackgroud'),
         _SwatchGroup(
           items: const [
             _SwatchItem('Normal', WdsSemanticColorBackgroud.normal),
@@ -63,7 +62,7 @@ class _SemanticColorShowcase extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        _SectionTitle('Border'),
+        _SectionTitle('Border: WdsSemanticColorBorder'),
         _SwatchGroup(
           items: const [
             _SwatchItem('Neutral', WdsSemanticColorBorder.neutral),
@@ -71,7 +70,7 @@ class _SemanticColorShowcase extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        _SectionTitle('Status'),
+        _SectionTitle('Status: WdsSemanticColorStatus'),
         _SwatchGroup(
           items: const [
             _SwatchItem('Positive', WdsSemanticColorStatus.positive),
@@ -80,7 +79,7 @@ class _SemanticColorShowcase extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        _SectionTitle('Material'),
+        _SectionTitle('Material: WdsSemanticColorMaterial'),
         _SwatchGroup(
           items: const [
             _SwatchItem('Dimmer', WdsSemanticColorMaterial.dimmer),

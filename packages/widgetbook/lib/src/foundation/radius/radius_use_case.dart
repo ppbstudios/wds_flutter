@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:wds_tokens/wds_tokens.dart';
-import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_page_layout.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
+
+import '../../widgetbook_components/widgetbook_components.dart';
 
 @widgetbook.UseCase(
   name: 'Radius',
-  type: BorderRadius,
-  path: 'radius/',
+  type: Radius,
+  path: '[foundation]/',
 )
 Widget buildWdsRadiusUseCase(BuildContext context) {
   return const RadiusUseCase();
@@ -27,31 +26,43 @@ class RadiusUseCase extends StatelessWidget {
 
   Widget _buildRadiusTable() {
     final radiusTokens = [
-      {'name': 'border-radius-0', 'value': WdsAtomicRadius.v0, 'label': '0px'},
-      {'name': 'border-radius-4', 'value': WdsAtomicRadius.v4, 'label': '4px'},
-      {'name': 'border-radius-8', 'value': WdsAtomicRadius.v8, 'label': '8px'},
       {
-        'name': 'border-radius-12',
+        'name': 'WdsAtomicRadius.v0',
+        'value': WdsAtomicRadius.v0,
+        'label': '0px'
+      },
+      {
+        'name': 'WdsAtomicRadius.v4',
+        'value': WdsAtomicRadius.v4,
+        'label': '4px'
+      },
+      {
+        'name': 'WdsAtomicRadius.v8',
+        'value': WdsAtomicRadius.v8,
+        'label': '8px'
+      },
+      {
+        'name': 'WdsAtomicRadius.v12',
         'value': WdsAtomicRadius.v12,
         'label': '12px'
       },
       {
-        'name': 'border-radius-16',
-        'value': WdsAtomicRadius.v16,
+        'name': 'WdsAtomicRadius.v20',
+        'value': WdsAtomicRadius.v20,
         'label': '16px'
       },
       {
-        'name': 'border-radius-20',
+        'name': 'WdsAtomicRadius.v20',
         'value': WdsAtomicRadius.v20,
         'label': '20px'
       },
       {
-        'name': 'border-radius-30',
+        'name': 'WdsAtomicRadius.v30',
         'value': WdsAtomicRadius.v30,
         'label': '30px'
       },
       {
-        'name': 'border-radius-full',
+        'name': 'WdsAtomicRadius.full',
         'value': WdsAtomicRadius.full,
         'label': '99999px'
       },

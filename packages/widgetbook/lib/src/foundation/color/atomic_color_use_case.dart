@@ -1,14 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:wds_tokens/wds_tokens.dart';
-import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_page_layout.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
+import '../../widgetbook_components/widgetbook_components.dart';
+
 @widgetbook.UseCase(
-  name: 'Atomic Color',
+  name: 'Atomic',
   type: Color,
-  path: 'color/',
-  designLink:
-      'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
+  path: '[foundation]/',
 )
 Widget buildWdsAtomicColorsUseCase(BuildContext context) {
   return const _AtomicColorShowcase();
@@ -24,7 +21,7 @@ class _AtomicColorShowcase extends StatelessWidget {
       _buildNeutralSection(),
       _buildCoolNeutralSection(),
       _buildPaletteSection(
-          'Pink',
+          'Pink: WdsColorPink',
           _shadesFrom([
             WdsColorPink.v100,
             WdsColorPink.v200,
@@ -37,7 +34,7 @@ class _AtomicColorShowcase extends StatelessWidget {
             WdsColorPink.v900,
           ])),
       _buildPaletteSection(
-          'Orange',
+          'Orange: WdsColorOrange',
           _shadesFrom([
             WdsColorOrange.v100,
             WdsColorOrange.v200,
@@ -50,7 +47,7 @@ class _AtomicColorShowcase extends StatelessWidget {
             WdsColorOrange.v900,
           ])),
       _buildPaletteSection(
-          'Yellow',
+          'Yellow: WdsColorYellow',
           _shadesFrom([
             WdsColorYellow.v100,
             WdsColorYellow.v200,
@@ -63,7 +60,7 @@ class _AtomicColorShowcase extends StatelessWidget {
             WdsColorYellow.v900,
           ])),
       _buildPaletteSection(
-          'Blue',
+          'Blue: WdsColorBlue',
           _shadesFrom([
             WdsColorBlue.v100,
             WdsColorBlue.v200,
@@ -76,7 +73,7 @@ class _AtomicColorShowcase extends StatelessWidget {
             WdsColorBlue.v900,
           ])),
       _buildPaletteSection(
-          'Sky',
+          'Sky: WdsColorSky',
           _shadesFrom([
             WdsColorSky.v100,
             WdsColorSky.v200,
@@ -113,14 +110,14 @@ class _AtomicColorShowcase extends StatelessWidget {
       _ColorItem(label: 'Black', color: WdsColorCommon.black),
     ];
     return _Section(
-      title: 'Common',
+      title: 'Common: WdsColorCommon',
       body: _SwatchRow(items: items),
     );
   }
 
   static _Section _buildNeutralSection() {
     return _buildPaletteSection(
-        'Neutral',
+        'Neutral: WdsColorNeutral',
         _shadesFrom([
           WdsColorNeutral.v100,
           WdsColorNeutral.v200,
@@ -137,7 +134,7 @@ class _AtomicColorShowcase extends StatelessWidget {
   static _Section _buildCoolNeutralSection() {
     // Approximated with Indigo shades to resemble cool neutral tones.
     return _buildPaletteSection(
-        'Cool Neutral',
+        'Cool Neutral: WdsColorCoolNeutral',
         _shadesFrom([
           WdsColorCoolNeutral.v100,
           WdsColorCoolNeutral.v200,
@@ -152,13 +149,16 @@ class _AtomicColorShowcase extends StatelessWidget {
   }
 
   static _Section _buildBrandSection() {
-    // Placeholder brand trio using token colors. Replace with brand tokens when available.
-    final items = <_ColorItem>[
-      _ColorItem(label: 'Hapa Kristin', color: WdsColorBrand.hapakristin),
-      _ColorItem(label: 'Chuu', color: WdsColorBrand.chuu),
-      _ColorItem(label: 'Gemhour', color: WdsColorBrand.gemhour),
-    ];
-    return _Section(title: 'Brand', body: _SwatchRow(items: items));
+    return _Section(
+      title: 'Brand: WdsColorBrand',
+      body: _SwatchRow(
+        items: <_ColorItem>[
+          _ColorItem(label: 'Hapa Kristin', color: WdsColorBrand.hapakristin),
+          _ColorItem(label: 'Chuu', color: WdsColorBrand.chuu),
+          _ColorItem(label: 'Gemhour', color: WdsColorBrand.gemhour),
+        ],
+      ),
+    );
   }
 
   static _Section _buildOpacitySection() {
@@ -183,7 +183,7 @@ class _AtomicColorShowcase extends StatelessWidget {
           color: WdsColorCommon.black.withValues(alpha: opacity)));
     }
     return _Section(
-      title: 'Opacity',
+      title: 'Opacity: WdsAtomicOpacity',
       body: _SwatchRow(items: items, showHex: false, valueSuffix: '%'),
     );
   }
