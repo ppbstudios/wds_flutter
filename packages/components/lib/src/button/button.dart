@@ -11,7 +11,7 @@ class _ButtonPaddingBySize {
     // 문서 기준: xL(16,13), L(16,11), M(16,10), S(16,7), TY(16,6)
     return switch (size) {
       WdsButtonSize.xlarge => const EdgeInsets.fromLTRB(16, 13, 16, 13),
-      WdsButtonSize.large => const EdgeInsets.fromLTRB(16, 9, 16, 9),
+      WdsButtonSize.large => const EdgeInsets.fromLTRB(16, 11, 16, 11),
       WdsButtonSize.medium => const EdgeInsets.fromLTRB(16, 9, 16, 9),
       WdsButtonSize.small => const EdgeInsets.fromLTRB(16, 7, 16, 7),
       WdsButtonSize.tiny => const EdgeInsets.fromLTRB(16, 6, 16, 6),
@@ -25,8 +25,8 @@ class _ButtonHeightBySize {
   static double of(WdsButtonSize size) {
     return switch (size) {
       WdsButtonSize.xlarge => 48,
-      WdsButtonSize.large => 40,
-      WdsButtonSize.medium => 36,
+      WdsButtonSize.large => 44,
+      WdsButtonSize.medium => 38,
       WdsButtonSize.small => 30,
       WdsButtonSize.tiny => 28,
     };
