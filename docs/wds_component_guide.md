@@ -36,7 +36,6 @@ child | `Widget` | 버튼 내 label 위치에 오는 컴포넌트, 텍스트(`Te
 - `cta`
 - `primary`
 - `secondary`
-- `square`
 
 variant에 따라서 backgroundColor, color, radius, borderSide 가 정해집니다.
 
@@ -47,8 +46,6 @@ variant에 따라서 backgroundColor, color, radius, borderSide 가 정해집니
 cta | WdsColorNeutral.v900(#121212) | WdsColorCommon.white(#FFFFFF) | .full | null
 primary | WdsColorBlue.v400(#5B7BF3) | WdsColorCommon.white(#FFFFFF) | .full | null
 secondary | WdsColorCommon.white(#FFFFFF) | WdsSemanticColorText.normal(#121212) | .full | BorderSide(color: WdsSemanticColorBorder.neutral)
-square | WdsColorCommon.white(#FFFFFF) | WdsColorNeutral.v600(#4E4E4E) | .v4 | BorderSide(color: WdsSemanticColorBorder.alternative)
-
 
 
 e.g. code
@@ -56,8 +53,7 @@ e.g. code
 enum WdsButtonVariant {
     cta,
     primary,
-    secondary,
-    square;
+    secondary;
 }
 ```
 
@@ -199,3 +195,30 @@ Row(
 
 위 2개의 상태를 가지며 disabled 인 상태일 떄는 텍스트, decoration, icon 모두 같은 색상을 갖습니다.
 - `WdsSemanticColorText.disable`
+
+---
+
+## SquareButton
+
+버튼과 다르게 SquareButton은 단일 size, typography (색상 제외), padding 이 같은 버튼입니다. 단, state는 아래 2가지로 구분됩니다.
+- `enabled`
+- `disabled`
+
+여기서 `pressed` 는 웹인 경우 hovered 상태도 포함되며 #Button에 구현되어 있는 pressed(hover)와 같은 메커니즘으로 구성됩니다. disabled 일 때 opacity 설정하는 방법도 같습니다.
+
+### SquareButton - 고정된 속성
+
+- size: `Size(double.infinity, 32)`
+- typography: `WdsSemanticTypography.caption12Medium`
+- padding: `EdgeInsets.symmetric(horizontal: 17, vertical: 8)`
+
+### SquareButton - state
+
+state | backgroundColor | color | radius | borderSide 
+--- | --- | --- | --- | --- 
+enabled | WdsColorCommon.white(#FFFFFF) | WdsSemanticColorText.neutral(#4E4E4E) | .v4 | BorderSide(color: WdsSemanticColorBorder.alternative)
+disabled | WdsColorCommon.white(#FFFFFF) | WdsSemanticColorText.neutral(#4E4E4E) | .v4 | BorderSide(color: WdsSemanticColorBorder.alternative)
+
+## Header
+
+화면 상단에

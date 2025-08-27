@@ -21,7 +21,7 @@ Widget buildWdsButtonUseCase(BuildContext context) {
 Widget _buildPlaygroundSection(BuildContext context) {
   final variant = context.knobs.object.dropdown<String>(
     label: 'variant',
-    options: ['cta', 'primary', 'secondary', 'square'],
+    options: ['cta', 'primary', 'secondary'],
     initialOption: 'cta',
     description: '버튼의 성격을 정의해요',
   );
@@ -69,7 +69,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
     'cta' => WdsButtonVariant.cta,
     'primary' => WdsButtonVariant.primary,
     'secondary' => WdsButtonVariant.secondary,
-    'square' => WdsButtonVariant.square,
     _ => WdsButtonVariant.cta,
   };
 
@@ -99,7 +98,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
     children: [
       WidgetbookSubsection(
         title: 'variant',
-        labels: ['cta', 'primary', 'secondary', 'square'],
+        labels: ['cta', 'primary', 'secondary'],
         content: Row(
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
@@ -119,15 +118,9 @@ Widget _buildDemonstrationSection(BuildContext context) {
                 variant: WdsButtonVariant.secondary,
                 size: WdsButtonSize.medium,
                 child: Text('텍스트')),
-            WdsButton(
-                onTap: () => print('Square pressed'),
-                variant: WdsButtonVariant.square,
-                size: WdsButtonSize.medium,
-                child: Text('텍스트')),
           ],
         ),
       ),
-      const SizedBox(height: 32),
       WidgetbookSubsection(
         title: 'size',
         labels: ['xlarge', 'large', 'medium', 'small', 'tiny'],
@@ -188,11 +181,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
                     variant: WdsButtonVariant.secondary,
                     size: WdsButtonSize.medium,
                     child: Text('텍스트')),
-                WdsButton(
-                    onTap: () => print('Square default'),
-                    variant: WdsButtonVariant.square,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트')),
+                // Square 는 별도 SquareButton 컴포넌트로 분리됨
               ],
             ),
             Row(
@@ -214,11 +203,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
                     variant: WdsButtonVariant.secondary,
                     size: WdsButtonSize.medium,
                     child: Text('텍스트')),
-                WdsButton(
-                    onTap: () => print('Square pressed'),
-                    variant: WdsButtonVariant.square,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트')),
+                // Square 는 별도 SquareButton 컴포넌트로 분리됨
               ],
             ),
             Row(
@@ -243,13 +228,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
                     size: WdsButtonSize.medium,
                     child: Text('텍스트'),
                     isEnabled: false),
-                WdsButton(
-                  onTap: () => print('Square disabled'),
-                  variant: WdsButtonVariant.square,
-                  size: WdsButtonSize.medium,
-                  child: Text('텍스트'),
-                  isEnabled: false,
-                ),
+                // Square 는 별도 SquareButton 컴포넌트로 분리됨
               ],
             ),
           ],

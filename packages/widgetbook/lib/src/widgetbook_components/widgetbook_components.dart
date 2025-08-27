@@ -28,3 +28,6 @@ class Typography {}
 
 /// 컴포넌트 path 관리를 위한 클래스
 class Cover {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class SquareButton {}

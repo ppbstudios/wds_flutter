@@ -112,16 +112,18 @@ class _InfoChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isFixed = label.contains('fixed');
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: WdsColorBlue.v100,
+        color: isFixed ? WdsColorNeutral.v100 : WdsColorBlue.v100,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Text(
-        label,
+        isFixed ? label.replaceAll('fixed', '') : label,
         style: WdsSemanticTypography.caption11Bold.copyWith(
-          color: WdsColorBlue.v700,
+          color: isFixed ? WdsColorNeutral.v900 : WdsColorBlue.v700,
         ),
       ),
     );

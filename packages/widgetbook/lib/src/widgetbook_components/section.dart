@@ -16,12 +16,12 @@ class WidgetbookSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: spacing,
       children: [
         Text(
           title,
           style: WdsSemanticTypography.title20Bold,
         ),
-        SizedBox(height: spacing),
         ...children,
       ],
     );
