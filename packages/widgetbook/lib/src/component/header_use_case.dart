@@ -25,6 +25,11 @@ Widget _buildPlaygroundSection(BuildContext context) {
     initialOption: 'title',
   );
   final titleText = context.knobs.string(label: 'title', initialValue: '타이틀');
+  final enableLeading = context.knobs.boolean(
+    label: 'leading',
+    initialValue: false,
+    description: 'leading 영역 on/off',
+  );
   final actionsCount = context.knobs.int.slider(
     label: 'actions',
     initialValue: 1,
@@ -40,13 +45,38 @@ Widget _buildPlaygroundSection(BuildContext context) {
     );
   });
 
+  // leading 위젯 샘플
+  final Widget? leadingWidget = enableLeading
+      ? WdsIconButton(
+          onTap: () => print('leading'),
+          icon: WdsIcon.chevronRight.build(width: 24, height: 24),
+        )
+      : null;
+
+  if (type == 'logo' && enableLeading) {
+    // logo 변형에서는 leading 강제 off + 스낵바 알림
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final messenger = ScaffoldMessenger.maybeOf(context);
+      messenger?.showSnackBar(
+        const SnackBar(content: Text('logo variant에서는 leading을 사용할 수 없어요.')),
+      );
+    });
+  }
+
   Widget header = switch (type) {
     'logo' => WdsHeader.logo(actions: actions),
-    'title' => WdsHeader.title(title: Text(titleText), actions: actions),
+    'title' => WdsHeader.title(
+        title: Text(titleText),
+        leading: type == 'logo' ? null : leadingWidget,
+        actions: actions),
     'search' => WdsHeader.search(
         title: Text('준비중이에요..🧑‍💻'),
+        leading: type == 'logo' ? null : leadingWidget,
         actions: actions.isEmpty ? actions : actions.sublist(0, 1)),
-    _ => WdsHeader.title(title: Text(titleText), actions: actions),
+    _ => WdsHeader.title(
+        title: Text(titleText),
+        leading: type == 'logo' ? null : leadingWidget,
+        actions: actions),
   };
 
   return WidgetbookPlayground(
@@ -58,6 +88,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
       'layout: stretch',
       'variant: $type',
       'actions: ${actions.length}',
+      'leading: ${enableLeading && type != 'logo'}',
     ],
   );
 }

@@ -29,31 +29,33 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
           key: key,
         );
 
-  /// 타이틀 헤더: title 필수, 가운데 정렬, leading 없음
+  /// 타이틀 헤더: title 필수, leading 유무에 따라 가운데 정렬 여부 결정
   WdsHeader.title({
     required Widget title,
+    Widget? leading,
     List<Widget> actions = const [],
     Key? key,
   }) : this._(
-          leading: null,
+          leading: leading,
           title: title,
           actions: actions,
-          hasCenterTitle: true,
+          hasCenterTitle: leading == null,
           key: key,
         );
 
   /// 검색 헤더: title 자리에 SearchField 등, 가운데 정렬, actions 최대 1개
   factory WdsHeader.search({
     required Widget title,
+    Widget? leading,
     List<Widget> actions = const [],
     Key? key,
   }) {
     assert(actions.length <= 1, 'actions 는 최대 1개만 추가할 수 있습니다.');
     return WdsHeader._(
-      leading: null,
+      leading: leading,
       title: title,
       actions: actions,
-      hasCenterTitle: true,
+      hasCenterTitle: leading == null,
       key: key,
     );
   }
@@ -98,8 +100,8 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
       );
     }
 
-    // leading 규칙: hasCenterTitle true 이면 leading 은 null 이어야 함 (문서 기준)
-    final Widget? leadingWidget = hasCenterTitle ? null : leading;
+    // leading 은 전달된 값 사용. hasCenterTitle 은 생성자에서 leading 유무로 결정
+    final Widget? leadingWidget = leading;
 
     // actions: 오른쪽 정렬, 최대 3개 권장. 빈 리스트면 표시 안 함
     final Widget? actionsRow = actions.isEmpty
