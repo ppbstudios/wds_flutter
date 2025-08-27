@@ -2,7 +2,6 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 library wds_tokens;
 
-
 class WdsAtomicOpacity {
   const WdsAtomicOpacity._();
   static const double v10 = 0.1;

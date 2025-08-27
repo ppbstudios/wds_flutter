@@ -29,7 +29,7 @@ size | `Size` | 버튼 크기 (maxWidth: double.infinity, maxHeight: 고정 높�
 isEnabled | `bool` | 버튼 enabled 여부 (`false` 시 'disabled' 상태)
 child | `Widget` | 버튼 내 label 위치에 오는 컴포넌트, 텍스트(`Text`) 또는 Text + Icon 조합이 올 수 도 있음
 
-### Button - Variant
+### Button - variant
 
 정해진 Variant만 사용할 수 있습니다. 
 
@@ -62,7 +62,7 @@ enum WdsButtonVariant {
 ```
 
 
-### Button - Size
+### Button - size
 
 [Size 클래스](https://api.flutter.dev/flutter/dart-ui/Size-class.html)
 
@@ -117,7 +117,7 @@ enum WdsButtonSize {
 }
 ```
 
-### Button - State
+### Button - state
 
 아래 3가지로 구성됩니다. hovered와 pressed는 동일한 상태로 간주하고 처리합니다.
 
@@ -143,3 +143,59 @@ enum WdsButtonState {
     final Color? overlayColor;
 }
 ```
+
+
+## TextButton
+
+Button 과는 속성이 다소 다른 버튼으로 배경색이나 테두리가 없는 버튼으로 텍스트로만 구성됩니다. 주로 강조가 덜한 보조적인 액션에 사용합니다.
+
+### TextButton - 공통
+
+텍스트 색상이 모든 variant 내에서 같습니다.
+- color: `WdsSemanticColorText.neutral`
+
+### TextButton - variant
+
+속성 | decoration | decorationColor | trailing
+--- | --- | --- | --- 
+text | null | null | null
+underline |  TextDecoration.underline | `WdsSemanticColorText.neutral` | null
+icon | null | null | chevronRight
+
+trailing에 오는 icon은 packages/foundation 내 정의되어있는 WdsIcon에서 불러옵니다.
+
+### TextButton - size
+
+
+속성 | size | typography | icon size | padding
+--- | --- | --- | --- | --- 
+medium | Size(double.infinity, 30) | WdsSemanticTypography.body15NormalMedium | 20x20 | EdgeInsets.symmetric(vertical: 4)
+small | Size(double.infinity, 28) | WdsSemanticTypography.body13NormalMedium | 16x16 | EdgeInsets.symmetric(vertical: 5)
+
+
+이 때 trailing에 오는 아이콘은 icon size 만큼 영역을 가지며, 텍스트와 여유 공간없이 바로 붙어있으며 상하 padding은 1px로 조정됩니다.
+
+e.g. code - variant: medium
+``` dart
+Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+        Text('텍스트'),
+        Padding(
+            padding: EdgeInsets.symmetric(vertical: 1),
+            child: WdsIcon.chevronRight.build(
+                width: 20,
+                height: 20,
+            ),
+        ),
+    ]
+),
+```
+
+### TextButton - state
+
+- enabled
+- disabled
+
+위 2개의 상태를 가지며 disabled 인 상태일 떄는 텍스트, decoration, icon 모두 같은 색상을 갖습니다.
+- `WdsSemanticColorText.disable`

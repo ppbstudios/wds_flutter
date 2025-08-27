@@ -8,3 +8,12 @@ environment:
 dependencies:
   wds_tokens:
     path: ../tokens
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.2.0
+
+
+flutter:
+  assets:
+    - assets/
+    - assets/vector/

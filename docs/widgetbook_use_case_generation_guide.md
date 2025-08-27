@@ -64,6 +64,8 @@ Widget _buildPlaygroundSection(BuildContext context) {
 }
 ```
 
+- DO Use description for each knobs with nice and kind mood ux writing in Korean
+
 ### Demonstration Sections
 
 Use `WidgetbookSection` and `WidgetbookSubsection` for organized demonstrations:
@@ -325,6 +327,44 @@ Widget buildCustomButtonWithIconUseCase(BuildContext context) { /* ... */ }
 - **Consistent formatting**: Follow Dart style guidelines
 - **Meaningful defaults**: Initial values should represent realistic usage
 - **Error handling**: Wrap potentially failing operations in try-catch where appropriate
+
+### Widget Construction Rules (WDS)
+
+- Prefer const wherever possible to reduce rebuild cost.
+- Prefer layout+decoration composition over Container:
+  - Use SizedBox/ConstrainedBox/LimitedBox for sizing and constraints.
+  - Use Padding for insets.
+  - Use DecoratedBox or ColoredBox for background, border, and radius.
+- Example (Container → composition):
+
+```dart
+// Bad
+// Container(
+//   padding: const EdgeInsets.all(12),
+//   decoration: BoxDecoration(
+//     color: Colors.white,
+//     borderRadius: BorderRadius.circular(8),
+//   ),
+//   child: child,
+// )
+
+// Good
+ClipRRect(
+  borderRadius: BorderRadius.circular(8),
+  child: DecoratedBox(
+    decoration: const BoxDecoration(color: Colors.white),
+    child: Padding(
+      padding: const EdgeInsets.all(12),
+      child: child,
+    ),
+  ),
+)
+```
+
+### Patterned Backgrounds
+
+- Use CustomPaint with a painter for patterned areas (e.g., 45° '/' hatch).
+- Keep spacing readable; if not specified, prefer slightly wider spacing for clarity.
 
 ### Use Case Coverage
 
