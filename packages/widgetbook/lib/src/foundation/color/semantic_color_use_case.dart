@@ -5,9 +5,9 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgetbook_components/widgetbook_components.dart';
 
 @widgetbook.UseCase(
-  name: 'Semantic Color',
+  name: 'Semantic',
   type: Color,
-  path: 'foundation/color/',
+  path: '[foundation]/',
 )
 Widget buildWdsSemanticColorUseCase(BuildContext context) {
   return const _SemanticColorShowcase();

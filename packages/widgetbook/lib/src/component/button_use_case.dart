@@ -7,8 +7,8 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(
   name: 'Button',
-  type: WdsButton,
-  path: 'component/button/',
+  type: Button,
+  path: '[component]/',
 )
 Widget buildWdsButtonUseCase(BuildContext context) {
   return WidgetbookPageLayout(

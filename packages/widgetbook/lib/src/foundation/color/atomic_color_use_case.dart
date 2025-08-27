@@ -5,11 +5,9 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 import '../../widgetbook_components/widgetbook_components.dart';
 
 @widgetbook.UseCase(
-  name: 'Atomic Color',
+  name: 'Atomic',
   type: Color,
-  path: 'foundation/color/',
-  designLink:
-      'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
+  path: '[foundation]/',
 )
 Widget buildWdsAtomicColorsUseCase(BuildContext context) {
   return const _AtomicColorShowcase();

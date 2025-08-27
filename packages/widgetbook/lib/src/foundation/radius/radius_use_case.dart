@@ -6,10 +6,8 @@ import '../../widgetbook_components/widgetbook_components.dart';
 
 @widgetbook.UseCase(
   name: 'Radius',
-  type: BorderRadius,
-  path: 'foundation/radius/',
-  designLink:
-      'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=232-4326&m=dev',
+  type: Radius,
+  path: '[foundation]/',
 )
 Widget buildWdsRadiusUseCase(BuildContext context) {
   return const RadiusUseCase();

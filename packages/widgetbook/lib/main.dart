@@ -13,16 +13,33 @@ void main() {
 class WidgetbookApp extends StatelessWidget {
   const WidgetbookApp({super.key});
 
+  static const _categoryOrder = {
+    'foundation': 0,
+    'component': 1,
+  };
+
   @override
   Widget build(BuildContext context) {
     return Widgetbook.material(
-      directories: directories,
+      directories: directories
+        ..sort(
+          (p0, p1) {
+            if (p0 is WidgetbookCategory && p1 is WidgetbookCategory) {
+              return _categoryOrder[p0.name]!.compareTo(
+                _categoryOrder[p1.name]!,
+              );
+            }
+
+            return 0;
+          },
+        ),
       themeMode: ThemeMode.light,
       lightTheme: wbc.WidgetbookCustomTheme.lightTheme,
       darkTheme: wbc.WidgetbookCustomTheme.darkTheme,
+      initialRoute: 'about',
       addons: [
         GridAddon(),
-        InspectorAddon(enabled: true),
+        InspectorAddon(),
         ZoomAddon(),
         ViewportAddon(Viewports.all),
         SemanticsAddon(),

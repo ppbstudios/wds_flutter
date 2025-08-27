@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Typography;
 import 'package:wds_tokens/wds_tokens.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
@@ -7,10 +7,8 @@ import '../../widgetbook_components/widgetbook_components.dart';
 
 @widgetbook.UseCase(
   name: 'Typography',
-  type: TextStyle,
-  path: 'foundation/typography/',
-  designLink:
-      'https://www.figma.com/design/jZaYUOtWAtNGDL9h6dTjK6/WDS--WINC-Design-System-?node-id=2-24',
+  type: Typography,
+  path: '[foundation]/',
 )
 Widget buildWdsTypographyUseCase(BuildContext context) {
   return const _TypographyShowcase();
