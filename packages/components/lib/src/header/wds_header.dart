@@ -14,6 +14,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     required this.actions,
     required this.hasCenterTitle,
+    required this.isLogo,
     Key? key,
   }) : super(key: key);
 
@@ -22,10 +23,11 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
     List<Widget> actions = const [],
     Key? key,
   }) : this._(
-          leading: WdsIcon.wincLogo.build(width: 24, height: 24),
-          title: null,
+          leading: null,
+          title: WdsIcon.wincLogo.build(width: 24, height: 24),
           actions: actions,
           hasCenterTitle: false,
+          isLogo: true,
           key: key,
         );
 
@@ -40,6 +42,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
           title: title,
           actions: actions,
           hasCenterTitle: leading == null,
+          isLogo: false,
           key: key,
         );
 
@@ -56,14 +59,16 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       actions: actions,
       hasCenterTitle: leading == null,
+      isLogo: false,
       key: key,
     );
   }
 
   final Widget? leading;
-  final Widget? title;
+  final Widget title;
   final List<Widget> actions;
   final bool hasCenterTitle;
+  final bool isLogo;
 
   @override
   Size get preferredSize => const Size.fromHeight(50);
@@ -71,7 +76,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     // Text 타입 title 에 고정 타이포 적용
-    Widget? titleWidget = title;
+    Widget titleWidget = title;
     if (titleWidget is Text) {
       final Text t = titleWidget;
       final TextStyle merged =
@@ -93,23 +98,25 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
         textHeightBehavior: t.textHeightBehavior,
         selectionColor: t.selectionColor,
       );
-    } else if (titleWidget != null) {
+    } else {
       titleWidget = DefaultTextStyle.merge(
         style: fixedTypography,
         child: titleWidget,
       );
     }
 
-    // leading 은 전달된 값 사용. hasCenterTitle 은 생성자에서 leading 유무로 결정
-    final Widget? leadingWidget = leading;
+    // leading 은 전달된 값 사용. logo 변형이 아닌 경우 최소 40x40 영역 보장
+    final Widget? leadingWidget = isLogo ? null : leading;
 
     // actions: 오른쪽 정렬, 최대 3개 권장. 빈 리스트면 표시 안 함
-    final Widget? actionsRow = actions.isEmpty
-        ? null
+    final Widget actionsArea = actions.isEmpty
+        ? const SizedBox.square(dimension: 40)
         : Row(
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
-            children: actions,
+            children: actions
+                .map((w) => SizedBox.square(dimension: 40, child: w))
+                .toList(),
           );
 
     // 레이아웃: padding 내에서 leading - title - actions 배치
@@ -119,26 +126,28 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
         padding: fixedPadding,
         child: Stack(
           children: [
-            if (leadingWidget != null)
+            // Leading 영역: logo 변형이면 표시하지 않음, 그 외 최소 40x40 확보
+            if (!isLogo)
               Align(
                 alignment: Alignment.centerLeft,
-                child: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: leadingWidget,
+                child: SizedBox.square(
+                  dimension: 40,
+                  child: leadingWidget ?? const SizedBox.shrink(),
                 ),
               ),
-            if (titleWidget != null)
-              Align(
-                alignment:
-                    hasCenterTitle ? Alignment.center : Alignment.centerLeft,
-                child: titleWidget,
-              ),
-            if (actionsRow != null)
-              Align(
-                alignment: Alignment.centerRight,
-                child: actionsRow,
-              ),
+
+            // Title: 항상 전체 헤더 영역 기준으로 가운데 또는 좌측 정렬
+            Align(
+              alignment:
+                  hasCenterTitle ? Alignment.center : Alignment.centerLeft,
+              child: titleWidget,
+            ),
+
+            // Actions 영역: 비어있어도 최소 40x40 확보, 우측 정렬
+            Align(
+              alignment: Alignment.centerRight,
+              child: actionsArea,
+            ),
           ],
         ),
       ),
