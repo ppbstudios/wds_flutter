@@ -1,7 +1,7 @@
 [build]
   # This file is for Netlify configuration
   # The actual build is handled by GitHub Actions
-  ignore = "git log -1 --pretty=%B | grep -q 'skip-netlify'"
+  ignore = "exit 0"
 
 [build.environment]
   # Environment variables for build context

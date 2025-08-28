@@ -23,6 +23,13 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    concurrency:
+      group: widgetbook-${{ github.ref }}
+      cancel-in-progress: true
     
     steps:
       - name: Checkout code
@@ -46,8 +53,18 @@ jobs:
         working-directory: packages/widgetbook
         run: flutter build web --release
         
+      - name: Deploy Preview to Netlify (PR)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=packages/widgetbook/build/web --message="Deploy Preview for PR #${{ github.event.pull_request.number }}" --alias=deploy-preview-${{ github.event.pull_request.number }}
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+
       - name: Deploy to Netlify
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
