@@ -41,7 +41,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
           leading: leading,
           title: title,
           actions: actions,
-          hasCenterTitle: leading == null,
+          hasCenterTitle: true,
           isLogo: false,
           key: key,
         );
@@ -58,7 +58,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
       leading: leading,
       title: title,
       actions: actions,
-      hasCenterTitle: leading == null,
+      hasCenterTitle: true,
       isLogo: false,
       key: key,
     );
