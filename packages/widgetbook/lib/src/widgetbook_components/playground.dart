@@ -6,7 +6,7 @@ class WidgetbookPlayground extends StatelessWidget {
   const WidgetbookPlayground({
     required this.child,
     this.info = const [],
-    this.height = 280,
+    this.height = 320,
     this.padding = const EdgeInsets.all(24),
     this.layout = PlaygroundLayout.center,
     this.backgroundColor = WdsColorCommon.white,
@@ -78,7 +78,7 @@ class WidgetbookPlayground extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
-                spacing: 24,
+                spacing: 32,
                 children: [
                   Text(
                     'Playground',

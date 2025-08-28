@@ -14,14 +14,20 @@ import 'package:wds_widgetbook/src/component/bottom_navigation_use_case.dart'
     as _wds_widgetbook_src_component_bottom_navigation_use_case;
 import 'package:wds_widgetbook/src/component/button_use_case.dart'
     as _wds_widgetbook_src_component_button_use_case;
+import 'package:wds_widgetbook/src/component/chip_use_case.dart'
+    as _wds_widgetbook_src_component_chip_use_case;
 import 'package:wds_widgetbook/src/component/header_use_case.dart'
     as _wds_widgetbook_src_component_header_use_case;
 import 'package:wds_widgetbook/src/component/icon_button_use_case.dart'
     as _wds_widgetbook_src_component_icon_button_use_case;
+import 'package:wds_widgetbook/src/component/search_field_use_case.dart'
+    as _wds_widgetbook_src_component_search_field_use_case;
 import 'package:wds_widgetbook/src/component/square_button_use_case.dart'
     as _wds_widgetbook_src_component_square_button_use_case;
 import 'package:wds_widgetbook/src/component/text_button_use_case.dart'
     as _wds_widgetbook_src_component_text_button_use_case;
+import 'package:wds_widgetbook/src/component/text_field_use_case.dart'
+    as _wds_widgetbook_src_component_text_field_use_case;
 import 'package:wds_widgetbook/src/cover.dart' as _wds_widgetbook_src_cover;
 import 'package:wds_widgetbook/src/foundation/color/atomic_color_use_case.dart'
     as _wds_widgetbook_src_foundation_color_atomic_color_use_case;
@@ -56,6 +62,13 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'Chip',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Chip',
+          builder: _wds_widgetbook_src_component_chip_use_case.buildChipUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'Header',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Header',
@@ -72,6 +85,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'SearchField',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'SearchField',
+          builder: _wds_widgetbook_src_component_search_field_use_case
+              .buildWdsSearchFieldUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'SquareButton',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'SquareButton',
@@ -85,6 +106,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'TextButton',
           builder: _wds_widgetbook_src_component_text_button_use_case
               .buildWdsTextButtonUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'TextField',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'TextField',
+          builder: _wds_widgetbook_src_component_text_field_use_case
+              .buildWdsTextFieldUseCase,
         ),
       ),
     ],

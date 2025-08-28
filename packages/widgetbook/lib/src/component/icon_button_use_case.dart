@@ -34,7 +34,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    height: 144,
+    height: 160,
     layout: PlaygroundLayout.center,
     backgroundColor: WdsColorCoolNeutral.v50,
     child: button,
