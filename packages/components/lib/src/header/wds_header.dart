@@ -24,7 +24,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
     Key? key,
   }) : this._(
           leading: null,
-          title: WdsIcon.wincLogo.build(width: 24, height: 24),
+          title: WdsIcon.wincLogo.build(width: 62, height: 17),
           actions: actions,
           hasCenterTitle: false,
           isLogo: true,
