@@ -1,6 +1,8 @@
 # wds_flutter
 Flutter를 위한 WDS(WINC Design System)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f703ba3d-6c1d-4fdf-a236-5324b31d9a09/deploy-status)](https://app.netlify.com/projects/winc-design-system/deploys)
+
 ### Token Generator 사용법 (`tools/token_generator`)
 
 디자인 토큰 JSON을 Dart 코드로 변환합니다. 생성된 파일은 `packages/tokens/lib/atomic/*.g.dart`에 저장됩니다.

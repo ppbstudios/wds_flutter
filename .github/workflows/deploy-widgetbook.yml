@@ -47,6 +47,7 @@ jobs:
         run: flutter build web --release
         
       - name: Deploy to Netlify
+        if: github.event_name == 'push'
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -54,6 +55,17 @@ jobs:
         with:
           args: deploy --prod --dir=packages/widgetbook/build/web --message="Deploy from GitHub Actions"
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+      
+      - name: Resolve Netlify site name
+        if: github.event_name == 'pull_request'
+        id: site_name
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          RESPONSE=$(curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID)
+          NAME=$(python3 -c 'import json,sys;print(json.load(sys.stdin)["name"])' <<< "$RESPONSE")
+          echo "name=$NAME" >> $GITHUB_OUTPUT
           
       - name: Comment PR with preview URL
         if: github.event_name == 'pull_request'
@@ -64,5 +76,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🎨 **Widgetbook Preview**: Your changes have been deployed!\n\n📱 [View Widgetbook Preview](https://${{ secrets.NETLIFY_SITE_ID }}.netlify.app)'
+              body: '🎨 **Widgetbook Preview**: Your changes have a deploy preview!\n\n📱 [View Deploy Preview](https://deploy-preview-${{ github.event.pull_request.number }}--${{ steps.site_name.outputs.name }}.netlify.app)'
             })
