@@ -2,6 +2,8 @@ import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.d
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
+const Icon _icon = Icon(Icons.crop_square_rounded, size: 24);
+
 @widgetbook.UseCase(
   name: 'Header',
   type: Header,
@@ -20,15 +22,19 @@ Widget buildWdsHeaderUseCase(BuildContext context) {
 
 Widget _buildPlaygroundSection(BuildContext context) {
   final type = context.knobs.object.dropdown<String>(
-    label: 'variant',
-    options: ['logo', 'title', 'search'],
-    initialOption: 'title',
+      label: 'variant',
+      options: ['logo', 'title', 'search'],
+      initialOption: 'title',
+      description: '3가지 유형이 있어요');
+  final titleText = context.knobs.string(
+    label: 'title',
+    initialValue: '텍스트',
+    description: 'variant가 title일 때 표기되는 텍스트예요',
   );
-  final titleText = context.knobs.string(label: 'title', initialValue: '타이틀');
   final enableLeading = context.knobs.boolean(
     label: 'leading',
     initialValue: false,
-    description: 'leading 영역 on/off',
+    description: 'variant가 logo일 때는 사용할 수 없어요',
   );
   final actionsCount = context.knobs.int.slider(
     label: 'actions',
@@ -36,29 +42,32 @@ Widget _buildPlaygroundSection(BuildContext context) {
     min: 0,
     max: 3,
     divisions: 3,
+    description: '오른쪽에 위치하는 아이콘의 개수를 조절할 수 있어요',
   );
 
   final List<Widget> actions = List.generate(actionsCount, (i) {
     return WdsIconButton(
       onTap: () => print('action $i'),
-      icon: WdsIcon.chevronRight.build(width: 24, height: 24),
+      icon: _icon,
     );
   });
 
   // leading 위젯 샘플
-  final Widget? leadingWidget = enableLeading
-      ? WdsIconButton(
-          onTap: () => print('leading'),
-          icon: WdsIcon.chevronRight.build(width: 24, height: 24),
-        )
-      : null;
+  Widget? leadingWidget;
+  if (enableLeading) {
+    leadingWidget = WdsIconButton(
+      onTap: () => print('leading'),
+      icon: _icon,
+    );
+  }
 
   if (type == 'logo' && enableLeading) {
     // logo 변형에서는 leading 강제 off + 스낵바 알림
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final messenger = ScaffoldMessenger.maybeOf(context);
-      messenger?.showSnackBar(
-        const SnackBar(content: Text('logo variant에서는 leading을 사용할 수 없어요.')),
+      WidgetbookState.maybeOf(context)?.updateQueryField(
+        group: 'knobs',
+        field: 'leading',
+        value: 'false',
       );
     });
   }
@@ -68,15 +77,18 @@ Widget _buildPlaygroundSection(BuildContext context) {
     'title' => WdsHeader.title(
         title: Text(titleText),
         leading: type == 'logo' ? null : leadingWidget,
-        actions: actions),
+        actions: actions,
+      ),
     'search' => WdsHeader.search(
         title: Text('준비중이에요..🧑‍💻'),
         leading: type == 'logo' ? null : leadingWidget,
-        actions: actions.isEmpty ? actions : actions.sublist(0, 1)),
+        actions: actions.isEmpty ? actions : actions.sublist(0, 1),
+      ),
     _ => WdsHeader.title(
         title: Text(titleText),
         leading: type == 'logo' ? null : leadingWidget,
-        actions: actions),
+        actions: actions,
+      ),
   };
 
   return WidgetbookPlayground(
@@ -106,15 +118,15 @@ Widget _buildDemonstrationSection(BuildContext context) {
           children: [
             WdsHeader.logo(actions: const []),
             WdsHeader.title(
-              title: const Text('타이틀'),
+              title: const Text('텍스트'),
               actions: [
                 WdsIconButton(
                   onTap: () => print('search'),
-                  icon: WdsIcon.chevronRight.build(width: 24, height: 24),
+                  icon: _icon,
                 ),
                 WdsIconButton(
                   onTap: () => print('more'),
-                  icon: WdsIcon.chevronRight.build(width: 24, height: 24),
+                  icon: _icon,
                 ),
               ],
             ),
@@ -123,7 +135,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
               actions: [
                 WdsIconButton(
                   onTap: () => print('submit'),
-                  icon: WdsIcon.chevronRight.build(width: 24, height: 24),
+                  icon: _icon,
                 ),
               ],
             ),
