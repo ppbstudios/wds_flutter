@@ -27,6 +27,8 @@ import 'package:wds_widgetbook/src/foundation/color/atomic_color_use_case.dart'
     as _wds_widgetbook_src_foundation_color_atomic_color_use_case;
 import 'package:wds_widgetbook/src/foundation/color/semantic_color_use_case.dart'
     as _wds_widgetbook_src_foundation_color_semantic_color_use_case;
+import 'package:wds_widgetbook/src/foundation/icon/icon_use_case.dart'
+    as _wds_widgetbook_src_foundation_icon_icon_use_case;
 import 'package:wds_widgetbook/src/foundation/radius/radius_use_case.dart'
     as _wds_widgetbook_src_foundation_radius_radius_use_case;
 import 'package:wds_widgetbook/src/foundation/typography/typography_use_case.dart'
@@ -105,6 +107,14 @@ final directories = <_widgetbook.WidgetbookNode>[
                     .buildWdsSemanticColorUseCase,
           ),
         ],
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Icon',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Icon',
+          builder: _wds_widgetbook_src_foundation_icon_icon_use_case
+              .buildWdsIconUseCase,
+        ),
       ),
       _widgetbook.WidgetbookLeafComponent(
         name: 'Radius',

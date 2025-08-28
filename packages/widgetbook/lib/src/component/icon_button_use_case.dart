@@ -20,21 +20,16 @@ Widget buildWdsIconButtonUseCase(BuildContext context) {
 
 Widget _buildPlaygroundSection(BuildContext context) {
   final enabled = context.knobs.boolean(label: 'isEnabled', initialValue: true);
-  final iconName = context.knobs.object.dropdown<String>(
+  final icon = context.knobs.object.dropdown<WdsIcon>(
     label: 'icon',
-    initialOption: 'chevronRight',
-    options: ['chevronRight', 'wincLogo'],
+    initialOption: WdsIcon.blank,
+    options: WdsIcon.values,
+    labelBuilder: (v) => v.name,
   );
 
-  Widget icon = switch (iconName) {
-    'chevronRight' => WdsIcon.chevronRight.build(width: 24, height: 24),
-    'wincLogo' => WdsIcon.wincLogo.build(width: 24, height: 24),
-    _ => WdsIcon.chevronRight.build(width: 24, height: 24),
-  };
-
   final button = WdsIconButton(
-    onTap: () => print('IconButton pressed: $iconName'),
-    icon: icon,
+    onTap: () => print('IconButton pressed: $icon'),
+    icon: icon.build(),
     isEnabled: enabled,
   );
 
@@ -44,7 +39,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     backgroundColor: WdsColorCoolNeutral.v50,
     child: button,
     info: [
-      'icon: $iconName',
+      'icon: ${icon.name}',
       'state: ${enabled ? 'enabled' : 'disabled'}',
     ],
   );
@@ -64,12 +59,12 @@ Widget _buildDemonstrationSection(BuildContext context) {
           children: [
             WdsIconButton(
               onTap: () => print('enabled'),
-              icon: WdsIcon.chevronRight.build(width: 24, height: 24),
+              icon: WdsIcon.blank.build(),
             ),
             WdsIconButton(
-              onTap: () {},
+              onTap: null,
               isEnabled: false,
-              icon: WdsIcon.chevronRight.build(width: 24, height: 24),
+              icon: WdsIcon.blank.build(),
             ),
           ],
         ),

@@ -2,7 +2,7 @@ library;
 
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart' hide Typography;
+import 'package:flutter/material.dart' hide Typography, Icon;
 import 'package:wds_tokens/wds_tokens.dart';
 
 export 'package:flutter/material.dart' hide Typography, TextButton;
@@ -26,6 +26,9 @@ class TextButton {}
 ///
 /// material 에서 Typography 는 hidden 처리
 class Typography {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class Icon {}
 
 /// 컴포넌트 path 관리를 위한 클래스
 class Cover {}

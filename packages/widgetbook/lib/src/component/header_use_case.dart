@@ -2,7 +2,7 @@ import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.d
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-const Icon _icon = Icon(Icons.crop_square_rounded, size: 24);
+final Widget _icon = WdsIcon.blank.build(width: 24, height: 24);
 
 @widgetbook.UseCase(
   name: 'Header',
