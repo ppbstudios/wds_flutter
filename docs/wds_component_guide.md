@@ -359,6 +359,9 @@ SizedBox(
 )
 ```
 
+- 선택된 BottomNavigationItem의 Text는 `WdsFontWeight.bold` 을 갖습니다.
+- 선택안된 BottomNavigationItem의 Text는 `WdsFontWeight.medium` 을 갖습니다.
+
 
 ## SearchField
 
@@ -467,14 +470,15 @@ state는 아래 5가지를 가집니다.
     - `error` 2px `WdsSemanticColorStatus.destructive`
   - label: 모든 state 동일
     - typography: `WdsSemanticTypography.body13NormalRegular`
-    - color: `WdsSemanticColorText.alternative`
-  - hint: 
-    - `enabled`
-        - typography: `WdsSemanticTypography.body15NormalRegular`
-        - color: `WdsSemanticColorText.alternative`
-    - 나머지
-        - typography: `WdsSemanticTypography.body15NormalRegular`
-        - color: `WdsSemanticColorText.normal`
+    - color: 
+        - `disabled`: `WdsSemanticColorText.disable`
+        - 나머지: `WdsSemanticColorText.alternative`
+  - hint: typography는 통일
+    - typography: `WdsSemanticTypography.body15NormalRegular`
+    - color:
+        - `enabled`: `WdsSemanticColorText.alternative`
+        - `disabled`: `WdsSemanticColorText.disable`
+        - 나머지: `WdsSemanticColorText.normal`
   - error: state == `error` 일 때만 
     - typography: `WdsSemanticTypography.caption12Regular`
     - color: `WdsSemanticColorStatus.destructive`
@@ -496,13 +500,18 @@ state는 아래 5가지를 가집니다.
     - 나머지
         - typography: `WdsSemanticTypography.body13NormalRegular`
         - color: `WdsSemanticColorText.normal`
+  - input:
+    - `disabled`: `WdsSemanticColorText.alternative`
+    - 그 외: `WdsSemanticColorText.normal`
   - trailing: 값이 있을 때 또는 포커스일 때 trailing clear 버튼 표시(아래 참고)
 
 ### TextField - size
 
 - 최소 width: 250px
 - 최대 width: `double.infinity`
-- 높이: 내용과 padding에 의해 결정되며 텍스트 라인은 1줄을 권장합니다.
+- 높이: 1줄 기준 시각적 고정 높이를 유지합니다.
+  - outlined: 포커스 시 underline 두께(1→2px) 증가를 하단 패딩 보정으로 흡수하여 높이 변화가 없도록 합니다.
+  - box: 패딩을 포함해 1줄 기준 약 44px을 유지합니다.
 
 ### TextField - radius & border
 
@@ -625,19 +634,30 @@ variant에 따라서 backgroundColor, color, borderSide가 정해집니다.
 
 속성 | backgroundColor | color | borderSide
 --- | --- | --- | ---
-outline | Colors.transparent | WdsSemanticColorText.normal | BorderSide(color: WdsSemanticColorBorder.neutral)
+outline | null | WdsSemanticColorText.neutral | BorderSide(color: WdsSemanticColorBorder.alternative)
 solid | WdsSemanticColorBackgroud.alternative | WdsSemanticColorText.normal | null
 
 ### Chip - size
 
 px 단위로 이루어집니다. width는 Hug 방식으로 내용에 맞게 wrapping 됩니다. height는 속성 별로 정해집니다.
 
+**outline인 경우**
+
 속성 | size | typography | padding
 --- | --- | --- | ---
-xsmall | Size(double.infinity, 20) | WdsSemanticTypography.caption10Medium | EdgeInsets.symmetric(horizontal: 8, vertical: 4)
-small | Size(double.infinity, 24) | WdsSemanticTypography.caption12Medium | EdgeInsets.symmetric(horizontal: 10, vertical: 5)  
-medium | Size(double.infinity, 28) | WdsSemanticTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 12, vertical: 6)
-large | Size(double.infinity, 32) | WdsSemanticTypography.body15NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 7)
+xsmall | Size(double.infinity, 24) | WdsSemanticTypography.caption12Regular | EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+small | Size(double.infinity, 30) | WdsSemanticTypography.body13NormalRegular | EdgeInsets.symmetric(horizontal: 12, vertical: 6)  
+medium | Size(double.infinity, 34) | WdsSemanticTypography.body13NormalRegular | EdgeInsets.symmetric(horizontal: 12, vertical: 8)
+large | Size(double.infinity, 38) | WdsSemanticTypography.body13NormalRegular | EdgeInsets.symmetric(horizontal: 12, vertical: 10)
+
+**solid인 경우**
+
+속성 | size | typography | padding
+--- | --- | --- | ---
+xsmall | Size(double.infinity, 24) | WdsSemanticTypography.caption12Medium | EdgeInsets.symmetric(horizontal: 14, vertical: 6)
+small | Size(double.infinity, 30) | WdsSemanticTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 6)  
+medium | Size(double.infinity, 34) | WdsSemanticTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 8)
+large | Size(double.infinity, 38) | WdsSemanticTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 10)
 
 ### Chip - state
 
@@ -653,9 +673,15 @@ disabled | 비활성화된 상태
 state에 따라 배경색과 텍스트 색상이 조정됩니다.
 
 - `enabled`: 기본 variant 색상 적용
-- `pressed`: 배경색에 0.1 opacity overlay 적용
-- `focused`: outline variant인 경우 배경색을 WdsSemanticColorBackgroud.alternative으로, solid variant인 경우 더 진한 배경색 적용
+- `pressed`: 배경색에 0.1 opacity overlay 적용 (hover 상태 포함)
+- `focused`: 선택된 상태로, 두 variant 모두 배경색이 `cta`(#121212)로 변경되고 텍스트 및 아이콘 색상이 `WdsColorCommon.white`(#FFFFFF)로 변경됨
 - `disabled`: 전체적으로 0.4 opacity 적용
+
+**focused state 상세:**
+- 배경색: `cta` (WdsColorNeutral.v900, #121212)
+- 텍스트 색상: `WdsColorCommon.white` (#FFFFFF)  
+- 아이콘 색상: `WdsColorCommon.white` (#FFFFFF)
+- 테두리: outline variant의 경우 기존 테두리 제거됨 (배경색으로 인해 불필요)
 
 ### Chip - layout
 
@@ -665,7 +691,7 @@ Chip은 leading, label, trailing 순서로 가로 배치됩니다.
 - `label`: 중앙 영역에 텍스트 배치
 - `trailing`: 오른쪽 영역에 아이콘 배치
 
-각 요소 간 spacing은 4px입니다.
+각 요소 간 spacing은 2px입니다.
 
 ``` dart
 Row(

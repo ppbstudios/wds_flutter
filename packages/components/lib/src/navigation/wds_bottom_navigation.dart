@@ -93,6 +93,7 @@ class _BottomNavigationItemWidget extends StatelessWidget {
                 item.label,
                 style: WdsSemanticTypography.caption10Medium.copyWith(
                   color: cta,
+                  fontWeight: isActive ? WdsFontWeight.bold : WdsFontWeight.medium,
                 ),
                 maxLines: 1,
               ),

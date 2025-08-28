@@ -4,8 +4,7 @@ enum WdsTextFieldVariant { outlined, box }
 
 /// 디자인 시스템 TextField (outlined, box)
 class WdsTextField extends StatefulWidget {
-  const WdsTextField({
-    this.variant = WdsTextFieldVariant.outlined,
+  const WdsTextField.outlined({
     this.controller,
     this.focusNode,
     this.enabled = true,
@@ -17,7 +16,23 @@ class WdsTextField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     Key? key,
-  }) : super(key: key);
+  })  : variant = WdsTextFieldVariant.outlined,
+        super(key: key);
+
+  const WdsTextField.box({
+    this.controller,
+    this.focusNode,
+    this.enabled = true,
+    this.autofocus = false,
+    this.label,
+    this.hintText,
+    this.helperText,
+    this.errorText,
+    this.onChanged,
+    this.onSubmitted,
+    Key? key,
+  })  : variant = WdsTextFieldVariant.box,
+        super(key: key);
 
   final WdsTextFieldVariant variant;
   final TextEditingController? controller;
@@ -103,16 +118,20 @@ class _WdsTextFieldState extends State<WdsTextField> {
     );
 
     final TextStyle inputStyle =
-        WdsSemanticTypography.body13NormalRegular.copyWith(
+        WdsSemanticTypography.body15NormalRegular.copyWith(
       color: widget.enabled
           ? WdsSemanticColorText.normal
           : WdsSemanticColorText.alternative,
     );
+    // hint 색: enabled -> alternative, disabled -> disable, 기타(포커스/값/에러) -> normal
+    final bool _otherState = _hasFocus || _hasValue || _hasError;
     final TextStyle hintStyle =
         WdsSemanticTypography.body15NormalRegular.copyWith(
-      color: widget.enabled
-          ? WdsSemanticColorText.alternative
-          : WdsSemanticColorText.normal,
+      color: !widget.enabled
+          ? WdsSemanticColorText.disable
+          : (_otherState
+              ? WdsSemanticColorText.normal
+              : WdsSemanticColorText.alternative),
     );
 
     final InputDecoration decoration = InputDecoration(
@@ -134,7 +153,9 @@ class _WdsTextFieldState extends State<WdsTextField> {
         Text(
           label,
           style: WdsSemanticTypography.body13NormalRegular.copyWith(
-            color: WdsSemanticColorText.alternative,
+            color: widget.enabled
+                ? WdsSemanticColorText.alternative
+                : WdsSemanticColorText.disable,
           ),
         ),
       );
@@ -142,16 +163,21 @@ class _WdsTextFieldState extends State<WdsTextField> {
     }
 
     column.add(
-      TextField(
-        controller: _controller,
-        focusNode: _focusNode,
-        enabled: widget.enabled,
-        autofocus: widget.autofocus,
-        style: inputStyle,
-        maxLines: 1,
-        onChanged: widget.onChanged,
-        onSubmitted: widget.onSubmitted,
-        decoration: decoration,
+      // 포커스 시 underline 두께(2px)로 인해 전체 높이가 커 보이는 점을 방지하기 위해
+      // 비포커스 상태일 때만 바닥 패딩 1px을 추가해 총 높이를 동일하게 유지합니다.
+      Padding(
+        padding: EdgeInsets.only(bottom: (_hasFocus || _hasError) ? 0 : 1),
+        child: TextField(
+          controller: _controller,
+          focusNode: _focusNode,
+          enabled: widget.enabled,
+          autofocus: widget.autofocus,
+          style: inputStyle,
+          maxLines: 1,
+          onChanged: widget.onChanged,
+          onSubmitted: widget.onSubmitted,
+          decoration: decoration,
+        ),
       ),
     );
 
@@ -217,9 +243,11 @@ class _WdsTextFieldState extends State<WdsTextField> {
     final bool otherState = _hasFocus || _hasValue || _hasError;
     final TextStyle hintStyle =
         WdsSemanticTypography.body13NormalRegular.copyWith(
-      color: (widget.enabled && !otherState)
+      color: !widget.enabled
           ? WdsSemanticColorText.alternative
-          : WdsSemanticColorText.normal,
+          : (otherState
+              ? WdsSemanticColorText.normal
+              : WdsSemanticColorText.alternative),
     );
 
     final InputBorder noBorder = const OutlineInputBorder(
@@ -258,18 +286,14 @@ class _WdsTextFieldState extends State<WdsTextField> {
 
     final Row row = Row(
       mainAxisSize: MainAxisSize.min,
+      spacing: 8,
       children: [
         Expanded(child: field),
-        if (showClear) ...[
-          const SizedBox(width: 8),
-          WdsIconButton(
+        if (showClear)
+          GestureDetector(
             onTap: _clear,
-            icon: WdsIcon.circleFilledClose.build(
-              width: 24,
-              height: 24,
-            ),
+            child: WdsIcon.circleFilledClose.build(),
           ),
-        ],
       ],
     );
 
@@ -289,7 +313,13 @@ class _WdsTextFieldState extends State<WdsTextField> {
 
     // helper / error
     final List<Widget> column = [
-      ClipRRect(borderRadius: radius, child: core),
+      ClipRRect(
+        borderRadius: radius,
+        child: SizedBox(
+          height: 44, // 22(Text) + 2(padding) + 20(content padding) = 44
+          child: core,
+        ),
+      ),
     ];
     final String? error = widget.errorText;
     final String? helper = widget.helperText;
