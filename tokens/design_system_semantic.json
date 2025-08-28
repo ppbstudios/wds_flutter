@@ -75,7 +75,7 @@
     "material": {
       "dimmer": {
         "$type": "color",
-        "$value": "#000000cc"
+        "$value": "#00000099"
       },
       "pressed": {
         "$type": "color",

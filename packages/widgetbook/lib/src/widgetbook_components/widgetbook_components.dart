@@ -7,6 +7,7 @@ import 'package:wds_tokens/wds_tokens.dart';
 
 export 'package:flutter/material.dart' hide Typography, TextButton;
 export 'package:wds_components/wds_components.dart';
+export 'package:wds_foundation/wds_foundation.dart';
 export 'package:wds_tokens/wds_tokens.dart';
 
 part 'page_layout.dart';
@@ -31,3 +32,12 @@ class Cover {}
 
 /// 컴포넌트 path 관리를 위한 클래스
 class SquareButton {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class IconButton {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class Header {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class BottomNavigation {}

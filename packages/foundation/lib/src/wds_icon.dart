@@ -2,7 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 enum WdsIcon {
-  chevronRight(path: 'assets/vector/chevronRight.svg');
+  chevronRight(path: 'assets/vector/chevron_right.svg'),
+  wincLogo(path: 'assets/vector/winc_logo.svg'),
+  ;
 
   const WdsIcon({
     required this.path,

@@ -17,3 +17,4 @@ flutter:
   assets:
     - assets/
     - assets/vector/
+    - assets/vector/navigation/

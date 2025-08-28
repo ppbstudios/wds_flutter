@@ -10,8 +10,14 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:wds_widgetbook/src/component/bottom_navigation_use_case.dart'
+    as _wds_widgetbook_src_component_bottom_navigation_use_case;
 import 'package:wds_widgetbook/src/component/button_use_case.dart'
     as _wds_widgetbook_src_component_button_use_case;
+import 'package:wds_widgetbook/src/component/header_use_case.dart'
+    as _wds_widgetbook_src_component_header_use_case;
+import 'package:wds_widgetbook/src/component/icon_button_use_case.dart'
+    as _wds_widgetbook_src_component_icon_button_use_case;
 import 'package:wds_widgetbook/src/component/square_button_use_case.dart'
     as _wds_widgetbook_src_component_square_button_use_case;
 import 'package:wds_widgetbook/src/component/text_button_use_case.dart'
@@ -32,11 +38,35 @@ final directories = <_widgetbook.WidgetbookNode>[
     name: 'component',
     children: [
       _widgetbook.WidgetbookLeafComponent(
+        name: 'BottomNavigation',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'BottomNavigation',
+          builder: _wds_widgetbook_src_component_bottom_navigation_use_case
+              .buildWdsBottomNavigationUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'Button',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Button',
           builder: _wds_widgetbook_src_component_button_use_case
               .buildWdsButtonUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Header',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Header',
+          builder: _wds_widgetbook_src_component_header_use_case
+              .buildWdsHeaderUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'IconButton',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'IconButton',
+          builder: _wds_widgetbook_src_component_icon_button_use_case
+              .buildWdsIconButtonUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(

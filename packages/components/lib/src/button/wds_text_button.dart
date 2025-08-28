@@ -215,19 +215,29 @@ class _WdsTextButtonState extends State<WdsTextButton>
       behavior: HitTestBehavior.opaque,
       child: ClipRRect(
         borderRadius: borderRadius,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            SizedBox(
-              height: height,
-              child: Center(child: content),
-            ),
-            Positioned.fill(
-              child: IgnorePointer(
-                child: RepaintBoundary(child: overlay),
+        child: SizedBox(
+          height: height,
+          child: Center(
+            child: Align(
+              alignment: Alignment.center,
+              widthFactor: 1,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // 높이 유지, 폭은 컨텐츠 폭 기준
+                  SizedBox(height: height),
+                  // 오버레이 (컨텐츠 폭 기준)
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: RepaintBoundary(child: overlay),
+                    ),
+                  ),
+                  // 컨텐츠
+                  RepaintBoundary(child: content),
+                ],
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

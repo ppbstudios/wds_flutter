@@ -64,7 +64,27 @@ Widget _buildPlaygroundSection(BuildContext context) {
 }
 ```
 
-- DO Use description for each knobs with nice and kind mood ux writing in Korean
+Note: Provide human-friendly descriptions for each knob in Korean UX writing style only when your project localization policy requires Korean. Otherwise, prefer concise English descriptions.
+
+### Component-specific Strategy (WDS)
+
+- Button: Expose variant (`cta/primary/secondary`) and size (`xlarge/large/medium/small/tiny`) knobs. Use a single-line label for realistic text.
+- SquareButton: Show fixed specs (height/padding/typography) in the info panel. Expose only `isEnabled` and label knobs.
+- TextButton: Expose variant (`text/underline/icon`), size (`medium/small`), and `isEnabled`. For the icon variant, visually confirm the trailing icon.
+
+### New Component Use Case Recipe (Generic)
+
+Use this recipe whenever a new component is added to the design guide:
+
+1. Identify critical parameters → create knobs for them (text, enabled, variant, size, etc.).
+2. Add a Playground with a fixed height and an info panel summarizing the current configuration.
+3. Add Demonstration sections covering:
+   - Variants (e.g., primary/secondary/tertiary)
+   - Sizes (e.g., large/medium/small)
+   - States (e.g., enabled/pressed/disabled)
+4. Ensure callbacks print useful debug messages for quick verification.
+5. Keep composition consistent using `WidgetbookPageLayout`, `WidgetbookSection`, and `WidgetbookSubsection`.
+6. For WDS, ensure typography and colors are derived from tokens (no hard-coded values).
 
 ### Demonstration Sections
 
@@ -493,3 +513,13 @@ Before generating use cases, verify:
 - [ ] State management requirements
 - [ ] Theme/localization dependencies
 - [ ] Callback signatures and expected behavior
+ 
+## Final Checklist (WDS-specific)
+
+- [ ] Playground에 핵심 파라미터 knob 제공: 필수/시각/행동/콜백
+- [ ] 정보 패널(info)에 현재 설정값을 직관적으로 표기(특히 고정 규격인 SquareButton)
+- [ ] Demonstration 섹션에서 variant/size/state 별 대표 사례 제시
+- [ ] Hover/Pressed/Disabled 등 인터랙션이 눈으로 확인 가능하도록 배치
+- [ ] 위젯북 공통 레이아웃(WidgetbookPageLayout/Section/Subsection) 준수
+- [ ] WDS 토큰 기반 텍스트/컬러/보더/라운드 일관성 유지
+- [ ] 린트/빌드 오류 없음

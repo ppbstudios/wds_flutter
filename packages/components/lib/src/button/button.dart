@@ -225,8 +225,6 @@ class _WdsButtonState extends State<WdsButton>
       },
     );
 
-    // Ripple 제거됨 (hover/pressed는 동일 overlay 처리)
-
     // Gestures and hover (MouseRegion only on web)
     final coreGesture = GestureDetector(
       onTapDown: widget.isEnabled ? _handleTapDown : null,
@@ -236,30 +234,43 @@ class _WdsButtonState extends State<WdsButton>
       behavior: HitTestBehavior.opaque,
       child: ClipRRect(
         borderRadius: borderRadius,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // 배경 + 선택적 테두리
-            DecoratedBox(
-              decoration: ShapeDecoration(
-                color: style.background,
-                shape: RoundedRectangleBorder(
-                  borderRadius: borderRadius,
-                  side: style.border ?? BorderSide.none,
-                ),
-              ),
-              child: SizedBox(
-                height: height,
-                child: Center(child: content),
+        child: SizedBox(
+          height: height,
+          child: Center(
+            child: Align(
+              alignment: Alignment.center,
+              widthFactor: 1,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // 배경 + 선택적 테두리 (컨텐츠 폭 기준)
+                  Positioned.fill(
+                    child: RepaintBoundary(
+                      child: DecoratedBox(
+                        decoration: ShapeDecoration(
+                          color: style.background,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: borderRadius,
+                            side: style.border ?? BorderSide.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // 버튼 높이를 유지하되, 폭은 컨텐츠 폭에 맞춤
+                  SizedBox(height: height),
+                  // 컨텐츠 폭을 채우는 오버레이 (텍스트 아래 레이어)
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: RepaintBoundary(child: overlay),
+                    ),
+                  ),
+                  // 최상단 컨텐츠(텍스트/아이콘 등)
+                  RepaintBoundary(child: content),
+                ],
               ),
             ),
-            // 호버/눌림 오버레이 (애니메이션)
-            Positioned.fill(
-              child: IgnorePointer(
-                child: RepaintBoundary(child: overlay),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
