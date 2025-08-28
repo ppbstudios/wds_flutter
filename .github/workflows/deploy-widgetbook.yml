@@ -53,6 +53,12 @@ jobs:
         working-directory: packages/widgetbook
         run: flutter build web --release
         
+      - name: Prepare Netlify config in build folder (PR)
+        if: github.event_name == 'pull_request'
+        run: |
+          cp netlify.toml packages/widgetbook/build/web/ || true
+          echo "/* /index.html 200" > packages/widgetbook/build/web/_redirects
+
       - name: Deploy Preview to Netlify (PR)
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         uses: netlify/actions/cli@master
