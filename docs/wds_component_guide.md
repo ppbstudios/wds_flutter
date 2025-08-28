@@ -360,3 +360,322 @@ SizedBox(
 ```
 
 
+## SearchField
+
+콘텐츠를 검색할 때 사용합니다.
+
+flutter/widget 라이브러리 내에는 TextField같은 컴포넌트가 없기 때문에 SearchField만 예외로 flutter/material을 사용해야 합니다.
+
+TextField나 TextFormField를 사용할 떄는 항상 부모의 크기가 정해져야 하므로 ConstrainedBox 같이 영역을 정해둘 수 있는 요소들과 함께 사용해야 합니다.
+
+### SearchField - state
+
+state는 enabled와 disabled 2가지로 나뉩니다. enabled 일 때만 텍스트 입력이 가능하고 disabled인 경우에는 입력이 불가능 합니다.
+
+### SearchField - size
+
+너비는 최소, 최대 너비가 있습니다.
+- 최소 width: 250px
+- 최대 width: `double.infinity` 로 사용할 수 있는 최대 너비를 사용하면 합니다.
+
+높이는 36px로 고정 높이입니다.
+
+### SearchField - radius
+
+`WdsAtomicRadius.full` 를 갖습니다.
+
+### SearchField - backgroundColor
+
+`WdsSemanticColorBackgroud.alternative`를 갖습니다.
+
+### SearchField - padding
+
+state와 무방하게 기본적으로 `EdgeInsets.symmetric(horizontal: 12, vertical: 6)`을 갖습니다.
+
+### SearchField - typography
+
+먼저, state가 enabled인 경우
+- typography는 `WdsSemanticTypography.body15NormalRegular`를 따릅니다.
+- color는 `WdsSemanticColorText.normal`를 따릅니다.
+
+반대로 state가 disabled인 경우에는 
+- typography는 `WdsSemanticTypography.body15NormalRegular`를 따릅니다.
+- color는 `WdsSemanticColorText.alternative`를 따릅니다.
+
+### SearchField - trailing
+
+state가 disabled인 경우 trailing은 null로 존재하지 않습니다. state가 enabled이고 입력된 텍스트의 길이가 0보다 클 때만 존재합니다.
+
+- trailing icon: `WdsIcon.circleFilledClose.build(width: 24, height: 24)`를 사용합니다.
+
+trailing을 적용한 모습은 다음과 같습니다.
+
+``` dart
+WdsIconButton(
+    onTap: $clearText, 
+    icon: WdsIcon.circleFilledClose.build(width: 24, height: 24),
+)
+```
+
+trailing이 존재하면 텍스트 영역과 horizontal 하게 8px 만큼의 spacing을 갖습니다.
+
+### SearchField - textfield
+
+고정 높이 24px에 위 아래 1px 씩 padding을 갖습니다. 따라서 텍스트 필드 영역은 고정높이 22px을 갖게됩니다. 예시 코드로 확인하면 아래와 같이 작성할 수 있습니다.
+
+``` dart
+Padding(
+    padding: EdgeInsets.symmetric(vertical: 1),
+    child: LimitedBox(
+        maxHeight: 22,
+        child: TextField( ... ),
+    ),
+)
+```
+
+## TextField
+
+길지 않은 텍스트를 입력할 때 사용합니다.
+
+### TextField - variant
+
+- outlined
+- box
+
+이렇게 2가지 있습니다.
+
+outlined는 좌측 상단에 Label이 위치하고 있으며 바로 아래 텍스트 입력란이 있습니다. 그리고 텍스트 입력란은 underlined 형태로 존재하며, hint text를 지정할 수 있습니다.
+
+box는 Label이 없으며 오직 텍스트 입력란과 border만 존재합니다. border는 radius가 8px이며 solid한 1px `WdsSemanticColorBorder.alternative` 입니다.
+
+### TextField - state
+
+state는 아래 5가지를 가집니다.
+
+- enabled: 기본 상태
+- focused: 입력 포커스를 가진 상태
+- active: 값이 1자 이상 존재하는 상태(포커스 유무와 무관)
+- error: 유효성 오류가 존재하는 상태
+- disabled: 비활성화 상태
+
+상태별 표현은 variant에 따라 다릅니다.
+
+- outlined
+  - underline: 
+    - `enabled` 1px `WdsSemanticColorBorder.alternative`
+    - `focused` 2px `WdsSemanticColorStatus.positive`
+    - `error` 2px `WdsSemanticColorStatus.destructive`
+  - label: 모든 state 동일
+    - typography: `WdsSemanticTypography.body13NormalRegular`
+    - color: `WdsSemanticColorText.alternative`
+  - hint: 
+    - `enabled`
+        - typography: `WdsSemanticTypography.body15NormalRegular`
+        - color: `WdsSemanticColorText.alternative`
+    - 나머지
+        - typography: `WdsSemanticTypography.body15NormalRegular`
+        - color: `WdsSemanticColorText.normal`
+  - error: state == `error` 일 때만 
+    - typography: `WdsSemanticTypography.caption12Regular`
+    - color: `WdsSemanticColorStatus.destructive`
+  - helper 혹은 counter
+    - typography: `WdsSemanticTypography.caption12Regular`
+    - color: `WdsSemanticColorText.alternative`
+
+- box
+  - border: 
+    - radius 8 (`WdsAtomicRadius.v8`)
+    - thickness, color
+      - `enabled` 1px `WdsSemanticColorBorder.alternative`
+      - `focused` 1px `WdsSemanticColorStatus.positive`
+      - `error` 1px `WdsSemanticColorStatus.destructive`
+  - hint: 
+    - `enabled`, `disabled`
+        - typography: `WdsSemanticTypography.body13NormalRegular`
+        - color: `WdsSemanticColorText.alternative`
+    - 나머지
+        - typography: `WdsSemanticTypography.body13NormalRegular`
+        - color: `WdsSemanticColorText.normal`
+  - trailing: 값이 있을 때 또는 포커스일 때 trailing clear 버튼 표시(아래 참고)
+
+### TextField - size
+
+- 최소 width: 250px
+- 최대 width: `double.infinity`
+- 높이: 내용과 padding에 의해 결정되며 텍스트 라인은 1줄을 권장합니다.
+
+### TextField - radius & border
+
+- outlined: underline only, 굵기는 상태(state)에 따라 1px/2px로 변경, box는 항상 1px
+- box: `BorderRadius.all(Radius.circular(8))` 고정
+
+### TextField - padding
+
+- outlined: label 아래 텍스트 영역의 수직 padding은 7px, 좌우는 0px
+- box: `EdgeInsets.symmetric(horizontal: 16, vertical: 10)`
+
+### TextField - typography
+
+(state) 참고
+
+### TextField - helper text
+
+입력란 하단에 추가 설명 또는 오류 메시지를 표시할 수 있습니다.
+
+- 기본: `WdsSemanticColorText.alternative`
+- error: `WdsSemanticColorStatus.destructive` (border와 일관성 유지)
+- 위치: 입력 영역 하단에서
+    - underline: 6px 여백
+    - box: 8px 여백
+
+### TextField - trailing
+
+- box: 값이 존재할 때만 clear 아이콘을 노출합니다.
+  - icon: `WdsIcon.circleFilledClose.build(width: 24, height: 24)`
+  - interaction: `WdsIconButton` 사용, 텍스트와 가로 8px 간격
+- outlined: 기본적으로 trailing을 사용하지 않으나, 아래 "verified" 패턴에서 버튼을 조합해 사용할 수 있습니다.
+
+e.g. code - box variant, trailing clear
+``` dart
+Row(
+  mainAxisSize: MainAxisSize.min,
+  spacing: 8,
+  children: [
+    Expanded(child: TextField(/* ... */)),
+    if ($hasValue)
+      WdsIconButton(
+        onTap: $clearText,
+        icon: WdsIcon.circleFilledClose.build(width: 24, height: 24),
+      ),
+  ],
+)
+```
+
+### TextField - verified (outlined + button)
+
+휴대폰 인증/코드 전송과 같이 입력과 액션 버튼이 결합되는 패턴입니다. outlined variant에서만 사용합니다.
+
+- 구성: `outlined TextField` + 우측 `Button`
+- 버튼 size: `WdsButtonSize.small` 권장
+- 버튼 state: TextField의 state와 독립적으로 동작(단, `disabled` 인 입력은 버튼도 `disabled` 처리 권장)
+- spacing: 텍스트 영역과 버튼 사이 가로 16px
+- 타이머 노출이 필요한 경우 오른쪽 정렬 caption을 함께 표기
+  - typography: `WdsSemanticTypography.body13NormalRegular`
+  - color: `WdsSemanticColorStatus.positive`
+
+e.g. code - verified 패턴
+``` dart
+Row(
+  spacing: 16,
+  children: [
+    Expanded(child: TextField(/* outlined */)),
+    WdsButton(
+      onTap: $onVerify,
+      size: WdsButtonSize.small,
+      variant: WdsButtonVariant.secondary,
+      child: const Text('텍스트'),
+    ),
+  ],
+)
+```
+
+### TextField - accessibility
+
+- label은 항상 제공하거나, 시각적으로 숨길 경우 `semanticsLabel`을 설정합니다.
+- 에러 메시지는 텍스트로도 제공하여 스크린리더가 읽을 수 있도록 합니다.
+
+---
+
+## Chip
+
+정보를 카테고리화하거나 필터링에 사용되는 소형 컴포넌트입니다. 주로 태그나 라벨로 활용하며, leading 및 trailing 영역과 중앙의 label로 구성됩니다.
+
+Chip은 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+label | `String` | 중앙에 표시되는 텍스트
+leading | `Widget?` | 왼쪽에 위치하는 아이콘 또는 위젯 (선택사항)
+trailing | `Widget?` | 오른쪽에 위치하는 아이콘 또는 위젯 (선택사항)
+onTap | `VoidCallback?` | 칩이 눌렸을 때 콜백 (선택사항)
+isEnabled | `bool` | 칩 활성화 여부 (`false` 시 'disabled' 상태)
+
+### Chip - shape
+
+칩의 외형을 결정하는 속성입니다.
+
+- `pill`: 완전한 원형 모서리
+- `square`: 8px 라운드 모서리
+
+shape에 따라 radius가 정해집니다.
+
+속성 | radius
+--- | ---
+pill | WdsAtomicRadius.full
+square | WdsAtomicRadius.v8
+
+### Chip - variant
+
+정해진 Variant만 사용할 수 있습니다.
+
+- `outline`: 투명 배경에 테두리만 있는 형태
+- `solid`: 배경색이 채워진 형태
+
+variant에 따라서 backgroundColor, color, borderSide가 정해집니다.
+
+속성 | backgroundColor | color | borderSide
+--- | --- | --- | ---
+outline | Colors.transparent | WdsSemanticColorText.normal | BorderSide(color: WdsSemanticColorBorder.neutral)
+solid | WdsSemanticColorBackgroud.alternative | WdsSemanticColorText.normal | null
+
+### Chip - size
+
+px 단위로 이루어집니다. width는 Hug 방식으로 내용에 맞게 wrapping 됩니다. height는 속성 별로 정해집니다.
+
+속성 | size | typography | padding
+--- | --- | --- | ---
+xsmall | Size(double.infinity, 20) | WdsSemanticTypography.caption10Medium | EdgeInsets.symmetric(horizontal: 8, vertical: 4)
+small | Size(double.infinity, 24) | WdsSemanticTypography.caption12Medium | EdgeInsets.symmetric(horizontal: 10, vertical: 5)  
+medium | Size(double.infinity, 28) | WdsSemanticTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+large | Size(double.infinity, 32) | WdsSemanticTypography.body15NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 7)
+
+### Chip - state
+
+아래 4가지로 구성됩니다.
+
+속성 | 설명
+--- | --- 
+enabled | 기본값
+pressed | 눌린 상태 (hover 상태도 포함)
+focused | 선택된 상태
+disabled | 비활성화된 상태
+
+state에 따라 배경색과 텍스트 색상이 조정됩니다.
+
+- `enabled`: 기본 variant 색상 적용
+- `pressed`: 배경색에 0.1 opacity overlay 적용
+- `focused`: outline variant인 경우 배경색을 WdsSemanticColorBackgroud.alternative으로, solid variant인 경우 더 진한 배경색 적용
+- `disabled`: 전체적으로 0.4 opacity 적용
+
+### Chip - layout
+
+Chip은 leading, label, trailing 순서로 가로 배치됩니다.
+
+- `leading`: 왼쪽 영역에 아이콘 배치 (16x16 또는 20x20 크기 권장)
+- `label`: 중앙 영역에 텍스트 배치
+- `trailing`: 오른쪽 영역에 아이콘 배치
+
+각 요소 간 spacing은 4px입니다.
+
+``` dart
+Row(
+    mainAxisSize: MainAxisSize.min,
+    spacing: 4,
+    children: [
+        if (leading != null) leading!,
+        Text(label, style: typography),
+        if (trailing != null) trailing!,
+    ],
+)
+```
+
