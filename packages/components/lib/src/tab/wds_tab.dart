@@ -8,8 +8,8 @@ class WdsTextTabs extends StatelessWidget {
     required this.tabs,
     required this.currentIndex,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final List<String> tabs;
   final int currentIndex;
@@ -68,9 +68,8 @@ class WdsLineTabs extends StatelessWidget {
     required this.tabs,
     required this.currentIndex,
     this.onTap,
-    Key? key,
-  })  : assert(tabs.length == 2 || tabs.length == 3),
-        super(key: key);
+    super.key,
+  }) : assert(tabs.length == 2 || tabs.length == 3);
 
   final List<String> tabs;
   final int currentIndex;
@@ -100,10 +99,6 @@ class WdsLineTabs extends StatelessWidget {
             color: WdsSemanticColorText.neutral,
           );
 
-    final padding = isSelected
-        ? const EdgeInsets.fromLTRB(16, 11, 16, 9) // underline 2px 공간 고려
-        : const EdgeInsets.fromLTRB(16, 11, 16, 10);
-
     return Expanded(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -121,7 +116,7 @@ class WdsLineTabs extends StatelessWidget {
             ),
             Align(
               child: Padding(
-                padding: padding,
+                padding: const EdgeInsets.fromLTRB(16, 11, 16, 10),
                 child: Text(tabs[index], style: labelStyle),
               ),
             ),
