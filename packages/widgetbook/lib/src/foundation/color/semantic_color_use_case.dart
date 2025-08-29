@@ -22,29 +22,29 @@ class _SemanticColorShowcase extends StatelessWidget {
       children: [
         _StyleIntroSection(),
         const SizedBox(height: 24),
-        _SectionTitle('Color'),
-        _SwatchGroup(
+        const _SectionTitle('Color'),
+        const _SwatchGroup(
           label: 'cta',
-          items: const [
+          items: [
             _SwatchItem('Normal', cta),
           ],
         ),
-        _SwatchGroup(
+        const _SwatchGroup(
           label: 'primary',
-          items: const [
+          items: [
             _SwatchItem('Normal', primary),
           ],
         ),
-        _SwatchGroup(
+        const _SwatchGroup(
           label: 'secondary',
-          items: const [
+          items: [
             _SwatchItem('Normal', secondary),
           ],
         ),
         const SizedBox(height: 12),
-        _SectionTitle('Text: WdsSemanticColorText'),
-        _SwatchGroup(
-          items: const [
+        const _SectionTitle('Text: WdsSemanticColorText'),
+        const _SwatchGroup(
+          items: [
             _SwatchItem('Normal', WdsSemanticColorText.normal),
             _SwatchItem('Strong', WdsSemanticColorText.strong),
             _SwatchItem('Neutral', WdsSemanticColorText.neutral),
@@ -54,34 +54,34 @@ class _SemanticColorShowcase extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        _SectionTitle('Background: WdsSemanticColorBackgroud'),
-        _SwatchGroup(
-          items: const [
+        const _SectionTitle('Background: WdsSemanticColorBackgroud'),
+        const _SwatchGroup(
+          items: [
             _SwatchItem('Normal', WdsSemanticColorBackgroud.normal),
             _SwatchItem('Alternative', WdsSemanticColorBackgroud.alternative),
           ],
         ),
         const SizedBox(height: 12),
-        _SectionTitle('Border: WdsSemanticColorBorder'),
-        _SwatchGroup(
-          items: const [
+        const _SectionTitle('Border: WdsSemanticColorBorder'),
+        const _SwatchGroup(
+          items: [
             _SwatchItem('Neutral', WdsSemanticColorBorder.neutral),
             _SwatchItem('Alternative', WdsSemanticColorBorder.alternative),
           ],
         ),
         const SizedBox(height: 12),
-        _SectionTitle('Status: WdsSemanticColorStatus'),
-        _SwatchGroup(
-          items: const [
+        const _SectionTitle('Status: WdsSemanticColorStatus'),
+        const _SwatchGroup(
+          items: [
             _SwatchItem('Positive', WdsSemanticColorStatus.positive),
             _SwatchItem('Cautionary', WdsSemanticColorStatus.cautionaty),
             _SwatchItem('Destructive', WdsSemanticColorStatus.destructive),
           ],
         ),
         const SizedBox(height: 12),
-        _SectionTitle('Material: WdsSemanticColorMaterial'),
-        _SwatchGroup(
-          items: const [
+        const _SectionTitle('Material: WdsSemanticColorMaterial'),
+        const _SwatchGroup(
+          items: [
             _SwatchItem('Dimmer', WdsSemanticColorMaterial.dimmer),
             _SwatchItem('Pressed', WdsSemanticColorMaterial.pressed),
           ],
@@ -94,7 +94,7 @@ class _SemanticColorShowcase extends StatelessWidget {
 class _StyleIntroSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 8,
       children: [
@@ -129,8 +129,8 @@ class _SectionTitle extends StatelessWidget {
 
 class _SwatchGroup extends StatelessWidget {
   const _SwatchGroup({
-    this.label,
     required this.items,
+    this.label,
   });
 
   final String? label;

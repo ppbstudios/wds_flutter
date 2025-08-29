@@ -2,12 +2,6 @@ part of '../../wds_components.dart';
 
 /// 앱 상단에 위치하는 헤더. `PreferredSizeWidget` 구현으로 AppBar 대체 가능
 class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
-  // 고정 스펙
-  static const Size fixedSize = Size(double.infinity, 50);
-  static const EdgeInsets fixedPadding = EdgeInsets.fromLTRB(16, 5, 16, 5);
-  static const TextStyle fixedTypography = WdsSemanticTypography.heading17Bold;
-  static const Color fixedBackground = WdsSemanticColorBackgroud.normal;
-
   // 공통 생성자 (private), named constructors 로만 생성
   const WdsHeader._({
     required this.leading,
@@ -15,8 +9,9 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
     required this.actions,
     required this.hasCenterTitle,
     required this.isLogo,
-    Key? key,
-  }) : super(key: key);
+    required this.isSearch,
+    super.key,
+  });
 
   /// 로고 헤더: leading 은 WINC 로고, 가운데 정렬 아님, title 없음
   WdsHeader.logo({
@@ -28,11 +23,12 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
           actions: actions,
           hasCenterTitle: false,
           isLogo: true,
+          isSearch: false,
           key: key,
         );
 
   /// 타이틀 헤더: title 필수, leading 유무에 따라 가운데 정렬 여부 결정
-  WdsHeader.title({
+  const WdsHeader.title({
     required Widget title,
     Widget? leading,
     List<Widget> actions = const [],
@@ -43,6 +39,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
           actions: actions,
           hasCenterTitle: true,
           isLogo: false,
+          isSearch: false,
           key: key,
         );
 
@@ -60,15 +57,22 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       hasCenterTitle: true,
       isLogo: false,
+      isSearch: true,
       key: key,
     );
   }
+  // 고정 스펙
+  static const Size fixedSize = Size(double.infinity, 50);
+  static const EdgeInsets fixedPadding = EdgeInsets.fromLTRB(16, 5, 16, 5);
+  static const TextStyle fixedTypography = WdsSemanticTypography.heading17Bold;
+  static const Color fixedBackground = WdsSemanticColorBackgroud.normal;
 
   final Widget? leading;
   final Widget title;
   final List<Widget> actions;
   final bool hasCenterTitle;
   final bool isLogo;
+  final bool isSearch;
 
   @override
   Size get preferredSize => const Size.fromHeight(50);
@@ -91,7 +95,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
         locale: t.locale,
         softWrap: t.softWrap,
         overflow: t.overflow,
-        textScaleFactor: t.textScaleFactor,
+        textScaler: t.textScaler,
         maxLines: 1,
         semanticsLabel: t.semanticsLabel,
         textWidthBasis: t.textWidthBasis,
@@ -140,7 +144,12 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
             Align(
               alignment:
                   hasCenterTitle ? Alignment.center : Alignment.centerLeft,
-              child: titleWidget,
+              child: isSearch
+                  ? FractionallySizedBox(
+                      widthFactor: 0.567,
+                      child: titleWidget,
+                    )
+                  : titleWidget,
             ),
 
             // Actions 영역: 비어있어도 최소 40x40 확보, 우측 정렬

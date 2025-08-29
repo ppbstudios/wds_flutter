@@ -59,7 +59,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   };
 
   final button = WdsTextButton(
-    onTap: () => print('TextButton pressed: $variant $size'),
+    onTap: () => debugPrint('TextButton pressed: $variant $size'),
     isEnabled: isEnabled,
     variant: variantValue,
     size: sizeValue,
@@ -67,13 +67,12 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    height: 200,
-    child: button,
     info: [
       'variant: $variant',
       'size: $size',
       'state: ${isEnabled ? 'enabled' : 'disabled'}',
     ],
+    child: button,
   );
 }
 
@@ -98,7 +97,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
     };
 
     return WdsTextButton(
-      onTap: () => print('pressed: $variant $size'),
+      onTap: () => debugPrint('pressed: $variant $size'),
       isEnabled: enabled,
       variant: variantValue,
       size: sizeValue,
@@ -165,16 +164,25 @@ Widget _buildDemonstrationSection(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             buildOne(
-                label: '텍스트', variant: 'text', size: 'medium', enabled: false),
+              label: '텍스트',
+              variant: 'text',
+              size: 'medium',
+              enabled: false,
+            ),
             const SizedBox(width: 16),
             buildOne(
-                label: '텍스트',
-                variant: 'underline',
-                size: 'medium',
-                enabled: false),
+              label: '텍스트',
+              variant: 'underline',
+              size: 'medium',
+              enabled: false,
+            ),
             const SizedBox(width: 16),
             buildOne(
-                label: '텍스트', variant: 'icon', size: 'medium', enabled: false),
+              label: '텍스트',
+              variant: 'icon',
+              size: 'medium',
+              enabled: false,
+            ),
           ],
         ),
       ),

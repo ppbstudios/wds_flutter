@@ -15,7 +15,7 @@ Widget buildWdsTypographyUseCase(BuildContext context) {
 const String kDefaultTypographyText = '모든 국민은 소급입법에 의하여 참정권을 제한받지 아니한다. '
     '이 헌법에 의한 최종의 대법원 재판을 받기 전에는 유죄로 인정되지 아니한다.';
 
-const _tableDimensions = const {
+const _tableDimensions = {
   0: FixedColumnWidth(240),
   1: FixedColumnWidth(84),
   2: FixedColumnWidth(84),
@@ -32,8 +32,8 @@ class _TypographyShowcase extends StatelessWidget {
       title: 'Typography',
       children: [
         _buildTypographyPlayground(context),
-        SizedBox(height: 32),
-        _StylesSection(),
+        const SizedBox(height: 32),
+        const _StylesSection(),
       ],
     );
   }
@@ -64,7 +64,6 @@ Widget _buildTypographyPlayground(BuildContext context) {
 
   final letterSpacing = context.knobs.double.slider(
     label: 'letterSpacing',
-    initialValue: 0,
     min: -0.2,
     max: 0.1,
     divisions: 40,
@@ -102,18 +101,18 @@ Widget _buildTypographyPlayground(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    child: Text(
-      sampleText,
-      maxLines: 2,
-      style: style,
-      textAlign: TextAlign.start,
-    ),
     info: [
       'size: ${fontSize.toStringAsFixed(0)}px',
       'lineHeight: ${lineHeight.toStringAsFixed(0)}px',
       'letterSpacing: ${letterSpacing.toStringAsFixed(2)}',
       'weight: ${_getWeightLabel(weight)}',
     ],
+    child: Text(
+      sampleText,
+      maxLines: 2,
+      style: style,
+      textAlign: TextAlign.start,
+    ),
   );
 }
 
@@ -136,12 +135,12 @@ class _StylesSection extends StatelessWidget {
         _StyleTableHeader(),
         const Divider(height: 1),
         // Title 32
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Title 32',
           tokenName: 'WdsSemanticTypography.title32Medium',
           fontSize: WdsFontSize.v32,
           lineHeightPx: WdsFontLineHeight.v42,
-          styles: const [
+          styles: [
             WdsSemanticTypography.title32Medium,
             WdsSemanticTypography.title32Bold,
             WdsSemanticTypography.title32Regular,
@@ -149,12 +148,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Title 22
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Title 22',
           tokenName: 'WdsSemanticTypography.title22Medium',
           fontSize: WdsFontSize.v22,
           lineHeightPx: WdsFontLineHeight.v30,
-          styles: const [
+          styles: [
             WdsSemanticTypography.title22Bold,
             WdsSemanticTypography.title22Medium,
             WdsSemanticTypography.title22Regular,
@@ -162,12 +161,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Title 20
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Title 20',
           tokenName: 'WdsSemanticTypography.title20Medium',
           fontSize: WdsFontSize.v20,
           lineHeightPx: WdsFontLineHeight.v28,
-          styles: const [
+          styles: [
             WdsSemanticTypography.title20Bold,
             WdsSemanticTypography.title20Medium,
             WdsSemanticTypography.title20Regular,
@@ -175,12 +174,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Heading 18
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Heading 18',
           tokenName: 'WdsSemanticTypography.heading18Medium',
           fontSize: WdsFontSize.v18,
           lineHeightPx: WdsFontLineHeight.v26,
-          styles: const [
+          styles: [
             WdsSemanticTypography.heading18ExtraBold,
             WdsSemanticTypography.heading18Bold,
             WdsSemanticTypography.heading18Medium,
@@ -189,12 +188,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Heading 17
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Heading 17',
           tokenName: 'WdsSemanticTypography.heading17Medium',
           fontSize: WdsFontSize.v17,
           lineHeightPx: WdsFontLineHeight.v24,
-          styles: const [
+          styles: [
             WdsSemanticTypography.heading17ExtraBold,
             WdsSemanticTypography.heading17Bold,
             WdsSemanticTypography.heading17Medium,
@@ -203,12 +202,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Heading 16
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Heading 16',
           tokenName: 'WdsSemanticTypography.heading16Medium',
           fontSize: WdsFontSize.v16,
           lineHeightPx: WdsFontLineHeight.v24,
-          styles: const [
+          styles: [
             WdsSemanticTypography.heading16Bold,
             WdsSemanticTypography.heading16Medium,
             WdsSemanticTypography.heading16Regular,
@@ -216,12 +215,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Body 15 Normal
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Body 15 Normal',
           tokenName: 'WdsSemanticTypography.body15NormalMedium',
           fontSize: WdsFontSize.v15,
           lineHeightPx: WdsFontLineHeight.v22,
-          styles: const [
+          styles: [
             WdsSemanticTypography.body15NormalBold,
             WdsSemanticTypography.body15NormalMedium,
             WdsSemanticTypography.body15NormalRegular,
@@ -229,12 +228,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Body 15 Reading
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Body 15 Reading',
           tokenName: 'WdsSemanticTypography.body15ReadingMedium',
           fontSize: WdsFontSize.v15,
           lineHeightPx: WdsFontLineHeight.v24,
-          styles: const [
+          styles: [
             WdsSemanticTypography.body15ReadingBold,
             WdsSemanticTypography.body15ReadingMedium,
             WdsSemanticTypography.body15ReadingRegular,
@@ -242,12 +241,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Body 14 Normal
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Body 14 Normal',
           tokenName: 'WdsSemanticTypography.body14NormalMedium',
           fontSize: WdsFontSize.v14,
           lineHeightPx: WdsFontLineHeight.v20,
-          styles: const [
+          styles: [
             WdsSemanticTypography.body14NormalBold,
             WdsSemanticTypography.body14NormalMedium,
             WdsSemanticTypography.body14NormalRegular,
@@ -255,12 +254,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Body 14 Reading
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Body 14 Reading',
           tokenName: 'WdsSemanticTypography.body14ReadingMedium',
           fontSize: WdsFontSize.v14,
           lineHeightPx: WdsFontLineHeight.v22,
-          styles: const [
+          styles: [
             WdsSemanticTypography.body14ReadingBold,
             WdsSemanticTypography.body14ReadingMedium,
             WdsSemanticTypography.body14ReadingRegular,
@@ -268,12 +267,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Body 13 Normal
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Body 13 Normal',
           tokenName: 'WdsSemanticTypography.body13NormalMedium',
           fontSize: WdsFontSize.v13,
           lineHeightPx: WdsFontLineHeight.v18,
-          styles: const [
+          styles: [
             WdsSemanticTypography.body13NormalBold,
             WdsSemanticTypography.body13NormalMedium,
             WdsSemanticTypography.body13NormalRegular,
@@ -281,12 +280,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Body 13 Reading
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Body 13 Reading',
           tokenName: 'WdsSemanticTypography.body13ReadingMedium',
           fontSize: WdsFontSize.v13,
           lineHeightPx: WdsFontLineHeight.v20,
-          styles: const [
+          styles: [
             WdsSemanticTypography.body13ReadingBold,
             WdsSemanticTypography.body13ReadingMedium,
             WdsSemanticTypography.body13ReadingRegular,
@@ -294,12 +293,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Caption 12
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Caption 12',
           tokenName: 'WdsSemanticTypography.caption12Medium',
           fontSize: WdsFontSize.v12,
           lineHeightPx: WdsFontLineHeight.v16,
-          styles: const [
+          styles: [
             WdsSemanticTypography.caption12Bold,
             WdsSemanticTypography.caption12Medium,
             WdsSemanticTypography.caption12Regular,
@@ -307,12 +306,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Caption 11
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Caption 11',
           tokenName: 'WdsSemanticTypography.caption11Medium',
           fontSize: WdsFontSize.v11,
           lineHeightPx: WdsFontLineHeight.v14,
-          styles: const [
+          styles: [
             WdsSemanticTypography.caption11Bold,
             WdsSemanticTypography.caption11Medium,
             WdsSemanticTypography.caption11Regular,
@@ -320,12 +319,12 @@ class _StylesSection extends StatelessWidget {
           previewText: kDefaultTypographyText,
         ),
         // Caption 10
-        _TypographyRow(
+        const _TypographyRow(
           label: 'Caption 10',
           tokenName: 'WdsSemanticTypography.caption10Medium',
           fontSize: WdsFontSize.v10,
           lineHeightPx: WdsFontLineHeight.v13,
-          styles: const [
+          styles: [
             WdsSemanticTypography.caption10Bold,
             WdsSemanticTypography.caption10Medium,
             WdsSemanticTypography.caption10Regular,
@@ -342,14 +341,13 @@ class _StyleTableHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Table(
       columnWidths: _tableDimensions,
-      defaultVerticalAlignment: TableCellVerticalAlignment.top,
       children: [
         TableRow(
           children: [
-            _HeaderCell('명칭'),
-            _HeaderCell('크기'),
-            _HeaderCell('행간'),
-            _HeaderCell('자간'),
+            const _HeaderCell('명칭'),
+            const _HeaderCell('크기'),
+            const _HeaderCell('행간'),
+            const _HeaderCell('자간'),
             _PreviewHeaderCell(),
           ],
         ),
@@ -391,14 +389,13 @@ class _TypographyRow extends StatelessWidget {
         ? _formatLetterSpacing(uniqueSpacings.first)
         : '다수';
 
-    final Map<FontWeight, TextStyle> _styleByWeight = {
+    final Map<FontWeight, TextStyle> styleByWeight = {
       for (final s in styles)
         if (s.fontWeight != null) s.fontWeight!: s,
     };
 
     return Table(
       columnWidths: _tableDimensions,
-      defaultVerticalAlignment: TableCellVerticalAlignment.top,
       children: [
         TableRow(
           children: [
@@ -439,45 +436,45 @@ class _TypographyRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: _styleByWeight[WdsFontWeight.extrabold] != null
+                      child: styleByWeight[WdsFontWeight.extrabold] != null
                           ? Text(
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: _styleByWeight[WdsFontWeight.extrabold]!,
+                              style: styleByWeight[WdsFontWeight.extrabold]!,
                             )
                           : const SizedBox.shrink(),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: _styleByWeight[WdsFontWeight.bold] != null
+                      child: styleByWeight[WdsFontWeight.bold] != null
                           ? Text(
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: _styleByWeight[WdsFontWeight.bold]!,
+                              style: styleByWeight[WdsFontWeight.bold]!,
                             )
                           : const SizedBox.shrink(),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: _styleByWeight[WdsFontWeight.medium] != null
+                      child: styleByWeight[WdsFontWeight.medium] != null
                           ? Text(
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: _styleByWeight[WdsFontWeight.medium]!,
+                              style: styleByWeight[WdsFontWeight.medium]!,
                             )
                           : const SizedBox.shrink(),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: _styleByWeight[WdsFontWeight.regular] != null
+                      child: styleByWeight[WdsFontWeight.regular] != null
                           ? Text(
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: _styleByWeight[WdsFontWeight.regular]!,
+                              style: styleByWeight[WdsFontWeight.regular]!,
                             )
                           : const SizedBox.shrink(),
                     ),
@@ -511,8 +508,8 @@ class _HeaderCell extends StatelessWidget {
 class _PreviewHeaderCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -520,7 +517,7 @@ class _PreviewHeaderCell extends StatelessWidget {
             '미리보기',
             style: WdsSemanticTypography.heading17Bold,
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -530,21 +527,21 @@ class _PreviewHeaderCell extends StatelessWidget {
                   style: WdsSemanticTypography.caption11Bold,
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Expanded(
                 child: Text(
                   'Bold (600)',
                   style: WdsSemanticTypography.caption11Bold,
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Expanded(
                 child: Text(
                   'Medium (500)',
                   style: WdsSemanticTypography.caption11Bold,
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               Expanded(
                 child: Text(
                   'Regular (400)',

@@ -6,8 +6,8 @@ class WdsIconButton extends StatefulWidget {
     required this.onTap,
     required this.icon,
     this.isEnabled = true,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final VoidCallback? onTap;
   final Widget icon; // 일반적으로 WdsIcon.xxx.build(width:24,height:24)

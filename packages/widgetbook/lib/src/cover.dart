@@ -15,9 +15,8 @@ Widget buildWdsCover(BuildContext context) {
         child: SizedBox(
           width: constraints.maxWidth,
           height: constraints.maxHeight,
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 96,
             children: [
               Text(

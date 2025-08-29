@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
-enum WdsNavigationIcon {
+import 'interface/icon.dart';
+
+enum WdsNavigationIcon implements IconBuilder {
   store(
     inactivePath: 'assets/vector/navigation/store_inactive.svg',
     activePath: 'assets/vector/navigation/store_active.svg',
@@ -32,6 +34,7 @@ enum WdsNavigationIcon {
 
   final String inactivePath;
 
+  @override
   Widget build({
     bool isActive = false,
   }) =>

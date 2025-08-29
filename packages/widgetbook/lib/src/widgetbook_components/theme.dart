@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_classes_with_only_static_members
+
 part of 'widgetbook_components.dart';
 
 class WidgetbookCustomTheme {
@@ -6,7 +8,6 @@ class WidgetbookCustomTheme {
     fontFamily: WdsFontFamily.pretendard,
     colorScheme: ColorScheme.fromSeed(
       seedColor: WdsColorBlue.v400,
-      brightness: Brightness.light,
       primary: WdsColorBlue.v400,
       onPrimary: WdsColorCommon.white,
       secondary: WdsColorPink.v500,
@@ -17,7 +18,7 @@ class WidgetbookCustomTheme {
       outline: WdsColorNeutral.v200,
       outlineVariant: WdsColorNeutral.v100,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       displayLarge: WdsSemanticTypography.title32Bold,
       displayMedium: WdsSemanticTypography.title22Bold,
       displaySmall: WdsSemanticTypography.title20Bold,
@@ -34,7 +35,7 @@ class WidgetbookCustomTheme {
       labelMedium: WdsSemanticTypography.caption12Medium,
       labelSmall: WdsSemanticTypography.caption11Medium,
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: WdsColorCommon.white,
       foregroundColor: WdsColorNeutral.v900,
       elevation: 0,
@@ -47,7 +48,7 @@ class WidgetbookCustomTheme {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
-        side: BorderSide(color: WdsColorNeutral.v200),
+        side: const BorderSide(color: WdsColorNeutral.v200),
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(
@@ -63,7 +64,7 @@ class WidgetbookCustomTheme {
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: WdsColorBlue.v400,
-        side: BorderSide(color: WdsColorBlue.v400),
+        side: const BorderSide(color: WdsColorBlue.v400),
         textStyle: WdsSemanticTypography.body14NormalMedium,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
@@ -82,23 +83,23 @@ class WidgetbookCustomTheme {
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: WdsColorNeutral.v200),
+        borderSide: const BorderSide(color: WdsColorNeutral.v200),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: WdsColorNeutral.v200),
+        borderSide: const BorderSide(color: WdsColorNeutral.v200),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: WdsColorBlue.v400, width: 2),
+        borderSide: const BorderSide(color: WdsColorBlue.v400, width: 2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: WdsColorPink.v500),
+        borderSide: const BorderSide(color: WdsColorPink.v500),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: WdsColorPink.v500, width: 2),
+        borderSide: const BorderSide(color: WdsColorPink.v500, width: 2),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       labelStyle: WdsSemanticTypography.body14NormalRegular.copyWith(
@@ -108,11 +109,11 @@ class WidgetbookCustomTheme {
         color: WdsColorNeutral.v400,
       ),
     ),
-    dividerTheme: DividerThemeData(
+    dividerTheme: const DividerThemeData(
       color: WdsColorNeutral.v200,
       thickness: 1,
     ),
-    snackBarTheme: SnackBarThemeData(
+    snackBarTheme: const SnackBarThemeData(
       backgroundColor: WdsColorCommon.white,
     ),
     dropdownMenuTheme: DropdownMenuThemeData(
@@ -120,7 +121,7 @@ class WidgetbookCustomTheme {
         backgroundColor: WidgetStateProperty.all(WdsColorCommon.white),
       ),
     ),
-    popupMenuTheme: PopupMenuThemeData(
+    popupMenuTheme: const PopupMenuThemeData(
       color: WdsColorCommon.white,
       position: PopupMenuPosition.under,
     ),
@@ -156,7 +157,7 @@ class WidgetbookCustomTheme {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
-        side: BorderSide(color: WdsColorNeutral.v600),
+        side: const BorderSide(color: WdsColorNeutral.v600),
       ),
     ),
   );

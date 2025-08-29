@@ -33,7 +33,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   final button = WdsSquareButton(
-    onTap: () => print('SquareButton pressed'),
+    onTap: () => debugPrint('SquareButton pressed'),
     isEnabled: isEnabled,
     child: Text(
       text,
@@ -42,14 +42,13 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    height: 200,
-    child: button,
     info: [
       'size: height32 fixed',
       'typography: caption12Medium fixed',
       'padding: horizontal17, vertical8 fixed',
       'state: ${isEnabled ? 'enabled' : 'disabled'}',
     ],
+    child: button,
   );
 }
 
@@ -66,13 +65,13 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 16,
           children: [
             WdsSquareButton(
-              onTap: () => print('Square enabled'),
-              child: Text('텍스트'),
+              onTap: () => debugPrint('Square enabled'),
+              child: const Text('텍스트'),
             ),
             WdsSquareButton(
-              onTap: () => print('Square disabled'),
+              onTap: () => debugPrint('Square disabled'),
               isEnabled: false,
-              child: Text('텍스트'),
+              child: const Text('텍스트'),
             ),
           ],
         ),

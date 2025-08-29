@@ -29,49 +29,49 @@ class RadiusUseCase extends StatelessWidget {
       {
         'name': 'WdsAtomicRadius.v0',
         'value': WdsAtomicRadius.v0,
-        'label': '0px'
+        'label': '0px',
       },
       {
         'name': 'WdsAtomicRadius.v4',
         'value': WdsAtomicRadius.v4,
-        'label': '4px'
+        'label': '4px',
       },
       {
         'name': 'WdsAtomicRadius.v8',
         'value': WdsAtomicRadius.v8,
-        'label': '8px'
+        'label': '8px',
       },
       {
         'name': 'WdsAtomicRadius.v12',
         'value': WdsAtomicRadius.v12,
-        'label': '12px'
+        'label': '12px',
       },
       {
         'name': 'WdsAtomicRadius.v20',
         'value': WdsAtomicRadius.v20,
-        'label': '16px'
+        'label': '16px',
       },
       {
         'name': 'WdsAtomicRadius.v20',
         'value': WdsAtomicRadius.v20,
-        'label': '20px'
+        'label': '20px',
       },
       {
         'name': 'WdsAtomicRadius.v30',
         'value': WdsAtomicRadius.v30,
-        'label': '30px'
+        'label': '30px',
       },
       {
         'name': 'WdsAtomicRadius.full',
         'value': WdsAtomicRadius.full,
-        'label': '99999px'
+        'label': '99999px',
       },
     ];
 
     return Table(
       columnWidths: const {
         0: FlexColumnWidth(2),
-        1: FlexColumnWidth(1),
+        1: FlexColumnWidth(),
         2: FlexColumnWidth(2),
       },
       children: [
@@ -126,7 +126,7 @@ class RadiusUseCase extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      token['name'] as String,
+                      token['name']! as String,
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
@@ -146,7 +146,7 @@ class RadiusUseCase extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  token['label'] as String,
+                  token['label']! as String,
                   style: TextStyle(
                     color: Colors.grey.shade700,
                     fontSize: 16,
@@ -155,7 +155,7 @@ class RadiusUseCase extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: _buildRadiusVisual(token['value'] as double),
+                child: _buildRadiusVisual(token['value']! as double),
               ),
             ],
           ),

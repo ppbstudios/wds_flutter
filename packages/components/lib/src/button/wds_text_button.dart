@@ -56,8 +56,8 @@ class WdsTextButton extends StatefulWidget {
     this.isEnabled = true,
     this.variant = WdsTextButtonVariant.text,
     this.size = WdsTextButtonSize.medium,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final VoidCallback? onTap;
   final Widget child;
@@ -117,11 +117,12 @@ class _WdsTextButtonState extends State<WdsTextButton>
   Widget build(BuildContext context) {
     final double height = _TextButtonHeightBySize.of(widget.size);
     final EdgeInsets padding = _TextButtonPaddingBySize.of(widget.size);
-    final TextStyle baseTypography = _TextButtonTypographyBySize.of(widget.size)
-        .copyWith(
-            color: widget.isEnabled
-                ? WdsSemanticColorText.neutral
-                : WdsSemanticColorText.disable);
+    final TextStyle baseTypography =
+        _TextButtonTypographyBySize.of(widget.size).copyWith(
+      color: widget.isEnabled
+          ? WdsSemanticColorText.neutral
+          : WdsSemanticColorText.disable,
+    );
     final BorderRadius borderRadius = BorderRadius.circular(WdsAtomicRadius.v4);
 
     // Compose child: force typography for Text
@@ -156,7 +157,7 @@ class _WdsTextButtonState extends State<WdsTextButton>
           locale: childText.locale,
           softWrap: childText.softWrap,
           overflow: childText.overflow,
-          textScaleFactor: childText.textScaleFactor,
+          textScaler: childText.textScaler,
           maxLines: 1,
           semanticsLabel: childText.semanticsLabel,
           textWidthBasis: childText.textWidthBasis,
@@ -219,7 +220,6 @@ class _WdsTextButtonState extends State<WdsTextButton>
           height: height,
           child: Center(
             child: Align(
-              alignment: Alignment.center,
               widthFactor: 1,
               child: Stack(
                 alignment: Alignment.center,

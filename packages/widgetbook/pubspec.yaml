@@ -8,19 +8,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  widgetbook: ^3.16.0
   wds_components:
     path: ../components
   wds_foundation:
     path: ../foundation
   wds_tokens:
     path: ../tokens
+  widgetbook: ^3.16.0
   widgetbook_annotation: ^3.7.0
 
 
 dev_dependencies:
-  widgetbook_generator: ^3.16.0
   build_runner: ^2.7.0
+  flutter_lints: ^5.0.0
+  widgetbook_generator: ^3.16.0
 
 
 flutter:
