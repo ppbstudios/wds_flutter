@@ -336,7 +336,7 @@ Future<void> _generateSemantic({
             if (!_isTypographyLeafNode(innerProps)) continue;
 
             final fieldName = _camelCase(
-              '${styleName}_${variantOrGroupName}_${innerVariantName}',
+              '${styleName}_${variantOrGroupName}_$innerVariantName',
             );
 
             final familyExpr = _resolveTypographyFamily(innerProps['family']);
@@ -364,8 +364,9 @@ Future<void> _generateSemantic({
               sizeExpr: sizeExpr,
             );
             if (heightExpr != null) lines.add('height: $heightExpr');
-            if (letterSpacingExpr != null)
+            if (letterSpacingExpr != null) {
               lines.add('letterSpacing: $letterSpacingExpr');
+            }
 
             sb.writeln('  static const TextStyle $fieldName = TextStyle(');
             for (int i = 0; i < lines.length; i++) {
@@ -377,7 +378,7 @@ Future<void> _generateSemantic({
         }
 
         // 일반(2단계) 구조 처리
-        final fieldName = _camelCase('${styleName}_${variantOrGroupName}');
+        final fieldName = _camelCase('${styleName}_$variantOrGroupName');
 
         final familyExpr = _resolveTypographyFamily(propsOrGroup['family']);
         final weightExpr = _resolveTypographyWeight(propsOrGroup['weight']);
@@ -404,8 +405,9 @@ Future<void> _generateSemantic({
           sizeExpr: sizeExpr,
         );
         if (heightExpr != null) lines.add('height: $heightExpr');
-        if (letterSpacingExpr != null)
+        if (letterSpacingExpr != null) {
           lines.add('letterSpacing: $letterSpacingExpr');
+        }
 
         sb.writeln('  static const TextStyle $fieldName = TextStyle(');
         for (int i = 0; i < lines.length; i++) {
@@ -523,7 +525,7 @@ Future<void> _generateTokenFamily(
         // 그룹 클래스로 노출
         final groupClassBase = _pascalCase(k);
         final groupClass =
-            groupClassBase.isEmpty ? '' : '${rootPrefix}${groupClassBase}';
+            groupClassBase.isEmpty ? '' : '$rootPrefix$groupClassBase';
         if (groupClass.isNotEmpty && exposedGroupClassNames.add(groupClass)) {
           buf.writeln(
             '  static const $groupClass ${_camelCase(k)} = $groupClass._();',
@@ -544,9 +546,10 @@ Future<void> _generateTokenFamily(
         !(child.containsKey(r'$value') && child.containsKey(r'$type'))) {
       final classNameBase = _pascalCase(k);
       final className =
-          classNameBase.isEmpty ? '' : '${rootPrefix}${classNameBase}';
-      if (className.isEmpty || !generatedGroupClassNames.add(className))
+          classNameBase.isEmpty ? '' : '$rootPrefix$classNameBase';
+      if (className.isEmpty || !generatedGroupClassNames.add(className)) {
         continue;
+      }
       final cb = StringBuffer()
         ..writeln('class $className {')
         ..writeln('  const $className._();');
@@ -873,7 +876,7 @@ String? _composeFlutterHeight({String? lineHeightExpr, String? sizeExpr}) {
   if (lineHeightExpr == '1.0') return '1.0';
   // If font size is known, convert px lineHeight to ratio.
   if (sizeExpr != null && sizeExpr.isNotEmpty) {
-    return '(${lineHeightExpr}) / (${sizeExpr})';
+    return '($lineHeightExpr) / ($sizeExpr)';
   }
   // Without font size, we cannot compute a reliable ratio. Omit height.
   return null;
