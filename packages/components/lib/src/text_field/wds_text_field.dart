@@ -13,6 +13,8 @@ class WdsTextField extends StatefulWidget {
     this.hintText,
     this.helperText,
     this.errorText,
+    this.validator,
+    this.autovalidateMode = AutovalidateMode.disabled,
     this.onChanged,
     this.onSubmitted,
     Key? key,
@@ -28,6 +30,8 @@ class WdsTextField extends StatefulWidget {
     this.hintText,
     this.helperText,
     this.errorText,
+    this.validator,
+    this.autovalidateMode = AutovalidateMode.disabled,
     this.onChanged,
     this.onSubmitted,
     Key? key,
@@ -44,17 +48,26 @@ class WdsTextField extends StatefulWidget {
 
   final bool autofocus;
 
-  final String? label; // outlined 전용 라벨 (상단 고정)
+  /// outlined 전용 라벨 (상단 고정)
+  final String? label;
 
+  /// 힌트 텍스트
   final String? hintText;
 
-  final String? helperText; // 하단 보조 텍스트 (error 미노출 시)
+  /// 하단 보조 텍스트 (error 미노출 시)
+  final String? helperText;
 
-  final String? errorText; // 오류 메시지 (우선 노출)
+  /// 오류 메시지 (우선 노출)
+  final String? errorText;
 
   final ValueChanged<String>? onChanged;
 
   final ValueChanged<String>? onSubmitted;
+
+  /// 내부 검증을 위한 validator 및 자동검증 모드
+  final String? Function(String value)? validator;
+
+  final AutovalidateMode autovalidateMode;
 
   @override
   State<WdsTextField> createState() => _WdsTextFieldState();
@@ -73,12 +86,17 @@ class _WdsTextFieldState extends State<WdsTextField> {
   TextStyle _helperStyle = const TextStyle();
   TextStyle _errorStyle = const TextStyle();
 
+  String? _internalErrorText;
+  bool _userInteracted = false;
+
   @override
   void initState() {
     super.initState();
     _controller.addListener(_onChangedInternal);
     _focusNode.addListener(_onFocusChanged);
     _precomputeStyles();
+    // 초기 값 존재 시 즉시 검증 필요할 수 있음
+    _runValidation(force: widget.autovalidateMode == AutovalidateMode.always);
   }
 
   @override
@@ -107,16 +125,40 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   void _onChangedInternal() {
+    _userInteracted = true;
+    _runValidation();
     if (mounted) setState(() {});
   }
 
   void _onFocusChanged() {
+    // 포커스를 잃을 때 강제 검증 (disabled 모드에서도 blur 시 검증하도록)
+    if (!_hasFocus) {
+      _runValidation(force: true);
+    }
     if (mounted) setState(() {});
   }
 
   bool get _hasValue => _controller.text.isNotEmpty;
   bool get _hasFocus => _focusNode.hasFocus;
-  bool get _hasError => widget.errorText?.isNotEmpty == true;
+  String? get _effectiveErrorText => widget.errorText?.isNotEmpty == true
+      ? widget.errorText
+      : _internalErrorText;
+  bool get _hasError => _effectiveErrorText?.isNotEmpty == true;
+
+  void _runValidation({bool force = false}) {
+    if (widget.validator == null) return;
+
+    final shouldValidate = switch (widget.autovalidateMode) {
+      AutovalidateMode.disabled => force,
+      AutovalidateMode.always => true,
+      AutovalidateMode.onUserInteraction => _userInteracted,
+      AutovalidateMode.onUnfocus => false,
+    };
+
+    if (!shouldValidate) return;
+
+    _internalErrorText = widget.validator!.call(_controller.text);
+  }
 
   void _clear() {
     _controller.clear();
@@ -124,16 +166,18 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   Widget _buildHelperErrorText() {
-    final hasError = widget.errorText?.isNotEmpty == true;
+    final hasError = _effectiveErrorText?.isNotEmpty == true;
     final hasHelper = widget.helperText?.isNotEmpty == true;
 
-    if (hasError && hasHelper) {
+    if (widget.variant == WdsTextFieldVariant.outlined &&
+        hasError &&
+        hasHelper) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
             child: Text(
-              widget.errorText!,
+              _effectiveErrorText!,
               style: _errorStyle.copyWith(
                   color: WdsSemanticColorStatus.destructive),
               maxLines: 1,
@@ -156,7 +200,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
 
     if (hasError) {
       return Text(
-        widget.errorText!,
+        _effectiveErrorText!,
         style: _errorStyle.copyWith(color: WdsSemanticColorStatus.destructive),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
@@ -259,8 +303,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
               ),
             ),
             // Helper/Error text
-            if (widget.errorText?.isNotEmpty == true ||
-                widget.helperText?.isNotEmpty == true)
+            if (_hasError || widget.helperText?.isNotEmpty == true)
               RepaintBoundary(child: _buildHelperErrorText()),
           ],
         ),
@@ -371,8 +414,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
           children: [
             ClipRRect(borderRadius: radius, child: textField),
             // Helper/Error text
-            if (widget.errorText?.isNotEmpty == true ||
-                widget.helperText?.isNotEmpty == true)
+            if (_hasError || widget.helperText?.isNotEmpty == true)
               RepaintBoundary(child: _buildHelperErrorText()),
           ],
         ),

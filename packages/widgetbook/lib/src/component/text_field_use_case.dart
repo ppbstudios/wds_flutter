@@ -73,7 +73,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
       label: label,
       hintText: hint,
       helperText: helper.isEmpty ? null : helper,
-      errorText: error.isEmpty ? null : error,
     );
   } else {
     field = WdsTextField.box(
@@ -82,7 +81,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
       label: label,
       hintText: hint,
       helperText: helper.isEmpty ? null : helper,
-      errorText: error.isEmpty ? null : error,
     );
   }
 
@@ -101,6 +99,18 @@ Widget _buildPlaygroundSection(BuildContext context) {
 }
 
 Widget _buildDemonstrationSection(BuildContext context) {
+  final controller = TextEditingController(text: '에러가 발생할 텍스트');
+
+  final errorNode1 = FocusNode();
+
+  final errorNode2 = FocusNode();
+
+  Future<void> _focusNode(FocusNode node) async {
+    node.requestFocus();
+    await Future.delayed(const Duration(milliseconds: 500));
+    node.unfocus();
+  }
+
   return WidgetbookSection(
     title: 'TextField',
     spacing: 32,
@@ -144,13 +154,27 @@ Widget _buildDemonstrationSection(BuildContext context) {
             ),
 
             /// error
-            const SizedBox(
+            SizedBox(
               width: 320,
-              child: WdsTextField.outlined(
-                label: '주제',
-                hintText: '힌트',
-                errorText: '오류 메시지',
-              ),
+              child: Builder(builder: (context) {
+                bool hasBuilt = false;
+
+                return StatefulBuilder(builder: (context, setState) {
+                  if (!hasBuilt) {
+                    hasBuilt = true;
+                    _focusNode(errorNode1).then((_) => setState(() {}));
+                  }
+
+                  return WdsTextField.outlined(
+                    label: '주제',
+                    hintText: '힌트',
+                    helperText: '유저의 이해를 도와줄 텍스트',
+                    controller: controller,
+                    validator: (value) => '오류가 발생해요  ',
+                    focusNode: errorNode1,
+                  );
+                });
+              }),
             ),
 
             /// disabled
@@ -160,7 +184,6 @@ Widget _buildDemonstrationSection(BuildContext context) {
                 label: '주제',
                 hintText: '힌트',
                 helperText: '헬퍼',
-                errorText: null,
                 isEnabled: false,
               ),
             ),
@@ -174,12 +197,15 @@ Widget _buildDemonstrationSection(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 24,
           children: [
+            /// enabled
             const SizedBox(
               width: 320,
               child: WdsTextField.box(
                 hintText: '힌트',
               ),
             ),
+
+            /// focused
             const SizedBox(
               width: 320,
               child: _FocusWrapper(
@@ -188,6 +214,8 @@ Widget _buildDemonstrationSection(BuildContext context) {
                 ),
               ),
             ),
+
+            /// active
             SizedBox(
               width: 320,
               child: _ActiveWrapper(
@@ -196,13 +224,30 @@ Widget _buildDemonstrationSection(BuildContext context) {
                 ),
               ),
             ),
-            const SizedBox(
+
+            /// error
+            SizedBox(
               width: 320,
-              child: WdsTextField.box(
-                hintText: '힌트',
-                errorText: '오류 메시지',
-              ),
+              child: Builder(builder: (context) {
+                bool hasBuilt = false;
+
+                return StatefulBuilder(builder: (context, setState) {
+                  if (!hasBuilt) {
+                    hasBuilt = true;
+                    _focusNode(errorNode2).then((_) => setState(() {}));
+                  }
+
+                  return WdsTextField.box(
+                    hintText: '힌트',
+                    controller: controller,
+                    validator: (value) => '오류가 발생해요',
+                    focusNode: errorNode2,
+                  );
+                });
+              }),
             ),
+
+            /// disabled
             const SizedBox(
               width: 320,
               child: WdsTextField.box(
@@ -303,13 +348,16 @@ Widget _buildVerifiedSection(BuildContext context) {
 // Helper wrappers for demonstration
 class _FocusWrapper extends StatefulWidget {
   const _FocusWrapper({required this.child});
+
   final WdsTextField child;
+
   @override
   State<_FocusWrapper> createState() => _FocusWrapperState();
 }
 
 class _FocusWrapperState extends State<_FocusWrapper> {
   final FocusNode _focusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -322,7 +370,6 @@ class _FocusWrapperState extends State<_FocusWrapper> {
         label: widget.child.label,
         hintText: widget.child.hintText,
         helperText: widget.child.helperText,
-        errorText: widget.child.errorText,
         isEnabled: widget.child.isEnabled,
         focusNode: _focusNode,
       );
@@ -332,7 +379,6 @@ class _FocusWrapperState extends State<_FocusWrapper> {
       label: widget.child.label,
       hintText: widget.child.hintText,
       helperText: widget.child.helperText,
-      errorText: widget.child.errorText,
       isEnabled: widget.child.isEnabled,
       focusNode: _focusNode,
     );
@@ -348,7 +394,14 @@ class _ActiveWrapper extends StatefulWidget {
 
 class _ActiveWrapperState extends State<_ActiveWrapper> {
   late final TextEditingController _controller =
-      TextEditingController(text: '값');
+      TextEditingController(text: '활성화된 상태의 텍스트');
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.child.variant == WdsTextFieldVariant.outlined) {
@@ -356,7 +409,6 @@ class _ActiveWrapperState extends State<_ActiveWrapper> {
         label: widget.child.label,
         hintText: widget.child.hintText,
         helperText: widget.child.helperText,
-        errorText: widget.child.errorText,
         isEnabled: widget.child.isEnabled,
         controller: _controller,
       );
@@ -366,7 +418,6 @@ class _ActiveWrapperState extends State<_ActiveWrapper> {
       label: widget.child.label,
       hintText: widget.child.hintText,
       helperText: widget.child.helperText,
-      errorText: widget.child.errorText,
       isEnabled: widget.child.isEnabled,
       controller: _controller,
     );
