@@ -207,10 +207,11 @@ Row(
 여기서 `pressed` 는 웹인 경우 hovered 상태도 포함되며 #Button에 구현되어 있는 pressed(hover)와 같은 메커니즘으로 구성됩니다. disabled 일 때 opacity 설정하는 방법도 같습니다.
 
 ### SquareButton - 고정된 속성
-
-- size: `Size(double.infinity, 32)`
-- typography: `WdsSemanticTypography.caption12Medium`
-- padding: `EdgeInsets.symmetric(horizontal: 17, vertical: 8)`
+속성 | 값
+--- | ---
+size | `Size(double.infinity, 32)`
+typography | `WdsSemanticTypography.caption12Medium`
+padding | `EdgeInsets.symmetric(horizontal: 17, vertical: 8)`
 
 ### SquareButton - state
 
@@ -239,10 +240,13 @@ pressed(hover)는 위에서도 언급했듯이 Button과 같은 메커니즘을 
 화면 상단에 위치하는 내비게이션입니다. material 라이브러리에서 쓰이는 AppBar와 같은 역할을 하며, MaterialApp 에서도 사용할 수 있도록 PreferredSize 클래스를 확장해서 구현합니다.
 
 **Header 구성 요소:**
-- `leading`: `Widget`
-- `title`: `Widget`
-- `actions`: `List<Widget>`
-- `hasCenterTitle`: `bool`
+
+속성 | Type | 비고
+--- | --- | ---
+leading | `Widget` | 좌측 아이콘 등 배치
+title | `Widget` | 중앙 타이틀
+actions | `List<Widget>` | 우측 아이콘 목록
+hasCenterTitle | `bool` | `leading`이 없고 `title`만 있을 때 중앙 정렬 허용
 
 Header 는 leading, title, 그리고 action 영역으로 나뉩니다. 왼쪽부터 오른쪽으로 차례대로 leading, title, 그리고 action이 배치되며 leading과 action에는 아이콘들이 위치할 수 있습니다.
 leading이 없고 title만 존재할 때 hasCenterTitle 여부를 설정할 수 있습니다.
@@ -251,12 +255,13 @@ leading이 없고 title만 존재할 때 hasCenterTitle 여부를 설정할 수 
 
 고정된 속성으로는 size, padding, backgroundColor, 그리고 typography 가 있습니다.
 
-- size: `Size(double.infinity, 50)`
-- padding: `EdgeInsets.symmetric(horizontal: 16, vertical: 5)`
-- backgroundColor: `WdsSemanticColorBackgroud.normal`
-- typography: `WdsSemanticTypography.heading17Bold`
-- title width (.search 변형): 전체 가용 너비의 `204/360`(≈`0.567`)로 제한
-  - 구현: `.search`에서만 `FractionallySizedBox(widthFactor: 0.567)` 적용
+속성 | 값 | 비고
+--- | --- | ---
+size | `Size(double.infinity, 50)` |
+padding | `EdgeInsets.symmetric(horizontal: 16, vertical: 5)` |
+backgroundColor | `WdsSemanticColorBackgroud.normal` |
+typography | `WdsSemanticTypography.heading17Bold` |
+title width (.search 변형) | 전체 가용 너비의 `204/360`(≈`0.567`) | `.search`에서만 `FractionallySizedBox(widthFactor: 0.567)` 적용
 
 padding은 양 끝에 위치한 leading 과 actions의 interaction 영역을 고려했습니다.
 
@@ -326,16 +331,17 @@ WdsHeader.search({
 BottomNavigation은 위,아래 각 1px씩 padding과 BottomNavigationItem(height: 45) 그리고 상단에 border(WdsSemanticColorBorder.alternative, 1px) 까지 총 48px의 높이를 가집니다.
 
 ### BottomNavigationItem
+구성 요소 | Type
+--- | ---
+icon | `WdsNavigationIcon`
+label | `String`
 
-구성 요소는 
-- icon: `WdsNavigationIcon`
-- label: `String`
+icon의 interaction 영역은 다음과 같습니다.
 
-입니다.
-
-icon의 interaction 영역은 
-- width: 전체 너비의 1/N 만큼
-- height: 45px 고정
+속성 | 값
+--- | ---
+width | 전체 너비의 1/N 만큼
+height | 45px 고정
 
 icon의 위치는 interaction 영역의 center 위치하고 `EdgeInsets.symmetric(vertical: 3)`만큼의 padding을 갖습니다. icon의 Widget configuration은 아래처럼 정의할 수 있습니다.
 
@@ -361,8 +367,10 @@ SizedBox(
 )
 ```
 
-- 선택된 BottomNavigationItem의 Text는 `WdsFontWeight.bold` 을 갖습니다.
-- 선택안된 BottomNavigationItem의 Text는 `WdsFontWeight.medium` 을 갖습니다.
+선택 상태 | Text 폰트 굵기
+--- | ---
+선택됨 | `WdsFontWeight.bold`
+선택 안됨 | `WdsFontWeight.medium`
 
 
 ## SearchField
@@ -378,12 +386,13 @@ TextField나 TextFormField를 사용할 떄는 항상 부모의 크기가 정해
 state는 enabled와 disabled 2가지로 나뉩니다. enabled 일 때만 텍스트 입력이 가능하고 disabled인 경우에는 입력이 불가능 합니다.
 
 ### SearchField - size
+너비와 높이는 다음과 같습니다.
 
-너비는 최소, 최대 너비가 있습니다.
-- 최소 width: 250px
-- 최대 width: `double.infinity` 로 사용할 수 있는 최대 너비를 사용하면 합니다.
-
-높이는 36px로 고정 높이입니다.
+항목 | 값 | 비고
+--- | --- | ---
+최소 width | 250px |
+최대 width | `double.infinity` | 사용 가능한 최대 너비 사용
+height | 36px | 고정 높이
 
 ### SearchField - radius
 
@@ -394,18 +403,18 @@ state는 enabled와 disabled 2가지로 나뉩니다. enabled 일 때만 텍스�
 `WdsSemanticColorBackgroud.alternative`를 갖습니다.
 
 ### SearchField - padding
-
-state와 무방하게 기본적으로 `EdgeInsets.symmetric(horizontal: 12, vertical: 6)`을 갖습니다.
+항목 | 값 | 비고
+--- | --- | ---
+padding | `EdgeInsets.symmetric(horizontal: 12, vertical: 6)` | state와 무관하게 동일
 
 ### SearchField - typography
 
-먼저, state가 enabled인 경우
-- typography는 `WdsSemanticTypography.body15NormalRegular`를 따릅니다.
-- color는 `WdsSemanticColorText.normal`를 따릅니다.
+state별 typography와 color는 다음과 같습니다.
 
-반대로 state가 disabled인 경우에는 
-- typography는 `WdsSemanticTypography.body15NormalRegular`를 따릅니다.
-- color는 `WdsSemanticColorText.alternative`를 따릅니다.
+state | typography | color
+--- | --- | ---
+enabled | `WdsSemanticTypography.body15NormalRegular` | `WdsSemanticColorText.normal`
+disabled | `WdsSemanticTypography.body15NormalRegular` | `WdsSemanticColorText.alternative`
 
 ### SearchField - trailing
 
@@ -465,64 +474,60 @@ state는 아래 5가지를 가집니다.
 
 상태별 표현은 variant에 따라 다릅니다.
 
-- outlined
-  - underline: 
-    - `enabled` 1px `WdsSemanticColorBorder.alternative`
-    - `focused` 2px `WdsSemanticColorStatus.positive`
-    - `error` 2px `WdsSemanticColorStatus.destructive`
-  - label: 모든 state 동일
-    - typography: `WdsSemanticTypography.body13NormalRegular`
-    - color: 
-        - `disabled`: `WdsSemanticColorText.disable`
-        - 나머지: `WdsSemanticColorText.alternative`
-  - hint: typography는 통일
-    - typography: `WdsSemanticTypography.body15NormalRegular`
-    - color:
-        - `disabled`: `WdsSemanticColorText.disable`
-        - 나머지: `WdsSemanticColorText.alternative`
-  - error: state == `error` 일 때만 
-    - typography: `WdsSemanticTypography.caption12Regular`
-    - color: `WdsSemanticColorStatus.destructive`
-  - helper 혹은 counter
-    - typography: `WdsSemanticTypography.caption12Regular`
-    - color: `WdsSemanticColorText.alternative`
+outlined
 
-- box
-  - border: 
-    - radius 8 (`WdsAtomicRadius.v8`)
-    - thickness, color
-      - `enabled` 1px `WdsSemanticColorBorder.alternative`
-      - `focused` 1px `WdsSemanticColorStatus.positive`
-      - `error` 1px `WdsSemanticColorStatus.destructive`
-  - hint: 
-    - `enabled`, `disabled`
-        - typography: `WdsSemanticTypography.body13NormalRegular`
-        - color: `WdsSemanticColorText.alternative`
-    - 나머지
-        - typography: `WdsSemanticTypography.body13NormalRegular`
-        - color: `WdsSemanticColorText.normal`
-  - input:
-    - `disabled`: `WdsSemanticColorText.alternative`
-    - 그 외: `WdsSemanticColorText.normal`
-  - trailing: 값이 있을 때 또는 포커스일 때 trailing clear 버튼 표시(아래 참고)
+항목 | 상태 | 값
+--- | --- | ---
+underline | enabled | 1px `WdsSemanticColorBorder.alternative`
+underline | focused | 2px `WdsSemanticColorStatus.positive`
+underline | error | 2px `WdsSemanticColorStatus.destructive`
+label.typography | all | `WdsSemanticTypography.body13NormalRegular`
+label.color | disabled | `WdsSemanticColorText.disable`
+label.color | 그 외 | `WdsSemanticColorText.alternative`
+hint.typography | all | `WdsSemanticTypography.body15NormalRegular`
+hint.color | enabled | `WdsSemanticColorText.alternative`
+hint.color | disabled | `WdsSemanticColorText.disable`
+hint.color | focused/error/active | `WdsSemanticColorText.alternative`
+error(문구) | error | typography `WdsSemanticTypography.caption12Regular`, color `WdsSemanticColorStatus.destructive`
+helper/counter | all | typography `WdsSemanticTypography.caption12Regular`, color `WdsSemanticColorText.alternative`
+
+box
+
+항목 | 상태 | 값
+--- | --- | ---
+border.radius | all | 8 (`WdsAtomicRadius.v8`)
+border.thickness/color | enabled | 1px `WdsSemanticColorBorder.alternative`
+border.thickness/color | focused | 1px `WdsSemanticColorStatus.positive`
+border.thickness/color | error | 1px `WdsSemanticColorStatus.destructive`
+hint.typography | all | `WdsSemanticTypography.body15NormalRegular`
+hint.color | enabled | `WdsSemanticColorText.alternative`
+hint.color | disabled | `WdsSemanticColorText.disable`
+hint.color | focused/error/active | `WdsSemanticColorText.alternative`
+input.color | disabled | `WdsSemanticColorText.alternative`
+input.color | 그 외 | `WdsSemanticColorText.normal`
+trailing | 조건 | 값이 있을 때 또는 포커스일 때 clear 버튼 표시
 
 ### TextField - size
-
-- 최소 width: 250px
-- 최대 width: `double.infinity`
-- 높이: 1줄 기준 시각적 고정 높이를 유지합니다.
-  - outlined: 포커스 시 underline 두께(1→2px) 증가를 하단 패딩 보정으로 흡수하여 높이 변화가 없도록 합니다.
-  - box: 패딩을 포함해 1줄 기준 약 44px을 유지합니다.
+항목 | 값 | 비고
+--- | --- | ---
+최소 width | 250px |
+최대 width | `double.infinity` | 사용 가능한 최대 너비 사용
+높이(outlined) | 시각적 고정 | 포커스 시 underline 두께 증가를 하단 패딩 보정으로 흡수
+높이(box) | 약 44px | 패딩 포함, 1줄 기준 유지
 
 ### TextField - radius & border
 
-- outlined: underline only, 굵기는 상태(state)에 따라 1px/2px로 변경, box는 항상 1px
-- box: `BorderRadius.all(Radius.circular(8))` 고정
+variant | border/radius
+--- | ---
+outlined | underline only, 굵기는 상태(state)에 따라 1px/2px로 변경
+box | `BorderRadius.all(Radius.circular(8))` 고정, 테두리 1px
 
 ### TextField - padding
 
-- outlined: label 아래 텍스트 영역의 수직 padding은 7px, 좌우는 0px
-- box: `EdgeInsets.symmetric(horizontal: 16, vertical: 10)`
+variant | padding
+--- | ---
+outlined | label 아래 텍스트 영역의 수직 7px, 좌우 0px
+box | `EdgeInsets.symmetric(horizontal: 16, vertical: 10)`
 
 ### TextField - typography
 
@@ -530,9 +535,11 @@ state는 아래 5가지를 가집니다.
 
 ### TextField - cursor
 
-- color: `WdsSemanticColorText.normal`
-- width: 2px
-- radius: `WdsAtomicRadius.full`
+속성 | 값
+--- | ---
+color | `WdsSemanticColorText.normal`
+width | 2px
+radius | `WdsAtomicRadius.full`
 
 ### TextField - helper text
 
@@ -543,6 +550,17 @@ state는 아래 5가지를 가집니다.
 - 위치: 입력 영역 하단에서
     - underline: 6px 여백
     - box: 8px 여백
+
+에러 상태(state = `error`)에서는 helper와 error를 동시에 노출합니다.
+
+- 좌측: 에러 메시지
+  - typography: `WdsSemanticTypography.caption12Regular`
+  - color: `WdsSemanticColorStatus.destructive`
+  - 최대 1줄, 넘치면 말줄임 처리
+- 우측: 헬퍼 텍스트
+  - typography: `WdsSemanticTypography.caption12Regular`
+  - color: `WdsSemanticColorText.alternative`
+  - 최대 1줄, 우측 정렬, 넘치면 말줄임 처리
 
 ### TextField - trailing
 
@@ -684,6 +702,8 @@ state에 따라 배경색과 텍스트 색상이 조정됩니다.
 - `focused`: 선택된 상태로, 두 variant 모두 배경색이 `cta`(#121212)로 변경되고 텍스트 및 아이콘 색상이 `WdsColorCommon.white`(#FFFFFF)로 변경됨
 - `disabled`: 전체적으로 0.4 opacity 적용
 
+focused 상태에서는 hover/pressed overlay가 적용되지 않습니다. 따라서 아이콘과 텍스트는 완전한 흰색으로 표시됩니다. 또한 outline variant에서도 테두리는 제거되며 배경만 `cta`로 표시됩니다.
+
 **focused state 상세:**
 - 배경색: `cta` (WdsColorNeutral.v900, #121212)
 - 텍스트 색상: `WdsColorCommon.white` (#FFFFFF)  
@@ -711,4 +731,218 @@ Row(
     ],
 )
 ```
+
+## Select
+
+좌측 상단에 제목(title)이 있을 수도, 없을 수도 있습니다.
+
+### Select - variant
+
+- `normal`
+- `blocked`
+
+모든 variant는 `isEnabled` 상태를 가집니다(`inactive`/`active`).
+단, `blocked` 인 경우에만 `isEnabled == false`일 때 title과 hint text가 `disable` 색상을 사용합니다.
+
+### Select - state
+
+- `enabled`: 상호작용 가능
+- `disabled`: 상호작용 불가
+
+### Select - layout & style
+항목 | 상태/조건 | 값 | 비고
+--- | --- | --- | ---
+padding | - | `EdgeInsets.fromLTRB(16, 12, 16, 12)` |
+radius | - | `WdsAtomicRadius.v8` |
+border | normal | `BorderSide(color: primary, width: 1)` |
+border | blocked | `BorderSide(color: WdsSemanticColorBorder.alternative, width: 1)` |
+backgroundColor | normal | `WdsColorCommon.white` |
+backgroundColor | blocked | `WdsColorNeutral.v50` |
+title.typography | - | `WdsSemanticTypography.body14NormalRegular` |
+title.color | 기본 | `WdsSemanticColorText.normal` |
+title.color | blocked + disabled | `WdsSemanticColorText.disable` |
+hint text | enabled | typography `WdsSemanticTypography.body14NormalRegular`, color `WdsSemanticColorText.normal` |
+hint text | disabled | typography `WdsSemanticTypography.body14NormalRegular`, color `WdsSemanticColorText.alternative` | `blocked`는 `disable`
+trailing 간격 | - | 10px | 아이콘과 텍스트 사이
+아이콘 | 닫힘 | `chevronDown` |
+아이콘 | 열림 | `chevronUp` |
+
+---
+
+## Tab
+
+문자 기반 탭으로 가로 스크롤이 가능합니다.
+
+### TextTabs - state
+상태 | color | typography | 비고
+--- | --- | --- | ---
+enabled | `WdsSemanticColorText.alternative` | `WdsSemanticTypography.body15NormalMedium` |
+focused | `WdsSemanticColorText.normal` | `WdsSemanticTypography.body15NormalBold` |
+featured | 디자인 의도 색상 | `WdsSemanticTypography.body15NormalBold` | 강조 필요 시
+
+### TextTabs - spacing & scroll
+항목 | 값 | 비고
+--- | --- | ---
+좌측 시작 padding | 16px |
+탭 간 간격 | 24px |
+스크롤 끝 padding | 오른쪽으로 더 스크롤 가능할 때 없음 | 끝까지 스크롤 시 16px
+상하 padding | 8px |
+
+### LineTabs
+
+선택된 탭에 underline이 표시됩니다. 탭 별 너비는 사용 가능한 최대 너비를 탭 수(2 또는 3)로 균등 분할합니다.
+
+항목 | 상태 | 값 | 비고
+--- | --- | --- | ---
+label.typography | 선택됨 | `WdsSemanticTypography.body15ReadingBold` |
+label.color | 선택됨 | `WdsSemanticColorText.normal` |
+label.padding | 선택됨 | `EdgeInsets.fromLTRB(16, 11, 16, 9)` | underline 2px 고려
+label.typography | 선택 안됨 | `WdsSemanticTypography.body15ReadingMedium` |
+label.color | 선택 안됨 | `WdsSemanticColorText.neutral` |
+label.padding | 선택 안됨 | `EdgeInsets.fromLTRB(16, 11, 16, 10)` |
+underline | 선택됨 | 높이 2px, 너비 탭 full, color `WdsColorCommon.black` |
+underline | 선택 안됨 | 1px solid `WdsSemanticColorBorder.alternative` |
+탭 개수 | - | 2개 또는 3개 |
+
+## Action Area
+화면 하단에서 주요 액션(결제, 다음 단계 등)을 안정적으로 수행하게 하는 영역입니다. 두 가지 성격으로 구분합니다.
+
+- `FixedActionArea`: 버튼 조합만 있는 고정형
+- `DynamicActionArea`: CTA 버튼을 기준으로 상단에 보조 정보/컨트롤이 함께 오는 동적형
+
+두 컴포넌트 모두 다음 공통 스타일을 따릅니다.
+
+항목 | 값 | 비고
+--- | --- | ---
+border(top) | `1px WdsSemanticColorBorder.alternative` |
+backgroundColor | `WdsColorCommon.white` |
+padding | `EdgeInsets.all(16)` |
+
+CTA는 기본적으로 `WdsButton`을 사용하고, 특별한 언급이 없으면 size는 `WdsButtonSize.xlarge` 입니다.
+
+### FixedActionArea
+
+고정된 높이를 갖는 단순 버튼 영역입니다.
+
+항목 | 값 | 비고
+--- | --- | ---
+height | `81px` | 고정 높이
+border(top) | `1px WdsSemanticColorBorder.alternative` | 공통
+backgroundColor | `WdsColorCommon.white` | 공통
+padding | `EdgeInsets.all(16)` | 공통
+
+#### FixedActionArea - variant
+
+variant | 버튼 구성 | 레이아웃/크기 | spacing
+--- | --- | --- | ---
+normal | CTA 1개 | `Expanded` 로 가로 전체 사용, size `xlarge` | -
+filter | 2개: `.secondary`(좌), `.cta`(우) | 좌측 고정너비 `110px`(size `xlarge`), 우측 `Expanded` 로 stretch | 12px
+division | 2개: `.secondary` + `.cta` | 두 버튼 모두 `Expanded`, 너비 비율 1:1, size `xlarge` | 12px
+
+예시
+
+``` dart
+// normal
+Row(children: [
+  Expanded(child: WdsButton(variant: WdsButtonVariant.cta, size: WdsButtonSize.xlarge, child: const Text('메인액션'))),
+]);
+
+// filter
+Row(spacing: 12, children: [
+  SizedBox(
+    width: 110,
+    child: WdsButton(variant: WdsButtonVariant.secondary, size: WdsButtonSize.xlarge, child: const Text('대체액션')),
+  ),
+  Expanded(
+    child: WdsButton(variant: WdsButtonVariant.cta, size: WdsButtonSize.xlarge, child: const Text('메인액션')),
+  ),
+]);
+
+// division
+Row(spacing: 12, children: [
+  Expanded(child: WdsButton(variant: WdsButtonVariant.secondary, size: WdsButtonSize.xlarge, child: const Text('대체액션'))),
+  Expanded(child: WdsButton(variant: WdsButtonVariant.cta, size: WdsButtonSize.xlarge, child: const Text('메인액션'))),
+]);
+```
+
+### DynamicActionArea
+
+CTA 버튼을 중심으로, 그 위에 상황별 보조 정보/컨트롤이 함께 배치되는 영역입니다. 상단 보조 영역은 한 줄(one-line)을 기본으로 하며, 필요 시 내부 콘텐츠 길이에 맞춰 높이가 자연스럽게 늘어납니다.
+
+항목 | 값 | 비고
+--- | --- | ---
+border(top) | `1px WdsSemanticColorBorder.alternative` | 공통
+backgroundColor | `WdsColorCommon.white` | 공통
+padding | `EdgeInsets.all(16)` | 공통
+CTA | `WdsButton(variant: cta, size: xlarge)` | 가로 전체 stretch
+
+#### DynamicActionArea - variant
+
+variant | 상단 보조 영역 내용 | 상단 영역 타이포/간격 | 버튼 레이아웃
+--- | --- | --- | ---
+product | 상품 관련 요약 메타 정보(좋아요 수, 리뷰 수 등) | 메타 블록 간 가로 간격 12px | CTA 1개 stretch
+discount | 프로모션/할인 안내 문구(아이콘 옵션) | 아이콘과 텍스트 간 8px, 한 줄 | CTA 1개 stretch
+checkbox | 체크 옵션 + 라벨 한 줄 | 체크박스와 라벨 간 8px | CTA 1개 stretch
+summary | 요약 캡션(좌) + 금액/수치(우) 형태 | 좌우 정렬, 한 줄 | CTA 1개 stretch
+chips | 선택된 필터/태그 칩 목록 | 칩 간 8px, 한 줄 스크롤/줄바꿈 없이 표시 권장 | CTA 1개 또는 보조 버튼 동시 노출 가능
+
+각 variant 상세
+
+- product
+  - 상단에 2개의 메타 블록을 좌→우로 배치합니다(예: 하트 아이콘+카운트, 리뷰 라벨+카운트).
+  - 블록 사이 가로 간격은 12px 입니다. 각 블록 내부의 상·하 정렬은 자유이나 한 줄 내에서 시각적 균형을 유지합니다.
+  - 하단에는 `CTA xlarge` 버튼을 가로 전체로 배치합니다.
+
+- discount
+  - "총 N원 할인 받았어요"와 같은 한 줄 안내를 노출합니다. 강조 수치(금액 등)는 브랜드/강조 색상을 사용할 수 있습니다.
+  - 아이콘을 사용할 경우 텍스트와 8px 간격으로 배치합니다.
+  - 하단에는 `CTA xlarge` 버튼을 가로 전체로 배치합니다.
+
+- checkbox
+  - 상단에 체크 가능한 옵션 1개와 라벨을 한 줄로 배치합니다(간격 8px).
+  - 체크 상태는 CTA와 독립적으로 동작하지만, 비활성화 흐름이 필요하면 비즈니스 로직에서 CTA의 `isEnabled`를 제어합니다.
+
+- summary
+  - 좌측에 짧은 캡션(예: "요약"), 우측에 금액/수치 텍스트를 배치합니다. 두 요소는 한 줄에서 좌우 정렬됩니다.
+  - 금액 텍스트는 읽기 가독성을 위해 적절한 세맨틱 타이포그래피 사용을 권장합니다.
+
+- chips
+  - 선택된 필터/태그 칩들을 한 줄로 나열합니다. 칩 간 간격은 8px 입니다.
+  - 칩 행 아래에 CTA만 배치하거나, 필요 시 보조 `.secondary` 버튼을 함께 노출할 수 있습니다.
+    - 보조 버튼을 함께 사용할 때 레이아웃은 `FixedActionArea.filter`와 동일(좌 110px 고정 + 우 CTA stretch, 간격 12px) 하게 구성할 수 있습니다.
+
+예시
+
+``` dart
+// product (상단 메타 + CTA)
+Column(spacing: 12, children: [
+  Row(spacing: 12, children: [
+    // 메타 블록 #1
+    Column(mainAxisSize: MainAxisSize.min, children: [/* 아이콘/라벨 + 수치 */]),
+    // 메타 블록 #2
+    Column(mainAxisSize: MainAxisSize.min, children: [/* 아이콘/라벨 + 수치 */]),
+  ]),
+  WdsButton(variant: WdsButtonVariant.cta, size: WdsButtonSize.xlarge, child: const Text('메인액션')),
+]);
+
+// chips (칩 + 보조버튼 + CTA)
+Column(spacing: 12, children: [
+  Wrap(spacing: 8, runSpacing: 0, children: [/* WdsChip ... */]),
+  Row(spacing: 12, children: [
+    SizedBox(
+      width: 110,
+      child: WdsButton(variant: WdsButtonVariant.secondary, size: WdsButtonSize.xlarge, child: const Text('대체액션')),
+    ),
+    Expanded(
+      child: WdsButton(variant: WdsButtonVariant.cta, size: WdsButtonSize.xlarge, child: const Text('메인액션')),
+    ),
+  ]),
+]);
+```
+
+### 접근성 및 동작
+
+- 고정/동적 유형 모두 안전 영역(safe area)을 고려해 하단 제스처 바와 겹치지 않도록 합니다.
+- 버튼 `disabled` 상태는 `opacity 0.4` 규칙을 따릅니다(버튼 규칙과 동일).
+- 상단 보조 영역의 정보는 스크린리더가 읽을 수 있도록 텍스트 위주로 제공합니다.
 

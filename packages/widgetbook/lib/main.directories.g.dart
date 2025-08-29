@@ -9,6 +9,8 @@
 // AppGenerator
 // **************************************************************************
 
+import 'package:wds_widgetbook/src/component/action_area_use_case.dart'
+    as _wds_widgetbook_src_component_action_area_use_case;
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:wds_widgetbook/src/component/bottom_navigation_use_case.dart'
     as _wds_widgetbook_src_component_bottom_navigation_use_case;
@@ -22,8 +24,12 @@ import 'package:wds_widgetbook/src/component/icon_button_use_case.dart'
     as _wds_widgetbook_src_component_icon_button_use_case;
 import 'package:wds_widgetbook/src/component/search_field_use_case.dart'
     as _wds_widgetbook_src_component_search_field_use_case;
+import 'package:wds_widgetbook/src/component/select_use_case.dart'
+    as _wds_widgetbook_src_component_select_use_case;
 import 'package:wds_widgetbook/src/component/square_button_use_case.dart'
     as _wds_widgetbook_src_component_square_button_use_case;
+import 'package:wds_widgetbook/src/component/tab_use_case.dart'
+    as _wds_widgetbook_src_component_tab_use_case;
 import 'package:wds_widgetbook/src/component/text_button_use_case.dart'
     as _wds_widgetbook_src_component_text_button_use_case;
 import 'package:wds_widgetbook/src/component/text_field_use_case.dart'
@@ -69,6 +75,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'ActionArea',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'FixedActionArea',
+          builder: _wds_widgetbook_src_component_action_area_use_case
+              .buildWdsFixedActionAreaUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'Header',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Header',
@@ -85,6 +99,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'DynamicActionArea',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'DynamicActionArea',
+          builder: _wds_widgetbook_src_component_action_area_use_case
+              .buildWdsDynamicActionAreaUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'SearchField',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'SearchField',
@@ -93,11 +115,27 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'Select',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Select',
+          builder: _wds_widgetbook_src_component_select_use_case
+              .buildWdsSelectUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'SquareButton',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'SquareButton',
           builder: _wds_widgetbook_src_component_square_button_use_case
               .buildWdsSquareButtonUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Tabs',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Tabs',
+          builder:
+              _wds_widgetbook_src_component_tab_use_case.buildWdsTabsUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
