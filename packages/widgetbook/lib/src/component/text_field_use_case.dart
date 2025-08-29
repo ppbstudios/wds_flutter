@@ -105,7 +105,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
   Future<void> focusNode(FocusNode node) async {
     node.requestFocus();
     await Future.delayed(const Duration(milliseconds: 500));
-    node.unfocus();
+    if (node.hasFocus && context.mounted) node.unfocus();
   }
 
   return WidgetbookSection(

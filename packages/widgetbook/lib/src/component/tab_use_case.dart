@@ -10,7 +10,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 Widget buildWdsTabsUseCase(BuildContext context) {
   return WidgetbookPageLayout(
     title: 'Tabs',
-    description: '텍스트 탭과 언더라인 탭(LineTabs)의 상태와 간격을 확인합니다.',
+    description: '선택하여 목적에 따라 구분된 선택지로 이동할 수 있습니다.',
     children: [
       _buildTextTabsPlayground(context),
       _buildLineTabsPlayground(context),
