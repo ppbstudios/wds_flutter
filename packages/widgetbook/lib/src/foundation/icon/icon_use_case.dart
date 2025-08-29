@@ -34,7 +34,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    height: 144,
     backgroundColor: WdsColorCoolNeutral.v50,
     child: selected.build(color: color, width: 24, height: 24),
     info: [

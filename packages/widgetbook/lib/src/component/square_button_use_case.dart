@@ -42,7 +42,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    height: 200,
     child: button,
     info: [
       'size: height32 fixed',

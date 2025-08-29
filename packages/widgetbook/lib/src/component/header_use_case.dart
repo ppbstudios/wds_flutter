@@ -80,7 +80,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
         actions: actions,
       ),
     'search' => WdsHeader.search(
-        title: Text('준비중이에요..🧑‍💻'),
+        title: WdsSearchField(hintText: '검색어를 입력해주세요'),
         leading: type == 'logo' ? null : leadingWidget,
         actions: actions.isEmpty ? actions : actions.sublist(0, 1),
       ),
@@ -92,7 +92,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
   };
 
   return WidgetbookPlayground(
-    height: 180,
     layout: PlaygroundLayout.stretch,
     backgroundColor: WdsColorCoolNeutral.v50,
     child: header,
@@ -131,7 +130,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
               ],
             ),
             WdsHeader.search(
-              title: const Text('검색'),
+              title: WdsSearchField(hintText: '검색어를 입력해주세요'),
               actions: [
                 WdsIconButton(
                   onTap: () => print('submit'),

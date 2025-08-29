@@ -6,7 +6,6 @@ class WidgetbookPlayground extends StatelessWidget {
   const WidgetbookPlayground({
     required this.child,
     this.info = const [],
-    this.height = 320,
     this.padding = const EdgeInsets.all(24),
     this.layout = PlaygroundLayout.center,
     this.backgroundColor = WdsColorCommon.white,
@@ -15,7 +14,6 @@ class WidgetbookPlayground extends StatelessWidget {
 
   final Widget child;
   final List<String> info;
-  final double height;
   final EdgeInsetsGeometry padding;
   final PlaygroundLayout layout;
   final Color backgroundColor;
@@ -73,44 +71,41 @@ class WidgetbookPlayground extends StatelessWidget {
           ),
           child: Padding(
             padding: padding,
-            child: LimitedBox(
-              maxHeight: height,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                spacing: 32,
-                children: [
-                  Text(
-                    'Playground',
-                    style: WdsSemanticTypography.title20Bold.copyWith(
-                      color: WdsColorBlue.v500,
-                    ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              spacing: 32,
+              children: [
+                Text(
+                  'Playground',
+                  style: WdsSemanticTypography.title20Bold.copyWith(
+                    color: WdsColorBlue.v500,
                   ),
-                  switch (layout) {
-                    PlaygroundLayout.stretch => SizedBox(
-                        width: double.infinity,
-                        child: content,
-                      ),
-                    PlaygroundLayout.center => SizedBox(
-                        width: double.infinity,
-                        child: Center(
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxWidth: constraints.maxWidth,
-                            ),
-                            child: IntrinsicWidth(child: content),
+                ),
+                switch (layout) {
+                  PlaygroundLayout.stretch => SizedBox(
+                      width: double.infinity,
+                      child: content,
+                    ),
+                  PlaygroundLayout.center => SizedBox(
+                      width: double.infinity,
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: constraints.maxWidth,
                           ),
+                          child: IntrinsicWidth(child: content),
                         ),
                       ),
-                  },
-                  if (info.isNotEmpty)
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: info.map((text) => _InfoChip(text)).toList(),
                     ),
-                ],
-              ),
+                },
+                if (info.isNotEmpty)
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: info.map((text) => _InfoChip(text)).toList(),
+                  ),
+              ],
             ),
           ),
         );

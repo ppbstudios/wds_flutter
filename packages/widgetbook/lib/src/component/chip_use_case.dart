@@ -67,7 +67,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    height: 210,
     child: shape == WdsChipShape.pill
         ? WdsChip.pill(
             label: label,

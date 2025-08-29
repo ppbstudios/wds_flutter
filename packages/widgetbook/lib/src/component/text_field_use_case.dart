@@ -68,7 +68,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   final WdsTextField field;
   if (variant == WdsTextFieldVariant.outlined) {
     field = WdsTextField.outlined(
-      enabled: enabled,
+      isEnabled: enabled,
       controller: controller,
       label: label,
       hintText: hint,
@@ -77,7 +77,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     );
   } else {
     field = WdsTextField.box(
-      enabled: enabled,
+      isEnabled: enabled,
       controller: controller,
       label: label,
       hintText: hint,
@@ -87,7 +87,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
   }
 
   return WidgetbookPlayground(
-    height: 320,
     layout: PlaygroundLayout.center,
     child: SizedBox(width: 360, child: field),
     info: [
@@ -162,7 +161,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
                 hintText: '힌트',
                 helperText: '헬퍼',
                 errorText: null,
-                enabled: false,
+                isEnabled: false,
               ),
             ),
           ],
@@ -208,7 +207,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
               width: 320,
               child: WdsTextField.box(
                 hintText: '힌트',
-                enabled: false,
+                isEnabled: false,
               ),
             ),
           ],
@@ -324,7 +323,7 @@ class _FocusWrapperState extends State<_FocusWrapper> {
         hintText: widget.child.hintText,
         helperText: widget.child.helperText,
         errorText: widget.child.errorText,
-        enabled: widget.child.enabled,
+        isEnabled: widget.child.isEnabled,
         focusNode: _focusNode,
       );
     }
@@ -334,7 +333,7 @@ class _FocusWrapperState extends State<_FocusWrapper> {
       hintText: widget.child.hintText,
       helperText: widget.child.helperText,
       errorText: widget.child.errorText,
-      enabled: widget.child.enabled,
+      isEnabled: widget.child.isEnabled,
       focusNode: _focusNode,
     );
   }
@@ -358,7 +357,7 @@ class _ActiveWrapperState extends State<_ActiveWrapper> {
         hintText: widget.child.hintText,
         helperText: widget.child.helperText,
         errorText: widget.child.errorText,
-        enabled: widget.child.enabled,
+        isEnabled: widget.child.isEnabled,
         controller: _controller,
       );
     }
@@ -368,7 +367,7 @@ class _ActiveWrapperState extends State<_ActiveWrapper> {
       hintText: widget.child.hintText,
       helperText: widget.child.helperText,
       errorText: widget.child.errorText,
-      enabled: widget.child.enabled,
+      isEnabled: widget.child.isEnabled,
       controller: _controller,
     );
   }

@@ -81,7 +81,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    height: 200,
     child: button,
     info: [
       'variant: $variant',

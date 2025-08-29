@@ -36,7 +36,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    height: 200,
     layout: PlaygroundLayout.center,
     child: ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 360),
