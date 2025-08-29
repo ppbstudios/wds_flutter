@@ -33,7 +33,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   final button = WdsSquareButton(
-    onTap: () => print('SquareButton pressed'),
+    onTap: () => debugPrint('SquareButton pressed'),
     isEnabled: isEnabled,
     child: Text(
       text,
@@ -65,11 +65,11 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 16,
           children: [
             WdsSquareButton(
-              onTap: () => print('Square enabled'),
+              onTap: () => debugPrint('Square enabled'),
               child: const Text('텍스트'),
             ),
             WdsSquareButton(
-              onTap: () => print('Square disabled'),
+              onTap: () => debugPrint('Square disabled'),
               isEnabled: false,
               child: const Text('텍스트'),
             ),

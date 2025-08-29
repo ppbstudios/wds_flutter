@@ -6,8 +6,8 @@ class WdsSquareButton extends StatefulWidget {
     required this.onTap,
     required this.child,
     this.isEnabled = true,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// 버튼 탭 콜백 (비활성 시 무시)
   final VoidCallback? onTap;
@@ -80,8 +80,7 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
     Widget content = Padding(padding: padding, child: widget.child);
     if (widget.child is Text) {
       final Text childText = widget.child as Text;
-      final TextStyle? merged =
-          childText.style?.merge(typography) ?? typography;
+      final TextStyle merged = childText.style?.merge(typography) ?? typography;
       content = Padding(
         padding: padding,
         child: Text(

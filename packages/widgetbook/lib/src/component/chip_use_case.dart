@@ -82,7 +82,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
             variant: variant,
             leading: hasLeading ? _icon : null,
             trailing: hasTrailing ? _icon : null,
-            onTap: () => print('Chip tapped: $label'),
+            onTap: () => debugPrint('Chip tapped: $label'),
           )
         : WdsChip.square(
             label: label,
@@ -91,7 +91,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
             variant: variant,
             leading: hasLeading ? _icon : null,
             trailing: hasTrailing ? _icon : null,
-            onTap: () => print('Chip tapped: $label'),
+            onTap: () => debugPrint('Chip tapped: $label'),
           ),
   );
 }
@@ -120,12 +120,12 @@ Widget _buildShapeSection() {
       children: [
         WdsChip.pill(
           label: '텍스트',
-          onTap: () => print('Pill chip tapped'),
+          onTap: () => debugPrint('Pill chip tapped'),
         ),
         const SizedBox(width: 16),
         WdsChip.square(
           label: '텍스트',
-          onTap: () => print('Square chip tapped'),
+          onTap: () => debugPrint('Square chip tapped'),
         ),
       ],
     ),
@@ -141,13 +141,13 @@ Widget _buildVariantSection() {
       children: [
         WdsChip.pill(
           label: '텍스트',
-          onTap: () => print('Outline chip tapped'),
+          onTap: () => debugPrint('Outline chip tapped'),
         ),
         const SizedBox(width: 16),
         WdsChip.pill(
           label: '텍스트',
           variant: WdsChipVariant.solid,
-          onTap: () => print('Solid chip tapped'),
+          onTap: () => debugPrint('Solid chip tapped'),
         ),
       ],
     ),
@@ -165,21 +165,21 @@ Widget _buildSizeSection() {
         WdsChip.pill(
           label: '텍스트',
           size: WdsChipSize.xsmall,
-          onTap: () => print('XSmall chip tapped'),
+          onTap: () => debugPrint('XSmall chip tapped'),
         ),
         WdsChip.pill(
           label: '텍스트',
           size: WdsChipSize.small,
-          onTap: () => print('Small chip tapped'),
+          onTap: () => debugPrint('Small chip tapped'),
         ),
         WdsChip.pill(
           label: '텍스트',
-          onTap: () => print('Medium chip tapped'),
+          onTap: () => debugPrint('Medium chip tapped'),
         ),
         WdsChip.pill(
           label: '텍스트',
           size: WdsChipSize.large,
-          onTap: () => print('Large chip tapped'),
+          onTap: () => debugPrint('Large chip tapped'),
         ),
       ],
     ),
@@ -205,16 +205,17 @@ Widget _buildStateSection() {
           children: [
             WdsChip.pill(
               label: '일반',
-              onTap: () => print('Enabled outline chip'),
+              onTap: () => debugPrint('Enabled outline chip'),
             ),
             WdsChip.pill(
               label: '비활성',
               isEnabled: false,
-              onTap: () => print('Disabled outline chip'),
+              onTap: () => debugPrint('Disabled outline chip'),
             ),
             WdsChip.pill(
               label: '클릭해보세요',
-              onTap: () => print('Interactive outline chip - focus toggles'),
+              onTap: () =>
+                  debugPrint('Interactive outline chip - focus toggles'),
             ),
           ],
         ),
@@ -231,18 +232,18 @@ Widget _buildStateSection() {
             WdsChip.pill(
               label: '일반',
               variant: WdsChipVariant.solid,
-              onTap: () => print('Enabled solid chip'),
+              onTap: () => debugPrint('Enabled solid chip'),
             ),
             WdsChip.pill(
               label: '비활성',
               variant: WdsChipVariant.solid,
               isEnabled: false,
-              onTap: () => print('Disabled solid chip'),
+              onTap: () => debugPrint('Disabled solid chip'),
             ),
             WdsChip.pill(
               label: '클릭해보세요',
               variant: WdsChipVariant.solid,
-              onTap: () => print('Interactive solid chip - focus toggles'),
+              onTap: () => debugPrint('Interactive solid chip - focus toggles'),
             ),
           ],
         ),
@@ -257,14 +258,14 @@ Widget _buildStateSection() {
               label: '아이콘',
               leading: _icon,
               trailing: _icon,
-              onTap: () => print('Outline chip with icons'),
+              onTap: () => debugPrint('Outline chip with icons'),
             ),
             WdsChip.pill(
               label: '아이콘',
               variant: WdsChipVariant.solid,
               leading: _icon,
               trailing: _icon,
-              onTap: () => print('Solid chip with icons'),
+              onTap: () => debugPrint('Solid chip with icons'),
             ),
           ],
         ),

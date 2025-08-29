@@ -16,8 +16,8 @@ class WdsSearchField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.autofocus = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final TextEditingController? controller;
   final String? hintText;

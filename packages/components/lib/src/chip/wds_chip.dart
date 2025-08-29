@@ -98,9 +98,8 @@ class WdsChip extends StatefulWidget {
     this.isEnabled = true,
     this.variant = WdsChipVariant.outline,
     this.size = WdsChipSize.medium,
-    Key? key,
-  })  : shape = WdsChipShape.pill,
-        super(key: key);
+    super.key,
+  }) : shape = WdsChipShape.pill;
 
   const WdsChip.square({
     required this.label,
@@ -110,9 +109,8 @@ class WdsChip extends StatefulWidget {
     this.isEnabled = true,
     this.variant = WdsChipVariant.outline,
     this.size = WdsChipSize.medium,
-    Key? key,
-  })  : shape = WdsChipShape.square,
-        super(key: key);
+    super.key,
+  }) : shape = WdsChipShape.square;
 
   final String label;
 

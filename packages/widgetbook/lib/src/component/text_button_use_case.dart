@@ -59,7 +59,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   };
 
   final button = WdsTextButton(
-    onTap: () => print('TextButton pressed: $variant $size'),
+    onTap: () => debugPrint('TextButton pressed: $variant $size'),
     isEnabled: isEnabled,
     variant: variantValue,
     size: sizeValue,
@@ -97,7 +97,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
     };
 
     return WdsTextButton(
-      onTap: () => print('pressed: $variant $size'),
+      onTap: () => debugPrint('pressed: $variant $size'),
       isEnabled: enabled,
       variant: variantValue,
       size: sizeValue,

@@ -54,7 +54,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   };
 
   final child = Text(text, style: styleBySize[size]!);
-  void onTap() => print('Button pressed: $variant $size');
+  void onTap() => debugPrint('Button pressed: $variant $size');
 
   final sizeValue = switch (size) {
     'xlarge' => WdsButtonSize.xlarge,
@@ -103,16 +103,16 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 16,
           children: [
             WdsButton(
-              onTap: () => print('CTA pressed'),
+              onTap: () => debugPrint('CTA pressed'),
               child: const Text('텍스트'),
             ),
             WdsButton(
-              onTap: () => print('Primary pressed'),
+              onTap: () => debugPrint('Primary pressed'),
               variant: WdsButtonVariant.primary,
               child: const Text('텍스트'),
             ),
             WdsButton(
-              onTap: () => print('Secondary pressed'),
+              onTap: () => debugPrint('Secondary pressed'),
               variant: WdsButtonVariant.secondary,
               child: const Text('텍스트'),
             ),
@@ -127,26 +127,26 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 16,
           children: [
             WdsButton(
-              onTap: () => print('XL pressed'),
+              onTap: () => debugPrint('XL pressed'),
               size: WdsButtonSize.xlarge,
               child: const Text('텍스트'),
             ),
             WdsButton(
-              onTap: () => print('L pressed'),
+              onTap: () => debugPrint('L pressed'),
               size: WdsButtonSize.large,
               child: const Text('텍스트'),
             ),
             WdsButton(
-              onTap: () => print('M pressed'),
+              onTap: () => debugPrint('M pressed'),
               child: const Text('텍스트'),
             ),
             WdsButton(
-              onTap: () => print('S pressed'),
+              onTap: () => debugPrint('S pressed'),
               size: WdsButtonSize.small,
               child: const Text('텍스트'),
             ),
             WdsButton(
-              onTap: () => print('TY pressed'),
+              onTap: () => debugPrint('TY pressed'),
               size: WdsButtonSize.tiny,
               child: const Text('텍스트'),
             ),
@@ -164,16 +164,16 @@ Widget _buildDemonstrationSection(BuildContext context) {
               spacing: 16,
               children: [
                 WdsButton(
-                  onTap: () => print('CTA default'),
+                  onTap: () => debugPrint('CTA default'),
                   child: const Text('텍스트'),
                 ),
                 WdsButton(
-                  onTap: () => print('Primary default'),
+                  onTap: () => debugPrint('Primary default'),
                   variant: WdsButtonVariant.primary,
                   child: const Text('텍스트'),
                 ),
                 WdsButton(
-                  onTap: () => print('Secondary default'),
+                  onTap: () => debugPrint('Secondary default'),
                   variant: WdsButtonVariant.secondary,
                   child: const Text('텍스트'),
                 ),
@@ -185,16 +185,16 @@ Widget _buildDemonstrationSection(BuildContext context) {
               spacing: 16,
               children: [
                 WdsButton(
-                  onTap: () => print('CTA pressed'),
+                  onTap: () => debugPrint('CTA pressed'),
                   child: const Text('텍스트'),
                 ),
                 WdsButton(
-                  onTap: () => print('Primary pressed'),
+                  onTap: () => debugPrint('Primary pressed'),
                   variant: WdsButtonVariant.primary,
                   child: const Text('텍스트'),
                 ),
                 WdsButton(
-                  onTap: () => print('Secondary pressed'),
+                  onTap: () => debugPrint('Secondary pressed'),
                   variant: WdsButtonVariant.secondary,
                   child: const Text('텍스트'),
                 ),
@@ -206,18 +206,18 @@ Widget _buildDemonstrationSection(BuildContext context) {
               spacing: 16,
               children: [
                 WdsButton(
-                  onTap: () => print('CTA disabled'),
+                  onTap: () => debugPrint('CTA disabled'),
                   isEnabled: false,
                   child: const Text('텍스트'),
                 ),
                 WdsButton(
-                  onTap: () => print('Primary disabled'),
+                  onTap: () => debugPrint('Primary disabled'),
                   variant: WdsButtonVariant.primary,
                   isEnabled: false,
                   child: const Text('텍스트'),
                 ),
                 WdsButton(
-                  onTap: () => print('Secondary disabled'),
+                  onTap: () => debugPrint('Secondary disabled'),
                   variant: WdsButtonVariant.secondary,
                   isEnabled: false,
                   child: const Text('텍스트'),

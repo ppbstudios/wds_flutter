@@ -17,8 +17,8 @@ class WdsSelect extends StatefulWidget {
     this.isExpanded = false,
     this.onTap,
     this.variant = WdsSelectVariant.normal,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   const WdsSelect.blocked({
     required this.selected,
@@ -27,9 +27,8 @@ class WdsSelect extends StatefulWidget {
     this.isEnabled = true,
     this.isExpanded = false,
     this.onTap,
-    Key? key,
-  })  : variant = WdsSelectVariant.blocked,
-        super(key: key);
+    super.key,
+  }) : variant = WdsSelectVariant.blocked;
 
   /// 좌측 상단 "주제"
   ///

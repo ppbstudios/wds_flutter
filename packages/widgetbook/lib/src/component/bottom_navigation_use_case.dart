@@ -61,7 +61,7 @@ class _BottomNavigationDemoState extends State<_BottomNavigationDemo> {
       currentIndex: _currentIndex,
       onTap: (i) {
         setState(() => _currentIndex = i);
-        print('tap index: $i');
+        debugPrint('tap index: $i');
       },
     );
   }

@@ -89,8 +89,8 @@ class WdsButton extends StatefulWidget {
     this.isEnabled = true,
     this.variant = WdsButtonVariant.cta,
     this.size = WdsButtonSize.medium,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final VoidCallback? onTap;
   final Widget child;
@@ -108,16 +108,6 @@ class _WdsButtonState extends State<WdsButton>
   bool _isPressed = false;
 
   static const Duration _hoverAnimationDuration = Duration(milliseconds: 150);
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   // Interaction handlers
   void _handleTapDown(TapDownDetails details) {
@@ -178,7 +168,7 @@ class _WdsButtonState extends State<WdsButton>
     // Text 자식일 경우 강제 타이포그래피 적용
     if (widget.child is Text) {
       final Text childText = widget.child as Text;
-      final TextStyle? merged =
+      final TextStyle merged =
           childText.style?.merge(fixedTypography) ?? fixedTypography;
       content = IconTheme(
         data: IconThemeData(color: style.foreground),
@@ -236,39 +226,34 @@ class _WdsButtonState extends State<WdsButton>
         borderRadius: borderRadius,
         child: SizedBox(
           height: height,
-          child: Center(
-            child: Align(
-              widthFactor: 1,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // 배경 + 선택적 테두리 (컨텐츠 폭 기준)
-                  Positioned.fill(
-                    child: RepaintBoundary(
-                      child: DecoratedBox(
-                        decoration: ShapeDecoration(
-                          color: style.background,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: borderRadius,
-                            side: style.border ?? BorderSide.none,
-                          ),
-                        ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // 배경 + 선택적 테두리 (컨텐츠 폭 기준)
+              Positioned.fill(
+                child: RepaintBoundary(
+                  child: DecoratedBox(
+                    decoration: ShapeDecoration(
+                      color: style.background,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: borderRadius,
+                        side: style.border ?? BorderSide.none,
                       ),
                     ),
                   ),
-                  // 버튼 높이를 유지하되, 폭은 컨텐츠 폭에 맞춤
-                  SizedBox(height: height),
-                  // 컨텐츠 폭을 채우는 오버레이 (텍스트 아래 레이어)
-                  Positioned.fill(
-                    child: IgnorePointer(
-                      child: RepaintBoundary(child: overlay),
-                    ),
-                  ),
-                  // 최상단 컨텐츠(텍스트/아이콘 등)
-                  RepaintBoundary(child: content),
-                ],
+                ),
               ),
-            ),
+              // 버튼 높이를 유지하되, 폭은 컨텐츠 폭에 맞춤
+              SizedBox(height: height),
+              // 컨텐츠 폭을 채우는 오버레이 (텍스트 아래 레이어)
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: RepaintBoundary(child: overlay),
+                ),
+              ),
+              // 최상단 컨텐츠(텍스트/아이콘 등)
+              RepaintBoundary(child: content),
+            ],
           ),
         ),
       ),

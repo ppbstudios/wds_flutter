@@ -17,8 +17,8 @@ class WdsDynamicActionArea extends StatelessWidget {
     required this.variant,
     required this.cta,
     this.metaBuilder,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// variant별 상단 보조 한 줄을 구성하는 빌더
   /// 반환 위젯은 한 줄(Row/Wrap 등)로 구성하는 것을 권장

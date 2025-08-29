@@ -25,52 +25,50 @@ Widget _buildFixedPlayground(BuildContext context) {
     initialOption: 'normal',
   );
 
-  final labelPrimary =
-      context.knobs.string(label: 'primary label', initialValue: '메인액션');
-  final labelSecondary =
-      context.knobs.string(label: 'secondary label', initialValue: '대체액션');
+  final labelPrimary = context.knobs.string(
+    label: 'primary label',
+    initialValue: '메인액션',
+  );
+  final labelSecondary = context.knobs.string(
+    label: 'secondary label',
+    initialValue: '대체액션',
+  );
 
-  WdsFixedActionArea area;
-  switch (variant) {
-    case 'filter':
-      area = WdsFixedActionArea.filter(
+  final area = switch (variant) {
+    'filter' => WdsFixedActionArea.filter(
         secondary: WdsButton(
-          onTap: () => print('secondary'),
+          onTap: () => debugPrint('secondary'),
           variant: WdsButtonVariant.secondary,
           size: WdsButtonSize.xlarge,
           child: Text(labelSecondary),
         ),
         primary: WdsButton(
-          onTap: () => print('primary'),
+          onTap: () => debugPrint('primary'),
           size: WdsButtonSize.xlarge,
           child: Text(labelPrimary),
         ),
-      );
-      break;
-    case 'division':
-      area = WdsFixedActionArea.division(
+      ),
+    'division' => WdsFixedActionArea.division(
         secondary: WdsButton(
-          onTap: () => print('secondary'),
+          onTap: () => debugPrint('secondary'),
           variant: WdsButtonVariant.secondary,
           size: WdsButtonSize.xlarge,
           child: Text(labelSecondary),
         ),
         primary: WdsButton(
-          onTap: () => print('primary'),
+          onTap: () => debugPrint('primary'),
           size: WdsButtonSize.xlarge,
           child: Text(labelPrimary),
         ),
-      );
-      break;
-    default:
-      area = WdsFixedActionArea.normal(
+      ),
+    _ => WdsFixedActionArea.normal(
         primary: WdsButton(
-          onTap: () => print('primary'),
+          onTap: () => debugPrint('primary'),
           size: WdsButtonSize.xlarge,
           child: Text(labelPrimary),
         ),
-      );
-  }
+      ),
+  };
 
   return WidgetbookPlayground(
     info: const [
@@ -165,7 +163,7 @@ Widget _buildDynamicPlayground(BuildContext context) {
   final area = WdsDynamicActionArea(
     variant: variant,
     cta: WdsButton(
-      onTap: () => print('cta'),
+      onTap: () => debugPrint('cta'),
       size: WdsButtonSize.xlarge,
       child: Text(labelPrimary),
     ),

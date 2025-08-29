@@ -28,7 +28,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   final button = WdsIconButton(
-    onTap: () => print('IconButton pressed: $icon'),
+    onTap: () => debugPrint('IconButton pressed: $icon'),
     icon: icon.build(),
     isEnabled: enabled,
   );
@@ -56,7 +56,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 16,
           children: [
             WdsIconButton(
-              onTap: () => print('enabled'),
+              onTap: () => debugPrint('enabled'),
               icon: WdsIcon.blank.build(),
             ),
             WdsIconButton(

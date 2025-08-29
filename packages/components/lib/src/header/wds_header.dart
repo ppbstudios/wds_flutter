@@ -10,8 +10,8 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
     required this.hasCenterTitle,
     required this.isLogo,
     required this.isSearch,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// 로고 헤더: leading 은 WINC 로고, 가운데 정렬 아님, title 없음
   WdsHeader.logo({
@@ -28,7 +28,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
         );
 
   /// 타이틀 헤더: title 필수, leading 유무에 따라 가운데 정렬 여부 결정
-  WdsHeader.title({
+  const WdsHeader.title({
     required Widget title,
     Widget? leading,
     List<Widget> actions = const [],

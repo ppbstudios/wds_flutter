@@ -48,18 +48,24 @@ class WidgetbookSubsection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: spacing,
       children: [
-        Row(
-          children: [
-            Text('$title = ', style: WdsSemanticTypography.heading17Bold),
-            ...labels
-                .expand(
-                  (label) => [
-                    _TypeLabel(label),
-                    const SizedBox(width: 12),
-                  ],
-                )
-                .take(labels.length * 2 - 1),
-          ],
+        SizedBox(
+          height: 28,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                Text('$title = ', style: WdsSemanticTypography.heading17Bold),
+                ...labels
+                    .expand(
+                      (label) => [
+                        _TypeLabel(label),
+                        const SizedBox(width: 12),
+                      ],
+                    )
+                    .take(labels.length * 2 - 1),
+              ],
+            ),
+          ),
         ),
         Card(
           clipBehavior: Clip.hardEdge,

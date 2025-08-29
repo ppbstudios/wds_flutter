@@ -46,7 +46,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   final List<Widget> actions = List.generate(actionsCount, (i) {
     return WdsIconButton(
-      onTap: () => print('action $i'),
+      onTap: () => debugPrint('action $i'),
       icon: _icon,
     );
   });
@@ -55,7 +55,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   Widget? leadingWidget;
   if (enableLeading) {
     leadingWidget = WdsIconButton(
-      onTap: () => print('leading'),
+      onTap: () => debugPrint('leading'),
       icon: _icon,
     );
   }
@@ -119,11 +119,11 @@ Widget _buildDemonstrationSection(BuildContext context) {
               title: const Text('텍스트'),
               actions: [
                 WdsIconButton(
-                  onTap: () => print('search'),
+                  onTap: () => debugPrint('search'),
                   icon: _icon,
                 ),
                 WdsIconButton(
-                  onTap: () => print('more'),
+                  onTap: () => debugPrint('more'),
                   icon: _icon,
                 ),
               ],
@@ -132,7 +132,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
               title: const WdsSearchField(hintText: '검색어를 입력해주세요'),
               actions: [
                 WdsIconButton(
-                  onTap: () => print('submit'),
+                  onTap: () => debugPrint('submit'),
                   icon: _icon,
                 ),
               ],

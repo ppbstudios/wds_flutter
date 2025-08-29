@@ -283,7 +283,7 @@ Widget _buildVerifiedSection(BuildContext context) {
             ),
           ),
           WdsButton(
-            onTap: () => print('인증!'),
+            onTap: () => debugPrint('인증!'),
             size: WdsButtonSize.small,
             variant: WdsButtonVariant.secondary,
             child: const Text('인증'),
@@ -301,7 +301,7 @@ Widget _buildVerifiedSection(BuildContext context) {
             ),
           ),
           WdsButton(
-            onTap: () => print('CTA'),
+            onTap: () => debugPrint('CTA'),
             size: WdsButtonSize.small,
             child: const Text('텍스트'),
           ),
@@ -318,7 +318,7 @@ Widget _buildVerifiedSection(BuildContext context) {
             ),
           ),
           WdsButton(
-            onTap: () => print('PRIMARY'),
+            onTap: () => debugPrint('PRIMARY'),
             size: WdsButtonSize.small,
             variant: WdsButtonVariant.primary,
             child: const Text('텍스트'),

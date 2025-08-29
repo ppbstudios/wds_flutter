@@ -61,7 +61,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     isEnabled: enabled,
     isExpanded: expanded,
     variant: variant,
-    onTap: () => print('Select tapped'),
+    onTap: () => debugPrint('Select tapped'),
   );
 
   return WidgetbookPlayground(

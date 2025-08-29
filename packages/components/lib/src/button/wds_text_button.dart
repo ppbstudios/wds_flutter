@@ -56,8 +56,8 @@ class WdsTextButton extends StatefulWidget {
     this.isEnabled = true,
     this.variant = WdsTextButtonVariant.text,
     this.size = WdsTextButtonSize.medium,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final VoidCallback? onTap;
   final Widget child;

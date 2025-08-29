@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.2.0
+  meta: ^1.14.0
   wds_tokens:
     path: ../tokens
 

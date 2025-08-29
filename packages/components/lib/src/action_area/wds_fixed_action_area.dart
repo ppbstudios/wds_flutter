@@ -10,19 +10,18 @@ enum WdsFixedActionAreaVariant { normal, filter, division }
 class WdsFixedActionArea extends StatelessWidget {
   WdsFixedActionArea.normal({
     required this.primary,
-    Key? key,
+    super.key,
   })  : variant = WdsFixedActionAreaVariant.normal,
         secondary = null,
         assert(
           primary.size == WdsButtonSize.xlarge,
           'primary 버튼은 size xlarge 여야 합니다.',
-        ),
-        super(key: key);
+        );
 
   WdsFixedActionArea.filter({
     required this.secondary,
     required this.primary,
-    Key? key,
+    super.key,
   })  : variant = WdsFixedActionAreaVariant.filter,
         assert(secondary != null),
         assert(
@@ -36,13 +35,12 @@ class WdsFixedActionArea extends StatelessWidget {
         assert(
           primary.size == WdsButtonSize.xlarge,
           'primary 버튼은 size xlarge 여야 합니다.',
-        ),
-        super(key: key);
+        );
 
   WdsFixedActionArea.division({
     required this.secondary,
     required this.primary,
-    Key? key,
+    super.key,
   })  : variant = WdsFixedActionAreaVariant.division,
         assert(secondary != null),
         assert(
@@ -56,8 +54,7 @@ class WdsFixedActionArea extends StatelessWidget {
         assert(
           primary.size == WdsButtonSize.xlarge,
           'primary 버튼은 size xlarge 여야 합니다.',
-        ),
-        super(key: key);
+        );
 
   /// 좌측 보조 버튼 (.secondary, xlarge)
   final WdsButton? secondary;
@@ -75,29 +72,30 @@ class WdsFixedActionArea extends StatelessWidget {
       WdsFixedActionAreaVariant.division => _buildDivision(),
     };
 
-    return SizedBox(
-      height: 81,
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: WdsColorCommon.white,
-          border: Border(
-            top: BorderSide(color: WdsSemanticColorBorder.alternative),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return SizedBox(
+          width: constraints.maxWidth,
+          height: 81,
+          child: DecoratedBox(
+            decoration: const BoxDecoration(
+              color: WdsColorCommon.white,
+              border: Border(
+                top: BorderSide(color: WdsSemanticColorBorder.alternative),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: content,
+            ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: content,
-        ),
-      ),
+        );
+      },
     );
   }
 
   Widget _buildNormal() {
-    return Row(
-      children: [
-        Expanded(child: primary),
-      ],
-    );
+    return primary;
   }
 
   Widget _buildFilter() {
