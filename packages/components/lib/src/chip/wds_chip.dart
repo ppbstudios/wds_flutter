@@ -240,7 +240,13 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
     final List<Widget> contentChildren = [];
 
     if (widget.leading != null) {
-      contentChildren.add(widget.leading!.build(color: currentIconColor));
+      contentChildren.add(
+        widget.leading!.build(
+          color: currentIconColor,
+          width: 16,
+          height: 16,
+        ),
+      );
     }
 
     contentChildren.add(
@@ -253,15 +259,19 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
     );
 
     if (widget.trailing != null) {
-      contentChildren.add(widget.trailing!.build(color: currentIconColor));
+      contentChildren.add(
+        widget.trailing!.build(
+          color: currentIconColor,
+          width: 16,
+          height: 16,
+        ),
+      );
     }
 
     final contentRow = Row(
       mainAxisSize: MainAxisSize.min,
-      children: contentChildren
-          .expand((widget) => [widget, const SizedBox(width: 4)])
-          .take(contentChildren.length * 2 - 1)
-          .toList(),
+      spacing: 2,
+      children: contentChildren.toList(),
     );
 
     Widget content = Padding(
