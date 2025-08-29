@@ -255,6 +255,8 @@ leading이 없고 title만 존재할 때 hasCenterTitle 여부를 설정할 수 
 - padding: `EdgeInsets.symmetric(horizontal: 16, vertical: 5)`
 - backgroundColor: `WdsSemanticColorBackgroud.normal`
 - typography: `WdsSemanticTypography.heading17Bold`
+- title width (.search 변형): 전체 가용 너비의 `204/360`(≈`0.567`)로 제한
+  - 구현: `.search`에서만 `FractionallySizedBox(widthFactor: 0.567)` 적용
 
 padding은 양 끝에 위치한 leading 과 actions의 interaction 영역을 고려했습니다.
 
@@ -476,9 +478,8 @@ state는 아래 5가지를 가집니다.
   - hint: typography는 통일
     - typography: `WdsSemanticTypography.body15NormalRegular`
     - color:
-        - `enabled`: `WdsSemanticColorText.alternative`
         - `disabled`: `WdsSemanticColorText.disable`
-        - 나머지: `WdsSemanticColorText.normal`
+        - 나머지: `WdsSemanticColorText.alternative`
   - error: state == `error` 일 때만 
     - typography: `WdsSemanticTypography.caption12Regular`
     - color: `WdsSemanticColorStatus.destructive`
@@ -526,6 +527,12 @@ state는 아래 5가지를 가집니다.
 ### TextField - typography
 
 (state) 참고
+
+### TextField - cursor
+
+- color: `WdsSemanticColorText.normal`
+- width: 2px
+- radius: `WdsAtomicRadius.full`
 
 ### TextField - helper text
 

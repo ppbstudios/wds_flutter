@@ -15,6 +15,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
     required this.actions,
     required this.hasCenterTitle,
     required this.isLogo,
+    required this.isSearch,
     Key? key,
   }) : super(key: key);
 
@@ -28,6 +29,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
           actions: actions,
           hasCenterTitle: false,
           isLogo: true,
+          isSearch: false,
           key: key,
         );
 
@@ -43,6 +45,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
           actions: actions,
           hasCenterTitle: true,
           isLogo: false,
+          isSearch: false,
           key: key,
         );
 
@@ -60,6 +63,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       hasCenterTitle: true,
       isLogo: false,
+      isSearch: true,
       key: key,
     );
   }
@@ -69,6 +73,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget> actions;
   final bool hasCenterTitle;
   final bool isLogo;
+  final bool isSearch;
 
   @override
   Size get preferredSize => const Size.fromHeight(50);
@@ -140,7 +145,12 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
             Align(
               alignment:
                   hasCenterTitle ? Alignment.center : Alignment.centerLeft,
-              child: titleWidget,
+              child: isSearch
+                  ? FractionallySizedBox(
+                      widthFactor: 0.567,
+                      child: titleWidget,
+                    )
+                  : titleWidget,
             ),
 
             // Actions 영역: 비어있어도 최소 40x40 확보, 우측 정렬
