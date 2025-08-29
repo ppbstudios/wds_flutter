@@ -7,15 +7,20 @@ class WdsTextTabs extends StatelessWidget {
   const WdsTextTabs({
     required this.tabs,
     required this.currentIndex,
+    this.featuredColors = const {},
     this.onTap,
     super.key,
   });
 
   final List<String> tabs;
+
   final int currentIndex;
+
   final ValueChanged<int>? onTap;
 
-  TextStyle _styleFor(WdsTextTabState state) {
+  final Map<int, Color> featuredColors;
+
+  TextStyle _styleFor(WdsTextTabState state, int index) {
     return switch (state) {
       WdsTextTabState.enabled =>
         WdsSemanticTypography.body15NormalMedium.copyWith(
@@ -24,7 +29,7 @@ class WdsTextTabs extends StatelessWidget {
       WdsTextTabState.focused ||
       WdsTextTabState.featured =>
         WdsSemanticTypography.body15NormalBold.copyWith(
-          color: WdsSemanticColorText.normal,
+          color: featuredColors[index] ?? WdsSemanticColorText.normal,
         ),
     };
   }
@@ -33,15 +38,16 @@ class WdsTextTabs extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40,
-      child: ListView.separated(
+      child: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
+        itemCount: tabs.length,
         itemBuilder: (context, index) {
           final isFocused = index == currentIndex;
           final state =
               isFocused ? WdsTextTabState.focused : WdsTextTabState.enabled;
-          final style = _styleFor(state);
+          final style = _styleFor(state, index);
 
           return GestureDetector(
             behavior: HitTestBehavior.opaque,
@@ -55,8 +61,6 @@ class WdsTextTabs extends StatelessWidget {
             ),
           );
         },
-        separatorBuilder: (_, __) => const SizedBox(width: 0),
-        itemCount: tabs.length,
       ),
     );
   }
@@ -72,7 +76,9 @@ class WdsLineTabs extends StatelessWidget {
   }) : assert(tabs.length == 2 || tabs.length == 3);
 
   final List<String> tabs;
+
   final int currentIndex;
+
   final ValueChanged<int>? onTap;
 
   @override

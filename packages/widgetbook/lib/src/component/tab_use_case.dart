@@ -15,7 +15,8 @@ Widget buildWdsTabsUseCase(BuildContext context) {
       _buildTextTabsPlayground(context),
       _buildLineTabsPlayground(context),
       const SizedBox(height: 32),
-      _buildDemonstrationSection(context),
+      _buildTextTabsDemonstrationSection(context),
+      _buildLineTabsDemonstrationSection(context),
     ],
   );
 }
@@ -28,13 +29,13 @@ Widget _buildLineTabsPlayground(BuildContext context) {
   return const _LineTabsPlayground();
 }
 
-Widget _buildDemonstrationSection(BuildContext context) {
-  return WidgetbookSection(
-    title: 'Tabs',
+Widget _buildTextTabsDemonstrationSection(BuildContext context) {
+  return const WidgetbookSection(
+    title: 'TextTabs',
     children: [
-      const WidgetbookSubsection(
-        title: 'TextTabs state',
-        labels: ['enabled', 'focused'],
+      WidgetbookSubsection(
+        title: 'state',
+        labels: ['enabled', 'focused', 'featured'],
         content: Column(
           spacing: 8,
           children: [
@@ -45,20 +46,27 @@ Widget _buildDemonstrationSection(BuildContext context) {
             WdsTextTabs(
               tabs: ['추천', '매장 단독 혜택', '신상', '할인'],
               currentIndex: 2,
+              featuredColors: {2: primary},
             ),
           ],
         ),
       ),
-      const SizedBox(height: 24),
+    ],
+  );
+}
+
+Widget _buildLineTabsDemonstrationSection(BuildContext context) {
+  return WidgetbookSection(
+    title: 'LineTabs',
+    children: [
       WidgetbookSubsection(
-        title: 'LineTabs count/state',
-        labels: const ['2개', '3개'],
+        title: 'variant',
+        labels: const ['length == 2', 'length == 3'],
         content: Column(
-          spacing: 8,
+          spacing: 24,
           children: [
             WdsLineTabs(tabs: const ['텍스트', '텍스트'], currentIndex: 0),
             WdsLineTabs(tabs: const ['텍스트', '텍스트'], currentIndex: 1),
-            const SizedBox(height: 8),
             WdsLineTabs(tabs: const ['텍스트', '텍스트', '텍스트'], currentIndex: 1),
           ],
         ),
@@ -93,6 +101,7 @@ class _TextTabsPlaygroundState extends State<_TextTabsPlayground> {
     final List<String> tabs = List.generate(count, (i) => '추천 ${i + 1}');
 
     return WidgetbookPlayground(
+      backgroundColor: WdsColorCoolNeutral.v50,
       info: [
         'count: $count',
         'currentIndex: $_currentIndex',
@@ -130,7 +139,7 @@ class _LineTabsPlaygroundState extends State<_LineTabsPlayground> {
     }
 
     final List<String> tabs =
-        count == 2 ? const ['텍스트', '텍스트'] : const ['텍스트', '텍스트', '텍스트'];
+        count == 2 ? const ['첫번째', '두번째'] : const ['첫번째', '두번째', '세번째'];
 
     return WidgetbookPlayground(
       info: [

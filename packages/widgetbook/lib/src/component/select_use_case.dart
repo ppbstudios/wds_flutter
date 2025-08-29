@@ -81,17 +81,44 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
 Widget _buildDemonstrationSection(BuildContext context) {
   return const WidgetbookSection(
-    title: 'Variants & States',
+    title: 'Select',
     children: [
       WidgetbookSubsection(
-        title: 'enabled (inactive/active)',
-        labels: ['normal', 'colored', 'blocked'],
+        title: 'variant',
+        labels: ['normal', 'blocked'],
         content: Wrap(
           spacing: 16,
           runSpacing: 16,
           children: [
             _SelectDemo(variant: WdsSelectVariant.normal, enabled: true),
             _SelectDemo(variant: WdsSelectVariant.blocked, enabled: true),
+          ],
+        ),
+      ),
+      SizedBox(height: 24),
+      WidgetbookSubsection(
+        title: 'state',
+        labels: ['enabled', 'disabled'],
+        content: Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            _SelectDemo(
+              variant: WdsSelectVariant.normal,
+              enabled: true,
+            ),
+            _SelectDemo(
+              variant: WdsSelectVariant.blocked,
+              enabled: true,
+            ),
+            _SelectDemo(
+              variant: WdsSelectVariant.normal,
+              enabled: false,
+            ),
+            _SelectDemo(
+              variant: WdsSelectVariant.blocked,
+              enabled: false,
+            ),
             _SelectDemo(
               variant: WdsSelectVariant.normal,
               enabled: true,
@@ -102,19 +129,6 @@ Widget _buildDemonstrationSection(BuildContext context) {
               enabled: true,
               title: '주제',
             ),
-          ],
-        ),
-      ),
-      SizedBox(height: 24),
-      WidgetbookSubsection(
-        title: 'disabled',
-        labels: ['normal', 'colored', 'blocked'],
-        content: Wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children: [
-            _SelectDemo(variant: WdsSelectVariant.normal, enabled: false),
-            _SelectDemo(variant: WdsSelectVariant.blocked, enabled: false),
             _SelectDemo(
               variant: WdsSelectVariant.normal,
               enabled: false,

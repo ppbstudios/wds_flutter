@@ -9,7 +9,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 )
 Widget buildWdsFixedActionAreaUseCase(BuildContext context) {
   return WidgetbookPageLayout(
-    title: 'FixedActionArea',
+    title: 'ActionArea',
     description: '사용자가 인터페이스를 통해 상호작용을 할 수 있는 공간을 제공합니다.',
     children: [
       _buildFixedPlayground(context),

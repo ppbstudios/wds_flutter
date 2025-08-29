@@ -51,19 +51,22 @@ Widget _buildDemonstrationSection(BuildContext context) {
   return const WidgetbookSection(
     title: 'SearchField',
     children: [
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        spacing: 16,
-        children: [
-          SizedBox(
-            width: 280,
-            child: WdsSearchField(hintText: '검색어를 입력하세요'),
-          ),
-          SizedBox(
-            width: 280,
-            child: WdsSearchField(hintText: '비활성', enabled: false),
-          ),
-        ],
+      WidgetbookSubsection(
+        title: 'state',
+        labels: ['enabled', 'disabled'],
+        content: Wrap(
+          spacing: 16,
+          children: [
+            SizedBox(
+              width: 280,
+              child: WdsSearchField(hintText: '검색어를 입력하세요'),
+            ),
+            SizedBox(
+              width: 280,
+              child: WdsSearchField(hintText: '비활성', enabled: false),
+            ),
+          ],
+        ),
       ),
     ],
   );
