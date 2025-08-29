@@ -67,12 +67,12 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    child: button,
     info: [
       'variant: $variant',
       'size: $size',
       'state: ${isEnabled ? 'enabled' : 'disabled'}',
     ],
+    child: button,
   );
 }
 
@@ -164,16 +164,25 @@ Widget _buildDemonstrationSection(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             buildOne(
-                label: '텍스트', variant: 'text', size: 'medium', enabled: false),
+              label: '텍스트',
+              variant: 'text',
+              size: 'medium',
+              enabled: false,
+            ),
             const SizedBox(width: 16),
             buildOne(
-                label: '텍스트',
-                variant: 'underline',
-                size: 'medium',
-                enabled: false),
+              label: '텍스트',
+              variant: 'underline',
+              size: 'medium',
+              enabled: false,
+            ),
             const SizedBox(width: 16),
             buildOne(
-                label: '텍스트', variant: 'icon', size: 'medium', enabled: false),
+              label: '텍스트',
+              variant: 'icon',
+              size: 'medium',
+              enabled: false,
+            ),
           ],
         ),
       ),

@@ -56,17 +56,24 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   final hasLeading = context.knobs.boolean(
     label: 'hasLeading',
-    initialValue: false,
     description: '좌측에 아이콘을 표시해요',
   );
 
   final hasTrailing = context.knobs.boolean(
     label: 'hasTrailing',
-    initialValue: false,
     description: '우측에 아이콘을 표시해요',
   );
 
   return WidgetbookPlayground(
+    info: [
+      'label: $label',
+      'shape: $shape',
+      'variant: $variant',
+      'size: $size',
+      'isEnabled: $isEnabled',
+      'hasLeading: $hasLeading',
+      'hasTrailing: $hasTrailing',
+    ],
     child: shape == WdsChipShape.pill
         ? WdsChip.pill(
             label: label,
@@ -86,15 +93,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
             trailing: hasTrailing ? _icon : null,
             onTap: () => print('Chip tapped: $label'),
           ),
-    info: [
-      'label: $label',
-      'shape: $shape',
-      'variant: $variant',
-      'size: $size',
-      'isEnabled: $isEnabled',
-      'hasLeading: $hasLeading',
-      'hasTrailing: $hasTrailing',
-    ],
   );
 }
 
@@ -143,7 +141,6 @@ Widget _buildVariantSection() {
       children: [
         WdsChip.pill(
           label: '텍스트',
-          variant: WdsChipVariant.outline,
           onTap: () => print('Outline chip tapped'),
         ),
         const SizedBox(width: 16),
@@ -163,7 +160,6 @@ Widget _buildSizeSection() {
     labels: ['xsmall', 'small', 'medium', 'large'],
     content: Row(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
       spacing: 16,
       children: [
         WdsChip.pill(
@@ -178,7 +174,6 @@ Widget _buildSizeSection() {
         ),
         WdsChip.pill(
           label: '텍스트',
-          size: WdsChipSize.medium,
           onTap: () => print('Medium chip tapped'),
         ),
         WdsChip.pill(
@@ -200,33 +195,35 @@ Widget _buildStateSection() {
       spacing: 16,
       children: [
         // Outline variant states
-        Text('Outline Variant:', style: WdsSemanticTypography.caption12Medium),
+        const Text(
+          'Outline Variant:',
+          style: WdsSemanticTypography.caption12Medium,
+        ),
         Row(
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
           children: [
             WdsChip.pill(
               label: '일반',
-              variant: WdsChipVariant.outline,
-              isEnabled: true,
               onTap: () => print('Enabled outline chip'),
             ),
             WdsChip.pill(
               label: '비활성',
-              variant: WdsChipVariant.outline,
               isEnabled: false,
               onTap: () => print('Disabled outline chip'),
             ),
             WdsChip.pill(
               label: '클릭해보세요',
-              variant: WdsChipVariant.outline,
               onTap: () => print('Interactive outline chip - focus toggles'),
             ),
           ],
         ),
         const SizedBox(height: 8),
         // Solid variant states
-        Text('Solid Variant:', style: WdsSemanticTypography.caption12Medium),
+        const Text(
+          'Solid Variant:',
+          style: WdsSemanticTypography.caption12Medium,
+        ),
         Row(
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
@@ -234,7 +231,6 @@ Widget _buildStateSection() {
             WdsChip.pill(
               label: '일반',
               variant: WdsChipVariant.solid,
-              isEnabled: true,
               onTap: () => print('Enabled solid chip'),
             ),
             WdsChip.pill(
@@ -252,14 +248,13 @@ Widget _buildStateSection() {
         ),
         const SizedBox(height: 8),
         // With icons demonstration
-        Text('With Icons:', style: WdsSemanticTypography.caption12Medium),
+        const Text('With Icons:', style: WdsSemanticTypography.caption12Medium),
         Row(
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
           children: [
             WdsChip.pill(
               label: '아이콘',
-              variant: WdsChipVariant.outline,
               leading: _icon,
               trailing: _icon,
               onTap: () => print('Outline chip with icons'),

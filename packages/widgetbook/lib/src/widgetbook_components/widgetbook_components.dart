@@ -53,3 +53,16 @@ class TextField {}
 
 /// 컴포넌트 path 관리를 위한 클래스
 class Chip {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+/// material 의 Tab 과 충돌을 피하기 위해 Tabs 로 명명
+class Tabs {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class Select {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class FixedActionArea {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class DynamicActionArea {}

@@ -34,13 +34,12 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    layout: PlaygroundLayout.center,
     backgroundColor: WdsColorCoolNeutral.v50,
-    child: button,
     info: [
       'icon: ${icon.name}',
       'state: ${enabled ? 'enabled' : 'disabled'}',
     ],
+    child: button,
   );
 }
 

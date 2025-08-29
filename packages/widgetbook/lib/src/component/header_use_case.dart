@@ -22,10 +22,11 @@ Widget buildWdsHeaderUseCase(BuildContext context) {
 
 Widget _buildPlaygroundSection(BuildContext context) {
   final type = context.knobs.object.dropdown<String>(
-      label: 'variant',
-      options: ['logo', 'title', 'search'],
-      initialOption: 'title',
-      description: '3가지 유형이 있어요');
+    label: 'variant',
+    options: ['logo', 'title', 'search'],
+    initialOption: 'title',
+    description: '3가지 유형이 있어요',
+  );
   final titleText = context.knobs.string(
     label: 'title',
     initialValue: '텍스트',
@@ -33,13 +34,11 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
   final enableLeading = context.knobs.boolean(
     label: 'leading',
-    initialValue: false,
     description: 'variant가 logo일 때는 사용할 수 없어요',
   );
   final actionsCount = context.knobs.int.slider(
     label: 'actions',
     initialValue: 1,
-    min: 0,
     max: 3,
     divisions: 3,
     description: '오른쪽에 위치하는 아이콘의 개수를 조절할 수 있어요',
@@ -80,7 +79,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
         actions: actions,
       ),
     'search' => WdsHeader.search(
-        title: WdsSearchField(hintText: '검색어를 입력해주세요'),
+        title: const WdsSearchField(hintText: '검색어를 입력해주세요'),
         leading: type == 'logo' ? null : leadingWidget,
         actions: actions.isEmpty ? actions : actions.sublist(0, 1),
       ),
@@ -94,13 +93,13 @@ Widget _buildPlaygroundSection(BuildContext context) {
   return WidgetbookPlayground(
     layout: PlaygroundLayout.stretch,
     backgroundColor: WdsColorCoolNeutral.v50,
-    child: header,
     info: [
       'layout: stretch',
       'variant: $type',
       'actions: ${actions.length}',
       'leading: ${enableLeading && type != 'logo'}',
     ],
+    child: header,
   );
 }
 
@@ -115,7 +114,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
         content: Column(
           spacing: 16,
           children: [
-            WdsHeader.logo(actions: const []),
+            WdsHeader.logo(),
             WdsHeader.title(
               title: const Text('텍스트'),
               actions: [
@@ -130,7 +129,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
               ],
             ),
             WdsHeader.search(
-              title: WdsSearchField(hintText: '검색어를 입력해주세요'),
+              title: const WdsSearchField(hintText: '검색어를 입력해주세요'),
               actions: [
                 WdsIconButton(
                   onTap: () => print('submit'),

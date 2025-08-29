@@ -52,10 +52,12 @@ class WidgetbookSubsection extends StatelessWidget {
           children: [
             Text('$title = ', style: WdsSemanticTypography.heading17Bold),
             ...labels
-                .expand((label) => [
-                      _TypeLabel(label),
-                      const SizedBox(width: 12),
-                    ])
+                .expand(
+                  (label) => [
+                    _TypeLabel(label),
+                    const SizedBox(width: 12),
+                  ],
+                )
                 .take(labels.length * 2 - 1),
           ],
         ),
@@ -86,7 +88,7 @@ class _TypeLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: WdsColorNeutral.v100,
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),

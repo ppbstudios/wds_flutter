@@ -35,7 +35,7 @@ class WdsBottomNavigation extends StatelessWidget {
       height: _totalHeight,
       width: double.infinity,
       child: DecoratedBox(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: WdsColorCommon.white,
           border: Border(
             top: BorderSide(color: WdsSemanticColorBorder.alternative),
@@ -93,7 +93,8 @@ class _BottomNavigationItemWidget extends StatelessWidget {
                 item.label,
                 style: WdsSemanticTypography.caption10Medium.copyWith(
                   color: cta,
-                  fontWeight: isActive ? WdsFontWeight.bold : WdsFontWeight.medium,
+                  fontWeight:
+                      isActive ? WdsFontWeight.bold : WdsFontWeight.medium,
                 ),
                 maxLines: 1,
               ),

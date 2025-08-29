@@ -238,7 +238,6 @@ class _WdsButtonState extends State<WdsButton>
           height: height,
           child: Center(
             child: Align(
-              alignment: Alignment.center,
               widthFactor: 1,
               child: Stack(
                 alignment: Alignment.center,

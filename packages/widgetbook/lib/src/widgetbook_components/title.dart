@@ -25,7 +25,7 @@ class WidgetbookTitle extends StatelessWidget {
             description!,
             style: WdsSemanticTypography.heading16Regular,
           ),
-        Divider(
+        const Divider(
           height: 4,
           thickness: 4,
           color: WdsColorCommon.black,

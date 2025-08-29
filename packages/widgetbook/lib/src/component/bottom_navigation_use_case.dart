@@ -8,11 +8,17 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 )
 Widget buildWdsBottomNavigationUseCase(BuildContext context) {
   final items = [
-    WdsBottomNavigationItem(icon: WdsNavigationIcon.home, label: '홈'),
-    WdsBottomNavigationItem(icon: WdsNavigationIcon.store, label: '내 예약매장'),
-    WdsBottomNavigationItem(icon: WdsNavigationIcon.category, label: '카테고리'),
-    WdsBottomNavigationItem(icon: WdsNavigationIcon.like, label: '좋아요'),
-    WdsBottomNavigationItem(icon: WdsNavigationIcon.my, label: '마이윙크'),
+    const WdsBottomNavigationItem(icon: WdsNavigationIcon.home, label: '홈'),
+    const WdsBottomNavigationItem(
+      icon: WdsNavigationIcon.store,
+      label: '내 예약매장',
+    ),
+    const WdsBottomNavigationItem(
+      icon: WdsNavigationIcon.category,
+      label: '카테고리',
+    ),
+    const WdsBottomNavigationItem(icon: WdsNavigationIcon.like, label: '좋아요'),
+    const WdsBottomNavigationItem(icon: WdsNavigationIcon.my, label: '마이윙크'),
   ];
 
   return WidgetbookPageLayout(

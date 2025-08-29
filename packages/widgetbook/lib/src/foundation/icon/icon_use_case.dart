@@ -35,12 +35,12 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   return WidgetbookPlayground(
     backgroundColor: WdsColorCoolNeutral.v50,
-    child: selected.build(color: color, width: 24, height: 24),
     info: [
       'icon: ${selected.name}',
       'color',
       'size fixed: 24x24',
     ],
+    child: selected.build(color: color, width: 24, height: 24),
   );
 }
 
@@ -120,7 +120,7 @@ class _NavigationIconGrid extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 spacing: 8,
                 children: [
-                  icons[i].build(isActive: false),
+                  icons[i].build(),
                   SizedBox(
                     width: 96,
                     child: Text(

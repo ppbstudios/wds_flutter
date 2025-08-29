@@ -36,26 +36,25 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    layout: PlaygroundLayout.center,
-    child: ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 360),
-      child: widget,
-    ),
     info: [
       'state: ${enabled ? 'enabled' : 'disabled'}',
       'hint: $hint',
     ],
+    child: ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 360),
+      child: widget,
+    ),
   );
 }
 
 Widget _buildDemonstrationSection(BuildContext context) {
-  return WidgetbookSection(
+  return const WidgetbookSection(
     title: 'SearchField',
     children: [
       Row(
         mainAxisSize: MainAxisSize.min,
         spacing: 16,
-        children: const [
+        children: [
           SizedBox(
             width: 280,
             child: WdsSearchField(hintText: '검색어를 입력하세요'),

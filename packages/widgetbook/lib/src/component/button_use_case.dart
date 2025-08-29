@@ -54,7 +54,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   };
 
   final child = Text(text, style: styleBySize[size]!);
-  final onTap = () => print('Button pressed: $variant $size');
+  void onTap() => print('Button pressed: $variant $size');
 
   final sizeValue = switch (size) {
     'xlarge' => WdsButtonSize.xlarge,
@@ -74,19 +74,19 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   final button = WdsButton(
     onTap: onTap,
-    child: child,
     isEnabled: isEnabled,
     variant: variantValue,
     size: sizeValue,
+    child: child,
   );
 
   return WidgetbookPlayground(
-    child: button,
     info: [
       'variant: $variant',
       'size: $size',
       'state: ${isEnabled ? 'enabled' : 'disabled'}',
     ],
+    child: button,
   );
 }
 
@@ -103,20 +103,19 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 16,
           children: [
             WdsButton(
-                onTap: () => print('CTA pressed'),
-                variant: WdsButtonVariant.cta,
-                size: WdsButtonSize.medium,
-                child: Text('텍스트')),
+              onTap: () => print('CTA pressed'),
+              child: const Text('텍스트'),
+            ),
             WdsButton(
-                onTap: () => print('Primary pressed'),
-                variant: WdsButtonVariant.primary,
-                size: WdsButtonSize.medium,
-                child: Text('텍스트')),
+              onTap: () => print('Primary pressed'),
+              variant: WdsButtonVariant.primary,
+              child: const Text('텍스트'),
+            ),
             WdsButton(
-                onTap: () => print('Secondary pressed'),
-                variant: WdsButtonVariant.secondary,
-                size: WdsButtonSize.medium,
-                child: Text('텍스트')),
+              onTap: () => print('Secondary pressed'),
+              variant: WdsButtonVariant.secondary,
+              child: const Text('텍스트'),
+            ),
           ],
         ),
       ),
@@ -128,30 +127,29 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 16,
           children: [
             WdsButton(
-                onTap: () => print('XL pressed'),
-                variant: WdsButtonVariant.cta,
-                size: WdsButtonSize.xlarge,
-                child: Text('텍스트')),
+              onTap: () => print('XL pressed'),
+              size: WdsButtonSize.xlarge,
+              child: const Text('텍스트'),
+            ),
             WdsButton(
-                onTap: () => print('L pressed'),
-                variant: WdsButtonVariant.cta,
-                size: WdsButtonSize.large,
-                child: Text('텍스트')),
+              onTap: () => print('L pressed'),
+              size: WdsButtonSize.large,
+              child: const Text('텍스트'),
+            ),
             WdsButton(
-                onTap: () => print('M pressed'),
-                variant: WdsButtonVariant.cta,
-                size: WdsButtonSize.medium,
-                child: Text('텍스트')),
+              onTap: () => print('M pressed'),
+              child: const Text('텍스트'),
+            ),
             WdsButton(
-                onTap: () => print('S pressed'),
-                variant: WdsButtonVariant.cta,
-                size: WdsButtonSize.small,
-                child: Text('텍스트')),
+              onTap: () => print('S pressed'),
+              size: WdsButtonSize.small,
+              child: const Text('텍스트'),
+            ),
             WdsButton(
-                onTap: () => print('TY pressed'),
-                variant: WdsButtonVariant.cta,
-                size: WdsButtonSize.tiny,
-                child: Text('텍스트')),
+              onTap: () => print('TY pressed'),
+              size: WdsButtonSize.tiny,
+              child: const Text('텍스트'),
+            ),
           ],
         ),
       ),
@@ -166,20 +164,19 @@ Widget _buildDemonstrationSection(BuildContext context) {
               spacing: 16,
               children: [
                 WdsButton(
-                    onTap: () => print('CTA default'),
-                    variant: WdsButtonVariant.cta,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트')),
+                  onTap: () => print('CTA default'),
+                  child: const Text('텍스트'),
+                ),
                 WdsButton(
-                    onTap: () => print('Primary default'),
-                    variant: WdsButtonVariant.primary,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트')),
+                  onTap: () => print('Primary default'),
+                  variant: WdsButtonVariant.primary,
+                  child: const Text('텍스트'),
+                ),
                 WdsButton(
-                    onTap: () => print('Secondary default'),
-                    variant: WdsButtonVariant.secondary,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트')),
+                  onTap: () => print('Secondary default'),
+                  variant: WdsButtonVariant.secondary,
+                  child: const Text('텍스트'),
+                ),
                 // Square 는 별도 SquareButton 컴포넌트로 분리됨
               ],
             ),
@@ -188,20 +185,19 @@ Widget _buildDemonstrationSection(BuildContext context) {
               spacing: 16,
               children: [
                 WdsButton(
-                    onTap: () => print('CTA pressed'),
-                    variant: WdsButtonVariant.cta,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트')),
+                  onTap: () => print('CTA pressed'),
+                  child: const Text('텍스트'),
+                ),
                 WdsButton(
-                    onTap: () => print('Primary pressed'),
-                    variant: WdsButtonVariant.primary,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트')),
+                  onTap: () => print('Primary pressed'),
+                  variant: WdsButtonVariant.primary,
+                  child: const Text('텍스트'),
+                ),
                 WdsButton(
-                    onTap: () => print('Secondary pressed'),
-                    variant: WdsButtonVariant.secondary,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트')),
+                  onTap: () => print('Secondary pressed'),
+                  variant: WdsButtonVariant.secondary,
+                  child: const Text('텍스트'),
+                ),
                 // Square 는 별도 SquareButton 컴포넌트로 분리됨
               ],
             ),
@@ -210,23 +206,22 @@ Widget _buildDemonstrationSection(BuildContext context) {
               spacing: 16,
               children: [
                 WdsButton(
-                    onTap: () => print('CTA disabled'),
-                    variant: WdsButtonVariant.cta,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트'),
-                    isEnabled: false),
+                  onTap: () => print('CTA disabled'),
+                  isEnabled: false,
+                  child: const Text('텍스트'),
+                ),
                 WdsButton(
-                    onTap: () => print('Primary disabled'),
-                    variant: WdsButtonVariant.primary,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트'),
-                    isEnabled: false),
+                  onTap: () => print('Primary disabled'),
+                  variant: WdsButtonVariant.primary,
+                  isEnabled: false,
+                  child: const Text('텍스트'),
+                ),
                 WdsButton(
-                    onTap: () => print('Secondary disabled'),
-                    variant: WdsButtonVariant.secondary,
-                    size: WdsButtonSize.medium,
-                    child: Text('텍스트'),
-                    isEnabled: false),
+                  onTap: () => print('Secondary disabled'),
+                  variant: WdsButtonVariant.secondary,
+                  isEnabled: false,
+                  child: const Text('텍스트'),
+                ),
                 // Square 는 별도 SquareButton 컴포넌트로 분리됨
               ],
             ),

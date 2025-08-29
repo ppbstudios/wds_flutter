@@ -93,7 +93,6 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
           autofocus: widget.autofocus,
           onChanged: widget.onChanged,
           onSubmitted: widget.onSubmitted,
-          maxLines: 1,
           style: textStyle,
           cursorColor: WdsSemanticColorText.normal,
           decoration: InputDecoration(
@@ -115,7 +114,7 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
     final bool showTrailing = widget.enabled && _controller.text.isNotEmpty;
 
     final Widget core = DecoratedBox(
-      decoration: ShapeDecoration(
+      decoration: const ShapeDecoration(
         color: WdsSemanticColorBackgroud.alternative,
         shape: RoundedRectangleBorder(borderRadius: borderRadius),
       ),
@@ -144,7 +143,6 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
       child: ConstrainedBox(
         constraints: const BoxConstraints(
           minWidth: 250,
-          maxWidth: double.infinity,
           minHeight: 36,
           maxHeight: 36,
         ),

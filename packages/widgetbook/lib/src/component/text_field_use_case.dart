@@ -53,13 +53,11 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   final error = context.knobs.string(
     label: 'error',
-    initialValue: '',
     description: '텍스트 입력란 아래에 표시될 에러 텍스트를 입력해 주세요. 작성하면 error 상태로 바뀝니다.',
   );
 
   final text = context.knobs.string(
     label: 'initial text',
-    initialValue: '',
     description: '텍스트 입력란에 초기 값을 입력해 주세요',
   );
 
@@ -85,8 +83,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
   }
 
   return WidgetbookPlayground(
-    layout: PlaygroundLayout.center,
-    child: SizedBox(width: 360, child: field),
     info: [
       'variant: ${variant.name}',
       'state: ${enabled ? 'enabled' : 'disabled'}',
@@ -95,6 +91,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
       if (helper.isNotEmpty) 'helper: $helper',
       if (error.isNotEmpty) 'error: $error',
     ],
+    child: SizedBox(width: 360, child: field),
   );
 }
 
@@ -105,7 +102,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
 
   final errorNode2 = FocusNode();
 
-  Future<void> _focusNode(FocusNode node) async {
+  Future<void> focusNode(FocusNode node) async {
     node.requestFocus();
     await Future.delayed(const Duration(milliseconds: 500));
     node.unfocus();
@@ -143,10 +140,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
             ),
 
             /// active
-            SizedBox(
+            const SizedBox(
               width: 320,
               child: _ActiveWrapper(
-                child: const WdsTextField.outlined(
+                child: WdsTextField.outlined(
                   label: '주제',
                   hintText: '힌트',
                 ),
@@ -156,25 +153,29 @@ Widget _buildDemonstrationSection(BuildContext context) {
             /// error
             SizedBox(
               width: 320,
-              child: Builder(builder: (context) {
-                bool hasBuilt = false;
+              child: Builder(
+                builder: (context) {
+                  bool hasBuilt = false;
 
-                return StatefulBuilder(builder: (context, setState) {
-                  if (!hasBuilt) {
-                    hasBuilt = true;
-                    _focusNode(errorNode1).then((_) => setState(() {}));
-                  }
+                  return StatefulBuilder(
+                    builder: (context, setState) {
+                      if (!hasBuilt) {
+                        hasBuilt = true;
+                        focusNode(errorNode1).then((_) => setState(() {}));
+                      }
 
-                  return WdsTextField.outlined(
-                    label: '주제',
-                    hintText: '힌트',
-                    helperText: '유저의 이해를 도와줄 텍스트',
-                    controller: controller,
-                    validator: (value) => '오류가 발생해요  ',
-                    focusNode: errorNode1,
+                      return WdsTextField.outlined(
+                        label: '주제',
+                        hintText: '힌트',
+                        helperText: '유저의 이해를 도와줄 텍스트',
+                        controller: controller,
+                        validator: (value) => '오류가 발생해요  ',
+                        focusNode: errorNode1,
+                      );
+                    },
                   );
-                });
-              }),
+                },
+              ),
             ),
 
             /// disabled
@@ -216,10 +217,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
             ),
 
             /// active
-            SizedBox(
+            const SizedBox(
               width: 320,
               child: _ActiveWrapper(
-                child: const WdsTextField.box(
+                child: WdsTextField.box(
                   hintText: '힌트',
                 ),
               ),
@@ -228,23 +229,27 @@ Widget _buildDemonstrationSection(BuildContext context) {
             /// error
             SizedBox(
               width: 320,
-              child: Builder(builder: (context) {
-                bool hasBuilt = false;
+              child: Builder(
+                builder: (context) {
+                  bool hasBuilt = false;
 
-                return StatefulBuilder(builder: (context, setState) {
-                  if (!hasBuilt) {
-                    hasBuilt = true;
-                    _focusNode(errorNode2).then((_) => setState(() {}));
-                  }
+                  return StatefulBuilder(
+                    builder: (context, setState) {
+                      if (!hasBuilt) {
+                        hasBuilt = true;
+                        focusNode(errorNode2).then((_) => setState(() {}));
+                      }
 
-                  return WdsTextField.box(
-                    hintText: '힌트',
-                    controller: controller,
-                    validator: (value) => '오류가 발생해요',
-                    focusNode: errorNode2,
+                      return WdsTextField.box(
+                        hintText: '힌트',
+                        controller: controller,
+                        validator: (value) => '오류가 발생해요',
+                        focusNode: errorNode2,
+                      );
+                    },
                   );
-                });
-              }),
+                },
+              ),
             ),
 
             /// disabled
@@ -266,7 +271,6 @@ Widget _buildDemonstrationSection(BuildContext context) {
 Widget _buildVerifiedSection(BuildContext context) {
   return WidgetbookSection(
     title: 'verified (outlined + button)',
-    spacing: 16,
     children: [
       Row(
         mainAxisSize: MainAxisSize.min,
@@ -299,7 +303,6 @@ Widget _buildVerifiedSection(BuildContext context) {
           WdsButton(
             onTap: () => print('CTA'),
             size: WdsButtonSize.small,
-            variant: WdsButtonVariant.cta,
             child: const Text('텍스트'),
           ),
         ],
@@ -322,11 +325,11 @@ Widget _buildVerifiedSection(BuildContext context) {
           ),
         ],
       ),
-      Row(
+      const Row(
         mainAxisSize: MainAxisSize.min,
         spacing: 16,
         children: [
-          const Expanded(
+          Expanded(
             child: WdsTextField.outlined(
               label: '주제',
               hintText: '텍스트를 입력해주세요.',
@@ -337,7 +340,7 @@ Widget _buildVerifiedSection(BuildContext context) {
             isEnabled: false,
             size: WdsButtonSize.small,
             variant: WdsButtonVariant.secondary,
-            child: const Text('텍스트'),
+            child: Text('텍스트'),
           ),
         ],
       ),

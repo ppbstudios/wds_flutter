@@ -2,12 +2,6 @@ part of '../../wds_components.dart';
 
 /// 앱 상단에 위치하는 헤더. `PreferredSizeWidget` 구현으로 AppBar 대체 가능
 class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
-  // 고정 스펙
-  static const Size fixedSize = Size(double.infinity, 50);
-  static const EdgeInsets fixedPadding = EdgeInsets.fromLTRB(16, 5, 16, 5);
-  static const TextStyle fixedTypography = WdsSemanticTypography.heading17Bold;
-  static const Color fixedBackground = WdsSemanticColorBackgroud.normal;
-
   // 공통 생성자 (private), named constructors 로만 생성
   const WdsHeader._({
     required this.leading,
@@ -67,6 +61,11 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
       key: key,
     );
   }
+  // 고정 스펙
+  static const Size fixedSize = Size(double.infinity, 50);
+  static const EdgeInsets fixedPadding = EdgeInsets.fromLTRB(16, 5, 16, 5);
+  static const TextStyle fixedTypography = WdsSemanticTypography.heading17Bold;
+  static const Color fixedBackground = WdsSemanticColorBackgroud.normal;
 
   final Widget? leading;
   final Widget title;

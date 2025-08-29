@@ -17,9 +17,8 @@ class WdsTextField extends StatefulWidget {
     this.autovalidateMode = AutovalidateMode.disabled,
     this.onChanged,
     this.onSubmitted,
-    Key? key,
-  })  : variant = WdsTextFieldVariant.outlined,
-        super(key: key);
+    super.key,
+  }) : variant = WdsTextFieldVariant.outlined;
 
   const WdsTextField.box({
     this.controller,
@@ -34,9 +33,8 @@ class WdsTextField extends StatefulWidget {
     this.autovalidateMode = AutovalidateMode.disabled,
     this.onChanged,
     this.onSubmitted,
-    Key? key,
-  })  : variant = WdsTextFieldVariant.box,
-        super(key: key);
+    super.key,
+  }) : variant = WdsTextFieldVariant.box;
 
   final WdsTextFieldVariant variant;
 
@@ -169,35 +167,6 @@ class _WdsTextFieldState extends State<WdsTextField> {
     final hasError = _effectiveErrorText?.isNotEmpty == true;
     final hasHelper = widget.helperText?.isNotEmpty == true;
 
-    if (widget.variant == WdsTextFieldVariant.outlined &&
-        hasError &&
-        hasHelper) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Flexible(
-            child: Text(
-              _effectiveErrorText!,
-              style: _errorStyle.copyWith(
-                  color: WdsSemanticColorStatus.destructive),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Flexible(
-            child: Text(
-              widget.helperText!,
-              style: _helperStyle.copyWith(
-                  color: WdsSemanticColorText.alternative),
-              textAlign: TextAlign.end,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
-      );
-    }
-
     if (hasError) {
       return Text(
         _effectiveErrorText!,
@@ -207,12 +176,16 @@ class _WdsTextFieldState extends State<WdsTextField> {
       );
     }
 
-    return Text(
-      widget.helperText!,
-      style: _helperStyle.copyWith(color: WdsSemanticColorText.alternative),
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
-    );
+    if (hasHelper) {
+      return Text(
+        widget.helperText!,
+        style: _helperStyle.copyWith(color: WdsSemanticColorText.alternative),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 
   @override
@@ -228,15 +201,9 @@ class _WdsTextFieldState extends State<WdsTextField> {
         ? WdsSemanticColorText.normal
         : WdsSemanticColorText.alternative;
 
-    final hintColor =
-        switch ((!widget.isEnabled, _hasFocus, _hasError, _hasValue)) {
-      (true, _, _, _) => WdsSemanticColorText.disable, // disabled
-      (false, true, _, _) => WdsSemanticColorText.normal, // focused
-      (false, _, true, _) => WdsSemanticColorText.normal, // error
-      (false, _, _, true) => WdsSemanticColorText.normal, // active (has value)
-      (false, false, false, false) =>
-        WdsSemanticColorText.alternative, // enabled
-    };
+    final hintColor = widget.isEnabled
+        ? WdsSemanticColorText.alternative
+        : WdsSemanticColorText.disable;
 
     final labelColor = widget.isEnabled
         ? WdsSemanticColorText.alternative
@@ -248,12 +215,12 @@ class _WdsTextFieldState extends State<WdsTextField> {
       (false, true) =>
         const BorderSide(color: WdsSemanticColorStatus.positive, width: 2),
       (false, false) =>
-        const BorderSide(color: WdsSemanticColorBorder.alternative, width: 1),
+        const BorderSide(color: WdsSemanticColorBorder.alternative),
     };
 
     final decoration = InputDecoration(
       isDense: true,
-      contentPadding: const EdgeInsets.symmetric(vertical: 7, horizontal: 0),
+      contentPadding: const EdgeInsets.symmetric(vertical: 7),
       hintText: widget.hintText,
       hintStyle: _hintStyle.copyWith(color: hintColor),
       border: UnderlineInputBorder(borderSide: borderSide),
@@ -265,8 +232,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
     );
 
     return ConstrainedBox(
-      constraints:
-          const BoxConstraints(minWidth: 250, maxWidth: double.infinity),
+      constraints: const BoxConstraints(minWidth: 250),
       child: RepaintBoundary(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -283,19 +249,19 @@ class _WdsTextFieldState extends State<WdsTextField> {
               ),
             // TextField with height stabilization
             RepaintBoundary(
-              child: Padding(
-                padding:
-                    EdgeInsets.only(bottom: (_hasFocus || _hasError) ? 0 : 1),
+              child: TextSelectionTheme(
+                data: TextSelectionThemeData(
+                  selectionHandleColor: primary,
+                  selectionColor: primary.withAlpha(40),
+                ),
                 child: TextField(
                   controller: _controller,
                   focusNode: _focusNode,
                   enabled: widget.isEnabled,
                   autofocus: widget.autofocus,
                   cursorColor: WdsSemanticColorText.normal,
-                  cursorWidth: 2,
                   cursorRadius: const Radius.circular(WdsAtomicRadius.full),
                   style: _inputStyle.copyWith(color: inputColor),
-                  maxLines: 1,
                   onChanged: widget.onChanged,
                   onSubmitted: widget.onSubmitted,
                   decoration: decoration,
@@ -323,15 +289,9 @@ class _WdsTextFieldState extends State<WdsTextField> {
         ? WdsSemanticColorText.normal
         : WdsSemanticColorText.alternative;
 
-    final hintColor =
-        switch ((!widget.isEnabled, _hasFocus, _hasError, _hasValue)) {
-      (true, _, _, _) => WdsSemanticColorText.disable, // disabled
-      (false, true, _, _) => WdsSemanticColorText.normal, // focused
-      (false, _, true, _) => WdsSemanticColorText.normal, // error
-      (false, _, _, true) => WdsSemanticColorText.normal, // active (has value)
-      (false, false, false, false) =>
-        WdsSemanticColorText.alternative, // enabled
-    };
+    final hintColor = !widget.isEnabled
+        ? WdsSemanticColorText.disable
+        : WdsSemanticColorText.alternative;
 
     final borderColor = switch ((_hasError, _hasFocus)) {
       (true, _) => WdsSemanticColorStatus.destructive,
@@ -350,7 +310,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
             color: WdsSemanticColorBackgroud.normal,
             shape: RoundedRectangleBorder(
               borderRadius: radius,
-              side: BorderSide(color: borderColor, width: 1),
+              side: BorderSide(color: borderColor),
             ),
           ),
           child: Padding(
@@ -370,10 +330,8 @@ class _WdsTextFieldState extends State<WdsTextField> {
                         enabled: widget.isEnabled,
                         autofocus: widget.autofocus,
                         cursorColor: WdsSemanticColorText.normal,
-                        cursorWidth: 2,
                         cursorRadius:
                             const Radius.circular(WdsAtomicRadius.full),
-                        maxLines: 1,
                         style: _inputStyle.copyWith(color: inputColor),
                         onChanged: widget.onChanged,
                         onSubmitted: widget.onSubmitted,
@@ -404,8 +362,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
     );
 
     return ConstrainedBox(
-      constraints:
-          const BoxConstraints(minWidth: 250, maxWidth: double.infinity),
+      constraints: const BoxConstraints(minWidth: 250),
       child: RepaintBoundary(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
