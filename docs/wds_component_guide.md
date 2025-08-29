@@ -804,11 +804,10 @@ underline | 선택됨 | 높이 2px, 너비 탭 full, color `WdsColorCommon.black
 underline | 선택 안됨 | 1px solid `WdsSemanticColorBorder.alternative` |
 탭 개수 | - | 2개 또는 3개 |
 
-## Action Area
-화면 하단에서 주요 액션(결제, 다음 단계 등)을 안정적으로 수행하게 하는 영역입니다. 두 가지 성격으로 구분합니다.
+## ActionArea
+화면 하단에서 주요 액션(결제, 다음 단계 등)을 안정적으로 수행하게 하는 영역입니다.
 
-- `FixedActionArea`: 버튼 조합만 있는 고정형
-- `DynamicActionArea`: CTA 버튼을 기준으로 상단에 보조 정보/컨트롤이 함께 오는 동적형
+- `ActionArea`: 버튼 조합만 있는 고정형
 
 두 컴포넌트 모두 다음 공통 스타일을 따릅니다.
 
@@ -820,7 +819,7 @@ padding | `EdgeInsets.all(16)` |
 
 CTA는 기본적으로 `WdsButton`을 사용하고, 특별한 언급이 없으면 size는 `WdsButtonSize.xlarge` 입니다.
 
-### FixedActionArea
+### ActionArea
 
 고정된 높이를 갖는 단순 버튼 영역입니다.
 
@@ -831,7 +830,7 @@ border(top) | `1px WdsSemanticColorBorder.alternative` | 공통
 backgroundColor | `WdsColorCommon.white` | 공통
 padding | `EdgeInsets.all(16)` | 공통
 
-#### FixedActionArea - variant
+#### ActionArea - variant
 
 variant | 버튼 구성 | 레이아웃/크기 | spacing
 --- | --- | --- | ---
@@ -843,9 +842,7 @@ division | 2개: `.secondary` + `.cta` | 두 버튼 모두 `Expanded`, 너비 �
 
 ``` dart
 // normal
-Row(children: [
-  Expanded(child: WdsButton(variant: WdsButtonVariant.cta, size: WdsButtonSize.xlarge, child: const Text('메인액션'))),
-]);
+Expanded(child: WdsButton(variant: WdsButtonVariant.cta, size: WdsButtonSize.xlarge, child: const Text('메인액션')));
 
 // filter
 Row(spacing: 12, children: [
@@ -862,81 +859,6 @@ Row(spacing: 12, children: [
 Row(spacing: 12, children: [
   Expanded(child: WdsButton(variant: WdsButtonVariant.secondary, size: WdsButtonSize.xlarge, child: const Text('대체액션'))),
   Expanded(child: WdsButton(variant: WdsButtonVariant.cta, size: WdsButtonSize.xlarge, child: const Text('메인액션'))),
-]);
-```
-
-### DynamicActionArea
-
-CTA 버튼을 중심으로, 그 위에 상황별 보조 정보/컨트롤이 함께 배치되는 영역입니다. 상단 보조 영역은 한 줄(one-line)을 기본으로 하며, 필요 시 내부 콘텐츠 길이에 맞춰 높이가 자연스럽게 늘어납니다.
-
-항목 | 값 | 비고
---- | --- | ---
-border(top) | `1px WdsSemanticColorBorder.alternative` | 공통
-backgroundColor | `WdsColorCommon.white` | 공통
-padding | `EdgeInsets.all(16)` | 공통
-CTA | `WdsButton(variant: cta, size: xlarge)` | 가로 전체 stretch
-
-#### DynamicActionArea - variant
-
-variant | 상단 보조 영역 내용 | 상단 영역 타이포/간격 | 버튼 레이아웃
---- | --- | --- | ---
-product | 상품 관련 요약 메타 정보(좋아요 수, 리뷰 수 등) | 메타 블록 간 가로 간격 12px | CTA 1개 stretch
-discount | 프로모션/할인 안내 문구(아이콘 옵션) | 아이콘과 텍스트 간 8px, 한 줄 | CTA 1개 stretch
-checkbox | 체크 옵션 + 라벨 한 줄 | 체크박스와 라벨 간 8px | CTA 1개 stretch
-summary | 요약 캡션(좌) + 금액/수치(우) 형태 | 좌우 정렬, 한 줄 | CTA 1개 stretch
-chips | 선택된 필터/태그 칩 목록 | 칩 간 8px, 한 줄 스크롤/줄바꿈 없이 표시 권장 | CTA 1개 또는 보조 버튼 동시 노출 가능
-
-각 variant 상세
-
-- product
-  - 상단에 2개의 메타 블록을 좌→우로 배치합니다(예: 하트 아이콘+카운트, 리뷰 라벨+카운트).
-  - 블록 사이 가로 간격은 12px 입니다. 각 블록 내부의 상·하 정렬은 자유이나 한 줄 내에서 시각적 균형을 유지합니다.
-  - 하단에는 `CTA xlarge` 버튼을 가로 전체로 배치합니다.
-
-- discount
-  - "총 N원 할인 받았어요"와 같은 한 줄 안내를 노출합니다. 강조 수치(금액 등)는 브랜드/강조 색상을 사용할 수 있습니다.
-  - 아이콘을 사용할 경우 텍스트와 8px 간격으로 배치합니다.
-  - 하단에는 `CTA xlarge` 버튼을 가로 전체로 배치합니다.
-
-- checkbox
-  - 상단에 체크 가능한 옵션 1개와 라벨을 한 줄로 배치합니다(간격 8px).
-  - 체크 상태는 CTA와 독립적으로 동작하지만, 비활성화 흐름이 필요하면 비즈니스 로직에서 CTA의 `isEnabled`를 제어합니다.
-
-- summary
-  - 좌측에 짧은 캡션(예: "요약"), 우측에 금액/수치 텍스트를 배치합니다. 두 요소는 한 줄에서 좌우 정렬됩니다.
-  - 금액 텍스트는 읽기 가독성을 위해 적절한 세맨틱 타이포그래피 사용을 권장합니다.
-
-- chips
-  - 선택된 필터/태그 칩들을 한 줄로 나열합니다. 칩 간 간격은 8px 입니다.
-  - 칩 행 아래에 CTA만 배치하거나, 필요 시 보조 `.secondary` 버튼을 함께 노출할 수 있습니다.
-    - 보조 버튼을 함께 사용할 때 레이아웃은 `FixedActionArea.filter`와 동일(좌 110px 고정 + 우 CTA stretch, 간격 12px) 하게 구성할 수 있습니다.
-
-예시
-
-``` dart
-// product (상단 메타 + CTA)
-Column(spacing: 12, children: [
-  Row(spacing: 12, children: [
-    // 메타 블록 #1
-    Column(mainAxisSize: MainAxisSize.min, children: [/* 아이콘/라벨 + 수치 */]),
-    // 메타 블록 #2
-    Column(mainAxisSize: MainAxisSize.min, children: [/* 아이콘/라벨 + 수치 */]),
-  ]),
-  WdsButton(variant: WdsButtonVariant.cta, size: WdsButtonSize.xlarge, child: const Text('메인액션')),
-]);
-
-// chips (칩 + 보조버튼 + CTA)
-Column(spacing: 12, children: [
-  Wrap(spacing: 8, runSpacing: 0, children: [/* WdsChip ... */]),
-  Row(spacing: 12, children: [
-    SizedBox(
-      width: 110,
-      child: WdsButton(variant: WdsButtonVariant.secondary, size: WdsButtonSize.xlarge, child: const Text('대체액션')),
-    ),
-    Expanded(
-      child: WdsButton(variant: WdsButtonVariant.cta, size: WdsButtonSize.xlarge, child: const Text('메인액션')),
-    ),
-  ]),
 ]);
 ```
 

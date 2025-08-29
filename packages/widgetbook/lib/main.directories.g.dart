@@ -9,9 +9,9 @@
 // AppGenerator
 // **************************************************************************
 
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:wds_widgetbook/src/component/action_area_use_case.dart'
     as _wds_widgetbook_src_component_action_area_use_case;
-// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:wds_widgetbook/src/component/bottom_navigation_use_case.dart'
     as _wds_widgetbook_src_component_bottom_navigation_use_case;
 import 'package:wds_widgetbook/src/component/button_use_case.dart'
@@ -52,6 +52,14 @@ final directories = <_widgetbook.WidgetbookNode>[
     name: 'component',
     children: [
       _widgetbook.WidgetbookLeafComponent(
+        name: 'ActionArea',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'ActionArea',
+          builder: _wds_widgetbook_src_component_action_area_use_case
+              .buildWdsFixedActionAreaUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'BottomNavigation',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'BottomNavigation',
@@ -75,14 +83,6 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
-        name: 'ActionArea',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'FixedActionArea',
-          builder: _wds_widgetbook_src_component_action_area_use_case
-              .buildWdsFixedActionAreaUseCase,
-        ),
-      ),
-      _widgetbook.WidgetbookLeafComponent(
         name: 'Header',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Header',
@@ -96,14 +96,6 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'IconButton',
           builder: _wds_widgetbook_src_component_icon_button_use_case
               .buildWdsIconButtonUseCase,
-        ),
-      ),
-      _widgetbook.WidgetbookLeafComponent(
-        name: 'DynamicActionArea',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'DynamicActionArea',
-          builder: _wds_widgetbook_src_component_action_area_use_case
-              .buildWdsDynamicActionAreaUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(

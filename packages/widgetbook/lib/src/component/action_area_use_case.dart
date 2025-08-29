@@ -3,14 +3,14 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(
-  name: 'FixedActionArea',
-  type: FixedActionArea,
+  name: 'ActionArea',
+  type: ActionArea,
   path: '[component]/',
 )
 Widget buildWdsFixedActionAreaUseCase(BuildContext context) {
   return WidgetbookPageLayout(
     title: 'FixedActionArea',
-    description: '하단 고정형 액션 영역(81px). normal/filter/division 변형을 확인합니다.',
+    description: '사용자가 인터페이스를 통해 상호작용을 할 수 있는 공간을 제공합니다.',
     children: [
       _buildFixedPlayground(context),
       _buildFixedDemonstration(context),
@@ -35,7 +35,7 @@ Widget _buildFixedPlayground(BuildContext context) {
   );
 
   final area = switch (variant) {
-    'filter' => WdsFixedActionArea.filter(
+    'filter' => WdsActionArea.filter(
         secondary: WdsButton(
           onTap: () => debugPrint('secondary'),
           variant: WdsButtonVariant.secondary,
@@ -48,7 +48,7 @@ Widget _buildFixedPlayground(BuildContext context) {
           child: Text(labelPrimary),
         ),
       ),
-    'division' => WdsFixedActionArea.division(
+    'division' => WdsActionArea.division(
         secondary: WdsButton(
           onTap: () => debugPrint('secondary'),
           variant: WdsButtonVariant.secondary,
@@ -61,7 +61,7 @@ Widget _buildFixedPlayground(BuildContext context) {
           child: Text(labelPrimary),
         ),
       ),
-    _ => WdsFixedActionArea.normal(
+    _ => WdsActionArea.normal(
         primary: WdsButton(
           onTap: () => debugPrint('primary'),
           size: WdsButtonSize.xlarge,
@@ -71,6 +71,7 @@ Widget _buildFixedPlayground(BuildContext context) {
   };
 
   return WidgetbookPlayground(
+    backgroundColor: WdsColorCoolNeutral.v50,
     info: const [
       'height: 81',
       'padding: 16 all',
@@ -85,22 +86,22 @@ Widget _buildFixedPlayground(BuildContext context) {
 
 Widget _buildFixedDemonstration(BuildContext context) {
   return WidgetbookSection(
-    title: 'Variants',
+    title: 'ActionArea',
     children: [
       WidgetbookSubsection(
-        title: 'normal / filter / division',
+        title: 'variant',
         labels: const ['normal', 'filter', 'division'],
         content: Column(
           spacing: 16,
           children: [
-            WdsFixedActionArea.normal(
+            WdsActionArea.normal(
               primary: WdsButton(
                 onTap: () {},
                 size: WdsButtonSize.xlarge,
                 child: const Text('메인액션'),
               ),
             ),
-            WdsFixedActionArea.filter(
+            WdsActionArea.filter(
               secondary: WdsButton(
                 onTap: () {},
                 variant: WdsButtonVariant.secondary,
@@ -113,7 +114,7 @@ Widget _buildFixedDemonstration(BuildContext context) {
                 child: const Text('메인액션'),
               ),
             ),
-            WdsFixedActionArea.division(
+            WdsActionArea.division(
               secondary: WdsButton(
                 onTap: () {},
                 variant: WdsButtonVariant.secondary,
@@ -125,108 +126,6 @@ Widget _buildFixedDemonstration(BuildContext context) {
                 size: WdsButtonSize.xlarge,
                 child: const Text('메인액션'),
               ),
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
-}
-
-@widgetbook.UseCase(
-  name: 'DynamicActionArea',
-  type: DynamicActionArea,
-  path: '[component]/',
-)
-Widget buildWdsDynamicActionAreaUseCase(BuildContext context) {
-  return WidgetbookPageLayout(
-    title: 'DynamicActionArea',
-    description: '보조 정보/컨트롤 + CTA로 구성되는 동적 액션 영역',
-    children: [
-      _buildDynamicPlayground(context),
-      _buildDynamicDemonstration(context),
-    ],
-  );
-}
-
-Widget _buildDynamicPlayground(BuildContext context) {
-  final variant = context.knobs.object.dropdown<WdsDynamicActionAreaVariant>(
-    label: 'variant',
-    options: WdsDynamicActionAreaVariant.values,
-    initialOption: WdsDynamicActionAreaVariant.product,
-    labelBuilder: (v) => v.name,
-  );
-
-  final labelPrimary =
-      context.knobs.string(label: 'cta label', initialValue: '메인액션');
-
-  final area = WdsDynamicActionArea(
-    variant: variant,
-    cta: WdsButton(
-      onTap: () => debugPrint('cta'),
-      size: WdsButtonSize.xlarge,
-      child: Text(labelPrimary),
-    ),
-  );
-
-  return WidgetbookPlayground(
-    info: const [
-      'padding: 16 all',
-      'top border: 1px alternative',
-      'cta: xlarge stretch',
-    ],
-    child: SizedBox(
-      height: 160,
-      child: Align(alignment: Alignment.bottomCenter, child: area),
-    ),
-  );
-}
-
-Widget _buildDynamicDemonstration(BuildContext context) {
-  WdsButton cta(String label) => WdsButton(
-        onTap: () {},
-        size: WdsButtonSize.xlarge,
-        child: Text(label),
-      );
-
-  return WidgetbookSection(
-    title: 'Variants',
-    children: [
-      WidgetbookSubsection(
-        title: 'product / discount / checkbox',
-        labels: const ['product', 'discount', 'checkbox'],
-        content: Column(
-          spacing: 16,
-          children: [
-            WdsDynamicActionArea(
-              variant: WdsDynamicActionAreaVariant.product,
-              cta: cta('메인액션'),
-            ),
-            WdsDynamicActionArea(
-              variant: WdsDynamicActionAreaVariant.discount,
-              cta: cta('메인액션'),
-            ),
-            WdsDynamicActionArea(
-              variant: WdsDynamicActionAreaVariant.checkbox,
-              cta: cta('메인액션'),
-            ),
-          ],
-        ),
-      ),
-      const SizedBox(height: 24),
-      WidgetbookSubsection(
-        title: 'summary / chips',
-        labels: const ['summary', 'chips'],
-        content: Column(
-          spacing: 16,
-          children: [
-            WdsDynamicActionArea(
-              variant: WdsDynamicActionAreaVariant.summary,
-              cta: cta('메인액션'),
-            ),
-            WdsDynamicActionArea(
-              variant: WdsDynamicActionAreaVariant.chips,
-              cta: cta('메인액션'),
             ),
           ],
         ),

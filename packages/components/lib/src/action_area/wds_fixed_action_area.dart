@@ -1,28 +1,28 @@
 part of '../../wds_components.dart';
 
-enum WdsFixedActionAreaVariant { normal, filter, division }
+enum WdsActionAreaVariant { normal, filter, division }
 
 /// 하단 고정 액션 영역
 /// - height: 81
 /// - padding: EdgeInsets.all(16)
 /// - border(top): 1px alternative
 /// - background: white
-class WdsFixedActionArea extends StatelessWidget {
-  WdsFixedActionArea.normal({
+class WdsActionArea extends StatelessWidget {
+  WdsActionArea.normal({
     required this.primary,
     super.key,
-  })  : variant = WdsFixedActionAreaVariant.normal,
+  })  : variant = WdsActionAreaVariant.normal,
         secondary = null,
         assert(
           primary.size == WdsButtonSize.xlarge,
           'primary 버튼은 size xlarge 여야 합니다.',
         );
 
-  WdsFixedActionArea.filter({
+  WdsActionArea.filter({
     required this.secondary,
     required this.primary,
     super.key,
-  })  : variant = WdsFixedActionAreaVariant.filter,
+  })  : variant = WdsActionAreaVariant.filter,
         assert(secondary != null),
         assert(
           secondary!.variant == WdsButtonVariant.secondary,
@@ -37,11 +37,11 @@ class WdsFixedActionArea extends StatelessWidget {
           'primary 버튼은 size xlarge 여야 합니다.',
         );
 
-  WdsFixedActionArea.division({
+  WdsActionArea.division({
     required this.secondary,
     required this.primary,
     super.key,
-  })  : variant = WdsFixedActionAreaVariant.division,
+  })  : variant = WdsActionAreaVariant.division,
         assert(secondary != null),
         assert(
           secondary!.variant == WdsButtonVariant.secondary,
@@ -62,14 +62,14 @@ class WdsFixedActionArea extends StatelessWidget {
   /// 우측 메인 CTA (xlarge)
   final WdsButton primary;
 
-  final WdsFixedActionAreaVariant variant;
+  final WdsActionAreaVariant variant;
 
   @override
   Widget build(BuildContext context) {
     final Widget content = switch (variant) {
-      WdsFixedActionAreaVariant.normal => _buildNormal(),
-      WdsFixedActionAreaVariant.filter => _buildFilter(),
-      WdsFixedActionAreaVariant.division => _buildDivision(),
+      WdsActionAreaVariant.normal => _buildNormal(),
+      WdsActionAreaVariant.filter => _buildFilter(),
+      WdsActionAreaVariant.division => _buildDivision(),
     };
 
     return LayoutBuilder(
