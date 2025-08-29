@@ -94,7 +94,7 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
           locale: childText.locale,
           softWrap: childText.softWrap,
           overflow: childText.overflow,
-          textScaleFactor: childText.textScaleFactor,
+          textScaler: childText.textScaler,
           maxLines: 1,
           semanticsLabel: childText.semanticsLabel,
           textWidthBasis: childText.textWidthBasis,

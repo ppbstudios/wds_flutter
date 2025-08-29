@@ -96,7 +96,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
         locale: t.locale,
         softWrap: t.softWrap,
         overflow: t.overflow,
-        textScaleFactor: t.textScaleFactor,
+        textScaler: t.textScaler,
         maxLines: 1,
         semanticsLabel: t.semanticsLabel,
         textWidthBasis: t.textWidthBasis,

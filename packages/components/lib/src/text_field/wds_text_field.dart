@@ -92,8 +92,8 @@ class _WdsTextFieldState extends State<WdsTextField> {
 
   void _precomputeStyles() {
     final isOutlined = widget.variant == WdsTextFieldVariant.outlined;
-    
-    _inputStyle = isOutlined 
+
+    _inputStyle = isOutlined
         ? WdsSemanticTypography.body15NormalRegular
         : WdsSemanticTypography.body13NormalRegular;
 
@@ -124,16 +124,50 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   Widget _buildHelperErrorText() {
-    if (widget.errorText?.isNotEmpty == true) {
+    final hasError = widget.errorText?.isNotEmpty == true;
+    final hasHelper = widget.helperText?.isNotEmpty == true;
+
+    if (hasError && hasHelper) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Text(
+              widget.errorText!,
+              style: _errorStyle.copyWith(
+                  color: WdsSemanticColorStatus.destructive),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Flexible(
+            child: Text(
+              widget.helperText!,
+              style: _helperStyle.copyWith(
+                  color: WdsSemanticColorText.alternative),
+              textAlign: TextAlign.end,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      );
+    }
+
+    if (hasError) {
       return Text(
         widget.errorText!,
         style: _errorStyle.copyWith(color: WdsSemanticColorStatus.destructive),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       );
     }
-    
+
     return Text(
       widget.helperText!,
       style: _helperStyle.copyWith(color: WdsSemanticColorText.alternative),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 
@@ -149,19 +183,28 @@ class _WdsTextFieldState extends State<WdsTextField> {
     final inputColor = widget.isEnabled
         ? WdsSemanticColorText.normal
         : WdsSemanticColorText.alternative;
-    
-    final hintColor = widget.isEnabled
-        ? WdsSemanticColorText.alternative
-        : WdsSemanticColorText.disable;
-    
+
+    final hintColor =
+        switch ((!widget.isEnabled, _hasFocus, _hasError, _hasValue)) {
+      (true, _, _, _) => WdsSemanticColorText.disable, // disabled
+      (false, true, _, _) => WdsSemanticColorText.normal, // focused
+      (false, _, true, _) => WdsSemanticColorText.normal, // error
+      (false, _, _, true) => WdsSemanticColorText.normal, // active (has value)
+      (false, false, false, false) =>
+        WdsSemanticColorText.alternative, // enabled
+    };
+
     final labelColor = widget.isEnabled
         ? WdsSemanticColorText.alternative
         : WdsSemanticColorText.disable;
 
     final borderSide = switch ((_hasError, _hasFocus)) {
-      (true, _) => const BorderSide(color: WdsSemanticColorStatus.destructive, width: 2),
-      (false, true) => const BorderSide(color: WdsSemanticColorStatus.positive, width: 2),
-      (false, false) => const BorderSide(color: WdsSemanticColorBorder.alternative, width: 1),
+      (true, _) =>
+        const BorderSide(color: WdsSemanticColorStatus.destructive, width: 2),
+      (false, true) =>
+        const BorderSide(color: WdsSemanticColorStatus.positive, width: 2),
+      (false, false) =>
+        const BorderSide(color: WdsSemanticColorBorder.alternative, width: 1),
     };
 
     final decoration = InputDecoration(
@@ -236,11 +279,17 @@ class _WdsTextFieldState extends State<WdsTextField> {
     final inputColor = widget.isEnabled
         ? WdsSemanticColorText.normal
         : WdsSemanticColorText.alternative;
-    
-    final hintColor = widget.isEnabled
-        ? WdsSemanticColorText.alternative
-        : WdsSemanticColorText.disable;
-    
+
+    final hintColor =
+        switch ((!widget.isEnabled, _hasFocus, _hasError, _hasValue)) {
+      (true, _, _, _) => WdsSemanticColorText.disable, // disabled
+      (false, true, _, _) => WdsSemanticColorText.normal, // focused
+      (false, _, true, _) => WdsSemanticColorText.normal, // error
+      (false, _, _, true) => WdsSemanticColorText.normal, // active (has value)
+      (false, false, false, false) =>
+        WdsSemanticColorText.alternative, // enabled
+    };
+
     final borderColor = switch ((_hasError, _hasFocus)) {
       (true, _) => WdsSemanticColorStatus.destructive,
       (false, true) => WdsSemanticColorStatus.positive,

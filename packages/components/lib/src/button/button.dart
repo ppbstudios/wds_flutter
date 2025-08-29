@@ -194,7 +194,7 @@ class _WdsButtonState extends State<WdsButton>
             locale: childText.locale,
             softWrap: childText.softWrap,
             overflow: childText.overflow,
-            textScaleFactor: childText.textScaleFactor,
+            textScaler: childText.textScaler,
             maxLines: 1, // 스펙: 최대 1줄
             semanticsLabel: childText.semanticsLabel,
             textWidthBasis: childText.textWidthBasis,

@@ -2,7 +2,7 @@ import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.d
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
-final _icon = WdsIcon.blank.build();
+final _icon = WdsIcon.blank;
 
 @widgetbook.UseCase(
   name: 'Chip',

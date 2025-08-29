@@ -94,7 +94,7 @@ class WidgetbookPlayground extends StatelessWidget {
                           constraints: BoxConstraints(
                             maxWidth: constraints.maxWidth,
                           ),
-                          child: IntrinsicWidth(child: content),
+                          child: content,
                         ),
                       ),
                     ),

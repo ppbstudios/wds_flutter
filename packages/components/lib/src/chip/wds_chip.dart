@@ -34,7 +34,7 @@ enum WdsChipVariant {
 
 enum WdsChipSize {
   xsmall(
-    height: 24,
+    height: 28,
     outlinePadding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
     solidPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
     outlineTypography: WdsSemanticTypography.caption12Regular,
@@ -82,7 +82,9 @@ enum WdsChipSize {
   }
 
   TextStyle typographyFor(WdsChipVariant variant) {
-    return variant == WdsChipVariant.outline ? outlineTypography : solidTypography;
+    return variant == WdsChipVariant.outline
+        ? outlineTypography
+        : solidTypography;
   }
 }
 
@@ -113,12 +115,19 @@ class WdsChip extends StatefulWidget {
         super(key: key);
 
   final String label;
-  final Widget? leading;
-  final Widget? trailing;
+
+  final WdsIcon? leading;
+
+  final WdsIcon? trailing;
+
   final VoidCallback? onTap;
+
   final bool isEnabled;
+
   final WdsChipShape shape;
+
   final WdsChipVariant variant;
+
   final WdsChipSize size;
 
   @override
@@ -131,7 +140,7 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
   bool _isFocused = false;
 
   static const Duration _hoverAnimationDuration = Duration(milliseconds: 150);
-  
+
   // Cache expensive computations
   late final TextStyle _typography;
   late final TextStyle _focusedTypography;
@@ -146,16 +155,20 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
 
   void _precomputeExpensiveValues() {
     // Cache typography with color applied (variant-specific)
-    _typography = widget.size.typographyFor(widget.variant).copyWith(color: widget.variant.foreground);
-    
+    _typography = widget.size
+        .typographyFor(widget.variant)
+        .copyWith(color: widget.variant.foreground);
+
     // focused state uses white text for proper contrast with cta background
-    _focusedTypography = widget.size.typographyFor(widget.variant).copyWith(color: WdsColorCommon.white);
-    
+    _focusedTypography = widget.size
+        .typographyFor(widget.variant)
+        .copyWith(color: WdsColorCommon.white);
+
     // Cache background colors
     _normalBackground = widget.variant.background;
     // focused state uses cta color for both outline and solid variants
     _focusedBackground = cta;
-    
+
     // Pre-build content children list (we'll build the row dynamically for text color changes)
   }
 
@@ -195,6 +208,10 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
 
   // Colors
   Color _overlayTargetColor() {
+    // Focused 상태에서는 overlay를 적용하지 않습니다.
+    if (_isFocused) {
+      return const Color(0x00000000);
+    }
     final Color base = WdsSemanticColorMaterial.pressed;
     if (_isPressed || _isHovered) {
       return base;
@@ -216,15 +233,16 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
 
     // Get current text style and icon color based on focus state
     final currentTypography = _isFocused ? _focusedTypography : _typography;
-    final currentIconColor = _isFocused ? WdsColorCommon.white : widget.variant.foreground;
-    
+    final currentIconColor =
+        _isFocused ? WdsColorCommon.white : widget.variant.foreground;
+
     // Build content row with current text style
     final List<Widget> contentChildren = [];
-    
+
     if (widget.leading != null) {
-      contentChildren.add(widget.leading!);
+      contentChildren.add(widget.leading!.build(color: currentIconColor));
     }
-    
+
     contentChildren.add(
       Text(
         widget.label,
@@ -233,9 +251,9 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
         overflow: TextOverflow.ellipsis,
       ),
     );
-    
+
     if (widget.trailing != null) {
-      contentChildren.add(widget.trailing!);
+      contentChildren.add(widget.trailing!.build(color: currentIconColor));
     }
 
     final contentRow = Row(
@@ -246,12 +264,9 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
           .toList(),
     );
 
-    Widget content = IconTheme(
-      data: IconThemeData(color: currentIconColor),
-      child: Padding(
-        padding: padding,
-        child: contentRow,
-      ),
+    Widget content = Padding(
+      padding: padding,
+      child: contentRow,
     );
 
     // Overlay animation
@@ -292,7 +307,10 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
                         color: backgroundColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: borderRadius,
-                          side: widget.variant.border ?? BorderSide.none,
+                          // focused 상태에서는 border를 제거합니다 (outline에서도 표시하지 않음)
+                          side: _isFocused
+                              ? BorderSide.none
+                              : (widget.variant.border ?? BorderSide.none),
                         ),
                       ),
                     ),
@@ -332,9 +350,6 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
       child: gestureChild,
     );
 
-    if (!widget.isEnabled) {
-      return Opacity(opacity: 0.4, child: result);
-    }
     return result;
   }
 }
