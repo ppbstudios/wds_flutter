@@ -30,7 +30,7 @@ show_help() {
     echo "TOKEN_TYPE:"
     echo "  atomic     Generate atomic tokens only"
     echo "  semantic   Generate semantic tokens only"
-    echo "  all        Generate both atomic and semantic tokens (default)"
+    echo "  all        Generate all tokens: atomic → semantic (default)"
     echo ""
     echo "OPTIONS:"
     echo "  -h, --help              Show this help message"
@@ -41,7 +41,7 @@ show_help() {
     echo "  -o, --output-dir        Output directory for generated tokens (default: ./packages/tokens)"
     echo ""
     echo "Examples:"
-    echo "  $0                                    # Generate all tokens"
+    echo "  $0                                    # Generate all tokens (atomic → semantic)"
     echo "  $0 atomic                             # Generate atomic tokens only"
     echo "  $0 semantic                           # Generate semantic tokens only"
     echo "  $0 -v semantic                        # Generate semantic tokens with verbose output"
@@ -94,12 +94,6 @@ if [[ ! -d "$INPUT_DIR" ]]; then
     exit 1
 fi
 
-# Validate output directory
-if [[ ! -d "$OUTPUT_DIR" ]]; then
-    echo -e "${RED}Error: Output directory '$OUTPUT_DIR' does not exist${NC}"
-    exit 1
-fi
-
 # Validate generator path
 if [[ ! -f "$GENERATOR_PATH" ]]; then
     echo -e "${RED}Error: Token generator not found at '$GENERATOR_PATH'${NC}"
@@ -121,6 +115,7 @@ fi
 generate_tokens() {
     local type=$1
     local json_file=""
+    local out_dir_used="${OUTPUT_DIR}"
     
     case $type in
         atomic)
@@ -145,13 +140,21 @@ generate_tokens() {
             ;;
     esac
     
-    local cmd="dart run $GENERATOR_PATH -i $json_file -o $OUTPUT_DIR -k $type --base-font-size $BASE_FONT_SIZE $VERBOSE_OPT $SYNC_OPT"
+    # Ensure output directory exists for the selected type
+    if [[ ! -d "$out_dir_used" ]]; then
+        echo -e "${RED}Error: Output directory '$out_dir_used' does not exist${NC}"
+        return 1
+    fi
+
+    local cmd="dart run $GENERATOR_PATH -i $json_file -o $out_dir_used -k $type --base-font-size $BASE_FONT_SIZE $VERBOSE_OPT $SYNC_OPT"
     
     echo -e "${YELLOW}Executing: $cmd${NC}"
     echo ""
     
     if eval $cmd; then
         echo -e "${GREEN}✓ Successfully generated $type tokens${NC}"
+        # brief delay to avoid race conditions between sequential generations
+        sleep 0.5
     else
         echo -e "${RED}✗ Failed to generate $type tokens${NC}"
         return 1
@@ -170,7 +173,7 @@ case $TOKEN_TYPE in
         generate_tokens "semantic"
         ;;
     all)
-        echo -e "${BLUE}Generating all tokens...${NC}"
+        echo -e "${BLUE}Generating all tokens (atomic → semantic)...${NC}"
         echo ""
         generate_tokens "atomic"
         echo ""
