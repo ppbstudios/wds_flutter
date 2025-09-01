@@ -17,7 +17,7 @@ class RadiusUseCase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WidgetbookPageLayout(
-      title: 'Border Radius Tokens',
+      title: 'Radius',
       children: [
         _buildRadiusTable(),
       ],
@@ -94,7 +94,7 @@ class RadiusUseCase extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
-                'Value',
+                'Visual',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey.shade700,
@@ -104,7 +104,7 @@ class RadiusUseCase extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
-                'Visual',
+                'Value',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey.shade700,
@@ -145,6 +145,10 @@ class RadiusUseCase extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
+                child: _buildRadiusVisual(token['value']! as double),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
                 child: Text(
                   token['label']! as String,
                   style: TextStyle(
@@ -152,10 +156,6 @@ class RadiusUseCase extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: _buildRadiusVisual(token['value']! as double),
               ),
             ],
           ),
