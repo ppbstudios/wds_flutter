@@ -16,6 +16,8 @@ import 'package:wds_widgetbook/src/component/bottom_navigation_use_case.dart'
     as _wds_widgetbook_src_component_bottom_navigation_use_case;
 import 'package:wds_widgetbook/src/component/button_use_case.dart'
     as _wds_widgetbook_src_component_button_use_case;
+import 'package:wds_widgetbook/src/component/checkbox_use_case.dart'
+    as _wds_widgetbook_src_component_checkbox_use_case;
 import 'package:wds_widgetbook/src/component/chip_use_case.dart'
     as _wds_widgetbook_src_component_chip_use_case;
 import 'package:wds_widgetbook/src/component/header_use_case.dart'
@@ -28,6 +30,8 @@ import 'package:wds_widgetbook/src/component/select_use_case.dart'
     as _wds_widgetbook_src_component_select_use_case;
 import 'package:wds_widgetbook/src/component/square_button_use_case.dart'
     as _wds_widgetbook_src_component_square_button_use_case;
+import 'package:wds_widgetbook/src/component/switch_use_case.dart'
+    as _wds_widgetbook_src_component_switch_use_case;
 import 'package:wds_widgetbook/src/component/tab_use_case.dart'
     as _wds_widgetbook_src_component_tab_use_case;
 import 'package:wds_widgetbook/src/component/text_button_use_case.dart'
@@ -76,6 +80,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'Checkbox',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Checkbox',
+          builder: _wds_widgetbook_src_component_checkbox_use_case
+              .buildWdsCheckboxUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'Chip',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Chip',
@@ -120,6 +132,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'SquareButton',
           builder: _wds_widgetbook_src_component_square_button_use_case
               .buildWdsSquareButtonUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Switch',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Switch',
+          builder: _wds_widgetbook_src_component_switch_use_case
+              .buildWdsSwitchUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(

@@ -17,7 +17,7 @@ class RadiusUseCase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WidgetbookPageLayout(
-      title: 'Border Radius Tokens',
+      title: 'Radius',
       children: [
         _buildRadiusTable(),
       ],
@@ -27,42 +27,42 @@ class RadiusUseCase extends StatelessWidget {
   Widget _buildRadiusTable() {
     final radiusTokens = [
       {
-        'name': 'WdsAtomicRadius.v0',
-        'value': WdsAtomicRadius.v0,
+        'name': 'none',
+        'value': WdsAtomicRadius.none,
         'label': '0px',
       },
       {
-        'name': 'WdsAtomicRadius.v4',
-        'value': WdsAtomicRadius.v4,
+        'name': 'xs',
+        'value': WdsAtomicRadius.xs,
         'label': '4px',
       },
       {
-        'name': 'WdsAtomicRadius.v8',
-        'value': WdsAtomicRadius.v8,
+        'name': 'sm',
+        'value': WdsAtomicRadius.sm,
         'label': '8px',
       },
       {
-        'name': 'WdsAtomicRadius.v12',
-        'value': WdsAtomicRadius.v12,
+        'name': 'md',
+        'value': WdsAtomicRadius.md,
         'label': '12px',
       },
       {
-        'name': 'WdsAtomicRadius.v20',
-        'value': WdsAtomicRadius.v20,
+        'name': 'lg',
+        'value': WdsAtomicRadius.lg,
         'label': '16px',
       },
       {
-        'name': 'WdsAtomicRadius.v20',
-        'value': WdsAtomicRadius.v20,
+        'name': 'xl',
+        'value': WdsAtomicRadius.xl,
         'label': '20px',
       },
       {
-        'name': 'WdsAtomicRadius.v30',
-        'value': WdsAtomicRadius.v30,
+        'name': 'xxl',
+        'value': WdsAtomicRadius.xxl,
         'label': '30px',
       },
       {
-        'name': 'WdsAtomicRadius.full',
+        'name': 'full',
         'value': WdsAtomicRadius.full,
         'label': '99999px',
       },
@@ -94,7 +94,7 @@ class RadiusUseCase extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
-                'Value',
+                'Visual',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey.shade700,
@@ -104,7 +104,7 @@ class RadiusUseCase extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
-                'Visual',
+                'Value',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey.shade700,
@@ -145,6 +145,10 @@ class RadiusUseCase extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(16),
+                child: _buildRadiusVisual(token['value']! as double),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
                 child: Text(
                   token['label']! as String,
                   style: TextStyle(
@@ -152,10 +156,6 @@ class RadiusUseCase extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: _buildRadiusVisual(token['value']! as double),
               ),
             ],
           ),

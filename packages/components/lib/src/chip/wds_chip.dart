@@ -2,7 +2,7 @@ part of '../../wds_components.dart';
 
 enum WdsChipShape {
   pill(radius: WdsAtomicRadius.full),
-  square(radius: WdsAtomicRadius.v8);
+  square(radius: WdsAtomicRadius.sm);
 
   const WdsChipShape({required this.radius});
 

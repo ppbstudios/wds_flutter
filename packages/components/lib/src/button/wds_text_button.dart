@@ -123,7 +123,7 @@ class _WdsTextButtonState extends State<WdsTextButton>
           ? WdsSemanticColorText.neutral
           : WdsSemanticColorText.disable,
     );
-    final BorderRadius borderRadius = BorderRadius.circular(WdsAtomicRadius.v4);
+    final BorderRadius borderRadius = BorderRadius.circular(WdsAtomicRadius.xs);
 
     // Compose child: force typography for Text
     Widget content = Padding(padding: padding, child: widget.child);

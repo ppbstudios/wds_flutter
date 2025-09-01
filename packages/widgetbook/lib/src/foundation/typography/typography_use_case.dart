@@ -71,15 +71,15 @@ Widget _buildTypographyPlayground(BuildContext context) {
 
   final weight = context.knobs.object.dropdown<FontWeight>(
     label: 'fontWeight',
-    initialOption: WdsFontWeight.extrabold,
+    initialOption: WdsFontWeight.extraBold,
     options: const [
-      WdsFontWeight.extrabold,
+      WdsFontWeight.extraBold,
       WdsFontWeight.bold,
       WdsFontWeight.medium,
       WdsFontWeight.regular,
     ],
     labelBuilder: (w) {
-      if (w == WdsFontWeight.extrabold) return 'extrabold';
+      if (w == WdsFontWeight.extraBold) return 'extraBold';
       if (w == WdsFontWeight.bold) return 'bold';
       if (w == WdsFontWeight.medium) return 'medium';
       return 'regular';
@@ -117,7 +117,7 @@ Widget _buildTypographyPlayground(BuildContext context) {
 }
 
 String _getWeightLabel(FontWeight weight) {
-  if (weight == WdsFontWeight.extrabold) return 'extrabold';
+  if (weight == WdsFontWeight.extraBold) return 'extraBold';
   if (weight == WdsFontWeight.bold) return 'bold';
   if (weight == WdsFontWeight.medium) return 'medium';
   return 'regular';
@@ -436,12 +436,12 @@ class _TypographyRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: styleByWeight[WdsFontWeight.extrabold] != null
+                      child: styleByWeight[WdsFontWeight.extraBold] != null
                           ? Text(
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: styleByWeight[WdsFontWeight.extrabold]!,
+                              style: styleByWeight[WdsFontWeight.extraBold]!,
                             )
                           : const SizedBox.shrink(),
                     ),

@@ -178,5 +178,7 @@ case $TOKEN_TYPE in
         ;;
 esac
 
+fvm exec melos run format
+
 echo ""
 echo -e "${GREEN}Token generation completed!${NC}"
