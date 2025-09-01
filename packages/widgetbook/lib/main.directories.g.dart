@@ -18,6 +18,8 @@ import 'package:wds_widgetbook/src/component/button_use_case.dart'
     as _wds_widgetbook_src_component_button_use_case;
 import 'package:wds_widgetbook/src/component/chip_use_case.dart'
     as _wds_widgetbook_src_component_chip_use_case;
+import 'package:wds_widgetbook/src/component/dot_pagination_use_case.dart'
+    as _wds_widgetbook_src_component_dot_pagination_use_case;
 import 'package:wds_widgetbook/src/component/header_use_case.dart'
     as _wds_widgetbook_src_component_header_use_case;
 import 'package:wds_widgetbook/src/component/icon_button_use_case.dart'
@@ -96,6 +98,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'IconButton',
           builder: _wds_widgetbook_src_component_icon_button_use_case
               .buildWdsIconButtonUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'PaginationDot',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'PaginationDot',
+          builder: _wds_widgetbook_src_component_dot_pagination_use_case
+              .buildWdsDotPaginationUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
