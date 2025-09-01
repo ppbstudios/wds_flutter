@@ -6,8 +6,8 @@ class WdsSquareButton extends StatefulWidget {
     required this.onTap,
     required this.child,
     this.isEnabled = true,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// 버튼 탭 콜백 (비활성 시 무시)
   final VoidCallback? onTap;
@@ -74,14 +74,13 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
       color: WdsSemanticColorText.neutral,
     );
     final BorderRadius borderRadius =
-        BorderRadius.all(Radius.circular(WdsAtomicRadius.v4));
+        const BorderRadius.all(Radius.circular(WdsAtomicRadius.v4));
 
     // 자식이 Text 인 경우 강제 타이포그래피 적용, 그 외에는 DefaultTextStyle.merge
     Widget content = Padding(padding: padding, child: widget.child);
     if (widget.child is Text) {
       final Text childText = widget.child as Text;
-      final TextStyle? merged =
-          childText.style?.merge(typography) ?? typography;
+      final TextStyle merged = childText.style?.merge(typography) ?? typography;
       content = Padding(
         padding: padding,
         child: Text(
@@ -94,7 +93,7 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
           locale: childText.locale,
           softWrap: childText.softWrap,
           overflow: childText.overflow,
-          textScaleFactor: childText.textScaleFactor,
+          textScaler: childText.textScaler,
           maxLines: 1,
           semanticsLabel: childText.semanticsLabel,
           textWidthBasis: childText.textWidthBasis,
@@ -132,7 +131,6 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
           height: height,
           child: Center(
             child: Align(
-              alignment: Alignment.center,
               widthFactor: 1,
               child: Stack(
                 alignment: Alignment.center,
@@ -154,7 +152,7 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
                     ),
                   ),
                   // 높이 유지, 폭은 컨텐츠 폭 기준
-                  SizedBox(height: height),
+                  const SizedBox(height: height),
                   // 오버레이 (컨텐츠 폭 기준)
                   Positioned.fill(
                     child: IgnorePointer(

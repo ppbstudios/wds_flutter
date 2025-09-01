@@ -6,27 +6,45 @@ import 'package:path/path.dart' as p;
 
 void main(List<String> arguments) async {
   final parser = ArgParser()
-    ..addOption('input',
-        abbr: 'i', help: '입력 JSON 경로', valueHelp: 'path/to/tokens.json')
-    ..addOption('out',
-        abbr: 'o', help: '생성된 Dart 파일 루트 디렉터리', valueHelp: 'path/to/output')
-    ..addOption('library',
-        abbr: 'l', help: '라이브러리 이름', defaultsTo: 'wds_tokens')
-    ..addOption('kind',
-        abbr: 'k',
-        help: '생성 모드: atomic 또는 semantic',
-        allowed: ['atomic', 'semantic'],
-        defaultsTo: 'atomic')
+    ..addOption(
+      'input',
+      abbr: 'i',
+      help: '입력 JSON 경로',
+      valueHelp: 'path/to/tokens.json',
+    )
+    ..addOption(
+      'out',
+      abbr: 'o',
+      help: '생성된 Dart 파일 루트 디렉터리',
+      valueHelp: 'path/to/output',
+    )
+    ..addOption(
+      'library',
+      abbr: 'l',
+      help: '라이브러리 이름',
+      defaultsTo: 'wds_tokens',
+    )
+    ..addOption(
+      'kind',
+      abbr: 'k',
+      help: '생성 모드: atomic 또는 semantic',
+      allowed: ['atomic', 'semantic'],
+      defaultsTo: 'atomic',
+    )
     ..addFlag('overwrite', abbr: 'f', help: '기존 파일 덮어쓰기', defaultsTo: true)
     ..addFlag('verbose', abbr: 'v', help: '로그 출력', defaultsTo: true)
-    ..addFlag('sync',
-        abbr: 's',
-        help: 'JSON 기준으로 출력 디렉터리 동기화(불필요 파일 삭제 + export 인덱스 생성)',
-        defaultsTo: true)
-    ..addOption('base-font-size',
-        help: 'letterSpacing 계산 시 사용할 기본 폰트 크기(px)',
-        valueHelp: '16.0',
-        defaultsTo: '16.0');
+    ..addFlag(
+      'sync',
+      abbr: 's',
+      help: 'JSON 기준으로 출력 디렉터리 동기화(불필요 파일 삭제 + export 인덱스 생성)',
+      defaultsTo: true,
+    )
+    ..addOption(
+      'base-font-size',
+      help: 'letterSpacing 계산 시 사용할 기본 폰트 크기(px)',
+      valueHelp: '16.0',
+      defaultsTo: '16.0',
+    );
 
   final argResult = parser.parse(arguments);
   final inputPath = argResult['input'] as String?;
@@ -58,19 +76,21 @@ void main(List<String> arguments) async {
 
   if (kind == 'atomic') {
     await _generateAtomic(
-        jsonMap: jsonMap,
-        outDir: outDir,
-        libraryName: libraryName,
-        verbose: verbose,
-        sync: sync);
+      jsonMap: jsonMap,
+      outDir: outDir,
+      libraryName: libraryName,
+      verbose: verbose,
+      sync: sync,
+    );
   } else {
     await _generateSemantic(
-        jsonMap: jsonMap,
-        outDir: outDir,
-        libraryName: libraryName,
-        verbose: verbose,
-        sync: sync,
-        baseFontSize: baseFontSize);
+      jsonMap: jsonMap,
+      outDir: outDir,
+      libraryName: libraryName,
+      verbose: verbose,
+      sync: sync,
+      baseFontSize: baseFontSize,
+    );
   }
 }
 
@@ -139,11 +159,12 @@ Future<void> _generateAtomic({
     final basename = 'wds_atomic_${_toSnake(rootKey)}.dart';
     generatedBasenames.add(basename);
     await _generateForRoot(
-        rootKey: rootKey,
-        rootMap: rootMap,
-        outDir: outDir,
-        libraryName: libraryName,
-        verbose: verbose);
+      rootKey: rootKey,
+      rootMap: rootMap,
+      outDir: outDir,
+      libraryName: libraryName,
+      verbose: verbose,
+    );
   }
 
   if (sync) {
@@ -250,7 +271,8 @@ Future<void> _generateSemantic({
     final colorLib = StringBuffer()
       ..writeln('// GENERATED CODE - DO NOT MODIFY BY HAND')
       ..writeln(
-          '// ignore_for_file: constant_identifier_names, non_constant_identifier_names')
+        '// ignore_for_file: constant_identifier_names, non_constant_identifier_names',
+      )
       ..writeln('import "package:flutter/material.dart";')
       ..writeln('import "../atomic/color.dart";')
       ..writeln();
@@ -277,16 +299,18 @@ Future<void> _generateSemantic({
 
   // semantic/typography
   final typographyRoot = jsonMap.entries.firstWhere(
-      (e) =>
-          e.key.toString().toLowerCase() == 'typography' &&
-          e.value is Map<String, dynamic>,
-      orElse: () => const MapEntry('', null));
+    (e) =>
+        e.key.toString().toLowerCase() == 'typography' &&
+        e.value is Map<String, dynamic>,
+    orElse: () => const MapEntry('', null),
+  );
   if (typographyRoot.value is Map<String, dynamic>) {
     final tyMap = typographyRoot.value as Map<String, dynamic>;
     final sb = StringBuffer()
       ..writeln('// GENERATED CODE - DO NOT MODIFY BY HAND')
       ..writeln(
-          '// ignore_for_file: constant_identifier_names, non_constant_identifier_names')
+        '// ignore_for_file: constant_identifier_names, non_constant_identifier_names',
+      )
       ..writeln('import "package:flutter/material.dart";')
       ..writeln('import "../atomic/atomic.dart";')
       ..writeln();
@@ -312,28 +336,37 @@ Future<void> _generateSemantic({
             if (!_isTypographyLeafNode(innerProps)) continue;
 
             final fieldName = _camelCase(
-                '${styleName}_${variantOrGroupName}_${innerVariantName}');
+              '${styleName}_${variantOrGroupName}_$innerVariantName',
+            );
 
             final familyExpr = _resolveTypographyFamily(innerProps['family']);
             final weightExpr = _resolveTypographyWeight(innerProps['weight']);
             final sizeExpr = _resolveTypographyNumberClassed(
-                innerProps['size'], 'WdsFontSize');
+              innerProps['size'],
+              'WdsFontSize',
+            );
             final lineHeightExpr = _resolveTypographyNumberClassed(
-                innerProps['lineHeight'], 'WdsFontLineHeight');
+              innerProps['lineHeight'],
+              'WdsFontLineHeight',
+            );
             final letterSpacingExpr = _resolveTypographyLetterSpacing(
-                innerProps['letterSpacing'],
-                sizeExpr: sizeExpr,
-                baseFontSize: baseFontSize);
+              innerProps['letterSpacing'],
+              sizeExpr: sizeExpr,
+              baseFontSize: baseFontSize,
+            );
 
             final lines = <String>[];
             if (familyExpr != null) lines.add('fontFamily: $familyExpr');
             if (weightExpr != null) lines.add('fontWeight: $weightExpr');
             if (sizeExpr != null) lines.add('fontSize: $sizeExpr');
             final heightExpr = _composeFlutterHeight(
-                lineHeightExpr: lineHeightExpr, sizeExpr: sizeExpr);
+              lineHeightExpr: lineHeightExpr,
+              sizeExpr: sizeExpr,
+            );
             if (heightExpr != null) lines.add('height: $heightExpr');
-            if (letterSpacingExpr != null)
+            if (letterSpacingExpr != null) {
               lines.add('letterSpacing: $letterSpacingExpr');
+            }
 
             sb.writeln('  static const TextStyle $fieldName = TextStyle(');
             for (int i = 0; i < lines.length; i++) {
@@ -345,28 +378,36 @@ Future<void> _generateSemantic({
         }
 
         // 일반(2단계) 구조 처리
-        final fieldName = _camelCase('${styleName}_${variantOrGroupName}');
+        final fieldName = _camelCase('${styleName}_$variantOrGroupName');
 
         final familyExpr = _resolveTypographyFamily(propsOrGroup['family']);
         final weightExpr = _resolveTypographyWeight(propsOrGroup['weight']);
         final sizeExpr = _resolveTypographyNumberClassed(
-            propsOrGroup['size'], 'WdsFontSize');
+          propsOrGroup['size'],
+          'WdsFontSize',
+        );
         final lineHeightExpr = _resolveTypographyNumberClassed(
-            propsOrGroup['lineHeight'], 'WdsFontLineHeight');
+          propsOrGroup['lineHeight'],
+          'WdsFontLineHeight',
+        );
         final letterSpacingExpr = _resolveTypographyLetterSpacing(
-            propsOrGroup['letterSpacing'],
-            sizeExpr: sizeExpr,
-            baseFontSize: baseFontSize);
+          propsOrGroup['letterSpacing'],
+          sizeExpr: sizeExpr,
+          baseFontSize: baseFontSize,
+        );
 
         final lines = <String>[];
         if (familyExpr != null) lines.add('fontFamily: $familyExpr');
         if (weightExpr != null) lines.add('fontWeight: $weightExpr');
         if (sizeExpr != null) lines.add('fontSize: $sizeExpr');
         final heightExpr = _composeFlutterHeight(
-            lineHeightExpr: lineHeightExpr, sizeExpr: sizeExpr);
+          lineHeightExpr: lineHeightExpr,
+          sizeExpr: sizeExpr,
+        );
         if (heightExpr != null) lines.add('height: $heightExpr');
-        if (letterSpacingExpr != null)
+        if (letterSpacingExpr != null) {
           lines.add('letterSpacing: $letterSpacingExpr');
+        }
 
         sb.writeln('  static const TextStyle $fieldName = TextStyle(');
         for (int i = 0; i < lines.length; i++) {
@@ -405,7 +446,13 @@ Future<void> _generateForRoot({
   // 타입별로 적절한 생성 함수 호출
   final dominantType = _inferDominantType(rootMap);
   await _generateTokenFamily(
-      rootKey, rootMap, dominantType, outDir, libraryName, verbose);
+    rootKey,
+    rootMap,
+    dominantType,
+    outDir,
+    libraryName,
+    verbose,
+  );
 }
 
 String _inferDominantType(Map<String, dynamic> node) {
@@ -433,18 +480,20 @@ String _inferDominantType(Map<String, dynamic> node) {
 }
 
 Future<void> _generateTokenFamily(
-    String rootKey,
-    Map<String, dynamic> rootMap,
-    String dominantType,
-    String outDir,
-    String libraryName,
-    bool verbose) async {
+  String rootKey,
+  Map<String, dynamic> rootMap,
+  String dominantType,
+  String outDir,
+  String libraryName,
+  bool verbose,
+) async {
   final classPrefix = 'WdsAtomic${_pascalCase(rootKey)}';
   final rootPrefix = _pascalCase(rootKey);
   final buf = StringBuffer()
     ..writeln('// GENERATED CODE - DO NOT MODIFY BY HAND')
     ..writeln(
-        '// ignore_for_file: constant_identifier_names, non_constant_identifier_names')
+      '// ignore_for_file: constant_identifier_names, non_constant_identifier_names',
+    )
     ..writeln('library $libraryName;')
     ..writeln("import 'package:flutter/material.dart';")
     ..writeln()
@@ -469,16 +518,18 @@ Future<void> _generateTokenFamily(
         final identifier = _identifierFromKey(k);
         if (convertedValue != null && exposedTopLevelNames.add(identifier)) {
           buf.writeln(
-              '  static const ${_getDartTypeForToken(type)} $identifier = $convertedValue;');
+            '  static const ${_getDartTypeForToken(type)} $identifier = $convertedValue;',
+          );
         }
       } else {
         // 그룹 클래스로 노출
         final groupClassBase = _pascalCase(k);
         final groupClass =
-            groupClassBase.isEmpty ? '' : '${rootPrefix}${groupClassBase}';
+            groupClassBase.isEmpty ? '' : '$rootPrefix$groupClassBase';
         if (groupClass.isNotEmpty && exposedGroupClassNames.add(groupClass)) {
           buf.writeln(
-              '  static const $groupClass ${_camelCase(k)} = $groupClass._();');
+            '  static const $groupClass ${_camelCase(k)} = $groupClass._();',
+          );
         }
       }
     }
@@ -495,9 +546,10 @@ Future<void> _generateTokenFamily(
         !(child.containsKey(r'$value') && child.containsKey(r'$type'))) {
       final classNameBase = _pascalCase(k);
       final className =
-          classNameBase.isEmpty ? '' : '${rootPrefix}${classNameBase}';
-      if (className.isEmpty || !generatedGroupClassNames.add(className))
+          classNameBase.isEmpty ? '' : '$rootPrefix$classNameBase';
+      if (className.isEmpty || !generatedGroupClassNames.add(className)) {
         continue;
+      }
       final cb = StringBuffer()
         ..writeln('class $className {')
         ..writeln('  const $className._();');
@@ -518,7 +570,8 @@ Future<void> _generateTokenFamily(
           final identifier = _identifierFromKey(e.key);
           if (convertedValue != null && fieldNames.add(identifier)) {
             cb.writeln(
-                '  static const ${_getDartTypeForToken(type)} $identifier = $convertedValue;');
+              '  static const ${_getDartTypeForToken(type)} $identifier = $convertedValue;',
+            );
           }
         }
       }
@@ -549,8 +602,7 @@ Future<void> _syncAtomicOutputs({
   // 1) 불필요한 이전 산출물 삭제 (atomic/*.dart 중 이번에 생성되지 않은 wds_atomic_* 파일)
   final atomicDir = Directory(p.join(outDir, 'lib', 'atomic'));
   if (await atomicDir.exists()) {
-    await for (final entity
-        in atomicDir.list(recursive: false, followLinks: false)) {
+    await for (final entity in atomicDir.list(followLinks: false)) {
       if (entity is File) {
         final name = p.basename(entity.path);
         final isAtomic =
@@ -568,8 +620,7 @@ Future<void> _syncAtomicOutputs({
   // 1-1) color part 산출물 정리 (lib/atomic/color/*.dart)
   final colorPartsDir = Directory(p.join(outDir, 'lib', 'atomic', 'color'));
   if (await colorPartsDir.exists()) {
-    await for (final entity
-        in colorPartsDir.list(recursive: false, followLinks: false)) {
+    await for (final entity in colorPartsDir.list(followLinks: false)) {
       if (entity is File) {
         final name = p.basename(entity.path);
         final isGenerated =
@@ -585,8 +636,7 @@ Future<void> _syncAtomicOutputs({
   // 1-2) font part 산출물 정리 (lib/atomic/font/*.dart)
   final fontPartsDir = Directory(p.join(outDir, 'lib', 'atomic', 'font'));
   if (await fontPartsDir.exists()) {
-    await for (final entity
-        in fontPartsDir.list(recursive: false, followLinks: false)) {
+    await for (final entity in fontPartsDir.list(followLinks: false)) {
       if (entity is File) {
         final name = p.basename(entity.path);
         final isGenerated =
@@ -644,8 +694,7 @@ Future<void> _syncSemanticOutputs({
   final semanticColorDir =
       Directory(p.join(outDir, 'lib', 'semantic', 'color'));
   if (await semanticColorDir.exists()) {
-    await for (final entity
-        in semanticColorDir.list(recursive: false, followLinks: false)) {
+    await for (final entity in semanticColorDir.list(followLinks: false)) {
       if (entity is File) {
         final name = p.basename(entity.path);
         final isGenerated =
@@ -743,7 +792,7 @@ String? _convertBoxShadowValue(dynamic value) => switch (value) {
       List list => () {
           final shadows = [
             for (final item in list)
-              if (item is Map<String, dynamic>) _convertSingleBoxShadow(item)
+              if (item is Map<String, dynamic>) _convertSingleBoxShadow(item),
           ].whereType<String>().toList();
           return shadows.isNotEmpty ? '[${shadows.join(', ')}]' : null;
         }(),
@@ -827,7 +876,7 @@ String? _composeFlutterHeight({String? lineHeightExpr, String? sizeExpr}) {
   if (lineHeightExpr == '1.0') return '1.0';
   // If font size is known, convert px lineHeight to ratio.
   if (sizeExpr != null && sizeExpr.isNotEmpty) {
-    return '(${lineHeightExpr}) / (${sizeExpr})';
+    return '($lineHeightExpr) / ($sizeExpr)';
   }
   // Without font size, we cannot compute a reliable ratio. Omit height.
   return null;
@@ -897,8 +946,11 @@ String? _resolveTypographyNumberClassed(dynamic node, String className) {
   return null;
 }
 
-String? _resolveTypographyLetterSpacing(dynamic node,
-    {String? sizeExpr, required double baseFontSize}) {
+String? _resolveTypographyLetterSpacing(
+  dynamic node, {
+  required double baseFontSize,
+  String? sizeExpr,
+}) {
   // Flutter TextStyle.letterSpacing expects logical pixels.
   // 규칙 변경: 넘어온 값이 숫자면 px로 그대로 사용, 문자열 %면 em으로 변환만 수행(-2.4% → -0.024).
   if (node is Map<String, dynamic> && node.containsKey(r'$value')) {
@@ -1025,7 +1077,8 @@ Future<void> _generateColorLibrary({
           final convertedValue = _convertValueByType(type, val);
           if (convertedValue != null && fieldNames.add(identifier)) {
             cb.writeln(
-                '  static const ${_getDartTypeForToken(type)} $identifier = $convertedValue;');
+              '  static const ${_getDartTypeForToken(type)} $identifier = $convertedValue;',
+            );
           }
         }
       }
@@ -1045,7 +1098,8 @@ Future<void> _generateColorLibrary({
   final libBuf = StringBuffer()
     ..writeln('// GENERATED CODE - DO NOT MODIFY BY HAND')
     ..writeln(
-        '// ignore_for_file: constant_identifier_names, non_constant_identifier_names')
+      '// ignore_for_file: constant_identifier_names, non_constant_identifier_names',
+    )
     ..writeln('import "package:flutter/material.dart";')
     ..writeln();
 
@@ -1125,7 +1179,8 @@ Future<void> _generateFontLibrary({
           final convertedValue = _convertValueByType(type, val);
           if (convertedValue != null && fieldNames.add(identifier)) {
             cb.writeln(
-                '  static const ${_getDartTypeForToken(type)} $identifier = $convertedValue;');
+              '  static const ${_getDartTypeForToken(type)} $identifier = $convertedValue;',
+            );
           }
         }
       }
@@ -1145,7 +1200,8 @@ Future<void> _generateFontLibrary({
   final libBuf = StringBuffer()
     ..writeln('// GENERATED CODE - DO NOT MODIFY BY HAND')
     ..writeln(
-        '// ignore_for_file: constant_identifier_names, non_constant_identifier_names')
+      '// ignore_for_file: constant_identifier_names, non_constant_identifier_names',
+    )
     ..writeln('import "package:flutter/material.dart";')
     ..writeln();
 
@@ -1264,7 +1320,7 @@ final Set<String> _dartReserved = {
   'show',
   'hide',
   'static',
-  'typedef'
+  'typedef',
 };
 
 String _identifierFromKey(String key) {

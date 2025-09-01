@@ -16,9 +16,8 @@ class WdsBottomNavigation extends StatelessWidget {
     required this.items,
     required this.currentIndex,
     required this.onTap,
-    Key? key,
-  })  : assert(items.length >= 2, '최소 2개 이상의 아이템이 필요합니다.'),
-        super(key: key);
+    super.key,
+  }) : assert(items.length >= 2, '최소 2개 이상의 아이템이 필요합니다.');
 
   final List<WdsBottomNavigationItem> items;
   final int currentIndex;
@@ -35,7 +34,7 @@ class WdsBottomNavigation extends StatelessWidget {
       height: _totalHeight,
       width: double.infinity,
       child: DecoratedBox(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: WdsColorCommon.white,
           border: Border(
             top: BorderSide(color: WdsSemanticColorBorder.alternative),
@@ -93,6 +92,8 @@ class _BottomNavigationItemWidget extends StatelessWidget {
                 item.label,
                 style: WdsSemanticTypography.caption10Medium.copyWith(
                   color: cta,
+                  fontWeight:
+                      isActive ? WdsFontWeight.bold : WdsFontWeight.medium,
                 ),
                 maxLines: 1,
               ),
