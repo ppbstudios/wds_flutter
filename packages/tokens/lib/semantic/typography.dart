@@ -61,7 +61,7 @@ class WdsSemanticTypography {
   );
   static const TextStyle heading18ExtraBold = TextStyle(
     fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.extrabold,
+    fontWeight: WdsFontWeight.extraBold,
     fontSize: WdsFontSize.v18,
     height: (WdsFontLineHeight.v26) / (WdsFontSize.v18),
   );
@@ -85,7 +85,7 @@ class WdsSemanticTypography {
   );
   static const TextStyle heading17ExtraBold = TextStyle(
     fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.extrabold,
+    fontWeight: WdsFontWeight.extraBold,
     fontSize: WdsFontSize.v17,
     height: (WdsFontLineHeight.v24) / (WdsFontSize.v17),
   );

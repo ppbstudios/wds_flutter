@@ -278,7 +278,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   Widget _buildBox(BuildContext context) {
-    const radius = BorderRadius.all(Radius.circular(WdsAtomicRadius.v8));
+    const radius = BorderRadius.all(Radius.circular(WdsAtomicRadius.sm));
     const contentPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 10);
     const noBorder = OutlineInputBorder(
       borderSide: BorderSide(style: BorderStyle.none, width: 0),

@@ -74,7 +74,7 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
       color: WdsSemanticColorText.neutral,
     );
     final BorderRadius borderRadius =
-        const BorderRadius.all(Radius.circular(WdsAtomicRadius.v4));
+        const BorderRadius.all(Radius.circular(WdsAtomicRadius.xs));
 
     // 자식이 Text 인 경우 강제 타이포그래피 적용, 그 외에는 DefaultTextStyle.merge
     Widget content = Padding(padding: padding, child: widget.child);

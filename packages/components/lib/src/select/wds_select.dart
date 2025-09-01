@@ -70,7 +70,7 @@ class _WdsSelectState extends State<WdsSelect> {
       color: _backgroundColor(),
       shape: RoundedRectangleBorder(
         borderRadius:
-            const BorderRadius.all(Radius.circular(WdsAtomicRadius.v8)),
+            const BorderRadius.all(Radius.circular(WdsAtomicRadius.sm)),
         side: _borderSide(),
       ),
     );
