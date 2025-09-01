@@ -982,3 +982,71 @@ SizedBox.fromSize(
 )
 ```
 
+## Checkbox
+
+사용자가 여러 항목 중에서 하나 또는 여러 개를 선택할 수 있도록 돕습니다. 값(true/false)과 활성화 여부(isEnabled)로 표현이 달라집니다.
+
+### Checkbox - size
+
+속성 | spec | padding | 비고
+--- | --- | --- | ---
+large | 24x24 | `EdgeInsets.all(3)` | 기본
+small | 20x20 | `EdgeInsets.all(2)` | 컴팩트
+
+e.g. enum
+``` dart
+enum WdsCheckboxSize {
+  small(spec: Size(20, 20), padding: EdgeInsets.all(2)),
+  large(spec: Size(24, 24), padding: EdgeInsets.all(3));
+
+  const WdsCheckboxSize({
+    required this.spec,
+    required this.padding,
+  });
+
+  final Size spec;
+  final EdgeInsets padding;
+}
+```
+
+### Checkbox - state
+
+상태 | 설명
+--- | ---
+enabled | 상호작용 가능, `onChanged` 호출됨
+disabled | 상호작용 불가, 전체적으로 `opacity 0.4` 적용(색상은 `withAlpha(40)` 등 동일 메커니즘)
+
+### Checkbox - value
+
+값 | 설명
+--- | ---
+false | 체크 해제 상태, 체크 마크 표기 없음
+true | 체크 상태, 체크 마크 표기 및 배경 채움
+
+### Checkbox - backgroundColor
+
+- `true`: `cta`
+- `false`: `null`
+
+### Checkbox - border & radius
+
+- `true`: `border = null`
+- `false`: `border = BorderSide(color: WdsSemanticColorBorder.neutral)`
+- `borderRadius`: `WdsAtomicRadius.xs` (size와 무관하게 동일)
+
+### Checkbox - check mark
+
+- 체크 마크는 `value == true`일 때만 노출됩니다.
+- 그려지는 방향은 왼쪽에서 오른쪽으로 진행합니다.
+- 기준 좌표계(large, 24x24 기준): 패딩 3px을 제외한 내부 20x20 영역을 (0,0)~(20,20)으로 사용합니다.
+  - left-top-check-mark: (3,8), (2,9), (3,9)
+  - middle-bottom-check-mark: (6,13), (7,13)
+  - top-right-check-mark: (14,4), (14,5), (15,5), (13,4)
+- small(20x20, padding 2) 사이즈는 동일한 형태를 비율에 맞게 축소하여 렌더링합니다.
+
+### Checkbox - animation
+
+- 배경 채움은 중심에서 가장자리로 퍼지도록 채웁니다.
+- 색상 채움은 `CustomPaint`로 구현합니다.
+- 애니메이션은 `Duration(milliseconds: 300)` + `Curves.easeIn`을 사용합니다.
+- 체크 마크 경로는 왼쪽에서 오른쪽으로 그리며 진행도에 따라 부분 경로를 렌더링합니다.

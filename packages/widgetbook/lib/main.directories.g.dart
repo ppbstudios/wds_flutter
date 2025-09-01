@@ -16,6 +16,8 @@ import 'package:wds_widgetbook/src/component/bottom_navigation_use_case.dart'
     as _wds_widgetbook_src_component_bottom_navigation_use_case;
 import 'package:wds_widgetbook/src/component/button_use_case.dart'
     as _wds_widgetbook_src_component_button_use_case;
+import 'package:wds_widgetbook/src/component/checkbox_use_case.dart'
+    as _wds_widgetbook_src_component_checkbox_use_case;
 import 'package:wds_widgetbook/src/component/chip_use_case.dart'
     as _wds_widgetbook_src_component_chip_use_case;
 import 'package:wds_widgetbook/src/component/header_use_case.dart'
@@ -75,6 +77,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'Button',
           builder: _wds_widgetbook_src_component_button_use_case
               .buildWdsButtonUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Checkbox',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Checkbox',
+          builder: _wds_widgetbook_src_component_checkbox_use_case
+              .buildWdsCheckboxUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(

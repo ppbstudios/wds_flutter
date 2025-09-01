@@ -16,6 +16,7 @@ part 'src/action_area/wds_fixed_action_area.dart';
 part 'src/button/button.dart';
 part 'src/button/wds_square_button.dart';
 part 'src/button/wds_text_button.dart';
+part 'src/checkbox/wds_checkbox.dart';
 part 'src/chip/wds_chip.dart';
 part 'src/header/wds_header.dart';
 part 'src/icon/wds_icon_button.dart';
