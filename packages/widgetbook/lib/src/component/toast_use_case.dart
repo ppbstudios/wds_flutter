@@ -1,4 +1,5 @@
 import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.dart';
+import 'package:wds_widgetbook/src/widgetbook_utils/wds_toast_util.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -28,6 +29,15 @@ Widget _buildPlaygroundSection(BuildContext context) {
     labelBuilder: (v) => v.name,
   );
 
+  final int durationMs = context.knobs.int.slider(
+    label: 'duration (ms)',
+    description: '토스트가 자동으로 닫히는 시간(밀리초)입니다.',
+    initialValue: 2000,
+    min: 500,
+    max: 5000,
+    divisions: 9,
+  );
+
   final message = context.knobs.string(
     label: 'message',
     description: 'Toast에 표시될 메시지를 입력해 주세요',
@@ -50,12 +60,16 @@ Widget _buildPlaygroundSection(BuildContext context) {
       'borderRadius: 8px',
       'textStyle: body14NormalMedium',
       'textColor: white',
+      'duration: ${durationMs}ms',
       if (variant == WdsToastVariant.icon) 'iconSize: 24x24',
       if (variant == WdsToastVariant.icon) 'iconSpacing: 6px',
     ],
-    child: variant == WdsToastVariant.text
-        ? WdsToast.text(message: message)
-        : WdsToast.icon(message: message, leadingIcon: icon),
+    child: _ToastPlaygroundControls(
+      variant: variant,
+      message: message,
+      icon: icon,
+      durationMs: durationMs,
+    ),
   );
 }
 
@@ -81,4 +95,74 @@ Widget _buildDemonstrationSection(BuildContext context) {
       ),
     ],
   );
+}
+
+class _ToastPlaygroundControls extends StatefulWidget {
+  const _ToastPlaygroundControls({
+    required this.variant,
+    required this.message,
+    required this.icon,
+    required this.durationMs,
+  });
+
+  final WdsToastVariant variant;
+  final String message;
+  final WdsIcon icon;
+  final int durationMs;
+
+  @override
+  State<_ToastPlaygroundControls> createState() =>
+      _ToastPlaygroundControlsState();
+}
+
+class _ToastPlaygroundControlsState extends State<_ToastPlaygroundControls> {
+  WdsToastController? _controller;
+
+  @override
+  void dispose() {
+    _controller?.dismiss();
+    super.dispose();
+  }
+
+  void _showToast() {
+    _controller?.dismiss();
+    final Duration duration = Duration(milliseconds: widget.durationMs);
+    _controller = widget.variant == WdsToastVariant.text
+        ? context.showWdsToastText(
+            widget.message,
+            duration: duration,
+          )
+        : context.showWdsToastIcon(
+            widget.message,
+            icon: widget.icon,
+            duration: duration,
+          );
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      spacing: 12,
+      children: [
+        WdsButton(
+          variant: WdsButtonVariant.primary,
+          size: WdsButtonSize.large,
+          onTap: _showToast,
+          child: const Text(
+            'Toast 띄우기',
+          ),
+        ),
+        WdsButton(
+          variant: WdsButtonVariant.secondary,
+          size: WdsButtonSize.large,
+          onTap: () => setState(() => _controller?.dismiss()),
+          child: const Text(
+            'Toast 닫기',
+          ),
+        ),
+      ],
+    );
+  }
 }
