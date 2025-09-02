@@ -1,3 +1,4 @@
+import 'package:wds_tokens/wds_tokens.dart' as tokens;
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 import '../../widgetbook_components/widgetbook_components.dart';
@@ -21,73 +22,73 @@ class _AtomicColorShowcase extends StatelessWidget {
       _buildNeutralSection(),
       _buildCoolNeutralSection(),
       _buildPaletteSection(
-        'Pink: WdsColorPink',
+        'Pink',
         _shadesFrom([
-          WdsColorPink.v100,
-          WdsColorPink.v200,
-          WdsColorPink.v300,
-          WdsColorPink.v400,
-          WdsColorPink.v500,
-          WdsColorPink.v600,
-          WdsColorPink.v700,
-          WdsColorPink.v800,
-          WdsColorPink.v900,
+          tokens.WdsAtomicColorPink.v100,
+          tokens.WdsAtomicColorPink.v200,
+          tokens.WdsAtomicColorPink.v300,
+          tokens.WdsAtomicColorPink.v400,
+          tokens.WdsAtomicColorPink.v500,
+          tokens.WdsAtomicColorPink.v600,
+          tokens.WdsAtomicColorPink.v700,
+          tokens.WdsAtomicColorPink.v800,
+          tokens.WdsAtomicColorPink.v900,
         ]),
       ),
       _buildPaletteSection(
-        'Orange: WdsColorOrange',
+        'Orange',
         _shadesFrom([
-          WdsColorOrange.v100,
-          WdsColorOrange.v200,
-          WdsColorOrange.v300,
-          WdsColorOrange.v400,
-          WdsColorOrange.v500,
-          WdsColorOrange.v600,
-          WdsColorOrange.v700,
-          WdsColorOrange.v800,
-          WdsColorOrange.v900,
+          tokens.WdsAtomicColorOrange.v100,
+          tokens.WdsAtomicColorOrange.v200,
+          tokens.WdsAtomicColorOrange.v300,
+          tokens.WdsAtomicColorOrange.v400,
+          tokens.WdsAtomicColorOrange.v500,
+          tokens.WdsAtomicColorOrange.v600,
+          tokens.WdsAtomicColorOrange.v700,
+          tokens.WdsAtomicColorOrange.v800,
+          tokens.WdsAtomicColorOrange.v900,
         ]),
       ),
       _buildPaletteSection(
-        'Yellow: WdsColorYellow',
+        'Yellow',
         _shadesFrom([
-          WdsColorYellow.v100,
-          WdsColorYellow.v200,
-          WdsColorYellow.v300,
-          WdsColorYellow.v400,
-          WdsColorYellow.v500,
-          WdsColorYellow.v600,
-          WdsColorYellow.v700,
-          WdsColorYellow.v800,
-          WdsColorYellow.v900,
+          tokens.WdsAtomicColorYellow.v100,
+          tokens.WdsAtomicColorYellow.v200,
+          tokens.WdsAtomicColorYellow.v300,
+          tokens.WdsAtomicColorYellow.v400,
+          tokens.WdsAtomicColorYellow.v500,
+          tokens.WdsAtomicColorYellow.v600,
+          tokens.WdsAtomicColorYellow.v700,
+          tokens.WdsAtomicColorYellow.v800,
+          tokens.WdsAtomicColorYellow.v900,
         ]),
       ),
       _buildPaletteSection(
-        'Blue: WdsColorBlue',
+        'Blue',
         _shadesFrom([
-          WdsColorBlue.v100,
-          WdsColorBlue.v200,
-          WdsColorBlue.v300,
-          WdsColorBlue.v400,
-          WdsColorBlue.v500,
-          WdsColorBlue.v600,
-          WdsColorBlue.v700,
-          WdsColorBlue.v800,
-          WdsColorBlue.v900,
+          tokens.WdsAtomicColorBlue.v100,
+          tokens.WdsAtomicColorBlue.v200,
+          tokens.WdsAtomicColorBlue.v300,
+          tokens.WdsAtomicColorBlue.v400,
+          tokens.WdsAtomicColorBlue.v500,
+          tokens.WdsAtomicColorBlue.v600,
+          tokens.WdsAtomicColorBlue.v700,
+          tokens.WdsAtomicColorBlue.v800,
+          tokens.WdsAtomicColorBlue.v900,
         ]),
       ),
       _buildPaletteSection(
-        'Sky: WdsColorSky',
+        'Sky',
         _shadesFrom([
-          WdsColorSky.v100,
-          WdsColorSky.v200,
-          WdsColorSky.v300,
-          WdsColorSky.v400,
-          WdsColorSky.v500,
-          WdsColorSky.v600,
-          WdsColorSky.v700,
-          WdsColorSky.v800,
-          WdsColorSky.v900,
+          tokens.WdsAtomicColorSky.v100,
+          tokens.WdsAtomicColorSky.v200,
+          tokens.WdsAtomicColorSky.v300,
+          tokens.WdsAtomicColorSky.v400,
+          tokens.WdsAtomicColorSky.v500,
+          tokens.WdsAtomicColorSky.v600,
+          tokens.WdsAtomicColorSky.v700,
+          tokens.WdsAtomicColorSky.v800,
+          tokens.WdsAtomicColorSky.v900,
         ]),
       ),
       _buildBrandSection(),
@@ -111,28 +112,28 @@ class _AtomicColorShowcase extends StatelessWidget {
 
   static _Section _buildCommonSection() {
     final items = <_ColorItem>[
-      const _ColorItem(label: 'White', color: WdsColorCommon.white),
-      const _ColorItem(label: 'Black', color: WdsColorCommon.black),
+      const _ColorItem(label: 'White', color: tokens.$white),
+      const _ColorItem(label: 'Black', color: tokens.$black),
     ];
     return _Section(
-      title: 'Common: WdsColorCommon',
+      title: 'Common',
       body: _SwatchRow(items: items),
     );
   }
 
   static _Section _buildNeutralSection() {
     return _buildPaletteSection(
-      'Neutral: WdsColorNeutral',
+      'Neutral',
       _shadesFrom([
-        WdsColorNeutral.v100,
-        WdsColorNeutral.v200,
-        WdsColorNeutral.v300,
-        WdsColorNeutral.v400,
-        WdsColorNeutral.v500,
-        WdsColorNeutral.v600,
-        WdsColorNeutral.v700,
-        WdsColorNeutral.v800,
-        WdsColorNeutral.v900,
+        tokens.WdsAtomicColorNeutral.v100,
+        tokens.WdsAtomicColorNeutral.v200,
+        tokens.WdsAtomicColorNeutral.v300,
+        tokens.WdsAtomicColorNeutral.v400,
+        tokens.WdsAtomicColorNeutral.v500,
+        tokens.WdsAtomicColorNeutral.v600,
+        tokens.WdsAtomicColorNeutral.v700,
+        tokens.WdsAtomicColorNeutral.v800,
+        tokens.WdsAtomicColorNeutral.v900,
       ]),
     );
   }
@@ -140,29 +141,35 @@ class _AtomicColorShowcase extends StatelessWidget {
   static _Section _buildCoolNeutralSection() {
     // Approximated with Indigo shades to resemble cool neutral tones.
     return _buildPaletteSection(
-      'Cool Neutral: WdsColorCoolNeutral',
+      'Cool Neutral',
       _shadesFrom([
-        WdsColorCoolNeutral.v100,
-        WdsColorCoolNeutral.v200,
-        WdsColorCoolNeutral.v300,
-        WdsColorCoolNeutral.v400,
-        WdsColorCoolNeutral.v500,
-        WdsColorCoolNeutral.v600,
-        WdsColorCoolNeutral.v700,
-        WdsColorCoolNeutral.v800,
-        WdsColorCoolNeutral.v900,
+        tokens.WdsAtomicColorCoolNeutral.v100,
+        tokens.WdsAtomicColorCoolNeutral.v200,
+        tokens.WdsAtomicColorCoolNeutral.v300,
+        tokens.WdsAtomicColorCoolNeutral.v400,
+        tokens.WdsAtomicColorCoolNeutral.v500,
+        tokens.WdsAtomicColorCoolNeutral.v600,
+        tokens.WdsAtomicColorCoolNeutral.v700,
+        tokens.WdsAtomicColorCoolNeutral.v800,
+        tokens.WdsAtomicColorCoolNeutral.v900,
       ]),
     );
   }
 
   static _Section _buildBrandSection() {
     return const _Section(
-      title: 'Brand: WdsColorBrand',
+      title: 'Brand',
       body: _SwatchRow(
         items: <_ColorItem>[
-          _ColorItem(label: 'Hapa Kristin', color: WdsColorBrand.hapakristin),
-          _ColorItem(label: 'Chuu', color: WdsColorBrand.chuu),
-          _ColorItem(label: 'Gemhour', color: WdsColorBrand.gemhour),
+          _ColorItem(
+            label: 'Hapa Kristin',
+            color: tokens.WdsAtomicColorBrand.hapakristin,
+          ),
+          _ColorItem(label: 'Chuu', color: tokens.WdsAtomicColorBrand.chuu),
+          _ColorItem(
+            label: 'Gemhour',
+            color: tokens.WdsAtomicColorBrand.gemhour,
+          ),
         ],
       ),
     );
@@ -170,16 +177,16 @@ class _AtomicColorShowcase extends StatelessWidget {
 
   static _Section _buildOpacitySection() {
     final opacities = [
-      WdsAtomicOpacity.v5,
-      WdsAtomicOpacity.v10,
-      WdsAtomicOpacity.v20,
-      WdsAtomicOpacity.v30,
-      WdsAtomicOpacity.v40,
-      WdsAtomicOpacity.v50,
-      WdsAtomicOpacity.v60,
-      WdsAtomicOpacity.v70,
-      WdsAtomicOpacity.v80,
-      WdsAtomicOpacity.v90,
+      tokens.WdsAtomicOpacity.v5,
+      tokens.WdsAtomicOpacity.v10,
+      tokens.WdsAtomicOpacity.v20,
+      tokens.WdsAtomicOpacity.v30,
+      tokens.WdsAtomicOpacity.v40,
+      tokens.WdsAtomicOpacity.v50,
+      tokens.WdsAtomicOpacity.v60,
+      tokens.WdsAtomicOpacity.v70,
+      tokens.WdsAtomicOpacity.v80,
+      tokens.WdsAtomicOpacity.v90,
     ];
 
     final items = <_ColorItem>[];
@@ -188,12 +195,12 @@ class _AtomicColorShowcase extends StatelessWidget {
       items.add(
         _ColorItem(
           label: percentLabel,
-          color: WdsColorCommon.black.withValues(alpha: opacity),
+          color: tokens.$black.withValues(alpha: opacity),
         ),
       );
     }
     return _Section(
-      title: 'Opacity: WdsAtomicOpacity',
+      title: 'Opacity',
       body: _SwatchRow(items: items, showHex: false, valueSuffix: '%'),
     );
   }
@@ -217,7 +224,7 @@ class _SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: WdsSemanticTypography.title20Bold,
+      style: WdsTypography.title20Bold,
     );
   }
 }
@@ -280,12 +287,12 @@ class _ColorSwatch extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             item.label,
-            style: WdsSemanticTypography.caption11Bold,
+            style: WdsTypography.caption11Bold,
           ),
           if (showHex)
             Text(
               valueText,
-              style: WdsSemanticTypography.caption11Bold,
+              style: WdsTypography.caption11Bold,
             ),
         ],
       ),

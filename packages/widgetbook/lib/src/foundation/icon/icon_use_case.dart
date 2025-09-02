@@ -23,7 +23,7 @@ Widget buildWdsIconUseCase(BuildContext context) {
 Widget _buildPlaygroundSection(BuildContext context) {
   final color = context.knobs.color(
     label: 'color',
-    initialValue: WdsColorNeutral.v900,
+    initialValue: WdsColors.textNormal,
   );
 
   final selected = context.knobs.object.dropdown<WdsIcon>(
@@ -34,7 +34,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    backgroundColor: WdsColorCoolNeutral.v50,
     info: [
       'icon: ${selected.name}',
       'color',
@@ -92,7 +91,7 @@ class _IconGrid extends StatelessWidget {
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: WdsSemanticTypography.caption11Bold,
+                      style: WdsTypography.caption11Bold,
                     ),
                   ),
                 ],
@@ -128,7 +127,7 @@ class _NavigationIconGrid extends StatelessWidget {
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: WdsSemanticTypography.caption11Bold,
+                      style: WdsTypography.caption11Bold,
                     ),
                   ),
                 ],
@@ -146,7 +145,7 @@ class _NavigationIconGrid extends StatelessWidget {
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: WdsSemanticTypography.caption11Bold,
+                      style: WdsTypography.caption11Bold,
                     ),
                   ),
                 ],
@@ -182,7 +181,7 @@ class _OrderStatusIconGrid extends StatelessWidget {
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: WdsSemanticTypography.caption11Bold,
+                      style: WdsTypography.caption11Bold,
                     ),
                   ),
                 ],
@@ -200,7 +199,7 @@ class _OrderStatusIconGrid extends StatelessWidget {
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: WdsSemanticTypography.caption11Bold,
+                      style: WdsTypography.caption11Bold,
                     ),
                   ),
                 ],

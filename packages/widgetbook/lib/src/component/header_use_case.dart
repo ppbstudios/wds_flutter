@@ -92,7 +92,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   return WidgetbookPlayground(
     layout: PlaygroundLayout.stretch,
-    backgroundColor: WdsColorCoolNeutral.v50,
+    backgroundColor: WdsColors.coolNeutral50,
     info: [
       'layout: stretch',
       'variant: $type',
