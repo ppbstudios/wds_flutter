@@ -24,6 +24,8 @@ import 'package:wds_widgetbook/src/component/header_use_case.dart'
     as _wds_widgetbook_src_component_header_use_case;
 import 'package:wds_widgetbook/src/component/icon_button_use_case.dart'
     as _wds_widgetbook_src_component_icon_button_use_case;
+import 'package:wds_widgetbook/src/component/radio_use_case.dart'
+    as _wds_widgetbook_src_component_radio_use_case;
 import 'package:wds_widgetbook/src/component/search_field_use_case.dart'
     as _wds_widgetbook_src_component_search_field_use_case;
 import 'package:wds_widgetbook/src/component/select_use_case.dart'
@@ -38,6 +40,8 @@ import 'package:wds_widgetbook/src/component/text_button_use_case.dart'
     as _wds_widgetbook_src_component_text_button_use_case;
 import 'package:wds_widgetbook/src/component/text_field_use_case.dart'
     as _wds_widgetbook_src_component_text_field_use_case;
+import 'package:wds_widgetbook/src/component/toast_use_case.dart'
+    as _wds_widgetbook_src_component_toast_use_case;
 import 'package:wds_widgetbook/src/cover.dart' as _wds_widgetbook_src_cover;
 import 'package:wds_widgetbook/src/foundation/color/atomic_color_use_case.dart'
     as _wds_widgetbook_src_foundation_color_atomic_color_use_case;
@@ -111,6 +115,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'Radio',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Radio',
+          builder:
+              _wds_widgetbook_src_component_radio_use_case.buildWdsRadioUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'SearchField',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'SearchField',
@@ -164,6 +176,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'TextField',
           builder: _wds_widgetbook_src_component_text_field_use_case
               .buildWdsTextFieldUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Toast',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Toast',
+          builder:
+              _wds_widgetbook_src_component_toast_use_case.buildWdsToastUseCase,
         ),
       ),
     ],

@@ -10,7 +10,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 Widget buildWdsRadioUseCase(BuildContext context) {
   return WidgetbookPageLayout(
     title: 'Radio',
-    description: '그룹 내에서 하나의 옵션만 선택할 수 있는 Radio 컴포넌트입니다. groupValue와 개별 value를 비교하여 선택 여부를 판단합니다.',
+    description: '사용자가 여러 옵션 중에서 하나만 선택할 수 있도록 돕습니다.',
     children: [
       _buildPlaygroundSection(context),
       const SizedBox(height: 32),
@@ -169,8 +169,8 @@ class _RadioDemo extends StatefulWidget {
 }
 
 class _RadioDemoState extends State<_RadioDemo> {
-  String? _groupValue;
-  
+  String? _groupValue = 'A'; // Default selection
+
   @override
   Widget build(BuildContext context) {
     return Column(

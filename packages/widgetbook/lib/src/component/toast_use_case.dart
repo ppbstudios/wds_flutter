@@ -22,6 +22,7 @@ Widget buildWdsToastUseCase(BuildContext context) {
 Widget _buildPlaygroundSection(BuildContext context) {
   final variant = context.knobs.object.dropdown<WdsToastVariant>(
     label: 'variant',
+    description: 'icon으로 선택해서 icon을 설정해 보세요',
     options: WdsToastVariant.values,
     initialOption: WdsToastVariant.text,
     labelBuilder: (v) => v.name,
@@ -29,7 +30,8 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   final message = context.knobs.string(
     label: 'message',
-    initialValue: '작업이 완료되었습니다',
+    description: 'Toast에 표시될 메시지를 입력해 주세요',
+    initialValue: '메시지에 마침표를 찍어요.',
   );
 
   final icon = context.knobs.object.dropdown<WdsIcon>(
@@ -59,54 +61,21 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
 Widget _buildDemonstrationSection(BuildContext context) {
   return const WidgetbookSection(
-    title: 'Toast Variants',
+    title: 'Toast',
     children: [
       WidgetbookSubsection(
-        title: 'text',
-        labels: ['기본 텍스트', '긴 메시지'],
+        title: 'variant',
+        labels: ['text', 'icon'],
         content: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
           children: [
-            WdsToast.text(message: '저장되었습니다'),
-            WdsToast.text(message: '변경 사항이 성공적으로 저장되었습니다'),
-          ],
-        ),
-      ),
-      SizedBox(height: 24),
-      WidgetbookSubsection(
-        title: 'icon',
-        labels: ['성공', '정보', '경고'],
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 16,
-          children: [
+            WdsToast.text(message: '메시지에 마침표를 찍어요.'),
             WdsToast.icon(
-              message: '저장되었습니다',
-              leadingIcon: WdsIcon.blank, // You can replace with appropriate success icon
+              message: '메시지에 마침표를 찍어요.',
+              leadingIcon: WdsIcon.blank,
             ),
-            WdsToast.icon(
-              message: '새로운 업데이트가 있습니다',
-              leadingIcon: WdsIcon.blank, // You can replace with appropriate info icon
-            ),
-            WdsToast.icon(
-              message: '네트워크 연결을 확인해주세요',
-              leadingIcon: WdsIcon.blank, // You can replace with appropriate warning icon
-            ),
-          ],
-        ),
-      ),
-      SizedBox(height: 24),
-      WidgetbookSubsection(
-        title: 'message length',
-        labels: ['짧은 메시지', '중간 메시지', '긴 메시지'],
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 16,
-          children: [
-            WdsToast.text(message: '완료'),
-            WdsToast.text(message: '파일이 업로드되었습니다'),
-            WdsToast.text(message: '사용자 프로필 정보가 성공적으로 업데이트되었습니다'),
           ],
         ),
       ),
