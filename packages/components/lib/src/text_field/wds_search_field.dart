@@ -67,14 +67,11 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
     );
 
     const BorderRadius borderRadius = BorderRadius.all(
-      Radius.circular(WdsAtomicRadius.full),
+      Radius.circular(WdsRadius.full),
     );
 
-    final TextStyle textStyle =
-        WdsSemanticTypography.body15NormalRegular.copyWith(
-      color: widget.enabled
-          ? WdsSemanticColorText.normal
-          : WdsSemanticColorText.alternative,
+    final TextStyle textStyle = WdsTypography.body15NormalRegular.copyWith(
+      color: widget.enabled ? WdsColors.textNormal : WdsColors.textAlternative,
     );
 
     const InputBorder noBorder = OutlineInputBorder(
@@ -94,13 +91,13 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
           onChanged: widget.onChanged,
           onSubmitted: widget.onSubmitted,
           style: textStyle,
-          cursorColor: WdsSemanticColorText.normal,
+          cursorColor: WdsColors.textNormal,
           decoration: InputDecoration(
             isDense: true,
             contentPadding: EdgeInsets.zero,
             hintText: widget.hintText,
-            hintStyle: WdsSemanticTypography.body15NormalRegular.copyWith(
-              color: WdsSemanticColorText.alternative,
+            hintStyle: WdsTypography.body15NormalRegular.copyWith(
+              color: WdsColors.textAlternative,
             ),
             border: noBorder,
             enabledBorder: noBorder,
@@ -115,7 +112,7 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
 
     final Widget core = DecoratedBox(
       decoration: const ShapeDecoration(
-        color: WdsSemanticColorBackgroud.alternative,
+        color: WdsColors.backgroundAlternative,
         shape: RoundedRectangleBorder(borderRadius: borderRadius),
       ),
       child: Padding(

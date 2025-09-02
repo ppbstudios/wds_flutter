@@ -18,17 +18,17 @@ class WidgetbookTitle extends StatelessWidget {
       children: [
         Text(
           title,
-          style: WdsSemanticTypography.title32Bold,
+          style: WdsTypography.title32Bold,
         ),
         if (description != null && description!.isNotEmpty)
           Text(
             description!,
-            style: WdsSemanticTypography.heading16Regular,
+            style: WdsTypography.heading16Regular,
           ),
         const Divider(
           height: 4,
           thickness: 4,
-          color: WdsColorCommon.black,
+          color: WdsColors.black,
         ),
       ],
     );

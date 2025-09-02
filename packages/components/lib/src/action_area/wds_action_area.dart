@@ -79,9 +79,9 @@ class WdsActionArea extends StatelessWidget {
           height: 81,
           child: DecoratedBox(
             decoration: const BoxDecoration(
-              color: WdsColorCommon.white,
+              color: WdsColors.white,
               border: Border(
-                top: BorderSide(color: WdsSemanticColorBorder.alternative),
+                top: BorderSide(color: WdsColors.borderAlternative),
               ),
             ),
             child: Padding(

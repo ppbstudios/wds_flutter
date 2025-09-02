@@ -46,7 +46,7 @@ Widget _buildTextTabsDemonstrationSection(BuildContext context) {
             WdsTextTabs(
               tabs: ['추천', '매장 단독 혜택', '신상', '할인'],
               currentIndex: 2,
-              featuredColors: {2: primary},
+              featuredColors: {2: WdsColors.primary},
             ),
           ],
         ),
@@ -101,7 +101,7 @@ class _TextTabsPlaygroundState extends State<_TextTabsPlayground> {
     final List<String> tabs = List.generate(count, (i) => '추천 ${i + 1}');
 
     return WidgetbookPlayground(
-      backgroundColor: WdsColorCoolNeutral.v50,
+      backgroundColor: WdsColors.coolNeutral50,
       info: [
         'count: $count',
         'currentIndex: $_currentIndex',

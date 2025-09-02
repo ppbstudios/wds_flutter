@@ -74,7 +74,7 @@ class _WdsCheckboxState extends State<WdsCheckbox>
   Widget build(BuildContext context) {
     final Size boxSize = widget.size.spec;
     final BorderRadius radius =
-        const BorderRadius.all(Radius.circular(WdsAtomicRadius.xs));
+        const BorderRadius.all(Radius.circular(WdsRadius.xs));
 
     Widget paint = AnimatedBuilder(
       animation: _controller,
@@ -128,16 +128,17 @@ class _CheckboxPainter extends CustomPainter {
     final Rect outer = Offset.zero & sizeSpec.spec;
     final RRect rrect = RRect.fromRectAndRadius(
       outer,
-      const Radius.circular(WdsAtomicRadius.xs),
+      const Radius.circular(WdsRadius.xs),
     );
 
     // Background/border (no animation for background)
     if (isChecked) {
-      final Paint fill = Paint()..color = (isEnabled ? cta : cta.withAlpha(40));
+      final Paint fill = Paint()
+        ..color = (isEnabled ? WdsColors.cta : WdsColors.cta.withAlpha(40));
       canvas.drawRRect(rrect, fill);
     } else {
       final Paint border = Paint()
-        ..color = WdsSemanticColorBorder.neutral
+        ..color = WdsColors.borderNeutral
         ..style = PaintingStyle.stroke
         ..strokeWidth = 1;
       canvas.drawRRect(rrect, border);
@@ -150,9 +151,9 @@ class _CheckboxPainter extends CustomPainter {
       final double scale = inner / 20.0; // large=1.0, small=0.8
 
       const markPath = [
-        Offset(3, 9),
+        Offset(3.5, 9.5),
         Offset(8.5, 15),
-        Offset(17.5, 4),
+        Offset(17.5, 5),
       ];
 
       Path mark = Path();
@@ -166,7 +167,7 @@ class _CheckboxPainter extends CustomPainter {
 
       final metrics = mark.computeMetrics();
       final Paint stroke = Paint()
-        ..color = WdsColorCommon.white
+        ..color = WdsColors.white
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.square
         ..strokeJoin = StrokeJoin.miter

@@ -1,3 +1,4 @@
+import 'package:wds_tokens/wds_tokens.dart' as tokens;
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -48,15 +49,15 @@ Widget _buildTypographyPlayground(BuildContext context) {
 
   final fontSize = context.knobs.double.slider(
     label: 'fontSize(px)',
-    initialValue: WdsFontSize.v18,
-    min: WdsFontSize.v10,
-    max: WdsFontSize.v32,
+    initialValue: tokens.WdsAtomicFontSize.v18,
+    min: tokens.WdsAtomicFontSize.v10,
+    max: tokens.WdsAtomicFontSize.v32,
     divisions: 11,
   );
 
   final lineHeight = context.knobs.double.slider(
     label: 'lineHeight(px)',
-    initialValue: WdsFontLineHeight.v30,
+    initialValue: tokens.WdsAtomicFontLineHeight.v30,
     min: 12,
     max: 56,
     divisions: 44,
@@ -71,17 +72,17 @@ Widget _buildTypographyPlayground(BuildContext context) {
 
   final weight = context.knobs.object.dropdown<FontWeight>(
     label: 'fontWeight',
-    initialOption: WdsFontWeight.extraBold,
+    initialOption: tokens.WdsAtomicFontWeight.extraBold,
     options: const [
-      WdsFontWeight.extraBold,
-      WdsFontWeight.bold,
-      WdsFontWeight.medium,
-      WdsFontWeight.regular,
+      tokens.WdsAtomicFontWeight.extraBold,
+      tokens.WdsAtomicFontWeight.bold,
+      tokens.WdsAtomicFontWeight.medium,
+      tokens.WdsAtomicFontWeight.regular,
     ],
     labelBuilder: (w) {
-      if (w == WdsFontWeight.extraBold) return 'extraBold';
-      if (w == WdsFontWeight.bold) return 'bold';
-      if (w == WdsFontWeight.medium) return 'medium';
+      if (w == tokens.WdsAtomicFontWeight.extraBold) return 'extraBold';
+      if (w == tokens.WdsAtomicFontWeight.bold) return 'bold';
+      if (w == tokens.WdsAtomicFontWeight.medium) return 'medium';
       return 'regular';
     },
   );
@@ -92,7 +93,7 @@ Widget _buildTypographyPlayground(BuildContext context) {
   );
 
   final style = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
+    fontFamily: tokens.WdsAtomicFontFamily.pretendard,
     fontWeight: weight,
     fontSize: fontSize,
     height: lineHeight / fontSize,
@@ -117,9 +118,9 @@ Widget _buildTypographyPlayground(BuildContext context) {
 }
 
 String _getWeightLabel(FontWeight weight) {
-  if (weight == WdsFontWeight.extraBold) return 'extraBold';
-  if (weight == WdsFontWeight.bold) return 'bold';
-  if (weight == WdsFontWeight.medium) return 'medium';
+  if (weight == tokens.WdsAtomicFontWeight.extraBold) return 'extraBold';
+  if (weight == tokens.WdsAtomicFontWeight.bold) return 'bold';
+  if (weight == tokens.WdsAtomicFontWeight.medium) return 'medium';
   return 'regular';
 }
 
@@ -138,12 +139,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Title 32',
           tokenName: 'WdsSemanticTypography.title32Medium',
-          fontSize: WdsFontSize.v32,
-          lineHeightPx: WdsFontLineHeight.v42,
+          fontSize: tokens.WdsAtomicFontSize.v32,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v42,
           styles: [
-            WdsSemanticTypography.title32Medium,
-            WdsSemanticTypography.title32Bold,
-            WdsSemanticTypography.title32Regular,
+            tokens.WdsSemanticTypography.title32Medium,
+            tokens.WdsSemanticTypography.title32Bold,
+            tokens.WdsSemanticTypography.title32Regular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -151,12 +152,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Title 22',
           tokenName: 'WdsSemanticTypography.title22Medium',
-          fontSize: WdsFontSize.v22,
-          lineHeightPx: WdsFontLineHeight.v30,
+          fontSize: tokens.WdsAtomicFontSize.v22,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v30,
           styles: [
-            WdsSemanticTypography.title22Bold,
-            WdsSemanticTypography.title22Medium,
-            WdsSemanticTypography.title22Regular,
+            tokens.WdsSemanticTypography.title22Bold,
+            tokens.WdsSemanticTypography.title22Medium,
+            tokens.WdsSemanticTypography.title22Regular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -164,12 +165,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Title 20',
           tokenName: 'WdsSemanticTypography.title20Medium',
-          fontSize: WdsFontSize.v20,
-          lineHeightPx: WdsFontLineHeight.v28,
+          fontSize: tokens.WdsAtomicFontSize.v20,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v28,
           styles: [
-            WdsSemanticTypography.title20Bold,
-            WdsSemanticTypography.title20Medium,
-            WdsSemanticTypography.title20Regular,
+            tokens.WdsSemanticTypography.title20Bold,
+            tokens.WdsSemanticTypography.title20Medium,
+            tokens.WdsSemanticTypography.title20Regular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -177,13 +178,13 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Heading 18',
           tokenName: 'WdsSemanticTypography.heading18Medium',
-          fontSize: WdsFontSize.v18,
-          lineHeightPx: WdsFontLineHeight.v26,
+          fontSize: tokens.WdsAtomicFontSize.v18,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v26,
           styles: [
-            WdsSemanticTypography.heading18ExtraBold,
-            WdsSemanticTypography.heading18Bold,
-            WdsSemanticTypography.heading18Medium,
-            WdsSemanticTypography.heading18Regular,
+            tokens.WdsSemanticTypography.heading18ExtraBold,
+            tokens.WdsSemanticTypography.heading18Bold,
+            tokens.WdsSemanticTypography.heading18Medium,
+            tokens.WdsSemanticTypography.heading18Regular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -191,13 +192,13 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Heading 17',
           tokenName: 'WdsSemanticTypography.heading17Medium',
-          fontSize: WdsFontSize.v17,
-          lineHeightPx: WdsFontLineHeight.v24,
+          fontSize: tokens.WdsAtomicFontSize.v17,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v24,
           styles: [
-            WdsSemanticTypography.heading17ExtraBold,
-            WdsSemanticTypography.heading17Bold,
-            WdsSemanticTypography.heading17Medium,
-            WdsSemanticTypography.heading17Regular,
+            tokens.WdsSemanticTypography.heading17ExtraBold,
+            tokens.WdsSemanticTypography.heading17Bold,
+            tokens.WdsSemanticTypography.heading17Medium,
+            tokens.WdsSemanticTypography.heading17Regular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -205,12 +206,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Heading 16',
           tokenName: 'WdsSemanticTypography.heading16Medium',
-          fontSize: WdsFontSize.v16,
-          lineHeightPx: WdsFontLineHeight.v24,
+          fontSize: tokens.WdsAtomicFontSize.v16,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v24,
           styles: [
-            WdsSemanticTypography.heading16Bold,
-            WdsSemanticTypography.heading16Medium,
-            WdsSemanticTypography.heading16Regular,
+            tokens.WdsSemanticTypography.heading16Bold,
+            tokens.WdsSemanticTypography.heading16Medium,
+            tokens.WdsSemanticTypography.heading16Regular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -218,12 +219,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Body 15 Normal',
           tokenName: 'WdsSemanticTypography.body15NormalMedium',
-          fontSize: WdsFontSize.v15,
-          lineHeightPx: WdsFontLineHeight.v22,
+          fontSize: tokens.WdsAtomicFontSize.v15,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v22,
           styles: [
-            WdsSemanticTypography.body15NormalBold,
-            WdsSemanticTypography.body15NormalMedium,
-            WdsSemanticTypography.body15NormalRegular,
+            tokens.WdsSemanticTypography.body15NormalBold,
+            tokens.WdsSemanticTypography.body15NormalMedium,
+            tokens.WdsSemanticTypography.body15NormalRegular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -231,12 +232,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Body 15 Reading',
           tokenName: 'WdsSemanticTypography.body15ReadingMedium',
-          fontSize: WdsFontSize.v15,
-          lineHeightPx: WdsFontLineHeight.v24,
+          fontSize: tokens.WdsAtomicFontSize.v15,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v24,
           styles: [
-            WdsSemanticTypography.body15ReadingBold,
-            WdsSemanticTypography.body15ReadingMedium,
-            WdsSemanticTypography.body15ReadingRegular,
+            tokens.WdsSemanticTypography.body15ReadingBold,
+            tokens.WdsSemanticTypography.body15ReadingMedium,
+            tokens.WdsSemanticTypography.body15ReadingRegular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -244,12 +245,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Body 14 Normal',
           tokenName: 'WdsSemanticTypography.body14NormalMedium',
-          fontSize: WdsFontSize.v14,
-          lineHeightPx: WdsFontLineHeight.v20,
+          fontSize: tokens.WdsAtomicFontSize.v14,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v20,
           styles: [
-            WdsSemanticTypography.body14NormalBold,
-            WdsSemanticTypography.body14NormalMedium,
-            WdsSemanticTypography.body14NormalRegular,
+            tokens.WdsSemanticTypography.body14NormalBold,
+            tokens.WdsSemanticTypography.body14NormalMedium,
+            tokens.WdsSemanticTypography.body14NormalRegular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -257,12 +258,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Body 14 Reading',
           tokenName: 'WdsSemanticTypography.body14ReadingMedium',
-          fontSize: WdsFontSize.v14,
-          lineHeightPx: WdsFontLineHeight.v22,
+          fontSize: tokens.WdsAtomicFontSize.v14,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v22,
           styles: [
-            WdsSemanticTypography.body14ReadingBold,
-            WdsSemanticTypography.body14ReadingMedium,
-            WdsSemanticTypography.body14ReadingRegular,
+            tokens.WdsSemanticTypography.body14ReadingBold,
+            tokens.WdsSemanticTypography.body14ReadingMedium,
+            tokens.WdsSemanticTypography.body14ReadingRegular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -270,12 +271,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Body 13 Normal',
           tokenName: 'WdsSemanticTypography.body13NormalMedium',
-          fontSize: WdsFontSize.v13,
-          lineHeightPx: WdsFontLineHeight.v18,
+          fontSize: tokens.WdsAtomicFontSize.v13,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v18,
           styles: [
-            WdsSemanticTypography.body13NormalBold,
-            WdsSemanticTypography.body13NormalMedium,
-            WdsSemanticTypography.body13NormalRegular,
+            tokens.WdsSemanticTypography.body13NormalBold,
+            tokens.WdsSemanticTypography.body13NormalMedium,
+            tokens.WdsSemanticTypography.body13NormalRegular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -283,12 +284,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Body 13 Reading',
           tokenName: 'WdsSemanticTypography.body13ReadingMedium',
-          fontSize: WdsFontSize.v13,
-          lineHeightPx: WdsFontLineHeight.v20,
+          fontSize: tokens.WdsAtomicFontSize.v13,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v20,
           styles: [
-            WdsSemanticTypography.body13ReadingBold,
-            WdsSemanticTypography.body13ReadingMedium,
-            WdsSemanticTypography.body13ReadingRegular,
+            tokens.WdsSemanticTypography.body13ReadingBold,
+            tokens.WdsSemanticTypography.body13ReadingMedium,
+            tokens.WdsSemanticTypography.body13ReadingRegular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -296,12 +297,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Caption 12',
           tokenName: 'WdsSemanticTypography.caption12Medium',
-          fontSize: WdsFontSize.v12,
-          lineHeightPx: WdsFontLineHeight.v16,
+          fontSize: tokens.WdsAtomicFontSize.v12,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v16,
           styles: [
-            WdsSemanticTypography.caption12Bold,
-            WdsSemanticTypography.caption12Medium,
-            WdsSemanticTypography.caption12Regular,
+            tokens.WdsSemanticTypography.caption12Bold,
+            tokens.WdsSemanticTypography.caption12Medium,
+            tokens.WdsSemanticTypography.caption12Regular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -309,12 +310,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Caption 11',
           tokenName: 'WdsSemanticTypography.caption11Medium',
-          fontSize: WdsFontSize.v11,
-          lineHeightPx: WdsFontLineHeight.v14,
+          fontSize: tokens.WdsAtomicFontSize.v11,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v14,
           styles: [
-            WdsSemanticTypography.caption11Bold,
-            WdsSemanticTypography.caption11Medium,
-            WdsSemanticTypography.caption11Regular,
+            tokens.WdsSemanticTypography.caption11Bold,
+            tokens.WdsSemanticTypography.caption11Medium,
+            tokens.WdsSemanticTypography.caption11Regular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -322,12 +323,12 @@ class _StylesSection extends StatelessWidget {
         const _TypographyRow(
           label: 'Caption 10',
           tokenName: 'WdsSemanticTypography.caption10Medium',
-          fontSize: WdsFontSize.v10,
-          lineHeightPx: WdsFontLineHeight.v13,
+          fontSize: tokens.WdsAtomicFontSize.v10,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v13,
           styles: [
-            WdsSemanticTypography.caption10Bold,
-            WdsSemanticTypography.caption10Medium,
-            WdsSemanticTypography.caption10Regular,
+            tokens.WdsSemanticTypography.caption10Bold,
+            tokens.WdsSemanticTypography.caption10Medium,
+            tokens.WdsSemanticTypography.caption10Regular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -407,8 +408,9 @@ class _TypographyRow extends StatelessWidget {
                   Text(label),
                   Text(
                     tokenName,
-                    style: WdsSemanticTypography.caption10Regular.copyWith(
-                      color: WdsColorNeutral.v300,
+                    style:
+                        tokens.WdsSemanticTypography.caption10Regular.copyWith(
+                      color: tokens.WdsAtomicColorNeutral.v300,
                     ),
                   ),
                 ],
@@ -436,47 +438,57 @@ class _TypographyRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: styleByWeight[WdsFontWeight.extraBold] != null
+                      child:
+                          styleByWeight[tokens.WdsAtomicFontWeight.extraBold] !=
+                                  null
+                              ? Text(
+                                  previewText,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: styleByWeight[
+                                      tokens.WdsAtomicFontWeight.extraBold]!,
+                                )
+                              : const SizedBox.shrink(),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child:
+                          styleByWeight[tokens.WdsAtomicFontWeight.bold] != null
+                              ? Text(
+                                  previewText,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: styleByWeight[
+                                      tokens.WdsAtomicFontWeight.bold]!,
+                                )
+                              : const SizedBox.shrink(),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: styleByWeight[tokens.WdsAtomicFontWeight.medium] !=
+                              null
                           ? Text(
                               previewText,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: styleByWeight[WdsFontWeight.extraBold]!,
+                              style: styleByWeight[
+                                  tokens.WdsAtomicFontWeight.medium]!,
                             )
                           : const SizedBox.shrink(),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: styleByWeight[WdsFontWeight.bold] != null
-                          ? Text(
-                              previewText,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: styleByWeight[WdsFontWeight.bold]!,
-                            )
-                          : const SizedBox.shrink(),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: styleByWeight[WdsFontWeight.medium] != null
-                          ? Text(
-                              previewText,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: styleByWeight[WdsFontWeight.medium]!,
-                            )
-                          : const SizedBox.shrink(),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: styleByWeight[WdsFontWeight.regular] != null
-                          ? Text(
-                              previewText,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: styleByWeight[WdsFontWeight.regular]!,
-                            )
-                          : const SizedBox.shrink(),
+                      child:
+                          styleByWeight[tokens.WdsAtomicFontWeight.regular] !=
+                                  null
+                              ? Text(
+                                  previewText,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: styleByWeight[
+                                      tokens.WdsAtomicFontWeight.regular]!,
+                                )
+                              : const SizedBox.shrink(),
                     ),
                   ],
                 ),
@@ -499,7 +511,7 @@ class _HeaderCell extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Text(
         label,
-        style: WdsSemanticTypography.heading17Bold,
+        style: WdsTypography.heading17Bold,
       ),
     );
   }
@@ -515,7 +527,7 @@ class _PreviewHeaderCell extends StatelessWidget {
         children: [
           Text(
             '미리보기',
-            style: WdsSemanticTypography.heading17Bold,
+            style: WdsTypography.heading17Bold,
           ),
           SizedBox(height: 4),
           Row(
@@ -524,28 +536,28 @@ class _PreviewHeaderCell extends StatelessWidget {
               Expanded(
                 child: Text(
                   'ExtraBold (800)',
-                  style: WdsSemanticTypography.caption11Bold,
+                  style: WdsTypography.caption11Bold,
                 ),
               ),
               SizedBox(width: 16),
               Expanded(
                 child: Text(
                   'Bold (600)',
-                  style: WdsSemanticTypography.caption11Bold,
+                  style: WdsTypography.caption11Bold,
                 ),
               ),
               SizedBox(width: 16),
               Expanded(
                 child: Text(
                   'Medium (500)',
-                  style: WdsSemanticTypography.caption11Bold,
+                  style: WdsTypography.caption11Bold,
                 ),
               ),
               SizedBox(width: 16),
               Expanded(
                 child: Text(
                   'Regular (400)',
-                  style: WdsSemanticTypography.caption11Bold,
+                  style: WdsTypography.caption11Bold,
                 ),
               ),
             ],

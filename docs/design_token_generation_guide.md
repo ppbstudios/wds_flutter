@@ -1,366 +1,447 @@
-# 요청
+# 디자인 토큰 생성기 요구사항
 
-token_generator 로직을 아래 요구사항을 기반으로 작성
+## 개요
 
-# 역할
+token_generator를 통해 JSON 데이터를 순수 Dart 코드로 변환하여 primitive(atomic), semantic 디자인 토큰을 생성합니다.
+foundation은 개발자가 수작업으로 구현합니다.
 
-@design_token_background.md, @guide.md 을 분석해 어떤 일을 해야하는 지 파악합니다. JSON 데이터를 순수 Dart 코드로 변환해 primitive(atomic), semantic, 그리고 component_specific 관련 디자인 토큰을 제작해야 합니다. 제작 시에는 @token_generator/ 를 통해 제작합니다. 
+### 입력 파일
+| 파일명 | 역할 | 출처 |
+|-------|------|------|
+| `design_system_atomic.json` | 원시(primitive) 토큰 정의 | Figma 내보내기 |
+| `design_system_semantic.json` | 의미적(semantic) 토큰 정의 | Figma 내보내기 |
 
-# 개요
+### 출력 구조
+| 토큰 레벨 | 생성 위치 | 관리 방식 | 설명 |
+|----------|----------|----------|------|
+| Atomic | `tokens/lib/atomic/` | 자동 생성 | 원시 디자인 값들 |
+| Semantic | `tokens/lib/semantic/` | 자동 생성 | 의미적 토큰들 |
 
-제공되는 JSON은 
-- @tokens/design_system_atomic.json
-- @tokens/design_system_semantic.json
+### 패키지 연동 구조
+```
+JSON → tokens(자동생성) → foundation(수작업) → components(사용)
+```
 
-으로 Figma에서 export된 JSON이 파일로 주어질 예정입니다. 생성되는 디자인 토큰 관련 Dart 클래스는 모두 JSON 기반이어야하며, JSON에 없는 데이터는 Dart 클래스로 생성되지 않습니다.
+## JSON 구조 요구사항
 
-- atomic (primitive)
-- semantic
-- component_specific
-
-으로 대분류를 3가지로 나눕니다. 생성된 토큰들은 다른 패키지에 적용됩니다. 
-
-적용되는 패키지:
-- @foundation/ 
-- @components/ 
-
-그리고 이 2개의 패키지에서 생성되는 요소들은 @widgetbook.dart 패키지로 Import 되어 Flutter Web이 빌드돼 디자이너, 기획자와 소통하는 데 사용됩니다.
-
-JSON이 변경될 때 마다 token 부터 components 까지 mapping 되어야 하므로 정해진 규칙이 있어야 변경되는 값에 유연하게 대체할 수 있습니다.
-
-# 요구사항
-
-JSON의 객체를 구분 지을 때 가장 안쪽 객체는 상시
-
-``` JSON
+모든 토큰의 최하위 객체는 다음 구조를 가져야 합니다:
+```json
 {
-  "$type": "some type",
-  "$value": "some value"
+  "$type": "토큰 타입",
+  "$value": "토큰 값"
 }
 ```
 
-를 갖습니다. 해당 값을 key 로 갖는 key - value 쌍은 특정 클래스 나 static 변수로 생성되야 합니다.
+### 클래스 생성 규칙
 
-그리고 static 변수들을 포함한 클래스는 바로 상위 객체가 됩니다. 
+| JSON 구조 | 생성되는 Dart 클래스 |
+|-----------|-------------------|
+| 숫자 키 (`"50", "100"`) | `v` 접두사 (`v50`, `v100`) |
+| 문자 키 (`"blue", "primary"`) | 카멜케이스 변환 |
+| 중첩 객체 | part 클래스로 분리 |
 
-예를 들어, 
-
-``` JSON
+#### 예시
+```json
 {
   "Blue": {
-    "50": { "$type": "some type", "$value": "some value" },
-    "100": { "$type": "some type", "$value": "some value" },
-    ...
+    "50": { "$type": "color", "$value": "#e6ebfd" },
+    "100": { "$type": "color", "$value": "#cdd8ff" }
   }
 }
 ```
-이런 JSON이 있을 때는 
 
-``` dart
+```dart
 class WdsColorBlue {
   const WdsColorBlue._();
-
+  
+  static const Color v5 = Color(0xFFF9EDCE);
   static const Color v50 = Color(0xFFE6EBFD);
   static const Color v100 = Color(0xFFCDD8FF);
-  ...
 }
 ```
-와 같은 클래스가 생성됩니다. key가 "{number}"인 경우에는 `v{number}`로 변수명을 작성합니다.
 
-@design_system_atomic.json 안에 보면 "color"라는 상위 객체로 "Blue", "Sky", "Pink" 등 다양한 색상이 구성되어 있는 걸 볼 수 있는데, 이럴 때 가장 상위 객체가 전체를 갖는 클래스로 생성되면 됩니다.
+### 라이브러리 구조
 
-여기서 주의할 점은 `WdsColorXXX._()` 처럼 private 생성자를 사용해야하기 때문에 하나의 라이브러리로 묶어야 합니다. 하나의 라이브러리로 묶을 때는 part 를 활용합니다.
+| 파일 구조 | 파일 내용 |
+|-----------|----------|
+| `color/wds_atomic_color_blue.dart` | `part of '../wds_atomic_color.dart';` |
+| `color/wds_atomic_color_pink.dart` | `part of '../wds_atomic_color.dart';` |
+| `wds_atomic_color.dart` | 메인 라이브러리 + part 선언 |
 
-``` 
-├── color/
-│   ├── wds_color_blue.dart
-│   ├── wds_color_pink.dart
-│   ├── ...
-├── color.dart
+```dart
+// wds_atomic_color.dart
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+import "package:flutter/widgets.dart";
+
+part 'color/wds_atomic_color_blue.dart';
+part 'color/wds_atomic_color_pink.dart';
 ```
 
-이 때 color.dart 는 
+## 패키지 Import 가이드
 
-``` dart
-part 'color/wds_color_blue.dart';
-part 'color/wds_color_pink.dart';
+### 기본 원칙
+| 상황 | 사용할 패키지 | 이유 |
+|------|-------------|------|
+| 기본 위젯 | `package:flutter/widgets.dart` | Material 독립성 유지 |
+| Color 클래스 필요 | `package:flutter/material.dart` | Color 클래스 사용 |
+| 복잡한 위젯 (TabBar 등) | `package:flutter/material.dart` | 선별적 Material 사용 |
 
+
+## Atomic 토큰 생성 규칙
+
+### 파일 구조
+```
+atomic/
+├── wds_atomic_color/                # Part 파일들
+├── wds_atomic_color.dart            # 메인 라이브러리
+├── wds_atomic_font/                 # Part 파일들
+├── wds_atomic_font.dart             # 메인 라이브러리
+├── wds_atomic_opacity.dart
+├── wds_atomic_radius.dart
+├── wds_atomic_space.dart
+└── wds_atomic.dart                  # Export 파일
 ```
 
-이런 식으로 하나의 라이브러리를 형성하도록 구현합니다.
-
-## Design Token Type Mapping Instructions: primitive
-
-@design_system_atomic.json 에 해당합니다. atomic 디렉토리 내 생성된 모든 파일은 `atomic/atomic.dart` 안에서 export 되어야 합니다.
-
-atomic/atomic.dart 예시
-``` dart
+### atomic.dart 구조
+```dart
 library;
 
-export 'color.dart';
-export 'font.dart';
-export 'radius.dart';
+export 'wds_atomic_color.dart';
+export 'wds_atomic_font.dart';
+export 'wds_atomic_radius.dart';
+export 'wds_atomic_opacity.dart';
+export 'wds_atomic_space.dart';
 ```
 
-- 파일명 규칙: atomic 단일 파일은 `.g.dart`를 사용하지 않습니다. 예) `wds_atomic_radius.dart`, `wds_atomic_opacity.dart`
-- 집계 클래스: `WdsColor`, `WdsFont`와 같은 상위 집계 클래스는 생성하지 않습니다. 각 그룹 클래스만(part) 생성합니다.
+### 생성 규칙
+| 규칙 | 적용 방법 |
+|------|----------|
+| 파일명 | `.g.dart` 사용하지 않음 |
+| 클래스명 | Color: `WdsAtomicColor{그룹명}`, Font: `WdsAtomicFont{그룹명}` |
+| 집계 클래스 | 생성하지 않음 (part만 생성) |
 
-### Overview
+## 타입 변환 규칙
 
-This document outlines the conversion rules for DTCG (Design Tokens Community Group) $type values to Flutter/Dart types in the token generator.
+### 변환 표
+| $type | Dart 타입 | 변환 규칙 | Import 패키지 |
+|-------|----------|----------|-------------|
+| `color` | `Color` | 헥스코드 → `Color(0xFFHEXCODE)` | `flutter/material.dart` |
+| `dimension` | `double` | rem→px (1rem=16px), px→숫자 | - |
+| `text` | `String` | 문자열 그대로, 이스케이프 처리 | - |
+| `number` | `double` | 숫자 타입으로 변환 | - |
+| `boxShadow` | `List<BoxShadow>` | BoxShadow 객체 배열로 변환 | `flutter/material.dart` |
+| `lineHeight` | `double` | "AUTO" → 1.0, 숫자 → double | - |
+| `fontSize` | `double` | 문자열 숫자 → double | - |
+| `letterSpacing` | `double` | 픽셀 또는 em 단위 | - |
+| `paragraphSpacing` | 무시 | 생성하지 않음 | - |
 
-**Type Conversion Table**
+### 상세 변환 규칙
 
-  | $type            | Target Dart Type | Conversion Logic                                                               |
-  |------------------|------------------|--------------------------------------------------------------------------------|
-  | color            | Color            | Convert hex values to Flutter Color objects from package:flutter/material.dart |
-  | dimension        | double           | Convert rem to px (1rem = 16px), handle px values, parse as double             |
-  | text             | String           | Use as string literal with proper escaping                                     |
-  | number           | double           | Convert to double type                                                         |
-  | boxShadow        | List<BoxShadow>  | Convert to Flutter BoxShadow objects (see details below)                       |
-  | lineHeight       | double           | Handle "AUTO" as 1.0, otherwise convert number to double                       |
-  | fontSize         | double           | Convert string numbers to double                                               |
-  | letterSpacing    | double           | Use px if number; percentage to em only (no fontSize multiply)                 |
-  | paragraphSpacing | Ignored          | Skip this type (could be used in StrutStyle later)                             |
-
-**For "font relevant keys**:
-- DO parse "font" for root key
-- DO parse "family" for map key
-- DO parse "size" for map key
-- DO parse "weight" for map key
-- DO parse "lineHeight" for map key
-- DO NOT parse "lineHeights" for root key
-- DO NOT parse "fontSize" for root key
-- DO NOT parse "letterSpacing" for root key
-- DO NOT parse "paragraphSpacing" for root key
-- DO NOT parse "textCase" for root key
-
-### Detailed Conversion Rules
-
-**color Type**
-  - Input: Hex color strings (e.g., "#FF5733")
-  - Output: Flutter Color object (e.g., Color(0xFFFF5733))
-  - Import: package:flutter/material.dart
-
-**dimension Type**
-  - Input: String with units or numeric value
-  - Conversion:
-    - "1rem" → 16.0 (1rem = 16px)
-    - "24px" → 24.0
-    - "12" → 12.0
-  - Output: double value
-
-**boxShadow Type**
-  - Input: Object or array of shadow definitions
-  - Properties mapping:
-    - color → Color (converted from hex)
-    - x, y OR offsetX, offsetY → Offset(x, y)
-    - blur OR blurRadius → blurRadius
-    - spread OR spreadRadius → spreadRadius
-    - type should equal "dropShadow"
-  - Output: List<BoxShadow>
-  - Example:
-``` dart
-  BoxShadow(
-    offset: Offset(0, 3),
-    blurRadius: 16,
-    spreadRadius: 0,
-    color: Color(0x0C000000),
-  )
+#### Color 타입
+```
+입력: "#FF5733"
+출력: Color(0xFFFF5733)
 ```
 
-**lineHeight Type**
-  - Input: String or number
-  - Conversion:
-    - "AUTO" → 1.0
-    - Any numeric string → parse as double
-  - Output: double
+#### Dimension 타입
+| 입력 | 출력 | 규칙 |
+|------|------|------|
+| `"1rem"` | `16.0` | 1rem = 16px |
+| `"24px"` | `24.0` | px 단위 제거 |
+| `"12"` | `12.0` | 숫자 그대로 |
 
-**fontSize Type**
-  - Input: String containing number
-  - Conversion: Parse string to double
-  - Output: double
-
-**letterSpacing Type**
-  - Input: em number (e.g., -0.02), or percentage string (e.g., -2.4%)
-  - 규칙(업데이트):
-    - 숫자(예: -0.4)로 오면 px(논리 픽셀)로 간주해 그대로 사용합니다.
-    - 문자열 퍼센트(예: "-2.4%")로 오면 em으로 변환만 합니다: `em = percentage / 100.0` → `-0.024`.
-    - 더 이상 fontSize를 곱하지 않습니다. 사용처(Flutter)는 px 또는 em을 그대로 받습니다.
-
-**opacity Type (atomic/opacity)**
-  - Input: number in percentage (e.g., 5, 10, 60)
-  - 규칙: 0.0~1.0으로 정규화해서 출력합니다. `normalized = value / 100.0`
-  - 예: `5 → 0.05`, `60 → 0.6`
-
-  - Base font size fallback: fontSize가 명시되지 않은 경우, CLI 옵션 `--base-font-size`(기본 16.0)를 곱해 px를 계산합니다.
-    - 사용 예: `dart run bin/main.dart -k semantic -i tokens/design_system_semantic.json -o packages/tokens --base-font-size 16.0`
-
-**weight Type**
-  - Input: number (e.g. 600)
-  - Conversion:
-    - 600 → FontWeight.w600
-    - unavailable value → FontWeight.w400
-  - Output: FontWeight
-  
-## Design Token Type Mapping Instructions: semantic
-
-@design_system_semantic.json 에 해당합니다.
-
-### Overview
-
-semantic 작업은 primitive 작업이 이루어진 뒤에 진행할 수 있습니다. 이유는 Semantic 내 "$value"는 primitive에서 정의된 값을 활용하기 때문입니다.
-
-### "color"
-
-예를 들어 "$type"이 "color"인 경우,
-``` JSON
+#### BoxShadow 타입
+```json
 {
-  "Primary": {
+  "color": "#000000",
+  "x": 0,
+  "y": 3,
+  "blur": 16,
+  "spread": 0,
+  "type": "dropShadow"
+}
+```
+
+```dart
+BoxShadow(
+  offset: Offset(0, 3),
+  blurRadius: 16,
+  spreadRadius: 0,
+  color: Color(0x0C000000),
+)
+```
+
+#### LetterSpacing 타입
+| 입력 | 출력 | 변환 규칙 |
+|------|------|----------|
+| `-0.4` | `-0.4` | px로 간주, 그대로 사용 |
+| `"-2.4%"` | `-0.024` | `percentage / 100.0` |
+
+#### Opacity 타입
+| 입력 | 출력 | 변환 규칙 |
+|------|------|----------|
+| `5` | `0.05` | `value / 100.0` |
+| `60` | `0.6` | 0.0~1.0 정규화 |
+
+#### FontWeight 타입
+| 입력 | 출력 |
+|------|------|
+| `600` | `FontWeight.w600` |
+| 없는 값 | `FontWeight.w400` |
+
+### 폰트 관련 키 파싱 규칙
+
+| 키 이름 | 파싱 여부 | 비고 |
+|---------|----------|------|
+| `font` | ✅ | 루트 키로 파싱 |
+| `family` | ✅ | 맵 키로 파싱 |
+| `size` | ✅ | 맵 키로 파싱 |
+| `weight` | ✅ | 맵 키로 파싱 |
+| `lineHeight` | ✅ | 맵 키로 파싱 |
+| `lineHeights` | ❌ | 루트 키로 파싱 안 함 |
+| `fontSize` | ❌ | 루트 키로 파싱 안 함 |
+| `letterSpacing` | ❌ | 루트 키로 파싱 안 함 |
+| `paragraphSpacing` | ❌ | 루트 키로 파싱 안 함 |
+| `textCase` | ❌ | 루트 키로 파싱 안 함 |
+
+## Semantic 토큰 생성 규칙
+
+### 생성 조건
+- [필수] Atomic 토큰 생성 완료 후 진행
+- Semantic의 `$value`는 primitive 토큰 참조
+- 별도 그룹 없이 단일 객체인 경우 `$type`에 맞는 파일에 변수로 생성
+  - `const Color $cta = WdsAtomicColorNeutral.v900`;
+  - 변수명 앞에 `$` prefix 붙이기
+
+### Color 토큰 예시
+
+#### 입력 JSON
+```json
+{
+  "primary": {
     "$type": "color",
-    "$value": "{color.Neutral.900}"
+    "$value": "{color.blue.400}"
   }
 }
 ```
-은 Dart로 생성될 때, 위 primitive가 성공적으로 생성되면
 
-atomic/color/wds_color_neutral.dart
-``` dart
-class WdsColorNeutral {
-  const WdsColorNeutral._();
-  static const Color v50 = Color(0xFFF6F6F6);
-  static const Color v100 = Color(0xFFE3E3E3);
-  static const Color v200 = Color(0xFFD3D3D3);
-  static const Color v300 = Color(0xFFBCBCBC);
-  static const Color v400 = Color(0xFFA2A2A2);
-  static const Color v500 = Color(0xFF6D6D6D);
-  static const Color v600 = Color(0xFF4E4E4E);
-  static const Color v700 = Color(0xFF373737);
-  static const Color v800 = Color(0xFF212121);
-  static const Color v900 = Color(0xFF121212);
-}
-```
-
-atomic/color.dart
-``` dart
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+#### 생성 결과
+```dart
+// semantic/wds_semantic_color.dart
 import "package:flutter/material.dart";
+import "../atomic/wds_atomic_color.dart";
 
-part 'color/wds_color_blue.dart';
-part 'color/wds_color_brand.dart';
-part 'color/wds_color_common.dart';
-part 'color/wds_color_cool_neutral.dart';
-part 'color/wds_color_neutral.dart';
-part 'color/wds_color_orange.dart';
-part 'color/wds_color_pink.dart';
-part 'color/wds_color_sky.dart';
-part 'color/wds_color_yellow.dart';
+const Color $cta = WdsAtomicColorNeutral.v900;
+const Color $primary = WdsAtomicColorBlue.v400;
+const Color $secondary = WdsAtomicColorPink.v500;
 ```
 
-Semantic 색상 파일은 다음처럼 생성됩니다.
-
-semantic/color.dart
-``` dart
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
-import "package:flutter/material.dart";
-import "../atomic/color.dart";
-
-const Color cta = WdsColorNeutral.v900;
-const Color primary = WdsColorBlue.v400;
-const Color secondary = WdsColorPink.v500;
-```
-
-하위 depth가 있는 경우, 그룹은 part 클래스로만 제공됩니다.
-
-semantic/color/wds_semantic_color_background.dart
-``` dart
-part of '../color.dart';
+#### 하위 깊이가 있는 경우
+```dart
+// semantic/color/wds_semantic_color_background.dart
+part of '../wds_semantic_color.dart';
 
 class WdsSemanticColorBackground {
   const WdsSemanticColorBackground._();
+  
   static const Color normal = WdsColorCommon.white;
   static const Color alternative = WdsColorNeutral.v50;
 }
 ```
 
-상위 집계 클래스(`WdsSemanticColor`)는 생성하지 않으며, `semantic/semantic.dart`에서 color/typography를 export 합니다.
+### Typography 토큰
 
-### "typography"
+#### 구성 요소
+| 속성 | 타입 | 매핑 |
+|------|------|------|
+| `family` | `text` | `WdsAtomicFontFamily.pretendard` |
+| `weight` | `number` | `WdsAtomicFontWeight.bold` |
+| `size` | `number` | `WdsAtomicFontSize.v18` |
+| `lineHeight` | `number` | `height` 계산 (배수) |
+| `letterSpacing` | `number` | 픽셀 또는 em 단위 |
 
-하나의 Typography를 구성하는 요소들은
-- family: "text"
-- weight: "number"
-- size: "number"
-- lineheight: "number"
-- letterSpacing: "number"
-이 있습니다.
-
-각 key에 해당되는 값들은 `WdsFontXXX`과 mapping 되어야 합니다.
-
-예시 (업데이트된 규칙 반영)
-``` dart
+#### 생성 예시
+```dart
 import '../atomic/atomic.dart';
 
 class WdsSemanticTypography {
   const WdsSemanticTypography._();
+  
   static const TextStyle bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v18,
-    // height는 배수로 변환되어 출력됩니다: height = lineHeight / fontSize
-    height: WdsFontLineHeight.v26 / WdsFontSize.v18,
-    // letterSpacing은 숫자(px)는 그대로, %는 em으로만 변환해 출력됩니다
-    letterSpacing: -0.024, // 예: -2.4% → -0.024
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v18,
+    height: WdsAtomicFontLineHeight.v26 / WdsAtomicFontSize.v18, // 배수 계산
+    letterSpacing: -0.024, // -2.4% → -0.024
   );
 }
 ```
 
-여기서 height는 Flutter의 요구사항대로 배수 값으로 생성됩니다. JSON에서 제공되는 lineHeight가 px(숫자)라면 생성기는 `height = lineHeight / fontSize`로 변환합니다. 만약 `lineHeight`가 `AUTO`면 1.0을 사용합니다.
+### Height 계산 규칙
+| 조건 | 계산 방법 |
+|------|----------|
+| lineHeight가 숫자 | `height = lineHeight / fontSize` |
+| lineHeight가 "AUTO" | `height = 1.0` |
 
-또한 `letterSpacing` 값이 숫자면 px로 간주해 그대로 사용하고, 문자열 %면 em으로만 변환합니다. 폰트 크기는 더 이상 곱하지 않습니다.
+### Body 계열 예외 처리
 
-@design_system_semantic.json 에 해당합니다. semantic 디렉토리 내 생성된 모든 파일은 `semantic/semantic.dart` 안에서 export 되어야 합니다.
+일반 구조는 2단계 (`Heading18 > bold`), Body는 3단계 허용 (`Body15 > Normal > bold`)
+- Body는 Reading, Normal 로 분류됨
 
-semantic/semantic.dart 예시
-``` dart
-library;
-
-export 'color.dart';
-export 'typography.dart';
-```
-
-### Body 계열 예외 처리 규칙
-
-일반적인 Typography 구조는 `Heading18 > bold | medium | regular` 처럼 2단계입니다. 그러나 Body는 예외적으로 3단계 중첩을 가질 수 있습니다.
-
-예시(JSON)
+#### 예시 JSON
 ```json
 {
   "Typography": {
     "Body15": {
       "Normal": {
-        "bold": { "family": {...}, "weight": {...}, "lineHeight": {...}, "size": {...}, "letterSpacing": {...} },
-        "medium": { ... },
-        "regular": { ... }
+        "bold": { /* 스타일 정의 */ },
+        "medium": { /* 스타일 정의 */ }
       },
       "Reading": {
-        "bold": { ... },
-        "medium": { ... },
-        "regular": { ... }
+        "bold": { /* 스타일 정의 */ }
       }
     }
   }
 }
 ```
 
-생성기는 다음과 같이 중첩 그룹 이름을 포함해 필드명을 생성합니다.
-- `Body15 > Normal > bold` → `body15NormalBold`
-- `Body15 > Normal > medium` → `body15NormalMedium`
-- `Body15 > Reading > regular` → `body15ReadingRegular`
+#### 필드명 생성 규칙
+| 구조 | 생성되는 필드명 |
+|------|---------------|
+| `Body15 > Normal > bold` | `body15NormalBold` |
+| `Body15 > Normal > medium` | `body15NormalMedium` |
+| `Body15 > Reading > regular` | `body15ReadingRegular` |
+| `Heading18 > bold` | `heading18Bold` |
 
-즉, 3단계인 경우 `style_group_variant`를 연결하여 카멜케이스로 필드명을 만듭니다. 2단계(일반) 구조는 기존과 동일하게 `style_variant`를 사용합니다.
+### Export 구조
+```dart
+// semantic/wds_semantic.dart
+library;
+
+export 'wds_semantic_color.dart';
+export 'wds_semantic_typography.dart';
+```
+
+## Foundation 패키지 연동
+
+### 연동 흐름
+1. **tokens 생성**: token_generator로 atomic, semantic 토큰을 `packages/tokens/`에 생성
+2. **foundation 갱신(수작업)**: tokens 변경 사항을 반영하여 `packages/foundation/lib/` 파일들을 직접 수정
+3. **components 사용**: foundation을 통해서만 토큰 접근
+
+### Components 사용 원칙
+
+#### 올바른 사용법
+```dart
+// ✅ foundation을 통한 접근
+import 'package:wds_foundation/wds_foundation.dart';
+
+class WdsButton extends StatelessWidget {
+  const WdsButton({
+    super.key,
+    required this.onPressed,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: DecoratedBox(  // Container 대신 DecoratedBox
+        decoration: const BoxDecoration(
+          color: WdsColors.primary,  // foundation 인터페이스
+          borderRadius: BorderRadius.all(Radius.circular(WdsRadius.sm)),
+        ),
+        child: Padding(  // 별도 Padding
+          padding: const EdgeInsets.symmetric(
+            horizontal: WdsSpacing.md5,
+            vertical: WdsSpacing.md3,
+          ),
+          child: Text(
+            label,
+            style: WdsTypography.buttonLabel,  // foundation 인터페이스
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+#### 금지된 사용법
+```dart
+// ❌ tokens 직접 접근
+import 'package:wds_tokens/atomic/wds_atomic_color.dart';  // 직접 import 금지
+
+class BadButton extends StatelessWidget {
+  @override  // const 생성자 누락
+  Widget build(BuildContext context) {
+    return Container(  // Container 남용
+      color: WdsAtomicColorBlue.v400,  // tokens 직접 사용 금지
+    );
+  }
+}
+```
+
+### 위젯 구성 원칙
+
+| 원칙 | 적용 방법 |
+|------|----------|
+| 단순한 Widget Tree | 불필요한 중첩 최소화 |
+| const 최적화 | 모든 생성자에 const 적용 |
+| 전용 위젯 활용 | Container → DecoratedBox + Padding |
+
+## CLI 옵션
+
+### CLI 옵션
+
+| 옵션 | 설명 | 기본값 | 예시 |
+|------|------|--------|------|
+| `-k` | 토큰 종류 (atomic/semantic) | - | `-k semantic` |
+| `-i` | 입력 파일 경로 | - | `-i tokens/design_system_atomic.json` |
+| `-o` | 출력 디렉토리 | - | `-o packages/tokens` |
+| `--base-font-size` | 기본 폰트 크기 | 16.0 | `--base-font-size 16.0` |
+
+### 단계별 실행 예시
+
+```bash  
+# 1. Atomic 토큰 생성
+dart run bin/main.dart \
+  -k atomic \
+  -i tokens/design_system_atomic.json \
+  -o packages/tokens
+
+# 2. Semantic 토큰 생성
+dart run bin/main.dart \
+  -k semantic \
+  -i tokens/design_system_semantic.json \
+  -o packages/tokens \
+  --base-font-size 16.0
+
+# 3. Foundation 통합 인터페이스 갱신(수작업)
+# tokens 변경 사항을 참고하여 packages/foundation/lib/*.dart 업데이트
+```
+
+### 파이프라인 자동화
+```bash
+#!/bin/bash
+# generate_tokens.sh
+
+echo "🔥 토큰 생성 파이프라인 시작"
+
+echo "📦 1단계: Atomic 토큰 생성 중..."
+dart run bin/main.dart -k atomic -i tokens/design_system_atomic.json -o packages/tokens
+
+echo "📦 2단계: Semantic 토큰 생성 중..."  
+dart run bin/main.dart -k semantic -i tokens/design_system_semantic.json -o packages/tokens --base-font-size 16.0
+
+echo "📦 3단계: Foundation 통합 인터페이스 수작업 갱신..."
+echo "   ↳ packages/foundation/lib/colors.dart 등 직접 수정"
+
+echo "✅ 토큰 생성 완료!"
+echo "💡 이제 components에서 'package:foundation/foundation.dart'를 import하여 사용하세요."
+```
 
 ---
 

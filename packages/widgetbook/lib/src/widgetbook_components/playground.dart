@@ -8,7 +8,7 @@ class WidgetbookPlayground extends StatelessWidget {
     this.info = const [],
     this.padding = const EdgeInsets.all(24),
     this.layout = PlaygroundLayout.center,
-    this.backgroundColor = WdsColorCommon.white,
+    this.backgroundColor = WdsColors.white,
     super.key,
   });
 
@@ -67,7 +67,7 @@ class WidgetbookPlayground extends StatelessWidget {
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: WdsColorNeutral.v200),
+            border: Border.all(color: WdsColors.neutral200),
           ),
           child: Padding(
             padding: padding,
@@ -78,8 +78,8 @@ class WidgetbookPlayground extends StatelessWidget {
               children: [
                 Text(
                   'Playground',
-                  style: WdsSemanticTypography.title20Bold.copyWith(
-                    color: WdsColorBlue.v500,
+                  style: WdsTypography.title20Bold.copyWith(
+                    color: WdsColors.blue500,
                   ),
                 ),
                 switch (layout) {
@@ -125,13 +125,13 @@ class _InfoChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: isFixed ? WdsColorNeutral.v100 : WdsColorBlue.v100,
+        color: isFixed ? WdsColors.neutral100 : WdsColors.blue100,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Text(
         isFixed ? label.replaceAll('fixed', '') : label,
-        style: WdsSemanticTypography.caption11Bold.copyWith(
-          color: isFixed ? WdsColorNeutral.v900 : WdsColorBlue.v700,
+        style: WdsTypography.caption11Bold.copyWith(
+          color: isFixed ? WdsColors.neutral900 : WdsColors.blue700,
         ),
       ),
     );

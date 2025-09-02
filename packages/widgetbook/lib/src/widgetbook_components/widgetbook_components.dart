@@ -3,12 +3,11 @@ library;
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart' hide Typography, Icon, Chip, Switch;
-import 'package:wds_tokens/wds_tokens.dart';
+import 'package:wds_foundation/wds_foundation.dart';
 
 export 'package:flutter/material.dart' hide Typography, TextButton, TextField;
 export 'package:wds_components/wds_components.dart';
 export 'package:wds_foundation/wds_foundation.dart';
-export 'package:wds_tokens/wds_tokens.dart';
 
 part 'page_layout.dart';
 part 'playground.dart';

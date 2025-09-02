@@ -168,15 +168,13 @@
         "$value": "#700700"
       }
     },
-    "common": {
-      "white": {
-        "$type": "color",
-        "$value": "#ffffff"
-      },
-      "black": {
-        "$type": "color",
-        "$value": "#000000"
-      }
+    "white": {
+      "$type": "color",
+      "$value": "#ffffff"
+    },
+    "black": {
+      "$type": "color",
+      "$value": "#000000"
     },
     "brand": {
       "hapakristin": {

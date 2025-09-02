@@ -22,14 +22,13 @@ class WdsTextTabs extends StatelessWidget {
 
   TextStyle _styleFor(WdsTextTabState state, int index) {
     return switch (state) {
-      WdsTextTabState.enabled =>
-        WdsSemanticTypography.body15NormalMedium.copyWith(
-          color: WdsSemanticColorText.alternative,
+      WdsTextTabState.enabled => WdsTypography.body15NormalMedium.copyWith(
+          color: WdsColors.textAlternative,
         ),
       WdsTextTabState.focused ||
       WdsTextTabState.featured =>
-        WdsSemanticTypography.body15NormalBold.copyWith(
-          color: featuredColors[index] ?? WdsSemanticColorText.normal,
+        WdsTypography.body15NormalBold.copyWith(
+          color: featuredColors[index] ?? WdsColors.textNormal,
         ),
     };
   }
@@ -98,11 +97,11 @@ class WdsLineTabs extends StatelessWidget {
     final isSelected = index == currentIndex;
 
     final labelStyle = isSelected
-        ? WdsSemanticTypography.body15ReadingBold.copyWith(
-            color: WdsSemanticColorText.normal,
+        ? WdsTypography.body15ReadingBold.copyWith(
+            color: WdsColors.textNormal,
           )
-        : WdsSemanticTypography.body15ReadingMedium.copyWith(
-            color: WdsSemanticColorText.neutral,
+        : WdsTypography.body15ReadingMedium.copyWith(
+            color: WdsColors.textNeutral,
           );
 
     return Expanded(
@@ -118,7 +117,7 @@ class WdsLineTabs extends StatelessWidget {
               right: 0,
               bottom: 0,
               height: 1,
-              child: ColoredBox(color: WdsSemanticColorBorder.alternative),
+              child: ColoredBox(color: WdsColors.borderAlternative),
             ),
             Align(
               child: Padding(
@@ -133,7 +132,7 @@ class WdsLineTabs extends StatelessWidget {
                 right: 0,
                 child: SizedBox(
                   height: 2,
-                  child: ColoredBox(color: WdsColorCommon.black),
+                  child: ColoredBox(color: WdsColors.black),
                 ),
               ),
           ],

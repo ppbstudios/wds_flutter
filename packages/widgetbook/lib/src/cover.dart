@@ -11,7 +11,7 @@ Widget buildWdsCover(BuildContext context) {
   return LayoutBuilder(
     builder: (context, constraints) {
       return ColoredBox(
-        color: WdsColorBlue.v400,
+        color: WdsColors.blue400,
         child: SizedBox(
           width: constraints.maxWidth,
           height: constraints.maxHeight,
@@ -24,8 +24,8 @@ Widget buildWdsCover(BuildContext context) {
                 style: TextStyle(
                   fontSize: 64,
                   fontWeight: FontWeight.w800,
-                  color: WdsColorCommon.white,
-                  fontFamily: WdsFontFamily.pretendard,
+                  color: WdsColors.white,
+                  fontFamily: WdsTypography.fontFamily,
                 ),
               ),
               Text(
@@ -33,8 +33,8 @@ Widget buildWdsCover(BuildContext context) {
                 style: TextStyle(
                   fontSize: 180,
                   fontWeight: FontWeight.w800,
-                  color: WdsColorCommon.white,
-                  fontFamily: WdsFontFamily.pretendard,
+                  color: WdsColors.white,
+                  fontFamily: WdsTypography.fontFamily,
                 ),
               ),
             ],

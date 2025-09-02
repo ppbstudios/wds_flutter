@@ -58,19 +58,18 @@ class WdsSelect extends StatefulWidget {
 class _WdsSelectState extends State<WdsSelect> {
   @override
   Widget build(BuildContext context) {
-    final titleStyle = WdsSemanticTypography.body14NormalRegular.copyWith(
+    final titleStyle = WdsTypography.body14NormalRegular.copyWith(
       color: _titleColor(),
     );
 
-    final optionStyle = WdsSemanticTypography.body14NormalRegular.copyWith(
+    final optionStyle = WdsTypography.body14NormalRegular.copyWith(
       color: _textColor(),
     );
 
     final decoration = ShapeDecoration(
       color: _backgroundColor(),
       shape: RoundedRectangleBorder(
-        borderRadius:
-            const BorderRadius.all(Radius.circular(WdsAtomicRadius.sm)),
+        borderRadius: const BorderRadius.all(Radius.circular(WdsRadius.sm)),
         side: _borderSide(),
       ),
     );
@@ -79,7 +78,7 @@ class _WdsSelectState extends State<WdsSelect> {
 
     final arrowIcon =
         (widget.isExpanded ? WdsIcon.chevronUp : WdsIcon.chevronDown).build(
-      color: WdsColorNeutral.v500,
+      color: WdsColors.textNeutral,
     );
 
     final field = Padding(
@@ -130,34 +129,34 @@ class _WdsSelectState extends State<WdsSelect> {
 
   Color _titleColor() {
     return (!widget.isEnabled && widget.variant == WdsSelectVariant.blocked)
-        ? WdsSemanticColorText.disable
-        : WdsSemanticColorText.normal;
+        ? WdsColors.textDisable
+        : WdsColors.textNormal;
   }
 
   Color _textColor() {
     if (!widget.isEnabled) {
-      return WdsSemanticColorText.disable;
+      return WdsColors.textDisable;
     }
 
     if (widget.variant == WdsSelectVariant.blocked) {
-      return WdsSemanticColorText.alternative;
+      return WdsColors.textAlternative;
     }
 
-    return WdsSemanticColorText.normal;
+    return WdsColors.textNormal;
   }
 
   Color _backgroundColor() {
     return switch (widget.variant) {
-      WdsSelectVariant.normal => WdsColorCommon.white,
-      WdsSelectVariant.blocked => WdsColorNeutral.v50,
+      WdsSelectVariant.normal => WdsColors.white,
+      WdsSelectVariant.blocked => WdsColors.neutral50,
     };
   }
 
   BorderSide _borderSide() {
     return switch (widget.variant) {
-      WdsSelectVariant.normal => const BorderSide(color: primary),
+      WdsSelectVariant.normal => const BorderSide(color: WdsColors.primary),
       WdsSelectVariant.blocked =>
-        const BorderSide(color: WdsSemanticColorBorder.alternative),
+        const BorderSide(color: WdsColors.borderAlternative),
     };
   }
 }

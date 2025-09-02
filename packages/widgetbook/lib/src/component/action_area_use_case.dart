@@ -71,7 +71,7 @@ Widget _buildFixedPlayground(BuildContext context) {
   };
 
   return WidgetbookPlayground(
-    backgroundColor: WdsColorCoolNeutral.v50,
+    backgroundColor: WdsColors.coolNeutral50,
     info: const [
       'height: 81',
       'padding: 16 all',

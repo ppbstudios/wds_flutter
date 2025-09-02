@@ -1,8 +1,8 @@
 part of '../../wds_components.dart';
 
 enum WdsChipShape {
-  pill(radius: WdsAtomicRadius.full),
-  square(radius: WdsAtomicRadius.sm);
+  pill(radius: WdsRadius.full),
+  square(radius: WdsRadius.sm);
 
   const WdsChipShape({required this.radius});
 
@@ -12,12 +12,12 @@ enum WdsChipShape {
 enum WdsChipVariant {
   outline(
     background: Color(0x00000000), // null/transparent
-    foreground: WdsSemanticColorText.neutral,
-    border: BorderSide(color: WdsSemanticColorBorder.alternative),
+    foreground: WdsColors.textNormal,
+    border: BorderSide(color: WdsColors.borderAlternative),
   ),
   solid(
-    background: WdsSemanticColorBackgroud.alternative,
-    foreground: WdsSemanticColorText.normal,
+    background: WdsColors.backgroundAlternative,
+    foreground: WdsColors.textNormal,
     border: null,
   );
 
@@ -37,29 +37,29 @@ enum WdsChipSize {
     height: 28,
     outlinePadding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
     solidPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-    outlineTypography: WdsSemanticTypography.caption12Regular,
-    solidTypography: WdsSemanticTypography.caption12Medium,
+    outlineTypography: WdsTypography.caption12Regular,
+    solidTypography: WdsTypography.caption12Medium,
   ),
   small(
     height: 30,
     outlinePadding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
     solidPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-    outlineTypography: WdsSemanticTypography.body13NormalRegular,
-    solidTypography: WdsSemanticTypography.body13NormalMedium,
+    outlineTypography: WdsTypography.body13NormalRegular,
+    solidTypography: WdsTypography.body13NormalMedium,
   ),
   medium(
     height: 34,
     outlinePadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     solidPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-    outlineTypography: WdsSemanticTypography.body13NormalRegular,
-    solidTypography: WdsSemanticTypography.body13NormalMedium,
+    outlineTypography: WdsTypography.body13NormalRegular,
+    solidTypography: WdsTypography.body13NormalMedium,
   ),
   large(
     height: 38,
     outlinePadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
     solidPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-    outlineTypography: WdsSemanticTypography.body13NormalRegular,
-    solidTypography: WdsSemanticTypography.body13NormalMedium,
+    outlineTypography: WdsTypography.body13NormalRegular,
+    solidTypography: WdsTypography.body13NormalMedium,
   );
 
   const WdsChipSize({
@@ -160,12 +160,12 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
     // focused state uses white text for proper contrast with cta background
     _focusedTypography = widget.size
         .typographyFor(widget.variant)
-        .copyWith(color: WdsColorCommon.white);
+        .copyWith(color: WdsColors.white);
 
     // Cache background colors
     _normalBackground = widget.variant.background;
     // focused state uses cta color for both outline and solid variants
-    _focusedBackground = cta;
+    _focusedBackground = WdsColors.cta;
 
     // Pre-build content children list (we'll build the row dynamically for text color changes)
   }
@@ -210,7 +210,7 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
     if (_isFocused) {
       return const Color(0x00000000);
     }
-    final Color base = WdsSemanticColorMaterial.pressed;
+    final Color base = WdsColors.materialPressed;
     if (_isPressed || _isHovered) {
       return base;
     }
@@ -232,7 +232,7 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
     // Get current text style and icon color based on focus state
     final currentTypography = _isFocused ? _focusedTypography : _typography;
     final currentIconColor =
-        _isFocused ? WdsColorCommon.white : widget.variant.foreground;
+        _isFocused ? WdsColors.white : widget.variant.foreground;
 
     // Build content row with current text style
     final List<Widget> contentChildren = [];

@@ -56,7 +56,7 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
 
   Color _overlayTargetColor() {
     // hover/pressed 를 동일한 오버레이로 처리
-    final Color base = WdsSemanticColorMaterial.pressed;
+    final Color base = WdsColors.materialPressed;
     if (_isPressed || _isHovered) return base;
     return const Color(0x00000000);
   }
@@ -70,11 +70,11 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
     // state: enabled/disabled 동일 배경/테두리, disabled 는 opacity 로 표현
     const double height = 32;
     const EdgeInsets padding = EdgeInsets.fromLTRB(17, 8, 17, 8);
-    final TextStyle typography = WdsSemanticTypography.caption12Medium.copyWith(
-      color: WdsSemanticColorText.neutral,
+    final TextStyle typography = WdsTypography.caption12Medium.copyWith(
+      color: WdsColors.textNormal,
     );
     final BorderRadius borderRadius =
-        const BorderRadius.all(Radius.circular(WdsAtomicRadius.xs));
+        const BorderRadius.all(Radius.circular(WdsRadius.xs));
 
     // 자식이 Text 인 경우 강제 타이포그래피 적용, 그 외에는 DefaultTextStyle.merge
     Widget content = Padding(padding: padding, child: widget.child);
@@ -140,11 +140,11 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
                     child: RepaintBoundary(
                       child: DecoratedBox(
                         decoration: ShapeDecoration(
-                          color: WdsColorCommon.white,
+                          color: WdsColors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: borderRadius,
                             side: const BorderSide(
-                              color: WdsSemanticColorBorder.alternative,
+                              color: WdsColors.borderAlternative,
                             ),
                           ),
                         ),

@@ -28,42 +28,42 @@ class RadiusUseCase extends StatelessWidget {
     final radiusTokens = [
       {
         'name': 'none',
-        'value': WdsAtomicRadius.none,
+        'value': WdsRadius.none,
         'label': '0px',
       },
       {
         'name': 'xs',
-        'value': WdsAtomicRadius.xs,
+        'value': WdsRadius.xs,
         'label': '4px',
       },
       {
         'name': 'sm',
-        'value': WdsAtomicRadius.sm,
+        'value': WdsRadius.sm,
         'label': '8px',
       },
       {
         'name': 'md',
-        'value': WdsAtomicRadius.md,
+        'value': WdsRadius.md,
         'label': '12px',
       },
       {
         'name': 'lg',
-        'value': WdsAtomicRadius.lg,
+        'value': WdsRadius.lg,
         'label': '16px',
       },
       {
         'name': 'xl',
-        'value': WdsAtomicRadius.xl,
+        'value': WdsRadius.xl,
         'label': '20px',
       },
       {
         'name': 'xxl',
-        'value': WdsAtomicRadius.xxl,
+        'value': WdsRadius.xxl,
         'label': '30px',
       },
       {
         'name': 'full',
-        'value': WdsAtomicRadius.full,
+        'value': WdsRadius.full,
         'label': '99999px',
       },
     ];

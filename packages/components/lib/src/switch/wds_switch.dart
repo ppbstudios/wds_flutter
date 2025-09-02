@@ -55,14 +55,14 @@ class _WdsSwitchState extends State<WdsSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    final trackColor = widget.value ? primary : WdsColorNeutral.v200;
+    final trackColor = widget.value ? WdsColors.primary : WdsColors.neutral200;
 
     final knobAlign =
         widget.value ? Alignment.centerRight : Alignment.centerLeft;
 
     Widget knob = DecoratedBox(
       decoration: const BoxDecoration(
-        color: WdsColorCommon.white,
+        color: WdsColors.white,
         shape: BoxShape.circle,
       ),
       child: SizedBox.square(

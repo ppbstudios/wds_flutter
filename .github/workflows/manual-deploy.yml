@@ -72,6 +72,11 @@ jobs:
         working-directory: packages/widgetbook
         run: flutter build web --release
         
+      - name: Prepare Netlify config in build folder
+        run: |
+          cp netlify.toml packages/widgetbook/build/web/ || true
+          echo "/* /index.html 200" > packages/widgetbook/build/web/_redirects
+        
       - name: Deploy to Netlify (Production)
         if: inputs.environment == 'production'
         uses: netlify/actions/cli@master
@@ -91,6 +96,28 @@ jobs:
         with:
           args: deploy --dir=packages/widgetbook/build/web --message="${{ inputs.message }} by ${{ github.actor }}"
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_STAGING_SITE_ID"]'
+      
+      - name: Fetch latest deploy permalink (Production)
+        if: inputs.environment == 'production'
+        id: latest_deploy_prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          RESPONSE=$(curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys?per_page=1")
+          PERMALINK=$(echo "$RESPONSE" | jq -r '.[0] | (.deploy_ssl_url // .deploy_url // .ssl_url // .url // "")')
+          echo "permalink=$PERMALINK" >> $GITHUB_OUTPUT
+      
+      - name: Fetch latest deploy permalink (Staging)
+        if: inputs.environment == 'staging'
+        id: latest_deploy_staging
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_STAGING_SITE_ID }}
+        run: |
+          RESPONSE=$(curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys?per_page=1")
+          PERMALINK=$(echo "$RESPONSE" | jq -r '.[0] | (.deploy_ssl_url // .deploy_url // .ssl_url // .url // "")')
+          echo "permalink=$PERMALINK" >> $GITHUB_OUTPUT
           
       - name: Create deployment summary
         run: |
@@ -100,8 +127,7 @@ jobs:
           echo "- **Deployed by**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Message**: ${{ inputs.message }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          if [[ "${{ inputs.environment }}" == "production" ]]; then
-            echo "- **URL**: https://${{ secrets.NETLIFY_SITE_ID }}.netlify.app" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- **URL**: https://${{ secrets.NETLIFY_STAGING_SITE_ID }}.netlify.app" >> $GITHUB_STEP_SUMMARY
-          fi
+          PROD_LINK='${{ steps.latest_deploy_prod.outputs.permalink }}'
+          STAGING_LINK='${{ steps.latest_deploy_staging.outputs.permalink }}'
+          LINK="$PROD_LINK"; if [[ -z "$LINK" ]]; then LINK="$STAGING_LINK"; fi
+          if [[ -n "$LINK" ]]; then echo "- **Permalink**: $LINK" >> $GITHUB_STEP_SUMMARY; fi
