@@ -2,11 +2,11 @@
 ///
 /// maintained by [seunghwanly](github.com/seunghwanly)
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
-part of '../color.dart';
+part of '../wds_semantic_color.dart';
 
 class WdsSemanticColorStatus {
   const WdsSemanticColorStatus._();
-  static const Color cautionaty = WdsColorOrange.v500;
-  static const Color destructive = WdsColorOrange.v600;
-  static const Color positive = WdsColorBlue.v400;
+  static const Color cautionaty = WdsAtomicColorOrange.v500;
+  static const Color destructive = WdsAtomicColorOrange.v600;
+  static const Color positive = WdsAtomicColorBlue.v400;
 }

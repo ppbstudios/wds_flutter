@@ -2,14 +2,14 @@
 ///
 /// maintained by [seunghwanly](github.com/seunghwanly)
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
-part of '../color.dart';
+part of '../wds_semantic_color.dart';
 
 class WdsSemanticColorText {
   const WdsSemanticColorText._();
-  static const Color alternative = WdsColorNeutral.v400;
-  static const Color assistive = WdsColorNeutral.v300;
-  static const Color disable = WdsColorNeutral.v100;
-  static const Color neutral = WdsColorNeutral.v600;
-  static const Color normal = WdsColorNeutral.v900;
+  static const Color alternative = WdsAtomicColorNeutral.v400;
+  static const Color assistive = WdsAtomicColorNeutral.v300;
+  static const Color disable = WdsAtomicColorNeutral.v100;
+  static const Color neutral = WdsAtomicColorNeutral.v600;
+  static const Color normal = WdsAtomicColorNeutral.v900;
   static const Color strong = $black;
 }

@@ -2,10 +2,10 @@
 ///
 /// maintained by [seunghwanly](github.com/seunghwanly)
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
-part of '../color.dart';
+part of '../wds_semantic_color.dart';
 
 class WdsSemanticColorBorder {
   const WdsSemanticColorBorder._();
-  static const Color alternative = WdsColorCoolNeutral.v100;
-  static const Color neutral = WdsColorNeutral.v200;
+  static const Color alternative = WdsAtomicColorCoolNeutral.v100;
+  static const Color neutral = WdsAtomicColorNeutral.v200;
 }

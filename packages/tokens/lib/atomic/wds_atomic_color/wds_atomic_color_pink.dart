@@ -2,10 +2,10 @@
 ///
 /// maintained by [seunghwanly](github.com/seunghwanly)
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
-part of '../color.dart';
+part of '../wds_atomic_color.dart';
 
-class WdsColorPink {
-  const WdsColorPink._();
+class WdsAtomicColorPink {
+  const WdsAtomicColorPink._();
   static const Color v50 = Color(0xFFFFE6F0);
   static const Color v100 = Color(0xFFFFCBDF);
   static const Color v200 = Color(0xFFFFB2D0);

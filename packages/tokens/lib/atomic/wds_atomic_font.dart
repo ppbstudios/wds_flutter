@@ -6,7 +6,7 @@ library;
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 import 'package:flutter/material.dart';
 
-part 'font/wds_font_family.dart';
-part 'font/wds_font_line_height.dart';
-part 'font/wds_font_size.dart';
-part 'font/wds_font_weight.dart';
+part 'wds_atomic_font/wds_atomic_font_family.dart';
+part 'wds_atomic_font/wds_atomic_font_line_height.dart';
+part 'wds_atomic_font/wds_atomic_font_size.dart';
+part 'wds_atomic_font/wds_atomic_font_weight.dart';
