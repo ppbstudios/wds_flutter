@@ -110,16 +110,16 @@ class _WdsTextFieldState extends State<WdsTextField> {
     final isOutlined = widget.variant == WdsTextFieldVariant.outlined;
 
     _inputStyle = isOutlined
-        ? WdsSemanticTypography.body15NormalRegular
-        : WdsSemanticTypography.body13NormalRegular;
+        ? WdsTypography.body15NormalRegular
+        : WdsTypography.body13NormalRegular;
 
     _hintStyle = isOutlined
-        ? WdsSemanticTypography.body15NormalRegular
-        : WdsSemanticTypography.body13NormalRegular;
+        ? WdsTypography.body15NormalRegular
+        : WdsTypography.body13NormalRegular;
 
-    _labelStyle = WdsSemanticTypography.body13NormalRegular;
-    _helperStyle = WdsSemanticTypography.caption12Regular;
-    _errorStyle = WdsSemanticTypography.caption12Regular;
+    _labelStyle = WdsTypography.body13NormalRegular;
+    _helperStyle = WdsTypography.caption12Regular;
+    _errorStyle = WdsTypography.caption12Regular;
   }
 
   void _onChangedInternal() {
@@ -170,7 +170,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
     if (hasError) {
       return Text(
         _effectiveErrorText!,
-        style: _errorStyle.copyWith(color: WdsSemanticColorStatus.destructive),
+        style: _errorStyle.copyWith(color: WdsColors.statusDestructive),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
@@ -179,7 +179,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
     if (hasHelper) {
       return Text(
         widget.helperText!,
-        style: _helperStyle.copyWith(color: WdsSemanticColorText.alternative),
+        style: _helperStyle.copyWith(color: WdsColors.textAlternative),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
@@ -197,25 +197,21 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   Widget _buildOutlined(BuildContext context) {
-    final inputColor = widget.isEnabled
-        ? WdsSemanticColorText.normal
-        : WdsSemanticColorText.alternative;
+    final inputColor =
+        widget.isEnabled ? WdsColors.textNormal : WdsColors.textAlternative;
 
-    final hintColor = widget.isEnabled
-        ? WdsSemanticColorText.alternative
-        : WdsSemanticColorText.disable;
+    final hintColor =
+        widget.isEnabled ? WdsColors.textAlternative : WdsColors.textDisable;
 
-    final labelColor = widget.isEnabled
-        ? WdsSemanticColorText.alternative
-        : WdsSemanticColorText.disable;
+    final labelColor =
+        widget.isEnabled ? WdsColors.textAlternative : WdsColors.textDisable;
 
     final borderSide = switch ((_hasError, _hasFocus)) {
       (true, _) =>
-        const BorderSide(color: WdsSemanticColorStatus.destructive, width: 2),
+        const BorderSide(color: WdsColors.statusDestructive, width: 2),
       (false, true) =>
-        const BorderSide(color: WdsSemanticColorStatus.positive, width: 2),
-      (false, false) =>
-        const BorderSide(color: WdsSemanticColorBorder.alternative),
+        const BorderSide(color: WdsColors.statusPositive, width: 2),
+      (false, false) => const BorderSide(color: WdsColors.borderAlternative),
     };
 
     final decoration = InputDecoration(
@@ -251,16 +247,16 @@ class _WdsTextFieldState extends State<WdsTextField> {
             RepaintBoundary(
               child: TextSelectionTheme(
                 data: TextSelectionThemeData(
-                  selectionHandleColor: primary,
-                  selectionColor: primary.withAlpha(40),
+                  selectionHandleColor: WdsColors.primary,
+                  selectionColor: WdsColors.primary.withAlpha(40),
                 ),
                 child: TextField(
                   controller: _controller,
                   focusNode: _focusNode,
                   enabled: widget.isEnabled,
                   autofocus: widget.autofocus,
-                  cursorColor: WdsSemanticColorText.normal,
-                  cursorRadius: const Radius.circular(WdsAtomicRadius.full),
+                  cursorColor: WdsColors.textNormal,
+                  cursorRadius: const Radius.circular(WdsRadius.full),
                   style: _inputStyle.copyWith(color: inputColor),
                   onChanged: widget.onChanged,
                   onSubmitted: widget.onSubmitted,
@@ -278,25 +274,23 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   Widget _buildBox(BuildContext context) {
-    const radius = BorderRadius.all(Radius.circular(WdsAtomicRadius.sm));
+    const radius = BorderRadius.all(Radius.circular(WdsRadius.sm));
     const contentPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 10);
     const noBorder = OutlineInputBorder(
       borderSide: BorderSide(style: BorderStyle.none, width: 0),
       borderRadius: BorderRadius.all(Radius.circular(0)),
     );
 
-    final inputColor = widget.isEnabled
-        ? WdsSemanticColorText.normal
-        : WdsSemanticColorText.alternative;
+    final inputColor =
+        widget.isEnabled ? WdsColors.textNormal : WdsColors.textAlternative;
 
-    final hintColor = !widget.isEnabled
-        ? WdsSemanticColorText.disable
-        : WdsSemanticColorText.alternative;
+    final hintColor =
+        !widget.isEnabled ? WdsColors.textDisable : WdsColors.textAlternative;
 
     final borderColor = switch ((_hasError, _hasFocus)) {
-      (true, _) => WdsSemanticColorStatus.destructive,
-      (false, true) => WdsSemanticColorStatus.positive,
-      (false, false) => WdsSemanticColorBorder.alternative,
+      (true, _) => WdsColors.statusDestructive,
+      (false, true) => WdsColors.statusPositive,
+      (false, false) => WdsColors.borderAlternative,
     };
 
     final showClear = (_hasValue || _hasFocus) && widget.isEnabled;
@@ -307,7 +301,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
         height: 44,
         child: DecoratedBox(
           decoration: ShapeDecoration(
-            color: WdsSemanticColorBackgroud.normal,
+            color: WdsColors.backgroundNormal,
             shape: RoundedRectangleBorder(
               borderRadius: radius,
               side: BorderSide(color: borderColor),
@@ -329,9 +323,8 @@ class _WdsTextFieldState extends State<WdsTextField> {
                         focusNode: _focusNode,
                         enabled: widget.isEnabled,
                         autofocus: widget.autofocus,
-                        cursorColor: WdsSemanticColorText.normal,
-                        cursorRadius:
-                            const Radius.circular(WdsAtomicRadius.full),
+                        cursorColor: WdsColors.textNormal,
+                        cursorRadius: const Radius.circular(WdsRadius.full),
                         style: _inputStyle.copyWith(color: inputColor),
                         onChanged: widget.onChanged,
                         onSubmitted: widget.onSubmitted,

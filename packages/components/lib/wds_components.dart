@@ -10,9 +10,8 @@ import 'package:flutter/material.dart'
         TextSelectionThemeData;
 import 'package:flutter/widgets.dart';
 import 'package:wds_foundation/wds_foundation.dart';
-import 'package:wds_tokens/wds_tokens.dart';
 
-part 'src/action_area/wds_fixed_action_area.dart';
+part 'src/action_area/wds_action_area.dart';
 part 'src/button/button.dart';
 part 'src/button/wds_square_button.dart';
 part 'src/button/wds_text_button.dart';

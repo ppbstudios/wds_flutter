@@ -31,8 +31,8 @@ class _TextButtonTypographyBySize {
 
   static TextStyle of(WdsTextButtonSize size) {
     return switch (size) {
-      WdsTextButtonSize.medium => WdsSemanticTypography.body15NormalMedium,
-      WdsTextButtonSize.small => WdsSemanticTypography.body13NormalMedium,
+      WdsTextButtonSize.medium => WdsTypography.body15NormalMedium,
+      WdsTextButtonSize.small => WdsTypography.body13NormalMedium,
     };
   }
 }
@@ -108,7 +108,7 @@ class _WdsTextButtonState extends State<WdsTextButton>
   }
 
   Color _overlayTargetColor() {
-    final Color base = WdsSemanticColorMaterial.pressed;
+    final Color base = WdsColors.materialPressed;
     if (_isPressed || _isHovered) return base;
     return const Color(0x00000000);
   }
@@ -119,11 +119,9 @@ class _WdsTextButtonState extends State<WdsTextButton>
     final EdgeInsets padding = _TextButtonPaddingBySize.of(widget.size);
     final TextStyle baseTypography =
         _TextButtonTypographyBySize.of(widget.size).copyWith(
-      color: widget.isEnabled
-          ? WdsSemanticColorText.neutral
-          : WdsSemanticColorText.disable,
+      color: widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable,
     );
-    final BorderRadius borderRadius = BorderRadius.circular(WdsAtomicRadius.xs);
+    final BorderRadius borderRadius = BorderRadius.circular(WdsRadius.xs);
 
     // Compose child: force typography for Text
     Widget content = Padding(padding: padding, child: widget.child);
@@ -137,9 +135,8 @@ class _WdsTextButtonState extends State<WdsTextButton>
       Color? decorationColor;
       if (widget.variant == WdsTextButtonVariant.underline) {
         decoration = TextDecoration.underline;
-        decorationColor = widget.isEnabled
-            ? WdsSemanticColorText.neutral
-            : WdsSemanticColorText.disable;
+        decorationColor =
+            widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable;
       }
 
       content = Padding(
@@ -175,9 +172,8 @@ class _WdsTextButtonState extends State<WdsTextButton>
     // trailing icon for icon variant
     if (widget.variant == WdsTextButtonVariant.icon) {
       final (double w, double h) = _TextButtonIconSizeBySize.of(widget.size);
-      final Color iconColor = widget.isEnabled
-          ? WdsSemanticColorText.neutral
-          : WdsSemanticColorText.disable;
+      final Color iconColor =
+          widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable;
       content = Row(
         mainAxisSize: MainAxisSize.min,
         children: [

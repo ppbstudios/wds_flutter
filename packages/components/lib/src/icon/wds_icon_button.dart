@@ -43,7 +43,7 @@ class _WdsIconButtonState extends State<WdsIconButton>
   }
 
   Color _overlayTargetColor() {
-    final Color base = WdsSemanticColorMaterial.pressed;
+    final Color base = WdsColors.materialPressed;
     if (_isPressed || _isHovered) return base;
     return const Color(0x00000000);
   }
