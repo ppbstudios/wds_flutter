@@ -1054,22 +1054,52 @@ true | 체크 상태, 체크 마크 표기 및 배경 채움
 
 ## Radio
 
-사용자가 여러 옵션 중에서 하나만 선택할 수 있도록 돕습니다.
+사용자가 여러 옵션 중에서 하나만 선택할 수 있도록 돕습니다. Checkbox와 달리 그룹 내에서 오직 하나의 항목만 선택 가능하며, `groupValue`와 개별 `value`를 비교하여 선택 여부를 판단합니다.
+
+Radio는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+value | `T` | 해당 Radio가 갖는 고유 값
+groupValue | `T?` | 현재 선택된 그룹 값 
+onChanged | `ValueChanged<T?>?` | 선택 시 호출되는 콜백
+isEnabled | `bool` | Radio 활성화 여부 (`false` 시 'disabled' 상태)
 
 ### Radio - size
 
-- small: 24x24
-- large: 20x20
+속성 | spec | padding | inner circle | 비고
+--- | --- | --- | --- | ---
+small | 20x20 | `EdgeInsets.all(1.67)` | 6.67px | 컴팩트
+large | 24x24 | `EdgeInsets.all(2)` | 10px | 기본
 
-로 나뉩니다.
+### Radio - state
 
-size가 small 일 때는 padding이 모든 방면으로 1.67px만큼, large일 때는 2px만큼 여백이 있습니다.
+상태 | 설명
+--- | ---
+enabled | 상호작용 가능, `onChanged` 호출됨
+disabled | 상호작용 불가, 전체적으로 `opacity 0.4` 적용
 
-padding:
-- small: `EdgeInsets.all(1.67)`
-- large: `EdgeInsets.all(2)`
+### Radio - value (선택 상태)
 
-### Radio - value
+상태 | border | backgroundColor | inner circle
+--- | --- | --- | ---
+선택됨 (`value == groupValue`) | 2px `WdsColors.statusPositive` (inside) | `WdsColors.white` | 원형, `WdsColors.primary`
+선택 안됨 (`value != groupValue`) | 1.25px `WdsColors.borderNeutral` (small) / 1.5px (large) | `null` | 없음
 
-- true: border 2px `WdsColors.primary`
-- false
+### Radio - 생성 방법
+
+Radio는 제네릭 타입을 사용하여 다양한 값 타입을 지원합니다.
+
+``` dart
+WdsRadio<String>.small(
+  value: 'option1',
+  groupValue: selectedValue,
+  onChanged: (String? value) => setState(() => selectedValue = value),
+)
+
+WdsRadio<String>.large(
+  value: 'option2', 
+  groupValue: selectedValue,
+  onChanged: (String? value) => setState(() => selectedValue = value),
+)
+```
