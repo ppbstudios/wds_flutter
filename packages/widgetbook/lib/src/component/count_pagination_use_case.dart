@@ -19,13 +19,13 @@ Widget buildCountPaginationUseCase(BuildContext context) {
 
 Widget _buildPlaygroundSection(BuildContext context) {
   final currentPage = context.knobs.int.input(
-    label: 'currentPage',
+    label: 'Current',
     initialValue: 3,
-    description: '현재 페이지 번호 (1부터 시작)',
+    description: '현재 페이지 번호',
   );
 
   final totalPage = context.knobs.int.input(
-    label: 'totalPage',
+    label: 'Total',
     initialValue: 10,
     description: '전체 페이지 수',
   );
