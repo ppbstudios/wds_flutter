@@ -82,7 +82,7 @@ class _WdsSelectState extends State<WdsSelect> {
           ? WdsColors.textNeutral.withAlpha(
               WdsOpacity.opacity40.toAlpha(),
             )
-          : WdsColors.textNeutral,
+          : WdsColors.neutral500,
     );
 
     final field = Padding(
