@@ -1185,6 +1185,35 @@ WdsToast.icon(
 )
 ```
 
+### Toast - 표시 유틸리티(show/dismiss)
+
+앱 어디에서나 간단히 토스트를 띄우고 자동으로 닫히도록 하기 위해 Overlay 기반 유틸리티를 제공합니다. Material(또는 Cupertino) 앱 컨텍스트 내에서 호출되어야 하며, 기본 지속시간은 2000ms입니다.
+
+``` dart
+// 텍스트 토스트
+final controller = WdsToastUtil.showText(
+  context,
+  message: '저장되었습니다',
+  duration: const Duration(milliseconds: 2000),
+);
+
+// 아이콘 토스트
+final controller2 = WdsToastUtil.showIcon(
+  context,
+  message: '작업이 완료되었습니다',
+  icon: WdsIcon.blank,
+  duration: const Duration(milliseconds: 1500),
+);
+
+// 수동 닫기
+controller.dismiss();
+```
+
+#### 구현/채택 근거
+- flutter/material의 `ScaffoldMessenger.showSnackBar`는 토스트의 디자인/레이아웃 제약과 다르며, 액션 버튼 등 스낵바 성격에 가깝습니다.
+- 네이티브(플랫폼 채널) 연동은 비용이 크고 WDS 일관 색/타이포/레이아웃 제어가 어렵습니다.
+- 따라서 Flutter Overlay 위에 `WdsToast`를 올리는 방식을 채택했습니다. SafeArea를 고려해 하단 중앙에 배치하고, 지정한 `Duration` 경과 시 자동 dismiss 합니다.
+
 ## Snackbar
 
 사용자가 수행한 작업에 대한 피드백을 제공합니다. Toast와 달리 추가적인 조치를 취할 수 있는 버튼이 포함되어 있습니다.
@@ -1274,3 +1303,94 @@ iconPosition | centerLeft | 세로 중앙 정렬
 component | `WdsTextButton` | 
 variant | `.underline` 또는 `.icon` | 
 spacing | 8px | 콘텐츠와 액션 버튼 사이 간격
+
+
+## Tooltip
+
+설명적 내용이 필요한 경우에 사용합니다.
+
+Tooltip은 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+message | `String` | 툴팁에 표시될 메시지
+hasArrow | `bool` | 화살표 표시 여부 (`true` 시 화살표 표시)
+hasCloseButton | `bool` | 닫기 버튼 표시 여부 (`true` 시 우측에 닫기 버튼 표시)
+alignment | `WdsTooltipAlignment` | 툴팁 위치 설정
+onClose | `VoidCallback?` | 닫기 버튼이 눌렸을 때 콜백 (hasCloseButton이 true일 때만)
+
+### Tooltip - 고정된 속성
+
+모든 Tooltip은 동일한 시각적 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+backgroundColor | `WdsColors.cta` (#121212) | 고정
+borderRadius | `WdsRadius.sm` | 고정
+typography | `WdsTypography.body14NormalMedium` | 
+textColor | `WdsColors.white` (#FFFFFF) |
+minWidth | 64px | 최소 너비
+padding | `EdgeInsets.fromLTRB(10, 8, 10, 8)` | 외부 패딩
+contentPadding | `EdgeInsets.symmetric(horizontal: 2)` | 텍스트 내부 패딩
+
+### Tooltip - arrow
+
+화살표가 표시되는 경우의 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+arrowWidth | 24px | 고정
+arrowHeight | 8px | 고정
+arrowTriangleWidth | 12px | 실제 삼각형 너비 (24px - 6px - 6px)
+sidePadding | 6px | 화살표 양쪽 여백
+tipPadding | 1.54px | 화살표 끝 부분 여백
+
+화살표는 alignment에 따라 회전되며, 이등변삼각형으로 렌더링됩니다. 툴팁 컨테이너와의 시각적 연결을 위해 1px overlap이 적용됩니다.
+
+### Tooltip - closeButton
+
+닫기 버튼이 표시되는 경우의 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+icon | `WdsIcon.close` | 고정 아이콘, 다른 아이콘 사용 불가
+buttonSize | 20x20px | 고정 영역
+spacing | 8px | 콘텐츠와 버튼 사이 간격
+position | 우측 | 텍스트와 같은 행에 위치
+layout | hug content | 콘텐츠 크기에 맞춰 축소 (Flexible 사용)
+
+### Tooltip - alignment
+
+툴팁의 위치를 결정하는 열거형입니다.
+
+alignment | 설명
+--- | ---
+topLeft | 대상의 왼쪽 위에 위치, 화살표는 아래쪽 왼쪽을 향함
+topCenter | 대상의 중앙 위에 위치, 화살표는 아래쪽 중앙을 향함
+topRight | 대상의 오른쪽 위에 위치, 화살표는 아래쪽 오른쪽을 향함
+rightTop | 대상의 오른쪽 위에 위치, 화살표는 왼쪽 위를 향함
+rightCenter | 대상의 오른쪽 중앙에 위치, 화살표는 왼쪽 중앙을 향함
+rightBottom | 대상의 오른쪽 아래에 위치, 화살표는 왼쪽 아래를 향함
+bottomLeft | 대상의 왼쪽 아래에 위치, 화살표는 위쪽 왼쪽을 향함
+bottomCenter | 대상의 중앙 아래에 위치, 화살표는 위쪽 중앙을 향함
+bottomRight | 대상의 오른쪽 아래에 위치, 화살표는 위쪽 오른쪽을 향함
+leftTop | 대상의 왼쪽 위에 위치, 화살표는 오른쪽 위를 향함
+leftCenter | 대상의 왼쪽 중앙에 위치, 화살표는 오른쪽 중앙을 향함
+leftBottom | 대상의 왼쪽 아래에 위치, 화살표는 오른쪽 아래를 향함
+
+### Tooltip - layout
+
+hasCloseButton에 따라 레이아웃 구조가 달라집니다.
+
+**hasCloseButton = false:**
+```
+CustomPaint > DecoratedBox > Padding > Text
+```
+
+**hasCloseButton = true:**
+```
+CustomPaint > DecoratedBox > Padding > Row(mainAxisSize.min): (Flexible > Text) + SizedBox(8px) + IconButton(20x20)
+```
+
+닫기 버튼이 있는 경우 `Row`는 `MainAxisSize.min`으로 설정되고, 텍스트는 `Flexible`로 감싸져 콘텐츠 크기에 맞춰 축소됩니다 (hug content). 닫기 아이콘은 `WdsIcon.close`로 고정됩니다.
+  

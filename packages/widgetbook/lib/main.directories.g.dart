@@ -44,6 +44,8 @@ import 'package:wds_widgetbook/src/component/text_field_use_case.dart'
     as _wds_widgetbook_src_component_text_field_use_case;
 import 'package:wds_widgetbook/src/component/toast_use_case.dart'
     as _wds_widgetbook_src_component_toast_use_case;
+import 'package:wds_widgetbook/src/component/tooltip_use_case.dart'
+    as _wds_widgetbook_src_component_tooltip_use_case;
 import 'package:wds_widgetbook/src/cover.dart' as _wds_widgetbook_src_cover;
 import 'package:wds_widgetbook/src/foundation/color/atomic_color_use_case.dart'
     as _wds_widgetbook_src_foundation_color_atomic_color_use_case;
@@ -194,6 +196,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'Toast',
           builder:
               _wds_widgetbook_src_component_toast_use_case.buildWdsToastUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Tooltip',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Tooltip',
+          builder: _wds_widgetbook_src_component_tooltip_use_case
+              .buildWdsTooltipUseCase,
         ),
       ),
     ],

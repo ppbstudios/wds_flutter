@@ -28,3 +28,4 @@ part 'src/tab/wds_tab.dart';
 part 'src/text_field/wds_search_field.dart';
 part 'src/text_field/wds_text_field.dart';
 part 'src/toast/wds_toast.dart';
+part 'src/tooltip/wds_tooltip.dart';
