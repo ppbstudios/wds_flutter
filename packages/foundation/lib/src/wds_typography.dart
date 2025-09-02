@@ -1,10 +1,13 @@
 library;
 
 import 'package:flutter/widgets.dart';
+import 'package:wds_tokens/atomic/wds_atomic_font.dart';
 import 'package:wds_tokens/semantic/wds_semantic_typography.dart';
 
 class WdsTypography {
   const WdsTypography._();
+
+  static const String fontFamily = WdsAtomicFontFamily.pretendard;
 
   static const TextStyle title32Bold = WdsSemanticTypography.title32Bold;
   static const TextStyle title32Medium = WdsSemanticTypography.title32Medium;
