@@ -19,14 +19,14 @@ class WdsDotPagination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color backgroundColor =
-        isActive ? WdsSemanticColorText.normal : WdsSemanticColorText.assistive;
+        isActive ? WdsColors.textNormal : WdsColors.textAssistive;
 
     return Container(
-      width: 8,
-      height: 8,
+      width: 6,
+      height: 6,
       decoration: BoxDecoration(
         color: backgroundColor,
-        shape: BoxShape.circle, // 완전한 원형
+        shape: BoxShape.circle,
       ),
     );
   }

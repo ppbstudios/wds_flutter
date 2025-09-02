@@ -66,7 +66,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
         labels: ['active', 'inactive'],
         content: Row(
           mainAxisSize: MainAxisSize.min,
-          spacing: 16,
+          spacing: 8,
           children: [
             WdsDotPagination(isActive: true),
             WdsDotPagination(isActive: false),

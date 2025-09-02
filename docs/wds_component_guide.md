@@ -866,9 +866,9 @@ isActive | `bool` | 'true' : 현재 페이지 / 'false' : 비활성 페이지
 
 | 항목 | 상태/조건 | 값   | 비고 |
 | --- | ------  | --- | --- |
-| width         | `Hug`     | dot 개수에 따라 유동적 |
-| backgroundColor | active | `WdsSemanticColorText.normal` |
-| backgroundColor | inactive | `WdsSemanticColorText.assistive` |
+| size            |    -    | `Size(6, 6)` |
+| backgroundColor | active | `WdsColors.textNormal` |
+| backgroundColor | inactive | `WdsColors.textAssistive` |
 
 ## ActionArea
 화면 하단에서 주요 액션(결제, 다음 단계 등)을 안정적으로 수행하게 하는 영역입니다.
