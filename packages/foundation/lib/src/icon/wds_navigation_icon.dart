@@ -1,7 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
-
-import 'interface/icon.dart';
+part of '../wds_icon.dart';
 
 enum WdsNavigationIcon implements IconBuilder {
   store(

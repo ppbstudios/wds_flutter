@@ -2,7 +2,6 @@ library;
 
 import 'package:wds_tokens/atomic/wds_atomic_space.dart';
 
-/// WDS 스페이싱 시스템 통합 인터페이스
 class WdsSpacing {
   const WdsSpacing._();
 

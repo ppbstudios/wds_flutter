@@ -2,7 +2,6 @@ library;
 
 import 'package:wds_tokens/atomic/wds_atomic_radius.dart';
 
-/// WDS 반지름 시스템 통합 인터페이스
 class WdsRadius {
   const WdsRadius._();
 

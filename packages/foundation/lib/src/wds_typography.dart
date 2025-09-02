@@ -1,9 +1,8 @@
 library;
 
 import 'package:flutter/widgets.dart';
-import 'package:wds_tokens/semantic/typography.dart';
+import 'package:wds_tokens/semantic/wds_semantic_typography.dart';
 
-/// WDS 타이포그래피 시스템 통합 인터페이스
 class WdsTypography {
   const WdsTypography._();
 
