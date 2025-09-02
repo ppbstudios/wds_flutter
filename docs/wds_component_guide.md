@@ -82,9 +82,9 @@ variant에 따라서 backgroundColor, color, radius, borderSide 가 정해집니
 
 속성 | backgroundColor | color | radius | borderSide
 --- | --- | --- | --- | ---
-cta | WdsColorNeutral.v900(#121212) | WdsColorCommon.white(#FFFFFF) | .full | null
-primary | WdsColorBlue.v400(#5B7BF3) | WdsColorCommon.white(#FFFFFF) | .full | null
-secondary | WdsColorCommon.white(#FFFFFF) | WdsSemanticColorText.normal(#121212) | .full | BorderSide(color: WdsSemanticColorBorder.neutral)
+cta | WdsColors.neutral900(#121212) | WdsColors.white(#FFFFFF) | WdsRadius.full | null
+primary | WdsColors.blue400(#5B7BF3) | WdsColors.white(#FFFFFF) | WdsRadius.full | null
+secondary | WdsColors.white(#FFFFFF) | WdsColors.textNormal(#121212) | .full | BorderSide(color: WdsColors.borderNeutral)
 
 
 e.g. code
@@ -105,38 +105,38 @@ px 단위로 이루어집니다. width는 Hug 방식으로 child에 맞게 wrapp
 
 속성 | size | typography | padding
 --- | --- | --- | ---
-xlarge | Size(double.infinity, 48) | WdsSemanticTypography.body15NormalBold | EdgeInsets.symmetric(horizontal: 16, vertical: 13)
-large | Size(double.infinity, 40) | WdsSemanticTypography.body15NormalBold | EdgeInsets.symmetric(horizontal: 16, vertical: 11)
-medium | Size(double.infinity, 36) | WdsSemanticTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 16, vertical: 10)
-small | Size(double.infinity, 30) | WdsSemanticTypography.caption12Medium | EdgeInsets.symmetric(horizontal: 16, vertical: 7) 
-tiny | Size(double.infinity, 28) | WdsSemanticTypography.caption12Medium | EdgeInsets.symmetric(horizontal: 16, vertical: 6)
+xlarge | Size(double.infinity, 48) | WdsTypography.body15NormalBold | EdgeInsets.symmetric(horizontal: 16, vertical: 13)
+large | Size(double.infinity, 40) | WdsTypography.body15NormalBold | EdgeInsets.symmetric(horizontal: 16, vertical: 11)
+medium | Size(double.infinity, 36) | WdsTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 16, vertical: 10)
+small | Size(double.infinity, 30) | WdsTypography.caption12Medium | EdgeInsets.symmetric(horizontal: 16, vertical: 7) 
+tiny | Size(double.infinity, 28) | WdsTypography.caption12Medium | EdgeInsets.symmetric(horizontal: 16, vertical: 6)
 
 e.g. code
 ``` dart
 enum WdsButtonSize {
     xlarge(
         size: Size(double.infinity, 48),
-        typography: WdsSemanticTypography.body15NormalBold,
+        typography: WdsTypography.body15NormalBold,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 13),
     ),
     large(
         size: Size(double.infinity, 40),
-        typography: WdsSemanticTypography.body15NormalBold,
+        typography: WdsTypography.body15NormalBold,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 11),
     ),
     medium(
         size: Size(double.infinity, 36),
-        typography: WdsSemanticTypography.body13NormalMedium,
+        typography: WdsTypography.body13NormalMedium,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
     ),
     small(
         size: Size(double.infinity, 30),
-        typography: WdsSemanticTypography.caption12Medium,
+        typography: WdsTypography.caption12Medium,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 7),
     ),
     tiny(
         size: Size(double.infinity, 28),
-        typography: WdsSemanticTypography.caption12Medium,
+        typography: WdsTypography.caption12Medium,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
     );
 
@@ -166,8 +166,8 @@ pressed | hover 상태도 포함
 ``` dart
 enum WdsButtonState {
     enabled(backgroundOpacity: null),
-    disabled(backgroundOpacity: 0.4),
-    pressed(backgroundOpacity: 0.1);
+    disabled(backgroundOpacity: WdsOpacity.opacity40),
+    pressed(backgroundOpacity: WdsOpacity.opacity10);
 
     const WdsButtonState({
         required this.backgroundOpacity,
@@ -187,14 +187,14 @@ Button 과는 속성이 다소 다른 버튼으로 배경색이나 테두리가 
 ### TextButton - 공통
 
 텍스트 색상이 모든 variant 내에서 같습니다.
-- color: `WdsSemanticColorText.neutral`
+- color: `WdsColors.textNeutral`
 
 ### TextButton - variant
 
 속성 | decoration | decorationColor | trailing
 --- | --- | --- | --- 
 text | null | null | null
-underline |  TextDecoration.underline | `WdsSemanticColorText.neutral` | null
+underline |  TextDecoration.underline | `WdsColors.textNeutral` | null
 icon | null | null | chevronRight
 
 trailing에 오는 icon은 packages/foundation 내 정의되어있는 WdsIcon에서 불러옵니다.
@@ -204,8 +204,8 @@ trailing에 오는 icon은 packages/foundation 내 정의되어있는 WdsIcon에
 
 속성 | size | typography | icon size | padding
 --- | --- | --- | --- | --- 
-medium | Size(double.infinity, 30) | WdsSemanticTypography.body15NormalMedium | 20x20 | EdgeInsets.symmetric(vertical: 4)
-small | Size(double.infinity, 28) | WdsSemanticTypography.body13NormalMedium | 16x16 | EdgeInsets.symmetric(vertical: 5)
+medium | Size(double.infinity, 30) | WdsTypography.body15NormalMedium | 20x20 | EdgeInsets.symmetric(vertical: 4)
+small | Size(double.infinity, 28) | WdsTypography.body13NormalMedium | 16x16 | EdgeInsets.symmetric(vertical: 5)
 
 
 이 때 trailing에 오는 아이콘은 icon size 만큼 영역을 가지며, 텍스트와 여유 공간없이 바로 붙어있으며 상하 padding은 1px로 조정됩니다.
@@ -233,7 +233,7 @@ Row(
 - disabled
 
 위 2개의 상태를 가지며 disabled 인 상태일 떄는 텍스트, decoration, icon 모두 같은 색상을 갖습니다.
-- `WdsSemanticColorText.disable`
+- `WdsColors.textDisable`
 
 ---
 
@@ -249,15 +249,15 @@ Row(
 속성 | 값
 --- | ---
 size | `Size(double.infinity, 32)`
-typography | `WdsSemanticTypography.caption12Medium`
+typography | `WdsTypography.caption12Medium`
 padding | `EdgeInsets.symmetric(horizontal: 17, vertical: 8)`
 
 ### SquareButton - state
 
 state | backgroundColor | color | radius | borderSide 
 --- | --- | --- | --- | --- 
-enabled | WdsColorCommon.white(#FFFFFF) | WdsSemanticColorText.neutral(#4E4E4E) | .v4 | BorderSide(color: WdsSemanticColorBorder.alternative)
-disabled | WdsColorCommon.white(#FFFFFF) | WdsSemanticColorText.neutral(#4E4E4E) | .v4 | BorderSide(color: WdsSemanticColorBorder.alternative)
+enabled | WdsColors.white(#FFFFFF) | WdsColors.textNeutral(#4E4E4E) | .v4 | BorderSide(color: WdsColors.borderAlternative)
+disabled | WdsColors.white(#FFFFFF) | WdsColors.textNeutral(#4E4E4E) | .v4 | BorderSide(color: WdsColors.borderAlternative)
 
 ## IconButton
 
@@ -298,8 +298,8 @@ leading이 없고 title만 존재할 때 hasCenterTitle 여부를 설정할 수 
 --- | --- | ---
 size | `Size(double.infinity, 50)` |
 padding | `EdgeInsets.symmetric(horizontal: 16, vertical: 5)` |
-backgroundColor | `WdsSemanticColorBackgroud.normal` |
-typography | `WdsSemanticTypography.heading17Bold` |
+backgroundColor | `WdsColors.backgroundNormal` |
+typography | `WdsTypography.heading17Bold` |
 title width (.search 변형) | 전체 가용 너비의 `204/360`(≈`0.567`) | `.search`에서만 `FractionallySizedBox(widthFactor: 0.567)` 적용
 
 padding은 양 끝에 위치한 leading 과 actions의 interaction 영역을 고려했습니다.
@@ -367,7 +367,7 @@ WdsHeader.search({
 
 화면 하단에 위치한 내비게이션입니다. 각 탭 별로 icon과 label이 하나의 쌍(pair)를 이룹니다. 고정 padding으로 `EdgeInsets.symmetric(vertical: 1)`를 가집니다.
 
-BottomNavigation은 위,아래 각 1px씩 padding과 BottomNavigationItem(height: 45) 그리고 상단에 border(WdsSemanticColorBorder.alternative, 1px) 까지 총 48px의 높이를 가집니다.
+BottomNavigation은 위,아래 각 1px씩 padding과 BottomNavigationItem(height: 45) 그리고 상단에 border(WdsColors.borderAlternative, 1px) 까지 총 48px의 높이를 가집니다.
 
 ### BottomNavigationItem
 구성 요소 | Type
@@ -397,7 +397,7 @@ SizedBox(
             WdsNavigationIcon.home.build(isActive: $selected),
             Text(
                 '홈',
-                style: WdsSemanticTypography.caption10Medium.copyWith(
+                style: WdsTypography.caption10Medium.copyWith(
                     color: cta,
                 ),
             ),
@@ -408,8 +408,8 @@ SizedBox(
 
 선택 상태 | Text 폰트 굵기
 --- | ---
-선택됨 | `WdsFontWeight.bold`
-선택 안됨 | `WdsFontWeight.medium`
+선택됨 | `.caption10Bold`
+선택 안됨 | `.caption10Medium`
 
 
 ## SearchField
@@ -435,11 +435,11 @@ height | 36px | 고정 높이
 
 ### SearchField - radius
 
-`WdsAtomicRadius.full` 를 갖습니다.
+`WdsRadius.full` 를 갖습니다.
 
 ### SearchField - backgroundColor
 
-`WdsSemanticColorBackgroud.alternative`를 갖습니다.
+`WdsColors.backgroundAlternative`를 갖습니다.
 
 ### SearchField - padding
 항목 | 값 | 비고
@@ -452,8 +452,8 @@ state별 typography와 color는 다음과 같습니다.
 
 state | typography | color
 --- | --- | ---
-enabled | `WdsSemanticTypography.body15NormalRegular` | `WdsSemanticColorText.normal`
-disabled | `WdsSemanticTypography.body15NormalRegular` | `WdsSemanticColorText.alternative`
+enabled | `WdsTypography.body15NormalRegular` | `WdsColors.textNormal`
+disabled | `WdsTypography.body15NormalRegular` | `WdsColors.textAlternative`
 
 ### SearchField - trailing
 
@@ -499,7 +499,7 @@ Padding(
 
 outlined는 좌측 상단에 Label이 위치하고 있으며 바로 아래 텍스트 입력란이 있습니다. 그리고 텍스트 입력란은 underlined 형태로 존재하며, hint text를 지정할 수 있습니다.
 
-box는 Label이 없으며 오직 텍스트 입력란과 border만 존재합니다. border는 radius가 8px이며 solid한 1px `WdsSemanticColorBorder.alternative` 입니다.
+box는 Label이 없으며 오직 텍스트 입력란과 border만 존재합니다. border는 radius가 8px이며 solid한 1px `WdsColors.borderAlternative` 입니다.
 
 ### TextField - state
 
@@ -517,33 +517,33 @@ outlined
 
 항목 | 상태 | 값
 --- | --- | ---
-underline | enabled | 1px `WdsSemanticColorBorder.alternative`
-underline | focused | 2px `WdsSemanticColorStatus.positive`
-underline | error | 2px `WdsSemanticColorStatus.destructive`
-label.typography | all | `WdsSemanticTypography.body13NormalRegular`
-label.color | disabled | `WdsSemanticColorText.disable`
-label.color | 그 외 | `WdsSemanticColorText.alternative`
-hint.typography | all | `WdsSemanticTypography.body15NormalRegular`
-hint.color | enabled | `WdsSemanticColorText.alternative`
-hint.color | disabled | `WdsSemanticColorText.disable`
-hint.color | focused/error/active | `WdsSemanticColorText.alternative`
-error(문구) | error | typography `WdsSemanticTypography.caption12Regular`, color `WdsSemanticColorStatus.destructive`
-helper/counter | all | typography `WdsSemanticTypography.caption12Regular`, color `WdsSemanticColorText.alternative`
+underline | enabled | 1px `WdsColors.borderAlternative`
+underline | focused | 2px `WdsColors.statusPositive`
+underline | error | 2px `WdsColors.statusDestructive`
+label.typography | all | `WdsTypography.body13NormalRegular`
+label.color | disabled | `WdsColors.textDisable`
+label.color | 그 외 | `WdsColors.textAlternative`
+hint.typography | all | `WdsTypography.body15NormalRegular`
+hint.color | enabled | `WdsColors.textAlternative`
+hint.color | disabled | `WdsColors.textDisable`
+hint.color | focused/error/active | `WdsColors.textAlternative`
+error(문구) | error | typography `WdsTypography.caption12Regular`, color `WdsColors.statusDestructive`
+helper/counter | all | typography `WdsTypography.caption12Regular`, color `WdsColors.textAlternative`
 
 box
 
 항목 | 상태 | 값
 --- | --- | ---
-border.radius | all | 8 (`WdsAtomicRadius.v8`)
-border.thickness/color | enabled | 1px `WdsSemanticColorBorder.alternative`
-border.thickness/color | focused | 1px `WdsSemanticColorStatus.positive`
-border.thickness/color | error | 1px `WdsSemanticColorStatus.destructive`
-hint.typography | all | `WdsSemanticTypography.body15NormalRegular`
-hint.color | enabled | `WdsSemanticColorText.alternative`
-hint.color | disabled | `WdsSemanticColorText.disable`
-hint.color | focused/error/active | `WdsSemanticColorText.alternative`
-input.color | disabled | `WdsSemanticColorText.alternative`
-input.color | 그 외 | `WdsSemanticColorText.normal`
+border.radius | all | 8 (`WdsRadius.v8`)
+border.thickness/color | enabled | 1px `WdsColors.borderAlternative`
+border.thickness/color | focused | 1px `WdsColors.statusPositive`
+border.thickness/color | error | 1px `WdsColors.statusDestructive`
+hint.typography | all | `WdsTypography.body15NormalRegular`
+hint.color | enabled | `WdsColors.textAlternative`
+hint.color | disabled | `WdsColors.textDisable`
+hint.color | focused/error/active | `WdsColors.textAlternative`
+input.color | disabled | `WdsColors.textAlternative`
+input.color | 그 외 | `WdsColors.textNormal`
 trailing | 조건 | 값이 있을 때 또는 포커스일 때 clear 버튼 표시
 
 ### TextField - size
@@ -576,16 +576,16 @@ box | `EdgeInsets.symmetric(horizontal: 16, vertical: 10)`
 
 속성 | 값
 --- | ---
-color | `WdsSemanticColorText.normal`
+color | `WdsColors.textNormal`
 width | 2px
-radius | `WdsAtomicRadius.full`
+radius | `WdsRadius.full`
 
 ### TextField - helper text
 
 입력란 하단에 추가 설명 또는 오류 메시지를 표시할 수 있습니다.
 
-- 기본: `WdsSemanticColorText.alternative`
-- error: `WdsSemanticColorStatus.destructive` (border와 일관성 유지)
+- 기본: `WdsColors.textAlternative`
+- error: `WdsColors.statusDestructive` (border와 일관성 유지)
 - 위치: 입력 영역 하단에서
     - underline: 6px 여백
     - box: 8px 여백
@@ -593,12 +593,12 @@ radius | `WdsAtomicRadius.full`
 에러 상태(state = `error`)에서는 helper와 error를 동시에 노출합니다.
 
 - 좌측: 에러 메시지
-  - typography: `WdsSemanticTypography.caption12Regular`
-  - color: `WdsSemanticColorStatus.destructive`
+  - typography: `WdsTypography.caption12Regular`
+  - color: `WdsColors.statusDestructive`
   - 최대 1줄, 넘치면 말줄임 처리
 - 우측: 헬퍼 텍스트
-  - typography: `WdsSemanticTypography.caption12Regular`
-  - color: `WdsSemanticColorText.alternative`
+  - typography: `WdsTypography.caption12Regular`
+  - color: `WdsColors.textAlternative`
   - 최대 1줄, 우측 정렬, 넘치면 말줄임 처리
 
 ### TextField - trailing
@@ -633,8 +633,8 @@ Row(
 - 버튼 state: TextField의 state와 독립적으로 동작(단, `disabled` 인 입력은 버튼도 `disabled` 처리 권장)
 - spacing: 텍스트 영역과 버튼 사이 가로 16px
 - 타이머 노출이 필요한 경우 오른쪽 정렬 caption을 함께 표기
-  - typography: `WdsSemanticTypography.body13NormalRegular`
-  - color: `WdsSemanticColorStatus.positive`
+  - typography: `WdsTypography.body13NormalRegular`
+  - color: `WdsColors.statusPositive`
 
 e.g. code - verified 패턴
 ``` dart
@@ -684,8 +684,8 @@ shape에 따라 radius가 정해집니다.
 
 속성 | radius
 --- | ---
-pill | WdsAtomicRadius.full
-square | WdsAtomicRadius.v8
+pill | WdsRadius.full
+square | WdsRadius.v8
 
 ### Chip - variant
 
@@ -698,8 +698,8 @@ variant에 따라서 backgroundColor, color, borderSide가 정해집니다.
 
 속성 | backgroundColor | color | borderSide
 --- | --- | --- | ---
-outline | null | WdsSemanticColorText.neutral | BorderSide(color: WdsSemanticColorBorder.alternative)
-solid | WdsSemanticColorBackgroud.alternative | WdsSemanticColorText.normal | null
+outline | null | WdsColors.textNeutral | BorderSide(color: WdsColors.borderAlternative)
+solid | WdsColors.backgroundAlternative | WdsColors.textNormal | null
 
 ### Chip - size
 
@@ -709,19 +709,19 @@ px 단위로 이루어집니다. width는 Hug 방식으로 내용에 맞게 wrap
 
 속성 | size | typography | padding
 --- | --- | --- | ---
-xsmall | Size(double.infinity, 24) | WdsSemanticTypography.caption12Regular | EdgeInsets.symmetric(horizontal: 12, vertical: 6)
-small | Size(double.infinity, 30) | WdsSemanticTypography.body13NormalRegular | EdgeInsets.symmetric(horizontal: 12, vertical: 6)  
-medium | Size(double.infinity, 34) | WdsSemanticTypography.body13NormalRegular | EdgeInsets.symmetric(horizontal: 12, vertical: 8)
-large | Size(double.infinity, 38) | WdsSemanticTypography.body13NormalRegular | EdgeInsets.symmetric(horizontal: 12, vertical: 10)
+xsmall | Size(double.infinity, 24) | WdsTypography.caption12Regular | EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+small | Size(double.infinity, 30) | WdsTypography.body13NormalRegular | EdgeInsets.symmetric(horizontal: 12, vertical: 6)  
+medium | Size(double.infinity, 34) | WdsTypography.body13NormalRegular | EdgeInsets.symmetric(horizontal: 12, vertical: 8)
+large | Size(double.infinity, 38) | WdsTypography.body13NormalRegular | EdgeInsets.symmetric(horizontal: 12, vertical: 10)
 
 **solid인 경우**
 
 속성 | size | typography | padding
 --- | --- | --- | ---
-xsmall | Size(double.infinity, 24) | WdsSemanticTypography.caption12Medium | EdgeInsets.symmetric(horizontal: 14, vertical: 6)
-small | Size(double.infinity, 30) | WdsSemanticTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 6)  
-medium | Size(double.infinity, 34) | WdsSemanticTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 8)
-large | Size(double.infinity, 38) | WdsSemanticTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 10)
+xsmall | Size(double.infinity, 24) | WdsTypography.caption12Medium | EdgeInsets.symmetric(horizontal: 14, vertical: 6)
+small | Size(double.infinity, 30) | WdsTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 6)  
+medium | Size(double.infinity, 34) | WdsTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 8)
+large | Size(double.infinity, 38) | WdsTypography.body13NormalMedium | EdgeInsets.symmetric(horizontal: 14, vertical: 10)
 
 ### Chip - state
 
@@ -738,15 +738,15 @@ state에 따라 배경색과 텍스트 색상이 조정됩니다.
 
 - `enabled`: 기본 variant 색상 적용
 - `pressed`: 배경색에 0.1 opacity overlay 적용 (hover 상태 포함)
-- `focused`: 선택된 상태로, 두 variant 모두 배경색이 `cta`(#121212)로 변경되고 텍스트 및 아이콘 색상이 `WdsColorCommon.white`(#FFFFFF)로 변경됨
+- `focused`: 선택된 상태로, 두 variant 모두 배경색이 `cta`(#121212)로 변경되고 텍스트 및 아이콘 색상이 `WdsColors.white`(#FFFFFF)로 변경됨
 - `disabled`: 전체적으로 0.4 opacity 적용
 
 focused 상태에서는 hover/pressed overlay가 적용되지 않습니다. 따라서 아이콘과 텍스트는 완전한 흰색으로 표시됩니다. 또한 outline variant에서도 테두리는 제거되며 배경만 `cta`로 표시됩니다.
 
 **focused state 상세:**
-- 배경색: `cta` (WdsColorNeutral.v900, #121212)
-- 텍스트 색상: `WdsColorCommon.white` (#FFFFFF)  
-- 아이콘 색상: `WdsColorCommon.white` (#FFFFFF)
+- 배경색: `cta` (WdsColors.neutral900, #121212)
+- 텍스트 색상: `WdsColors.white` (#FFFFFF)  
+- 아이콘 색상: `WdsColors.white` (#FFFFFF)
 - 테두리: outline variant의 경우 기존 테두리 제거됨 (배경색으로 인해 불필요)
 
 ### Chip - layout
@@ -792,16 +792,16 @@ Row(
 항목 | 상태/조건 | 값 | 비고
 --- | --- | --- | ---
 padding | - | `EdgeInsets.fromLTRB(16, 12, 16, 12)` |
-radius | - | `WdsAtomicRadius.v8` |
+radius | - | `WdsRadius.v8` |
 border | normal | `BorderSide(color: primary, width: 1)` |
-border | blocked | `BorderSide(color: WdsSemanticColorBorder.alternative, width: 1)` |
-backgroundColor | normal | `WdsColorCommon.white` |
+border | blocked | `BorderSide(color: WdsColors.borderAlternative, width: 1)` |
+backgroundColor | normal | `WdsColors.white` |
 backgroundColor | blocked | `WdsColorNeutral.v50` |
-title.typography | - | `WdsSemanticTypography.body14NormalRegular` |
-title.color | 기본 | `WdsSemanticColorText.normal` |
-title.color | blocked + disabled | `WdsSemanticColorText.disable` |
-hint text | enabled | typography `WdsSemanticTypography.body14NormalRegular`, color `WdsSemanticColorText.normal` |
-hint text | disabled | typography `WdsSemanticTypography.body14NormalRegular`, color `WdsSemanticColorText.alternative` | `blocked`는 `disable`
+title.typography | - | `WdsTypography.body14NormalRegular` |
+title.color | 기본 | `WdsColors.textNormal` |
+title.color | blocked + disabled | `WdsColors.textDisable` |
+hint text | enabled | typography `WdsTypography.body14NormalRegular`, color `WdsColors.textNormal` |
+hint text | disabled | typography `WdsTypography.body14NormalRegular`, color `WdsColors.textAlternative` | `blocked`는 `disable`
 trailing 간격 | - | 10px | 아이콘과 텍스트 사이
 아이콘 | 닫힘 | `chevronDown` |
 아이콘 | 열림 | `chevronUp` |
@@ -815,9 +815,9 @@ trailing 간격 | - | 10px | 아이콘과 텍스트 사이
 ### TextTabs - state
 상태 | color | typography | 비고
 --- | --- | --- | ---
-enabled | `WdsSemanticColorText.alternative` | `WdsSemanticTypography.body15NormalMedium` |
-focused | `WdsSemanticColorText.normal` | `WdsSemanticTypography.body15NormalBold` |
-featured | 디자인 의도 색상 | `WdsSemanticTypography.body15NormalBold` | 강조 필요 시
+enabled | `WdsColors.textAlternative` | `WdsTypography.body15NormalMedium` |
+focused | `WdsColors.textNormal` | `WdsTypography.body15NormalBold` |
+featured | 디자인 의도 색상 | `WdsTypography.body15NormalBold` | 강조 필요 시
 
 ### TextTabs - spacing & scroll
 항목 | 값 | 비고
@@ -833,14 +833,14 @@ featured | 디자인 의도 색상 | `WdsSemanticTypography.body15NormalBold` | 
 
 항목 | 상태 | 값 | 비고
 --- | --- | --- | ---
-label.typography | 선택됨 | `WdsSemanticTypography.body15ReadingBold` |
-label.color | 선택됨 | `WdsSemanticColorText.normal` |
+label.typography | 선택됨 | `WdsTypography.body15ReadingBold` |
+label.color | 선택됨 | `WdsColors.textNormal` |
 label.padding | 선택됨 | `EdgeInsets.fromLTRB(16, 11, 16, 9)` | underline 2px 고려
-label.typography | 선택 안됨 | `WdsSemanticTypography.body15ReadingMedium` |
-label.color | 선택 안됨 | `WdsSemanticColorText.neutral` |
+label.typography | 선택 안됨 | `WdsTypography.body15ReadingMedium` |
+label.color | 선택 안됨 | `WdsColors.textNeutral` |
 label.padding | 선택 안됨 | `EdgeInsets.fromLTRB(16, 11, 16, 10)` |
-underline | 선택됨 | 높이 2px, 너비 탭 full, color `WdsColorCommon.black` |
-underline | 선택 안됨 | 1px solid `WdsSemanticColorBorder.alternative` |
+underline | 선택됨 | 높이 2px, 너비 탭 full, color `WdsColors.black` |
+underline | 선택 안됨 | 1px solid `WdsColors.borderAlternative` |
 탭 개수 | - | 2개 또는 3개 |
 
 ## ActionArea
@@ -852,8 +852,8 @@ underline | 선택 안됨 | 1px solid `WdsSemanticColorBorder.alternative` |
 
 항목 | 값 | 비고
 --- | --- | ---
-border(top) | `1px WdsSemanticColorBorder.alternative` |
-backgroundColor | `WdsColorCommon.white` |
+border(top) | `1px WdsColors.borderAlternative` |
+backgroundColor | `WdsColors.white` |
 padding | `EdgeInsets.all(16)` |
 
 CTA는 기본적으로 `WdsButton`을 사용하고, 특별한 언급이 없으면 size는 `WdsButtonSize.xlarge` 입니다.
@@ -865,8 +865,8 @@ CTA는 기본적으로 `WdsButton`을 사용하고, 특별한 언급이 없으�
 항목 | 값 | 비고
 --- | --- | ---
 height | `81px` | 고정 높이
-border(top) | `1px WdsSemanticColorBorder.alternative` | 공통
-backgroundColor | `WdsColorCommon.white` | 공통
+border(top) | `1px WdsColors.borderAlternative` | 공통
+backgroundColor | `WdsColors.white` | 공통
 padding | `EdgeInsets.all(16)` | 공통
 
 #### ActionArea - variant
@@ -932,12 +932,12 @@ large | 52x32 | 24x24 | EdgeInsets.all(4) | 상하 4px 여백
 ### Switch - color
 
 - active(track): `primary`
-- inactive(track): `WdsColorNeutral.v200`
-- knob: `WdsColorCommon.white`
+- inactive(track): `WdsColors.neutral200`
+- knob: `WdsColors.white`
 
 ### Switch - background(track)
 
-- backgroundColor: `WdsColorNeutral.v200`
+- backgroundColor: `WdsColors.neutral200`
 - padding: size 별로 상이(small: `EdgeInsets.all(3)`, large: `EdgeInsets.all(4)`)
 
 large는 track 높이 32, knob 24로 상하 4px 여백이 생깁니다. small은 track 높이 24, knob 18로 상하 3px 여백을 둡니다.
@@ -960,7 +960,7 @@ SizedBox.fromSize(
   size: $size.spec, // enum 에 캡슐화된 track 스펙
   child: DecoratedBox(
     decoration: BoxDecoration(
-      color: $value ? primary : WdsColorNeutral.v200,
+      color: $value ? primary : WdsColors.neutral200,
       borderRadius: BorderRadius.circular($size.spec.height / 2),
     ),
     child: Padding(
@@ -971,7 +971,7 @@ SizedBox.fromSize(
         curve: Curves.easeIn,
         child: DecoratedBox(
           decoration: const BoxDecoration(
-            color: WdsColorCommon.white,
+            color: WdsColors.white,
             shape: BoxShape.circle,
           ),
           child: SizedBox.square(dimension: $size.knobSize),
@@ -1014,7 +1014,7 @@ enum WdsCheckboxSize {
 상태 | 설명
 --- | ---
 enabled | 상호작용 가능, `onChanged` 호출됨
-disabled | 상호작용 불가, 전체적으로 `opacity 0.4` 적용(색상은 `withAlpha(40)` 등 동일 메커니즘)
+disabled | 상호작용 불가, 전체적으로 `opacity 0.4` 적용(색상은 `withAlpha(WdsOpacity.opacity40.toAlpha())` 등 동일 메커니즘)
 
 ### Checkbox - value
 
@@ -1031,8 +1031,8 @@ true | 체크 상태, 체크 마크 표기 및 배경 채움
 ### Checkbox - border & radius
 
 - `true`: `border = null`
-- `false`: `border = BorderSide(color: WdsSemanticColorBorder.neutral)`
-- `borderRadius`: `WdsAtomicRadius.xs` (size와 무관하게 동일)
+- `false`: `border = BorderSide(color: WdsColors.borderNeutral)`
+- `borderRadius`: `WdsRadius.xs` (size와 무관하게 동일)
 
 ### Checkbox - check mark
 
@@ -1050,3 +1050,26 @@ true | 체크 상태, 체크 마크 표기 및 배경 채움
 - 색상 채움은 `CustomPaint`로 구현합니다.
 - 애니메이션은 `Duration(milliseconds: 300)` + `Curves.easeIn`을 사용합니다.
 - 체크 마크 경로는 왼쪽에서 오른쪽으로 그리며 진행도에 따라 부분 경로를 렌더링합니다.
+
+
+## Radio
+
+사용자가 여러 옵션 중에서 하나만 선택할 수 있도록 돕습니다.
+
+### Radio - size
+
+- small: 24x24
+- large: 20x20
+
+로 나뉩니다.
+
+size가 small 일 때는 padding이 모든 방면으로 1.67px만큼, large일 때는 2px만큼 여백이 있습니다.
+
+padding:
+- small: `EdgeInsets.all(1.67)`
+- large: `EdgeInsets.all(2)`
+
+### Radio - value
+
+- true: border 2px `WdsColors.primary`
+- false

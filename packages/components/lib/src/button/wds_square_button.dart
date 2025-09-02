@@ -65,7 +65,7 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
   Widget build(BuildContext context) {
     // 문서 명세 (docs/wds_component_guide.md):
     // size: Size(double.infinity, 32)
-    // typography: WdsSemanticTypography.caption12Medium
+    // typography: WdsTypography.caption12Medium
     // padding: EdgeInsets.symmetric(horizontal: 17, vertical: 8)
     // state: enabled/disabled 동일 배경/테두리, disabled 는 opacity 로 표현
     const double height = 32;
