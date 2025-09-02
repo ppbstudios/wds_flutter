@@ -21,6 +21,8 @@
 
 ## Design Token 관리하는 법
 
+Primitive, Semantic, 그리고 Component-specific 순으로 Token을 정리합니다.
+
 ### Primitive Token 정의
 
 Color, Spacing, Opacity, FontWeight 등 원초적인 값들을 먼저 정의합니다.
@@ -42,7 +44,7 @@ Primitive Token에 정의된 값들을 의미적으로 어떻게 사용할지 �
 primary, secondary, cta 등
 ~~~
 
-### Component-specific Token (미래 확장)
+### Component-specific Token (예정)
 
 특정 컴포넌트에서 사용될 토큰들을 정의합니다. 현재는 foundation 패키지에서 수동으로 관리하며, 향후 자동화 예정입니다.
 
@@ -157,30 +159,30 @@ class BadButton extends StatelessWidget {
 ```
 /wds
 ├── packages/
-│   ├── tokens/                     # [Package] tokens (generated)
-│   │   ├── atomic/                 # Primitive tokens
-│   │   │   ├── color.dart
-│   │   │   ├── typography.dart
-│   │   │   └── atomic.dart         # Export file
-│   │   ├── semantic/               # Semantic tokens  
-│   │   │   ├── color.dart
-│   │   │   ├── typography.dart
-│   │   │   └── semantic.dart       # Export file
-│   │   └── tokens.dart             # Main export file
-│   ├── foundation/                 # [Package] foundation (unified interface)
+│   ├── tokens/                       # [Package] tokens (generated)
+│   │   ├── atomic/                   # Primitive tokens
+│   │   │   ├── wds_atomic_color.dart
+│   │   │   ├── wds_atomic_typography.dart
+│   │   │   └── wds_atomic.dart       # Export file
+│   │   ├── semantic/                 # Semantic tokens  
+│   │   │   ├── wds_semantic_color.dart
+│   │   │   ├── wds_semantic_typography.dart
+│   │   │   └── wds_semantic.dart     # Export file
+│   │   └── tokens.dart               # Main export file
+│   ├── foundation/                   # [Package] foundation (unified interface)
 │   │   ├── lib/
-│   │   │   ├── colors.dart         # WdsColors - unified color interface
-│   │   │   ├── typography.dart     # WdsTypography - unified typography interface
-│   │   │   ├── spacing.dart        # WdsSpacing - unified spacing interface  
-│   │   │   └── wds_foundation.dart # Main export file
+│   │   │   ├── wds_colors.dart       # WdsColors - unified color interface
+│   │   │   ├── wds_typography.dart   # WdsTypography - unified typography interface
+│   │   │   ├── wds_spacing.dart      # WdsSpacing - unified spacing interface  
+│   │   │   └── wds_foundation.dart   # Main export file
 │   │   └── pubspec.yaml
-│   ├── components/                 # [Package] components
-│   ├── widgetbook/                 # [Package] widgetbook
+│   ├── components/                   # [Package] components
+│   ├── widgetbook/                   # [Package] widgetbook
 ├── tools/
-│   └── token_generator/            # [Package] JSON to Dart generator
+│   └── token_generator/              # [Package] JSON to Dart generator
 ├── tokens/
-│   ├── design_system_atomic.json   # Primitive tokens from Figma
-│   └── design_system_semantic.json # Semantic tokens from Figma
+│   ├── design_system_atomic.json     # Primitive tokens from Figma
+│   └── design_system_semantic.json   # Semantic tokens from Figma
 ```
 
 ## Foundation 패키지 역할
@@ -197,8 +199,8 @@ foundation 패키지는 tokens 패키지에서 생성된 atomic, semantic 토큰
 
 ```dart
 // foundation/lib/colors.dart
-import 'package:wds_tokens/atomic/color.dart';
-import 'package:wds_tokens/semantic/color.dart';
+import 'package:wds_tokens/atomic/wds_color.dart' as atomic;
+import 'package:wds_tokens/semantic/wds_color.dart' as semantic;
 
 /// WDS 컬러 시스템 통합 인터페이스
 /// 
@@ -206,12 +208,12 @@ import 'package:wds_tokens/semantic/color.dart';
 class WdsColors {
   const WdsColors._();
 
-  // Semantic colors (주요 사용)
-  static const Color primary = WdsSemanticColorPrimary;
-  static const Color cta = WdsSemanticColorCta;
-  static const Color secondary = WdsSemanticColorSecondary;
+  // Semantic colors
+  static const Color primary = semantic.$primary;
+  static const Color cta = semantic.$cta;
+  static const Color secondary = semantic.$secondary;
   
-  // Atomic colors (필요시 접근)
+  // Atomic colors
   static const Color blue50 = WdsColorBlue.v50;
   static const Color blue400 = WdsColorBlue.v400;
   static const Color neutral900 = WdsColorNeutral.v900;
@@ -225,20 +227,20 @@ class WdsColors {
 
 ```dart
 // foundation/lib/typography.dart  
-import 'package:wds_tokens/atomic/atomic.dart';
-import 'package:wds_tokens/semantic/typography.dart';
+import 'package:wds_tokens/atomic/wds_atomic.dart';
+import 'package:wds_tokens/semantic/wds_typography.dart';
 
 /// WDS 타이포그래피 시스템 통합 인터페이스
 class WdsTypography {
   const WdsTypography._();
 
   // Semantic typography
-  static const TextStyle heading18Bold = WdsSemanticTypographyHeading18Bold;
-  static const TextStyle body15Medium = WdsSemanticTypographyBody15Medium;
+  static const TextStyle heading18Bold = WdsSemanticTypography.heading18Bold;
+  static const TextStyle body15Medium = WdsSemanticTypography.body15Medium;
   
-  // Component-specific typography (미래 확장)
-  // static const TextStyle buttonLabel = body15Medium;
-  // static const TextStyle inputLabel = WdsSemanticTypographyCaption12Regular;
+  // Component-specific typography (확장 예정)
+  // static const TextStyle buttonLabel = WdsSemanticTypography.body15Medium;
+  // static const TextStyle inputLabel = WdsSemanticTypography.caption12Regular;
 }
 ```
 
@@ -268,8 +270,8 @@ class WdsButton extends StatelessWidget {
 ```dart
 // ❌ 금지된 사용법
 // components/lib/button/button.dart
-import 'package:wds_tokens/atomic/color.dart';       // ❌ tokens 직접 import 금지
-import 'package:wds_tokens/semantic/color.dart';     // ❌ tokens 직접 import 금지
+import 'package:wds_tokens/atomic/wds_color.dart';       // ❌ tokens 직접 import 금지
+import 'package:wds_tokens/semantic/wds_color.dart';     // ❌ tokens 직접 import 금지
 
 class WdsButton extends StatelessWidget {
   @override
@@ -293,7 +295,9 @@ class WdsButton extends StatelessWidget {
 ## 개발 워크플로우
 
 ### 디자인 토큰 업데이트 시
-1. **JSON 파일 수정** (`design_system_atomic.json`, `design_system_semantic.json`)
+1. **JSON 파일 수정** 
+  - `design_system_atomic.json`
+  - `design_system_semantic.json`
 2. **token_generator 실행**하여 tokens 패키지 업데이트
 3. **foundation 패키지의 통합 인터페이스 클래스들 수동 업데이트**
    - `WdsColors`, `WdsTypography`, `WdsSpacing` 등
@@ -329,7 +333,7 @@ packages:
 ## 패키지 표준화
 
 - `packages/tokens`는 Flutter 패키지이며, 생성 산출물은 반드시 `lib/` 하위에 생성/배치됩니다.
-  - `lib/atomic/color.dart`, `lib/semantic/typography.dart` 등
+  - `lib/atomic/wds_atomic_color.dart`, `lib/semantic/wds_semantic_typography.dart` 등
 - `packages/foundation`은 Flutter 패키지이며, tokens 패키지에 의존합니다.
 - `packages/components`는 Flutter 패키지이며, foundation 패키지에만 의존합니다.
 - `packages/widgetbook`는 Flutter 패키지이며 `widgetbook` 의존성을 사용합니다.

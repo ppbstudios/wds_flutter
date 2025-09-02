@@ -3,6 +3,7 @@
 ## 개요
 
 token_generator를 통해 JSON 데이터를 순수 Dart 코드로 변환하여 primitive(atomic), semantic 디자인 토큰을 생성합니다.
+foundation은 개발자가 수작업으로 구현합니다.
 
 ### 입력 파일
 | 파일명 | 역할 | 출처 |
@@ -13,10 +14,8 @@ token_generator를 통해 JSON 데이터를 순수 Dart 코드로 변환하여 p
 ### 출력 구조
 | 토큰 레벨 | 생성 위치 | 관리 방식 | 설명 |
 |----------|----------|----------|------|
-| Atomic | `tokens/atomic/` | 자동 생성 | 원시 디자인 값들 |
-| Semantic | `tokens/semantic/` | 자동 생성 | 의미적 토큰들 |
-| Foundation | `foundation/lib/` | 수작업 | 통합 인터페이스 클래스 |
-| Component-specific | `foundation/lib/` | 수작업 | 필요시 추가 토큰 |
+| Atomic | `tokens/lib/atomic/` | 자동 생성 | 원시 디자인 값들 |
+| Semantic | `tokens/lib/semantic/` | 자동 생성 | 의미적 토큰들 |
 
 ### 패키지 연동 구조
 ```
@@ -55,6 +54,7 @@ JSON → tokens(자동생성) → foundation(수작업) → components(사용)
 class WdsColorBlue {
   const WdsColorBlue._();
   
+  static const Color v5 = Color(0xFFF9EDCE);
   static const Color v50 = Color(0xFFE6EBFD);
   static const Color v100 = Color(0xFFCDD8FF);
 }
@@ -64,18 +64,18 @@ class WdsColorBlue {
 
 | 파일 구조 | 파일 내용 |
 |-----------|----------|
-| `color/wds_color_blue.dart` | `part of '../color.dart';` |
-| `color/wds_color_pink.dart` | `part of '../color.dart';` |
-| `color.dart` | 메인 라이브러리 + part 선언 |
+| `color/wds_atomic_color_blue.dart` | `part of '../wds_atomic_color.dart';` |
+| `color/wds_atomic_color_pink.dart` | `part of '../wds_atomic_color.dart';` |
+| `wds_atomic_color.dart` | 메인 라이브러리 + part 선언 |
 
 ```dart
-// color.dart
+// wds_atomic_color.dart
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 import "package:flutter/widgets.dart";
 
-part 'color/wds_color_blue.dart';
-part 'color/wds_color_pink.dart';
+part 'color/wds_atomic_color_blue.dart';
+part 'color/wds_atomic_color_pink.dart';
 ```
 
 ## 패키지 Import 가이드
@@ -87,40 +87,38 @@ part 'color/wds_color_pink.dart';
 | Color 클래스 필요 | `package:flutter/material.dart` | Color 클래스 사용 |
 | 복잡한 위젯 (TabBar 등) | `package:flutter/material.dart` | 선별적 Material 사용 |
 
-## Foundation 패키지 관리(수작업)
-
-foundation 패키지의 통합 인터페이스(`colors.dart`, `typography.dart`, `spacing.dart`, `radius.dart`, `opacity.dart`, `wds_foundation.dart`)는 자동 생성하지 않습니다. tokens 패키지 변경 후 수작업으로 갱신하세요.
 
 ## Atomic 토큰 생성 규칙
 
 ### 파일 구조
 ```
 atomic/
-├── color.dart          # 메인 라이브러리
-├── color/              # Part 파일들
-├── font.dart
-├── opacity.dart
-├── radius.dart
-├── spacing.dart
-└── atomic.dart         # Export 파일
+├── wds_atomic_color/                # Part 파일들
+├── wds_atomic_color.dart            # 메인 라이브러리
+├── wds_atomic_font/                 # Part 파일들
+├── wds_atomic_font.dart             # 메인 라이브러리
+├── wds_atomic_opacity.dart
+├── wds_atomic_radius.dart
+├── wds_atomic_space.dart
+└── wds_atomic.dart                  # Export 파일
 ```
 
 ### atomic.dart 구조
 ```dart
 library;
 
-export 'color.dart';
-export 'font.dart';
-export 'radius.dart';
-export 'opacity.dart';
-export 'spacing.dart';
+export 'wds_atomic_color.dart';
+export 'wds_atomic_font.dart';
+export 'wds_atomic_radius.dart';
+export 'wds_atomic_opacity.dart';
+export 'wds_atomic_space.dart';
 ```
 
 ### 생성 규칙
 | 규칙 | 적용 방법 |
 |------|----------|
 | 파일명 | `.g.dart` 사용하지 않음 |
-| 클래스명 | `WdsColor{그룹명}` 형태 |
+| 클래스명 | `WdsAtomicColor{그룹명}` 형태 |
 | 집계 클래스 | 생성하지 않음 (part만 생성) |
 
 ## 타입 변환 규칙
@@ -210,36 +208,39 @@ BoxShadow(
 ## Semantic 토큰 생성 규칙
 
 ### 생성 조건
-- Atomic 토큰 생성 완료 후 진행
+- [필수] Atomic 토큰 생성 완료 후 진행
 - Semantic의 `$value`는 primitive 토큰 참조
+- 별도 그룹 없이 단일 객체인 경우 `$type`에 맞는 파일에 변수로 생성
+  - `const Color $cta = WdsAtomicColorNeutral.v900`;
+  - 변수명 앞에 `$` prefix 붙이기
 
 ### Color 토큰 예시
 
 #### 입력 JSON
 ```json
 {
-  "Primary": {
+  "primary": {
     "$type": "color",
-    "$value": "{color.Neutral.900}"
+    "$value": "{color.blue.400}"
   }
 }
 ```
 
 #### 생성 결과
 ```dart
-// semantic/color.dart
+// semantic/wds_semantic_color.dart
 import "package:flutter/material.dart";
-import "../atomic/color.dart";
+import "../atomic/wds_atomic_color.dart";
 
-const Color cta = WdsColorNeutral.v900;
-const Color primary = WdsColorBlue.v400;
-const Color secondary = WdsColorPink.v500;
+const Color $cta = WdsAtomicColorNeutral.v900;
+const Color $primary = WdsAtomicColorBlue.v400;
+const Color $secondary = WdsAtomicColorPink.v500;
 ```
 
 #### 하위 깊이가 있는 경우
 ```dart
 // semantic/color/wds_semantic_color_background.dart
-part of '../color.dart';
+part of '../wds_semantic_color.dart';
 
 class WdsSemanticColorBackground {
   const WdsSemanticColorBackground._();
@@ -254,9 +255,9 @@ class WdsSemanticColorBackground {
 #### 구성 요소
 | 속성 | 타입 | 매핑 |
 |------|------|------|
-| `family` | `text` | `WdsFontFamily.pretendard` |
-| `weight` | `number` | `WdsFontWeight.bold` |
-| `size` | `number` | `WdsFontSize.v18` |
+| `family` | `text` | `WdsAtomicFontFamily.pretendard` |
+| `weight` | `number` | `WdsAtomicFontWeight.bold` |
+| `size` | `number` | `WdsAtomicFontSize.v18` |
 | `lineHeight` | `number` | `height` 계산 (배수) |
 | `letterSpacing` | `number` | 픽셀 또는 em 단위 |
 
@@ -268,10 +269,10 @@ class WdsSemanticTypography {
   const WdsSemanticTypography._();
   
   static const TextStyle bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v18,
-    height: WdsFontLineHeight.v26 / WdsFontSize.v18, // 배수 계산
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v18,
+    height: WdsAtomicFontLineHeight.v26 / WdsAtomicFontSize.v18, // 배수 계산
     letterSpacing: -0.024, // -2.4% → -0.024
   );
 }
@@ -286,6 +287,7 @@ class WdsSemanticTypography {
 ### Body 계열 예외 처리
 
 일반 구조는 2단계 (`Heading18 > bold`), Body는 3단계 허용 (`Body15 > Normal > bold`)
+- Body는 Reading, Normal 로 분류됨
 
 #### 예시 JSON
 ```json
@@ -314,11 +316,11 @@ class WdsSemanticTypography {
 
 ### Export 구조
 ```dart
-// semantic/semantic.dart
+// semantic/wds_semantic.dart
 library;
 
-export 'color.dart';
-export 'typography.dart';
+export 'wds_semantic_color.dart';
+export 'wds_semantic_typography.dart';
 ```
 
 ## Foundation 패키지 연동
@@ -370,13 +372,13 @@ class WdsButton extends StatelessWidget {
 #### 금지된 사용법
 ```dart
 // ❌ tokens 직접 접근
-import 'package:wds_tokens/atomic/color.dart';  // 직접 import 금지
+import 'package:wds_tokens/atomic/wds_atomic_color.dart';  // 직접 import 금지
 
 class BadButton extends StatelessWidget {
   @override  // const 생성자 누락
   Widget build(BuildContext context) {
     return Container(  // Container 남용
-      color: WdsColorBlue.v400,  // tokens 직접 사용 금지
+      color: WdsAtomicColorBlue.v400,  // tokens 직접 사용 금지
     );
   }
 }
