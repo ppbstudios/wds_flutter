@@ -4,8 +4,8 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 part of '../wds_atomic_font.dart';
 
-class WdsFontWeight {
-  const WdsFontWeight._();
+class WdsAtomicFontWeight {
+  const WdsAtomicFontWeight._();
   static const FontWeight bold = FontWeight.w600;
   static const FontWeight extraBold = FontWeight.w800;
   static const FontWeight medium = FontWeight.w500;

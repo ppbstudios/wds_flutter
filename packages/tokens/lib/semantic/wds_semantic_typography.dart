@@ -10,285 +10,285 @@ import '../atomic/atomic.dart';
 class WdsSemanticTypography {
   const WdsSemanticTypography._();
   static const TextStyle heading18ExtraBold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.extraBold,
-    fontSize: WdsFontSize.v18,
-    height: (WdsFontLineHeight.v26) / (WdsFontSize.v18),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.extraBold,
+    fontSize: WdsAtomicFontSize.v18,
+    height: (WdsAtomicFontLineHeight.v26) / (WdsAtomicFontSize.v18),
   );
   static const TextStyle heading18Bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v18,
-    height: (WdsFontLineHeight.v26) / (WdsFontSize.v18),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v18,
+    height: (WdsAtomicFontLineHeight.v26) / (WdsAtomicFontSize.v18),
   );
   static const TextStyle heading18Medium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v18,
-    height: (WdsFontLineHeight.v26) / (WdsFontSize.v18),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v18,
+    height: (WdsAtomicFontLineHeight.v26) / (WdsAtomicFontSize.v18),
   );
   static const TextStyle heading18Regular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v18,
-    height: (WdsFontLineHeight.v26) / (WdsFontSize.v18),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v18,
+    height: (WdsAtomicFontLineHeight.v26) / (WdsAtomicFontSize.v18),
   );
   static const TextStyle title32Medium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v32,
-    height: (WdsFontLineHeight.v42) / (WdsFontSize.v32),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v32,
+    height: (WdsAtomicFontLineHeight.v42) / (WdsAtomicFontSize.v32),
   );
   static const TextStyle title32Bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v32,
-    height: (WdsFontLineHeight.v42) / (WdsFontSize.v32),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v32,
+    height: (WdsAtomicFontLineHeight.v42) / (WdsAtomicFontSize.v32),
   );
   static const TextStyle title32Regular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v32,
-    height: (WdsFontLineHeight.v42) / (WdsFontSize.v32),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v32,
+    height: (WdsAtomicFontLineHeight.v42) / (WdsAtomicFontSize.v32),
   );
   static const TextStyle title22Bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v22,
-    height: (WdsFontLineHeight.v30) / (WdsFontSize.v22),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v22,
+    height: (WdsAtomicFontLineHeight.v30) / (WdsAtomicFontSize.v22),
   );
   static const TextStyle title22Medium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v22,
-    height: (WdsFontLineHeight.v30) / (WdsFontSize.v22),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v22,
+    height: (WdsAtomicFontLineHeight.v30) / (WdsAtomicFontSize.v22),
   );
   static const TextStyle title22Regular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v22,
-    height: (WdsFontLineHeight.v30) / (WdsFontSize.v22),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v22,
+    height: (WdsAtomicFontLineHeight.v30) / (WdsAtomicFontSize.v22),
   );
   static const TextStyle title20Bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v20,
-    height: (WdsFontLineHeight.v28) / (WdsFontSize.v20),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v20,
+    height: (WdsAtomicFontLineHeight.v28) / (WdsAtomicFontSize.v20),
   );
   static const TextStyle title20Medium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v20,
-    height: (WdsFontLineHeight.v28) / (WdsFontSize.v20),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v20,
+    height: (WdsAtomicFontLineHeight.v28) / (WdsAtomicFontSize.v20),
   );
   static const TextStyle title20Regular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v20,
-    height: (WdsFontLineHeight.v28) / (WdsFontSize.v20),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v20,
+    height: (WdsAtomicFontLineHeight.v28) / (WdsAtomicFontSize.v20),
   );
   static const TextStyle heading17ExtraBold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.extraBold,
-    fontSize: WdsFontSize.v17,
-    height: (WdsFontLineHeight.v24) / (WdsFontSize.v17),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.extraBold,
+    fontSize: WdsAtomicFontSize.v17,
+    height: (WdsAtomicFontLineHeight.v24) / (WdsAtomicFontSize.v17),
   );
   static const TextStyle heading17Bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v17,
-    height: (WdsFontLineHeight.v24) / (WdsFontSize.v17),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v17,
+    height: (WdsAtomicFontLineHeight.v24) / (WdsAtomicFontSize.v17),
   );
   static const TextStyle heading17Medium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v17,
-    height: (WdsFontLineHeight.v24) / (WdsFontSize.v17),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v17,
+    height: (WdsAtomicFontLineHeight.v24) / (WdsAtomicFontSize.v17),
   );
   static const TextStyle heading17Regular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v17,
-    height: (WdsFontLineHeight.v24) / (WdsFontSize.v17),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v17,
+    height: (WdsAtomicFontLineHeight.v24) / (WdsAtomicFontSize.v17),
   );
   static const TextStyle heading16Bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v16,
-    height: (WdsFontLineHeight.v24) / (WdsFontSize.v16),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v16,
+    height: (WdsAtomicFontLineHeight.v24) / (WdsAtomicFontSize.v16),
   );
   static const TextStyle heading16Medium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v16,
-    height: (WdsFontLineHeight.v24) / (WdsFontSize.v16),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v16,
+    height: (WdsAtomicFontLineHeight.v24) / (WdsAtomicFontSize.v16),
   );
   static const TextStyle heading16Regular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v16,
-    height: (WdsFontLineHeight.v24) / (WdsFontSize.v16),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v16,
+    height: (WdsAtomicFontLineHeight.v24) / (WdsAtomicFontSize.v16),
   );
   static const TextStyle body15NormalBold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v15,
-    height: (WdsFontLineHeight.v22) / (WdsFontSize.v15),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v15,
+    height: (WdsAtomicFontLineHeight.v22) / (WdsAtomicFontSize.v15),
   );
   static const TextStyle body15NormalMedium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v15,
-    height: (WdsFontLineHeight.v22) / (WdsFontSize.v15),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v15,
+    height: (WdsAtomicFontLineHeight.v22) / (WdsAtomicFontSize.v15),
   );
   static const TextStyle body15NormalRegular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v15,
-    height: (WdsFontLineHeight.v22) / (WdsFontSize.v15),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v15,
+    height: (WdsAtomicFontLineHeight.v22) / (WdsAtomicFontSize.v15),
   );
   static const TextStyle body15ReadingBold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v15,
-    height: (WdsFontLineHeight.v24) / (WdsFontSize.v15),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v15,
+    height: (WdsAtomicFontLineHeight.v24) / (WdsAtomicFontSize.v15),
   );
   static const TextStyle body15ReadingMedium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v15,
-    height: (WdsFontLineHeight.v24) / (WdsFontSize.v15),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v15,
+    height: (WdsAtomicFontLineHeight.v24) / (WdsAtomicFontSize.v15),
   );
   static const TextStyle body15ReadingRegular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v15,
-    height: (WdsFontLineHeight.v24) / (WdsFontSize.v15),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v15,
+    height: (WdsAtomicFontLineHeight.v24) / (WdsAtomicFontSize.v15),
   );
   static const TextStyle body14NormalBold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v14,
-    height: (WdsFontLineHeight.v20) / (WdsFontSize.v14),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v14,
+    height: (WdsAtomicFontLineHeight.v20) / (WdsAtomicFontSize.v14),
   );
   static const TextStyle body14NormalMedium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v14,
-    height: (WdsFontLineHeight.v20) / (WdsFontSize.v14),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v14,
+    height: (WdsAtomicFontLineHeight.v20) / (WdsAtomicFontSize.v14),
   );
   static const TextStyle body14NormalRegular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v14,
-    height: (WdsFontLineHeight.v20) / (WdsFontSize.v14),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v14,
+    height: (WdsAtomicFontLineHeight.v20) / (WdsAtomicFontSize.v14),
   );
   static const TextStyle body14ReadingBold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v14,
-    height: (WdsFontLineHeight.v22) / (WdsFontSize.v14),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v14,
+    height: (WdsAtomicFontLineHeight.v22) / (WdsAtomicFontSize.v14),
   );
   static const TextStyle body14ReadingMedium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v14,
-    height: (WdsFontLineHeight.v22) / (WdsFontSize.v14),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v14,
+    height: (WdsAtomicFontLineHeight.v22) / (WdsAtomicFontSize.v14),
   );
   static const TextStyle body14ReadingRegular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v14,
-    height: (WdsFontLineHeight.v22) / (WdsFontSize.v14),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v14,
+    height: (WdsAtomicFontLineHeight.v22) / (WdsAtomicFontSize.v14),
   );
   static const TextStyle body13NormalBold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v13,
-    height: (WdsFontLineHeight.v18) / (WdsFontSize.v13),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v13,
+    height: (WdsAtomicFontLineHeight.v18) / (WdsAtomicFontSize.v13),
   );
   static const TextStyle body13NormalMedium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v13,
-    height: (WdsFontLineHeight.v18) / (WdsFontSize.v13),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v13,
+    height: (WdsAtomicFontLineHeight.v18) / (WdsAtomicFontSize.v13),
   );
   static const TextStyle body13NormalRegular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v13,
-    height: (WdsFontLineHeight.v18) / (WdsFontSize.v13),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v13,
+    height: (WdsAtomicFontLineHeight.v18) / (WdsAtomicFontSize.v13),
   );
   static const TextStyle body13ReadingBold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v13,
-    height: (WdsFontLineHeight.v20) / (WdsFontSize.v13),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v13,
+    height: (WdsAtomicFontLineHeight.v20) / (WdsAtomicFontSize.v13),
   );
   static const TextStyle body13ReadingMedium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v13,
-    height: (WdsFontLineHeight.v20) / (WdsFontSize.v13),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v13,
+    height: (WdsAtomicFontLineHeight.v20) / (WdsAtomicFontSize.v13),
   );
   static const TextStyle body13ReadingRegular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v13,
-    height: (WdsFontLineHeight.v20) / (WdsFontSize.v13),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v13,
+    height: (WdsAtomicFontLineHeight.v20) / (WdsAtomicFontSize.v13),
   );
   static const TextStyle caption12Bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v12,
-    height: (WdsFontLineHeight.v16) / (WdsFontSize.v12),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v12,
+    height: (WdsAtomicFontLineHeight.v16) / (WdsAtomicFontSize.v12),
   );
   static const TextStyle caption12Medium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v12,
-    height: (WdsFontLineHeight.v16) / (WdsFontSize.v12),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v12,
+    height: (WdsAtomicFontLineHeight.v16) / (WdsAtomicFontSize.v12),
   );
   static const TextStyle caption12Regular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v12,
-    height: (WdsFontLineHeight.v16) / (WdsFontSize.v12),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v12,
+    height: (WdsAtomicFontLineHeight.v16) / (WdsAtomicFontSize.v12),
   );
   static const TextStyle caption11Bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v11,
-    height: (WdsFontLineHeight.v14) / (WdsFontSize.v11),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v11,
+    height: (WdsAtomicFontLineHeight.v14) / (WdsAtomicFontSize.v11),
   );
   static const TextStyle caption11Medium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v11,
-    height: (WdsFontLineHeight.v14) / (WdsFontSize.v11),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v11,
+    height: (WdsAtomicFontLineHeight.v14) / (WdsAtomicFontSize.v11),
   );
   static const TextStyle caption11Regular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v11,
-    height: (WdsFontLineHeight.v14) / (WdsFontSize.v11),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v11,
+    height: (WdsAtomicFontLineHeight.v14) / (WdsAtomicFontSize.v11),
   );
   static const TextStyle caption10Bold = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.bold,
-    fontSize: WdsFontSize.v10,
-    height: (WdsFontLineHeight.v13) / (WdsFontSize.v10),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.bold,
+    fontSize: WdsAtomicFontSize.v10,
+    height: (WdsAtomicFontLineHeight.v13) / (WdsAtomicFontSize.v10),
   );
   static const TextStyle caption10Medium = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.medium,
-    fontSize: WdsFontSize.v10,
-    height: (WdsFontLineHeight.v13) / (WdsFontSize.v10),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.medium,
+    fontSize: WdsAtomicFontSize.v10,
+    height: (WdsAtomicFontLineHeight.v13) / (WdsAtomicFontSize.v10),
   );
   static const TextStyle caption10Regular = TextStyle(
-    fontFamily: WdsFontFamily.pretendard,
-    fontWeight: WdsFontWeight.regular,
-    fontSize: WdsFontSize.v10,
-    height: (WdsFontLineHeight.v13) / (WdsFontSize.v10),
+    fontFamily: WdsAtomicFontFamily.pretendard,
+    fontWeight: WdsAtomicFontWeight.regular,
+    fontSize: WdsAtomicFontSize.v10,
+    height: (WdsAtomicFontLineHeight.v13) / (WdsAtomicFontSize.v10),
   );
 }

@@ -4,8 +4,8 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 part of '../wds_atomic_font.dart';
 
-class WdsFontSize {
-  const WdsFontSize._();
+class WdsAtomicFontSize {
+  const WdsAtomicFontSize._();
   static const double v10 = 10;
   static const double v11 = 11;
   static const double v12 = 12;

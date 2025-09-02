@@ -4,7 +4,7 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 part of '../wds_atomic_font.dart';
 
-class WdsFontFamily {
-  const WdsFontFamily._();
+class WdsAtomicFontFamily {
+  const WdsAtomicFontFamily._();
   static const String pretendard = 'Pretendard';
 }
