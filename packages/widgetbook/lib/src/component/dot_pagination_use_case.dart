@@ -57,11 +57,11 @@ Widget _buildPlaygroundSection(BuildContext context) {
 }
 
 Widget _buildDemonstrationSection(BuildContext context) {
-  return WidgetbookSection(
+  return const WidgetbookSection(
     title: 'PaginationDot',
     spacing: 32,
     children: [
-      const WidgetbookSubsection(
+      WidgetbookSubsection(
         title: 'state',
         labels: ['active', 'inactive'],
         content: Row(
@@ -70,54 +70,6 @@ Widget _buildDemonstrationSection(BuildContext context) {
           children: [
             WdsDotPagination(isActive: true),
             WdsDotPagination(isActive: false),
-          ],
-        ),
-      ),
-      WidgetbookSubsection(
-        title: 'usage examples',
-        labels: ['2 dots', '3 dots', '5 dots', '10 dots'],
-        content: Column(
-          spacing: 16,
-          children: [
-            // 2 dots
-            const Row(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 8,
-              children: [
-                WdsDotPagination(isActive: true),
-                WdsDotPagination(isActive: false),
-              ],
-            ),
-            // 3 dots
-            const Row(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 8,
-              children: [
-                WdsDotPagination(isActive: true),
-                WdsDotPagination(isActive: false),
-                WdsDotPagination(isActive: false),
-              ],
-            ),
-            // 5 dots
-            const Row(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 8,
-              children: [
-                WdsDotPagination(isActive: false),
-                WdsDotPagination(isActive: false),
-                WdsDotPagination(isActive: true),
-                WdsDotPagination(isActive: false),
-                WdsDotPagination(isActive: false),
-              ],
-            ),
-            // 10 dots
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 8,
-              children: List.generate(10, (index) {
-                return WdsDotPagination(isActive: index == 4);
-              }),
-            ),
           ],
         ),
       ),
