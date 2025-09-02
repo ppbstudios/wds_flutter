@@ -40,7 +40,7 @@ String? _resolveTypographyWeight(dynamic node) {
       weight = v.toInt();
     }
   }
-  return weight != null ? 'FontWeight.w$weight' : null;
+  return weight != null ? 'FontWeight.w$weight' : 'FontWeight.w400';
 }
 
 String? _resolveTypographyNumberClassed(dynamic node, String className) {
@@ -136,8 +136,8 @@ Future<void> _syncSemanticOutputs({
   final semanticDir = Directory(p.join(outDir, 'lib', 'semantic'));
   final semanticIndex = StringBuffer()
     ..writeln('library;')
-    ..writeln("export 'color.dart';")
-    ..writeln("export 'typography.dart';");
+    ..writeln("export 'wds_semantic_color.dart';")
+    ..writeln("export 'wds_semantic_typography.dart';");
   final semanticIndexFile = File(p.join(semanticDir.path, 'semantic.dart'));
   await semanticIndexFile.create(recursive: true);
   await semanticIndexFile.writeAsString(semanticIndex.toString());

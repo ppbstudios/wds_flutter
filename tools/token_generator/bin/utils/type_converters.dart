@@ -90,7 +90,7 @@ String? _convertLetterSpacingValue(dynamic value) => switch (value) {
       String s when s.endsWith('%') => () {
           final percentValue = double.tryParse(s.replaceAll('%', ''));
           return percentValue != null
-              ? ((percentValue / 100.0) * 16.0).toString()
+              ? (percentValue / 100.0).toString()
               : null;
         }(),
       String s when double.tryParse(s) != null => double.parse(s).toString(),
@@ -146,7 +146,7 @@ String? _convertSemanticColorValue(dynamic raw) {
         if (parts.length == 3) {
           final group = parts[1];
           final key = parts[2];
-          final className = 'WdsColor${_pascalCase(group)}';
+          final className = 'WdsAtomicColor${_pascalCase(group)}';
           final tokenField = _identifierFromKey(key);
           return '$className.$tokenField';
         } else if (parts.length == 2) {

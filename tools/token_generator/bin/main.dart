@@ -191,7 +191,7 @@ Future<void> _generateSemantic({
         final cb = StringBuffer()
           ..writeln(_generatedHeader)
           ..writeln(_ignoreForFile)
-          ..writeln("part of '../color.dart';")
+          ..writeln("part of '../wds_semantic_color.dart';")
           ..writeln()
           ..writeln('class $className {')
           ..writeln('  const $className._();');
@@ -229,7 +229,7 @@ Future<void> _generateSemantic({
       ..writeln(_generatedHeader)
       ..writeln(_ignoreForFile)
       ..writeln('import "package:flutter/material.dart";')
-      ..writeln('import "../atomic/color.dart";')
+      ..writeln('import "../atomic/atomic.dart";')
       ..writeln();
     for (final meta in partsMeta) {
       colorLib.writeln("part '${meta.$3}';");
@@ -245,7 +245,8 @@ Future<void> _generateSemantic({
     }
     // 그룹 클래스는 part 파일로만 제공
 
-    final colorLibFile = File(p.join(semanticDir.path, 'color.dart'));
+    final colorLibFile =
+        File(p.join(semanticDir.path, 'wds_semantic_color.dart'));
     await colorLibFile.create(recursive: true);
     await colorLibFile.writeAsString(colorLib.toString());
     state.generatedSemanticColor = true;
@@ -371,7 +372,7 @@ Future<void> _generateSemantic({
     }
 
     sb.writeln('}');
-    final file = File(p.join(semanticDir.path, 'typography.dart'));
+    final file = File(p.join(semanticDir.path, 'wds_semantic_typography.dart'));
     await file.create(recursive: true);
     await file.writeAsString(sb.toString());
     state.generatedSemanticTypography = true;

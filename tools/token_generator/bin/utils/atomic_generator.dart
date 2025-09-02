@@ -233,7 +233,7 @@ Future<void> _generateColorLibrary({
   required Set<String> generatedPartBasenames,
 }) async {
   final atomicDir = Directory(p.join(outDir, 'lib', 'atomic'));
-  final colorDir = Directory(p.join(atomicDir.path, 'color'));
+  final colorDir = Directory(p.join(atomicDir.path, 'wds_atomic_color'));
   await colorDir.create(recursive: true);
 
   final keys = rootMap.keys.toList()
@@ -255,19 +255,19 @@ Future<void> _generateColorLibrary({
 
     final classNameBase = _pascalCase(key);
     if (classNameBase.isEmpty) continue;
-    final className = 'WdsColor$classNameBase';
+    final className = 'WdsAtomicColor$classNameBase';
     if (!generatedClassNames.add(className)) {
       continue;
     }
 
     final fieldName = _camelCase(key);
-    final partFileName = 'wds_color_${_toSnake(key)}.dart';
-    final partRelativePath = 'color/$partFileName';
+    final partFileName = 'wds_atomic_color_${_toSnake(key)}.dart';
+    final partRelativePath = 'wds_atomic_color/$partFileName';
 
     final cb = StringBuffer()
       ..writeln(_generatedHeader)
       ..writeln(_ignoreForFile)
-      ..writeln("part of '../color.dart';")
+      ..writeln("part of '../wds_atomic_color.dart';")
       ..writeln()
       ..writeln('class $className {')
       ..writeln('  const $className._();');
@@ -347,7 +347,7 @@ Future<void> _generateColorLibrary({
     }
   }
 
-  final colorLibFile = File(p.join(atomicDir.path, 'color.dart'));
+  final colorLibFile = File(p.join(atomicDir.path, 'wds_atomic_color.dart'));
   await colorLibFile.create(recursive: true);
   await colorLibFile.writeAsString(libBuf.toString());
   if (verbose) stdout.writeln('생성 완료: ${colorLibFile.path}');
@@ -361,7 +361,7 @@ Future<void> _generateFontLibrary({
   required Set<String> generatedPartBasenames,
 }) async {
   final atomicDir = Directory(p.join(outDir, 'lib', 'atomic'));
-  final fontDir = Directory(p.join(atomicDir.path, 'font'));
+  final fontDir = Directory(p.join(atomicDir.path, 'wds_atomic_font'));
   await fontDir.create(recursive: true);
 
   final keys = rootMap.keys.toList()
@@ -386,13 +386,13 @@ Future<void> _generateFontLibrary({
     if (classNameBase.isEmpty) continue;
     final className = 'WdsFont$classNameBase';
     final fieldName = _camelCase(key);
-    final partFileName = 'wds_font_${_toSnake(key)}.dart';
-    final partRelativePath = 'font/$partFileName';
+    final partFileName = 'wds_atomic_font_${_toSnake(key)}.dart';
+    final partRelativePath = 'wds_atomic_font/$partFileName';
 
     final cb = StringBuffer()
       ..writeln(_generatedHeader)
       ..writeln(_ignoreForFile)
-      ..writeln("part of '../font.dart';")
+      ..writeln("part of '../wds_atomic_font.dart';")
       ..writeln()
       ..writeln('class $className {')
       ..writeln('  const $className._();');
@@ -444,7 +444,7 @@ Future<void> _generateFontLibrary({
     libBuf.writeln("part '${meta.$3}';");
   }
 
-  final fontLibFile = File(p.join(atomicDir.path, 'font.dart'));
+  final fontLibFile = File(p.join(atomicDir.path, 'wds_atomic_font.dart'));
   await fontLibFile.create(recursive: true);
   await fontLibFile.writeAsString(libBuf.toString());
   if (verbose) stdout.writeln('생성 완료: ${fontLibFile.path}');
@@ -463,10 +463,20 @@ Future<void> _syncAtomicOutputs({
         final name = p.basename(entity.path);
         final isAtomic =
             name.startsWith('wds_atomic_') && name.endsWith('.dart');
-        final isLegacy =
+        final isLegacyGenerated =
             name.startsWith('wds_atomic_') && name.endsWith('.g.dart');
-        if ((isAtomic && !state.generatedBasenames.contains(name)) ||
-            isLegacy) {
+
+        // 최신 메인 라이브러리 보존
+        final isNewMainColorLib = name == 'wds_atomic_color.dart';
+        final isNewMainFontLib = name == 'wds_atomic_font.dart';
+        final shouldKeep = (isNewMainColorLib && state.generatedColorLibrary) ||
+            (isNewMainFontLib && state.generatedFontLibrary) ||
+            state.generatedBasenames.contains(name);
+
+        // 구 구조 파일(color.dart, font.dart) 제거
+        final isOldMainLib = name == 'color.dart' || name == 'font.dart';
+
+        if ((isAtomic && !shouldKeep) || isLegacyGenerated || isOldMainLib) {
           await entity.delete();
           if (verbose) stdout.writeln('정리 완료(삭제): ${entity.path}');
         }
@@ -474,13 +484,15 @@ Future<void> _syncAtomicOutputs({
     }
   }
 
-  final colorPartsDir = Directory(p.join(outDir, 'lib', 'atomic', 'color'));
+  final colorPartsDir = Directory(
+    p.join(outDir, 'lib', 'atomic', 'wds_atomic_color'),
+  );
   if (await colorPartsDir.exists()) {
     await for (final entity in colorPartsDir.list(followLinks: false)) {
       if (entity is File) {
         final name = p.basename(entity.path);
         final isGenerated =
-            name.startsWith('wds_color_') && name.endsWith('.dart');
+            name.startsWith('wds_atomic_color_') && name.endsWith('.dart');
         if (isGenerated && !state.generatedColorPartBasenames.contains(name)) {
           await entity.delete();
           if (verbose) stdout.writeln('정리 완료(삭제): ${entity.path}');
@@ -489,13 +501,32 @@ Future<void> _syncAtomicOutputs({
     }
   }
 
-  final fontPartsDir = Directory(p.join(outDir, 'lib', 'atomic', 'font'));
+  // 구 구조 color/ 제거 (wds_color_*)
+  final oldColorDir = Directory(p.join(outDir, 'lib', 'atomic', 'color'));
+  if (await oldColorDir.exists()) {
+    await for (final entity in oldColorDir.list(followLinks: false)) {
+      if (entity is File) {
+        final name = p.basename(entity.path);
+        if (name.startsWith('wds_color_') && name.endsWith('.dart')) {
+          await entity.delete();
+          if (verbose) stdout.writeln('정리 완료(삭제): ${entity.path}');
+        }
+      }
+    }
+    // 폴더 비면 삭제 시도
+    if ((await oldColorDir.list(followLinks: false).length) == 0) {
+      await oldColorDir.delete().catchError((_) {});
+    }
+  }
+
+  final fontPartsDir =
+      Directory(p.join(outDir, 'lib', 'atomic', 'wds_atomic_font'));
   if (await fontPartsDir.exists()) {
     await for (final entity in fontPartsDir.list(followLinks: false)) {
       if (entity is File) {
         final name = p.basename(entity.path);
         final isGenerated =
-            name.startsWith('wds_font_') && name.endsWith('.dart');
+            name.startsWith('wds_atomic_font_') && name.endsWith('.dart');
         if (isGenerated && !state.generatedFontPartBasenames.contains(name)) {
           await entity.delete();
           if (verbose) stdout.writeln('정리 완료(삭제): ${entity.path}');
@@ -504,15 +535,32 @@ Future<void> _syncAtomicOutputs({
     }
   }
 
+  // 구 구조 font/ 제거 (wds_font_*)
+  final oldFontDir = Directory(p.join(outDir, 'lib', 'atomic', 'font'));
+  if (await oldFontDir.exists()) {
+    await for (final entity in oldFontDir.list(followLinks: false)) {
+      if (entity is File) {
+        final name = p.basename(entity.path);
+        if (name.startsWith('wds_font_') && name.endsWith('.dart')) {
+          await entity.delete();
+          if (verbose) stdout.writeln('정리 완료(삭제): ${entity.path}');
+        }
+      }
+    }
+    if ((await oldFontDir.list(followLinks: false).length) == 0) {
+      await oldFontDir.delete().catchError((_) {});
+    }
+  }
+
   final exportsInAtomic = <String>[];
-  if (state.generatedColorLibrary) exportsInAtomic.add('color.dart');
-  if (state.generatedFontLibrary) exportsInAtomic.add('font.dart');
+  if (state.generatedColorLibrary) exportsInAtomic.add('wds_atomic_color.dart');
+  if (state.generatedFontLibrary) exportsInAtomic.add('wds_atomic_font.dart');
   exportsInAtomic.addAll(state.generatedBasenames);
   exportsInAtomic.sort();
   final atomicIndex = StringBuffer()
     ..writeln('library;')
-    ..writeln("export 'color.dart';")
-    ..writeln("export 'font.dart';");
+    ..writeln("export 'wds_atomic_color.dart';")
+    ..writeln("export 'wds_atomic_font.dart';");
   for (final e in exportsInAtomic) {
     if (e.endsWith('.dart') && e.startsWith('wds_atomic_')) {
       atomicIndex.writeln("export '$e';");
