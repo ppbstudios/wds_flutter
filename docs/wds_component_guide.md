@@ -1103,3 +1103,85 @@ WdsRadio<String>.large(
   onChanged: (String? value) => setState(() => selectedValue = value),
 )
 ```
+
+
+## Toast
+
+화면에 잠시 나타났다 사라지는 짧은 알림 메시지로, 사용자가 수행한 작업에 대한 피드백을 제공합니다.
+
+Toast는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+message | `String` | 토스트에 표시될 메시지 내용
+leadingIcon | `WdsIcon?` | 선택사항인 앞쪽 아이콘 (icon variant에서만 사용)
+variant | `WdsToastVariant` | Toast의 표시 형태 (text 또는 icon)
+
+### Toast - variant
+
+정해진 Variant만 사용할 수 있습니다.
+
+- `text`: 텍스트만 표시하는 기본 형태
+- `icon`: 아이콘과 텍스트를 함께 표시하는 형태
+
+### Toast - 고정된 속성
+
+모든 Toast는 동일한 시각적 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+backgroundColor | `WdsColors.cta` (#121212) | 고정
+borderRadius | 8px | 고정
+typography | `WdsTypography.body14NormalMedium` | 
+textColor | `WdsColors.white` (#FFFFFF) |
+padding (outer) | `EdgeInsets.symmetric(horizontal: 16, vertical: 9)` | DecoratedBox 내부
+
+### Toast - layout
+
+variant에 따라 레이아웃 구조가 달라집니다.
+
+**text variant:**
+```
+DecoratedBox > Padding (outer) > Padding (inner) > Text
+```
+
+**icon variant:**
+```
+DecoratedBox > Padding (outer) > Row: (Padding > WdsIcon + Padding > Text)
+```
+
+### Toast - icon 속성 (icon variant)
+
+아이콘이 포함된 경우의 세부 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+iconSize | 24x24 |
+iconColor | `WdsColors.white` (#FFFFFF) |
+iconSpacing | 6px | 아이콘과 텍스트 사이 간격
+iconPadding | `EdgeInsets.symmetric(vertical: 3)` | 아이콘 상하 여백
+
+### Toast - padding
+
+variant에 따른 내부 패딩 구조입니다.
+
+variant | inner padding | 비고
+--- | --- | ---
+text | `EdgeInsets.symmetric(vertical: 5)` | 텍스트 주변 여백
+icon | `EdgeInsets.symmetric(vertical: 3)` (아이콘), `EdgeInsets.symmetric(vertical: 5)` (텍스트) | 각각 독립적 여백
+
+### Toast - 생성 방법
+
+named constructor로 생성할 수 있습니다.
+
+``` dart
+// 텍스트만 표시
+WdsToast.text(message: '저장되었습니다')
+
+// 아이콘과 함께 표시
+WdsToast.icon(
+  message: '작업이 완료되었습니다',
+  leadingIcon: WdsIcon.checkCircle,
+)
+```
+
