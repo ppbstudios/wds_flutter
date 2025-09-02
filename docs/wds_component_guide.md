@@ -12,6 +12,45 @@ Foundation 관련 생성 규칙은 @design_token_generation_guide.md 에서 확�
 material design 과 별도로 만드는 package 이며, 
 `import 'package:flutter/widgets.dart';` 에 있는 Widget들로 custom한 Widget을 구성합니다.
 
+## 공통 설계 가이드 (enum/생성자)
+
+- 고정 스펙(크기/패딩/라운드/아이콘 크기 등)은 "데이터를 담는 enum"으로 관리합니다.
+  - 각 enum 값은 `const` 생성자를 통해 실제 스펙 값을 보유합니다.
+  - 장점: 스펙이 한 곳에 응집되고, 분기/매핑 함수를 줄여 가독성과 유지보수성 향상.
+- 제한된 선택지만 허용되는 경우, `named constructor`로 인스턴스 생성을 제한합니다.
+  - 예: `WdsSwitch.small(...)`, `WdsSwitch.large(...)`
+  - 런타임 분기 대신 생성 시점에 크기가 고정되어 오류 여지를 줄입니다.
+
+e.g. enum with spec values + named constructors (Switch)
+``` dart
+enum WdsSwitchSize {
+  small(spec: Size(39, 24), padding: EdgeInsets.all(3), knobSize: 18),
+  large(spec: Size(52, 32), padding: EdgeInsets.all(4), knobSize: 24);
+
+  const WdsSwitchSize({
+    required this.spec,
+    required this.padding,
+    required this.knobSize,
+  });
+
+  final Size spec;        // track 크기
+  final EdgeInsets padding; // track 내부 여백
+  final double knobSize;  // knob 지름
+}
+
+class WdsSwitch extends StatefulWidget {
+  const WdsSwitch.small({ required this.value, required this.onChanged, this.isEnabled = true, super.key })
+      : size = WdsSwitchSize.small;
+  const WdsSwitch.large({ required this.value, required this.onChanged, this.isEnabled = true, super.key })
+      : size = WdsSwitchSize.large;
+
+  final bool value;
+  final ValueChanged<bool>? onChanged;
+  final bool isEnabled;
+  final WdsSwitchSize size;
+}
+```
+
 ## Button
 
 Button은 아래 속성으로 이루어 집니다.
@@ -895,3 +934,146 @@ Row(spacing: 12, children: [
 - 버튼 `disabled` 상태는 `opacity 0.4` 규칙을 따릅니다(버튼 규칙과 동일).
 - 상단 보조 영역의 정보는 스크린리더가 읽을 수 있도록 텍스트 위주로 제공합니다.
 
+
+## Switch
+
+설정의 on/off를 토글하는 컴포넌트입니다. 값 변화 시 애니메이션으로 전환됩니다.
+
+### Switch - size
+
+속성 | track(size) | knob | padding | 비고
+--- | --- | --- | --- | ---
+small | 39x24 | 18x18 | EdgeInsets.all(3) | 컴팩트
+large | 52x32 | 24x24 | EdgeInsets.all(4) | 상하 4px 여백
+
+### Switch - state
+
+- enabled: 상호작용 가능, `onChanged` 호출됨
+- disabled: 상호작용 불가, 색상에 `withAlpha(40)` 적용(약 40% 투명도)
+
+### Switch - value
+
+- false(inactive): 꺼짐 상태, knob는 왼쪽
+- true(active): 켜짐 상태, knob는 오른쪽
+
+### Switch - color
+
+- active(track): `primary`
+- inactive(track): `WdsColorNeutral.v200`
+- knob: `WdsColorCommon.white`
+
+### Switch - background(track)
+
+- backgroundColor: `WdsColorNeutral.v200`
+- padding: size 별로 상이(small: `EdgeInsets.all(3)`, large: `EdgeInsets.all(4)`)
+
+large는 track 높이 32, knob 24로 상하 4px 여백이 생깁니다. small은 track 높이 24, knob 18로 상하 3px 여백을 둡니다.
+
+### Switch - interaction
+
+- 터치/클릭 시 `value`가 토글되며, `onChanged(bool next)`를 호출합니다.
+- knob 위치 전환은 `Curves.easeIn`으로 애니메이션되며, `Duration(milliseconds: 200)`을 사용합니다.
+
+### Switch - 생성 방법
+
+- `WdsSwitch.small(value: $v, onChanged: $cb)`
+- `WdsSwitch.large(value: $v, onChanged: $cb)`
+
+size는 생성자에서 명시적으로 선택하며, 런타임에 변경하지 않습니다.
+
+e.g. layout
+``` dart
+SizedBox.fromSize(
+  size: $size.spec, // enum 에 캡슐화된 track 스펙
+  child: DecoratedBox(
+    decoration: BoxDecoration(
+      color: $value ? primary : WdsColorNeutral.v200,
+      borderRadius: BorderRadius.circular($size.spec.height / 2),
+    ),
+    child: Padding(
+      padding: $size.padding,
+      child: AnimatedAlign(
+        alignment: $value ? Alignment.centerRight : Alignment.centerLeft,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeIn,
+        child: DecoratedBox(
+          decoration: const BoxDecoration(
+            color: WdsColorCommon.white,
+            shape: BoxShape.circle,
+          ),
+          child: SizedBox.square(dimension: $size.knobSize),
+        ),
+      ),
+    ),
+  ),
+)
+```
+
+## Checkbox
+
+사용자가 여러 항목 중에서 하나 또는 여러 개를 선택할 수 있도록 돕습니다. 값(true/false)과 활성화 여부(isEnabled)로 표현이 달라집니다.
+
+### Checkbox - size
+
+속성 | spec | padding | 비고
+--- | --- | --- | ---
+large | 24x24 | `EdgeInsets.all(3)` | 기본
+small | 20x20 | `EdgeInsets.all(2)` | 컴팩트
+
+e.g. enum
+``` dart
+enum WdsCheckboxSize {
+  small(spec: Size(20, 20), padding: EdgeInsets.all(2)),
+  large(spec: Size(24, 24), padding: EdgeInsets.all(3));
+
+  const WdsCheckboxSize({
+    required this.spec,
+    required this.padding,
+  });
+
+  final Size spec;
+  final EdgeInsets padding;
+}
+```
+
+### Checkbox - state
+
+상태 | 설명
+--- | ---
+enabled | 상호작용 가능, `onChanged` 호출됨
+disabled | 상호작용 불가, 전체적으로 `opacity 0.4` 적용(색상은 `withAlpha(40)` 등 동일 메커니즘)
+
+### Checkbox - value
+
+값 | 설명
+--- | ---
+false | 체크 해제 상태, 체크 마크 표기 없음
+true | 체크 상태, 체크 마크 표기 및 배경 채움
+
+### Checkbox - backgroundColor
+
+- `true`: `cta`
+- `false`: `null`
+
+### Checkbox - border & radius
+
+- `true`: `border = null`
+- `false`: `border = BorderSide(color: WdsSemanticColorBorder.neutral)`
+- `borderRadius`: `WdsAtomicRadius.xs` (size와 무관하게 동일)
+
+### Checkbox - check mark
+
+- 체크 마크는 `value == true`일 때만 노출됩니다.
+- 그려지는 방향은 왼쪽에서 오른쪽으로 진행합니다.
+- 기준 좌표계(large, 24x24 기준): 패딩 3px을 제외한 내부 20x20 영역을 (0,0)~(20,20)으로 사용합니다.
+  - left-top-check-mark: (3,8), (2,9), (3,9)
+  - middle-bottom-check-mark: (6,13), (7,13)
+  - top-right-check-mark: (14,4), (14,5), (15,5), (13,4)
+- small(20x20, padding 2) 사이즈는 동일한 형태를 비율에 맞게 축소하여 렌더링합니다.
+
+### Checkbox - animation
+
+- 배경 채움은 중심에서 가장자리로 퍼지도록 채웁니다.
+- 색상 채움은 `CustomPaint`로 구현합니다.
+- 애니메이션은 `Duration(milliseconds: 300)` + `Curves.easeIn`을 사용합니다.
+- 체크 마크 경로는 왼쪽에서 오른쪽으로 그리며 진행도에 따라 부분 경로를 렌더링합니다.

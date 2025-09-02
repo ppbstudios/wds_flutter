@@ -13,6 +13,8 @@ dependencies:
   wds_tokens:
     path: ../tokens
 
+dev_dependencies:
+  flutter_lints: ^5.0.0
 
 flutter:
   assets:
@@ -20,6 +22,3 @@ flutter:
     - assets/vector/
     - assets/vector/navigation/
     - assets/vector/order_status/
-
-dev_dependencies:
-  flutter_lints: ^5.0.0

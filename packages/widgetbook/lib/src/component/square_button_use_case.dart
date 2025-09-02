@@ -37,7 +37,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     isEnabled: isEnabled,
     child: Text(
       text,
-      style: WdsSemanticTypography.caption12Medium,
+      style: WdsTypography.caption12Medium,
     ),
   );
 

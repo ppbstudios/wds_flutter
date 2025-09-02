@@ -20,7 +20,7 @@ class WidgetbookSection extends StatelessWidget {
       children: [
         Text(
           title,
-          style: WdsSemanticTypography.title20Bold,
+          style: WdsTypography.title20Bold,
         ),
         ...children,
       ],
@@ -54,7 +54,7 @@ class WidgetbookSubsection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                Text('$title = ', style: WdsSemanticTypography.heading17Bold),
+                Text('$title = ', style: WdsTypography.heading17Bold),
                 ...labels
                     .expand(
                       (label) => [
@@ -72,7 +72,7 @@ class WidgetbookSubsection extends StatelessWidget {
           child: CustomPaint(
             painter: const _DiagonalHatchPainter(
               background: Colors.white,
-              hatchColor: WdsColorNeutral.v100,
+              hatchColor: WdsColors.neutral100,
               hatchSpacing: 16,
               hatchStrokeWidth: 1,
             ),
@@ -95,14 +95,14 @@ class _TypeLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: const BoxDecoration(
-        color: WdsColorNeutral.v100,
+        color: WdsColors.neutral100,
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: Text(
           label,
-          style: WdsSemanticTypography.caption11Bold,
+          style: WdsTypography.caption11Bold,
         ),
       ),
     );

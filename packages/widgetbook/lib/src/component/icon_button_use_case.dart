@@ -34,7 +34,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   return WidgetbookPlayground(
-    backgroundColor: WdsColorCoolNeutral.v50,
+    backgroundColor: WdsColors.coolNeutral50,
     info: [
       'icon: ${icon.name}',
       'state: ${enabled ? 'enabled' : 'disabled'}',

@@ -17,7 +17,7 @@ class WidgetbookPageLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: WdsColorCommon.white,
+      backgroundColor: WdsColors.white,
       body: SafeArea(
         child: InteractiveViewer(
           maxScale: 6,

@@ -2,13 +2,12 @@ library;
 
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart' hide Typography, Icon, Chip;
-import 'package:wds_tokens/wds_tokens.dart';
+import 'package:flutter/material.dart' hide Typography, Icon, Chip, Switch;
+import 'package:wds_foundation/wds_foundation.dart';
 
 export 'package:flutter/material.dart' hide Typography, TextButton, TextField;
 export 'package:wds_components/wds_components.dart';
 export 'package:wds_foundation/wds_foundation.dart';
-export 'package:wds_tokens/wds_tokens.dart';
 
 part 'page_layout.dart';
 part 'playground.dart';
@@ -66,3 +65,9 @@ class Select {}
 
 /// 컴포넌트 path 관리를 위한 클래스
 class ActionArea {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class Switch {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class Checkbox {}

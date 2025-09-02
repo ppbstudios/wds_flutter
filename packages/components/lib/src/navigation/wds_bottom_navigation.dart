@@ -35,9 +35,9 @@ class WdsBottomNavigation extends StatelessWidget {
       width: double.infinity,
       child: DecoratedBox(
         decoration: const BoxDecoration(
-          color: WdsColorCommon.white,
+          color: WdsColors.white,
           border: Border(
-            top: BorderSide(color: WdsSemanticColorBorder.alternative),
+            top: BorderSide(color: WdsColors.borderAlternative),
           ),
         ),
         child: Padding(
@@ -77,6 +77,13 @@ class _BottomNavigationItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // fixed width/height per spec example: 32x39 inside interaction height 45
     const double iconHeight = 39;
+
+    const inactiveTextStyle = WdsTypography.caption10Medium;
+
+    final activeTextStyle = WdsTypography.caption10Bold.copyWith(
+      color: WdsColors.cta,
+    );
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -90,11 +97,7 @@ class _BottomNavigationItemWidget extends StatelessWidget {
               item.icon.build(isActive: isActive),
               Text(
                 item.label,
-                style: WdsSemanticTypography.caption10Medium.copyWith(
-                  color: cta,
-                  fontWeight:
-                      isActive ? WdsFontWeight.bold : WdsFontWeight.medium,
-                ),
+                style: isActive ? activeTextStyle : inactiveTextStyle,
                 maxLines: 1,
               ),
             ],

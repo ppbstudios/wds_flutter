@@ -64,8 +64,8 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
   // 고정 스펙
   static const Size fixedSize = Size(double.infinity, 50);
   static const EdgeInsets fixedPadding = EdgeInsets.fromLTRB(16, 5, 16, 5);
-  static const TextStyle fixedTypography = WdsSemanticTypography.heading17Bold;
-  static const Color fixedBackground = WdsSemanticColorBackgroud.normal;
+  static const TextStyle fixedTypography = WdsTypography.heading17Bold;
+  static const Color fixedBackground = WdsColors.backgroundNormal;
 
   final Widget? leading;
   final Widget title;

@@ -38,11 +38,11 @@ class _ButtonTypographyBySize {
 
   static TextStyle of(WdsButtonSize size) {
     return switch (size) {
-      WdsButtonSize.xlarge => WdsSemanticTypography.body15NormalBold,
-      WdsButtonSize.large => WdsSemanticTypography.body15NormalBold,
-      WdsButtonSize.medium => WdsSemanticTypography.body13NormalMedium,
-      WdsButtonSize.small => WdsSemanticTypography.caption12Medium,
-      WdsButtonSize.tiny => WdsSemanticTypography.caption12Medium,
+      WdsButtonSize.xlarge => WdsTypography.body15NormalBold,
+      WdsButtonSize.large => WdsTypography.body15NormalBold,
+      WdsButtonSize.medium => WdsTypography.body13NormalMedium,
+      WdsButtonSize.small => WdsTypography.caption12Medium,
+      WdsButtonSize.tiny => WdsTypography.caption12Medium,
     };
   }
 }
@@ -60,22 +60,22 @@ class _ButtonStyleByVariant {
   ) {
     return switch (variant) {
       WdsButtonVariant.cta => (
-          background: cta,
-          foreground: WdsColorCommon.white,
-          radius: WdsAtomicRadius.full,
+          background: WdsColors.cta,
+          foreground: WdsColors.white,
+          radius: WdsRadius.full,
           border: null,
         ),
       WdsButtonVariant.primary => (
-          background: primary,
-          foreground: WdsColorCommon.white,
-          radius: WdsAtomicRadius.full,
+          background: WdsColors.primary,
+          foreground: WdsColors.white,
+          radius: WdsRadius.full,
           border: null,
         ),
       WdsButtonVariant.secondary => (
-          background: WdsColorCommon.white,
-          foreground: WdsSemanticColorText.normal,
-          radius: WdsAtomicRadius.full,
-          border: const BorderSide(color: WdsSemanticColorBorder.neutral),
+          background: WdsColors.white,
+          foreground: WdsColors.textNormal,
+          radius: WdsRadius.full,
+          border: const BorderSide(color: WdsColors.borderNeutral),
         ),
     };
   }
@@ -143,8 +143,7 @@ class _WdsButtonState extends State<WdsButton>
   // Colors
   Color _overlayTargetColor() {
     // Base token overlay color for feedback
-    final Color base =
-        WdsSemanticColorMaterial.pressed; // semi-transparent black
+    final Color base = WdsColors.materialPressed; // semi-transparent black
     if (_isPressed || _isHovered) {
       return base;
     }

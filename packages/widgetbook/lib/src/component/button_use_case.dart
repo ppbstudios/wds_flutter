@@ -46,11 +46,11 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   final styleBySize = <String, TextStyle>{
-    'xlarge': WdsSemanticTypography.body15NormalBold,
-    'large': WdsSemanticTypography.body15NormalBold,
-    'medium': WdsSemanticTypography.body13NormalMedium,
-    'small': WdsSemanticTypography.caption12Medium,
-    'tiny': WdsSemanticTypography.caption12Medium,
+    'xlarge': WdsTypography.body15NormalBold,
+    'large': WdsTypography.body15NormalBold,
+    'medium': WdsTypography.body13NormalMedium,
+    'small': WdsTypography.caption12Medium,
+    'tiny': WdsTypography.caption12Medium,
   };
 
   final child = Text(text, style: styleBySize[size]!);
