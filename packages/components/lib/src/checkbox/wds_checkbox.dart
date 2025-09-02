@@ -151,9 +151,9 @@ class _CheckboxPainter extends CustomPainter {
       final double scale = inner / 20.0; // large=1.0, small=0.8
 
       const markPath = [
-        Offset(3, 9),
+        Offset(3.5, 9.5),
         Offset(8.5, 15),
-        Offset(17.5, 4),
+        Offset(17.5, 5),
       ];
 
       Path mark = Path();
