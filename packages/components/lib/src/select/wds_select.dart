@@ -4,8 +4,8 @@ enum WdsSelectVariant { normal, blocked }
 
 /// 드롭다운 Select
 /// - padding: EdgeInsets.fromLTRB(16, 12, 16, 12)
-/// - radius: WdsAtomicRadius.v8
-/// - border: 1px solid WdsSemanticColorBorder.alternative
+/// - radius: WdsRadius.sm
+/// - border: 1px solid WdsColors.borderAlternative
 /// - hintText padding: 상하 2px, 확장 상태와 무관
 /// - 아이콘: 닫힘 chevronDown, 열림 chevronUp (텍스트와 10px 간격)
 class WdsSelect extends StatefulWidget {

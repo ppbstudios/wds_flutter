@@ -2,11 +2,11 @@ part of '../../wds_components.dart';
 
 /// 검색 입력에 사용하는 SearchField
 /// - 높이: 고정 36
-/// - 반경: WdsAtomicRadius.full
-/// - 배경: WdsSemanticColorBackgroud.alternative
+/// - 반경: WdsRadius.full
+/// - 배경: WdsColors.backgroundAlternative
 /// - 패딩: EdgeInsets.symmetric(horizontal: 12, vertical: 6)
-/// - 타이포: WdsSemanticTypography.body15NormalRegular
-/// - 텍스트 색: enabled -> WdsSemanticColorText.normal, disabled -> WdsSemanticColorText.alternative
+/// - 타이포: WdsTypography.body15NormalRegular
+/// - 텍스트 색: enabled -> WdsColors.textNormal, disabled -> WdsColors.textAlternative
 /// - trailing: enabled && text.isNotEmpty 일 때 clear 아이콘 버튼(텍스트와 가로 8px 간격)
 class WdsSearchField extends StatefulWidget {
   const WdsSearchField({
