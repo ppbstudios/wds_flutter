@@ -10,7 +10,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 Widget buildWdsSelectUseCase(BuildContext context) {
   return WidgetbookPageLayout(
     title: 'Select',
-    description: '드롭다운 셀렉트의 variant/state와 레이아웃 규격을 확인합니다.',
+    description: '영역을 누르면 요소가 호출되고 이를 수정 또는 선택할 수 있습니다.',
     children: [
       _buildPlaygroundSection(context),
       _buildDemonstrationSection(context),

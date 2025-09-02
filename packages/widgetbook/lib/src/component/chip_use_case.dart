@@ -12,7 +12,7 @@ final _icon = WdsIcon.blank;
 Widget buildChipUseCase(BuildContext context) {
   return WidgetbookPageLayout(
     title: 'Chip',
-    description: '정보를 카테고리화하거나 필터링에 사용되는 소형 컴포넌트',
+    description: '상호작용을 통해 정보를 분류하거나, 상태를 표시할 때 사용됩니다.',
     children: [
       _buildPlaygroundSection(context),
       const SizedBox(height: 32),
@@ -189,14 +189,14 @@ Widget _buildSizeSection() {
 Widget _buildStateSection() {
   return WidgetbookSubsection(
     title: 'state',
-    labels: ['enabled', 'disabled', 'focused (click to toggle)'],
+    labels: ['enabled', 'disabled', 'focused'],
     content: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 16,
       children: [
         // Outline variant states
         const Text(
-          'Outline Variant:',
+          'Outline',
           style: WdsTypography.caption12Medium,
         ),
         Row(
@@ -222,7 +222,7 @@ Widget _buildStateSection() {
         const SizedBox(height: 8),
         // Solid variant states
         const Text(
-          'Solid Variant:',
+          'Solid',
           style: WdsTypography.caption12Medium,
         ),
         Row(
@@ -249,7 +249,7 @@ Widget _buildStateSection() {
         ),
         const SizedBox(height: 8),
         // With icons demonstration
-        const Text('With Icons:', style: WdsTypography.caption12Medium),
+        const Text('Icon', style: WdsTypography.caption12Medium),
         Row(
           mainAxisSize: MainAxisSize.min,
           spacing: 16,

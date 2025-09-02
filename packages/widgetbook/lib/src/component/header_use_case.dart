@@ -12,7 +12,7 @@ final Widget _icon = WdsIcon.blank.build(width: 24, height: 24);
 Widget buildWdsHeaderUseCase(BuildContext context) {
   return WidgetbookPageLayout(
     title: 'Header',
-    description: '상단 내비게이션 영역으로 leading/title/actions로 구성돼요.',
+    description: '화면 상단에 위치한 내비게이션입니다.',
     children: [
       _buildPlaygroundSection(context),
       _buildDemonstrationSection(context),

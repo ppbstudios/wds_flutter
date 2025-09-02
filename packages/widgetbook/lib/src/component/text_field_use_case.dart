@@ -10,7 +10,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 Widget buildWdsTextFieldUseCase(BuildContext context) {
   return WidgetbookPageLayout(
     title: 'TextField',
-    description: '일반 텍스트 입력 필드. outlined/box variant를 지원합니다.',
+    description: '길지않은 텍스트를 입력할때 사용합니다.',
     children: [
       _buildPlaygroundSection(context),
       _buildDemonstrationSection(context),
@@ -98,16 +98,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
 Widget _buildDemonstrationSection(BuildContext context) {
   final controller = TextEditingController(text: '에러가 발생할 텍스트');
 
-  final errorNode1 = FocusNode();
-
-  final errorNode2 = FocusNode();
-
-  Future<void> focusNode(FocusNode node) async {
-    node.requestFocus();
-    await Future.delayed(const Duration(milliseconds: 500));
-    if (node.hasFocus && context.mounted) node.unfocus();
-  }
-
   return WidgetbookSection(
     title: 'TextField',
     spacing: 32,
@@ -153,28 +143,12 @@ Widget _buildDemonstrationSection(BuildContext context) {
             /// error
             SizedBox(
               width: 320,
-              child: Builder(
-                builder: (context) {
-                  bool hasBuilt = false;
-
-                  return StatefulBuilder(
-                    builder: (context, setState) {
-                      if (!hasBuilt) {
-                        hasBuilt = true;
-                        focusNode(errorNode1).then((_) => setState(() {}));
-                      }
-
-                      return WdsTextField.outlined(
-                        label: '주제',
-                        hintText: '힌트',
-                        helperText: '유저의 이해를 도와줄 텍스트',
-                        controller: controller,
-                        validator: (value) => '오류가 발생해요  ',
-                        focusNode: errorNode1,
-                      );
-                    },
-                  );
-                },
+              child: WdsTextField.outlined(
+                label: '주제',
+                hintText: '힌트',
+                helperText: '유저의 이해를 도와줄 텍스트',
+                controller: controller,
+                validator: (value) => '오류가 발생해요  ',
               ),
             ),
 
@@ -229,26 +203,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
             /// error
             SizedBox(
               width: 320,
-              child: Builder(
-                builder: (context) {
-                  bool hasBuilt = false;
-
-                  return StatefulBuilder(
-                    builder: (context, setState) {
-                      if (!hasBuilt) {
-                        hasBuilt = true;
-                        focusNode(errorNode2).then((_) => setState(() {}));
-                      }
-
-                      return WdsTextField.box(
-                        hintText: '힌트',
-                        controller: controller,
-                        validator: (value) => '오류가 발생해요',
-                        focusNode: errorNode2,
-                      );
-                    },
-                  );
-                },
+              child: WdsTextField.box(
+                hintText: '힌트',
+                controller: controller,
+                validator: (value) => '오류가 발생해요',
               ),
             ),
 
