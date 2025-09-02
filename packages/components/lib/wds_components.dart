@@ -22,6 +22,7 @@ part 'src/icon/wds_icon_button.dart';
 part 'src/navigation/wds_bottom_navigation.dart';
 part 'src/radio/wds_radio.dart';
 part 'src/select/wds_select.dart';
+part 'src/snackbar/wds_snackbar.dart';
 part 'src/switch/wds_switch.dart';
 part 'src/tab/wds_tab.dart';
 part 'src/text_field/wds_search_field.dart';

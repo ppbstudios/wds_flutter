@@ -1185,3 +1185,92 @@ WdsToast.icon(
 )
 ```
 
+## Snackbar
+
+사용자가 수행한 작업에 대한 피드백을 제공합니다. Toast와 달리 추가적인 조치를 취할 수 있는 버튼이 포함되어 있습니다.
+
+Snackbar는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+message | `String` | 주요 메시지 내용
+description | `String?` | 보조 설명 텍스트 (description variant에서만 사용)
+leadingIcon | `WdsIcon?` | 선택사항인 앞쪽 아이콘
+action | `Widget` | 우측에 위치하는 액션 버튼 (WdsTextButton)
+variant | `WdsSnackbarVariant` | Snackbar의 표시 형태
+
+### Snackbar - variant
+
+정해진 Variant만 사용할 수 있습니다.
+
+- `normal`: 단일 메시지와 액션 버튼
+- `description`: 주 메시지와 보조 설명이 함께 표시
+- `multiLine`: 2줄까지 표시 가능한 긴 메시지와 액션 버튼
+
+### Snackbar - 고정된 속성
+
+모든 Snackbar는 동일한 시각적 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+backgroundColor | `WdsColors.cta` (#121212) | 고정
+borderRadius | 8px | 고정
+padding | `EdgeInsets.fromLTRB(16, 9, 16, 9)` | 외부 패딩
+
+### Snackbar - layout
+
+variant에 따라 레이아웃 구조가 달라집니다.
+
+**normal variant:**
+```
+Row: (Expanded > Padding > Text) + SizedBox(8px) + WdsTextButton
+```
+
+**description variant:**
+```
+Row: (Expanded > Padding > Column(Text(주), Text(보조))) + SizedBox(8px) + WdsTextButton
+```
+
+**multiLine variant:**
+```
+Row: (Expanded > Padding > Text(maxLines: 2)) + SizedBox(8px) + WdsTextButton
+```
+
+### Snackbar - text 속성
+
+variant별 텍스트 스타일과 제약사항입니다.
+
+variant | message 속성 | description 속성 | maxLines | overflow
+--- | --- | --- | --- | ---
+normal | `WdsTypography.body14NormalMedium`, `WdsColors.white` | - | 1 | ellipsis
+description | `WdsTypography.body14NormalMedium`, `WdsColors.white` | `WdsTypography.caption12Regular`, `WdsColors.textAssistive` | 각각 1 | ellipsis
+multiLine | `WdsTypography.caption12Regular`, `WdsColors.textAssistive` | - | 2 | ellipsis
+
+### Snackbar - padding
+
+모든 variant에서 내부 텍스트 영역은 동일한 패딩을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+text padding | `EdgeInsets.symmetric(vertical: 5)` | Expanded 내부 Padding
+
+### Snackbar - leadingIcon (선택사항)
+
+아이콘이 포함된 경우의 세부 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+iconSize | 24x24 |
+iconColor | `WdsColors.white` (#FFFFFF) |
+iconSpacing | 6px | 아이콘과 콘텐츠 사이 간격
+iconPosition | centerLeft | 세로 중앙 정렬
+
+### Snackbar - action
+
+우측에 위치하는 액션 버튼의 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+component | `WdsTextButton` | 
+variant | `.underline` 또는 `.icon` | 
+spacing | 8px | 콘텐츠와 액션 버튼 사이 간격
