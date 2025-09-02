@@ -78,7 +78,11 @@ class _WdsSelectState extends State<WdsSelect> {
 
     final arrowIcon =
         (widget.isExpanded ? WdsIcon.chevronUp : WdsIcon.chevronDown).build(
-      color: WdsColors.textNeutral,
+      color: widget.variant == WdsSelectVariant.blocked
+          ? WdsColors.textNeutral.withAlpha(
+              WdsOpacity.opacity40.toAlpha(),
+            )
+          : WdsColors.textNeutral,
     );
 
     final field = Padding(
@@ -139,6 +143,10 @@ class _WdsSelectState extends State<WdsSelect> {
     }
 
     if (widget.variant == WdsSelectVariant.blocked) {
+      return WdsColors.textAlternative;
+    }
+
+    if (widget.selected?.isEmpty ?? true) {
       return WdsColors.textAlternative;
     }
 
