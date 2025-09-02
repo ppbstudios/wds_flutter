@@ -30,6 +30,8 @@ import 'package:wds_widgetbook/src/component/search_field_use_case.dart'
     as _wds_widgetbook_src_component_search_field_use_case;
 import 'package:wds_widgetbook/src/component/select_use_case.dart'
     as _wds_widgetbook_src_component_select_use_case;
+import 'package:wds_widgetbook/src/component/snackbar_use_case.dart'
+    as _wds_widgetbook_src_component_snackbar_use_case;
 import 'package:wds_widgetbook/src/component/square_button_use_case.dart'
     as _wds_widgetbook_src_component_square_button_use_case;
 import 'package:wds_widgetbook/src/component/switch_use_case.dart'
@@ -136,6 +138,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'Select',
           builder: _wds_widgetbook_src_component_select_use_case
               .buildWdsSelectUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Snackbar',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Snackbar',
+          builder: _wds_widgetbook_src_component_snackbar_use_case
+              .buildWdsSnackbarUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
