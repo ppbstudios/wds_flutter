@@ -804,10 +804,11 @@ underline | 선택됨 | 높이 2px, 너비 탭 full, color `WdsColorCommon.black
 underline | 선택 안됨 | 1px solid `WdsSemanticColorBorder.alternative` |
 탭 개수 | - | 2개 또는 3개 |
 
+---
+
 ## PaginationDot
 
-페이지를 작은 점(dot) 형태로 표시하여 사용자가 현재 페이지와 다른 페이지로 쉽게 이동할 수 있도록 돕습니다.  
-주로 **Carousel, 온보딩 화면, 슬라이드** 등에서 사용됩니다.
+페이지를 작은 점(dot) 형태로 표시하여 사용자가 현재 페이지와 다른 페이지로 쉽게 이동할 수 있도록 돕습니다.
 
 PaginationDot은 아래 속성으로 이루어집니다.
 
@@ -815,20 +816,20 @@ PaginationDot은 아래 속성으로 이루어집니다.
 --- | --- | --- 
 isActive | `bool` | 'true' : 현재 페이지 / 'false' : 비활성 페이지
 
-### PaginationDot - size
+### PaginationDot - variant
 
 | 항목          | 값              | 비고 |
 |---------------|-----------------|------|
 | dot 최소 개수 | 2               | 1개는 의미 없음 |
 | dot 최대 개수 | 제한 없음       | 10개 이상 시 가독성 저하 |
-| width         | `Hug`     | dot 개수에 따라 유동적 |
-
 
 ### PaginationDot - style
-항목 | 상태/조건 | 값 | 비고
---- | --- | --- | ---
-backgroundColor | normal | `WdsColorNeutral.v900` |
-backgroundColor | blocked | `WdsColorNeutral.v300` |
+
+| 항목 | 상태/조건 | 값   | 비고 |
+| --- | ------  | --- | --- |
+| width         | `Hug`     | dot 개수에 따라 유동적 |
+| backgroundColor | active | `WdsSemanticColorText.normal` |
+| backgroundColor | inactive | `WdsSemanticColorText.assistive` |
 
 ## ActionArea
 화면 하단에서 주요 액션(결제, 다음 단계 등)을 안정적으로 수행하게 하는 영역입니다.

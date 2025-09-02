@@ -19,7 +19,7 @@ class WdsDotPagination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color backgroundColor =
-        isActive ? WdsColorNeutral.v900 : WdsColorNeutral.v300;
+        isActive ? WdsSemanticColorText.normal : WdsSemanticColorText.assistive;
 
     return Container(
       width: 8,
