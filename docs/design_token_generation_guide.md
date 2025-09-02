@@ -309,6 +309,64 @@ class WdsSemanticTypography {
 #### 필드명 생성 규칙
 | 구조 | 생성되는 필드명 |
 |------|---------------|
+
+### Shadow 토큰
+
+#### 개요
+- shadow는 color에 알파가 포함된 색상을 사용합니다. 기존 color 처리와 동일하게 변환합니다.
+- 구조: `shadow > 그룹(예: coolNeutral, Neutral) > 상태(예: normal, emphasize, strong, heavy) > 레이어(shadow1, shadow2, shadow3)`
+- 각 상태는 `List<BoxShadow>`로 생성됩니다. 레이어 순서대로 배열에 담깁니다.
+
+#### 지원 속성
+| 키 | 타입 | 매핑 |
+|----|------|------|
+| `color` 또는 `Color` | `color` | `Color`로 변환 또는 `{color.*}` 참조 처리 |
+| `blur` | `number` | `WdsAtomicBlur.*` 참조 또는 숫자 |
+| `offsetY` 또는 `offstY` | `number` | `WdsAtomicOffsetY.*` 참조 또는 숫자 |
+
+주의: `offsetX`는 현재 스펙에 없으며 X는 0으로 고정됩니다. `spread`는 0.0 고정.
+
+#### 예시 JSON
+```json
+{
+  "shadow": {
+    "coolNeutral": {
+      "normal": {
+        "shadow1": {
+          "color": {"$type": "color", "$value": "#819bff1f"},
+          "blur": {"$type": "number", "$value": "{blur.sm}"},
+          "offsetY": {"$type": "number", "$value": "{offsetY.xs}"}
+        }
+      }
+    }
+  }
+}
+```
+
+#### 생성 결과
+```dart
+// semantic/wds_semantic_shadow.dart
+import "package:flutter/material.dart";
+import "../atomic/atomic.dart";
+
+part 'shadow/wds_semantic_shadow_cool_neutral.dart';
+
+// semantic/shadow/wds_semantic_shadow_cool_neutral.dart
+part of '../wds_semantic_shadow.dart';
+
+class WdsSemanticShadowCoolNeutral {
+  const WdsSemanticShadowCoolNeutral._();
+
+  static const List<BoxShadow> normal = [
+    BoxShadow(
+      offset: Offset(0, WdsAtomicOffsetY.xs),
+      blurRadius: WdsAtomicBlur.sm,
+      spreadRadius: 0.0,
+      color: Color(0x1F819BFF),
+    ),
+  ];
+}
+```
 | `Body15 > Normal > bold` | `body15NormalBold` |
 | `Body15 > Normal > medium` | `body15NormalMedium` |
 | `Body15 > Reading > regular` | `body15ReadingRegular` |
