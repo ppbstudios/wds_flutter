@@ -118,7 +118,7 @@ export 'wds_atomic_space.dart';
 | 규칙 | 적용 방법 |
 |------|----------|
 | 파일명 | `.g.dart` 사용하지 않음 |
-| 클래스명 | `WdsAtomicColor{그룹명}` 형태 |
+| 클래스명 | Color: `WdsAtomicColor{그룹명}`, Font: `WdsAtomicFont{그룹명}` |
 | 집계 클래스 | 생성하지 않음 (part만 생성) |
 
 ## 타입 변환 규칙

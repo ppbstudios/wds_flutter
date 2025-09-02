@@ -384,7 +384,7 @@ Future<void> _generateFontLibrary({
 
     final classNameBase = _pascalCase(key);
     if (classNameBase.isEmpty) continue;
-    final className = 'WdsFont$classNameBase';
+    final className = 'WdsAtomicFont$classNameBase';
     final fieldName = _camelCase(key);
     final partFileName = 'wds_atomic_font_${_toSnake(key)}.dart';
     final partRelativePath = 'wds_atomic_font/$partFileName';
@@ -408,7 +408,7 @@ Future<void> _generateFontLibrary({
         final type = v[r'$type'] as String;
         final val = v[r'$value'];
         final identifier = _identifierFromKey(e.key);
-        if (className == 'WdsFontWeight') {
+        if (className == 'WdsAtomicFontWeight') {
           final fw = _convertToFontWeight(val);
           if (fw != null && fieldNames.add(identifier)) {
             cb.writeln('  static const FontWeight $identifier = $fw;');
@@ -515,7 +515,7 @@ Future<void> _syncAtomicOutputs({
     }
     // 폴더 비면 삭제 시도
     if ((await oldColorDir.list(followLinks: false).length) == 0) {
-      await oldColorDir.delete().catchError((_) {});
+      await oldColorDir.delete().catchError((_) => oldColorDir);
     }
   }
 
@@ -548,7 +548,7 @@ Future<void> _syncAtomicOutputs({
       }
     }
     if ((await oldFontDir.list(followLinks: false).length) == 0) {
-      await oldFontDir.delete().catchError((_) {});
+      await oldFontDir.delete().catchError((_) => oldFontDir);
     }
   }
 

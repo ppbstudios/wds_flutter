@@ -11,7 +11,7 @@ String? _resolveTypographyFamily(dynamic node) {
           parts[1].toLowerCase() == 'family') {
         final name = parts[2];
         final field = _identifierFromKey(name);
-        return 'WdsFontFamily.$field';
+        return 'WdsAtomicFontFamily.$field';
       }
       return null;
     }
@@ -34,7 +34,7 @@ String? _resolveTypographyWeight(dynamic node) {
           parts[1].toLowerCase() == 'weight') {
         final name = parts[2];
         final field = _identifierFromKey(name);
-        return 'WdsFontWeight.$field';
+        return 'WdsAtomicFontWeight.$field';
       }
     } else if (v is num) {
       weight = v.toInt();

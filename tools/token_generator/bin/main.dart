@@ -297,11 +297,11 @@ Future<void> _generateSemantic({
             final weightExpr = _resolveTypographyWeight(innerProps['weight']);
             final sizeExpr = _resolveTypographyNumberClassed(
               innerProps['size'],
-              'WdsFontSize',
+              'WdsAtomicFontSize',
             );
             final lineHeightExpr = _resolveTypographyNumberClassed(
               innerProps['lineHeight'],
-              'WdsFontLineHeight',
+              'WdsAtomicFontLineHeight',
             );
             final letterSpacingExpr = _resolveTypographyLetterSpacing(
               innerProps['letterSpacing'],
@@ -338,11 +338,11 @@ Future<void> _generateSemantic({
         final weightExpr = _resolveTypographyWeight(propsOrGroup['weight']);
         final sizeExpr = _resolveTypographyNumberClassed(
           propsOrGroup['size'],
-          'WdsFontSize',
+          'WdsAtomicFontSize',
         );
         final lineHeightExpr = _resolveTypographyNumberClassed(
           propsOrGroup['lineHeight'],
-          'WdsFontLineHeight',
+          'WdsAtomicFontLineHeight',
         );
         final letterSpacingExpr = _resolveTypographyLetterSpacing(
           propsOrGroup['letterSpacing'],
