@@ -1073,3 +1073,83 @@ padding:
 
 - true: border 2px `WdsColors.primary`
 - false
+
+
+## Divider
+
+디자인 요소와 정보를 구분하는 데 사용합니다.
+이를 통해 각 요소의 디자인 가독성이 향상됩니다.
+
+### Divider - 개요
+시각적 구분을 위한 선(line) 컴포넌트입니다. 방향(가로/세로)과 두께(variant)에 따라 고정 스펙을 사용합니다.
+
+### Divider - 속성
+
+속성 | Type | 비고
+--- | --- | ---
+variant | `WdsDividerVariant` | `normal`, `thick`
+isVertical | `bool` | `false`(기본), 세로선은 named constructor로 생성
+color | `Color` | 고정값 `WdsColors.borderAlternative`
+
+e.g. enum
+``` dart
+enum WdsDividerVariant { normal, thick }
+```
+
+### Divider - 생성 방법(방향)
+가로/세로 방향은 생성자에서 고정합니다.
+
+``` dart
+// 기본(가로, normal)
+const WdsDivider();
+
+// 가로, 두꺼운 두께
+const WdsDivider(variant: WdsDividerVariant.thick);
+
+// 세로(단일 스펙: 1 x 32)
+const WdsDivider.vertical();
+```
+
+e.g. build configuration (구현 예 아님)
+``` dart
+// 가로 divider: width = double.infinity, height = 1 또는 6, color = WdsColors.borderAlternative
+SizedBox(
+  width: double.infinity,
+  height: $height, // 1(normal) | 6(thick)
+  child: const DecoratedBox(
+    decoration: BoxDecoration(color: WdsColors.borderAlternative),
+  ),
+);
+
+// 세로 divider: width = 1, height = 32, color = WdsColors.borderAlternative
+SizedBox(
+  width: 1,
+  height: 32,
+  child: const DecoratedBox(
+    decoration: BoxDecoration(color: WdsColors.borderAlternative),
+  ),
+);
+```
+
+### Divider - color
+- 고정: `WdsColors.borderAlternative`
+
+### Divider - size
+
+방향 | variant | width | height | 비고
+--- | --- | --- | --- | ---
+가로 | normal | `double.infinity` | 1px | 전체 너비로 늘어남
+가로 | thick | `double.infinity` | 6px | 강조 구분선
+세로 | normal | 1px | 32px | 단일 스펙만 제공
+
+### Divider - 사용 예시
+``` dart
+// 가로, 보통 두께
+const WdsDivider();
+
+// 가로, 두꺼운 두께
+const WdsDivider(variant: WdsDividerVariant.thick);
+
+// 세로(고정 스펙: 1 x 32)
+const WdsDivider.vertical();
+```

@@ -2,7 +2,9 @@ library;
 
 import 'dart:math' as math;
 
-import 'package:flutter/material.dart' hide Typography, Icon, Chip, Switch;
+import 'package:flutter/material.dart'
+    hide Typography, Icon, Chip, Switch, Divider;
+import 'package:wds_components/wds_components.dart';
 import 'package:wds_foundation/wds_foundation.dart';
 
 export 'package:flutter/material.dart' hide Typography, TextButton, TextField;
@@ -68,3 +70,6 @@ class Switch {}
 
 /// 컴포넌트 path 관리를 위한 클래스
 class Checkbox {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class Divider {}

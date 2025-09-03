@@ -134,7 +134,7 @@ class _StylesSection extends StatelessWidget {
       spacing: 12,
       children: [
         _StyleTableHeader(),
-        const Divider(height: 1),
+        const WdsDivider(),
         // Title 32
         const _TypographyRow(
           label: 'Title 32',
