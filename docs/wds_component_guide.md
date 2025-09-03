@@ -1054,7 +1054,7 @@ SizedBox.fromSize(
 
 ### Checkbox - size
 
-속성 | spec | padding | 비고
+속성 | spec | margin | 비고
 --- | --- | --- | ---
 large | 24x24 | `EdgeInsets.all(3)` | 기본
 small | 20x20 | `EdgeInsets.all(2)` | 컴팩트
@@ -1062,16 +1062,16 @@ small | 20x20 | `EdgeInsets.all(2)` | 컴팩트
 e.g. enum
 ``` dart
 enum WdsCheckboxSize {
-  small(spec: Size(20, 20), padding: EdgeInsets.all(2)),
-  large(spec: Size(24, 24), padding: EdgeInsets.all(3));
+  small(spec: Size(20, 20), margin: EdgeInsets.all(2)),
+  large(spec: Size(24, 24), margin: EdgeInsets.all(3));
 
   const WdsCheckboxSize({
     required this.spec,
-    required this.padding,
+    required this.margin,
   });
 
   final Size spec;
-  final EdgeInsets padding;
+  final EdgeInsets margin;
 }
 ```
 
@@ -1097,18 +1097,33 @@ true | 체크 상태, 체크 마크 표기 및 배경 채움
 ### Checkbox - border & radius
 
 - `true`: `border = null`
-- `false`: `border = BorderSide(color: WdsColors.borderNeutral)`
+- `false`: `border = BorderSide(color: WdsColors.borderNeutral, width: 1.5)`
 - `borderRadius`: `WdsRadius.xs` (size와 무관하게 동일)
 
 ### Checkbox - check mark
 
 - 체크 마크는 `value == true`일 때만 노출됩니다.
 - 그려지는 방향은 왼쪽에서 오른쪽으로 진행합니다.
-- 기준 좌표계(large, 24x24 기준): 패딩 3px을 제외한 내부 20x20 영역을 (0,0)~(20,20)으로 사용합니다.
-  - left-top-check-mark: (3,8), (2,9), (3,9)
-  - middle-bottom-check-mark: (6,13), (7,13)
-  - top-right-check-mark: (14,4), (14,5), (15,5), (13,4)
-- small(20x20, padding 2) 사이즈는 동일한 형태를 비율에 맞게 축소하여 렌더링합니다.
+- 기준 좌표계(large 기준)는 내부 20x20 영역을 (0,0)~(20,20)으로 사용합니다. 실제 렌더 트리는 `SizedBox(spec) > Padding(margin) > ClipRRect > CustomPaint(20x20)` 구조이므로, 체크 마크 좌표는 (0,0)~(20,20) 기준으로 그립니다.
+  ~~~ dart
+  const markPath = [
+    Offset(4.75, 9.75), // left-top-check-mark
+    Offset(8.5, 13.5),  // middle-bottom-check-mark
+    Offset(15.5, 6.5),  // top-right-check-mark
+  ];
+  ~~~
+- small(20x20, margin 2) 사이즈는 동일한 형태를 비율에 맞게 축소하여 렌더링합니다.
+
+### Checkbox - layout tree
+
+위젯 트리는 다음과 같습니다.
+
+```
+SizedBox(spec)
+  > Padding(margin)
+    > ClipRRect(borderRadius: WdsRadius.xs)
+      > CustomPaint(size: 20x20)
+```
 
 ### Checkbox - animation
 
@@ -1120,23 +1135,348 @@ true | 체크 상태, 체크 마크 표기 및 배경 채움
 
 ## Radio
 
-사용자가 여러 옵션 중에서 하나만 선택할 수 있도록 돕습니다.
+사용자가 여러 옵션 중에서 하나만 선택할 수 있도록 돕습니다. Checkbox와 달리 그룹 내에서 오직 하나의 항목만 선택 가능하며, `groupValue`와 개별 `value`를 비교하여 선택 여부를 판단합니다.
+
+Radio는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+value | `T` | 해당 Radio가 갖는 고유 값
+groupValue | `T?` | 현재 선택된 그룹 값 
+onChanged | `ValueChanged<T?>?` | 선택 시 호출되는 콜백
+isEnabled | `bool` | Radio 활성화 여부 (`false` 시 'disabled' 상태)
 
 ### Radio - size
 
-- small: 24x24
-- large: 20x20
+속성 | spec | margin | inner circle | 비고
+--- | --- | --- | --- | ---
+small | 20x20 | `EdgeInsets.all(1.67)` | 6.67px | 컴팩트
+large | 24x24 | `EdgeInsets.all(2)` | 10px | 기본
 
-로 나뉩니다.
+레이아웃: `SizedBox > Padding > radio`
 
-size가 small 일 때는 padding이 모든 방면으로 1.67px만큼, large일 때는 2px만큼 여백이 있습니다.
+### Radio - state
 
-padding:
-- small: `EdgeInsets.all(1.67)`
-- large: `EdgeInsets.all(2)`
+상태 | 설명
+--- | ---
+enabled | 상호작용 가능, `onChanged` 호출됨
+disabled | 상호작용 불가, 전체적으로 `opacity 0.4` 적용
 
-### Radio - value
+### Radio - value (선택 상태)
 
+상태 | border | backgroundColor | inner circle
+--- | --- | --- | ---
+선택됨 (`value == groupValue`) | 2px `WdsColors.statusPositive` (inside) | `WdsColors.white` | 원형, `WdsColors.primary`
+선택 안됨 (`value != groupValue`) | 1.25px `WdsColors.borderNeutral` (small) / 1.5px (large) | `null` | 없음
+
+### Radio - 생성 방법
+
+Radio는 제네릭 타입을 사용하여 다양한 값 타입을 지원합니다.
+
+``` dart
+WdsRadio<String>.small(
+  value: 'option1',
+  groupValue: selectedValue,
+  onChanged: (String? value) => setState(() => selectedValue = value),
+)
+
+WdsRadio<String>.large(
+  value: 'option2', 
+  groupValue: selectedValue,
+  onChanged: (String? value) => setState(() => selectedValue = value),
+)
+```
+
+
+## Toast
+
+화면에 잠시 나타났다 사라지는 짧은 알림 메시지로, 사용자가 수행한 작업에 대한 피드백을 제공합니다.
+
+Toast는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+message | `String` | 토스트에 표시될 메시지 내용
+leadingIcon | `WdsIcon?` | 선택사항인 앞쪽 아이콘 (icon variant에서만 사용)
+variant | `WdsToastVariant` | Toast의 표시 형태 (text 또는 icon)
+
+### Toast - variant
+
+정해진 Variant만 사용할 수 있습니다.
+
+- `text`: 텍스트만 표시하는 기본 형태
+- `icon`: 아이콘과 텍스트를 함께 표시하는 형태
+
+### Toast - 고정된 속성
+
+모든 Toast는 동일한 시각적 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+backgroundColor | `WdsColors.cta` (#121212) | 고정
+borderRadius | 8px | 고정
+typography | `WdsTypography.body14NormalMedium` | 
+textColor | `WdsColors.white` (#FFFFFF) |
+padding (outer) | `EdgeInsets.symmetric(horizontal: 16, vertical: 9)` | DecoratedBox 내부
+
+### Toast - layout
+
+variant에 따라 레이아웃 구조가 달라집니다.
+
+**text variant:**
+```
+DecoratedBox > Padding (outer) > Padding (inner) > Text
+```
+
+**icon variant:**
+```
+DecoratedBox > Padding (outer) > Row: (Padding > WdsIcon + Padding > Text)
+```
+
+### Toast - icon 속성 (icon variant)
+
+아이콘이 포함된 경우의 세부 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+iconSize | 24x24 |
+iconColor | `WdsColors.white` (#FFFFFF) |
+iconSpacing | 6px | 아이콘과 텍스트 사이 간격
+iconPadding | `EdgeInsets.symmetric(vertical: 3)` | 아이콘 상하 여백
+
+### Toast - padding
+
+variant에 따른 내부 패딩 구조입니다.
+
+variant | inner padding | 비고
+--- | --- | ---
+text | `EdgeInsets.symmetric(vertical: 5)` | 텍스트 주변 여백
+icon | `EdgeInsets.symmetric(vertical: 3)` (아이콘), `EdgeInsets.symmetric(vertical: 5)` (텍스트) | 각각 독립적 여백
+
+### Toast - 생성 방법
+
+named constructor로 생성할 수 있습니다.
+
+``` dart
+// 텍스트만 표시
+WdsToast.text(message: '저장되었습니다')
+
+// 아이콘과 함께 표시
+WdsToast.icon(
+  message: '작업이 완료되었습니다',
+  leadingIcon: WdsIcon.checkCircle,
+)
+```
+
+### Toast - 표시 유틸리티(show/dismiss)
+
+앱 어디에서나 간단히 토스트를 띄우고 자동으로 닫히도록 하기 위해 Overlay 기반 유틸리티를 제공합니다. Material(또는 Cupertino) 앱 컨텍스트 내에서 호출되어야 하며, 기본 지속시간은 2000ms입니다.
+
+``` dart
+// 텍스트 토스트
+final controller = WdsToastUtil.showText(
+  context,
+  message: '저장되었습니다',
+  duration: const Duration(milliseconds: 2000),
+);
+
+// 아이콘 토스트
+final controller2 = WdsToastUtil.showIcon(
+  context,
+  message: '작업이 완료되었습니다',
+  icon: WdsIcon.blank,
+  duration: const Duration(milliseconds: 1500),
+);
+
+// 수동 닫기
+controller.dismiss();
+```
+
+#### 구현/채택 근거
+- flutter/material의 `ScaffoldMessenger.showSnackBar`는 토스트의 디자인/레이아웃 제약과 다르며, 액션 버튼 등 스낵바 성격에 가깝습니다.
+- 네이티브(플랫폼 채널) 연동은 비용이 크고 WDS 일관 색/타이포/레이아웃 제어가 어렵습니다.
+- 따라서 Flutter Overlay 위에 `WdsToast`를 올리는 방식을 채택했습니다. SafeArea를 고려해 하단 중앙에 배치하고, 지정한 `Duration` 경과 시 자동 dismiss 합니다.
+
+## Snackbar
+
+사용자가 수행한 작업에 대한 피드백을 제공합니다. Toast와 달리 추가적인 조치를 취할 수 있는 버튼이 포함되어 있습니다.
+
+Snackbar는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+message | `String` | 주요 메시지 내용
+description | `String?` | 보조 설명 텍스트 (description variant에서만 사용)
+leadingIcon | `WdsIcon?` | 선택사항인 앞쪽 아이콘
+action | `Widget` | 우측에 위치하는 액션 버튼 (WdsTextButton)
+variant | `WdsSnackbarVariant` | Snackbar의 표시 형태
+
+### Snackbar - variant
+
+정해진 Variant만 사용할 수 있습니다.
+
+- `normal`: 단일 메시지와 액션 버튼
+- `description`: 주 메시지와 보조 설명이 함께 표시
+- `multiLine`: 2줄까지 표시 가능한 긴 메시지와 액션 버튼
+
+### Snackbar - 고정된 속성
+
+모든 Snackbar는 동일한 시각적 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+backgroundColor | `WdsColors.cta` (#121212) | 고정
+borderRadius | 8px | 고정
+padding | `EdgeInsets.fromLTRB(16, 9, 16, 9)` | 외부 패딩
+
+### Snackbar - layout
+
+variant에 따라 레이아웃 구조가 달라집니다.
+
+**normal variant:**
+```
+Row: (Expanded > Padding > Text) + SizedBox(8px) + WdsTextButton
+```
+
+**description variant:**
+```
+Row: (Expanded > Padding > Column(Text(주), Text(보조))) + SizedBox(8px) + WdsTextButton
+```
+
+**multiLine variant:**
+```
+Row: (Expanded > Padding > Text(maxLines: 2)) + SizedBox(8px) + WdsTextButton
+```
+
+### Snackbar - text 속성
+
+variant별 텍스트 스타일과 제약사항입니다.
+
+variant | message 속성 | description 속성 | maxLines | overflow
+--- | --- | --- | --- | ---
+normal | `WdsTypography.body14NormalMedium`, `WdsColors.white` | - | 1 | ellipsis
+description | `WdsTypography.body14NormalMedium`, `WdsColors.white` | `WdsTypography.caption12Regular`, `WdsColors.textAssistive` | 각각 1 | ellipsis
+multiLine | `WdsTypography.caption12Regular`, `WdsColors.textAssistive` | - | 2 | ellipsis
+
+### Snackbar - padding
+
+모든 variant에서 내부 텍스트 영역은 동일한 패딩을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+text padding | `EdgeInsets.symmetric(vertical: 5)` | Expanded 내부 Padding
+
+### Snackbar - leadingIcon (선택사항)
+
+아이콘이 포함된 경우의 세부 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+iconSize | 24x24 |
+iconColor | `WdsColors.white` (#FFFFFF) |
+iconSpacing | 6px | 아이콘과 콘텐츠 사이 간격
+iconPosition | centerLeft | 세로 중앙 정렬
+
+### Snackbar - action
+
+우측에 위치하는 액션 버튼의 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+component | `WdsTextButton` | 
+variant | `.underline` 또는 `.icon` | 
+spacing | 8px | 콘텐츠와 액션 버튼 사이 간격
+
+
+## Tooltip
+
+설명적 내용이 필요한 경우에 사용합니다.
+
+Tooltip은 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+message | `String` | 툴팁에 표시될 메시지
+hasArrow | `bool` | 화살표 표시 여부 (`true` 시 화살표 표시)
+hasCloseButton | `bool` | 닫기 버튼 표시 여부 (`true` 시 우측에 닫기 버튼 표시)
+alignment | `WdsTooltipAlignment` | 툴팁 위치 설정
+onClose | `VoidCallback?` | 닫기 버튼이 눌렸을 때 콜백 (hasCloseButton이 true일 때만)
+
+### Tooltip - 고정된 속성
+
+모든 Tooltip은 동일한 시각적 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+backgroundColor | `WdsColors.cta` (#121212) | 고정
+borderRadius | `WdsRadius.sm` | 고정
+typography | `WdsTypography.body14NormalMedium` | 
+textColor | `WdsColors.white` (#FFFFFF) |
+minWidth | 64px | 최소 너비
+padding | `EdgeInsets.fromLTRB(10, 8, 10, 8)` | 외부 패딩
+contentPadding | `EdgeInsets.symmetric(horizontal: 2)` | 텍스트 내부 패딩
+
+### Tooltip - arrow
+
+화살표가 표시되는 경우의 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+arrowWidth | 24px | 고정
+arrowHeight | 8px | 고정
+arrowTriangleWidth | 12px | 실제 삼각형 너비 (24px - 6px - 6px)
+sidePadding | 6px | 화살표 양쪽 여백
+tipPadding | 1.54px | 화살표 끝 부분 여백
+
+화살표는 alignment에 따라 회전되며, 이등변삼각형으로 렌더링됩니다. 툴팁 컨테이너와의 시각적 연결을 위해 1px overlap이 적용됩니다.
+
+### Tooltip - closeButton
+
+닫기 버튼이 표시되는 경우의 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+icon | `WdsIcon.close` | 고정 아이콘, 다른 아이콘 사용 불가
+buttonSize | 20x20px | 고정 영역
+spacing | 8px | 콘텐츠와 버튼 사이 간격
+position | 우측 | 텍스트와 같은 행에 위치
+layout | hug content | 콘텐츠 크기에 맞춰 축소 (Flexible 사용)
+
+### Tooltip - alignment
+
+툴팁의 위치를 결정하는 열거형입니다.
+
+alignment | 설명
+--- | ---
+topLeft | 대상의 왼쪽 위에 위치, 화살표는 아래쪽 왼쪽을 향함
+topCenter | 대상의 중앙 위에 위치, 화살표는 아래쪽 중앙을 향함
+topRight | 대상의 오른쪽 위에 위치, 화살표는 아래쪽 오른쪽을 향함
+rightTop | 대상의 오른쪽 위에 위치, 화살표는 왼쪽 위를 향함
+rightCenter | 대상의 오른쪽 중앙에 위치, 화살표는 왼쪽 중앙을 향함
+rightBottom | 대상의 오른쪽 아래에 위치, 화살표는 왼쪽 아래를 향함
+bottomLeft | 대상의 왼쪽 아래에 위치, 화살표는 위쪽 왼쪽을 향함
+bottomCenter | 대상의 중앙 아래에 위치, 화살표는 위쪽 중앙을 향함
+bottomRight | 대상의 오른쪽 아래에 위치, 화살표는 위쪽 오른쪽을 향함
+leftTop | 대상의 왼쪽 위에 위치, 화살표는 오른쪽 위를 향함
+leftCenter | 대상의 왼쪽 중앙에 위치, 화살표는 오른쪽 중앙을 향함
+leftBottom | 대상의 왼쪽 아래에 위치, 화살표는 오른쪽 아래를 향함
+
+### Tooltip - layout
+
+hasCloseButton에 따라 레이아웃 구조가 달라집니다.
+
+**hasCloseButton = false:**
+```
+CustomPaint > DecoratedBox > Padding > Text
+```
+
+**hasCloseButton = true:**
+```
+CustomPaint > DecoratedBox > Padding > Row(mainAxisSize.min): (Flexible > Text) + SizedBox(8px) + IconButton(20x20)
+```
+
+닫기 버튼이 있는 경우 `Row`는 `MainAxisSize.min`으로 설정되고, 텍스트는 `Flexible`로 감싸져 콘텐츠 크기에 맞춰 축소됩니다 (hug content). 닫기 아이콘은 `WdsIcon.close`로 고정됩니다.
+  
 - true: border 2px `WdsColors.primary`
 - false
 

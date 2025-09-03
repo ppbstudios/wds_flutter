@@ -79,7 +79,9 @@ class _AtomicGenerationState {
 class _SemanticGenerationState {
   bool generatedSemanticColor = false;
   bool generatedSemanticTypography = false;
+  bool generatedSemanticShadow = false;
   final Set<String> semanticColorParts = {};
+  final Set<String> semanticShadowParts = {};
 }
 
 String _pascalCase(String input) {

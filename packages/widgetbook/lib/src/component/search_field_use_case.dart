@@ -10,7 +10,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 Widget buildWdsSearchFieldUseCase(BuildContext context) {
   return WidgetbookPageLayout(
     title: 'SearchField',
-    description: '검색 입력을 위한 필드 컴포넌트입니다. 고정 높이 36, full radius, 배경 alternative.',
+    description: '콘텐츠를 검색할때 사용합니다.',
     children: [
       _buildPlaygroundSection(context),
       _buildDemonstrationSection(context),

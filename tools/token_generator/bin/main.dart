@@ -379,6 +379,14 @@ Future<void> _generateSemantic({
     if (verbose) stdout.writeln('생성 완료: ${file.path}');
   }
 
+  // semantic/shadow
+  await _generateSemanticShadow(
+    jsonMap: jsonMap,
+    outDir: outDir,
+    verbose: verbose,
+    state: state,
+  );
+
   if (sync) {
     await _syncSemanticOutputs(
       outDir: outDir,

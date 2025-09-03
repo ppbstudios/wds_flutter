@@ -153,7 +153,22 @@ class _SemanticColorShowcase extends StatelessWidget {
         ),
         const _SwatchGroup(
           items: [
-            _SwatchItem(label: 'Normal', shadows: <BoxShadow>[]),
+            _SwatchItem(
+              label: 'Normal',
+              shadows: WdsShaows.normal,
+            ),
+            _SwatchItem(
+              label: 'Emphasize',
+              shadows: WdsShaows.emphasize,
+            ),
+            _SwatchItem(
+              label: 'Strong',
+              shadows: WdsShaows.strong,
+            ),
+            _SwatchItem(
+              label: 'Heavy',
+              shadows: WdsShaows.heavy,
+            ),
           ],
         ),
         Text(
@@ -162,6 +177,26 @@ class _SemanticColorShowcase extends StatelessWidget {
           style: WdsTypography.caption12Bold.copyWith(
             color: WdsColors.textStrong,
           ),
+        ),
+        const _SwatchGroup(
+          items: [
+            _SwatchItem(
+              label: 'Normal',
+              shadows: WdsShaows.normalCoolNeutral,
+            ),
+            _SwatchItem(
+              label: 'Emphasize',
+              shadows: WdsShaows.emphasizeCoolNeutral,
+            ),
+            _SwatchItem(
+              label: 'Strong',
+              shadows: WdsShaows.strongCoolNeutral,
+            ),
+            _SwatchItem(
+              label: 'Heavy',
+              shadows: WdsShaows.heavyCoolNeutral,
+            ),
+          ],
         ),
       ],
     );
@@ -270,16 +305,17 @@ class _Swatch extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 48,
-            height: 48,
+            width: 64,
+            height: 64,
             decoration: BoxDecoration(
               color: color ?? WdsSemanticColorBackgroud.normal,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.black12),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              border:
+                  shadows != null ? null : Border.all(color: Colors.black12),
               boxShadow: shadows,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 9),
           Text(
             label,
             textAlign: TextAlign.center,
@@ -290,5 +326,3 @@ class _Swatch extends StatelessWidget {
     );
   }
 }
-
-// (removed) _ElevationSwatchItem: 기능이 _SwatchItem + _Swatch로 대체되었습니다.

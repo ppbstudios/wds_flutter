@@ -1,16 +1,16 @@
 part of '../../wds_components.dart';
 
 enum WdsCheckboxSize {
-  small(spec: Size(20, 20), padding: EdgeInsets.all(2)),
-  large(spec: Size(24, 24), padding: EdgeInsets.all(3));
+  small(spec: Size(20, 20), margin: EdgeInsets.all(2)),
+  large(spec: Size(24, 24), margin: EdgeInsets.all(3));
 
   const WdsCheckboxSize({
     required this.spec,
-    required this.padding,
+    required this.margin,
   });
 
   final Size spec;
-  final EdgeInsets padding;
+  final EdgeInsets margin;
 }
 
 class WdsCheckbox extends StatefulWidget {
@@ -39,7 +39,8 @@ class WdsCheckbox extends StatefulWidget {
 
 class _WdsCheckboxState extends State<WdsCheckbox>
     with SingleTickerProviderStateMixin {
-  static const Duration _duration = Duration(milliseconds: 300);
+  static const Duration _duration = Duration.zero;
+
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: _duration,
@@ -75,16 +76,20 @@ class _WdsCheckboxState extends State<WdsCheckbox>
     final Size boxSize = widget.size.spec;
     final BorderRadius radius =
         const BorderRadius.all(Radius.circular(WdsRadius.xs));
+    final EdgeInsets outerMargin = widget.size.margin;
+    final Size innerSize = Size(
+      boxSize.width - outerMargin.left - outerMargin.right,
+      boxSize.height - outerMargin.top - outerMargin.bottom,
+    );
 
     Widget paint = AnimatedBuilder(
       animation: _controller,
       builder: (context, _) {
         final double t = Curves.easeIn.transform(_controller.value);
         return CustomPaint(
-          size: boxSize,
+          size: innerSize,
           painter: _CheckboxPainter(
             animationValue: t,
-            sizeSpec: widget.size,
             isChecked: widget.value,
             isEnabled: widget.isEnabled,
           ),
@@ -92,9 +97,15 @@ class _WdsCheckboxState extends State<WdsCheckbox>
       },
     );
 
-    Widget box = ClipRRect(
-      borderRadius: radius,
-      child: SizedBox.fromSize(size: boxSize, child: paint),
+    Widget box = SizedBox.fromSize(
+      size: boxSize,
+      child: Padding(
+        padding: outerMargin,
+        child: ClipRRect(
+          borderRadius: radius,
+          child: SizedBox.fromSize(size: innerSize, child: paint),
+        ),
+      ),
     );
 
     box = GestureDetector(
@@ -113,19 +124,17 @@ class _WdsCheckboxState extends State<WdsCheckbox>
 class _CheckboxPainter extends CustomPainter {
   _CheckboxPainter({
     required this.animationValue, // 0.0..1.0
-    required this.sizeSpec,
     required this.isChecked,
     required this.isEnabled,
   });
 
   final double animationValue;
-  final WdsCheckboxSize sizeSpec;
   final bool isChecked;
   final bool isEnabled;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Rect outer = Offset.zero & sizeSpec.spec;
+    final Rect outer = Offset.zero & size;
     final RRect rrect = RRect.fromRectAndRadius(
       outer,
       const Radius.circular(WdsRadius.xs),
@@ -137,29 +146,29 @@ class _CheckboxPainter extends CustomPainter {
         ..color = (isEnabled ? WdsColors.cta : WdsColors.cta.withAlpha(40));
       canvas.drawRRect(rrect, fill);
     } else {
+      const double strokeWidth = 1.5;
       final Paint border = Paint()
         ..color = WdsColors.borderNeutral
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 1;
-      canvas.drawRRect(rrect, border);
+        ..strokeWidth = strokeWidth;
+      final RRect inside = rrect.deflate(strokeWidth / 2);
+      canvas.drawRRect(inside, border);
     }
 
     // Check mark
     if (isChecked) {
-      final double pad = sizeSpec.padding.left;
-      final double inner = sizeSpec.spec.width - pad * 2;
-      final double scale = inner / 20.0; // large=1.0, small=0.8
+      final double scale = size.width / 20.0; // 20단위 좌표계를 비례 스케일
 
       const markPath = [
-        Offset(3.5, 9.5),
-        Offset(8.5, 15),
-        Offset(17.5, 5),
+        Offset(4.75, 9.75),
+        Offset(8.5, 13.5),
+        Offset(15.5, 6.5),
       ];
 
       Path mark = Path();
       Offset p(Offset offset) => Offset(
-            pad + offset.dx * scale,
-            pad + offset.dy * scale,
+            offset.dx * scale,
+            offset.dy * scale,
           );
       mark.moveTo(p(markPath[0]).dx, p(markPath[0]).dy);
       mark.lineTo(p(markPath[1]).dx, p(markPath[1]).dy);
@@ -185,7 +194,6 @@ class _CheckboxPainter extends CustomPainter {
   bool shouldRepaint(covariant _CheckboxPainter oldDelegate) {
     return animationValue != oldDelegate.animationValue ||
         isChecked != oldDelegate.isChecked ||
-        isEnabled != oldDelegate.isEnabled ||
-        sizeSpec != oldDelegate.sizeSpec;
+        isEnabled != oldDelegate.isEnabled;
   }
 }

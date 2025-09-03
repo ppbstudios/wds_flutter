@@ -115,28 +115,38 @@ class _WdsTextButtonState extends State<WdsTextButton>
 
   @override
   Widget build(BuildContext context) {
+    final Color effectiveColor =
+        widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable;
     final double height = _TextButtonHeightBySize.of(widget.size);
     final EdgeInsets padding = _TextButtonPaddingBySize.of(widget.size);
     final TextStyle baseTypography =
         _TextButtonTypographyBySize.of(widget.size).copyWith(
-      color: widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable,
+      color: effectiveColor,
     );
     final BorderRadius borderRadius = BorderRadius.circular(WdsRadius.xs);
 
     // Compose child: force typography for Text
     Widget content = Padding(padding: padding, child: widget.child);
 
+    // If child is Text and has a style.color, respect only that color
+    Color contentColor = effectiveColor;
+    if (widget.isEnabled && widget.child is Text) {
+      final Text textChild = widget.child as Text;
+      final Color? childColor = textChild.style?.color;
+      if (childColor != null) {
+        contentColor = childColor;
+      }
+    }
+
     if (widget.child is Text) {
       final Text childText = widget.child as Text;
-      final TextStyle merged =
-          childText.style?.merge(baseTypography) ?? baseTypography;
+      TextStyle merged = baseTypography.copyWith(color: contentColor);
 
       TextDecoration? decoration;
       Color? decorationColor;
       if (widget.variant == WdsTextButtonVariant.underline) {
         decoration = TextDecoration.underline;
-        decorationColor =
-            widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable;
+        decorationColor = contentColor;
       }
 
       content = Padding(
@@ -172,8 +182,7 @@ class _WdsTextButtonState extends State<WdsTextButton>
     // trailing icon for icon variant
     if (widget.variant == WdsTextButtonVariant.icon) {
       final (double w, double h) = _TextButtonIconSizeBySize.of(widget.size);
-      final Color iconColor =
-          widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable;
+      final Color iconColor = contentColor;
       content = Row(
         mainAxisSize: MainAxisSize.min,
         children: [

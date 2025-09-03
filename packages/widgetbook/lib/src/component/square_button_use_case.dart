@@ -10,8 +10,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 Widget buildWdsSquareButtonUseCase(BuildContext context) {
   return WidgetbookPageLayout(
     title: 'SquareButton',
-    description:
-        '고정된 크기와 타이포그래피, 패딩을 가지는 사각형 버튼입니다.\nhover/pressed 시 동일한 피드백 오버레이를 제공하며, 비활성 상태는 투명도로 표현합니다.',
+    description: '사용자가 원하는 동작을 수행할 수 있도록 돕습니다.',
     children: [
       _buildPlaygroundSection(context),
       _buildDemonstrationSection(context),

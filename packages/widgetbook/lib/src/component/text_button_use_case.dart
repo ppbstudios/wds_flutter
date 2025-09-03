@@ -159,7 +159,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
       const SizedBox(height: 32),
       WidgetbookSubsection(
         title: 'state',
-        labels: ['enabled (true)', 'disabled (false)'],
+        labels: ['enabled', 'disabled'],
         content: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
