@@ -51,6 +51,12 @@ class SearchField {}
 class TextField {}
 
 /// 컴포넌트 path 관리를 위한 클래스
+class PaginationDot {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class PaginationCount {}
+
+/// 컴포넌트 path 관리를 위한 클래스
 class Chip {}
 
 /// 컴포넌트 path 관리를 위한 클래스
