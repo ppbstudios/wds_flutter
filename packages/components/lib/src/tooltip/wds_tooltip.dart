@@ -200,11 +200,10 @@ class _TooltipPainter extends CustomPainter {
   }
 
   void _drawArrow(Canvas canvas, Size size, Paint paint) {
-    const arrowWidth = 24.0;
     const arrowHeight = 8.0;
     const sidePadding = 6.0;
     const tipPadding = 1.54;
-    const triangleWidth = arrowWidth - sidePadding * 2; // 12px
+    const triangleWidth = 12.0;
 
     late Path path;
 
@@ -214,7 +213,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.topLeft:
         path = _createBottomLeftArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -224,7 +222,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.topCenter:
         path = _createBottomCenterArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -234,7 +231,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.topRight:
         path = _createBottomRightArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -246,7 +242,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.rightTop:
         path = _createLeftTopArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -256,7 +251,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.rightCenter:
         path = _createLeftCenterArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -266,7 +260,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.rightBottom:
         path = _createLeftBottomArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -278,7 +271,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.bottomLeft:
         path = _createTopLeftArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -288,7 +280,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.bottomCenter:
         path = _createTopCenterArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -298,7 +289,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.bottomRight:
         path = _createTopRightArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -310,7 +300,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.leftTop:
         path = _createRightTopArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -320,7 +309,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.leftCenter:
         path = _createRightCenterArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -330,7 +318,6 @@ class _TooltipPainter extends CustomPainter {
       case WdsTooltipAlignment.leftBottom:
         path = _createRightBottomArrow(
           size,
-          arrowWidth,
           arrowHeight,
           sidePadding,
           triangleWidth,
@@ -342,7 +329,7 @@ class _TooltipPainter extends CustomPainter {
     canvas.drawPath(path, paint);
   }
 
-  // ── 위치 보조 계산 함수 ─────────────────────────────────────────────────
+  // 위치 보조 계산 함수
   double _calculateSlotX(
     Size size,
     double triangleWidth,
@@ -365,10 +352,9 @@ class _TooltipPainter extends CustomPainter {
     return minY + (maxY - minY) * fraction.clamp(0.0, 1.0);
   }
 
-  // ── Edge 별 위치 지정 버전(가변 center) ────────────────────────────────────
+  // Edge 별 위치 지정 버전(가변 center)
   Path _createTopArrowAt(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -391,7 +377,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createBottomArrowAt(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -414,7 +399,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createLeftArrowAt(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -422,7 +406,8 @@ class _TooltipPainter extends CustomPainter {
     double fractionY,
   ) {
     final path = Path();
-    final centerY = _calculateSlotY(size, triangleWidth, 0, fractionY);
+    final centerY =
+        _calculateSlotY(size, triangleWidth, sidePadding, fractionY);
     final left = -arrowHeight;
     const overlap = 1.0;
 
@@ -436,7 +421,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createRightArrowAt(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -444,7 +428,8 @@ class _TooltipPainter extends CustomPainter {
     double fractionY,
   ) {
     final path = Path();
-    final centerY = _calculateSlotY(size, triangleWidth, 0, fractionY);
+    final centerY =
+        _calculateSlotY(size, triangleWidth, sidePadding, fractionY);
     final right = size.width + arrowHeight;
     const overlap = 1.0;
 
@@ -460,7 +445,6 @@ class _TooltipPainter extends CustomPainter {
   // Top edge
   Path _createTopLeftArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -468,7 +452,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createTopArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
@@ -478,7 +461,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createTopCenterArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -486,7 +468,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createTopArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
@@ -496,7 +477,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createTopRightArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -504,7 +484,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createTopArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
@@ -515,7 +494,6 @@ class _TooltipPainter extends CustomPainter {
   // Bottom edge
   Path _createBottomLeftArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -523,7 +501,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createBottomArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
@@ -533,7 +510,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createBottomCenterArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -541,7 +517,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createBottomArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
@@ -551,7 +526,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createBottomRightArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -559,18 +533,16 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createBottomArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
         tipPadding,
-        1,
+        0,
       );
 
   // Left edge
   Path _createLeftTopArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -578,7 +550,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createLeftArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
@@ -588,7 +559,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createLeftCenterArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -596,7 +566,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createLeftArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
@@ -606,7 +575,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createLeftBottomArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -614,7 +582,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createLeftArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
@@ -625,7 +592,6 @@ class _TooltipPainter extends CustomPainter {
   // Right edge
   Path _createRightTopArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -633,7 +599,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createRightArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
@@ -643,7 +608,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createRightCenterArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -651,7 +615,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createRightArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
@@ -661,7 +624,6 @@ class _TooltipPainter extends CustomPainter {
 
   Path _createRightBottomArrow(
     Size size,
-    double arrowWidth,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
@@ -669,7 +631,6 @@ class _TooltipPainter extends CustomPainter {
   ) =>
       _createRightArrowAt(
         size,
-        arrowWidth,
         arrowHeight,
         sidePadding,
         triangleWidth,
