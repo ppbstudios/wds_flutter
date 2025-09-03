@@ -843,6 +843,72 @@ underline | 선택됨 | 높이 2px, 너비 탭 full, color `WdsColors.black` |
 underline | 선택 안됨 | 1px solid `WdsColors.borderAlternative` |
 탭 개수 | - | 2개 또는 3개 |
 
+---
+
+## PaginationDot
+
+페이지를 작은 점(dot) 형태로 표시하여 사용자가 현재 페이지와 다른 페이지로 쉽게 이동할 수 있도록 돕습니다.
+
+PaginationDot은 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+isActive | `bool` | 'true' : 현재 페이지 / 'false' : 비활성 페이지
+
+### PaginationDot - variant
+
+| 항목          | 값              | 비고 |
+|---------------|-----------------|------|
+| dot 최소 개수 | 2               | 1개는 의미 없음 |
+| dot 최대 개수 | 제한 없음       | 10개 이상 시 가독성 저하 |
+
+### PaginationDot - style
+
+| 항목 | 상태/조건 | 값   | 비고 |
+| --- | ------  | --- | --- |
+| size            |    -    | `Size(6, 6)` |
+| backgroundColor | active | `WdsColors.textNormal` |
+| backgroundColor | inactive | `WdsColors.textAssistive` |
+
+## PaginationCount
+페이지 번호를 숫자 형태로 표시하는 페이지네이션 방식입니다.
+
+PaginationCount는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+| currentPage | `int` | 현재 페이지
+| totalPage | `int` | 전체 페이지
+
+
+### PaginationCount - style
+
+항목 | 상태/조건 | 값 | 비고
+--- | --- | --- | ---
+width      | - | `Hug` | 페이지 수에 따라 유동적 
+background | - | `WdsColors.cta` | 배경 색
+background.opacity | - | `WdsOpacity.opacity80` | 배경 투명도
+radius  | - | `WdsRadius.full` | pill 형태 유지
+padding | - | `EdgeInsets.fromLTRB(10, 4, 10, 4)` | 내부 여백 설정
+
+### PaginationCount - textStyle (current / total)
+항목 | 상태 | 값 | 비고
+--- | --- | --- | ---
+text.typography | - | `WdsSemanticTypography.caption11Regular` | 텍스트 타이포그래피 
+text.color | current | `WdsColors.white` | 현재 페이지 텍스트 색상
+text.color | total | `WdsColors.textAssistive` | 전체 페이지 텍스트 색상
+text.opacity | - | `WdsOpacity.opacity80` | 전체 페이지 텍스트 투명도
+separator.spacing | - | 3px | current/total 시각적 구분 확보
+
+### PaginationCount - textStyle (separator)
+항목 | 상태 | 값 | 비고
+--- | --- | --- | ---
+text | - | `/` |   구분 텍스트
+text.typography | - | `WdsSemanticTypography.caption11Regular` | 텍스트 타이포그래피 
+text.color | - | `WdsColors.textAlternative` |  구분 텍스트 색상
+
+---
+
 ## ActionArea
 화면 하단에서 주요 액션(결제, 다음 단계 등)을 안정적으로 수행하게 하는 영역입니다.
 
