@@ -96,9 +96,17 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 32,
           children: [
             _CheckboxDemo(size: WdsCheckboxSize.small, enabled: true),
-            _CheckboxDemo(size: WdsCheckboxSize.small, enabled: false),
+            _CheckboxFixedValue(
+              size: WdsCheckboxSize.small,
+              enabled: false,
+              value: true,
+            ),
             _CheckboxDemo(size: WdsCheckboxSize.large, enabled: true),
-            _CheckboxDemo(size: WdsCheckboxSize.large, enabled: false),
+            _CheckboxFixedValue(
+              size: WdsCheckboxSize.large,
+              enabled: false,
+              value: true,
+            ),
           ],
         ),
       ),
