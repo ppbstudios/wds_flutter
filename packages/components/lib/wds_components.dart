@@ -10,7 +10,6 @@ import 'package:flutter/material.dart'
         TextSelectionThemeData;
 import 'package:flutter/widgets.dart';
 import 'package:wds_foundation/wds_foundation.dart';
-import 'package:wds_tokens/wds_tokens.dart';
 
 part 'src/action_area/wds_action_area.dart';
 part 'src/button/button.dart';
@@ -22,10 +21,11 @@ part 'src/divider/wds_divider.dart';
 part 'src/header/wds_header.dart';
 part 'src/icon/wds_icon_button.dart';
 part 'src/navigation/wds_bottom_navigation.dart';
-part 'src/radio/wds_radio.dart';
 part 'src/pagination/wds_count_pagination.dart';
 part 'src/pagination/wds_dot_pagination.dart';
+part 'src/radio/wds_radio.dart';
 part 'src/select/wds_select.dart';
+part 'src/slider/wds_slider.dart';
 part 'src/snackbar/wds_snackbar.dart';
 part 'src/switch/wds_switch.dart';
 part 'src/tab/wds_tab.dart';
