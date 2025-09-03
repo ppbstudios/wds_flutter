@@ -27,8 +27,8 @@ class WdsCountPagination extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
       decoration: BoxDecoration(
-        color: WdsColors.cta.withOpacity(WdsOpacity.opacity80),
-        borderRadius: BorderRadius.circular(WdsAtomicRadius.full),
+        color: WdsColors.cta.withAlpha(WdsOpacity.opacity80.toAlpha()),
+        borderRadius: BorderRadius.circular(WdsRadius.full),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -36,8 +36,8 @@ class WdsCountPagination extends StatelessWidget {
           // 현재 페이지 텍스트
           Text(
             currentPage.toString(),
-            style: WdsSemanticTypography.caption11Regular.copyWith(
-              color: WdsColors.white.withOpacity(WdsOpacity.opacity80),
+            style: WdsTypography.caption11Regular.copyWith(
+              color: WdsColors.white.withAlpha(WdsOpacity.opacity80.toAlpha()),
             ),
           ),
           // 구분자
@@ -45,7 +45,7 @@ class WdsCountPagination extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 3),
             child: Text(
               '/',
-              style: WdsSemanticTypography.caption11Regular.copyWith(
+              style: WdsTypography.caption11Regular.copyWith(
                 color: WdsColors.textAlternative,
               ),
             ),
@@ -53,8 +53,9 @@ class WdsCountPagination extends StatelessWidget {
           // 전체 페이지 텍스트
           Text(
             totalPage.toString(),
-            style: WdsSemanticTypography.caption11Regular.copyWith(
-              color: WdsColors.textAssistive.withOpacity(WdsOpacity.opacity80),
+            style: WdsTypography.caption11Regular.copyWith(
+              color: WdsColors.textAssistive
+                  .withAlpha(WdsOpacity.opacity80.toAlpha()),
             ),
           ),
         ],
