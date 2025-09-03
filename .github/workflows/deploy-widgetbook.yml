@@ -76,14 +76,12 @@ jobs:
 
       - name: Deploy Preview to Netlify (PR)
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
-        uses: nwtgck/actions-netlify@v3.0
-        with:
-          publish-dir: './packages/widgetbook/build/web'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Preview for ${{ github.event.pull_request.head.ref }}"
-          enable-pull-request-comment: false
-          enable-commit-comment: false
-          alias: ${{ steps.alias.outputs.alias }}
+        id: deploy
+        run: |
+          DEPLOY_OUTPUT=$(npx netlify-cli deploy --dir=packages/widgetbook/build/web --message="Preview for ${{ github.event.pull_request.head.ref }}" --alias=${{ steps.alias.outputs.alias }})
+          echo "deploy_output<<EOF" >> $GITHUB_OUTPUT
+          echo "$DEPLOY_OUTPUT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -95,8 +93,12 @@ jobs:
           script: |
             const branchName = context.payload.pull_request.head.ref;
             const alias = '${{ steps.alias.outputs.alias }}';
-            const siteId = '${{ secrets.NETLIFY_SITE_ID }}';
-            const previewUrl = `https://${alias}--${siteId}.netlify.app`;
+            const deployOutput = '${{ steps.deploy.outputs.deploy_output }}';
+            
+            // Extract URL from deploy output
+            const urlMatch = deployOutput.match(/https:\/\/[^\s]+\.netlify\.app/);
+            const previewUrl = urlMatch ? urlMatch[0] : `https://${alias}--winc-design-system.netlify.app`;
+            
             const body = `🎨 **Widgetbook Preview**\n\n🧭 Branch: \`${branchName}\`\n🔗 [Preview URL](${previewUrl})\n\n💡 This preview will be updated automatically when you push new commits.`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
