@@ -988,7 +988,7 @@ SizedBox.fromSize(
 
 ### Checkbox - size
 
-속성 | spec | padding | 비고
+속성 | spec | margin | 비고
 --- | --- | --- | ---
 large | 24x24 | `EdgeInsets.all(3)` | 기본
 small | 20x20 | `EdgeInsets.all(2)` | 컴팩트
@@ -996,16 +996,16 @@ small | 20x20 | `EdgeInsets.all(2)` | 컴팩트
 e.g. enum
 ``` dart
 enum WdsCheckboxSize {
-  small(spec: Size(20, 20), padding: EdgeInsets.all(2)),
-  large(spec: Size(24, 24), padding: EdgeInsets.all(3));
+  small(spec: Size(20, 20), margin: EdgeInsets.all(2)),
+  large(spec: Size(24, 24), margin: EdgeInsets.all(3));
 
   const WdsCheckboxSize({
     required this.spec,
-    required this.padding,
+    required this.margin,
   });
 
   final Size spec;
-  final EdgeInsets padding;
+  final EdgeInsets margin;
 }
 ```
 
@@ -1031,18 +1031,33 @@ true | 체크 상태, 체크 마크 표기 및 배경 채움
 ### Checkbox - border & radius
 
 - `true`: `border = null`
-- `false`: `border = BorderSide(color: WdsColors.borderNeutral)`
+- `false`: `border = BorderSide(color: WdsColors.borderNeutral, width: 1.5)`
 - `borderRadius`: `WdsRadius.xs` (size와 무관하게 동일)
 
 ### Checkbox - check mark
 
 - 체크 마크는 `value == true`일 때만 노출됩니다.
 - 그려지는 방향은 왼쪽에서 오른쪽으로 진행합니다.
-- 기준 좌표계(large, 24x24 기준): 패딩 3px을 제외한 내부 20x20 영역을 (0,0)~(20,20)으로 사용합니다.
-  - left-top-check-mark: (3,8), (2,9), (3,9)
-  - middle-bottom-check-mark: (6,13), (7,13)
-  - top-right-check-mark: (14,4), (14,5), (15,5), (13,4)
-- small(20x20, padding 2) 사이즈는 동일한 형태를 비율에 맞게 축소하여 렌더링합니다.
+- 기준 좌표계(large 기준)는 내부 20x20 영역을 (0,0)~(20,20)으로 사용합니다. 실제 렌더 트리는 `SizedBox(spec) > Padding(margin) > ClipRRect > CustomPaint(20x20)` 구조이므로, 체크 마크 좌표는 (0,0)~(20,20) 기준으로 그립니다.
+  ~~~ dart
+  const markPath = [
+    Offset(4.75, 9.75), // left-top-check-mark
+    Offset(8.5, 13.5),  // middle-bottom-check-mark
+    Offset(15.5, 6.5),  // top-right-check-mark
+  ];
+  ~~~
+- small(20x20, margin 2) 사이즈는 동일한 형태를 비율에 맞게 축소하여 렌더링합니다.
+
+### Checkbox - layout tree
+
+위젯 트리는 다음과 같습니다.
+
+```
+SizedBox(spec)
+  > Padding(margin)
+    > ClipRRect(borderRadius: WdsRadius.xs)
+      > CustomPaint(size: 20x20)
+```
 
 ### Checkbox - animation
 
@@ -1067,10 +1082,12 @@ isEnabled | `bool` | Radio 활성화 여부 (`false` 시 'disabled' 상태)
 
 ### Radio - size
 
-속성 | spec | padding | inner circle | 비고
+속성 | spec | margin | inner circle | 비고
 --- | --- | --- | --- | ---
 small | 20x20 | `EdgeInsets.all(1.67)` | 6.67px | 컴팩트
 large | 24x24 | `EdgeInsets.all(2)` | 10px | 기본
+
+레이아웃: `SizedBox > Padding > radio`
 
 ### Radio - state
 
