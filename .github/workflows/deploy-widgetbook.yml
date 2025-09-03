@@ -15,6 +15,7 @@ on:
       - 'packages/widgetbook/**'
       - 'packages/foundation/**'
       - 'packages/tokens/**'
+    # Only run push workflow if there's no open PR for this branch
   workflow_dispatch:  # Manual trigger for maintainers
 
 env:
@@ -29,7 +30,7 @@ jobs:
       issues: write
     concurrency:
       group: widgetbook-${{ github.ref }}
-      cancel-in-progress: false
+      cancel-in-progress: true
     
     steps:
       - name: Checkout code
@@ -77,11 +78,9 @@ jobs:
       - name: Deploy Preview to Netlify (PR)
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         id: deploy
-        run: |
-          DEPLOY_OUTPUT=$(npx netlify-cli deploy --dir=packages/widgetbook/build/web --message="Preview for ${{ github.event.pull_request.head.ref }}" --alias=${{ steps.alias.outputs.alias }})
-          echo "deploy_output<<EOF" >> $GITHUB_OUTPUT
-          echo "$DEPLOY_OUTPUT" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=packages/widgetbook/build/web --message="Preview for ${{ github.event.pull_request.head.ref }}" --alias=${{ steps.alias.outputs.alias }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -92,31 +91,24 @@ jobs:
         with:
           script: |
             const branchName = context.payload.pull_request.head.ref;
-            const alias = '${{ steps.alias.outputs.alias }}';
-            const deployOutput = '${{ steps.deploy.outputs.deploy_output }}';
+            const deployUrl = '${{ steps.deploy.outputs.NETLIFY_URL }}';
             
-            // Extract URL from deploy output
-            const urlMatch = deployOutput.match(/https:\/\/[^\s]+\.netlify\.app/);
-            const previewUrl = urlMatch ? urlMatch[0] : `https://${alias}--winc-design-system.netlify.app`;
+            const body = '🎨 **Widgetbook Preview**\n\n🧭 Branch: `' + branchName + '`\n🔗 [Preview URL](' + deployUrl + ')\n\n💡 This preview will be updated automatically when you push new commits.';
             
-            const body = `🎨 **Widgetbook Preview**\n\n🧭 Branch: \`${branchName}\`\n🔗 [Preview URL](${previewUrl})\n\n💡 This preview will be updated automatically when you push new commits.`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body,
-            })
+              body: body
+            });
 
 
 
-      - name: Deploy to Netlify
+      - name: Deploy to Netlify (Production)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: nwtgck/actions-netlify@v3.0
+        uses: netlify/actions/cli@master
         with:
-          publish-dir: './packages/widgetbook/build/web'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-          production-deploy: true
+          args: deploy --dir=packages/widgetbook/build/web --message="Deploy from GitHub Actions" --prod
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
