@@ -1,23 +1,23 @@
 part of '../../wds_components.dart';
 
 enum WdsRadioSize {
-  small(spec: Size(20, 20), padding: EdgeInsets.all(1.67), innerCircle: 6.67),
-  large(spec: Size(24, 24), padding: EdgeInsets.all(2), innerCircle: 10);
+  small(spec: Size(20, 20), margin: EdgeInsets.all(1.67), innerCircle: 6.67),
+  large(spec: Size(24, 24), margin: EdgeInsets.all(2), innerCircle: 10);
 
   const WdsRadioSize({
     required this.spec,
-    required this.padding,
+    required this.margin,
     required this.innerCircle,
   });
 
   final Size spec;
-  final EdgeInsets padding;
+  final EdgeInsets margin;
   final double innerCircle;
 }
 
 /// 사용자가 여러 옵션 중에서 하나만 선택할 수 있도록 돕는 Radio 컴포넌트
-/// 
-/// Checkbox와 달리 그룹 내에서 오직 하나의 항목만 선택 가능하며, 
+///
+/// Checkbox와 달리 그룹 내에서 오직 하나의 항목만 선택 가능하며,
 /// `groupValue`와 개별 `value`를 비교하여 선택 여부를 판단합니다.
 class WdsRadio<T> extends StatefulWidget {
   const WdsRadio.small({
@@ -38,16 +38,16 @@ class WdsRadio<T> extends StatefulWidget {
 
   /// 해당 Radio가 갖는 고유 값
   final T value;
-  
+
   /// 현재 선택된 그룹 값
   final T? groupValue;
-  
+
   /// 선택 시 호출되는 콜백
   final ValueChanged<T?>? onChanged;
-  
+
   /// Radio 활성화 여부 (false 시 'disabled' 상태)
   final bool isEnabled;
-  
+
   final WdsRadioSize size;
 
   /// 현재 이 Radio가 선택된 상태인지 확인
@@ -65,10 +65,15 @@ class _WdsRadioState<T> extends State<WdsRadio<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final Size radioSize = widget.size.spec;
+    final Size boxSize = widget.size.spec;
+    final EdgeInsets outerMargin = widget.size.margin;
+    final Size innerSize = Size(
+      boxSize.width - outerMargin.left - outerMargin.right,
+      boxSize.height - outerMargin.top - outerMargin.bottom,
+    );
 
-    Widget radio = CustomPaint(
-      size: radioSize,
+    Widget painted = CustomPaint(
+      size: innerSize,
       painter: _RadioPainter(
         sizeSpec: widget.size,
         isSelected: widget.isSelected,
@@ -76,9 +81,15 @@ class _WdsRadioState<T> extends State<WdsRadio<T>> {
       ),
     );
 
-    radio = ClipRRect(
-      borderRadius: BorderRadius.circular(radioSize.width / 2),
-      child: SizedBox.fromSize(size: radioSize, child: radio),
+    Widget radio = SizedBox.fromSize(
+      size: boxSize,
+      child: Padding(
+        padding: outerMargin,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(innerSize.width / 2),
+          child: SizedBox.fromSize(size: innerSize, child: painted),
+        ),
+      ),
     );
 
     radio = GestureDetector(
@@ -108,7 +119,7 @@ class _RadioPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Rect outer = Offset.zero & sizeSpec.spec;
+    final Rect outer = Offset.zero & size;
     final Offset center = outer.center;
     final double radius = outer.width / 2;
 
@@ -133,12 +144,16 @@ class _RadioPainter extends CustomPainter {
     } else {
       // Unselected state: border only with borderNeutral
       final double borderWidth = sizeSpec == WdsRadioSize.small ? 1.25 : 1.5;
-      
+
       final Paint borderPaint = Paint()
         ..color = WdsColors.borderNeutral
         ..style = PaintingStyle.stroke
         ..strokeWidth = borderWidth;
-      canvas.drawCircle(center, radius - borderWidth / 2, borderPaint); // Inside border
+      canvas.drawCircle(
+        center,
+        radius - borderWidth / 2,
+        borderPaint,
+      ); // Inside border
     }
   }
 
