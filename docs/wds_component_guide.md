@@ -843,6 +843,72 @@ underline | 선택됨 | 높이 2px, 너비 탭 full, color `WdsColors.black` |
 underline | 선택 안됨 | 1px solid `WdsColors.borderAlternative` |
 탭 개수 | - | 2개 또는 3개 |
 
+---
+
+## PaginationDot
+
+페이지를 작은 점(dot) 형태로 표시하여 사용자가 현재 페이지와 다른 페이지로 쉽게 이동할 수 있도록 돕습니다.
+
+PaginationDot은 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+isActive | `bool` | 'true' : 현재 페이지 / 'false' : 비활성 페이지
+
+### PaginationDot - variant
+
+| 항목          | 값              | 비고 |
+|---------------|-----------------|------|
+| dot 최소 개수 | 2               | 1개는 의미 없음 |
+| dot 최대 개수 | 제한 없음       | 10개 이상 시 가독성 저하 |
+
+### PaginationDot - style
+
+| 항목 | 상태/조건 | 값   | 비고 |
+| --- | ------  | --- | --- |
+| size            |    -    | `Size(6, 6)` |
+| backgroundColor | active | `WdsColors.textNormal` |
+| backgroundColor | inactive | `WdsColors.textAssistive` |
+
+## PaginationCount
+페이지 번호를 숫자 형태로 표시하는 페이지네이션 방식입니다.
+
+PaginationCount는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+| currentPage | `int` | 현재 페이지
+| totalPage | `int` | 전체 페이지
+
+
+### PaginationCount - style
+
+항목 | 상태/조건 | 값 | 비고
+--- | --- | --- | ---
+width      | - | `Hug` | 페이지 수에 따라 유동적 
+background | - | `WdsColors.cta` | 배경 색
+background.opacity | - | `WdsOpacity.opacity80` | 배경 투명도
+radius  | - | `WdsRadius.full` | pill 형태 유지
+padding | - | `EdgeInsets.fromLTRB(10, 4, 10, 4)` | 내부 여백 설정
+
+### PaginationCount - textStyle (current / total)
+항목 | 상태 | 값 | 비고
+--- | --- | --- | ---
+text.typography | - | `WdsSemanticTypography.caption11Regular` | 텍스트 타이포그래피 
+text.color | current | `WdsColors.white` | 현재 페이지 텍스트 색상
+text.color | total | `WdsColors.textAssistive` | 전체 페이지 텍스트 색상
+text.opacity | - | `WdsOpacity.opacity80` | 전체 페이지 텍스트 투명도
+separator.spacing | - | 3px | current/total 시각적 구분 확보
+
+### PaginationCount - textStyle (separator)
+항목 | 상태 | 값 | 비고
+--- | --- | --- | ---
+text | - | `/` |   구분 텍스트
+text.typography | - | `WdsSemanticTypography.caption11Regular` | 텍스트 타이포그래피 
+text.color | - | `WdsColors.textAlternative` |  구분 텍스트 색상
+
+---
+
 ## ActionArea
 화면 하단에서 주요 액션(결제, 다음 단계 등)을 안정적으로 수행하게 하는 영역입니다.
 
@@ -1411,3 +1477,85 @@ CustomPaint > DecoratedBox > Padding > Row(mainAxisSize.min): (Flexible > Text) 
 
 닫기 버튼이 있는 경우 `Row`는 `MainAxisSize.min`으로 설정되고, 텍스트는 `Flexible`로 감싸져 콘텐츠 크기에 맞춰 축소됩니다 (hug content). 닫기 아이콘은 `WdsIcon.close`로 고정됩니다.
   
+- true: border 2px `WdsColors.primary`
+- false
+
+
+## Divider
+
+디자인 요소와 정보를 구분하는 데 사용합니다.
+이를 통해 각 요소의 디자인 가독성이 향상됩니다.
+
+### Divider - 개요
+시각적 구분을 위한 선(line) 컴포넌트입니다. 방향(가로/세로)과 두께(variant)에 따라 고정 스펙을 사용합니다.
+
+### Divider - 속성
+
+속성 | Type | 비고
+--- | --- | ---
+variant | `WdsDividerVariant` | `normal`, `thick`
+isVertical | `bool` | `false`(기본), 세로선은 named constructor로 생성
+color | `Color` | 고정값 `WdsColors.borderAlternative`
+
+e.g. enum
+``` dart
+enum WdsDividerVariant { normal, thick }
+```
+
+### Divider - 생성 방법(방향)
+가로/세로 방향은 생성자에서 고정합니다.
+
+``` dart
+// 기본(가로, normal)
+const WdsDivider();
+
+// 가로, 두꺼운 두께
+const WdsDivider(variant: WdsDividerVariant.thick);
+
+// 세로(단일 스펙: 1 x 32)
+const WdsDivider.vertical();
+```
+
+e.g. build configuration (구현 예 아님)
+``` dart
+// 가로 divider: width = double.infinity, height = 1 또는 6, color = WdsColors.borderAlternative
+SizedBox(
+  width: double.infinity,
+  height: $height, // 1(normal) | 6(thick)
+  child: const DecoratedBox(
+    decoration: BoxDecoration(color: WdsColors.borderAlternative),
+  ),
+);
+
+// 세로 divider: width = 1, height = 32, color = WdsColors.borderAlternative
+SizedBox(
+  width: 1,
+  height: 32,
+  child: const DecoratedBox(
+    decoration: BoxDecoration(color: WdsColors.borderAlternative),
+  ),
+);
+```
+
+### Divider - color
+- 고정: `WdsColors.borderAlternative`
+
+### Divider - size
+
+방향 | variant | width | height | 비고
+--- | --- | --- | --- | ---
+가로 | normal | `double.infinity` | 1px | 전체 너비로 늘어남
+가로 | thick | `double.infinity` | 6px | 강조 구분선
+세로 | normal | 1px | 32px | 단일 스펙만 제공
+
+### Divider - 사용 예시
+``` dart
+// 가로, 보통 두께
+const WdsDivider();
+
+// 가로, 두꺼운 두께
+const WdsDivider(variant: WdsDividerVariant.thick);
+
+// 세로(고정 스펙: 1 x 32)
+const WdsDivider.vertical();
+```

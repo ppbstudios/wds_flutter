@@ -20,6 +20,12 @@ import 'package:wds_widgetbook/src/component/checkbox_use_case.dart'
     as _wds_widgetbook_src_component_checkbox_use_case;
 import 'package:wds_widgetbook/src/component/chip_use_case.dart'
     as _wds_widgetbook_src_component_chip_use_case;
+import 'package:wds_widgetbook/src/component/divider_use_case.dart'
+    as _wds_widgetbook_src_component_divider_use_case;
+import 'package:wds_widgetbook/src/component/count_pagination_use_case.dart'
+    as _wds_widgetbook_src_component_count_pagination_use_case;
+import 'package:wds_widgetbook/src/component/dot_pagination_use_case.dart'
+    as _wds_widgetbook_src_component_dot_pagination_use_case;
 import 'package:wds_widgetbook/src/component/header_use_case.dart'
     as _wds_widgetbook_src_component_header_use_case;
 import 'package:wds_widgetbook/src/component/icon_button_use_case.dart'
@@ -103,6 +109,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'Divider',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Divider',
+          builder: _wds_widgetbook_src_component_divider_use_case
+              .buildWdsDividerUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'Header',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Header',
@@ -124,6 +138,19 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'Radio',
           builder:
               _wds_widgetbook_src_component_radio_use_case.buildWdsRadioUseCase,
+        name: 'PaginationCount',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'CountPagination',
+          builder: _wds_widgetbook_src_component_count_pagination_use_case
+              .buildCountPaginationUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'PaginationDot',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'PaginationDot',
+          builder: _wds_widgetbook_src_component_dot_pagination_use_case
+              .buildWdsDotPaginationUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
