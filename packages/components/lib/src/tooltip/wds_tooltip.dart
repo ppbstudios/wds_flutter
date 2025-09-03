@@ -39,26 +39,29 @@ enum WdsTooltipAlignment {
   leftBottom;
 
   /// 화살표가 위치할 방향을 반환
-  ArrowDirection get arrowDirection {
-    switch (this) {
-      case topLeft:
-      case topCenter:
-      case topRight:
-        return ArrowDirection.bottom;
-      case rightTop:
-      case rightCenter:
-      case rightBottom:
-        return ArrowDirection.left;
-      case bottomLeft:
-      case bottomCenter:
-      case bottomRight:
-        return ArrowDirection.top;
-      case leftTop:
-      case leftCenter:
-      case leftBottom:
-        return ArrowDirection.right;
-    }
-  }
+  ArrowDirection get arrowDirection => switch (this) {
+        topLeft || topCenter || topRight => ArrowDirection.bottom,
+        rightTop || rightCenter || rightBottom => ArrowDirection.left,
+        bottomLeft || bottomCenter || bottomRight => ArrowDirection.top,
+        leftTop || leftCenter || leftBottom => ArrowDirection.right,
+      };
+
+  /// - 0: 왼쪽(상)에 위치
+  /// - 0.5: 중앙(중)에 위치
+  /// - 1: 오른쪽(하)에 위치
+  double get arrowFraction => switch (this) {
+        topLeft || bottomLeft => 0,
+        topCenter ||
+        bottomCenter ||
+        leftTop ||
+        leftCenter ||
+        leftBottom ||
+        rightTop ||
+        rightCenter ||
+        rightBottom =>
+          0.5,
+        topRight || bottomRight => 1,
+      };
 }
 
 /// 화살표 방향 - 내부적으로 사용되는 enum
@@ -205,128 +208,18 @@ class _TooltipPainter extends CustomPainter {
     const tipPadding = 1.54;
     const triangleWidth = 12.0;
 
-    late Path path;
+    // switch 문을 switch-expression으로 변환
+    final Path path = _createArrowWithRoundedTip(
+      size,
+      alignment.arrowDirection,
+      arrowHeight,
+      sidePadding,
+      triangleWidth,
+      tipPadding,
+      alignment.arrowFraction,
+    );
 
-    // alignment 별 세분화된 9개 위치(각 side의 3 분할)를 지원
-    switch (alignment) {
-      // Top group → 툴팁이 대상 위에 있으므로 화살표는 컨테이너의 하단에 표시
-      case WdsTooltipAlignment.topLeft:
-        path = _createBottomLeftArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-      case WdsTooltipAlignment.topCenter:
-        path = _createBottomCenterArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-      case WdsTooltipAlignment.topRight:
-        path = _createBottomRightArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-
-      // Right group → 툴팁이 대상의 오른쪽에 있으므로 화살표는 컨테이너의 왼쪽에 표시
-      case WdsTooltipAlignment.rightTop:
-        path = _createLeftTopArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-      case WdsTooltipAlignment.rightCenter:
-        path = _createLeftCenterArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-      case WdsTooltipAlignment.rightBottom:
-        path = _createLeftBottomArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-
-      // Bottom group → 툴팁이 대상 아래에 있으므로 화살표는 컨테이너의 상단에 표시
-      case WdsTooltipAlignment.bottomLeft:
-        path = _createTopLeftArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-      case WdsTooltipAlignment.bottomCenter:
-        path = _createTopCenterArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-      case WdsTooltipAlignment.bottomRight:
-        path = _createTopRightArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-
-      // Left group → 툴팁이 대상의 왼쪽에 있으므로 화살표는 컨테이너의 오른쪽에 표시
-      case WdsTooltipAlignment.leftTop:
-        path = _createRightTopArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-      case WdsTooltipAlignment.leftCenter:
-        path = _createRightCenterArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-      case WdsTooltipAlignment.leftBottom:
-        path = _createRightBottomArrow(
-          size,
-          arrowHeight,
-          sidePadding,
-          triangleWidth,
-          tipPadding,
-        );
-        break;
-    }
-
-    canvas.drawPath(path, paint);
+    return canvas.drawPath(path, paint);
   }
 
   // 위치 보조 계산 함수
@@ -352,291 +245,68 @@ class _TooltipPainter extends CustomPainter {
     return minY + (maxY - minY) * fraction.clamp(0.0, 1.0);
   }
 
-  // Edge 별 위치 지정 버전(가변 center)
-  Path _createTopArrowAt(
+  // 공통: 방향만 다른 곡률 팁 화살표 생성기
+  Path _createArrowWithRoundedTip(
     Size size,
+    ArrowDirection direction,
     double arrowHeight,
     double sidePadding,
     double triangleWidth,
     double tipPadding,
-    double fractionX,
+    double fraction,
   ) {
-    final path = Path();
-    final centerX =
-        _calculateSlotX(size, triangleWidth, sidePadding, fractionX);
-    final top = -arrowHeight;
     const overlap = 1.0;
 
-    path.moveTo(centerX - triangleWidth / 2, overlap);
-    path.lineTo(centerX, top + tipPadding);
-    path.lineTo(centerX + triangleWidth / 2, overlap);
-    path.close();
+    final double center;
+    if (direction == ArrowDirection.top || direction == ArrowDirection.bottom) {
+      center = _calculateSlotX(size, triangleWidth, sidePadding, fraction);
+    } else {
+      center = _calculateSlotY(size, triangleWidth, sidePadding, fraction);
+    }
+
+    final (Offset baseStart, Offset baseEnd, Offset tip) = switch (direction) {
+      ArrowDirection.top => (
+          Offset(center - triangleWidth / 2, overlap),
+          Offset(center + triangleWidth / 2, overlap),
+          Offset(center, -arrowHeight + tipPadding)
+        ),
+      ArrowDirection.bottom => (
+          Offset(center - triangleWidth / 2, size.height - overlap),
+          Offset(center + triangleWidth / 2, size.height - overlap),
+          Offset(center, size.height + arrowHeight - tipPadding)
+        ),
+      ArrowDirection.left => (
+          Offset(overlap, center - triangleWidth / 2),
+          Offset(overlap, center + triangleWidth / 2),
+          Offset(-arrowHeight + tipPadding, center)
+        ),
+      ArrowDirection.right => (
+          Offset(size.width - overlap, center - triangleWidth / 2),
+          Offset(size.width - overlap, center + triangleWidth / 2),
+          Offset(size.width + arrowHeight - tipPadding, center)
+        ),
+    };
+
+    const tipRoundT = 0.8;
+
+    final nearStart = Offset(
+      baseStart.dx + (tip.dx - baseStart.dx) * tipRoundT,
+      baseStart.dy + (tip.dy - baseStart.dy) * tipRoundT,
+    );
+    final nearEnd = Offset(
+      baseEnd.dx + (tip.dx - baseEnd.dx) * tipRoundT,
+      baseEnd.dy + (tip.dy - baseEnd.dy) * tipRoundT,
+    );
+
+    final path = Path()
+      ..moveTo(baseStart.dx, baseStart.dy)
+      ..lineTo(nearStart.dx, nearStart.dy)
+      ..quadraticBezierTo(tip.dx, tip.dy, nearEnd.dx, nearEnd.dy)
+      ..lineTo(baseEnd.dx, baseEnd.dy)
+      ..close();
 
     return path;
   }
-
-  Path _createBottomArrowAt(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-    double fractionX,
-  ) {
-    final path = Path();
-    final centerX =
-        _calculateSlotX(size, triangleWidth, sidePadding, fractionX);
-    final bottom = size.height + arrowHeight;
-    const overlap = 1.0;
-
-    path.moveTo(centerX - triangleWidth / 2, size.height - overlap);
-    path.lineTo(centerX, bottom - tipPadding);
-    path.lineTo(centerX + triangleWidth / 2, size.height - overlap);
-    path.close();
-
-    return path;
-  }
-
-  Path _createLeftArrowAt(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-    double fractionY,
-  ) {
-    final path = Path();
-    final centerY =
-        _calculateSlotY(size, triangleWidth, sidePadding, fractionY);
-    final left = -arrowHeight;
-    const overlap = 1.0;
-
-    path.moveTo(overlap, centerY - triangleWidth / 2);
-    path.lineTo(left + tipPadding, centerY);
-    path.lineTo(overlap, centerY + triangleWidth / 2);
-    path.close();
-
-    return path;
-  }
-
-  Path _createRightArrowAt(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-    double fractionY,
-  ) {
-    final path = Path();
-    final centerY =
-        _calculateSlotY(size, triangleWidth, sidePadding, fractionY);
-    final right = size.width + arrowHeight;
-    const overlap = 1.0;
-
-    path.moveTo(size.width - overlap, centerY - triangleWidth / 2);
-    path.lineTo(right - tipPadding, centerY);
-    path.lineTo(size.width - overlap, centerY + triangleWidth / 2);
-    path.close();
-
-    return path;
-  }
-
-  // ── 12개 위치 Wrapper (상/하/좌/우 × 좌/중/우 또는 상/중/하) ─────────────
-  // Top edge
-  Path _createTopLeftArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createTopArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0,
-      );
-
-  Path _createTopCenterArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createTopArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0.5,
-      );
-
-  Path _createTopRightArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createTopArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        1,
-      );
-
-  // Bottom edge
-  Path _createBottomLeftArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createBottomArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0,
-      );
-
-  Path _createBottomCenterArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createBottomArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0.5,
-      );
-
-  Path _createBottomRightArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createBottomArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0,
-      );
-
-  // Left edge
-  Path _createLeftTopArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createLeftArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0.5,
-      );
-
-  Path _createLeftCenterArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createLeftArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0.5,
-      );
-
-  Path _createLeftBottomArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createLeftArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0.5,
-      );
-
-  // Right edge
-  Path _createRightTopArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createRightArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0.5,
-      );
-
-  Path _createRightCenterArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createRightArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0.5,
-      );
-
-  Path _createRightBottomArrow(
-    Size size,
-    double arrowHeight,
-    double sidePadding,
-    double triangleWidth,
-    double tipPadding,
-  ) =>
-      _createRightArrowAt(
-        size,
-        arrowHeight,
-        sidePadding,
-        triangleWidth,
-        tipPadding,
-        0.5,
-      );
 
   @override
   bool shouldRepaint(covariant _TooltipPainter oldDelegate) {
