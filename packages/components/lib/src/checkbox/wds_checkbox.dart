@@ -39,7 +39,8 @@ class WdsCheckbox extends StatefulWidget {
 
 class _WdsCheckboxState extends State<WdsCheckbox>
     with SingleTickerProviderStateMixin {
-  static const Duration _duration = Duration(milliseconds: 300);
+  static const Duration _duration = Duration.zero;
+
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: _duration,

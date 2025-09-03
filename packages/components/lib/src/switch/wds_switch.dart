@@ -46,7 +46,7 @@ class WdsSwitch extends StatefulWidget {
 }
 
 class _WdsSwitchState extends State<WdsSwitch> {
-  static const Duration _duration = Duration(milliseconds: 200);
+  static const Duration _duration = Duration(milliseconds: 50);
 
   void _toggle() {
     if (!widget.isEnabled) return;
@@ -78,7 +78,7 @@ class _WdsSwitchState extends State<WdsSwitch> {
           padding: widget.size.padding,
           child: AnimatedAlign(
             duration: _duration,
-            curve: Curves.easeIn,
+            curve: Curves.easeInOut,
             alignment: knobAlign,
             child: knob,
           ),
