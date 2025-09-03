@@ -20,6 +20,8 @@ import 'package:wds_widgetbook/src/component/checkbox_use_case.dart'
     as _wds_widgetbook_src_component_checkbox_use_case;
 import 'package:wds_widgetbook/src/component/chip_use_case.dart'
     as _wds_widgetbook_src_component_chip_use_case;
+import 'package:wds_widgetbook/src/component/divider_use_case.dart'
+    as _wds_widgetbook_src_component_divider_use_case;
 import 'package:wds_widgetbook/src/component/count_pagination_use_case.dart'
     as _wds_widgetbook_src_component_count_pagination_use_case;
 import 'package:wds_widgetbook/src/component/dot_pagination_use_case.dart'
@@ -96,6 +98,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Chip',
           builder: _wds_widgetbook_src_component_chip_use_case.buildChipUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Divider',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Divider',
+          builder: _wds_widgetbook_src_component_divider_use_case
+              .buildWdsDividerUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
