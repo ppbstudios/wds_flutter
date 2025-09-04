@@ -1655,3 +1655,207 @@ knob 이동 | 좌우로 각각 독립적 이동 가능
 동일값 허용 | `start == end` 상황 허용
 interaction 표시 | hover/pressed 시 32x32 영역 표시
 division 단위 | `divisions`가 설정된 경우 해당 단위로만 이동
+
+
+## SectionMessage
+
+> 특정 섹션이나 영역 내에서 중요한 정보나 피드백을 전달하는 메시지입니다. 사용자가 필요한 행동을 취할 수 있도록 돕습니다.
+
+SectionMessage는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+message | `String` | 메시지에 표시될 텍스트 내용
+leadingIcon | `WdsIcon?` | 선택사항인 앞쪽 아이콘
+variant | `WdsSectionMessageVariant` | 메시지의 표시 형태 (normal, highlight, warning)
+
+### SectionMessage - variant
+
+정해진 Variant만 사용할 수 있습니다.
+
+- `normal`: 기본 정보 전달 형태
+- `highlight`: 긍정적인 정보나 성공 상태 표시
+- `warning`: 주의가 필요한 정보나 경고 상태 표시
+
+### SectionMessage - 고정된 속성
+
+모든 SectionMessage는 동일한 레이아웃 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+padding | `EdgeInsets.all(16)` | 모든 variant 고정
+iconSize | 16x16 | 아이콘 크기 고정
+iconPosition | leading | 아이콘 위치 고정
+iconSpacing | 4px | 아이콘과 텍스트 사이 간격
+
+### SectionMessage - variant별 속성
+
+variant에 따라 색상이 달라집니다.
+
+속성 | normal | highlight | warning
+--- | --- | --- | ---
+backgroundColor | `WdsColors.backgroundAlternative` | `WdsColors.blue50` | `WdsColors.orange50`
+textColor | `WdsColors.textNeutral` | `WdsColors.statusPositive` | `WdsColors.statusCautionaty`
+iconColor | `WdsColors.neutral500` | `WdsColors.primary` | `WdsColors.statusCautionaty`
+
+### SectionMessage - 생성 방법
+
+named constructor로 생성할 수 있습니다.
+
+``` dart
+// 기본 정보 메시지
+WdsSectionMessage.normal(
+  message: '정보를 확인해주세요',
+  leadingIcon: WdsIcon.info,
+)
+
+// 긍정적 메시지
+WdsSectionMessage.highlight(
+  message: '작업이 완료되었습니다',
+  leadingIcon: WdsIcon.checkCircle,
+)
+
+// 경고 메시지
+WdsSectionMessage.warning(
+  message: '주의가 필요한 사항입니다',
+  leadingIcon: WdsIcon.warning,
+)
+```
+
+### SectionMessage - 구현 세부사항
+
+- **borderRadius**: `WdsRadius.v8` (8px)
+- **Row spacing**: 4px (아이콘과 텍스트 사이)
+- **MainAxisSize**: `MainAxisSize.min` (콘텐츠 크기에 맞춤)
+- **Typography**: `WdsTypography.body14NormalMedium`
+
+## Badge
+
+> 정보의 개수를 강조하기 위해 사용합니다. 장바구니 아이템, 알림 등 개수에 대한 표기가 필요한 경우에 활용합니다. 중요도에 맞게 CTA/Primary 컬러를 사용합니다.
+
+Badge는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+count | `int` | 표시할 개수 (0은 표시하지 않음)
+targetIcon | `Widget` | Badge가 붙을 대상 아이콘 위젯
+
+### Badge - 고정된 속성
+
+모든 Badge는 동일한 시각적 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+backgroundColor | `WdsColors.primary` | 고정
+borderRadius | `WdsRadius.full` | 완전한 원형
+padding | `EdgeInsets.fromLTRB(4, 2, 4, 2)` | 고정
+typography | `WdsTypography.caption9SemiBold` | 9px, Pretendard, w600
+textColor | `WdsColors.white` | 고정
+letterSpacing | 0.03px | 고정
+lineHeight | 128% | 고정
+
+### Badge - 개수 표시 규칙
+
+- 0은 표시하지 않음
+- 1부터 99까지 숫자로 표시
+- 100부터는 "99+"로 표시
+
+### Badge - 위치 및 크기
+
+Badge는 항상 대상 아이콘의 오른쪽 아래에 위치합니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+targetIconSize | 24x24 | 대상 아이콘 크기 (0,0 ~ 23,23)
+stackSize | 24x24 | 원본 아이콘 크기 유지 (overflow 허용)
+badgePosition | 동적 계산 | digitCount에 따라 left 위치 조정
+interactionArea | 24x24 | 터치 영역 (아이콘 크기와 동일)
+
+### Badge - 사용 방법
+
+Extension을 통해 아이콘에 Badge를 추가할 수 있습니다.
+
+``` dart
+// 기본 사용법
+WdsIcon.cart.build().addBadge(count: 4);
+
+// Extension 구현
+extension WdsBadgeExtension on Widget {
+  Widget addBadge({
+    required int count,
+  }) {
+    if (count <= 0) {
+      return this;
+    }
+
+    return Stack(
+      children: [
+        this,
+        Positioned(
+          right: 0,
+          top: 0,
+          child: WdsBadge(count: count),
+        ),
+      ],
+    );
+  }
+}
+```
+
+### Badge - 크기별 차이
+
+개수에 따라 Badge 크기와 위치가 달라집니다.
+
+개수 범위 | 크기 | 위치 조정 | 비고
+--- | --- | --- | ---
+1 | 16x16 | left: 12px | 한 자리 수 (특별 처리)
+2-9 | 16x16 | left: 7px | 한 자리 수
+10-99 | 20x16 | left: 2px | 두 자리 수 (가로 확장)
+100+ | 24x16 | left: 2px | "99+" 표시 (최대 크기)
+
+### Badge - Overflow 허용 방식
+
+Badge가 원본 아이콘 크기를 유지하면서 overflow를 허용합니다.
+
+``` dart
+Stack(
+  clipBehavior: Clip.none, // overflow 허용
+  children: [
+    originalWidget, // 원본 위젯 그대로 유지 (24x24)
+    Positioned(
+      left: 19.5, // Badge 중앙이 (19.5, 19.5)에 위치
+      top: 19.5,  // 아이콘 24x24 기준 오른쪽 아래 중앙
+      child: WdsBadge(count: count),
+    ),
+  ],
+)
+```
+
+### Badge - 위치 계산
+
+- **아이콘 크기**: 24x24 (픽셀 0,0 ~ 23,23)
+- **Stack 크기**: 24x24 (원본 아이콘 크기 유지)
+- **Badge 위치**: `left: 12 - ((digitCount - 1) * 5), top: 12`
+- **digitCount**: 1자리=1, 2자리=2, 3자리 이상=2 (99+)
+- **Overflow**: Badge가 아이콘 영역을 벗어나도 표시됨
+
+### Badge - 위치 계산 공식
+
+``` dart
+int digitCount = count.toString().length;
+if (digitCount > 2) {
+  digitCount = 2; // 99+는 2자리로 처리
+}
+
+Positioned(
+  left: 12 - ((digitCount - 1) * 5), // 동적 위치 계산
+  top: 12, // 고정 상단 위치
+  child: WdsBadge(count: count),
+)
+```
+
+### Badge - 레이아웃 영향
+
+- **Row/Column**: 아이콘 크기(24x24)만큼만 공간 차지
+- **AppBar**: 높이가 늘어나지 않음
+- **Overflow**: Badge가 아이콘 영역을 벗어나도 정상 표시
