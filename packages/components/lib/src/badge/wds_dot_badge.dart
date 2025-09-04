@@ -36,10 +36,14 @@ class WdsDotBadge extends StatelessWidget {
 
     return Stack(
       clipBehavior: Clip.none,
-      alignment: Alignment.center,
       children: [
-        /// Badge
+        /// Figma에서 DotBadge가 위치한 지점은 레이아웃의 꼭지점이라서,
+        /// 사각형 내부에 위치하는 Positioned를 사용할 시 반지름만큼의 여유 공간이 있어야 디자인과 일치
         Positioned.fill(
+          top: -2,
+          right: -2,
+          bottom: -2,
+          left: -2,
           child: Align(
             alignment: alignment!,
             child: SizedBox.square(
