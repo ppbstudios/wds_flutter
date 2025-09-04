@@ -60,9 +60,10 @@ class _SliderPlaygroundState extends State<_SliderPlayground> {
       initialValue: true,
     );
 
-    final divisions = context.knobs.intOrNull.input(
-      label: 'divisions (선택)',
-      description: '움직일 수 있는 단위를 설정할 수 있어요',
+    final divisions = context.knobs.int.input(
+      label: 'divisions',
+      description: '움직일 수 있는 총 구간 수를 설정할 수 있어요. (기본값 10)',
+      initialValue: 10,
     );
 
     // Ensure values are within the valid range
@@ -83,7 +84,7 @@ class _SliderPlaygroundState extends State<_SliderPlayground> {
         'minValue: ${minValue.round()}',
         'maxValue: ${maxValue.round()}',
         'hasTitle: $hasTitle',
-        'divisions: ${divisions ?? 'none'}',
+        'divisions: $divisions',
         'state: ${enabled ? 'enabled' : 'disabled'}',
         'track: height=4px, colors=borderAlternative/primary',
         'knob: size=20px, interaction=32px',
@@ -127,7 +128,11 @@ Widget _buildDemonstrationSection(BuildContext context) {
       SizedBox(height: 32),
       WidgetbookSubsection(
         title: 'ranges',
-        labels: ['0~100', '0~1000', '-50~50'],
+        labels: [
+          '0~100 (단위: 10)',
+          '0~1000 (단위: 50)',
+          '-50~50 (단위: 20)',
+        ],
         content: _SliderRangeDemo(),
       ),
       SizedBox(height: 32),
@@ -158,6 +163,7 @@ class _SliderStatesDemoState extends State<_SliderStatesDemo> {
           maxValue: 100,
           values: _enabledValues,
           hasTitle: true,
+          divisions: 10,
           onChanged: (values) {
             setState(() => _enabledValues = values);
             print(
@@ -172,6 +178,7 @@ class _SliderStatesDemoState extends State<_SliderStatesDemo> {
           values: _disabledValues,
           hasTitle: true,
           isEnabled: false,
+          divisions: 10,
           onChanged: null,
         ),
       ],
@@ -201,6 +208,7 @@ class _SliderTitleDemoState extends State<_SliderTitleDemo> {
           maxValue: 100,
           values: _valuesWithTitle,
           hasTitle: true,
+          divisions: 10,
           onChanged: (values) {
             setState(() => _valuesWithTitle = values);
             print('With title: ${values.start.round()}~${values.end.round()}');
@@ -211,6 +219,7 @@ class _SliderTitleDemoState extends State<_SliderTitleDemo> {
           minValue: 0,
           maxValue: 100,
           values: _valuesWithoutTitle,
+          divisions: 10,
           onChanged: (values) {
             setState(() => _valuesWithoutTitle = values);
             print(
@@ -246,6 +255,7 @@ class _SliderRangeDemoState extends State<_SliderRangeDemo> {
           maxValue: 100,
           values: _range1Values,
           hasTitle: true,
+          divisions: 10,
           onChanged: (values) {
             setState(() => _range1Values = values);
             print('Range 0-100: ${values.start.round()}~${values.end.round()}');
@@ -271,6 +281,7 @@ class _SliderRangeDemoState extends State<_SliderRangeDemo> {
           maxValue: 50,
           values: _range3Values,
           hasTitle: true,
+          divisions: 5,
           onChanged: (values) {
             setState(() => _range3Values = values);
             print(
@@ -309,6 +320,7 @@ class _SliderTapDemoState extends State<_SliderTapDemo> {
           maxValue: 100,
           values: _tapDemoValues,
           hasTitle: true,
+          divisions: 100,
           onChanged: (values) {
             setState(() => _tapDemoValues = values);
             print(
