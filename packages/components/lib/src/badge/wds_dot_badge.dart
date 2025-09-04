@@ -68,7 +68,7 @@ class WdsDotBadge extends StatelessWidget {
 /// StatelessWidget 컴포넌트에서도 배지를 사용할 수 있도록 함
 mixin WdsBadgeMixin {
   /// 필요시 위젯을 점 배지로 감싸는 메서드 (모든 옵션 지원)
-  Widget withDotBadge({
+  Widget addDotBadge({
     required Widget child,
     Color? color,
     Alignment? alignment,
@@ -82,10 +82,10 @@ mixin WdsBadgeMixin {
 }
 
 /// 기존 위젯에 배지 기능을 추가하는 확장 메서드
-/// 어떤 위젯에든 .withDotBadge() 메서드를 사용할 수 있게 함
-extension WdsBadgeExtension on Widget {
+/// 어떤 위젯에든 .addDotBadge() 메서드를 사용할 수 있게 함
+extension WdsDotBadgeExtension on Widget {
   /// 모든 위젯에 점 배지를 추가하는 메서드 (모든 옵션 지원)
-  Widget withDotBadge({
+  Widget addDotBadge({
     Color? color,
     Alignment alignment = Alignment.topRight,
   }) {

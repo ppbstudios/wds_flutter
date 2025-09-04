@@ -1623,10 +1623,10 @@ WdsDotBadge(
 
 ``` dart
 // 기본 사용 (topRight 위치)
-Icon(Icons.settings).withDotBadge()
+Icon(Icons.settings).addDotBadge()
 
 // 색상과 위치 지정
-Icon(Icons.settings).withDotBadge(
+Icon(Icons.settings).addDotBadge(
   color: WdsColors.blue500,
   alignment: Alignment.topLeft,
 )
@@ -1640,7 +1640,7 @@ StatelessWidget 컴포넌트에서도 배지를 사용할 수 있도록 믹스�
 class MyWidget extends StatelessWidget with WdsBadgeMixin {
   @override
   Widget build(BuildContext context) {
-    return withDotBadge(
+    return addDotBadge(
       alignment: Alignment.topRight,
       child: Icon(Icons.favorite),
     );
