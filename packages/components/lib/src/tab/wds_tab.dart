@@ -288,7 +288,7 @@ class _WdsTextTabsState extends State<WdsTextTabs> {
         return WdsTextTabTheme(
           data: themeData,
           child: SizedBox(
-            height: 40,
+            height: 38,
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(vertical: 8),
               scrollDirection: Axis.horizontal,
