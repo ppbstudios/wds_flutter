@@ -47,11 +47,11 @@
       },
       "alternative": {
         "$type": "color",
-        "$value": "{color.neutral.400}"
+        "$value": "{color.neutral.500}"
       },
       "assistive": {
         "$type": "color",
-        "$value": "{color.neutral.300}"
+        "$value": "{color.neutral.400}"
       },
       "disable": {
         "$type": "color",

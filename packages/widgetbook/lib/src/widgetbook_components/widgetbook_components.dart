@@ -94,3 +94,9 @@ class Divider {}
 
 /// 컴포넌트 path 관리를 위한 클래스
 class DotBadge {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class SectionMessage {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class Badge {}

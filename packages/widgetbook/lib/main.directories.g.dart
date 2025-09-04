@@ -12,6 +12,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:wds_widgetbook/src/component/action_area_use_case.dart'
     as _wds_widgetbook_src_component_action_area_use_case;
+import 'package:wds_widgetbook/src/component/badge_use_case.dart'
+    as _wds_widgetbook_src_component_badge_use_case;
 import 'package:wds_widgetbook/src/component/bottom_navigation_use_case.dart'
     as _wds_widgetbook_src_component_bottom_navigation_use_case;
 import 'package:wds_widgetbook/src/component/button_use_case.dart'
@@ -36,8 +38,12 @@ import 'package:wds_widgetbook/src/component/radio_use_case.dart'
     as _wds_widgetbook_src_component_radio_use_case;
 import 'package:wds_widgetbook/src/component/search_field_use_case.dart'
     as _wds_widgetbook_src_component_search_field_use_case;
+import 'package:wds_widgetbook/src/component/section_message_use_case.dart'
+    as _wds_widgetbook_src_component_section_message_use_case;
 import 'package:wds_widgetbook/src/component/select_use_case.dart'
     as _wds_widgetbook_src_component_select_use_case;
+import 'package:wds_widgetbook/src/component/slider_use_case.dart'
+    as _wds_widgetbook_src_component_slider_use_case;
 import 'package:wds_widgetbook/src/component/snackbar_use_case.dart'
     as _wds_widgetbook_src_component_snackbar_use_case;
 import 'package:wds_widgetbook/src/component/square_button_use_case.dart'
@@ -77,6 +83,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'ActionArea',
           builder: _wds_widgetbook_src_component_action_area_use_case
               .buildWdsFixedActionAreaUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Badge',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Badge',
+          builder:
+              _wds_widgetbook_src_component_badge_use_case.buildWdsBadgeUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
@@ -175,11 +189,27 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'SectionMessage',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'SectionMessage',
+          builder: _wds_widgetbook_src_component_section_message_use_case
+              .buildWdsSectionMessageUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'Select',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Select',
           builder: _wds_widgetbook_src_component_select_use_case
               .buildWdsSelectUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Slider',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Slider',
+          builder: _wds_widgetbook_src_component_slider_use_case
+              .buildWdsSliderUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(

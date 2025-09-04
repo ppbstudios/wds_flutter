@@ -182,7 +182,7 @@ enum WdsButtonState {
 
 ## TextButton
 
-Button 과는 속성이 다소 다른 버튼으로 배경색이나 테두리가 없는 버튼으로 텍스트로만 구성됩니다. 주로 강조가 덜한 보조적인 액션에 사용합니다.
+> Button 과는 속성이 다소 다른 버튼으로 배경색이나 테두리가 없는 버튼으로 텍스트로만 구성됩니다. 주로 강조가 덜한 보조적인 액션에 사용합니다.
 
 ### TextButton - 공통
 
@@ -261,8 +261,13 @@ disabled | WdsColors.white(#FFFFFF) | WdsColors.textNeutral(#4E4E4E) | .v4 | Bor
 
 ## IconButton
 
-아이콘을 사용하여 특정 동작의 수행을 돕는 Widget 입니다. 구성요소는 가운데 위치할 아이콘과 padding 그리고 pressed 됐을 때 생기는 dimmed 영역이 있습니다.
-아이콘 자체는 24px * 24px로 구성되어 있으며, interaction은 그보다 넓은 40px * 40px로 구성되어 있습니다. interaction 영역은 CircleBorder 처럼 원형으로 구성되며 pressed 색상은 Button에서 주는 효과와 동일합니다. interaction은 icon 영역까지 `EdgeInsets.all(8)`만큼의 padding을 갖습니다. 
+> 아이콘을 사용하여 특정 동작의 수행을 돕는 Widget 입니다. 
+
+구성요소는 가운데 위치할 아이콘과 padding 그리고 pressed 됐을 때 생기는 dimmed 영역이 있습니다.
+
+아이콘 자체는 24px * 24px로 구성되어 있으며, interaction은 그보다 넓은 40px * 40px로 구성되어 있습니다. 
+interaction 영역은 CircleBorder 처럼 원형으로 구성되며 pressed 색상은 Button에서 주는 효과와 동일합니다. 
+interaction은 icon 영역까지 `EdgeInsets.all(8)`만큼의 padding을 갖습니다. 
 
 ### IconButton - state
 
@@ -276,7 +281,7 @@ pressed(hover)는 위에서도 언급했듯이 Button과 같은 메커니즘을 
 
 ## Header
 
-화면 상단에 위치하는 내비게이션입니다. material 라이브러리에서 쓰이는 AppBar와 같은 역할을 하며, MaterialApp 에서도 사용할 수 있도록 PreferredSize 클래스를 확장해서 구현합니다.
+> 화면 상단에 위치하는 내비게이션입니다. material 라이브러리에서 쓰이는 AppBar와 같은 역할을 하며, MaterialApp 에서도 사용할 수 있도록 PreferredSize 클래스를 확장해서 구현합니다.
 
 **Header 구성 요소:**
 
@@ -365,7 +370,7 @@ WdsHeader.search({
 
 ## BottomNavigation
 
-화면 하단에 위치한 내비게이션입니다. 각 탭 별로 icon과 label이 하나의 쌍(pair)를 이룹니다. 고정 padding으로 `EdgeInsets.symmetric(vertical: 1)`를 가집니다.
+> 화면 하단에 위치한 내비게이션입니다. 각 탭 별로 icon과 label이 하나의 쌍(pair)를 이룹니다. 고정 padding으로 `EdgeInsets.symmetric(vertical: 1)`를 가집니다.
 
 BottomNavigation은 위,아래 각 1px씩 padding과 BottomNavigationItem(height: 45) 그리고 상단에 border(WdsColors.borderAlternative, 1px) 까지 총 48px의 높이를 가집니다.
 
@@ -414,7 +419,7 @@ SizedBox(
 
 ## SearchField
 
-콘텐츠를 검색할 때 사용합니다.
+> 콘텐츠를 검색할 때 사용합니다.
 
 flutter/widget 라이브러리 내에는 TextField같은 컴포넌트가 없기 때문에 SearchField만 예외로 flutter/material을 사용해야 합니다.
 
@@ -488,7 +493,7 @@ Padding(
 
 ## TextField
 
-길지 않은 텍스트를 입력할 때 사용합니다.
+> 길지 않은 텍스트를 입력할 때 사용합니다.
 
 ### TextField - variant
 
@@ -661,7 +666,7 @@ Row(
 
 ## Chip
 
-정보를 카테고리화하거나 필터링에 사용되는 소형 컴포넌트입니다. 주로 태그나 라벨로 활용하며, leading 및 trailing 영역과 중앙의 label로 구성됩니다.
+> 정보를 카테고리화하거나 필터링에 사용되는 소형 컴포넌트입니다. 주로 태그나 라벨로 활용하며, leading 및 trailing 영역과 중앙의 label로 구성됩니다.
 
 Chip은 아래 속성으로 이루어집니다.
 
@@ -773,7 +778,7 @@ Row(
 
 ## Select
 
-좌측 상단에 제목(title)이 있을 수도, 없을 수도 있습니다.
+> 좌측 상단에 제목(title)이 있을 수도, 없을 수도 있습니다.
 
 ### Select - variant
 
@@ -810,7 +815,7 @@ trailing 간격 | - | 10px | 아이콘과 텍스트 사이
 
 ## Tab
 
-문자 기반 탭으로 가로 스크롤이 가능합니다.
+> 문자 기반 탭으로 가로 스크롤이 가능합니다.
 
 ### TextTabs - 속성
 
@@ -863,7 +868,7 @@ onTap | `ValueChanged<int>?` | 탭 선택 시 호출되는 콜백
 
 ### LineTabs
 
-선택된 탭에 underline이 표시됩니다. 탭 별 너비는 사용 가능한 최대 너비를 탭 수(2 또는 3)로 균등 분할합니다.
+> 선택된 탭에 underline이 표시됩니다. 탭 별 너비는 사용 가능한 최대 너비를 탭 수(2 또는 3)로 균등 분할합니다.
 
 항목 | 상태 | 값 | 비고
 --- | --- | --- | ---
@@ -881,7 +886,7 @@ underline | 선택 안됨 | 1px solid `WdsColors.borderAlternative` |
 
 ## PaginationDot
 
-페이지를 작은 점(dot) 형태로 표시하여 사용자가 현재 페이지와 다른 페이지로 쉽게 이동할 수 있도록 돕습니다.
+> 페이지를 작은 점(dot) 형태로 표시하여 사용자가 현재 페이지와 다른 페이지로 쉽게 이동할 수 있도록 돕습니다.
 
 PaginationDot은 아래 속성으로 이루어집니다.
 
@@ -944,7 +949,7 @@ text.color | - | `WdsColors.textAlternative` |  구분 텍스트 색상
 ---
 
 ## ActionArea
-화면 하단에서 주요 액션(결제, 다음 단계 등)을 안정적으로 수행하게 하는 영역입니다.
+> 화면 하단에서 주요 액션(결제, 다음 단계 등)을 안정적으로 수행하게 하는 영역입니다.
 
 - `ActionArea`: 버튼 조합만 있는 고정형
 
@@ -1010,7 +1015,7 @@ Row(spacing: 12, children: [
 
 ## Switch
 
-설정의 on/off를 토글하는 컴포넌트입니다. 값 변화 시 애니메이션으로 전환됩니다.
+> 설정의 on/off를 토글하는 컴포넌트입니다. 값 변화 시 애니메이션으로 전환됩니다.
 
 ### Switch - size
 
@@ -1084,7 +1089,7 @@ SizedBox.fromSize(
 
 ## Checkbox
 
-사용자가 여러 항목 중에서 하나 또는 여러 개를 선택할 수 있도록 돕습니다. 값(true/false)과 활성화 여부(isEnabled)로 표현이 달라집니다.
+> 사용자가 여러 항목 중에서 하나 또는 여러 개를 선택할 수 있도록 돕습니다. 값(true/false)과 활성화 여부(isEnabled)로 표현이 달라집니다.
 
 ### Checkbox - size
 
@@ -1169,7 +1174,7 @@ SizedBox(spec)
 
 ## Radio
 
-사용자가 여러 옵션 중에서 하나만 선택할 수 있도록 돕습니다. Checkbox와 달리 그룹 내에서 오직 하나의 항목만 선택 가능하며, `groupValue`와 개별 `value`를 비교하여 선택 여부를 판단합니다.
+> 사용자가 여러 옵션 중에서 하나만 선택할 수 있도록 돕습니다. Checkbox와 달리 그룹 내에서 오직 하나의 항목만 선택 가능하며, `groupValue`와 개별 `value`를 비교하여 선택 여부를 판단합니다.
 
 Radio는 아래 속성으로 이루어집니다.
 
@@ -1224,7 +1229,7 @@ WdsRadio<String>.large(
 
 ## Toast
 
-화면에 잠시 나타났다 사라지는 짧은 알림 메시지로, 사용자가 수행한 작업에 대한 피드백을 제공합니다.
+> 화면에 잠시 나타났다 사라지는 짧은 알림 메시지로, 사용자가 수행한 작업에 대한 피드백을 제공합니다.
 
 Toast는 아래 속성으로 이루어집니다.
 
@@ -1333,7 +1338,7 @@ controller.dismiss();
 
 ## Snackbar
 
-사용자가 수행한 작업에 대한 피드백을 제공합니다. Toast와 달리 추가적인 조치를 취할 수 있는 버튼이 포함되어 있습니다.
+> 사용자가 수행한 작업에 대한 피드백을 제공합니다. Toast와 달리 추가적인 조치를 취할 수 있는 버튼이 포함되어 있습니다.
 
 Snackbar는 아래 속성으로 이루어집니다.
 
@@ -1424,7 +1429,7 @@ spacing | 8px | 콘텐츠와 액션 버튼 사이 간격
 
 ## Tooltip
 
-설명적 내용이 필요한 경우에 사용합니다.
+> 설명적 내용이 필요한 경우에 사용합니다.
 
 Tooltip은 아래 속성으로 이루어집니다.
 
@@ -1645,7 +1650,7 @@ class MyWidget extends StatelessWidget with WdsBadgeMixin {
 
 ## Divider
 
-디자인 요소와 정보를 구분하는 데 사용합니다.
+> 디자인 요소와 정보를 구분하는 데 사용합니다.
 이를 통해 각 요소의 디자인 가독성이 향상됩니다.
 
 ### Divider - 개요
@@ -1721,3 +1726,298 @@ const WdsDivider(variant: WdsDividerVariant.thick);
 // 세로(고정 스펙: 1 x 32)
 const WdsDivider.vertical();
 ```
+
+## Slider
+
+> 특정 범위에 대한 값을 선택할 때 사용합니다.
+
+Slider는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | ---
+minValue | `double` | 최소값
+maxValue | `double` | 최대값
+values | `RangeValues` | 현재 선택된 범위 (start, end)
+divisions | `int?` | 슬라이더 분할 단위 (선택사항)
+onChanged | `ValueChanged<RangeValues>?` | 값 변경 시 콜백
+hasTitle | `bool` | 상단에 선택된 범위 표시 여부
+isEnabled | `bool` | 슬라이더 활성화 여부 (`false` 시 'disabled' 상태)
+
+### Slider - state
+
+아래 2가지 상태를 가집니다.
+
+상태 | 설명
+--- | ---
+enabled | 상호작용 가능, `onChanged` 호출됨
+disabled | 상호작용 불가, 색상 변경 적용
+
+### Slider - 구성 요소
+
+Slider는 여러 레이어로 구성됩니다 (아래부터 위 순서로 렌더링).
+
+구성 요소 | 속성 | 값 | 비고
+--- | --- | --- | ---
+background track | height | 4px | 전체 트랙 배경
+background track | width | `double.infinity` | 가용 전체 너비
+background track | borderRadius | `WdsRadius.full` |
+background track | color | `WdsColors.borderAlternative` |
+background track | margin | `EdgeInsets.symmetric(horizontal: 8)` | knob 영역 확보
+active track | height | 4px | 선택된 범위 표시
+active track | color | `WdsColors.primary` |
+active track | width | knob 간 거리만큼 동적 | start~end 구간
+knob | size | 20x20px | 원형 핸들
+knob | backgroundColor | `WdsColors.primary` |
+knob | border | 2px `WdsColors.white` (inside) |
+knob | shape | `CircleBorder` | CustomPaint로 구현
+knob interaction | size | 32x32px | 터치/호버 영역
+knob interaction | borderRadius | `WdsRadius.full` |
+knob interaction | backgroundColor | `WdsColors.cta.withAlpha(WdsOpacity.opacity5.toAlpha())` | hover/pressed 시에만 표시
+
+### Slider - title
+
+`hasTitle`이 `true`일 때 상단에 선택된 범위를 표시합니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+typography | `WdsTypography.heading16Bold` |
+color | `WdsColors.textNormal` | enabled 상태
+color (disabled) | `WdsColors.textDisable` | disabled 상태
+format | `"${start} ~ ${end}"` | 선택된 범위 텍스트
+
+e.g. code - hasTitle layout
+``` dart
+Column(
+  spacing: 12,
+  children: [
+    if (hasTitle) _buildTitle(),
+    _buildSlider(),
+  ],
+)
+```
+
+### Slider - disabled state
+
+비활성화 상태에서는 다음과 같이 색상이 변경됩니다.
+
+구성 요소 | disabled 상태 색상 | 비고
+--- | --- | ---
+title | `WdsColors.textDisable` |
+active track | `WdsColors.borderAlternative` |
+knob | `WdsColors.borderAlternative` | border는 `WdsColors.white` 유지
+
+### Slider - interaction
+
+상호작용 동작 및 제약사항입니다.
+
+동작 | 설명
+--- | ---
+knob 이동 | 좌우로 각각 독립적 이동 가능
+범위 제약 | 왼쪽 knob은 start값, 오른쪽 knob은 end값
+동일값 허용 | `start == end` 상황 허용
+interaction 표시 | hover/pressed 시 32x32 영역 표시
+division 단위 | `divisions`가 설정된 경우 해당 단위로만 이동
+
+
+## SectionMessage
+
+> 특정 섹션이나 영역 내에서 중요한 정보나 피드백을 전달하는 메시지입니다. 사용자가 필요한 행동을 취할 수 있도록 돕습니다.
+
+SectionMessage는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+message | `String` | 메시지에 표시될 텍스트 내용
+leadingIcon | `WdsIcon?` | 선택사항인 앞쪽 아이콘
+variant | `WdsSectionMessageVariant` | 메시지의 표시 형태 (normal, highlight, warning)
+
+### SectionMessage - variant
+
+정해진 Variant만 사용할 수 있습니다.
+
+- `normal`: 기본 정보 전달 형태
+- `highlight`: 긍정적인 정보나 성공 상태 표시
+- `warning`: 주의가 필요한 정보나 경고 상태 표시
+
+### SectionMessage - 고정된 속성
+
+모든 SectionMessage는 동일한 레이아웃 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+padding | `EdgeInsets.all(16)` | 모든 variant 고정
+iconSize | 16x16 | 아이콘 크기 고정
+iconPosition | leading | 아이콘 위치 고정
+iconSpacing | 4px | 아이콘과 텍스트 사이 간격
+
+### SectionMessage - variant별 속성
+
+variant에 따라 색상이 달라집니다.
+
+속성 | normal | highlight | warning
+--- | --- | --- | ---
+backgroundColor | `WdsColors.backgroundAlternative` | `WdsColors.blue50` | `WdsColors.orange50`
+textColor | `WdsColors.textNeutral` | `WdsColors.statusPositive` | `WdsColors.statusCautionaty`
+iconColor | `WdsColors.neutral500` | `WdsColors.primary` | `WdsColors.statusCautionaty`
+
+### SectionMessage - 생성 방법
+
+named constructor로 생성할 수 있습니다.
+
+``` dart
+// 기본 정보 메시지
+WdsSectionMessage.normal(
+  message: '정보를 확인해주세요',
+  leadingIcon: WdsIcon.info,
+)
+
+// 긍정적 메시지
+WdsSectionMessage.highlight(
+  message: '작업이 완료되었습니다',
+  leadingIcon: WdsIcon.checkCircle,
+)
+
+// 경고 메시지
+WdsSectionMessage.warning(
+  message: '주의가 필요한 사항입니다',
+  leadingIcon: WdsIcon.warning,
+)
+```
+
+### SectionMessage - 구현 세부사항
+
+- **borderRadius**: `WdsRadius.v8` (8px)
+- **Row spacing**: 4px (아이콘과 텍스트 사이)
+- **MainAxisSize**: `MainAxisSize.min` (콘텐츠 크기에 맞춤)
+- **Typography**: `WdsTypography.body14NormalMedium`
+
+## Badge
+
+> 정보의 개수를 강조하기 위해 사용합니다. 장바구니 아이템, 알림 등 개수에 대한 표기가 필요한 경우에 활용합니다. 중요도에 맞게 CTA/Primary 컬러를 사용합니다.
+
+Badge는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+count | `int` | 표시할 개수 (0은 표시하지 않음)
+targetIcon | `Widget` | Badge가 붙을 대상 아이콘 위젯
+
+### Badge - 고정된 속성
+
+모든 Badge는 동일한 시각적 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+backgroundColor | `WdsColors.primary` | 고정
+borderRadius | `WdsRadius.full` | 완전한 원형
+padding | `EdgeInsets.fromLTRB(4, 2, 4, 2)` | 고정
+typography | `WdsTypography.caption9SemiBold` | 9px, Pretendard, w600
+textColor | `WdsColors.white` | 고정
+letterSpacing | 0.03px | 고정
+lineHeight | 128% | 고정
+
+### Badge - 개수 표시 규칙
+
+- 0은 표시하지 않음
+- 1부터 99까지 숫자로 표시
+- 100부터는 "99+"로 표시
+
+### Badge - 위치 및 크기
+
+Badge는 항상 대상 아이콘의 오른쪽 아래에 위치합니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+targetIconSize | 24x24 | 대상 아이콘 크기 (0,0 ~ 23,23)
+stackSize | 24x24 | 원본 아이콘 크기 유지 (overflow 허용)
+badgePosition | 동적 계산 | digitCount에 따라 left 위치 조정
+interactionArea | 24x24 | 터치 영역 (아이콘 크기와 동일)
+
+### Badge - 사용 방법
+
+Extension을 통해 아이콘에 Badge를 추가할 수 있습니다.
+
+``` dart
+// 기본 사용법
+WdsIcon.cart.build().addBadge(count: 4);
+
+// Extension 구현
+extension WdsBadgeExtension on Widget {
+  Widget addBadge({
+    required int count,
+  }) {
+    if (count <= 0) {
+      return this;
+    }
+
+    return Stack(
+      children: [
+        this,
+        Positioned(
+          right: 0,
+          top: 0,
+          child: WdsBadge(count: count),
+        ),
+      ],
+    );
+  }
+}
+```
+
+### Badge - 크기별 차이
+
+개수에 따라 Badge 크기와 위치가 달라집니다.
+
+개수 범위 | 크기 | 위치 조정 | 비고
+--- | --- | --- | ---
+1 | 16x16 | left: 12px | 한 자리 수 (특별 처리)
+2-9 | 16x16 | left: 7px | 한 자리 수
+10-99 | 20x16 | left: 2px | 두 자리 수 (가로 확장)
+100+ | 24x16 | left: 2px | "99+" 표시 (최대 크기)
+
+### Badge - Overflow 허용 방식
+
+Badge가 원본 아이콘 크기를 유지하면서 overflow를 허용합니다.
+
+``` dart
+Stack(
+  clipBehavior: Clip.none, // overflow 허용
+  children: [
+    originalWidget, // 원본 위젯 그대로 유지 (24x24)
+    Positioned(
+      left: 19.5, // Badge 중앙이 (19.5, 19.5)에 위치
+      top: 19.5,  // 아이콘 24x24 기준 오른쪽 아래 중앙
+      child: WdsBadge(count: count),
+    ),
+  ],
+)
+```
+
+### Badge - 위치 계산
+
+- **아이콘 크기**: 24x24 (픽셀 0,0 ~ 23,23)
+- **Stack 크기**: 24x24 (원본 아이콘 크기 유지)
+- **Badge 위치**: `left: 12 - ((digitCount - 1) * 5), top: 12`
+- **digitCount**: 1자리=1, 2자리=2, 3자리 이상=2 (99+)
+- **Overflow**: Badge가 아이콘 영역을 벗어나도 표시됨
+
+### Badge - 위치 계산 공식
+
+``` dart
+int digitCount = count.toString().length;
+if (digitCount > 2) {
+  digitCount = 2; // 99+는 2자리로 처리
+}
+
+Positioned(
+  left: 12 - ((digitCount - 1) * 5), // 동적 위치 계산
+  top: 12, // 고정 상단 위치
+  child: WdsBadge(count: count),
+)
+```
+
+### Badge - 레이아웃 영향
+
+- **Row/Column**: 아이콘 크기(24x24)만큼만 공간 차지
+- **AppBar**: 높이가 늘어나지 않음
+- **Overflow**: Badge가 아이콘 영역을 벗어나도 정상 표시
