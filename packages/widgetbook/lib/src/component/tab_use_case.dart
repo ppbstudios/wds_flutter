@@ -113,10 +113,12 @@ class _TextTabsPlaygroundState extends State<_TextTabsPlayground> {
   @override
   Widget build(BuildContext context) {
     final int count = context.knobs.int.slider(
-      label: 'count (TextTabs)',
-      initialValue: 6,
+      label: '첫번째 Playground: TextTabs',
+      description:
+          '탭의 개수를 조절할 수 있어요.\n\u2022 DotBadge: 1번째\n\u2022 featured: 3번째, 5번째',
+      initialValue: 3,
       min: 2,
-      max: 8,
+      max: 6,
     );
 
     if (_controller.length != count) {
@@ -176,7 +178,8 @@ class _LineTabsPlaygroundState extends State<_LineTabsPlayground> {
   @override
   Widget build(BuildContext context) {
     final int count = context.knobs.object.dropdown<int>(
-      label: 'count (LineTabs)',
+      label: '두번째 Playground: LineTabs',
+      description: '탭의 개수를 조절할 수 있어요.',
       options: const [2, 3],
       initialOption: 2,
     );
