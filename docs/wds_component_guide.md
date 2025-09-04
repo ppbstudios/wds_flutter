@@ -812,6 +812,32 @@ trailing 간격 | - | 10px | 아이콘과 텍스트 사이
 
 문자 기반 탭으로 가로 스크롤이 가능합니다.
 
+### TextTabs - 속성
+
+속성 | Type | 비고
+--- | --- | ---
+tabs | `List<WdsTextTab>` | 표시할 탭들의 리스트
+controller | `WdsTextTabsController?` | 탭 컨트롤러 (선택사항)
+onTap | `ValueChanged<int>?` | 탭 선택 시 호출되는 콜백
+
+### TextTabs - controller
+
+`WdsTextTabsController`는 Material의 TabController와 유사한 패턴을 따릅니다.
+
+``` dart
+final controller = WdsTextTabsController(
+  length: 4,
+  initialIndex: 0,
+);
+
+// 사용법
+WdsTextTabs(
+  tabs: [...],
+  controller: controller,
+  onTap: (index) => controller.setIndex(index),
+)
+```
+
 ### TextTabs - state
 상태 | color | typography | 비고
 --- | --- | --- | ---
@@ -822,10 +848,18 @@ featured | 디자인 의도 색상 | `WdsTypography.body15NormalBold` | 강조 �
 ### TextTabs - spacing & scroll
 항목 | 값 | 비고
 --- | --- | ---
-좌측 시작 padding | 16px |
-탭 간 간격 | 24px |
-스크롤 끝 padding | 오른쪽으로 더 스크롤 가능할 때 없음 | 끝까지 스크롤 시 16px
+좌측 시작 padding | 16px | 첫 번째 탭
+탭 간 간격 | 20px | 탭 사이 간격
+우측 끝 padding | 16px | 마지막 탭
 상하 padding | 8px |
+
+### LineTabs - 속성
+
+속성 | Type | 비고
+--- | --- | ---
+tabs | `List<String>` | 표시할 탭들의 리스트
+controller | `WdsTextTabsController?` | 탭 컨트롤러 (선택사항)
+onTap | `ValueChanged<int>?` | 탭 선택 시 호출되는 콜백
 
 ### LineTabs
 
