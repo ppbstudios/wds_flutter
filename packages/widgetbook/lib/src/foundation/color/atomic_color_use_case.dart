@@ -195,7 +195,7 @@ class _AtomicColorShowcase extends StatelessWidget {
       items.add(
         _ColorItem(
           label: percentLabel,
-          color: tokens.$black.withValues(alpha: opacity),
+          color: tokens.$black.withAlpha(opacity.toAlpha()),
         ),
       );
     }

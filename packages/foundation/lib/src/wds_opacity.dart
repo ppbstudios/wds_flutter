@@ -25,5 +25,5 @@ extension WdsOpacityToAlpha on double {
   ///   WdsOpacity.opacity40.toAlpha(),
   /// )
   /// ```
-  int toAlpha() => (this * 100).toInt();
+  int toAlpha() => (this * 255).round();
 }
