@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as wb;
+import 'package:widgetbook_size_inspector/widgetbook_size_inspector.dart';
 
 import 'main.directories.g.dart';
 import 'src/widgetbook_components/widgetbook_components.dart' as wbc;
@@ -40,6 +41,7 @@ class WidgetbookApp extends StatelessWidget {
       addons: [
         GridAddon(),
         InspectorAddon(),
+        SizeInspectorAddon(), // New accurate inspector
         ZoomAddon(),
         ViewportAddon(Viewports.all),
         SemanticsAddon(),

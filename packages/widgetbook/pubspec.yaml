@@ -16,6 +16,7 @@ dependencies:
     path: ../tokens
   widgetbook: ^3.16.0
   widgetbook_annotation: ^3.7.0
+  widgetbook_size_inspector: ^0.0.1
 
 
 dev_dependencies:

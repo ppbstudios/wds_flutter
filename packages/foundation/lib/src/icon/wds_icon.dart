@@ -46,13 +46,18 @@ enum WdsIcon implements IconBuilder {
     Color? color,
     double? width,
     double? height,
-  }) =>
-      SvgPicture.asset(
-        path,
-        package: 'wds_foundation',
-        colorFilter:
-            color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
-        width: width,
-        height: height,
-      );
+  }) {
+    final iconWidth = width ?? 24.0;
+    final iconHeight = height ?? 24.0;
+
+    return SvgPicture.asset(
+      path,
+      package: 'wds_foundation',
+      colorFilter:
+          color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
+      width: iconWidth,
+      height: iconHeight,
+      fit: BoxFit.scaleDown,
+    );
+  }
 }
