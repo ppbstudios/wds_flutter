@@ -817,6 +817,32 @@ trailing 간격 | - | 10px | 아이콘과 텍스트 사이
 
 > 문자 기반 탭으로 가로 스크롤이 가능합니다.
 
+### TextTabs - 속성
+
+속성 | Type | 비고
+--- | --- | ---
+tabs | `List<WdsTextTab>` | 표시할 탭들의 리스트
+controller | `WdsTextTabsController?` | 탭 컨트롤러 (선택사항)
+onTap | `ValueChanged<int>?` | 탭 선택 시 호출되는 콜백
+
+### TextTabs - controller
+
+`WdsTextTabsController`는 Material의 TabController와 유사한 패턴을 따릅니다.
+
+``` dart
+final controller = WdsTextTabsController(
+  length: 4,
+  initialIndex: 0,
+);
+
+// 사용법
+WdsTextTabs(
+  tabs: [...],
+  controller: controller,
+  onTap: (index) => controller.setIndex(index),
+)
+```
+
 ### TextTabs - state
 상태 | color | typography | 비고
 --- | --- | --- | ---
@@ -827,10 +853,18 @@ featured | 디자인 의도 색상 | `WdsTypography.body15NormalBold` | 강조 �
 ### TextTabs - spacing & scroll
 항목 | 값 | 비고
 --- | --- | ---
-좌측 시작 padding | 16px |
-탭 간 간격 | 24px |
-스크롤 끝 padding | 오른쪽으로 더 스크롤 가능할 때 없음 | 끝까지 스크롤 시 16px
+좌측 시작 padding | 16px | 첫 번째 탭
+탭 간 간격 | 20px | 탭 사이 간격
+우측 끝 padding | 16px | 마지막 탭
 상하 padding | 8px |
+
+### LineTabs - 속성
+
+속성 | Type | 비고
+--- | --- | ---
+tabs | `List<String>` | 표시할 탭들의 리스트
+controller | `WdsTextTabsController?` | 탭 컨트롤러 (선택사항)
+onTap | `ValueChanged<int>?` | 탭 선택 시 호출되는 콜백
 
 ### LineTabs
 
@@ -1485,6 +1519,134 @@ CustomPaint > DecoratedBox > Padding > Row(mainAxisSize.min): (Flexible > Text) 
 - true: border 2px `WdsColors.primary`
 - false
 
+
+## DotBadge
+
+알림을 표시하는 작은 아이콘이나 배지로, 사용자가 특정 항목이나 상태에 대해 새로운 정보나 업데이트가 있음을 시각적으로 알려주는 요소입니다.
+
+DotBadge는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+child | `Widget` | 배지가 위치할 자식 위젯
+color | `Color?` | 점 배지의 색상 (기본값: WdsColors.orange600)
+alignment | `Alignment?` | 자식 위젯 기준 배지의 정렬 위치, null이면 미표기
+
+### DotBadge - 고정된 속성
+
+모든 DotBadge는 동일한 시각적 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+size | 4x4px | 고정 크기
+shape | `CircleBorder()` | 원형 모양
+기본 색상 | `WdsColors.orange600` | color가 null일 때 사용
+
+### DotBadge - alignment
+
+배지가 자식 위젯 기준으로 위치할 수 있는 9개 위치를 지원합니다.
+
+alignment | 설명
+--- | ---
+topLeft | 자식 위젯의 왼쪽 위 모서리
+topCenter | 자식 위젯의 위쪽 중앙
+topRight | 자식 위젯의 오른쪽 위 모서리
+middleLeft | 자식 위젯의 왼쪽 중앙
+middleCenter | 자식 위젯의 중앙
+middleRight | 자식 위젯의 오른쪽 중앙
+bottomLeft | 자식 위젯의 왼쪽 아래 모서리
+bottomCenter | 자식 위젯의 아래쪽 중앙
+bottomRight | 자식 위젯의 오른쪽 아래 모서리
+
+### DotBadge - layout
+
+DotBadge는 Stack과 Align을 사용하여 자식 위젯 크기에 맞춰 배지 위치를 결정합니다.
+
+``` dart
+Stack(
+  clipBehavior: Clip.none,
+  alignment: Alignment.center,
+  children: [
+    Positioned.fill(
+      top: -2,
+      right: -2,
+      bottom: -2,
+      left: -2,
+      child: Align(
+        alignment: alignment!,
+        child: SizedBox.square(
+          dimension: 4,
+          child: DecoratedBox(
+            decoration: ShapeDecoration(
+              shape: const CircleBorder(),
+              color: color ?? WdsColors.orange600,
+            ),
+          ),
+        ),
+      ),
+    ),
+    child,
+  ],
+)
+```
+
+### DotBadge - 사용 방법
+
+#### 기본 사용법
+``` dart
+WdsDotBadge(
+  alignment: Alignment.topRight,
+  child: Icon(Icons.notifications),
+)
+```
+
+#### 색상 지정
+``` dart
+WdsDotBadge(
+  alignment: Alignment.topRight,
+  color: WdsColors.red500,
+  child: Icon(Icons.mail),
+)
+```
+
+#### 배지 숨기기
+``` dart
+WdsDotBadge(
+  alignment: null, // 배지 숨김
+  child: Icon(Icons.home),
+)
+```
+
+### DotBadge - 확장 메서드
+
+모든 위젯에 배지 기능을 추가할 수 있는 확장 메서드를 제공합니다.
+
+``` dart
+// 기본 사용 (topRight 위치)
+Icon(Icons.settings).addDotBadge()
+
+// 색상과 위치 지정
+Icon(Icons.settings).addDotBadge(
+  color: WdsColors.blue500,
+  alignment: Alignment.topLeft,
+)
+```
+
+### DotBadge - 믹스인
+
+StatelessWidget 컴포넌트에서도 배지를 사용할 수 있도록 믹스인을 제공합니다.
+
+``` dart
+class MyWidget extends StatelessWidget with WdsBadgeMixin {
+  @override
+  Widget build(BuildContext context) {
+    return addDotBadge(
+      alignment: Alignment.topRight,
+      child: Icon(Icons.favorite),
+    );
+  }
+}
+```
 
 ## Divider
 
