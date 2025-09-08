@@ -141,7 +141,7 @@ class _TextTabsPlaygroundState extends State<_TextTabsPlayground> {
         'count: $count',
         'currentIndex: ${_controller.index}',
         'spacing: start=16, between=24, vertical=8',
-        'featured: index=2 .primary fixed',
+        'featured: index=2 .primary @fixed',
       ],
       child: WdsTextTabs(
         tabs: [

@@ -118,7 +118,6 @@ class _WdsSheetState extends State<WdsSheet> with TickerProviderStateMixin {
     return LayoutBuilder(
       builder: (context, constraints) {
         final maxHeight = constraints.maxHeight * widget.variant.maxHeightRatio;
-        final minHeight = constraints.maxHeight * widget.variant.minHeightRatio;
 
         final sheetWidgets = <Widget>[];
 
@@ -139,9 +138,10 @@ class _WdsSheetState extends State<WdsSheet> with TickerProviderStateMixin {
                         _SheetPaddingByArea.view,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         if (widget.image != null) ...[
-                          widget.image!,
+                          Center(child: widget.image!),
                           const SizedBox(height: 16),
                         ],
                         Text(
@@ -186,8 +186,9 @@ class _WdsSheetState extends State<WdsSheet> with TickerProviderStateMixin {
 
         return ConstrainedBox(
           constraints: BoxConstraints(
+            maxWidth: constraints.maxWidth,
             maxHeight: maxHeight,
-            minHeight: minHeight,
+            minWidth: constraints.minWidth,
           ),
           child: DecoratedBox(
             decoration: const BoxDecoration(
@@ -198,7 +199,6 @@ class _WdsSheetState extends State<WdsSheet> with TickerProviderStateMixin {
               ),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -222,7 +222,7 @@ class _WdsSheetState extends State<WdsSheet> with TickerProviderStateMixin {
 }
 
 class _WdsSheetHandle extends StatelessWidget {
-  const _WdsSheetHandle({super.key});
+  const _WdsSheetHandle();
 
   @override
   Widget build(BuildContext context) {
@@ -245,7 +245,7 @@ class _WdsSheetHandle extends StatelessWidget {
 }
 
 class _WdsSheetHeader extends StatelessWidget {
-  const _WdsSheetHeader({this.title, this.onClose, super.key});
+  const _WdsSheetHeader({this.title, this.onClose});
 
   final String? title;
 
@@ -298,7 +298,6 @@ class _WdsSheetBottom extends StatelessWidget {
     required this.onTap,
     required this.title,
     required this.isEnabled,
-    super.key,
   });
 
   final VoidCallback onTap;

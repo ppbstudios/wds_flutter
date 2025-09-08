@@ -58,7 +58,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
       'padding: 10px 8px 10px 8px',
       'layout: hug content (MainAxisSize.min)',
       if (hasArrow) 'arrowSize: 24x8px',
-      if (hasCloseButton) 'closeIcon: WdsIcon.close (fixed)',
+      if (hasCloseButton) 'closeIcon: WdsIcon.close @fixed',
       if (hasCloseButton) 'closeButtonSize: 20x20px',
     ],
     child: SizedBox(
