@@ -58,6 +58,8 @@ import 'package:wds_widgetbook/src/component/text_button_use_case.dart'
     as _wds_widgetbook_src_component_text_button_use_case;
 import 'package:wds_widgetbook/src/component/text_field_use_case.dart'
     as _wds_widgetbook_src_component_text_field_use_case;
+import 'package:wds_widgetbook/src/component/thumbnail_use_case.dart'
+    as _wds_widgetbook_src_component_wds_thumbnail_use_case;
 import 'package:wds_widgetbook/src/component/toast_use_case.dart'
     as _wds_widgetbook_src_component_toast_use_case;
 import 'package:wds_widgetbook/src/component/tooltip_use_case.dart'
@@ -268,6 +270,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'TextField',
           builder: _wds_widgetbook_src_component_text_field_use_case
               .buildWdsTextFieldUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Thumbnail',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Thumbnail',
+          builder: _wds_widgetbook_src_component_wds_thumbnail_use_case
+              .buildThumbnailUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(

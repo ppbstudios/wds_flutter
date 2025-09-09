@@ -3,7 +3,11 @@ import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.d
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart';
 
-@UseCase(name: 'Sheet', type: WdsSheet, path: '[component]/')
+@UseCase(
+  name: 'Sheet',
+  type: Sheet,
+  path: '[component]/',
+)
 Widget buildWdsSheetUseCase(BuildContext context) {
   return WidgetbookPageLayout(
     title: 'Sheet',
