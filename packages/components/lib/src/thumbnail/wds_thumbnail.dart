@@ -7,7 +7,7 @@ enum WdsThumbnailSize {
   sm(size: Size(90, 90)),
   md(size: Size(106, 106)),
   lg(size: Size(140, 140)),
-  xl(size: Size(179, 250)),
+  xl(size: Size(179, 179)),
   xxl(size: Size(200, 200));
 
   const WdsThumbnailSize({

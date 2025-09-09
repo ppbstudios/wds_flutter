@@ -152,7 +152,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
                   size: WdsThumbnailSize.xl,
                   hasRadius: true,
                 ),
-                Text('xl (179x250)'),
+                Text('xl (179x179)'),
               ],
             ),
             Column(
