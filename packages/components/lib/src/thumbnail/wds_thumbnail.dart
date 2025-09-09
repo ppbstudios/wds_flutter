@@ -27,6 +27,8 @@ class WdsThumbnail extends StatelessWidget {
     super.key,
   });
 
+  static const double _placeholderIconScale = 0.3;
+
   /// 이미지 경로 (URL 또는 에셋 경로)
   final String imagePath;
 
@@ -38,21 +40,26 @@ class WdsThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderRadius = hasRadius
-        ? const BorderRadius.all(Radius.circular(WdsRadius.xs))
-        : null;
+    final imageWidget =
+        _isNetworkImage(imagePath) ? _buildNetworkImage() : _buildAssetImage();
 
-    return RepaintBoundary(
-      child: SizedBox.fromSize(
-        size: size.size,
-        child: ClipRRect(
-          borderRadius: borderRadius ?? BorderRadius.zero,
-          child: _isNetworkImage(imagePath)
-              ? _buildNetworkImage()
-              : _buildAssetImage(),
-        ),
-      ),
+    return _buildImageWidget(imageWidget);
+  }
+
+  /// 이미지 위젯을 적절한 컨테이너로 감싸기
+  Widget _buildImageWidget(Widget imageWidget) {
+    final sizedWidget = SizedBox.fromSize(
+      size: size.size,
+      child: hasRadius
+          ? ClipRRect(
+              borderRadius:
+                  const BorderRadius.all(Radius.circular(WdsRadius.xs)),
+              child: imageWidget,
+            )
+          : imageWidget,
     );
+
+    return RepaintBoundary(child: sizedWidget);
   }
 
   /// 네트워크 이미지인지 확인
@@ -90,23 +97,28 @@ class WdsThumbnail extends StatelessWidget {
       fit: BoxFit.cover,
       placeholder: (context, url) => _buildPlaceholder(),
       errorWidget: (context, url, error) => _buildPlaceholder(),
-      imageBuilder: (context, imageProvider) {
-        return DecoratedBox(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: imageProvider,
-              fit: BoxFit.cover,
-            ),
+      imageBuilder: (context, imageProvider) => DecoratedBox(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.cover,
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
   /// 고정 placeholder 빌드 (Container 대신 const 위젯 사용)
   Widget _buildPlaceholder() {
-    return const ColoredBox(
+    return ColoredBox(
       color: WdsColors.coolNeutral100,
+      child: Center(
+        child: WdsIcon.thumbnail.build(
+          color: WdsColors.coolNeutral200,
+          width: size.size.width * _placeholderIconScale,
+          height: size.size.height * _placeholderIconScale,
+        ),
+      ),
     );
   }
 }
