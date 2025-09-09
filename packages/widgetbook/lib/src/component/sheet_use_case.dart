@@ -182,7 +182,7 @@ Widget _buildSheetContent(
                   color: WdsColors.borderAlternative,
                 ),
               )
-            : null,
+            : const SizedBox.shrink(),
         contentTitle: '여기는 제목 영역이에요\n최대 두 줄로 처리합니다',
         contentDescription: '현재 상황에 대한 추가 설명을 덧붙여 사용자에게 정보를 명확히 전달합니다.',
       ),
@@ -356,7 +356,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
                   debugPrint('onAction');
                 },
                 actionTitle: '메인액션',
-                image: null,
+                image: const SizedBox.shrink(),
                 contentTitle: '여기는 제목 영역이에요\n최대 두 줄로 처리합니다',
                 contentDescription: '현재 상황에 대한 추가 설명을 덧붙여 사용자에게 정보를 명확히 전달합니다.',
               ),
