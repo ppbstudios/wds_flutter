@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart'
     show
@@ -35,5 +36,6 @@ part 'src/switch/wds_switch.dart';
 part 'src/tab/wds_tab.dart';
 part 'src/text_field/wds_search_field.dart';
 part 'src/text_field/wds_text_field.dart';
+part 'src/thumbnail/wds_thumbnail.dart';
 part 'src/toast/wds_toast.dart';
 part 'src/tooltip/wds_tooltip.dart';
