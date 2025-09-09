@@ -100,3 +100,6 @@ class SectionMessage {}
 
 /// 컴포넌트 path 관리를 위한 클래스
 class Badge {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class Sheet {}

@@ -37,7 +37,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     info: [
       'icon: ${selected.name}',
       'color',
-      'size fixed: 24x24',
+      'size: 24x24 @fixed',
     ],
     child: selected.build(color: color, width: 24, height: 24),
   );

@@ -2021,3 +2021,115 @@ Positioned(
 - **Row/Column**: 아이콘 크기(24x24)만큼만 공간 차지
 - **AppBar**: 높이가 늘어나지 않음
 - **Overflow**: Badge가 아이콘 영역을 벗어나도 정상 표시
+
+## Sheet
+
+사용자가 화면에서 다른 작업을 진행하기 전에 반드시 확인하여야 하는 대화 상자입니다. 필요한 경우 Detach 해서 쓸 수 있습니다.
+
+Sheet는 4가지 요소로 구분됩니다:
+
+```dart
+Column(
+  children: [
+    if (variant != WdsSheetVariant.nudging) handle,
+    header,
+    view,
+    if (bottom != null) bottom,
+  ],
+)
+```
+
+속성 | Type | 비고
+--- | --- | ---
+onClose | `VoidCallback` | Sheet 닫기 콜백
+title | `String` | Sheet 제목
+variant | `WdsSheetVariant` | Sheet 타입 (fixed, draggable, nudging)
+size | `WdsSheetSize` | Sheet 크기 (max, min)
+isVisible | `bool` | Sheet 표시 여부
+child | `Widget` | Sheet 내부 컨텐츠
+bottom | `Widget?` | Sheet 하단 영역 (옵션)
+image | `Widget?` | nudging variant에서 사용할 이미지 (옵션)
+description | `String?` | nudging variant에서 사용할 설명 텍스트 (옵션)
+
+### Sheet - variant
+
+정해진 Variant만 사용할 수 있습니다.
+
+- `fixed`
+- `draggable` 
+- `nudging`
+
+**fixed**
+- View의 높이는 컨텐츠에 따라 최대 높이까지 자유롭게 조정 가능
+- fixed의 최대 View 높이는 max 또는 min 만 가능
+- 페이지 아래에서 위로 올라오며 닫기 버튼 또는 Dimmed 영역 터치 또는 페이지를 아래로 스크롤 시 Sheet를 닫을 수 있습니다.
+
+**draggable**
+- view의 높이는 max, min 전환만 가능하며 컨텐츠가 view 높이를 넘어갈 시 스크롤이 발생
+- 페이지 아래에서 위로 올라오며 닫기 버튼 또는 Dimmed 영역 터치 또는 페이지를 아래로 스크롤 시 Sheet를 닫을 수 있습니다.
+
+**nudging**
+- 고객에게 유익한 정보 제공 또는 행동을 유도할때 사용합니다
+- 간소화된 텍스트와 이미지만을 사용해 빠른 메세지 전달이 가능합니다
+- 영역을 Stack으로 구성하여 컨텐츠와 이미지/텍스트를 분리
+
+### Sheet - size
+
+각 variant별로 정해진 크기만 사용할 수 있습니다.
+
+**fixed**
+- `max`: constraints.maxHeight * 0.878 (674/768)
+- `min`: constraints.maxHeight * 0.349 (268/768)
+
+**draggable**
+- `max`: constraints.maxHeight * 0.930 (714/768)
+- `min`: constraints.maxHeight * 0.500 (384/768)
+
+**nudging**
+- `max`: constraints.maxHeight * 0.492 (378/768)
+- `min`: constraints.maxHeight * 0.305 (234/768)
+
+### Sheet - 구조
+
+**Handle 영역 (fixed, draggable만)**
+- top으로 7px padding이 있으며 40x5 px 크기에 `WdsColors.borderAlternative` 색상으로 `WdsRadius.full` radius
+- 영역의 고정 높이는 12px
+
+**Header 영역**
+- padding: `EdgeInsets.symmetric(horizontal: 16, vertical: 13)` 고정
+- 가운데 text, 오른쪽 끝에 trailing icon button 위치
+- trailing icon button: `WdsIcon.close`
+- header text: `WdsTypography.heading17Bold`, `WdsColors.textNormal`
+- 영역 크기는 고정인데 비율은 360px에서 204px 비로 고정
+- 고정 높이 영역 50px
+
+**View 영역**
+- padding: `EdgeInsets.all(16)` 고정
+
+**Bottom 영역 (옵션)**
+- bottom이 있는 경우, SafeArea로 감싸고 left, top, right의 padding은 16px
+- bottom은 최소 16px (노치 핸드폰처럼 하단 viewPadding이 달라질 수 있기 때문)
+
+**Nudging 구조**
+```dart
+Stack(
+  children: [
+    Column(children: [header, view, if (bottom != null) bottom]),
+    Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          if (image != null) 
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Center(child: image),
+            ),
+          Text(title, style: WdsTypography.heading18Bold, textAlign: TextAlign.center),
+          SizedBox(height: 10),
+          Text(description, style: WdsTypography.body15NormalRegular, textAlign: TextAlign.center),
+        ],
+      ),
+    ),
+  ],
+)
+```

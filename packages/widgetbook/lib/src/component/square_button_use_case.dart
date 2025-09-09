@@ -42,9 +42,9 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   return WidgetbookPlayground(
     info: [
-      'size: height32 fixed',
-      'typography: caption12Medium fixed',
-      'padding: horizontal17, vertical8 fixed',
+      'size: height32 @fixed',
+      'typography: caption12Medium @fixed',
+      'padding: horizontal17, vertical8 @fixed',
       'state: ${isEnabled ? 'enabled' : 'disabled'}',
     ],
     child: button,

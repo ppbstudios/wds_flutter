@@ -42,6 +42,8 @@ import 'package:wds_widgetbook/src/component/section_message_use_case.dart'
     as _wds_widgetbook_src_component_section_message_use_case;
 import 'package:wds_widgetbook/src/component/select_use_case.dart'
     as _wds_widgetbook_src_component_select_use_case;
+import 'package:wds_widgetbook/src/component/sheet_use_case.dart'
+    as _wds_widgetbook_src_component_sheet_use_case;
 import 'package:wds_widgetbook/src/component/slider_use_case.dart'
     as _wds_widgetbook_src_component_slider_use_case;
 import 'package:wds_widgetbook/src/component/snackbar_use_case.dart'
@@ -202,6 +204,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'Select',
           builder: _wds_widgetbook_src_component_select_use_case
               .buildWdsSelectUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Sheet',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Sheet',
+          builder:
+              _wds_widgetbook_src_component_sheet_use_case.buildWdsSheetUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
