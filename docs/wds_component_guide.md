@@ -2133,3 +2133,115 @@ Stack(
   ],
 )
 ```
+
+## Thumbnail
+
+일정한 비율의 이미지로 콘텐츠를 미리 보여줍니다. 네트워크 이미지와 에셋 이미지를 모두 지원하며, 캐싱 기능을 통해 성능을 최적화합니다.
+
+Thumbnail은 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+imagePath | `String` | 이미지 경로 (URL 또는 에셋 경로)
+size | `WdsThumbnailSize` | 썸네일 크기 (xxs, xs, sm, md, lg, xl, xxl)
+hasRadius | `bool` | 모서리 둥글기 적용 여부
+
+### Thumbnail - 자동 감지
+
+이미지 경로에 따라 자동으로 네트워크/에셋을 구분합니다.
+
+- **네트워크 이미지**: `http://` 또는 `https://`로 시작하는 URL
+- **에셋 이미지**: `assets/`로 시작하는 경로 또는 상대 경로
+
+### Thumbnail - size
+
+px 단위로 이루어집니다. 모든 크기는 정사각형이며, xl만 179x250의 직사각형입니다.
+
+속성 | size | 비고
+--- | --- | ---
+xxs | Size(64, 64) | 가장 작은 크기
+xs | Size(74, 74) | 작은 크기
+sm | Size(90, 90) | 작은-중간 크기
+md | Size(106, 106) | 중간 크기
+lg | Size(140, 140) | 큰 크기
+xl | Size(179, 250) | 가로형 직사각형
+xxl | Size(200, 200) | 가장 큰 정사각형
+
+e.g. enum
+``` dart
+enum WdsThumbnailSize {
+  xxs(size: Size(64, 64)),
+  xs(size: Size(74, 74)),
+  sm(size: Size(90, 90)),
+  md(size: Size(106, 106)),
+  lg(size: Size(140, 140)),
+  xl(size: Size(179, 250)),
+  xxl(size: Size(200, 200));
+
+  const WdsThumbnailSize({
+    required this.size,
+  });
+
+  final Size size;
+}
+```
+
+### Thumbnail - radius
+
+모서리 둥글기 설정입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+true | `BorderRadius.all(Radius.circular(WdsRadius.xs))` | 둥근 모서리 적용
+false | `null` | 직각 모서리
+
+### Thumbnail - 네트워크 이미지 처리
+
+네트워크 이미지는 `cached_network_image` 패키지를 사용하여 캐싱됩니다.
+
+- **원본 URL**: 입력된 URL을 그대로 사용
+- **에러 처리**: 로딩 실패 시 고정 placeholder 표시
+
+### Thumbnail - placeholder
+
+이미지 로딩 중에 표시되는 고정 위젯입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+placeholder | `WdsColors.coolNeutral100` 배경의 회색 사각형 | 고정, 변경 불가
+
+### Thumbnail - 생성 방법
+
+단일 생성자로 네트워크/에셋 이미지를 모두 처리합니다.
+
+``` dart
+// 네트워크 이미지 (자동 감지)
+WdsThumbnail(
+  imagePath: 'https://example.com/image.jpg',
+  size: WdsThumbnailSize.md,
+  hasRadius: true,
+)
+
+// 에셋 이미지 (자동 감지)
+WdsThumbnail(
+  imagePath: 'assets/images/thumbnail.png',
+  size: WdsThumbnailSize.lg,
+  hasRadius: false,
+)
+```
+
+### Thumbnail - 에러 처리
+
+이미지 로딩 실패 시 처리 방식입니다.
+
+- **네트워크 이미지**: 로딩 실패 시 고정 placeholder 표시
+- **에셋 이미지**: 에셋 로딩 실패 시 고정 placeholder 표시
+- **모든 경우**: 에러 발생 시 기본 placeholder (회색 배경) 표시
+
+### Thumbnail - 성능 최적화
+
+- **캐싱**: `cached_network_image`를 통한 자동 캐싱
+- **메모리 관리**: 이미지 크기에 따른 적절한 해상도 선택
+- **로딩 상태**: placeholder를 통한 부드러운 로딩 경험
+- **const 최적화**: 가능한 모든 위젯에 `const` 키워드 적용
+

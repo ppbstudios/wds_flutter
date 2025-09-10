@@ -32,6 +32,7 @@ enum WdsIcon implements IconBuilder {
   share(path: 'assets/vector/share.svg'),
   starFilled(path: 'assets/vector/star_filled.svg'),
   support(path: 'assets/vector/support.svg'),
+  thumbnail(path: 'assets/vector/thumbnail.svg'),
   wincLogo(path: 'assets/vector/winc_logo.svg'),
   ;
 
@@ -57,7 +58,6 @@ enum WdsIcon implements IconBuilder {
           color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
       width: iconWidth,
       height: iconHeight,
-      fit: BoxFit.scaleDown,
     );
   }
 }
