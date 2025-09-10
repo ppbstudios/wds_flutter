@@ -5,6 +5,9 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 const String productThumbnailUrl =
     'https://cdn.winc.app/uploads/ppb/image/src/81732/ppb_image_file-e110f7.jpg';
 
+const String productLensPatternImageUrl =
+    'https://cdn.winc.app/uploads/ppb/image/src/81734/ppb_image_file-3a9d58.png';
+
 @widgetbook.UseCase(
   name: 'ItemCard',
   type: ItemCard,
@@ -35,6 +38,12 @@ Widget _buildPlaygroundSection(BuildContext context) {
     label: 'thumbnailImageUrl',
     description: '썸네일 이미지 URL을 설정해요',
     initialValue: productThumbnailUrl,
+  );
+
+  final lensPatternImageUrl = context.knobs.string(
+    label: 'lensPatternImageUrl',
+    description: '렌즈 패턴 이미지 URL을 설정해요',
+    initialValue: productLensPatternImageUrl,
   );
 
   final brandName = context.knobs.string(
@@ -120,12 +129,12 @@ Widget _buildPlaygroundSection(BuildContext context) {
     state?.updateQueryField(
       group: 'knobs',
       field: 'hasLiked',
-      value: hasLiked.toString(),
+      value: (!hasLiked).toString(),
     );
     state?.updateQueryField(
       group: 'knobs',
       field: 'likeCount',
-      value: (likeCount + 1).toString(),
+      value: (likeCount + (hasLiked ? 1 : 0)).toString(),
     );
   }
 
@@ -141,6 +150,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     WdsItemCardSize.xl => WdsItemCard.xl(
         onLiked: onLiked,
         thumbnailImageUrl: thumbnailImageUrl,
+        lensPatternImageUrl: lensPatternImageUrl,
         brandName: brandName,
         productName: productName,
         lensType: lensType,
@@ -156,6 +166,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     WdsItemCardSize.lg => WdsItemCard.lg(
         onLiked: onLiked,
         thumbnailImageUrl: thumbnailImageUrl,
+        lensPatternImageUrl: lensPatternImageUrl,
         brandName: brandName,
         productName: productName,
         lensType: lensType,
@@ -171,6 +182,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     WdsItemCardSize.md => WdsItemCard.md(
         onLiked: onLiked,
         thumbnailImageUrl: thumbnailImageUrl,
+        lensPatternImageUrl: lensPatternImageUrl,
         brandName: brandName,
         productName: productName,
         lensType: lensType,
@@ -269,6 +281,7 @@ class __BuildDemonstrationSectionState
                   ),
                   hasLiked: hasLikedMap[WdsItemCardSize.xl] ?? false,
                   thumbnailImageUrl: productThumbnailUrl,
+                  lensPatternImageUrl: productLensPatternImageUrl,
                   brandName: '하파크리스틴',
                   productName: '빈 크리스틴 원데이 드립브라운',
                   lensType: '하루용',
@@ -298,6 +311,7 @@ class __BuildDemonstrationSectionState
                   ),
                   hasLiked: hasLikedMap[WdsItemCardSize.lg] ?? false,
                   thumbnailImageUrl: productThumbnailUrl,
+                  lensPatternImageUrl: productLensPatternImageUrl,
                   brandName: '하파크리스틴',
                   productName: '빈 크리스틴 원데이 드립브라운',
                   lensType: '하루용',
@@ -322,6 +336,7 @@ class __BuildDemonstrationSectionState
                   ),
                   hasLiked: hasLikedMap[WdsItemCardSize.md] ?? false,
                   thumbnailImageUrl: productThumbnailUrl,
+                  lensPatternImageUrl: productLensPatternImageUrl,
                   brandName: '하파크리스틴',
                   productName: '빈 크리스틴 원데이 드립브라운',
                   lensType: '하루용',

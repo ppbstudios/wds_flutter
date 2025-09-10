@@ -5,6 +5,19 @@ enum WdsItemCardSize {
   lg,
   md,
   xs;
+
+  Size get thumnbnailSize => switch (this) {
+        WdsItemCardSize.xl => WdsThumbnailSize.xl.size,
+        WdsItemCardSize.lg => WdsThumbnailSize.lg.size,
+        WdsItemCardSize.md => WdsThumbnailSize.md.size,
+        WdsItemCardSize.xs => WdsThumbnailSize.xs.size,
+      };
+
+  Size? get lensPatternSize => switch (this) {
+        WdsItemCardSize.xl || WdsItemCardSize.lg => const Size.square(40),
+        WdsItemCardSize.md => const Size.square(30),
+        WdsItemCardSize.xs => null,
+      };
 }
 
 class WdsItemCard extends StatefulWidget {
@@ -23,6 +36,7 @@ class WdsItemCard extends StatefulWidget {
     required this.likeCount,
     this.hasLiked = false,
     this.tags = const [],
+    this.lensPatternImageUrl,
     super.key,
   }) : size = WdsItemCardSize.xl;
 
@@ -41,6 +55,7 @@ class WdsItemCard extends StatefulWidget {
     required this.likeCount,
     this.hasLiked = false,
     this.tags = const [],
+    this.lensPatternImageUrl,
     super.key,
   }) : size = WdsItemCardSize.lg;
 
@@ -59,6 +74,7 @@ class WdsItemCard extends StatefulWidget {
     required this.likeCount,
     this.hasLiked = false,
     this.tags = const [],
+    this.lensPatternImageUrl,
     super.key,
   }) : size = WdsItemCardSize.md;
 
@@ -78,11 +94,14 @@ class WdsItemCard extends StatefulWidget {
     this.tags = const [],
     super.key,
   })  : size = WdsItemCardSize.xs,
-        brandName = '';
+        brandName = '',
+        lensPatternImageUrl = null;
 
   final VoidCallback onLiked;
 
   final String thumbnailImageUrl;
+
+  final String? lensPatternImageUrl;
 
   final String brandName;
 
@@ -142,10 +161,33 @@ class _WdsItemCardState extends State<WdsItemCard> {
         ),
     };
 
+    Widget? thumbnailImageWithLensPattern;
+    if (widget.lensPatternImageUrl != null &&
+        widget.lensPatternImageUrl!.isNotEmpty &&
+        widget.size.lensPatternSize != null) {
+      thumbnailImageWithLensPattern = Stack(
+        children: [
+          thumbnail,
+
+          /// LENS PATTERN IMAGE
+          Positioned(
+            right: 10,
+            bottom: 10,
+            child: CachedNetworkImage(
+              imageUrl: widget.lensPatternImageUrl!,
+              width: widget.size.lensPatternSize!.width,
+              height: widget.size.lensPatternSize!.height,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
+      );
+    }
+
     if (widget.size == WdsItemCardSize.xl ||
         widget.size == WdsItemCardSize.lg) {
       return _VerticalLayout(
-        thumbnail: thumbnail,
+        thumbnail: thumbnailImageWithLensPattern ?? thumbnail,
         brandName: widget.brandName,
         productName: widget.productName,
         lensType: widget.lensType,
@@ -163,7 +205,7 @@ class _WdsItemCardState extends State<WdsItemCard> {
     }
 
     return _HorizontalLayout(
-      thumbnail: thumbnail,
+      thumbnail: thumbnailImageWithLensPattern ?? thumbnail,
       brandName: widget.brandName,
       productName: widget.productName,
       lensType: widget.lensType,
@@ -240,7 +282,7 @@ class _VerticalLayout extends StatelessWidget {
           width: 155,
           child: Text(
             productName,
-            style: WdsTypography.body13NormalRegular.copyWith(
+            style: WdsTypography.body13NormalMedium.copyWith(
               color: WdsColors.textNormal,
             ),
             maxLines: size == WdsItemCardSize.xl ? 2 : 1,
@@ -312,7 +354,7 @@ class _HorizontalLayout extends StatelessWidget {
     required this.size,
   });
 
-  final WdsThumbnail thumbnail;
+  final Widget thumbnail;
   final String brandName;
   final String productName;
   final String lensType;
@@ -331,7 +373,7 @@ class _HorizontalLayout extends StatelessWidget {
     final horizontalSpacing = size == WdsItemCardSize.md ? 16.0 : 12.0;
 
     return SizedBox(
-      height: thumbnail.size.size.height,
+      height: size.thumnbnailSize.height,
       child: Row(
         spacing: horizontalSpacing,
         children: [
@@ -454,7 +496,7 @@ class __PriceInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasDiscount = originalPrice > 0 && salePrice < originalPrice;
+    final rate = originalPrice.getDiscountRate(salePrice);
 
     final finalSalePrice = Text(
       salePrice.toKRWFormat(),
@@ -468,12 +510,12 @@ class __PriceInfo extends StatelessWidget {
           .copyWith(color: WdsColors.textNormal),
     );
 
-    if (!hasDiscount) {
+    if (rate <= 0) {
       return finalSalePrice;
     }
 
     final discountRate = Text(
-      '${hasDiscount ? originalPrice.getDiscountRate(salePrice) : 0}%',
+      '$rate%',
       style: switch (size) {
         WdsItemCardSize.xl ||
         WdsItemCardSize.lg =>
