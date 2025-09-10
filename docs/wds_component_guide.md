@@ -2245,3 +2245,265 @@ WdsThumbnail(
 - **로딩 상태**: placeholder를 통한 부드러운 로딩 경험
 - **const 최적화**: 가능한 모든 위젯에 `const` 키워드 적용
 
+## Tag
+
+상품의 상태, 배송 일정, 카테고리 등 짧고 핵심적인 정보를 시각적으로 강조하기 위해 사용됩니다.
+
+
+**공통요소**
+- padding: horizontal 4px
+- borderRadius: `WdsRadius.xs` (4px)
+- typography: `WdsTypography.caption10Medium
+- height: 18px, 고정 높이
+
+### Tag - variant
+
+- normal
+- filled
+
+아래는 기본값
+
+**normal**
+- color: `WdsColors.textNeutral`
+- backgroundColor: `WdsColors.neutral50`
+
+**filled**
+- color: `WdsColors.white`
+- backgroundColor: `WdsColors.primary`
+
+다만 색상이 바뀔 수 있습니다.
+
+## ItemCard
+
+> 상품 정보를 집약적으로 전달하는 카드 컴포넌트입니다. 상품의 썸네일, 브랜드명, 상품명, 가격, 평점, 좋아요 등의 정보를 포함하여 상세 페이지로 유도하는 목적을 가집니다.
+
+ItemCard는 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+onLiked | `VoidCallback` | 좋아요 버튼이 눌렸을 때 콜백
+thumbnailImageUrl | `String` | 썸네일 이미지 URL
+brandName | `String` | 브랜드명 (xs 크기에서는 표시되지 않음)
+productName | `String` | 상품명
+lensType | `String` | 렌즈 유형
+diameter | `String` | 직경
+originalPrice | `double` | 정가
+salePrice | `double` | 판매가
+rating | `double` | 평점 (0.0 ~ 5.0)
+reviewCount | `int` | 리뷰 개수
+likeCount | `int` | 좋아요 개수
+hasLiked | `bool` | 좋아요 상태 (기본값: false)
+tags | `List<WdsTag>` | 태그 목록 (기본값: 빈 리스트)
+
+### ItemCard - size
+
+px 단위로 이루어집니다. 크기에 따라 레이아웃이 세로형(xl, lg)과 가로형(md, xs)으로 구분됩니다.
+
+속성 | layout | thumbnail size | 비고
+--- | --- | --- | ---
+xl | 세로형 | WdsThumbnailSize.xl | 가장 큰 크기, 세로 배치
+lg | 세로형 | WdsThumbnailSize.lg | 큰 크기, 세로 배치
+md | 가로형 | WdsThumbnailSize.md | 중간 크기, 가로 배치
+xs | 가로형 | WdsThumbnailSize.xs | 가장 작은 크기, 가로 배치
+
+e.g. enum
+``` dart
+enum WdsItemCardSize {
+  xl,
+  lg,
+  md,
+  xs;
+}
+```
+
+### ItemCard - layout
+
+크기에 따라 두 가지 레이아웃으로 구분됩니다.
+
+**세로형 레이아웃 (xl, lg)**
+- 썸네일이 상단에 위치
+- 상품 정보가 썸네일 하단에 세로로 배치
+- 브랜드명, 상품명, 렌즈 정보, 가격, 태그, 평점/좋아요 정보 순서로 배치
+
+**가로형 레이아웃 (md, xs)**
+- 썸네일이 좌측에 위치
+- 상품 정보가 썸네일 우측에 세로로 배치
+- md: 브랜드명 포함, xs: 브랜드명 제외
+
+### ItemCard - thumbnail
+
+각 크기별로 적절한 썸네일 크기를 사용합니다.
+
+속성 | thumbnail size | hasRadius | 비고
+--- | --- | --- | ---
+xl | WdsThumbnailSize.xl | false | 둥근 모서리 없음
+lg | WdsThumbnailSize.lg | true | 둥근 모서리 적용
+md | WdsThumbnailSize.md | true | 둥근 모서리 적용
+xs | WdsThumbnailSize.xs | true | 둥근 모서리 적용
+
+### ItemCard - typography
+
+크기별로 다른 타이포그래피를 사용합니다.
+
+**브랜드명**
+- xl/lg: `WdsTypography.body13NormalRegular`, `WdsColors.textNeutral`
+- md: `WdsTypography.caption12Regular`, `WdsColors.textNeutral`
+- xs: 표시되지 않음
+
+**상품명**
+- xl: `WdsTypography.body13NormalRegular`, `WdsColors.textNormal`, 최대 2줄
+- lg: `WdsTypography.body13NormalRegular`, `WdsColors.textNormal`, 최대 1줄
+- md: `WdsTypography.body13NormalRegular`, `WdsColors.textNormal`, 최대 1줄
+- xs: `WdsTypography.caption12Medium`, `WdsColors.textNormal`, 최대 1줄
+
+**렌즈 정보**
+- xl/lg/md: `WdsTypography.caption12Regular`, `WdsColors.textAlternative`
+- xs: `WdsTypography.caption11Regular`, `WdsColors.textAlternative`
+
+**가격 정보**
+- xl/lg: `WdsTypography.body15NormalBold`, `WdsColors.textNormal`
+- md: `WdsTypography.body13NormalBold`, `WdsColors.textNormal`
+- xs: `WdsTypography.caption12Bold`, `WdsColors.textNormal`
+
+### ItemCard - price display
+
+할인이 있는 경우와 없는 경우로 구분하여 표시합니다.
+
+**할인 없는 경우**
+- 판매가만 표시
+
+**할인이 있는 경우**
+- xl: 정가(취소선) + 할인율 + 판매가를 세로로 배치
+- lg/md/xs: 할인율 + 판매가를 가로로 배치
+
+할인율은 `WdsColors.secondary` 색상으로 강조 표시됩니다.
+
+### ItemCard - tags
+
+상품에 관련된 태그들을 표시합니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+spacing | 2px | 태그 간 간격
+maxCount | 제한 없음 | 권장: 2개 이하
+position | 가격 정보 하단 | 세로형 레이아웃에서만 표시
+
+### ItemCard - rating & like info
+
+평점과 좋아요 정보를 표시합니다.
+
+**평점 정보**
+- 아이콘: `WdsIcon.starFilled` (10x10px, `WdsColors.neutral200`)
+- 텍스트: `"평점(리뷰수)"` 형식
+- typography: `WdsTypography.caption11Regular`, `WdsColors.textAssistive`
+
+**좋아요 정보**
+- 아이콘: `WdsNavigationIcon.like` (10x10px, `WdsColors.neutral200`)
+- 텍스트: 좋아요 개수
+- typography: `WdsTypography.caption11Regular`, `WdsColors.textAssistive`
+
+### ItemCard - like button
+
+좋아요 버튼의 위치와 형태가 크기에 따라 다릅니다.
+
+속성 | xl/lg | md | xs
+--- | --- | --- | ---
+position | 우측 상단 | 우측 하단 | 우측 하단
+layout | 아이콘만 | 아이콘만 | 아이콘 + 개수 (세로 배치)
+size | 18x18px | 18x18px | 18x18px
+color (active) | `WdsColors.secondary` | `WdsColors.secondary` | `WdsColors.secondary`
+color (inactive) | `WdsColors.neutral200` | `WdsColors.neutral200` | `WdsColors.neutral200`
+
+### ItemCard - spacing
+
+크기별로 다른 간격을 사용합니다.
+
+속성 | xl | lg | md | xs
+--- | --- | --- | --- | ---
+thumbnail-content | 10px | 10px | 16px | 12px
+element spacing | 4px | 4px | 4px | 2px
+horizontal padding | 12px | 0px | 0px | 0px
+
+### ItemCard - 생성 방법
+
+named constructor로 생성할 수 있습니다.
+
+``` dart
+// 세로형 레이아웃 (xl)
+WdsItemCard.xl(
+  onLiked: () => print('좋아요'),
+  thumbnailImageUrl: 'https://example.com/image.jpg',
+  brandName: '브랜드명',
+  productName: '상품명',
+  lensType: '렌즈유형',
+  diameter: '직경',
+  originalPrice: 100000,
+  salePrice: 80000,
+  rating: 4.5,
+  reviewCount: 123,
+  likeCount: 45,
+  hasLiked: false,
+  tags: [WdsTag.normal('태그1'), WdsTag.filled('태그2')],
+)
+
+// 가로형 레이아웃 (xs)
+WdsItemCard.xs(
+  onLiked: () => print('좋아요'),
+  thumbnailImageUrl: 'https://example.com/image.jpg',
+  productName: '상품명',
+  lensType: '렌즈유형',
+  diameter: '직경',
+  originalPrice: 100000,
+  salePrice: 80000,
+  rating: 4.5,
+  reviewCount: 123,
+  likeCount: 45,
+  hasLiked: false,
+  tags: [WdsTag.normal('태그')],
+)
+```
+
+### ItemCard - state management
+
+좋아요 상태는 `StatefulWidget`으로 관리되며, `hasLiked` 값이 변경될 때 자동으로 UI가 업데이트됩니다.
+
+``` dart
+class _WdsItemCardState extends State<WdsItemCard> {
+  @override
+  void didUpdateWidget(covariant WdsItemCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    
+    if (oldWidget.hasLiked != widget.hasLiked) {
+      setState(() {});
+    }
+  }
+}
+```
+
+
+## Heading
+
+헤딩(Heading)은 페이지 및 템플릿의 역할 및 기능을 나타내는 컴포넌트입니다. 텍스트와 관련 엘리먼트가 결합한 컴포넌트로 정보 계층 구조에 따라 사용을 유의합니다.
+
+### Heading - 공통
+
+- 부모 widget으로부터 size를 받아서 렌더링
+  - 가로 너비만큼 stretch되는 성격을 가짐
+- 크게 2가지 영역으로 나뉨
+  - '타이틀', '더보기' (옵션)
+    - '더보기' 버튼을 넣을 지 여부를 결정하는 요소가 필요합니다. 
+  - '더보기'는 `WdsTextButton`이 위치
+  - '타이틀'과 '더보기'는 gap: 16px
+  - '타이틀'이 Expanded 영역
+  - '타이틀'은 `Padding(padding: EdgeInsets.symmetric(vertical: 2))` 를 부모 위젯으로 갖습니다.
+- padding: `EdgeInsets.symmetric(horizontal: 16, vertical: 4)`
+
+### Heading - size
+
+- lg
+- md
+
+lg일 때는 `WdsTextButtonVariant.text`와 `WdsTextButtonSize.small` 이 쓰입니다. 그리고 타이틀은 최대 2줄까지 작성 가능해요. `Row`로 감싸게되면 `CrossAxisAlignment.start`로 상단(top)에 맞춰서 정렬합니다.
+
+md일 때는 `WdsTextButtonVariant.icon`과 `WdsTextBittonSize.small`이 쓰입니다.
+
