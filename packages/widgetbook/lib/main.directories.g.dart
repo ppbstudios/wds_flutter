@@ -36,6 +36,8 @@ import 'package:wds_widgetbook/src/component/heading_use_case.dart'
     as _wds_widgetbook_src_component_heading_use_case;
 import 'package:wds_widgetbook/src/component/icon_button_use_case.dart'
     as _wds_widgetbook_src_component_icon_button_use_case;
+import 'package:wds_widgetbook/src/component/item_card_use_case.dart'
+    as _wds_widgetbook_src_component_item_card_use_case;
 import 'package:wds_widgetbook/src/component/radio_use_case.dart'
     as _wds_widgetbook_src_component_radio_use_case;
 import 'package:wds_widgetbook/src/component/search_field_use_case.dart'
@@ -56,12 +58,14 @@ import 'package:wds_widgetbook/src/component/switch_use_case.dart'
     as _wds_widgetbook_src_component_switch_use_case;
 import 'package:wds_widgetbook/src/component/tab_use_case.dart'
     as _wds_widgetbook_src_component_tab_use_case;
+import 'package:wds_widgetbook/src/component/tag_use_case.dart'
+    as _wds_widgetbook_src_component_tag_use_case;
 import 'package:wds_widgetbook/src/component/text_button_use_case.dart'
     as _wds_widgetbook_src_component_text_button_use_case;
 import 'package:wds_widgetbook/src/component/text_field_use_case.dart'
     as _wds_widgetbook_src_component_text_field_use_case;
 import 'package:wds_widgetbook/src/component/thumbnail_use_case.dart'
-    as _wds_widgetbook_src_component_wds_thumbnail_use_case;
+    as _wds_widgetbook_src_component_thumbnail_use_case;
 import 'package:wds_widgetbook/src/component/toast_use_case.dart'
     as _wds_widgetbook_src_component_toast_use_case;
 import 'package:wds_widgetbook/src/component/tooltip_use_case.dart'
@@ -171,6 +175,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'ItemCard',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'ItemCard',
+          builder: _wds_widgetbook_src_component_item_card_use_case
+              .buildWdsItemCardUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'PaginationCount',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'CountPagination',
@@ -267,6 +279,13 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'Tag',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Tag',
+          builder: _wds_widgetbook_src_component_tag_use_case.buildTagUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'TextButton',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'TextButton',
@@ -286,7 +305,7 @@ final directories = <_widgetbook.WidgetbookNode>[
         name: 'Thumbnail',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Thumbnail',
-          builder: _wds_widgetbook_src_component_wds_thumbnail_use_case
+          builder: _wds_widgetbook_src_component_thumbnail_use_case
               .buildThumbnailUseCase,
         ),
       ),

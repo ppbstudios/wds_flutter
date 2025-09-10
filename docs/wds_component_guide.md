@@ -2480,7 +2480,6 @@ class _WdsItemCardState extends State<WdsItemCard> {
 }
 ```
 
-
 ## Heading
 
 헤딩(Heading)은 페이지 및 템플릿의 역할 및 기능을 나타내는 컴포넌트입니다. 텍스트와 관련 엘리먼트가 결합한 컴포넌트로 정보 계층 구조에 따라 사용을 유의합니다.
@@ -2506,4 +2505,3 @@ class _WdsItemCardState extends State<WdsItemCard> {
 lg일 때는 `WdsTextButtonVariant.text`와 `WdsTextButtonSize.small` 이 쓰입니다. 그리고 타이틀은 최대 2줄까지 작성 가능해요. `Row`로 감싸게되면 `CrossAxisAlignment.start`로 상단(top)에 맞춰서 정렬합니다.
 
 md일 때는 `WdsTextButtonVariant.icon`과 `WdsTextBittonSize.small`이 쓰입니다.
-

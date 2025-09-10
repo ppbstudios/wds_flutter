@@ -34,9 +34,16 @@ enum WdsNavigationIcon implements IconBuilder {
   @override
   Widget build({
     bool isActive = false,
+    Color? color,
+    double? width,
+    double? height,
   }) =>
       SvgPicture.asset(
         isActive ? activePath : inactivePath,
         package: 'wds_foundation',
+        colorFilter:
+            color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
+        width: width,
+        height: height,
       );
 }
