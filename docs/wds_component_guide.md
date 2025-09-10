@@ -2479,3 +2479,29 @@ class _WdsItemCardState extends State<WdsItemCard> {
   }
 }
 ```
+
+## Heading
+
+헤딩(Heading)은 페이지 및 템플릿의 역할 및 기능을 나타내는 컴포넌트입니다. 텍스트와 관련 엘리먼트가 결합한 컴포넌트로 정보 계층 구조에 따라 사용을 유의합니다.
+
+### Heading - 공통
+
+- 부모 widget으로부터 size를 받아서 렌더링
+  - 가로 너비만큼 stretch되는 성격을 가짐
+- 크게 2가지 영역으로 나뉨
+  - '타이틀', '더보기' (옵션)
+    - '더보기' 버튼을 넣을 지 여부를 결정하는 요소가 필요합니다. 
+  - '더보기'는 `WdsTextButton`이 위치
+  - '타이틀'과 '더보기'는 gap: 16px
+  - '타이틀'이 Expanded 영역
+  - '타이틀'은 `Padding(padding: EdgeInsets.symmetric(vertical: 2))` 를 부모 위젯으로 갖습니다.
+- padding: `EdgeInsets.symmetric(horizontal: 16, vertical: 4)`
+
+### Heading - size
+
+- lg
+- md
+
+lg일 때는 `WdsTextButtonVariant.text`와 `WdsTextButtonSize.small` 이 쓰입니다. 그리고 타이틀은 최대 2줄까지 작성 가능해요. `Row`로 감싸게되면 `CrossAxisAlignment.start`로 상단(top)에 맞춰서 정렬합니다.
+
+md일 때는 `WdsTextButtonVariant.icon`과 `WdsTextBittonSize.small`이 쓰입니다.

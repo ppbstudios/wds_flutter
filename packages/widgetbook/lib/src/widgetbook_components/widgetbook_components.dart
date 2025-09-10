@@ -47,6 +47,9 @@ class IconButton {}
 class Header {}
 
 /// 컴포넌트 path 관리를 위한 클래스
+class Heading {}
+
+/// 컴포넌트 path 관리를 위한 클래스
 class BottomNavigation {}
 
 /// 컴포넌트 path 관리를 위한 클래스

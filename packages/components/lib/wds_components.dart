@@ -22,6 +22,7 @@ part 'src/checkbox/wds_checkbox.dart';
 part 'src/chip/wds_chip.dart';
 part 'src/divider/wds_divider.dart';
 part 'src/header/wds_header.dart';
+part 'src/heading/wds_heading.dart';
 part 'src/icon/wds_icon_button.dart';
 part 'src/item_card/wds_item_card.dart';
 part 'src/navigation/wds_bottom_navigation.dart';
