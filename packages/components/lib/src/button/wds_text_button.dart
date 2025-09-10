@@ -56,6 +56,7 @@ class WdsTextButton extends StatefulWidget {
     this.isEnabled = true,
     this.variant = WdsTextButtonVariant.text,
     this.size = WdsTextButtonSize.medium,
+    this.color = WdsColors.textNeutral,
     super.key,
   });
 
@@ -64,6 +65,7 @@ class WdsTextButton extends StatefulWidget {
   final bool isEnabled;
   final WdsTextButtonVariant variant;
   final WdsTextButtonSize size;
+  final Color color;
 
   @override
   State<WdsTextButton> createState() => _WdsTextButtonState();
@@ -116,7 +118,7 @@ class _WdsTextButtonState extends State<WdsTextButton>
   @override
   Widget build(BuildContext context) {
     final Color effectiveColor =
-        widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable;
+        widget.isEnabled ? widget.color : WdsColors.textDisable;
     final double height = _TextButtonHeightBySize.of(widget.size);
     final EdgeInsets padding = _TextButtonPaddingBySize.of(widget.size);
     final TextStyle baseTypography =
