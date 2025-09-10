@@ -27,6 +27,48 @@ class WdsThumbnail extends StatelessWidget {
     super.key,
   });
 
+  const WdsThumbnail.xxs({
+    required this.imagePath,
+    this.hasRadius = false,
+    super.key,
+  }) : size = WdsThumbnailSize.xxs;
+
+  const WdsThumbnail.xs({
+    required this.imagePath,
+    this.hasRadius = false,
+    super.key,
+  }) : size = WdsThumbnailSize.xs;
+
+  const WdsThumbnail.sm({
+    required this.imagePath,
+    this.hasRadius = false,
+    super.key,
+  }) : size = WdsThumbnailSize.sm;
+
+  const WdsThumbnail.md({
+    required this.imagePath,
+    this.hasRadius = false,
+    super.key,
+  }) : size = WdsThumbnailSize.md;
+
+  const WdsThumbnail.lg({
+    required this.imagePath,
+    this.hasRadius = false,
+    super.key,
+  }) : size = WdsThumbnailSize.lg;
+
+  const WdsThumbnail.xl({
+    required this.imagePath,
+    this.hasRadius = false,
+    super.key,
+  }) : size = WdsThumbnailSize.xl;
+
+  const WdsThumbnail.xxl({
+    required this.imagePath,
+    this.hasRadius = false,
+    super.key,
+  }) : size = WdsThumbnailSize.xxl;
+
   static const double _placeholderIconScale = 0.3;
 
   /// 이미지 경로 (URL 또는 에셋 경로)

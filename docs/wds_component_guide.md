@@ -2245,3 +2245,47 @@ WdsThumbnail(
 - **로딩 상태**: placeholder를 통한 부드러운 로딩 경험
 - **const 최적화**: 가능한 모든 위젯에 `const` 키워드 적용
 
+## Tag
+
+상품의 상태, 배송 일정, 카테고리 등 짧고 핵심적인 정보를 시각적으로 강조하기 위해 사용됩니다.
+
+
+**공통요소**
+- padding: horizontal 4px
+- borderRadius: `WdsRadius.xs` (4px)
+- typography: `WdsTypography.caption10Medium
+- height: 18px, 고정 높이
+
+### Tag - variant
+
+- normal
+- filled
+
+아래는 기본값
+
+**normal**
+- color: `WdsColors.textNeutral`
+- backgroundColor: `WdsColors.neutral50`
+
+**filled**
+- color: `WdsColors.white`
+- backgroundColor: `WdsColors.primary`
+
+다만 색상이 바뀔 수 있습니다.
+
+## ItemCard
+
+아이템 카드(Item cards)란 사용자에게 상품 정보를 집약적으로 전달하기 위한 요소입니다. 상품 정보(가격, 상품명, 리뷰, 혜택)를 명확하게 전달해 상세 페이지로 유도하는 목적을 가집니다.
+
+**공통 요소**
+- WdsThumbnail, size 별로 상이
+- 브랜드명
+- 좋아요 toggle
+- 상품명 2줄 최대, 넘으면 ellipsis
+- 렌즈유형
+- 직경
+- 판매가
+- 정가
+- WdsTag 여러 개 (갯수 제한은 없으나 2개를 넘지 않을 듯)
+- 평점
+- 좋아요 개수
