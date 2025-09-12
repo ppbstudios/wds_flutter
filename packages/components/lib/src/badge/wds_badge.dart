@@ -24,7 +24,6 @@ class WdsBadge extends StatelessWidget {
       displayText,
       style: const TextStyle(
         color: WdsColors.white,
-        letterSpacing: 0.03,
         height: 1.28, // 128%
         fontWeight: FontWeight.w600,
         fontFamily: WdsTypography.fontFamily,
@@ -33,31 +32,28 @@ class WdsBadge extends StatelessWidget {
       textAlign: TextAlign.center,
     );
 
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: WdsColors.primary,
-        borderRadius: BorderRadius.all(Radius.circular(WdsRadius.full)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
-        child: Builder(
-          builder: (context) {
-            if (displayText.length == 1) {
-              if (count == 1) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 2),
-                  child: text,
-                );
-              }
+    if (displayText.length > 2) {
+      return DecoratedBox(
+        decoration: const BoxDecoration(
+          color: WdsColors.primary,
+          borderRadius: BorderRadius.all(Radius.circular(WdsRadius.full)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
+          child: text,
+        ),
+      );
+    }
 
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 1),
-                child: text,
-              );
-            }
-
-            return text;
-          },
+    return SizedBox.square(
+      dimension: 16,
+      child: DecoratedBox(
+        decoration: const ShapeDecoration(
+          color: WdsColors.primary,
+          shape: CircleBorder(),
+        ),
+        child: Center(
+          child: text,
         ),
       ),
     );
@@ -79,20 +75,15 @@ extension WdsBadgeExtension on Widget {
       return this;
     }
 
-    int digitCount = count.toString().length;
-    if (digitCount > 2) {
-      digitCount = 2;
-    }
-
     return Stack(
       clipBehavior: Clip.none,
       children: [
-        // 원본 위젯 그대로 유지 (24x24)
+        // 원본 위젯 그대로 유지 (24x24), 항상 24x24 크기 유지
         this,
 
         /// Badge 위치 조정 - 아이콘 기준 오른쪽 아래 중앙
         Positioned(
-          left: 12 - ((digitCount - 1) * 5),
+          left: 12 - (count > 99 ? 5 : 0),
           top: 12,
           child: WdsBadge(count: count),
         ),
