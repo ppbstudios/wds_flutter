@@ -1,17 +1,31 @@
 part of '../../wds_components.dart';
 
 enum WdsItemCardSize {
-  xl,
-  lg,
-  md,
-  xs;
+  xl(
+    cardHeight: 340,
+    thumbnailSize: WdsThumbnailSize.xl,
+  ),
+  lg(
+    cardHeight: 287,
+    thumbnailSize: WdsThumbnailSize.lg,
+  ),
+  md(
+    cardHeight: 328,
+    thumbnailSize: WdsThumbnailSize.md,
+  ),
+  xs(
+    cardHeight: 328,
+    thumbnailSize: WdsThumbnailSize.xs,
+  ),
+  ;
 
-  Size get thumnbnailSize => switch (this) {
-        WdsItemCardSize.xl => WdsThumbnailSize.xl.size,
-        WdsItemCardSize.lg => WdsThumbnailSize.lg.size,
-        WdsItemCardSize.md => WdsThumbnailSize.md.size,
-        WdsItemCardSize.xs => WdsThumbnailSize.xs.size,
-      };
+  const WdsItemCardSize({
+    required this.cardHeight,
+    required this.thumbnailSize,
+  });
+
+  final double cardHeight;
+  final WdsThumbnailSize thumbnailSize;
 
   Size? get lensPatternSize => switch (this) {
         WdsItemCardSize.xl || WdsItemCardSize.lg => const Size.square(40),
@@ -43,6 +57,7 @@ class WdsItemCard extends StatefulWidget {
     this.productNameMaxLines = 1,
     this.leftThumbnailTags = const [],
     this.rightThumbnailTag,
+    this.scaleFactor = 1,
     super.key,
   })  : size = WdsItemCardSize.xl,
         indexTag = null,
@@ -72,6 +87,7 @@ class WdsItemCard extends StatefulWidget {
     this.leftThumbnailTags = const [],
     this.rightThumbnailTag,
     this.indexTag,
+    this.scaleFactor = 1,
     super.key,
   }) : size = WdsItemCardSize.lg;
 
@@ -92,6 +108,7 @@ class WdsItemCard extends StatefulWidget {
     this.tags = const [],
     this.lensPatternImageUrl,
     this.isSoldOut = false,
+    this.scaleFactor = 1,
     super.key,
   })  : size = WdsItemCardSize.md,
         productNameMaxLines = 1,
@@ -115,6 +132,7 @@ class WdsItemCard extends StatefulWidget {
     this.tags = const [],
     this.isSoldOut = false,
     this.productNameMaxLines = 1,
+    this.scaleFactor = 1,
     super.key,
   })  : size = WdsItemCardSize.xs,
         brandName = '',
@@ -163,6 +181,8 @@ class WdsItemCard extends StatefulWidget {
 
   final int productNameMaxLines;
 
+  final double scaleFactor;
+
   @override
   State<WdsItemCard> createState() => _WdsItemCardState();
 }
@@ -182,18 +202,22 @@ class _WdsItemCardState extends State<WdsItemCard> {
     final thumbnail = switch (widget.size) {
       WdsItemCardSize.xl => WdsThumbnail.xl(
           imagePath: widget.thumbnailImageUrl,
+          scaleFactor: widget.scaleFactor,
         ),
       WdsItemCardSize.lg => WdsThumbnail.lg(
           imagePath: widget.thumbnailImageUrl,
           hasRadius: true,
+          scaleFactor: widget.scaleFactor,
         ),
       WdsItemCardSize.md => WdsThumbnail.md(
           imagePath: widget.thumbnailImageUrl,
           hasRadius: true,
+          scaleFactor: widget.scaleFactor,
         ),
       WdsItemCardSize.xs => WdsThumbnail.xs(
           imagePath: widget.thumbnailImageUrl,
           hasRadius: true,
+          scaleFactor: widget.scaleFactor,
         ),
     };
 
@@ -256,8 +280,8 @@ class _WdsItemCardState extends State<WdsItemCard> {
             widget.lensPatternImageUrl!.isNotEmpty &&
             widget.size.lensPatternSize != null)
           Positioned(
-            right: 6,
-            bottom: 6,
+            right: 6 * widget.scaleFactor,
+            bottom: 6 * widget.scaleFactor,
             child: CachedNetworkImage(
               imageUrl: widget.lensPatternImageUrl!,
               width: widget.size.lensPatternSize!.width,
@@ -484,7 +508,7 @@ class _HorizontalLayout extends StatelessWidget {
     final horizontalSpacing = size == WdsItemCardSize.md ? 16.0 : 12.0;
 
     return SizedBox(
-      height: size.thumnbnailSize.height,
+      height: size.thumbnailSize.size.height,
       child: Row(
         spacing: horizontalSpacing,
         children: [
@@ -679,11 +703,10 @@ class __PriceInfo extends StatelessWidget {
       return salePriceAndDiscountRate;
     }
 
-    return Row(
+    return Column(
       mainAxisSize: MainAxisSize.min,
-      spacing: 4,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        salePriceAndDiscountRate,
         Text(
           originalPrice.toKRWFormat(),
           style: WdsTypography.caption11Regular.copyWith(
@@ -692,6 +715,7 @@ class __PriceInfo extends StatelessWidget {
             decorationColor: WdsColors.textAssistive,
           ),
         ),
+        salePriceAndDiscountRate,
       ],
     );
   }
