@@ -90,11 +90,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
             onTap: () {
               debugPrint('Chip tapped: $label');
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                if (groupValues.contains(value)) {
-                  groupValues.remove(value);
-                } else {
-                  groupValues.add(value);
-                }
+                __onTap(groupValues, value);
               });
             },
           )
@@ -110,11 +106,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
             onTap: () {
               debugPrint('Chip tapped: $label');
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                if (groupValues.contains(value)) {
-                  groupValues.remove(value);
-                } else {
-                  groupValues.add(value);
-                }
+                __onTap(groupValues, value);
               });
             },
           ),
@@ -153,29 +145,17 @@ Widget _buildShapeSection() {
               groupValues: groupValues,
               onTap: () {
                 debugPrint('Pill chip tapped');
-                setState(() {
-                  if (groupValues.contains(0)) {
-                    groupValues.remove(0);
-                  } else {
-                    groupValues.add(0);
-                  }
-                });
+                setState(() => __onTap(groupValues, 0));
               },
             ),
             const SizedBox(width: 16),
             WdsChip.square(
               label: '텍스트',
-              value: 0,
+              value: 1,
               groupValues: groupValues,
               onTap: () {
                 debugPrint('Square chip tapped');
-                setState(() {
-                  if (groupValues.contains(0)) {
-                    groupValues.remove(0);
-                  } else {
-                    groupValues.add(0);
-                  }
-                });
+                setState(() => __onTap(groupValues, 1));
               },
             ),
           ],
@@ -202,30 +182,18 @@ Widget _buildVariantSection() {
               groupValues: groupValues,
               onTap: () {
                 debugPrint('Outline chip tapped');
-                setState(() {
-                  if (groupValues.contains(0)) {
-                    groupValues.remove(0);
-                  } else {
-                    groupValues.add(0);
-                  }
-                });
+                setState(() => __onTap(groupValues, 0));
               },
             ),
             const SizedBox(width: 16),
             WdsChip.pill(
               label: '텍스트',
               variant: WdsChipVariant.solid,
-              value: 0,
+              value: 1,
               groupValues: groupValues,
               onTap: () {
                 debugPrint('Solid chip tapped');
-                setState(() {
-                  if (groupValues.contains(0)) {
-                    groupValues.remove(0);
-                  } else {
-                    groupValues.add(0);
-                  }
-                });
+                setState(() => __onTap(groupValues, 1));
               },
             ),
           ],
@@ -254,60 +222,36 @@ Widget _buildSizeSection() {
               groupValues: groupValues,
               onTap: () {
                 debugPrint('XSmall chip tapped');
-                setState(() {
-                  if (groupValues.contains(0)) {
-                    groupValues.remove(0);
-                  } else {
-                    groupValues.add(0);
-                  }
-                });
+                setState(() => __onTap(groupValues, 0));
               },
             ),
             WdsChip.pill(
               label: '텍스트',
               size: WdsChipSize.small,
-              value: 0,
+              value: 1,
               groupValues: groupValues,
               onTap: () {
                 debugPrint('Small chip tapped');
-                setState(() {
-                  if (groupValues.contains(0)) {
-                    groupValues.remove(0);
-                  } else {
-                    groupValues.add(0);
-                  }
-                });
+                setState(() => __onTap(groupValues, 1));
               },
             ),
             WdsChip.pill(
               label: '텍스트',
-              value: 0,
+              value: 2,
               groupValues: groupValues,
               onTap: () {
                 debugPrint('Medium chip tapped');
-                setState(() {
-                  if (groupValues.contains(0)) {
-                    groupValues.remove(0);
-                  } else {
-                    groupValues.add(0);
-                  }
-                });
+                setState(() => __onTap(groupValues, 2));
               },
             ),
             WdsChip.pill(
               label: '텍스트',
               size: WdsChipSize.large,
-              value: 0,
+              value: 3,
               groupValues: groupValues,
               onTap: () {
                 debugPrint('Large chip tapped');
-                setState(() {
-                  if (groupValues.contains(0)) {
-                    groupValues.remove(0);
-                  } else {
-                    groupValues.add(0);
-                  }
-                });
+                setState(() => __onTap(groupValues, 3));
               },
             ),
           ],
@@ -344,13 +288,7 @@ Widget _buildStateSection() {
                   groupValues: groupValues,
                   onTap: () {
                     debugPrint('Enabled outline chip');
-                    setState(() {
-                      if (groupValues.contains(0)) {
-                        groupValues.remove(0);
-                      } else {
-                        groupValues.add(0);
-                      }
-                    });
+                    setState(() => __onTap(groupValues, 0));
                   },
                 ),
                 WdsChip.pill(
@@ -360,13 +298,7 @@ Widget _buildStateSection() {
                   isEnabled: false,
                   onTap: () {
                     debugPrint('Disabled outline chip');
-                    setState(() {
-                      if (groupValues.contains(1)) {
-                        groupValues.remove(1);
-                      } else {
-                        groupValues.add(1);
-                      }
-                    });
+                    setState(() => __onTap(groupValues, 1));
                   },
                 ),
                 WdsChip.pill(
@@ -375,13 +307,7 @@ Widget _buildStateSection() {
                   groupValues: groupValues,
                   onTap: () {
                     debugPrint('Interactive outline chip - focus toggles');
-                    setState(() {
-                      if (groupValues.contains(2)) {
-                        groupValues.remove(2);
-                      } else {
-                        groupValues.add(2);
-                      }
-                    });
+                    setState(() => __onTap(groupValues, 2));
                   },
                 ),
               ],
@@ -403,13 +329,7 @@ Widget _buildStateSection() {
                   groupValues: groupValues,
                   onTap: () {
                     debugPrint('Enabled solid chip');
-                    setState(() {
-                      if (groupValues.contains(3)) {
-                        groupValues.remove(3);
-                      } else {
-                        groupValues.add(3);
-                      }
-                    });
+                    setState(() => __onTap(groupValues, 3));
                   },
                 ),
                 WdsChip.pill(
@@ -420,13 +340,7 @@ Widget _buildStateSection() {
                   isEnabled: false,
                   onTap: () {
                     debugPrint('Disabled solid chip');
-                    setState(() {
-                      if (groupValues.contains(4)) {
-                        groupValues.remove(4);
-                      } else {
-                        groupValues.add(4);
-                      }
-                    });
+                    setState(() => __onTap(groupValues, 4));
                   },
                 ),
                 WdsChip.pill(
@@ -436,13 +350,7 @@ Widget _buildStateSection() {
                   groupValues: groupValues,
                   onTap: () {
                     debugPrint('Interactive solid chip - focus toggles');
-                    setState(() {
-                      if (groupValues.contains(5)) {
-                        groupValues.remove(5);
-                      } else {
-                        groupValues.add(5);
-                      }
-                    });
+                    setState(() => __onTap(groupValues, 5));
                   },
                 ),
               ],
@@ -462,13 +370,7 @@ Widget _buildStateSection() {
                   trailing: _icon,
                   onTap: () {
                     debugPrint('Outline chip with icons');
-                    setState(() {
-                      if (groupValues.contains(6)) {
-                        groupValues.remove(6);
-                      } else {
-                        groupValues.add(6);
-                      }
-                    });
+                    setState(() => __onTap(groupValues, 6));
                   },
                 ),
                 WdsChip.pill(
@@ -480,13 +382,7 @@ Widget _buildStateSection() {
                   groupValues: groupValues,
                   onTap: () {
                     debugPrint('Solid chip with icons');
-                    setState(() {
-                      if (groupValues.contains(7)) {
-                        groupValues.remove(7);
-                      } else {
-                        groupValues.add(7);
-                      }
-                    });
+                    setState(() => __onTap(groupValues, 7));
                   },
                 ),
               ],
@@ -496,4 +392,13 @@ Widget _buildStateSection() {
       );
     },
   );
+}
+
+void __onTap<T>(Set<T> groupValues, T value) {
+  debugPrint('onTap: $groupValues, $value');
+  if (groupValues.contains(value)) {
+    groupValues.remove(value);
+  } else {
+    groupValues.add(value);
+  }
 }
