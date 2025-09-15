@@ -19,7 +19,7 @@ Widget buildCircularUseCase(BuildContext context) {
 }
 
 Widget _buildPlaygroundSection(BuildContext context) {
-  final size = context.knobs.int.input(
+  final size = context.knobs.double.input(
     label: 'size',
     initialValue: 28,
   );

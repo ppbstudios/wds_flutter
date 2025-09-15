@@ -8,16 +8,15 @@ class WdsCircular extends StatelessWidget {
   });
 
   /// 원형 로더의 크기
-  final int size;
+  final double size;
 
   /// 로더의 색상
   final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: size.toDouble(),
-      height: size.toDouble(),
+    return SizedBox.square(
+      dimension: size,
       child: CircularProgressIndicator(
         strokeWidth: 3,
         strokeCap: StrokeCap.round,
