@@ -2544,3 +2544,18 @@ md일 때는 `WdsTextButtonVariant.icon`과 `WdsTextBittonSize.small`이 쓰입�
 **medium**
 - spacing: `WdsSpacing.md5`
 - backgroundColor: 18
+
+## Circular
+
+로드 시간이 적은 일반적인 상황에서 사용합니다.
+
+### Circular - 공통
+
+
+### Circular - customization
+로드 시간이 짧은 일반적인 상황에서 사용하며, 속성은 size, color를 커스터마이징 할 수 있습니다.
+
+속성 | 타입 | 설명
+--- | --- | ---
+size | int | 원형 로더의 크기 조정 가능
+color | WdsColors | 로더의 색상 변경 가능
