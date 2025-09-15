@@ -53,7 +53,7 @@ class WdsTag extends StatelessWidget {
 
   static const EdgeInsets fixedPadding = EdgeInsets.symmetric(
     horizontal: 4,
-    vertical: 3,
+    vertical: 2.5,
   );
 
   static const TextStyle fixedTypography = WdsTypography.caption10Medium;

@@ -24,48 +24,56 @@ class WdsThumbnail extends StatelessWidget {
     required this.imagePath,
     required this.size,
     this.hasRadius = false,
+    this.scaleFactor = 1,
     super.key,
   });
 
   const WdsThumbnail.xxs({
     required this.imagePath,
     this.hasRadius = false,
+    this.scaleFactor = 1,
     super.key,
   }) : size = WdsThumbnailSize.xxs;
 
   const WdsThumbnail.xs({
     required this.imagePath,
     this.hasRadius = false,
+    this.scaleFactor = 1,
     super.key,
   }) : size = WdsThumbnailSize.xs;
 
   const WdsThumbnail.sm({
     required this.imagePath,
     this.hasRadius = false,
+    this.scaleFactor = 1,
     super.key,
   }) : size = WdsThumbnailSize.sm;
 
   const WdsThumbnail.md({
     required this.imagePath,
     this.hasRadius = false,
+    this.scaleFactor = 1,
     super.key,
   }) : size = WdsThumbnailSize.md;
 
   const WdsThumbnail.lg({
     required this.imagePath,
     this.hasRadius = false,
+    this.scaleFactor = 1,
     super.key,
   }) : size = WdsThumbnailSize.lg;
 
   const WdsThumbnail.xl({
     required this.imagePath,
     this.hasRadius = false,
+    this.scaleFactor = 1,
     super.key,
   }) : size = WdsThumbnailSize.xl;
 
   const WdsThumbnail.xxl({
     required this.imagePath,
     this.hasRadius = false,
+    this.scaleFactor = 1,
     super.key,
   }) : size = WdsThumbnailSize.xxl;
 
@@ -80,6 +88,8 @@ class WdsThumbnail extends StatelessWidget {
   /// 모서리 둥글기 적용 여부
   final bool hasRadius;
 
+  final double scaleFactor;
+
   @override
   Widget build(BuildContext context) {
     final imageWidget =
@@ -91,7 +101,7 @@ class WdsThumbnail extends StatelessWidget {
   /// 이미지 위젯을 적절한 컨테이너로 감싸기
   Widget _buildImageWidget(Widget imageWidget) {
     final sizedWidget = SizedBox.fromSize(
-      size: size.size,
+      size: size.size * scaleFactor,
       child: hasRadius
           ? ClipRRect(
               borderRadius:

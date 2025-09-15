@@ -1,0 +1,47 @@
+name: winc_demo
+description: "A demo project for WDS"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.2.1
+  wds_components:
+    path: ../../
+  wds_foundation:
+    path: ../../../foundation
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: packages/wds_foundation/fonts/Pretendard-Black.ttf
+          weight: 900
+        - asset: packages/wds_foundation/fonts/Pretendard-ExtraBold.ttf
+          weight: 800
+        - asset: packages/wds_foundation/fonts/Pretendard-Bold.ttf
+          weight: 700
+        - asset: packages/wds_foundation/fonts/Pretendard-SemiBold.ttf
+          weight: 600
+        - asset: packages/wds_foundation/fonts/Pretendard-Medium.ttf
+          weight: 500
+        - asset: packages/wds_foundation/fonts/Pretendard-Regular.ttf
+          weight: 400
+        - asset: packages/wds_foundation/fonts/Pretendard-Light.ttf
+          weight: 300
+        - asset: packages/wds_foundation/fonts/Pretendard-ExtraLight.ttf
+          weight: 200
+        - asset: packages/wds_foundation/fonts/Pretendard-Thin.ttf
+          weight: 100

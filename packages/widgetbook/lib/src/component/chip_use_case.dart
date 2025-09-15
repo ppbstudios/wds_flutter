@@ -64,6 +64,9 @@ Widget _buildPlaygroundSection(BuildContext context) {
     description: '우측에 아이콘을 표시해요',
   );
 
+  final String value = 'test';
+  final Set<String> groupValues = {};
+
   return WidgetbookPlayground(
     info: [
       'label: $label',
@@ -77,21 +80,35 @@ Widget _buildPlaygroundSection(BuildContext context) {
     child: shape == WdsChipShape.pill
         ? WdsChip.pill(
             label: label,
+            value: value,
+            groupValues: groupValues,
             size: size,
             isEnabled: isEnabled,
             variant: variant,
             leading: hasLeading ? _icon : null,
             trailing: hasTrailing ? _icon : null,
-            onTap: () => debugPrint('Chip tapped: $label'),
+            onTap: () {
+              debugPrint('Chip tapped: $label');
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                __onTap(groupValues, value);
+              });
+            },
           )
         : WdsChip.square(
             label: label,
+            value: value,
+            groupValues: groupValues,
             size: size,
             isEnabled: isEnabled,
             variant: variant,
             leading: hasLeading ? _icon : null,
             trailing: hasTrailing ? _icon : null,
-            onTap: () => debugPrint('Chip tapped: $label'),
+            onTap: () {
+              debugPrint('Chip tapped: $label');
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                __onTap(groupValues, value);
+              });
+            },
           ),
   );
 }
@@ -112,164 +129,276 @@ Widget _buildDemonstrationSection(BuildContext context) {
 }
 
 Widget _buildShapeSection() {
+  final groupValues = <int>{};
+
   return WidgetbookSubsection(
     title: 'shape',
     labels: ['pill', 'square'],
-    content: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        WdsChip.pill(
-          label: '텍스트',
-          onTap: () => debugPrint('Pill chip tapped'),
-        ),
-        const SizedBox(width: 16),
-        WdsChip.square(
-          label: '텍스트',
-          onTap: () => debugPrint('Square chip tapped'),
-        ),
-      ],
+    content: StatefulBuilder(
+      builder: (context, setState) {
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            WdsChip.pill(
+              label: '텍스트',
+              value: 0,
+              groupValues: groupValues,
+              onTap: () {
+                debugPrint('Pill chip tapped');
+                setState(() => __onTap(groupValues, 0));
+              },
+            ),
+            const SizedBox(width: 16),
+            WdsChip.square(
+              label: '텍스트',
+              value: 1,
+              groupValues: groupValues,
+              onTap: () {
+                debugPrint('Square chip tapped');
+                setState(() => __onTap(groupValues, 1));
+              },
+            ),
+          ],
+        );
+      },
     ),
   );
 }
 
 Widget _buildVariantSection() {
+  final groupValues = <int>{};
+
   return WidgetbookSubsection(
     title: 'variant',
     labels: ['outline', 'solid'],
-    content: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        WdsChip.pill(
-          label: '텍스트',
-          onTap: () => debugPrint('Outline chip tapped'),
-        ),
-        const SizedBox(width: 16),
-        WdsChip.pill(
-          label: '텍스트',
-          variant: WdsChipVariant.solid,
-          onTap: () => debugPrint('Solid chip tapped'),
-        ),
-      ],
+    content: StatefulBuilder(
+      builder: (context, setState) {
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            WdsChip.pill(
+              label: '텍스트',
+              value: 0,
+              groupValues: groupValues,
+              onTap: () {
+                debugPrint('Outline chip tapped');
+                setState(() => __onTap(groupValues, 0));
+              },
+            ),
+            const SizedBox(width: 16),
+            WdsChip.pill(
+              label: '텍스트',
+              variant: WdsChipVariant.solid,
+              value: 1,
+              groupValues: groupValues,
+              onTap: () {
+                debugPrint('Solid chip tapped');
+                setState(() => __onTap(groupValues, 1));
+              },
+            ),
+          ],
+        );
+      },
     ),
   );
 }
 
 Widget _buildSizeSection() {
+  final groupValues = <int>{};
+
   return WidgetbookSubsection(
     title: 'size',
     labels: ['xsmall', 'small', 'medium', 'large'],
-    content: Row(
-      mainAxisSize: MainAxisSize.min,
-      spacing: 16,
-      children: [
-        WdsChip.pill(
-          label: '텍스트',
-          size: WdsChipSize.xsmall,
-          onTap: () => debugPrint('XSmall chip tapped'),
-        ),
-        WdsChip.pill(
-          label: '텍스트',
-          size: WdsChipSize.small,
-          onTap: () => debugPrint('Small chip tapped'),
-        ),
-        WdsChip.pill(
-          label: '텍스트',
-          onTap: () => debugPrint('Medium chip tapped'),
-        ),
-        WdsChip.pill(
-          label: '텍스트',
-          size: WdsChipSize.large,
-          onTap: () => debugPrint('Large chip tapped'),
-        ),
-      ],
+    content: StatefulBuilder(
+      builder: (context, setState) {
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 16,
+          children: [
+            WdsChip.pill(
+              label: '텍스트',
+              size: WdsChipSize.xsmall,
+              value: 0,
+              groupValues: groupValues,
+              onTap: () {
+                debugPrint('XSmall chip tapped');
+                setState(() => __onTap(groupValues, 0));
+              },
+            ),
+            WdsChip.pill(
+              label: '텍스트',
+              size: WdsChipSize.small,
+              value: 1,
+              groupValues: groupValues,
+              onTap: () {
+                debugPrint('Small chip tapped');
+                setState(() => __onTap(groupValues, 1));
+              },
+            ),
+            WdsChip.pill(
+              label: '텍스트',
+              value: 2,
+              groupValues: groupValues,
+              onTap: () {
+                debugPrint('Medium chip tapped');
+                setState(() => __onTap(groupValues, 2));
+              },
+            ),
+            WdsChip.pill(
+              label: '텍스트',
+              size: WdsChipSize.large,
+              value: 3,
+              groupValues: groupValues,
+              onTap: () {
+                debugPrint('Large chip tapped');
+                setState(() => __onTap(groupValues, 3));
+              },
+            ),
+          ],
+        );
+      },
     ),
   );
 }
 
 Widget _buildStateSection() {
-  return WidgetbookSubsection(
-    title: 'state',
-    labels: ['enabled', 'disabled', 'focused'],
-    content: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 16,
-      children: [
-        // Outline variant states
-        const Text(
-          'Outline',
-          style: WdsTypography.caption12Medium,
-        ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
+  final groupValues = <int>{};
+
+  return StatefulBuilder(
+    builder: (context, setState) {
+      return WidgetbookSubsection(
+        title: 'state',
+        labels: ['enabled', 'disabled', 'focused'],
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16,
           children: [
-            WdsChip.pill(
-              label: '일반',
-              onTap: () => debugPrint('Enabled outline chip'),
+            // Outline variant states
+            const Text(
+              'Outline',
+              style: WdsTypography.caption12Medium,
             ),
-            WdsChip.pill(
-              label: '비활성',
-              isEnabled: false,
-              onTap: () => debugPrint('Disabled outline chip'),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 16,
+              children: [
+                WdsChip.pill(
+                  label: '일반',
+                  value: 0,
+                  groupValues: groupValues,
+                  onTap: () {
+                    debugPrint('Enabled outline chip');
+                    setState(() => __onTap(groupValues, 0));
+                  },
+                ),
+                WdsChip.pill(
+                  label: '비활성',
+                  value: 1,
+                  groupValues: groupValues,
+                  isEnabled: false,
+                  onTap: () {
+                    debugPrint('Disabled outline chip');
+                    setState(() => __onTap(groupValues, 1));
+                  },
+                ),
+                WdsChip.pill(
+                  label: '클릭해보세요',
+                  value: 2,
+                  groupValues: groupValues,
+                  onTap: () {
+                    debugPrint('Interactive outline chip - focus toggles');
+                    setState(() => __onTap(groupValues, 2));
+                  },
+                ),
+              ],
             ),
-            WdsChip.pill(
-              label: '클릭해보세요',
-              onTap: () =>
-                  debugPrint('Interactive outline chip - focus toggles'),
+            const SizedBox(height: 8),
+            // Solid variant states
+            const Text(
+              'Solid',
+              style: WdsTypography.caption12Medium,
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 16,
+              children: [
+                WdsChip.pill(
+                  label: '일반',
+                  variant: WdsChipVariant.solid,
+                  value: 3,
+                  groupValues: groupValues,
+                  onTap: () {
+                    debugPrint('Enabled solid chip');
+                    setState(() => __onTap(groupValues, 3));
+                  },
+                ),
+                WdsChip.pill(
+                  label: '비활성',
+                  variant: WdsChipVariant.solid,
+                  value: 4,
+                  groupValues: groupValues,
+                  isEnabled: false,
+                  onTap: () {
+                    debugPrint('Disabled solid chip');
+                    setState(() => __onTap(groupValues, 4));
+                  },
+                ),
+                WdsChip.pill(
+                  label: '클릭해보세요',
+                  variant: WdsChipVariant.solid,
+                  value: 5,
+                  groupValues: groupValues,
+                  onTap: () {
+                    debugPrint('Interactive solid chip - focus toggles');
+                    setState(() => __onTap(groupValues, 5));
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            // With icons demonstration
+            const Text('Icon', style: WdsTypography.caption12Medium),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 16,
+              children: [
+                WdsChip.pill(
+                  label: '아이콘',
+                  value: 6,
+                  groupValues: groupValues,
+                  leading: _icon,
+                  trailing: _icon,
+                  onTap: () {
+                    debugPrint('Outline chip with icons');
+                    setState(() => __onTap(groupValues, 6));
+                  },
+                ),
+                WdsChip.pill(
+                  label: '아이콘',
+                  variant: WdsChipVariant.solid,
+                  leading: _icon,
+                  trailing: _icon,
+                  value: 7,
+                  groupValues: groupValues,
+                  onTap: () {
+                    debugPrint('Solid chip with icons');
+                    setState(() => __onTap(groupValues, 7));
+                  },
+                ),
+              ],
             ),
           ],
         ),
-        const SizedBox(height: 8),
-        // Solid variant states
-        const Text(
-          'Solid',
-          style: WdsTypography.caption12Medium,
-        ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 16,
-          children: [
-            WdsChip.pill(
-              label: '일반',
-              variant: WdsChipVariant.solid,
-              onTap: () => debugPrint('Enabled solid chip'),
-            ),
-            WdsChip.pill(
-              label: '비활성',
-              variant: WdsChipVariant.solid,
-              isEnabled: false,
-              onTap: () => debugPrint('Disabled solid chip'),
-            ),
-            WdsChip.pill(
-              label: '클릭해보세요',
-              variant: WdsChipVariant.solid,
-              onTap: () => debugPrint('Interactive solid chip - focus toggles'),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        // With icons demonstration
-        const Text('Icon', style: WdsTypography.caption12Medium),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 16,
-          children: [
-            WdsChip.pill(
-              label: '아이콘',
-              leading: _icon,
-              trailing: _icon,
-              onTap: () => debugPrint('Outline chip with icons'),
-            ),
-            WdsChip.pill(
-              label: '아이콘',
-              variant: WdsChipVariant.solid,
-              leading: _icon,
-              trailing: _icon,
-              onTap: () => debugPrint('Solid chip with icons'),
-            ),
-          ],
-        ),
-      ],
-    ),
+      );
+    },
   );
+}
+
+void __onTap<T>(Set<T> groupValues, T value) {
+  debugPrint('onTap: $groupValues, $value');
+  if (groupValues.contains(value)) {
+    groupValues.remove(value);
+  } else {
+    groupValues.add(value);
+  }
 }
