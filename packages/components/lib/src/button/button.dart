@@ -13,8 +13,8 @@ class _ButtonPaddingBySize {
       WdsButtonSize.xlarge => const EdgeInsets.fromLTRB(16, 13, 16, 13),
       WdsButtonSize.large => const EdgeInsets.fromLTRB(16, 11, 16, 11),
       WdsButtonSize.medium => const EdgeInsets.fromLTRB(16, 9, 16, 9),
-      WdsButtonSize.small => const EdgeInsets.fromLTRB(16, 7, 16, 7),
-      WdsButtonSize.tiny => const EdgeInsets.fromLTRB(16, 6, 16, 6),
+      WdsButtonSize.small => const EdgeInsets.fromLTRB(12, 7, 12, 7),
+      WdsButtonSize.tiny => const EdgeInsets.fromLTRB(12, 6, 12, 6),
     };
   }
 }
