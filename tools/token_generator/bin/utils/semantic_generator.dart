@@ -90,7 +90,8 @@ String? _resolveTypographyLetterSpacing(
       }
     }
   }
-  return null;
+  // letterSpacing 값이 없는 경우 0으로 통일
+  return '0';
 }
 
 bool _isTypographyLeafNode(dynamic node) {
@@ -110,10 +111,15 @@ bool _isTypographyLeafNode(dynamic node) {
 
 String? _composeFlutterHeight({String? lineHeightExpr, String? sizeExpr}) {
   if (lineHeightExpr == null || lineHeightExpr.isEmpty) return null;
+
+  // lineHeight가 "AUTO"인 경우 height = 1.0
   if (lineHeightExpr == '1.0') return '1.0';
+
+  // lineHeight가 숫자인 경우 height = lineHeight / fontSize
   if (sizeExpr != null && sizeExpr.isNotEmpty) {
     return '($lineHeightExpr) / ($sizeExpr)';
   }
+
   return null;
 }
 

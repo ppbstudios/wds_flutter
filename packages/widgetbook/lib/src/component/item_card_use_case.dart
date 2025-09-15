@@ -8,6 +8,12 @@ const String productThumbnailUrl =
 const String productLensPatternImageUrl =
     'https://cdn.winc.app/uploads/ppb/image/src/81734/ppb_image_file-3a9d58.png';
 
+const String etcProductThumbnailUrl =
+    'https://cdn.winc.app/uploads/ppb/image/src/20619/ppb_image_file-341e67.png';
+
+const String setProductThumbnailUrl =
+    'https://cdn.winc.app/uploads/ppb/image/src/84398/ppb_image_file-c06e8d.jpg';
+
 @widgetbook.UseCase(
   name: 'ItemCard',
   type: ItemCard,
@@ -240,7 +246,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
 }
 
 class _BuildDemonstrationSection extends StatefulWidget {
-  const _BuildDemonstrationSection({super.key});
+  const _BuildDemonstrationSection();
 
   @override
   State<_BuildDemonstrationSection> createState() =>
@@ -370,6 +376,451 @@ class __BuildDemonstrationSectionState
                   reviewCount: 127,
                   likeCount: getLikeCount(WdsItemCardSize.xs),
                 ),
+              ),
+            ],
+          ),
+        ),
+
+        /// case
+        WidgetbookSubsection(
+          title: 'case',
+          labels: ['일반상품(정가))', '일반상품(할인)', '품절', 'ETC', '세트상품'],
+          content: Wrap(
+            runSpacing: 24,
+            spacing: 24,
+            children: [
+              /// 일반상품(정가)
+              Wrap(
+                runSpacing: 24,
+                spacing: 24,
+                children: [
+                  SizedBox(
+                    width: WdsThumbnailSize.xl.size.width,
+                    child: WdsItemCard.xl(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      lensPatternImageUrl: productLensPatternImageUrl,
+                      brandName: '하파크리스틴',
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                      tags: [
+                        const WdsTag.normal(label: '내 도수보유'),
+                        const WdsTag(label: '바로드림', color: WdsColors.primary),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: WdsThumbnailSize.lg.size.width,
+                    child: WdsItemCard.lg(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      lensPatternImageUrl: productLensPatternImageUrl,
+                      brandName: '하파크리스틴',
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                      tags: [
+                        const WdsTag.normal(label: '내 도수보유'),
+                        const WdsTag(label: '바로드림', color: WdsColors.primary),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: WdsThumbnailSize.md.size.height,
+                    child: WdsItemCard.md(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      lensPatternImageUrl: productLensPatternImageUrl,
+                      brandName: '하파크리스틴',
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                      tags: [
+                        const WdsTag.normal(label: '내 도수보유'),
+                        const WdsTag(label: '바로드림', color: WdsColors.primary),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: WdsThumbnailSize.xs.size.height,
+                    child: WdsItemCard.xs(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                    ),
+                  ),
+                ],
+              ),
+
+              /// 일반상품(할인)
+              Wrap(
+                runSpacing: 24,
+                spacing: 24,
+                children: [
+                  SizedBox(
+                    width: WdsThumbnailSize.xl.size.width,
+                    child: WdsItemCard.xl(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      lensPatternImageUrl: productLensPatternImageUrl,
+                      brandName: '하파크리스틴',
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                      tags: const [
+                        WdsTag.normal(label: '내 도수보유'),
+                        WdsTag(label: '바로드림', color: WdsColors.primary),
+                      ],
+                      leftThumbnailTags: const [
+                        WdsTag.$new(),
+                        WdsTag.$sale(),
+                        WdsTag.$best(),
+                      ],
+                      rightThumbnailTag: const WdsTag.$coupon(),
+                    ),
+                  ),
+                  SizedBox(
+                    width: WdsThumbnailSize.lg.size.width,
+                    child: WdsItemCard.lg(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      lensPatternImageUrl: productLensPatternImageUrl,
+                      brandName: '하파크리스틴',
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                      tags: const [
+                        WdsTag.normal(label: '내 도수보유'),
+                        WdsTag(label: '바로드림', color: WdsColors.primary),
+                      ],
+                      leftThumbnailTags: const [
+                        WdsTag.$new(),
+                        WdsTag.$sale(),
+                        WdsTag.$best(),
+                      ],
+                      rightThumbnailTag: const WdsTag.$coupon(),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: WdsThumbnailSize.md.size.height,
+                    child: WdsItemCard.md(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      lensPatternImageUrl: productLensPatternImageUrl,
+                      brandName: '하파크리스틴',
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                      tags: [
+                        const WdsTag.normal(label: '내 도수보유'),
+                        const WdsTag(label: '바로드림', color: WdsColors.primary),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: WdsThumbnailSize.xs.size.height,
+                    child: WdsItemCard.xs(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                      tags: [
+                        const WdsTag.normal(label: '내 도수보유'),
+                        const WdsTag(label: '바로드림', color: WdsColors.primary),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              /// 품절
+              Wrap(
+                runSpacing: 24,
+                spacing: 24,
+                children: [
+                  SizedBox(
+                    width: WdsThumbnailSize.xl.size.width,
+                    child: WdsItemCard.xl(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      lensPatternImageUrl: productLensPatternImageUrl,
+                      brandName: '하파크리스틴',
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      isSoldOut: true,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                      tags: const [
+                        WdsTag.normal(label: '내 도수보유'),
+                        WdsTag(label: '바로드림', color: WdsColors.primary),
+                      ],
+                      leftThumbnailTags: const [
+                        WdsTag.$new(),
+                        WdsTag.$sale(),
+                        WdsTag.$best(),
+                      ],
+                      rightThumbnailTag: const WdsTag.$coupon(),
+                    ),
+                  ),
+                  SizedBox(
+                    width: WdsThumbnailSize.lg.size.width,
+                    child: WdsItemCard.lg(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      lensPatternImageUrl: productLensPatternImageUrl,
+                      brandName: '하파크리스틴',
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      isSoldOut: true,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                      leftThumbnailTags: const [
+                        WdsTag.$new(),
+                      ],
+                      rightThumbnailTag: const WdsTag.$coupon(),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: WdsThumbnailSize.md.size.height,
+                    child: WdsItemCard.md(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      lensPatternImageUrl: productLensPatternImageUrl,
+                      brandName: '하파크리스틴',
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      isSoldOut: true,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: WdsThumbnailSize.xs.size.height,
+                    child: WdsItemCard.xs(
+                      onLiked: () {},
+                      thumbnailImageUrl: productThumbnailUrl,
+                      productName: '빈 크리스틴 원데이 드립브라운',
+                      lensType: '하루용',
+                      diameter: '14.2mm',
+                      originalPrice: 29900,
+                      salePrice: 29900,
+                      isSoldOut: true,
+                      rating: 4.51,
+                      reviewCount: 12345,
+                      likeCount: 18239,
+                    ),
+                  ),
+                ],
+              ),
+
+              /// ETC
+              Wrap(
+                runSpacing: 24,
+                spacing: 24,
+                children: [
+                  SizedBox(
+                    width: WdsThumbnailSize.xl.size.width,
+                    child: WdsItemCard.xl(
+                      onLiked: () {},
+                      thumbnailImageUrl: etcProductThumbnailUrl,
+                      brandName: '젬아워',
+                      productName: '젬아워 렌즈케이스 퍼플',
+                      lensType: null,
+                      diameter: null,
+                      originalPrice: 3000,
+                      salePrice: 3000,
+                      rating: 4.23,
+                      reviewCount: 123,
+                      likeCount: 312,
+                    ),
+                  ),
+                  SizedBox(
+                    width: WdsThumbnailSize.lg.size.width,
+                    child: WdsItemCard.lg(
+                      onLiked: () {},
+                      thumbnailImageUrl: etcProductThumbnailUrl,
+                      brandName: '젬아워',
+                      productName: '젬아워 렌즈케이스 퍼플',
+                      lensType: null,
+                      diameter: null,
+                      originalPrice: 3000,
+                      salePrice: 3000,
+                      rating: 4.23,
+                      reviewCount: 123,
+                      likeCount: 312,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: WdsThumbnailSize.md.size.height,
+                    child: WdsItemCard.md(
+                      onLiked: () {},
+                      thumbnailImageUrl: etcProductThumbnailUrl,
+                      brandName: '젬아워',
+                      productName: '젬아워 렌즈케이스 퍼플',
+                      lensType: null,
+                      diameter: null,
+                      originalPrice: 3000,
+                      salePrice: 3000,
+                      rating: 4.23,
+                      reviewCount: 123,
+                      likeCount: 312,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: WdsThumbnailSize.xs.size.height,
+                    child: WdsItemCard.xs(
+                      onLiked: () {},
+                      thumbnailImageUrl: etcProductThumbnailUrl,
+                      productName: '젬아워 렌즈케이스 퍼플',
+                      lensType: null,
+                      diameter: null,
+                      originalPrice: 3000,
+                      salePrice: 3000,
+                      rating: 4.23,
+                      reviewCount: 123,
+                      likeCount: 312,
+                    ),
+                  ),
+                ],
+              ),
+
+              /// 새트상품
+              Wrap(
+                runSpacing: 24,
+                spacing: 24,
+                children: [
+                  SizedBox(
+                    width: WdsThumbnailSize.xl.size.width,
+                    child: WdsItemCard.xl(
+                      onLiked: () {},
+                      thumbnailImageUrl: setProductThumbnailUrl,
+                      brandName: '윙크',
+                      productName: '[원데이] 첫사랑 렌즈 2팩 골라담기',
+                      lensType: null,
+                      diameter: null,
+                      originalPrice: 50000,
+                      salePrice: 50000,
+                      rating: 3.95,
+                      reviewCount: 99,
+                      likeCount: 128,
+                      rightThumbnailTag: const WdsTag.$coupon(),
+                    ),
+                  ),
+                  SizedBox(
+                    width: WdsThumbnailSize.lg.size.width,
+                    child: WdsItemCard.lg(
+                      onLiked: () {},
+                      thumbnailImageUrl: setProductThumbnailUrl,
+                      brandName: '윙크',
+                      productName: '[원데이] 첫사랑 렌즈 2팩 골라담기',
+                      lensType: null,
+                      diameter: null,
+                      originalPrice: 50000,
+                      salePrice: 50000,
+                      rating: 3.95,
+                      reviewCount: 99,
+                      likeCount: 128,
+                      rightThumbnailTag: const WdsTag.$coupon(),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: WdsThumbnailSize.md.size.height,
+                    child: WdsItemCard.md(
+                      onLiked: () {},
+                      thumbnailImageUrl: setProductThumbnailUrl,
+                      brandName: '윙크',
+                      productName: '[원데이] 첫사랑 렌즈 2팩 골라담기',
+                      lensType: null,
+                      diameter: null,
+                      originalPrice: 50000,
+                      salePrice: 50000,
+                      rating: 3.95,
+                      reviewCount: 99,
+                      likeCount: 128,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: WdsThumbnailSize.xs.size.height,
+                    child: WdsItemCard.xs(
+                      onLiked: () {},
+                      thumbnailImageUrl: setProductThumbnailUrl,
+                      productName: '[원데이] 첫사랑 렌즈 2팩 골라담기',
+                      lensType: null,
+                      diameter: null,
+                      originalPrice: 50000,
+                      salePrice: 50000,
+                      rating: 3.95,
+                      reviewCount: 99,
+                      likeCount: 128,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

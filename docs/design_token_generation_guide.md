@@ -278,6 +278,8 @@ class WdsSemanticTypography {
 }
 ```
 
+`letterSpacing` 값이 없는 경우에는 `0`으로 통일
+
 ### Height 계산 규칙
 | 조건 | 계산 방법 |
 |------|----------|
@@ -306,9 +308,6 @@ class WdsSemanticTypography {
 }
 ```
 
-#### 필드명 생성 규칙
-| 구조 | 생성되는 필드명 |
-|------|---------------|
 
 ### Shadow 토큰
 

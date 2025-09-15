@@ -6,20 +6,48 @@ class WdsTag extends StatelessWidget {
     required this.label,
     this.backgroundColor = WdsColors.neutral50,
     this.color = WdsColors.textNeutral,
+    this.hasRadius = true,
     super.key,
   });
 
   const WdsTag.normal({
     required this.label,
+    this.hasRadius = true,
     super.key,
   })  : backgroundColor = WdsColors.neutral50,
         color = WdsColors.textNeutral;
 
   const WdsTag.filled({
     required this.label,
+    this.hasRadius = true,
     super.key,
   })  : backgroundColor = WdsColors.primary,
         color = WdsColors.white;
+
+  /// 자주쓰이는 컴포넌트: NEW
+  const WdsTag.$new({super.key})
+      : label = 'NEW',
+        color = WdsColors.white,
+        backgroundColor = WdsColors.primary,
+        hasRadius = false;
+
+  const WdsTag.$sale({super.key})
+      : label = 'SALE',
+        color = WdsColors.white,
+        backgroundColor = WdsColors.secondary,
+        hasRadius = false;
+
+  const WdsTag.$best({super.key})
+      : label = 'BEST',
+        color = WdsColors.white,
+        backgroundColor = WdsColors.coolNeutral700,
+        hasRadius = false;
+
+  const WdsTag.$coupon({super.key})
+      : label = '쿠폰사용가능',
+        color = WdsColors.white,
+        backgroundColor = WdsColors.secondary,
+        hasRadius = false;
 
   static const double fixedHeight = 18;
 
@@ -40,6 +68,8 @@ class WdsTag extends StatelessWidget {
 
   final String label;
 
+  final bool hasRadius;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -47,7 +77,7 @@ class WdsTag extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: fixedBorderRadius,
+          borderRadius: hasRadius ? fixedBorderRadius : null,
         ),
         child: Padding(
           padding: fixedPadding,

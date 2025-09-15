@@ -20,11 +20,18 @@ extension WdsNumX on num {
   ///
   /// ``` dart
   /// 1000.toFormat() // '1,000'
-  /// 10000.toFormat() // '10,000'
-  /// 100000.toFormat() // '100,000'
-  /// 1000000.toFormat() // '1,000,000'
+  /// 10000.toFormat() // '9,999+'
+  /// 100000.toFormat() // '9,999+'
+  /// 100000.toFormat(shortFormat: false) // '100,000'
+  /// 1000000.toFormat() // '9,999+'
+  /// 1000000.toFormat(shortFormat: false) // '1,000,000'
+  /// 10000000.toFormat() // '9,999+'
   /// ```
-  String toFormat() {
+  String toFormat({bool shortFormat = true}) {
+    if (this > 9999 && shortFormat) {
+      return '9,999+';
+    }
+
     final numberFormat = NumberFormat('#,###');
     final formatted = numberFormat.format(this);
     return formatted;

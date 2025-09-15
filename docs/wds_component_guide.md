@@ -2535,3 +2535,42 @@ Selected (선택됨) | `WdsTypography.body13NormalBold` | `WdsColors.white` | `W
 - Enabled state의 스타일을 그대로 따르되, 전체 컴포넌트에 `WdsOpacity.opacity40` 적용  
 - 즉, **"선택됨"과 "선택 안 됨" 모두 동일하게 불투명도 40% 처리**
 - 사용자는 비활성화된 SegmentedControl에서 선택 변경이 불가능함
+
+## Loading
+
+로딩 컴포넌트는 사용자가 처리 진행 상태를 인지할 수 있도록 안내하는 시각적 피드백 요소입니다.
+로드 시간이 짧은 일반적인 상황에서 사용합니다.
+
+### Loading - 공통
+
+- 3개의 원형(dot)이 파동(wave) 형태로 확장/축소되는 애니메이션을 표현
+  - duration: 1500ms로 repeat() 로 무한 재생
+  - 각 dot에 Transform.scale 로 크기를 변경하며 wave 애니메이션 효과를 추가
+  - wave는 sin 곡선을 기반으로, index마다 phase shift를 적용해 시간차 애니메이션이 발생
+- Row로 구성되며, 각 dot 간격은 spacing 값으로 제어
+- dot은 BoxDecoration(shape: BoxShape.circle)로 표현
+- repaint 최소화를 위해 RepaintBoundary를 사용
+
+### Loading - color 
+
+- normal
+- white
+
+**normal**
+- backgroundColor: `WdsColors.primary`
+
+**white**
+- backgroundColor: `WdsColors.white`
+
+### Loading - size
+
+- small
+- medium
+
+**small**
+- spacing: `WdsSpacing.md2`
+- size: 8
+
+**medium**
+- spacing: `WdsSpacing.md5`
+- backgroundColor: 18
