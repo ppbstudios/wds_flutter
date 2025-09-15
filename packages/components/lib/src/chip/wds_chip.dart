@@ -89,9 +89,11 @@ enum WdsChipSize {
 }
 
 /// 정보를 카테고리화하거나 필터링에 사용되는 소형 컴포넌트
-class WdsChip extends StatefulWidget {
+class WdsChip<T> extends StatefulWidget {
   const WdsChip.pill({
     required this.label,
+    required this.value,
+    required this.groupValues,
     this.leading,
     this.trailing,
     this.onTap,
@@ -103,6 +105,8 @@ class WdsChip extends StatefulWidget {
 
   const WdsChip.square({
     required this.label,
+    required this.value,
+    required this.groupValues,
     this.leading,
     this.trailing,
     this.onTap,
@@ -128,6 +132,10 @@ class WdsChip extends StatefulWidget {
 
   final WdsChipSize size;
 
+  final T value;
+
+  final Set<T> groupValues;
+
   @override
   State<WdsChip> createState() => _WdsChipState();
 }
@@ -135,7 +143,6 @@ class WdsChip extends StatefulWidget {
 class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
   bool _isHovered = false;
   bool _isPressed = false;
-  bool _isFocused = false;
 
   static const Duration _hoverAnimationDuration = Duration(milliseconds: 150);
 
@@ -148,8 +155,11 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
     _precomputeExpensiveValues();
   }
+
+  bool get isFocused => widget.groupValues.contains(widget.value);
 
   void _precomputeExpensiveValues() {
     // Cache typography with color applied (variant-specific)
@@ -196,18 +206,13 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
     if (!widget.isEnabled) return;
     if (!mounted) return;
 
-    // Toggle focused state when tapped (for filter chips)
-    setState(() {
-      _isFocused = !_isFocused;
-    });
-
     widget.onTap?.call();
   }
 
   // Colors
   Color _overlayTargetColor() {
     // Focused 상태에서는 overlay를 적용하지 않습니다.
-    if (_isFocused) {
+    if (isFocused) {
       return const Color(0x00000000);
     }
     final Color base = WdsColors.materialPressed;
@@ -218,7 +223,7 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
   }
 
   Color _getBackgroundColor() {
-    return _isFocused ? _focusedBackground : _normalBackground;
+    return isFocused ? _focusedBackground : _normalBackground;
   }
 
   @override
@@ -230,9 +235,9 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
     final backgroundColor = _getBackgroundColor();
 
     // Get current text style and icon color based on focus state
-    final currentTypography = _isFocused ? _focusedTypography : _typography;
+    final currentTypography = isFocused ? _focusedTypography : _typography;
     final currentIconColor =
-        _isFocused ? WdsColors.white : widget.variant.foreground;
+        isFocused ? WdsColors.white : widget.variant.foreground;
 
     // Build content row with current text style
     final List<Widget> contentChildren = [];
@@ -316,7 +321,7 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
                         shape: RoundedRectangleBorder(
                           borderRadius: borderRadius,
                           // focused 상태에서는 border를 제거합니다 (outline에서도 표시하지 않음)
-                          side: _isFocused
+                          side: isFocused
                               ? BorderSide.none
                               : (widget.variant.border ?? BorderSide.none),
                         ),

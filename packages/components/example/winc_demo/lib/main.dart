@@ -267,9 +267,15 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   final PageController pageController = PageController();
 
+  Timer? timer;
+
   int heading1SelectedIndex = 0;
 
-  Timer? timer;
+  int heading2SelectedIndex = 0;
+
+  Set<int> heading1SelectedValues = {0};
+
+  Set<int> heading2SelectedValues = {0};
 
   @override
   void initState() {
@@ -426,14 +432,20 @@ class _HomeTabState extends State<HomeTab> {
                 } else {
                   padding = const EdgeInsets.symmetric(horizontal: 2);
                 }
+
+                final tab = HomeTab.heading1Tabs[index];
+
                 return Padding(
                   padding: padding,
                   child: WdsChip.pill(
-                    label: HomeTab.heading1Tabs[index],
-                    variant: index == heading1SelectedIndex
-                        ? WdsChipVariant.solid
-                        : WdsChipVariant.outline,
-                    onTap: () => setState(() => heading1SelectedIndex = index),
+                    label: tab,
+                    value: index,
+                    groupValues: heading1SelectedValues,
+                    onTap: () => setState(() {
+                      heading1SelectedIndex = index;
+                      heading1SelectedValues.clear();
+                      heading1SelectedValues.add(index);
+                    }),
                   ),
                 );
               },
@@ -531,14 +543,20 @@ class _HomeTabState extends State<HomeTab> {
                 } else {
                   padding = const EdgeInsets.symmetric(horizontal: 2);
                 }
+
+                final tab = HomeTab.heading1Tabs[index];
+
                 return Padding(
                   padding: padding,
                   child: WdsChip.pill(
-                    label: HomeTab.heading1Tabs[index],
-                    variant: index == heading1SelectedIndex
-                        ? WdsChipVariant.solid
-                        : WdsChipVariant.outline,
-                    onTap: () => setState(() => heading1SelectedIndex = index),
+                    label: tab,
+                    value: index,
+                    groupValues: heading2SelectedValues,
+                    onTap: () => setState(() {
+                      heading2SelectedIndex = index;
+                      heading2SelectedValues.clear();
+                      heading2SelectedValues.add(index);
+                    }),
                   ),
                 );
               },
@@ -623,25 +641,6 @@ class _HomeTabState extends State<HomeTab> {
                   ? 2
                   : 3;
 
-              final scaleFactor =
-                  width /
-                  (WdsItemCardSize.xs.thumbnailSize.size.width *
-                      crossAxisCount);
-
-              final scaledThumnailHeight =
-                  WdsItemCardSize.xs.thumbnailSize.size.height * scaleFactor;
-
-              final otherElementHeight =
-                  WdsItemCardSize.xs.cardHeight -
-                  WdsItemCardSize.xs.thumbnailSize.size.height;
-
-              final totalCardHeight = scaledThumnailHeight + otherElementHeight;
-
-              final itemWidth =
-                  width / crossAxisCount - 2 * (crossAxisCount - 1);
-
-              final childAspectRatio = itemWidth / totalCardHeight;
-
               return SliverList.separated(
                 itemCount: $dummyProducts
                     .take(crossAxisCount == 2 ? 3 : 5)
@@ -663,7 +662,6 @@ class _HomeTabState extends State<HomeTab> {
                     likeCount: product.likeCount,
                     tags: product.tags.map((tag) => tag.toTag()).toList(),
                     isSoldOut: product.isSoldOut,
-                    scaleFactor: scaleFactor,
                   );
                 },
               );
