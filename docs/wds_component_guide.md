@@ -2505,3 +2505,42 @@ class _WdsItemCardState extends State<WdsItemCard> {
 lg일 때는 `WdsTextButtonVariant.text`와 `WdsTextButtonSize.small` 이 쓰입니다. 그리고 타이틀은 최대 2줄까지 작성 가능해요. `Row`로 감싸게되면 `CrossAxisAlignment.start`로 상단(top)에 맞춰서 정렬합니다.
 
 md일 때는 `WdsTextButtonVariant.icon`과 `WdsTextBittonSize.small`이 쓰입니다.
+
+## Loading
+
+로딩 컴포넌트는 사용자가 처리 진행 상태를 인지할 수 있도록 안내하는 시각적 피드백 요소입니다.
+로드 시간이 짧은 일반적인 상황에서 사용합니다.
+
+### Loading - 공통
+
+- 3개의 원형(dot)이 파동(wave) 형태로 확장/축소되는 애니메이션을 표현
+  - duration: 1500ms로 repeat() 로 무한 재생
+  - 각 dot에 Transform.scale 로 크기를 변경하며 wave 애니메이션 효과를 추가
+  - wave는 sin 곡선을 기반으로, index마다 phase shift를 적용해 시간차 애니메이션이 발생
+- Row로 구성되며, 각 dot 간격은 spacing 값으로 제어
+- dot은 BoxDecoration(shape: BoxShape.circle)로 표현
+- repaint 최소화를 위해 RepaintBoundary를 사용
+
+### Loading - color 
+
+- normal
+- white
+
+**normal**
+- backgroundColor: `WdsColors.primary`
+
+**white**
+- backgroundColor: `WdsColors.white`
+
+### Loading - size
+
+- small
+- medium
+
+**small**
+- spacing: `WdsSpacing.md2`
+- size: 8
+
+**medium**
+- spacing: `WdsSpacing.md5`
+- backgroundColor: 18
