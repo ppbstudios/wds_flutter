@@ -54,7 +54,7 @@ class _SegmentedControlPlaygroundState
         'isEnabled: $isEnabled',
       ],
       child: SizedBox(
-        width: 114,
+        width: 108,
         child: segmentedControl,
       ),
     );
@@ -94,7 +94,7 @@ class _InteractiveSegmentedControlState
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 114,
+      width: 108,
       child: WdsSegmentedControl(
         segments: widget.segments,
         selectedIndex: _selectedIndex,
@@ -123,7 +123,7 @@ class _DisabledSegmentedControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 114,
+      width: 108,
       child: WdsSegmentedControl(
         segments: segments,
         selectedIndex: selectedIndex,

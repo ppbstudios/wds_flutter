@@ -30,7 +30,7 @@ class WdsSegmentedControl extends StatefulWidget {
 
 class _WdsSegmentedControlState extends State<WdsSegmentedControl> {
   final double _segmentHeight = 28;
-  static const double _slidingButtonOverlap = 6;
+  static const double _slidingButtonOverlap = 4;
 
   @override
   Widget build(BuildContext context) {
