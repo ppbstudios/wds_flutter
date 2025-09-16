@@ -76,15 +76,25 @@ Widget _buildLineTabsDemonstrationSection(BuildContext context) {
           spacing: 24,
           children: [
             WdsLineTabs(
-              tabs: const ['텍스트', '텍스트'],
+              tabs: const [
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+              ],
               controller: WdsTextTabsController(length: 2),
             ),
             WdsLineTabs(
-              tabs: const ['텍스트', '텍스트'],
+              tabs: const [
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+              ],
               controller: WdsTextTabsController(length: 2, initialIndex: 1),
             ),
             WdsLineTabs(
-              tabs: const ['텍스트', '텍스트', '텍스트'],
+              tabs: const [
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+              ],
               controller: WdsTextTabsController(length: 3, initialIndex: 1),
             ),
           ],
@@ -179,7 +189,7 @@ class _LineTabsPlaygroundState extends State<_LineTabsPlayground> {
   Widget build(BuildContext context) {
     final int count = context.knobs.object.dropdown<int>(
       label: '두번째 Playground: LineTabs',
-      description: '탭의 개수를 조절할 수 있어요.',
+      description: '탭의 개수를 조절할 수 있어요.\n\u2022 count: 1번째',
       options: const [2, 3],
       initialOption: 2,
     );
@@ -188,8 +198,16 @@ class _LineTabsPlaygroundState extends State<_LineTabsPlayground> {
       _controller = WdsTextTabsController(length: count);
     }
 
-    final List<String> tabs =
-        count == 2 ? const ['첫번째', '두번째'] : const ['첫번째', '두번째', '세번째'];
+    final List<WdsLineTab> tabs = count == 2
+        ? [
+            const WdsLineTab(title: '전체', count: 1234),
+            const WdsLineTab(title: '진행중'),
+          ]
+        : [
+            const WdsLineTab(title: '전체', count: 10000),
+            const WdsLineTab(title: '진행중'),
+            const WdsLineTab(title: '완료'),
+          ];
 
     return WidgetbookPlayground(
       info: [

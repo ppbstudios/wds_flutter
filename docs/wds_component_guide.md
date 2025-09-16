@@ -874,10 +874,10 @@ onTap | `ValueChanged<int>?` | 탭 선택 시 호출되는 콜백
 --- | --- | --- | ---
 label.typography | 선택됨 | `WdsTypography.body15ReadingBold` |
 label.color | 선택됨 | `WdsColors.textNormal` |
-label.padding | 선택됨 | `EdgeInsets.fromLTRB(16, 11, 16, 9)` | underline 2px 고려
+label.padding | 선택됨 | `EdgeInsets.fromLTRB(0, 11, 0, 9)` | underline 2px 고려
 label.typography | 선택 안됨 | `WdsTypography.body15ReadingMedium` |
 label.color | 선택 안됨 | `WdsColors.textNeutral` |
-label.padding | 선택 안됨 | `EdgeInsets.fromLTRB(16, 11, 16, 10)` |
+label.padding | 선택 안됨 | `EdgeInsets.fromLTRB(0, 11, 0, 10)` |
 underline | 선택됨 | 높이 2px, 너비 탭 full, color `WdsColors.black` |
 underline | 선택 안됨 | 1px solid `WdsColors.borderAlternative` |
 탭 개수 | - | 2개 또는 3개 |
