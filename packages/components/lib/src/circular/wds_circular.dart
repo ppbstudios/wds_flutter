@@ -15,10 +15,12 @@ class WdsCircular extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strokeWidth = size * (3.0 / 28.0);
+
     return SizedBox.square(
       dimension: size,
       child: CircularProgressIndicator(
-        strokeWidth: 3,
+        strokeWidth: strokeWidth,
         strokeCap: StrokeCap.round,
         valueColor: AlwaysStoppedAnimation<Color>(
           color ?? WdsColors.borderNeutral,
