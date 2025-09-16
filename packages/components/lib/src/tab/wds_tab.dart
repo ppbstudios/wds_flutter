@@ -9,9 +9,9 @@ enum WdsTextTabVariant {
   featured,
 }
 
-/// WdsTextTabs의 컨트롤러
-class WdsTextTabsController extends ChangeNotifier {
-  WdsTextTabsController({
+/// WdsTextTabs & WdsLineTabs의 컨트롤러
+class WdsTabsController extends ChangeNotifier {
+  WdsTabsController({
     required this.length,
     this.initialIndex = 0,
   })  : assert(length > 0),
@@ -243,7 +243,7 @@ class WdsTextTabs extends StatefulWidget {
   final List<WdsTextTab> tabs;
 
   /// 탭 컨트롤러 (선택사항)
-  final WdsTextTabsController? controller;
+  final WdsTabsController? controller;
 
   /// 탭 선택 시 호출되는 콜백
   final ValueChanged<int>? onTap;
@@ -253,13 +253,13 @@ class WdsTextTabs extends StatefulWidget {
 }
 
 class _WdsTextTabsState extends State<WdsTextTabs> {
-  late WdsTextTabsController _controller;
+  late WdsTabsController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ??
-        WdsTextTabsController(
+        WdsTabsController(
           length: widget.tabs.length,
         );
   }
@@ -269,7 +269,7 @@ class _WdsTextTabsState extends State<WdsTextTabs> {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       _controller = widget.controller ??
-          WdsTextTabsController(
+          WdsTabsController(
             length: widget.tabs.length,
           );
     }
@@ -359,7 +359,7 @@ class WdsLineTabs extends StatefulWidget {
   final List<WdsLineTab> tabs;
 
   /// 탭 컨트롤러 (선택사항)
-  final WdsTextTabsController? controller;
+  final WdsTabsController? controller;
 
   /// 탭 선택 시 호출되는 콜백
   final ValueChanged<int>? onTap;
@@ -369,13 +369,13 @@ class WdsLineTabs extends StatefulWidget {
 }
 
 class _WdsLineTabsState extends State<WdsLineTabs> {
-  late WdsTextTabsController _controller;
+  late WdsTabsController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ??
-        WdsTextTabsController(
+        WdsTabsController(
           length: widget.tabs.length,
         );
   }
@@ -385,7 +385,7 @@ class _WdsLineTabsState extends State<WdsLineTabs> {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       _controller = widget.controller ??
-          WdsTextTabsController(
+          WdsTabsController(
             length: widget.tabs.length,
           );
     }
