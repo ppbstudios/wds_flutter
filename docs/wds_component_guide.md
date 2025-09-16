@@ -2506,6 +2506,36 @@ lg일 때는 `WdsTextButtonVariant.text`와 `WdsTextButtonSize.small` 이 쓰입
 
 md일 때는 `WdsTextButtonVariant.icon`과 `WdsTextBittonSize.small`이 쓰입니다.
 
+## SegmentedControl
+
+SegmentedControl는 상품 상세 페이지에서 렌즈 종류(예: 하루용, 한달용) 와 같이 옵션을 구분할 때 사용됩니다.
+
+### SegmentedControl - 공통
+- 부모 위젯의 width에 따라 Row 또는 Wrap 형태로 유연하게 배치
+- 각 segment는 동일한 높이와 radius를 가지며, 선택 여부에 따라 배경과 텍스트 색상이 달라짐
+- 최대 2개 이상의 segment를 가지며, 단일 선택만 허용
+- 기본적으로 radius = `WdsRadius.full`, padding = `Padding(padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6))`, backgroundColor = `WdsColor.coolNeutral100`
+- interaction 시 InkWell로 터치 이벤트 처리
+
+### SegmentedControl - variants
+
+- day : 하루용
+- month : 한달용
+
+### SegmentedControl - enabled state
+
+상태 | typography | text color | container background | container radius
+--- | --- | --- | --- | ---
+Default (선택 안 됨) | `WdsTypography.body13NormalRegular` | `WdsColors.textNormal` | 없음 | 없음
+Selected (선택됨) | `WdsTypography.body13NormalBold` | `WdsColors.white` | `WdsColors.neutral900` | `WdsRadius.full`
+
+
+### SegmentedControl - disabled state
+
+- Enabled state의 스타일을 그대로 따르되, 전체 컴포넌트에 `WdsOpacity.opacity40` 적용  
+- 즉, **"선택됨"과 "선택 안 됨" 모두 동일하게 불투명도 40% 처리**
+- 사용자는 비활성화된 SegmentedControl에서 선택 변경이 불가능함
+
 ## Loading
 
 로딩 컴포넌트는 사용자가 처리 진행 상태를 인지할 수 있도록 안내하는 시각적 피드백 요소입니다.
@@ -2545,6 +2575,20 @@ md일 때는 `WdsTextButtonVariant.icon`과 `WdsTextBittonSize.small`이 쓰입�
 - spacing: `WdsSpacing.md5`
 - backgroundColor: 18
 
+## Circular
+
+로드 시간이 적은 일반적인 상황에서 사용합니다.
+
+### Circular - 공통
+
+
+### Circular - customization
+로드 시간이 짧은 일반적인 상황에서 사용하며, 속성은 size, color를 커스터마이징 할 수 있습니다.
+
+속성 | 타입 | 설명
+--- | --- | ---
+size | int | 원형 로더의 크기 조정 가능
+color | WdsColors | 로더의 색상 변경 가능
 
 ## Option
 

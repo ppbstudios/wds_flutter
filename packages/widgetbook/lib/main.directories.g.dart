@@ -22,6 +22,8 @@ import 'package:wds_widgetbook/src/component/checkbox_use_case.dart'
     as _wds_widgetbook_src_component_checkbox_use_case;
 import 'package:wds_widgetbook/src/component/chip_use_case.dart'
     as _wds_widgetbook_src_component_chip_use_case;
+import 'package:wds_widgetbook/src/component/circular_use_case.dart'
+    as _wds_widgetbook_src_component_circular_use_case;
 import 'package:wds_widgetbook/src/component/count_pagination_use_case.dart'
     as _wds_widgetbook_src_component_count_pagination_use_case;
 import 'package:wds_widgetbook/src/component/divider_use_case.dart'
@@ -48,6 +50,8 @@ import 'package:wds_widgetbook/src/component/search_field_use_case.dart'
     as _wds_widgetbook_src_component_search_field_use_case;
 import 'package:wds_widgetbook/src/component/section_message_use_case.dart'
     as _wds_widgetbook_src_component_section_message_use_case;
+import 'package:wds_widgetbook/src/component/segmented_control_use_case.dart'
+    as _wds_widgetbook_src_component_segmented_control_use_case;
 import 'package:wds_widgetbook/src/component/select_use_case.dart'
     as _wds_widgetbook_src_component_select_use_case;
 import 'package:wds_widgetbook/src/component/sheet_use_case.dart'
@@ -139,6 +143,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'Circular',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Circular',
+          builder: _wds_widgetbook_src_component_circular_use_case
+              .buildCircularUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'Divider',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Divider',
@@ -224,6 +236,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'SearchField',
           builder: _wds_widgetbook_src_component_search_field_use_case
               .buildWdsSearchFieldUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'SegmentedControl',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'SegmentedControl',
+          builder: _wds_widgetbook_src_component_segmented_control_use_case
+              .buildWdsSegmentedControlUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
