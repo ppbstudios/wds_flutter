@@ -284,8 +284,8 @@ class WdsPowerOptionItem extends WdsOptionItem {
               WdsChip.pill(
                 onTap: onTap,
                 label: '알림받는중',
-                value: 'r',
-                groupValues: {},
+                value: 1,
+                groupValues: {1},
                 size: WdsChipSize.xsmall,
                 variant: WdsChipVariant.solid,
               )
@@ -293,7 +293,7 @@ class WdsPowerOptionItem extends WdsOptionItem {
               WdsChip.pill(
                 onTap: onTap,
                 label: '입고알림',
-                value: 'ㄴ',
+                value: 0,
                 groupValues: {},
                 size: WdsChipSize.xsmall,
               ),
