@@ -40,6 +40,8 @@ import 'package:wds_widgetbook/src/component/item_card_use_case.dart'
     as _wds_widgetbook_src_component_item_card_use_case;
 import 'package:wds_widgetbook/src/component/loading_use_case.dart'
     as _wds_widgetbook_src_component_loading_use_case;
+import 'package:wds_widgetbook/src/component/option_use_case.dart'
+    as _wds_widgetbook_src_component_option_use_case;
 import 'package:wds_widgetbook/src/component/radio_use_case.dart'
     as _wds_widgetbook_src_component_radio_use_case;
 import 'package:wds_widgetbook/src/component/search_field_use_case.dart'
@@ -185,11 +187,11 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
-        name: 'Loading',
+        name: 'Option',
         useCase: _widgetbook.WidgetbookUseCase(
-          name: 'Loading',
-          builder: _wds_widgetbook_src_component_loading_use_case
-              .buildLoadingUseCase,
+          name: 'Option',
+          builder: _wds_widgetbook_src_component_option_use_case
+              .buildWdsOptionUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
@@ -333,6 +335,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'Tooltip',
           builder: _wds_widgetbook_src_component_tooltip_use_case
               .buildWdsTooltipUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'WdsLoading',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Loading',
+          builder: _wds_widgetbook_src_component_loading_use_case
+              .buildLoadingUseCase,
         ),
       ),
     ],
