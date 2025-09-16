@@ -80,14 +80,14 @@ Widget _buildLineTabsDemonstrationSection(BuildContext context) {
                 WdsLineTab(title: '텍스트'),
                 WdsLineTab(title: '텍스트'),
               ],
-              controller: WdsTextTabsController(length: 2),
+              controller: WdsTabsController(length: 2),
             ),
             WdsLineTabs(
               tabs: const [
                 WdsLineTab(title: '텍스트'),
                 WdsLineTab(title: '텍스트'),
               ],
-              controller: WdsTextTabsController(length: 2, initialIndex: 1),
+              controller: WdsTabsController(length: 2, initialIndex: 1),
             ),
             WdsLineTabs(
               tabs: const [
@@ -95,7 +95,7 @@ Widget _buildLineTabsDemonstrationSection(BuildContext context) {
                 WdsLineTab(title: '텍스트'),
                 WdsLineTab(title: '텍스트'),
               ],
-              controller: WdsTextTabsController(length: 3, initialIndex: 1),
+              controller: WdsTabsController(length: 3, initialIndex: 1),
             ),
           ],
         ),
@@ -112,12 +112,12 @@ class _TextTabsPlayground extends StatefulWidget {
 }
 
 class _TextTabsPlaygroundState extends State<_TextTabsPlayground> {
-  late WdsTextTabsController _controller;
+  late WdsTabsController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = WdsTextTabsController(length: 6, initialIndex: 1);
+    _controller = WdsTabsController(length: 6, initialIndex: 1);
   }
 
   @override
@@ -132,7 +132,7 @@ class _TextTabsPlaygroundState extends State<_TextTabsPlayground> {
     );
 
     if (_controller.length != count) {
-      _controller = WdsTextTabsController(length: count, initialIndex: 1);
+      _controller = WdsTabsController(length: count, initialIndex: 1);
     }
 
     final List<String> tabs = List.generate(count, (i) => '추천 ${i + 1}');
@@ -177,12 +177,12 @@ class _LineTabsPlayground extends StatefulWidget {
 }
 
 class _LineTabsPlaygroundState extends State<_LineTabsPlayground> {
-  late WdsTextTabsController _controller;
+  late WdsTabsController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = WdsTextTabsController(length: 2);
+    _controller = WdsTabsController(length: 2);
   }
 
   @override
@@ -195,7 +195,7 @@ class _LineTabsPlaygroundState extends State<_LineTabsPlayground> {
     );
 
     if (_controller.length != count) {
-      _controller = WdsTextTabsController(length: count);
+      _controller = WdsTabsController(length: count);
     }
 
     final List<WdsLineTab> tabs = count == 2
