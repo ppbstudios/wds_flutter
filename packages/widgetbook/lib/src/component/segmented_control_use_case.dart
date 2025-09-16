@@ -142,8 +142,8 @@ Widget _buildDemonstrationSection(BuildContext context) {
     spacing: 32,
     children: [
       WidgetbookSubsection(
-        title: 'disabled',
-        labels: ['true', 'false'],
+        title: 'state',
+        labels: ['enabled', 'disabled'],
         content: Row(
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
