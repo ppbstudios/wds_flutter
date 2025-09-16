@@ -10,7 +10,8 @@ import 'package:flutter/material.dart'
         InputBorder,
         UnderlineInputBorder,
         TextSelectionTheme,
-        TextSelectionThemeData;
+        TextSelectionThemeData,
+        CircularProgressIndicator;
 import 'package:flutter/widgets.dart';
 import 'package:wds_foundation/wds_foundation.dart';
 
@@ -22,6 +23,7 @@ part 'src/button/wds_square_button.dart';
 part 'src/button/wds_text_button.dart';
 part 'src/checkbox/wds_checkbox.dart';
 part 'src/chip/wds_chip.dart';
+part 'src/circular/wds_circular.dart';
 part 'src/divider/wds_divider.dart';
 part 'src/header/wds_header.dart';
 part 'src/heading/wds_heading.dart';
