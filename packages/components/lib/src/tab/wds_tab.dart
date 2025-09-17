@@ -353,7 +353,7 @@ class WdsLineTabs extends StatefulWidget {
     this.controller,
     this.onTap,
     super.key,
-  }) : assert(tabs.length == 2 || tabs.length == 3);
+  });
 
   /// 표시할 탭들의 리스트
   final List<WdsLineTab> tabs;

@@ -70,8 +70,8 @@ Widget _buildLineTabsDemonstrationSection(BuildContext context) {
     title: 'LineTabs',
     children: [
       WidgetbookSubsection(
-        title: 'variant',
-        labels: const ['length == 2', 'length == 3'],
+        title: 'columns',
+        labels: const ['2', '3', '4'],
         content: Column(
           spacing: 24,
           children: [
@@ -86,8 +86,36 @@ Widget _buildLineTabsDemonstrationSection(BuildContext context) {
               tabs: const [
                 WdsLineTab(title: '텍스트'),
                 WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
               ],
-              controller: WdsTabsController(length: 2, initialIndex: 1),
+              controller: WdsTabsController(length: 3, initialIndex: 1),
+            ),
+            WdsLineTabs(
+              tabs: const [
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+              ],
+              controller: WdsTabsController(length: 4, initialIndex: 1),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 24),
+      WidgetbookSubsection(
+        title: 'count',
+        labels: const ['true', 'false'],
+        content: Column(
+          spacing: 24,
+          children: [
+            WdsLineTabs(
+              tabs: const [
+                WdsLineTab(title: '텍스트', count: 10000),
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+              ],
+              controller: WdsTabsController(length: 3, initialIndex: 1),
             ),
             WdsLineTabs(
               tabs: const [
