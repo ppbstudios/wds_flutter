@@ -36,18 +36,21 @@ class WdsDivider extends StatelessWidget {
       );
     }
 
-    // 가로: width infinity, height variant 에 따라 1px | 6px
-    final double height = switch (variant) {
-      WdsDividerVariant.normal => 1,
-      WdsDividerVariant.thick => 6,
+    return switch (variant) {
+      WdsDividerVariant.normal => const SizedBox(
+          width: double.infinity,
+          height: 1,
+          child: DecoratedBox(
+            decoration: BoxDecoration(color: WdsColors.borderAlternative),
+          ),
+        ),
+      WdsDividerVariant.thick => const SizedBox(
+          width: double.infinity,
+          height: 6,
+          child: DecoratedBox(
+            decoration: BoxDecoration(color: WdsColors.backgroundAlternative),
+          ),
+        ),
     };
-
-    return SizedBox(
-      width: double.infinity,
-      height: height,
-      child: const DecoratedBox(
-        decoration: BoxDecoration(color: WdsColors.borderAlternative),
-      ),
-    );
   }
 }
