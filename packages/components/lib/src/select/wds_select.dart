@@ -66,11 +66,22 @@ class _WdsSelectState extends State<WdsSelect> {
       color: _textColor(),
     );
 
-    final decoration = ShapeDecoration(
+    final borderSide = _borderSide();
+    const radius = Radius.circular(WdsRadius.sm);
+
+    final decoration = BoxDecoration(
       color: _backgroundColor(),
-      shape: RoundedRectangleBorder(
-        borderRadius: const BorderRadius.all(Radius.circular(WdsRadius.sm)),
-        side: _borderSide(),
+      border: Border(
+        top: borderSide,
+        left: borderSide,
+        right: borderSide,
+        bottom: widget.isExpanded ? BorderSide.none : borderSide,
+      ),
+      borderRadius: BorderRadius.only(
+        topLeft: radius,
+        topRight: radius,
+        bottomLeft: widget.isExpanded ? Radius.zero : radius,
+        bottomRight: widget.isExpanded ? Radius.zero : radius,
       ),
     );
 
