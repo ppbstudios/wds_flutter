@@ -3,8 +3,8 @@ part of '../../wds_components.dart';
 enum WdsDividerVariant { normal, thick }
 
 /// 시각적 구분을 위한 선(line) 컴포넌트
-/// - color: WdsColors.borderAlternative (고정)
-/// - 가로(normal/thick), 세로(normal 고정)
+///
+/// 반드시 부모 위젯에서 크기가 결정된 상태여야 합니다.
 class WdsDivider extends StatelessWidget {
   const WdsDivider({
     this.variant = WdsDividerVariant.normal,
@@ -26,10 +26,9 @@ class WdsDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isVertical) {
-      // 세로: width 1px, height 32px (고정)
       return const SizedBox(
         width: 1,
-        height: 32,
+        height: double.infinity,
         child: DecoratedBox(
           decoration: BoxDecoration(color: WdsColors.borderAlternative),
         ),
