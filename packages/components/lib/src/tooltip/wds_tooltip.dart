@@ -50,17 +50,9 @@ enum WdsTooltipAlignment {
   /// - 0.5: 중앙(중)에 위치
   /// - 1: 오른쪽(하)에 위치
   double get arrowFraction => switch (this) {
-        topLeft || bottomLeft => 0,
-        topCenter ||
-        bottomCenter ||
-        leftTop ||
-        leftCenter ||
-        leftBottom ||
-        rightTop ||
-        rightCenter ||
-        rightBottom =>
-          0.5,
-        topRight || bottomRight => 1,
+        topLeft || bottomLeft || leftTop || rightTop => 0,
+        topCenter || bottomCenter || leftCenter || rightCenter => 0.5,
+        topRight || bottomRight || leftBottom || rightBottom => 1,
       };
 }
 
