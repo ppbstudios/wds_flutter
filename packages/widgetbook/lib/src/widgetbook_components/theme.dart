@@ -32,7 +32,7 @@ class WidgetbookCustomTheme {
       bodyMedium: WdsTypography.body14NormalRegular,
       bodySmall: WdsTypography.body13NormalRegular,
       labelLarge: WdsTypography.body14NormalMedium,
-      labelMedium: WdsTypography.caption12Medium,
+      labelMedium: WdsTypography.caption12NormalMedium,
       labelSmall: WdsTypography.caption11Medium,
     ),
     appBarTheme: const AppBarTheme(

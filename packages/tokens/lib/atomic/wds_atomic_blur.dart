@@ -6,11 +6,11 @@ library;
 
 class WdsAtomicBlur {
   const WdsAtomicBlur._();
-  static const double full = 20;
-  static const double lg = 8;
-  static const double md = 4;
-  static const double sm = 2;
-  static const double xl = 12;
-  static const double xs = 1;
-  static const double xxl = 16;
+  static const double v1 = 1;
+  static const double v12 = 12;
+  static const double v16 = 16;
+  static const double v2 = 2;
+  static const double v20 = 20;
+  static const double v4 = 4;
+  static const double v8 = 8;
 }

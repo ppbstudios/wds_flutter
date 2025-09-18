@@ -276,7 +276,7 @@ Widget _buildStateSection() {
             // Outline variant states
             const Text(
               'Outline',
-              style: WdsTypography.caption12Medium,
+              style: WdsTypography.caption12NormalMedium,
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -316,7 +316,7 @@ Widget _buildStateSection() {
             // Solid variant states
             const Text(
               'Solid',
-              style: WdsTypography.caption12Medium,
+              style: WdsTypography.caption12NormalMedium,
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -357,7 +357,7 @@ Widget _buildStateSection() {
             ),
             const SizedBox(height: 8),
             // With icons demonstration
-            const Text('Icon', style: WdsTypography.caption12Medium),
+            const Text('Icon', style: WdsTypography.caption12NormalMedium),
             Row(
               mainAxisSize: MainAxisSize.min,
               spacing: 16,

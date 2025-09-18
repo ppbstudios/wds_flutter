@@ -6,18 +6,18 @@ library;
 
 class WdsAtomicSpace {
   const WdsAtomicSpace._();
-  static const double md = 4;
-  static const double md10 = 48;
-  static const double md11 = 64;
-  static const double md2 = 6;
-  static const double md3 = 8;
-  static const double md4 = 12;
-  static const double md5 = 16;
-  static const double md6 = 20;
-  static const double md7 = 24;
-  static const double md8 = 32;
-  static const double md9 = 40;
-  static const double none = 0;
-  static const double xs = 2;
-  static const double xxs = 1;
+  static const double v0 = 0;
+  static const double v1 = 1;
+  static const double v12 = 12;
+  static const double v16 = 16;
+  static const double v2 = 2;
+  static const double v20 = 20;
+  static const double v24 = 24;
+  static const double v32 = 32;
+  static const double v4 = 4;
+  static const double v40 = 40;
+  static const double v48 = 48;
+  static const double v6 = 6;
+  static const double v64 = 64;
+  static const double v8 = 8;
 }
