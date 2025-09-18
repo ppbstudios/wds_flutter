@@ -189,7 +189,7 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
   }
 
   Widget _buildContent() {
-    final TextStyle typography = WdsTypography.caption12Medium.copyWith(
+    final TextStyle typography = WdsTypography.caption12NormalMedium.copyWith(
       color: WdsColors.textNormal,
     );
 

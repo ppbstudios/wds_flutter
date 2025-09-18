@@ -51,8 +51,8 @@ class _ButtonTypographyBySize {
       WdsButtonSize.xlarge => WdsTypography.body15NormalBold,
       WdsButtonSize.large => WdsTypography.body15NormalBold,
       WdsButtonSize.medium => WdsTypography.body13NormalMedium,
-      WdsButtonSize.small => WdsTypography.caption12Medium,
-      WdsButtonSize.tiny => WdsTypography.caption12Medium,
+      WdsButtonSize.small => WdsTypography.caption12NormalMedium,
+      WdsButtonSize.tiny => WdsTypography.caption12NormalMedium,
     };
   }
 }

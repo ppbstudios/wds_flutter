@@ -118,8 +118,8 @@ class _WdsTextFieldState extends State<WdsTextField> {
         : WdsTypography.body13NormalRegular;
 
     _labelStyle = WdsTypography.body13NormalRegular;
-    _helperStyle = WdsTypography.caption12Regular;
-    _errorStyle = WdsTypography.caption12Regular;
+    _helperStyle = WdsTypography.caption12NormalRegular;
+    _errorStyle = WdsTypography.caption12NormalRegular;
   }
 
   void _onChangedInternal() {

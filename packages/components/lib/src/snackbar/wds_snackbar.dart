@@ -142,7 +142,7 @@ class WdsSnackbar extends StatelessWidget {
             description!,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: WdsTypography.caption12Regular.copyWith(
+            style: WdsTypography.caption12NormalRegular.copyWith(
               color: WdsColors.textAssistive,
             ),
           ),
@@ -155,7 +155,7 @@ class WdsSnackbar extends StatelessWidget {
       message,
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
-      style: WdsTypography.caption12Regular.copyWith(
+      style: WdsTypography.caption12NormalRegular.copyWith(
         color: WdsColors.textAssistive,
       ),
     );

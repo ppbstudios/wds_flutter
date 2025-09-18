@@ -96,7 +96,7 @@ class WdsSectionMessage extends StatelessWidget {
             ),
             Text(
               message,
-              style: WdsTypography.caption12Regular.copyWith(
+              style: WdsTypography.caption12ReadingRegular.copyWith(
                 color: style.text,
               ),
             ),
