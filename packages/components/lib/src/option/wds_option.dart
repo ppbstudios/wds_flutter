@@ -404,7 +404,7 @@ class WdsProductOptionItem extends WdsOptionItem {
                 /// Title + Trailing
                 Row(
                   children: [
-                    Expanded(
+                    Flexible(
                       child: Text(
                         title,
                         style: _titleStyle.copyWith(
