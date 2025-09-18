@@ -42,6 +42,12 @@ Widget _buildPlaygroundSection(BuildContext context) {
     initialValue: variant == 'normal' ? WdsColors.textNeutral : WdsColors.white,
   );
 
+  final leadingIcon = context.knobs.objectOrNull.dropdown<WdsIcon>(
+    label: 'leadingIcon',
+    options: WdsIcon.values,
+    labelBuilder: (v) => v.name,
+  );
+
   return WidgetbookPlayground(
     info: [
       'label: $label',
@@ -51,12 +57,14 @@ Widget _buildPlaygroundSection(BuildContext context) {
       'height: ${WdsTag.fixedHeight}px @fixed',
       'padding: ${WdsTag.fixedPadding.horizontal}px @fixed',
       'typography: ${WdsTag.fixedTypography.fontSize}px @fixed',
+      'leadingIcon: ${leadingIcon?.name ?? 'null'}',
     ],
     child: Center(
       child: WdsTag(
         label: label,
         backgroundColor: backgroundColor,
         color: textColor,
+        leadingIcon: leadingIcon,
       ),
     ),
   );
@@ -69,8 +77,8 @@ Widget _buildDemonstrationSection(BuildContext context) {
       WidgetbookSubsection(
         title: 'variant',
         labels: ['normal', 'filled'],
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
+        content: Wrap(
+          spacing: 12,
           children: [
             WdsTag.normal(label: '내 도수보유'),
             SizedBox(width: 16),
@@ -80,63 +88,27 @@ Widget _buildDemonstrationSection(BuildContext context) {
       ),
       SizedBox(height: 24),
       WidgetbookSubsection(
-        title: 'label',
-        labels: ['짧은', '긴 텍스트', '숫자'],
-        content: Row(
-          spacing: 8,
-          mainAxisSize: MainAxisSize.min,
+        title: 'radius',
+        labels: ['true', 'false'],
+        content: Wrap(
+          spacing: 12,
           children: [
-            WdsTag.normal(label: 'NEW'),
-            WdsTag.normal(label: '인기 상품'),
-            WdsTag.normal(label: '123'),
+            WdsTag.normal(label: '텍스트', hasRadius: false),
+            WdsTag.normal(label: '텍스트'),
+            WdsTag.filled(label: '텍스트', hasRadius: false),
+            WdsTag.filled(label: '텍스트'),
           ],
         ),
       ),
       SizedBox(height: 24),
       WidgetbookSubsection(
-        title: 'backgroundColor',
-        labels: ['성공', '경고', '오류'],
-        content: Row(
-          spacing: 8,
-          mainAxisSize: MainAxisSize.min,
+        title: 'icon',
+        labels: ['true', 'false'],
+        content: Wrap(
+          spacing: 12,
           children: [
-            WdsTag(
-              label: '성공',
-              backgroundColor: WdsColors.statusPositive,
-              color: WdsColors.white,
-            ),
-            WdsTag(
-              label: '경고',
-              backgroundColor: WdsColors.statusCautionaty,
-              color: WdsColors.white,
-            ),
-            WdsTag(
-              label: '오류',
-              backgroundColor: WdsColors.statusDestructive,
-              color: WdsColors.white,
-            ),
-          ],
-        ),
-      ),
-      SizedBox(height: 24),
-      WidgetbookSubsection(
-        title: 'color',
-        labels: ['활성', '비활성', '선택됨'],
-        content: Row(
-          spacing: 8,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            WdsTag.filled(label: '활성'),
-            WdsTag(
-              label: '비활성',
-              backgroundColor: WdsColors.neutral100,
-              color: WdsColors.textDisable,
-            ),
-            WdsTag(
-              label: '선택됨',
-              backgroundColor: WdsColors.blue100,
-              color: WdsColors.primary,
-            ),
+            WdsTag.normal(label: '텍스트', leadingIcon: WdsIcon.blank),
+            WdsTag.normal(label: '텍스트'),
           ],
         ),
       ),
