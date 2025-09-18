@@ -1,17 +1,14 @@
 part of '../../wds_components.dart';
 
 enum WdsSheetVariant {
-  fixed(maxHeightRatio: 0.88, minHeightRatio: 0.35),
-  draggable(maxHeightRatio: 0.93, minHeightRatio: 0.50),
-  nudging(maxHeightRatio: 0.494, minHeightRatio: 0.31);
+  fixed(maxHeightRatio: 0.88),
+  draggable(maxHeightRatio: 0.93);
 
   const WdsSheetVariant({
     required this.maxHeightRatio,
-    required this.minHeightRatio,
   });
 
   final double maxHeightRatio;
-  final double minHeightRatio;
 }
 
 class _SheetPaddingByArea {
@@ -32,12 +29,18 @@ class _SheetDimensions {
   static const double handleHeight = 5;
   static const double handlePaddingTop = 7;
   static const double headerHeight = 50;
-  static const double nudgingContentSpacing = 10;
 }
 
 /// 디자인 시스템 규칙을 따르는 시트
 abstract class WdsSheet extends StatelessWidget {
-  const WdsSheet._({super.key});
+  const WdsSheet({
+    required this.variant,
+    required this.headerTitle,
+    this.onClose,
+    this.onAction,
+    this.actionTitle,
+    super.key,
+  });
 
   factory WdsSheet.fixed({
     required VoidCallback onClose,
@@ -45,319 +48,182 @@ abstract class WdsSheet extends StatelessWidget {
     required String headerTitle,
     required Widget content,
     required String actionTitle,
-    bool isActionEnabled = true,
     Key? key,
   }) =>
-      _WdsFixedSheet(
+      _FixedSheet(
         onClose: onClose,
         onAction: onAction,
         headerTitle: headerTitle,
         content: content,
         actionTitle: actionTitle,
-        isActionEnabled: isActionEnabled,
         key: key,
       );
 
   factory WdsSheet.draggable({
+    required VoidCallback onAction,
     required String headerTitle,
-    required Widget content,
+    required String actionTitle,
+    required List<Widget> children,
     Key? key,
   }) =>
-      _WdsDraggableSheet(
+      _DraggableSheet(
+        onAction: onAction,
         headerTitle: headerTitle,
-        content: content,
+        actionTitle: actionTitle,
         key: key,
+        children: children,
       );
 
-  factory WdsSheet.nudging({
-    required VoidCallback onClose,
-    required VoidCallback onAction,
-    required String actionTitle,
-    required Widget image,
-    required String contentTitle,
-    required String contentDescription,
-    bool isActionEnabled = true,
-    Key? key,
-  }) {
-    assert(contentTitle.isNotEmpty, 'contentTitle cannot be empty');
-    assert(contentDescription.isNotEmpty, 'contentDescription cannot be empty');
+  final WdsSheetVariant variant;
+  final VoidCallback? onClose;
+  final VoidCallback? onAction;
+  final String headerTitle;
+  final String? actionTitle;
+}
 
-    return _WdsNudgingSheet(
-      onClose: onClose,
-      onAction: onAction,
-      actionTitle: actionTitle,
-      image: image,
-      contentTitle: contentTitle,
-      contentDescription: contentDescription,
-      isActionEnabled: isActionEnabled,
-      key: key,
+class _FixedSheet extends WdsSheet {
+  const _FixedSheet({
+    required super.onClose,
+    required super.headerTitle,
+    required this.content,
+    super.onAction,
+    super.actionTitle,
+    super.key,
+  }) : super(variant: WdsSheetVariant.fixed);
+
+  final Widget content;
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      initialChildSize: variant.maxHeightRatio,
+      maxChildSize: variant.maxHeightRatio,
+      builder: (context, _) {
+        return __SheetContainer(
+          variant: variant,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              RepaintBoundary(
+                child: __SheetHeader(
+                  title: headerTitle,
+                  onClose: onClose,
+                ),
+              ),
+              Flexible(
+                child: Padding(
+                  padding: _SheetPaddingByArea.view,
+                  child: content,
+                ),
+              ),
+              if (onAction != null && actionTitle != null)
+                RepaintBoundary(
+                  child: __SheetBottom(
+                    onTap: onAction!,
+                    title: actionTitle!,
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _DraggableSheet extends WdsSheet {
+  const _DraggableSheet({
+    required super.headerTitle,
+    required this.children,
+    super.onAction,
+    super.actionTitle,
+    super.key,
+  }) : super(
+          onClose: null,
+          variant: WdsSheetVariant.draggable,
+        );
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      initialChildSize: variant.maxHeightRatio,
+      maxChildSize: variant.maxHeightRatio,
+      builder: (context, scrollController) {
+        return __SheetContainer(
+          variant: variant,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              /// HANDLE
+              const RepaintBoundary(child: __SheetHandle()),
+
+              /// HEADER
+              RepaintBoundary(child: __SheetHeader(title: headerTitle)),
+
+              /// CONTENT
+              Flexible(
+                child: ListView(
+                  controller: scrollController,
+                  padding: _SheetPaddingByArea.view,
+                  children: children,
+                ),
+              ),
+
+              /// ACTION
+              if (onAction != null && actionTitle != null)
+                RepaintBoundary(
+                  child: __SheetBottom(
+                    onTap: onAction!,
+                    title: actionTitle!,
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
 
 /// 공통 시트 컨테이너 - 성능 최적화를 위한 별도 위젯
-class _WdsSheetContainer extends StatelessWidget {
-  const _WdsSheetContainer({
+class __SheetContainer extends StatelessWidget {
+  const __SheetContainer({
     required this.variant,
-    required this.children,
-    this.useIntrinsicHeight = false,
+    required this.child,
   });
 
   final WdsSheetVariant variant;
-  final List<Widget> children;
-  final bool useIntrinsicHeight;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    if (useIntrinsicHeight) {
-      return _buildIntrinsicContainer(context);
-    }
-
     return LayoutBuilder(
-      builder: (context, constraints) {
-        final maxHeight = constraints.maxHeight * variant.maxHeightRatio;
-        final minHeight = constraints.maxHeight * variant.minHeightRatio;
-
-        return ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: constraints.maxWidth,
-            maxHeight: maxHeight,
-            minHeight: minHeight,
-            minWidth: constraints.minWidth,
-          ),
-          child: _buildDecoratedContainer(),
-        );
-      },
-    );
-  }
-
-  Widget _buildIntrinsicContainer(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final maxHeight = constraints.maxHeight * variant.maxHeightRatio;
-
-        return ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: constraints.maxWidth,
-            maxHeight: maxHeight,
-            minWidth: constraints.minWidth,
-          ),
-          child: IntrinsicHeight(
-            child: _buildDecoratedContainer(),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildDecoratedContainer() {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: WdsColors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(WdsRadius.lg),
-          topRight: Radius.circular(WdsRadius.lg),
+      builder: (context, constraints) => ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: constraints.maxWidth,
+          maxHeight: constraints.maxHeight * variant.maxHeightRatio,
+          minWidth: constraints.minWidth,
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: children,
+        child: DecoratedBox(
+          decoration: const BoxDecoration(
+            color: WdsColors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(WdsRadius.lg),
+              topRight: Radius.circular(WdsRadius.lg),
+            ),
+          ),
+          child: child,
+        ),
       ),
     );
   }
 }
 
-/// Fixed 타입 시트 - RepaintBoundary로 성능 최적화
-class _WdsFixedSheet extends WdsSheet {
-  const _WdsFixedSheet({
-    required this.onClose,
-    required this.onAction,
-    required this.headerTitle,
-    required this.content,
-    required this.actionTitle,
-    this.isActionEnabled = true,
-    super.key,
-  }) : super._();
-
-  final VoidCallback onClose;
-  final VoidCallback onAction;
-  final String headerTitle;
-  final Widget content;
-  final String actionTitle;
-  final bool isActionEnabled;
-
-  @override
-  Widget build(BuildContext context) {
-    return _WdsSheetContainer(
-      variant: WdsSheetVariant.fixed,
-      children: [
-        RepaintBoundary(
-          child: _WdsSheetHeader(
-            title: headerTitle,
-            onClose: onClose,
-          ),
-        ),
-        Flexible(
-          child: RepaintBoundary(
-            child: SingleChildScrollView(
-              padding: _SheetPaddingByArea.view,
-              child: content,
-            ),
-          ),
-        ),
-        RepaintBoundary(
-          child: _WdsSheetBottom(
-            onTap: onAction,
-            title: actionTitle,
-            isEnabled: isActionEnabled,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// Draggable 타입 시트 - RepaintBoundary로 성능 최적화
-class _WdsDraggableSheet extends WdsSheet {
-  const _WdsDraggableSheet({
-    required this.headerTitle,
-    required this.content,
-    super.key,
-  }) : super._();
-
-  final String headerTitle;
-  final Widget content;
-
-  @override
-  Widget build(BuildContext context) {
-    return _WdsSheetContainer(
-      variant: WdsSheetVariant.draggable,
-      children: [
-        const RepaintBoundary(child: _WdsSheetHandle()),
-        RepaintBoundary(
-          child: _WdsSheetHeader(title: headerTitle),
-        ),
-        Flexible(
-          child: RepaintBoundary(
-            child: Padding(
-              padding: _SheetPaddingByArea.view,
-              child: content,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// Nudging 타입 시트 - content 크기에 맞춰 동적 높이 조정
-class _WdsNudgingSheet extends WdsSheet {
-  const _WdsNudgingSheet({
-    required this.onClose,
-    required this.onAction,
-    required this.actionTitle,
-    required this.image,
-    required this.contentTitle,
-    required this.contentDescription,
-    this.isActionEnabled = true,
-    super.key,
-  }) : super._();
-
-  final VoidCallback onClose;
-  final VoidCallback onAction;
-  final String actionTitle;
-  final Widget image;
-  final String contentTitle;
-  final String contentDescription;
-  final bool isActionEnabled;
-
-  @override
-  Widget build(BuildContext context) {
-    return _WdsSheetContainer(
-      variant: WdsSheetVariant.nudging,
-      useIntrinsicHeight: true, // content 기반 높이 조정
-      children: [
-        Flexible(
-          child: Stack(
-            children: [
-              /// Content View
-              Padding(
-                padding:
-                    const EdgeInsets.only(top: 16) + _SheetPaddingByArea.view,
-                child: _NudgingContent(
-                  image: image,
-                  contentTitle: contentTitle,
-                  contentDescription: contentDescription,
-                ),
-              ),
-
-              /// Header
-              Positioned(
-                left: 0,
-                top: 0,
-                right: 0,
-                child: _WdsSheetHeader(onClose: onClose),
-              ),
-            ],
-          ),
-        ),
-        _WdsSheetBottom(
-          onTap: onAction,
-          title: actionTitle,
-          isEnabled: isActionEnabled,
-        ),
-      ],
-    );
-  }
-}
-
-/// Nudging content를 별도 위젯으로 분리하여 const 최적화
-class _NudgingContent extends StatelessWidget {
-  const _NudgingContent({
-    required this.image,
-    required this.contentTitle,
-    required this.contentDescription,
-  });
-
-  final Widget image;
-  final String contentTitle;
-  final String contentDescription;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        /// Image (조건부 렌더링)
-        if (image is! SizedBox || (image as SizedBox).width != 0) ...[
-          Center(child: image),
-          const SizedBox(height: 16),
-        ],
-
-        /// Title
-        Text(
-          contentTitle,
-          style: WdsTypography.heading18Bold,
-          textAlign: TextAlign.center,
-        ),
-
-        const SizedBox(height: _SheetDimensions.nudgingContentSpacing),
-
-        /// Description
-        Text(
-          contentDescription,
-          style: WdsTypography.body15NormalRegular,
-          textAlign: TextAlign.center,
-        ),
-      ],
-    );
-  }
-}
-
-class _WdsSheetHandle extends StatelessWidget {
-  const _WdsSheetHandle();
+class __SheetHandle extends StatelessWidget {
+  const __SheetHandle();
 
   @override
   Widget build(BuildContext context) {
@@ -379,8 +245,8 @@ class _WdsSheetHandle extends StatelessWidget {
   }
 }
 
-class _WdsSheetHeader extends StatelessWidget {
-  const _WdsSheetHeader({
+class __SheetHeader extends StatelessWidget {
+  const __SheetHeader({
     this.title,
     this.onClose,
   });
@@ -435,16 +301,14 @@ class _WdsSheetHeader extends StatelessWidget {
   }
 }
 
-class _WdsSheetBottom extends StatelessWidget {
-  const _WdsSheetBottom({
+class __SheetBottom extends StatelessWidget {
+  const __SheetBottom({
     required this.onTap,
     required this.title,
-    required this.isEnabled,
   });
 
   final VoidCallback onTap;
   final String title;
-  final bool isEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -454,7 +318,6 @@ class _WdsSheetBottom extends StatelessWidget {
         child: WdsButton(
           onTap: onTap,
           size: WdsButtonSize.xlarge,
-          isEnabled: isEnabled,
           child: Text(title),
         ),
       ),
