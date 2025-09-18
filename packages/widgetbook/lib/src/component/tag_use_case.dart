@@ -81,7 +81,6 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 12,
           children: [
             WdsTag.normal(label: '내 도수보유'),
-            SizedBox(width: 16),
             WdsTag.filled(label: '바로드림'),
           ],
         ),
