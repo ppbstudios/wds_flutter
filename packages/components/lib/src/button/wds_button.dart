@@ -57,6 +57,30 @@ class _ButtonTypographyBySize {
   }
 }
 
+class _ButtonIconBySize {
+  const _ButtonIconBySize._();
+
+  static double ofSize(WdsButtonSize size) {
+    return switch (size) {
+      WdsButtonSize.xlarge => 20,
+      WdsButtonSize.large => 20,
+      WdsButtonSize.medium => 16,
+      WdsButtonSize.small => 14,
+      WdsButtonSize.tiny => 14,
+    };
+  }
+
+  static SizedBox ofSpacing(WdsButtonSize size) {
+    return switch (size) {
+      WdsButtonSize.xlarge => const SizedBox(width: 4),
+      WdsButtonSize.large => const SizedBox(width: 4),
+      WdsButtonSize.medium => const SizedBox(width: 4),
+      WdsButtonSize.small => const SizedBox(width: 2),
+      WdsButtonSize.tiny => const SizedBox(width: 2),
+    };
+  }
+}
+
 class _ButtonStyleByVariant {
   const _ButtonStyleByVariant._();
 
@@ -99,15 +123,20 @@ class WdsButton extends StatefulWidget {
     this.isEnabled = true,
     this.variant = WdsButtonVariant.cta,
     this.size = WdsButtonSize.medium,
+    this.icon,
     this.isLoading = false,
     super.key,
-  });
+  }) : assert(
+          icon == null || child is Text,
+          'icon은 자식 위젯이 Text인 경우에만 사용 가능합니다.',
+        );
 
   final VoidCallback? onTap;
   final Widget child;
   final bool isEnabled;
   final WdsButtonVariant variant;
   final WdsButtonSize size;
+  final WdsIcon? icon;
   final bool isLoading;
 
   @override
@@ -207,22 +236,34 @@ class _WdsButtonState extends State<WdsButton>
         data: IconThemeData(color: style.foreground),
         child: Padding(
           padding: padding,
-          child: Text(
-            childText.data ?? '',
-            key: childText.key,
-            style: merged,
-            strutStyle: childText.strutStyle,
-            textAlign: childText.textAlign,
-            textDirection: childText.textDirection,
-            locale: childText.locale,
-            softWrap: childText.softWrap,
-            overflow: childText.overflow,
-            textScaler: childText.textScaler,
-            maxLines: 1, // 스펙: 최대 1줄
-            semanticsLabel: childText.semanticsLabel,
-            textWidthBasis: childText.textWidthBasis,
-            textHeightBehavior: childText.textHeightBehavior,
-            selectionColor: childText.selectionColor,
+          child: Row(
+            children: [
+              if (widget.icon != null) ...[
+                widget.icon!.build(
+                  color: style.foreground,
+                  width: _ButtonIconBySize.ofSize(widget.size),
+                  height: _ButtonIconBySize.ofSize(widget.size),
+                ),
+                _ButtonIconBySize.ofSpacing(widget.size),
+              ],
+              Text(
+                childText.data ?? '',
+                key: childText.key,
+                style: merged,
+                strutStyle: childText.strutStyle,
+                textAlign: childText.textAlign,
+                textDirection: childText.textDirection,
+                locale: childText.locale,
+                softWrap: childText.softWrap,
+                overflow: childText.overflow,
+                textScaler: childText.textScaler,
+                maxLines: 1, // 스펙: 최대 1줄
+                semanticsLabel: childText.semanticsLabel,
+                textWidthBasis: childText.textWidthBasis,
+                textHeightBehavior: childText.textHeightBehavior,
+                selectionColor: childText.selectionColor,
+              ),
+            ],
           ),
         ),
       );
