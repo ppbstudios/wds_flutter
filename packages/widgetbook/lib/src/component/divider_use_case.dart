@@ -50,17 +50,22 @@ Widget _buildPlaygroundSection(BuildContext context) {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: isVertical
-            ? Row(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 12,
-                children: [
-                  const Text('좌측'),
-                  divider,
-                  const Text('우측'),
-                ],
+            ? SizedBox(
+                height: 24,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  spacing: 12,
+                  children: [
+                    const Text('좌측'),
+                    divider,
+                    const Text('우측'),
+                  ],
+                ),
               )
             : Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 spacing: 12,
                 children: [
                   const Text('위'),
@@ -75,14 +80,15 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
 Widget _buildDemonstrationSection(BuildContext context) {
   return const WidgetbookSection(
-    title: 'Variants',
+    title: 'Divider',
     spacing: 24,
     children: [
       WidgetbookSubsection(
-        title: 'Horizontal',
+        title: 'variant',
         labels: ['normal', 'thick'],
         content: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 16,
           children: [
             WdsDivider(),
@@ -91,16 +97,20 @@ Widget _buildDemonstrationSection(BuildContext context) {
         ),
       ),
       WidgetbookSubsection(
-        title: 'Vertical',
-        labels: ['normal'],
-        content: Row(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 24,
-          children: [
-            Text('A'),
-            WdsDivider.vertical(),
-            Text('B'),
-          ],
+        title: 'isVertical',
+        labels: ['true'],
+        content: SizedBox(
+          height: 24,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            spacing: 24,
+            children: [
+              Text('A'),
+              WdsDivider.vertical(),
+              Text('B'),
+            ],
+          ),
         ),
       ),
     ],

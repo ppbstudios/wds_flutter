@@ -17,6 +17,16 @@ class _ButtonPaddingBySize {
       WdsButtonSize.tiny => const EdgeInsets.fromLTRB(12, 6, 12, 6),
     };
   }
+
+  static EdgeInsets ofLoading(WdsButtonSize size) {
+    return switch (size) {
+      WdsButtonSize.xlarge => const EdgeInsets.fromLTRB(11, 2, 11, 2),
+      WdsButtonSize.large => const EdgeInsets.fromLTRB(11, 2, 11, 2),
+      WdsButtonSize.medium => const EdgeInsets.fromLTRB(12, 1, 12, 1),
+      WdsButtonSize.small => const EdgeInsets.fromLTRB(13, 1, 13, 1),
+      WdsButtonSize.tiny => const EdgeInsets.fromLTRB(14, 2, 14, 2),
+    };
+  }
 }
 
 class _ButtonHeightBySize {
@@ -89,6 +99,7 @@ class WdsButton extends StatefulWidget {
     this.isEnabled = true,
     this.variant = WdsButtonVariant.cta,
     this.size = WdsButtonSize.medium,
+    this.isLoading = false,
     super.key,
   });
 
@@ -97,6 +108,7 @@ class WdsButton extends StatefulWidget {
   final bool isEnabled;
   final WdsButtonVariant variant;
   final WdsButtonSize size;
+  final bool isLoading;
 
   @override
   State<WdsButton> createState() => _WdsButtonState();
@@ -161,11 +173,33 @@ class _WdsButtonState extends State<WdsButton>
 
     Widget content = IconTheme(
       data: IconThemeData(color: style.foreground),
-      child: Padding(padding: padding, child: widget.child),
+      child: Padding(
+        padding: padding,
+        child: widget.child,
+      ),
     );
 
-    // Text 자식일 경우 강제 타이포그래피 적용
-    if (widget.child is Text) {
+    if (widget.isLoading) {
+      content = Padding(
+        padding: padding + _ButtonPaddingBySize.ofLoading(widget.size),
+        child: WdsCircular(
+          size: switch (widget.size) {
+            WdsButtonSize.xlarge => 18,
+            WdsButtonSize.large => 18,
+            WdsButtonSize.medium => 16,
+            WdsButtonSize.small => 14,
+            WdsButtonSize.tiny => 12,
+          },
+          color: switch (widget.variant) {
+            WdsButtonVariant.secondary => WdsColors.primary,
+            _ => WdsColors.white,
+          },
+        ),
+      );
+    }
+
+    /// Text 자식일 경우 강제 타이포그래피 적용
+    else if (widget.child is Text) {
       final Text childText = widget.child as Text;
       final TextStyle merged =
           childText.style?.merge(fixedTypography) ?? fixedTypography;
