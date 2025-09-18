@@ -85,11 +85,19 @@ class WdsTypography {
   static const TextStyle body13ReadingRegular =
       WdsSemanticTypography.body13ReadingRegular;
 
-  static const TextStyle caption12Bold = WdsSemanticTypography.caption12Bold;
-  static const TextStyle caption12Medium =
-      WdsSemanticTypography.caption12Medium;
-  static const TextStyle caption12Regular =
-      WdsSemanticTypography.caption12Regular;
+  static const TextStyle caption12NormalBold =
+      WdsSemanticTypography.caption12NormalBold;
+  static const TextStyle caption12NormalMedium =
+      WdsSemanticTypography.caption12NormalMedium;
+  static const TextStyle caption12NormalRegular =
+      WdsSemanticTypography.caption12NormalRegular;
+
+  static const TextStyle caption12ReadingBold =
+      WdsSemanticTypography.caption12ReadingBold;
+  static const TextStyle caption12ReadingMedium =
+      WdsSemanticTypography.caption12ReadingMedium;
+  static const TextStyle caption12ReadingRegular =
+      WdsSemanticTypography.caption12ReadingRegular;
 
   static const TextStyle caption11Bold = WdsSemanticTypography.caption11Bold;
   static const TextStyle caption11Medium =

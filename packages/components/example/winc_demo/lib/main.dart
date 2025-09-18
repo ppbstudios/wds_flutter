@@ -15,12 +15,12 @@ const double $maxMobileCrossAxisCountForTwo = 375;
 
 extension on String {
   WdsTag toTag() => switch (this) {
-        'NEW' => const WdsTag.$new(),
-        'SALE' => const WdsTag.$sale(),
-        'BEST' => const WdsTag.$best(),
-        '쿠폰사용가능' => const WdsTag.$coupon(),
-        _ => WdsTag.normal(label: this),
-      };
+    'NEW' => const WdsTag.$new(),
+    'SALE' => const WdsTag.$sale(),
+    'BEST' => const WdsTag.$best(),
+    '쿠폰사용가능' => const WdsTag.$coupon(),
+    _ => WdsTag.normal(label: this),
+  };
 }
 
 void main() async {
@@ -389,7 +389,7 @@ class _HomeTabState extends State<HomeTab> {
                         const SizedBox(height: 9),
                         Text(
                           item.$1,
-                          style: WdsTypography.caption12Regular.copyWith(
+                          style: WdsTypography.caption12NormalRegular.copyWith(
                             color: WdsColors.textNormal,
                           ),
                           textAlign: TextAlign.center,
@@ -458,16 +458,19 @@ class _HomeTabState extends State<HomeTab> {
           builder: (context, constraints) {
             final width = constraints.crossAxisExtent;
 
-            final crossAxisCount =
-                width <= $maxMobileCrossAxisCountForTwo ? 2 : 3;
+            final crossAxisCount = width <= $maxMobileCrossAxisCountForTwo
+                ? 2
+                : 3;
 
-            final scaleFactor = width /
+            final scaleFactor =
+                width /
                 (WdsItemCardSize.xl.thumbnailSize.size.width * crossAxisCount);
 
             final scaledThumnailHeight =
                 WdsItemCardSize.xl.thumbnailSize.size.height * scaleFactor;
 
-            final otherElementHeight = WdsItemCardSize.xl.cardHeight -
+            final otherElementHeight =
+                WdsItemCardSize.xl.cardHeight -
                 WdsItemCardSize.xl.thumbnailSize.size.height;
 
             final totalCardHeight = scaledThumnailHeight + otherElementHeight;
@@ -578,8 +581,8 @@ class _HomeTabState extends State<HomeTab> {
                         width: constraints.crossAxisExtent,
                         height: 200 * scaleFactor,
                         fit: BoxFit.cover,
-                        cacheWidth:
-                            (constraints.crossAxisExtent * ratio).toInt(),
+                        cacheWidth: (constraints.crossAxisExtent * ratio)
+                            .toInt(),
                         alignment: const Alignment(0, -0.25),
                       ),
                       Positioned(
@@ -607,9 +610,8 @@ class _HomeTabState extends State<HomeTab> {
                                 ),
                                 Text(
                                   '109명이 좋아합니다',
-                                  style: WdsTypography.caption12Medium.copyWith(
-                                    color: WdsColors.white,
-                                  ),
+                                  style: WdsTypography.caption12NormalMedium
+                                      .copyWith(color: WdsColors.white),
                                 ),
                               ],
                             ),
@@ -631,12 +633,14 @@ class _HomeTabState extends State<HomeTab> {
             builder: (context, constraints) {
               final width = constraints.crossAxisExtent;
 
-              final crossAxisCount =
-                  width <= $maxMobileCrossAxisCountForTwo ? 2 : 3;
+              final crossAxisCount = width <= $maxMobileCrossAxisCountForTwo
+                  ? 2
+                  : 3;
 
               return SliverList.separated(
-                itemCount:
-                    $dummyProducts.take(crossAxisCount == 2 ? 3 : 5).length,
+                itemCount: $dummyProducts
+                    .take(crossAxisCount == 2 ? 3 : 5)
+                    .length,
                 separatorBuilder: (_, __) => const SizedBox(height: 10),
                 itemBuilder: (context, index) {
                   final product = $dummyProducts[index];

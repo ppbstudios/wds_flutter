@@ -6,10 +6,10 @@ library;
 
 class WdsAtomicOffsetY {
   const WdsAtomicOffsetY._();
-  static const double lg = 6;
-  static const double md = 4;
-  static const double sm = 2;
-  static const double xl = 8;
-  static const double xs = 1;
-  static const double xxl = 16;
+  static const double v1 = 1;
+  static const double v16 = 16;
+  static const double v2 = 2;
+  static const double v4 = 4;
+  static const double v6 = 6;
+  static const double v8 = 8;
 }

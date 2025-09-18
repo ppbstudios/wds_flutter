@@ -72,17 +72,17 @@ Widget _buildTypographyPlayground(BuildContext context) {
 
   final weight = context.knobs.object.dropdown<FontWeight>(
     label: 'fontWeight',
-    initialOption: tokens.WdsAtomicFontWeight.extraBold,
+    initialOption: tokens.WdsAtomicFontWeight.v800,
     options: const [
-      tokens.WdsAtomicFontWeight.extraBold,
-      tokens.WdsAtomicFontWeight.bold,
-      tokens.WdsAtomicFontWeight.medium,
-      tokens.WdsAtomicFontWeight.regular,
+      tokens.WdsAtomicFontWeight.v800,
+      tokens.WdsAtomicFontWeight.v600,
+      tokens.WdsAtomicFontWeight.v500,
+      tokens.WdsAtomicFontWeight.v400,
     ],
     labelBuilder: (w) {
-      if (w == tokens.WdsAtomicFontWeight.extraBold) return 'extraBold';
-      if (w == tokens.WdsAtomicFontWeight.bold) return 'bold';
-      if (w == tokens.WdsAtomicFontWeight.medium) return 'medium';
+      if (w == tokens.WdsAtomicFontWeight.v800) return 'extraBold';
+      if (w == tokens.WdsAtomicFontWeight.v600) return 'bold';
+      if (w == tokens.WdsAtomicFontWeight.v500) return 'medium';
       return 'regular';
     },
   );
@@ -118,9 +118,9 @@ Widget _buildTypographyPlayground(BuildContext context) {
 }
 
 String _getWeightLabel(FontWeight weight) {
-  if (weight == tokens.WdsAtomicFontWeight.extraBold) return 'extraBold';
-  if (weight == tokens.WdsAtomicFontWeight.bold) return 'bold';
-  if (weight == tokens.WdsAtomicFontWeight.medium) return 'medium';
+  if (weight == tokens.WdsAtomicFontWeight.v800) return 'extraBold';
+  if (weight == tokens.WdsAtomicFontWeight.v600) return 'bold';
+  if (weight == tokens.WdsAtomicFontWeight.v500) return 'medium';
   return 'regular';
 }
 
@@ -295,14 +295,26 @@ class _StylesSection extends StatelessWidget {
         ),
         // Caption 12
         const _TypographyRow(
-          label: 'Caption 12',
-          tokenName: 'WdsSemanticTypography.caption12Medium',
+          label: 'Caption 12 Normal',
+          tokenName: 'WdsSemanticTypography.caption12NormalMedium',
           fontSize: tokens.WdsAtomicFontSize.v12,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v16,
           styles: [
-            tokens.WdsSemanticTypography.caption12Bold,
-            tokens.WdsSemanticTypography.caption12Medium,
-            tokens.WdsSemanticTypography.caption12Regular,
+            tokens.WdsSemanticTypography.caption12NormalBold,
+            tokens.WdsSemanticTypography.caption12NormalMedium,
+            tokens.WdsSemanticTypography.caption12NormalRegular,
+          ],
+          previewText: kDefaultTypographyText,
+        ),
+        const _TypographyRow(
+          label: 'Caption 12 Reading',
+          tokenName: 'WdsSemanticTypography.caption12ReadingMedium',
+          fontSize: tokens.WdsAtomicFontSize.v12,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v16,
+          styles: [
+            tokens.WdsSemanticTypography.caption12ReadingBold,
+            tokens.WdsSemanticTypography.caption12ReadingMedium,
+            tokens.WdsSemanticTypography.caption12ReadingRegular,
           ],
           previewText: kDefaultTypographyText,
         ),
@@ -439,54 +451,52 @@ class _TypographyRow extends StatelessWidget {
                   children: [
                     Expanded(
                       child:
-                          styleByWeight[tokens.WdsAtomicFontWeight.extraBold] !=
-                                  null
+                          styleByWeight[tokens.WdsAtomicFontWeight.v800] != null
                               ? Text(
                                   previewText,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: styleByWeight[
-                                      tokens.WdsAtomicFontWeight.extraBold]!,
+                                      tokens.WdsAtomicFontWeight.v800]!,
                                 )
                               : const SizedBox.shrink(),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
                       child:
-                          styleByWeight[tokens.WdsAtomicFontWeight.bold] != null
+                          styleByWeight[tokens.WdsAtomicFontWeight.v600] != null
                               ? Text(
                                   previewText,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: styleByWeight[
-                                      tokens.WdsAtomicFontWeight.bold]!,
+                                      tokens.WdsAtomicFontWeight.v600]!,
                                 )
                               : const SizedBox.shrink(),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: styleByWeight[tokens.WdsAtomicFontWeight.medium] !=
-                              null
-                          ? Text(
-                              previewText,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: styleByWeight[
-                                  tokens.WdsAtomicFontWeight.medium]!,
-                            )
-                          : const SizedBox.shrink(),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
                       child:
-                          styleByWeight[tokens.WdsAtomicFontWeight.regular] !=
-                                  null
+                          styleByWeight[tokens.WdsAtomicFontWeight.v500] != null
                               ? Text(
                                   previewText,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: styleByWeight[
-                                      tokens.WdsAtomicFontWeight.regular]!,
+                                      tokens.WdsAtomicFontWeight.v500]!,
+                                )
+                              : const SizedBox.shrink(),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child:
+                          styleByWeight[tokens.WdsAtomicFontWeight.v400] != null
+                              ? Text(
+                                  previewText,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: styleByWeight[
+                                      tokens.WdsAtomicFontWeight.v400]!,
                                 )
                               : const SizedBox.shrink(),
                     ),

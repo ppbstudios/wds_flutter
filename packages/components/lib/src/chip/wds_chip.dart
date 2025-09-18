@@ -37,8 +37,8 @@ enum WdsChipSize {
     height: 28,
     outlinePadding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
     solidPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-    outlineTypography: WdsTypography.caption12Regular,
-    solidTypography: WdsTypography.caption12Medium,
+    outlineTypography: WdsTypography.caption12NormalRegular,
+    solidTypography: WdsTypography.caption12NormalMedium,
   ),
   small(
     height: 30,

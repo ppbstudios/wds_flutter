@@ -375,19 +375,19 @@
       }
     },
     "weight": {
-      "bold": {
-        "$type": "number",
-        "$value": 600
-      },
-      "medium": {
-        "$type": "number",
-        "$value": 500
-      },
-      "regular": {
+      "400": {
         "$type": "number",
         "$value": 400
       },
-      "extraBold": {
+      "500": {
+        "$type": "number",
+        "$value": 500
+      },
+      "600": {
+        "$type": "number",
+        "$value": 600
+      },
+      "800": {
         "$type": "number",
         "$value": 800
       }
@@ -482,149 +482,149 @@
     }
   },
   "radius": {
-    "none": {
+    "0": {
       "$type": "number",
       "$value": 0
     },
-    "xs": {
+    "4": {
       "$type": "number",
       "$value": 4
     },
-    "sm": {
+    "8": {
       "$type": "number",
       "$value": 8
     },
-    "md": {
+    "12": {
       "$type": "number",
       "$value": 12
     },
-    "full": {
-      "$type": "number",
-      "$value": 9999
-    },
-    "lg": {
+    "16": {
       "$type": "number",
       "$value": 16
     },
-    "xl": {
+    "20": {
       "$type": "number",
       "$value": 20
     },
-    "xxl": {
+    "30": {
       "$type": "number",
       "$value": 30
+    },
+    "9999": {
+      "$type": "number",
+      "$value": 9999
     }
   },
   "space": {
-    "none": {
+    "0": {
       "$type": "number",
       "$value": 0
     },
-    "xxs": {
+    "1": {
       "$type": "number",
       "$value": 1
     },
-    "xs": {
+    "2": {
       "$type": "number",
       "$value": 2
     },
-    "md": {
+    "4": {
       "$type": "number",
       "$value": 4
     },
-    "md2": {
+    "6": {
       "$type": "number",
       "$value": 6
     },
-    "md3": {
+    "8": {
       "$type": "number",
       "$value": 8
     },
-    "md4": {
+    "12": {
       "$type": "number",
       "$value": 12
     },
-    "md5": {
+    "16": {
       "$type": "number",
       "$value": 16
     },
-    "md6": {
+    "20": {
       "$type": "number",
       "$value": 20
     },
-    "md7": {
+    "24": {
       "$type": "number",
       "$value": 24
     },
-    "md8": {
+    "32": {
       "$type": "number",
       "$value": 32
     },
-    "md9": {
+    "40": {
       "$type": "number",
       "$value": 40
     },
-    "md10": {
+    "48": {
       "$type": "number",
       "$value": 48
     },
-    "md11": {
+    "64": {
       "$type": "number",
       "$value": 64
     }
   },
   "blur": {
-    "xs": {
+    "1": {
       "$type": "number",
       "$value": 1
     },
-    "sm": {
+    "2": {
       "$type": "number",
       "$value": 2
     },
-    "md": {
+    "4": {
       "$type": "number",
       "$value": 4
     },
-    "lg": {
+    "8": {
       "$type": "number",
       "$value": 8
     },
-    "xl": {
+    "12": {
       "$type": "number",
       "$value": 12
     },
-    "xxl": {
+    "16": {
       "$type": "number",
       "$value": 16
     },
-    "full": {
+    "20": {
       "$type": "number",
       "$value": 20
     }
   },
   "offsetY": {
-    "xs": {
+    "1": {
       "$type": "number",
       "$value": 1
     },
-    "sm": {
+    "2": {
       "$type": "number",
       "$value": 2
     },
-    "md": {
+    "4": {
       "$type": "number",
       "$value": 4
     },
-    "xl": {
-      "$type": "number",
-      "$value": 8
-    },
-    "lg": {
+    "6": {
       "$type": "number",
       "$value": 6
     },
-    "xxl": {
+    "8": {
+      "$type": "number",
+      "$value": 8
+    },
+    "16": {
       "$type": "number",
       "$value": 16
     }

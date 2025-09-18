@@ -523,7 +523,7 @@ class _HorizontalLayout extends StatelessWidget {
                 if (size == WdsItemCardSize.md) ...[
                   Text(
                     brandName,
-                    style: WdsTypography.caption12Regular.copyWith(
+                    style: WdsTypography.caption12NormalRegular.copyWith(
                       color: WdsColors.textNeutral,
                     ),
                   ),
@@ -533,7 +533,7 @@ class _HorizontalLayout extends StatelessWidget {
                 /// 상품명
                 Text(
                   productName,
-                  style: WdsTypography.caption12Medium.copyWith(
+                  style: WdsTypography.caption12NormalMedium.copyWith(
                     color: WdsColors.textNormal,
                   ),
                   maxLines: productNameMaxLines,
@@ -602,7 +602,7 @@ class __LensInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final textStyle = switch (size) {
       WdsItemCardSize.xs => WdsTypography.caption11Regular,
-      _ => WdsTypography.caption12Regular,
+      _ => WdsTypography.caption12NormalRegular,
     }
         .copyWith(
       color: WdsColors.textAlternative,
@@ -669,7 +669,7 @@ class __PriceInfo extends StatelessWidget {
         WdsItemCardSize.lg =>
           WdsTypography.body15NormalBold,
         WdsItemCardSize.md => WdsTypography.body13NormalBold,
-        WdsItemCardSize.xs => WdsTypography.caption12Bold
+        WdsItemCardSize.xs => WdsTypography.caption12NormalBold
       }
           .copyWith(color: WdsColors.textNormal),
     );
@@ -685,7 +685,7 @@ class __PriceInfo extends StatelessWidget {
         WdsItemCardSize.lg =>
           WdsTypography.body15NormalBold,
         WdsItemCardSize.md => WdsTypography.body13NormalBold,
-        WdsItemCardSize.xs => WdsTypography.caption12Bold
+        WdsItemCardSize.xs => WdsTypography.caption12NormalBold
       }
           .copyWith(color: WdsColors.secondary),
     );

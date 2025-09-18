@@ -80,8 +80,8 @@ Widget _buildPlaygroundSection(BuildContext context) {
     'xlarge': WdsTypography.body15NormalBold,
     'large': WdsTypography.body15NormalBold,
     'medium': WdsTypography.body13NormalMedium,
-    'small': WdsTypography.caption12Medium,
-    'tiny': WdsTypography.caption12Medium,
+    'small': WdsTypography.caption12NormalMedium,
+    'tiny': WdsTypography.caption12NormalMedium,
   };
 
   final child = Text(text, style: styleBySize[size]!);
