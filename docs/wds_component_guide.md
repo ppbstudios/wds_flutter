@@ -2634,6 +2634,101 @@ Selected (선택됨) | `WdsTypography.body13NormalBold` | `WdsColors.white` | `W
 size | int | 원형 로더의 크기 조정 가능
 color | WdsColors | 로더의 색상 변경 가능
 
+## Option
+
+Select 영역에서 원하는 옵션을 선택할 수 있도록 돕습니다.
+
+**공통**:
+Select가 열리면(`isExpanded: true`) 여러 OptionItem들을 감싸고 있는 Option이 보이게 됩니다. 
+이 때, Option은 left, right, 그리고 bottom에 `WdsColors.primary`로 칠해진 stroke를 가지며,
+배경 색상은 `WdsColors.backgroundNormal`을 가집니다. stroke의 두께는 1px이고 bottomLeft, bottomRight에는 borderRadius 를 `Radius.circular(WdsRadius.sm)`로 둡니다.
+
+그리고 각 OptionItem은 top, bottom에 stroke를 `WdsColors.borderAlternative` 색상으로 1px 씩 가집니다. 다만, 가장 마지막 OptionItem은 Option처럼 bottomLeft, bottomRight가 `Radius.circular(WdsRadius.sm)`로 그려집니다. 가장 바깥의 stroke가 (Option의 border) 안의 영역의 (OptionItem의 border) 보다 우선순위가 높습니다.
+
+Option은 variant와 isSoldOut 로 조합될 수 있습니다.
+
+### Option - variant
+
+- power
+- product
+
+**power**
+- 높이: top/bottom border 1px 제외하고 고정 높이 47px
+- padding: left/right 각각 16px
+- 정렬: `CrossAxisAlignment.center`
+
+**power 구조**
+- label (필수)
+  - 너비: 고정 40px
+  - 높이: 부모 Widget 따라 20px
+  - 색상: `WdsTypography.body14NormalRegular.copyWith(color: WdsColors.textNormal)`
+  - isSoldOut true일 때: `WdsColors.textDisable`
+- tags (선택사항)
+  - 최대 2개
+  - 간격: label과 8px, tags 간 2px
+  - Widget: `WdsTag`만 허용
+  - 높이: 20px (부모 Widget 기준 위/아래 각 1px 간격)
+  - 구조: Expanded
+  - isSoldOut true일 때: 맨 앞에 `WdsTag.$soldOut` 추가
+- trailing (선택사항)
+  - 조건: `isSoldOut`이 true일 때만 표시
+  - Widget: `WdsChip.pill(variant: .outline, size: .xs)`
+  - 간격: label + tags와 10px
+  - 높이: `WdsChip` 속성 존중 (고정 20px 아님)
+
+**power 위젯 트리**
+```
+Option
+├ OptionItem (gap: 10px)
+⎮  ├ Row (gap: 8px, fixed height: 20px)
+⎮  ⎮  ├ label (required)
+⎮  ⎮  ├ tags (optional, expanded)
+⎮  ├ trailing (optional)
+```
+
+**product**
+- 높이: top/bottom border 1px 제외하고 고정 높이 63px
+- padding: left/right 16px, top/bottom 8px
+- 구성 요소: index, thumbnail, title, description, trailing
+
+**product 구조**
+- index (필수)
+  - 크기: 고정 18px × 20px
+- thumbnail (필수)
+  - 크기: 고정 크기
+- title (필수)
+  - 스타일: `WdsTypography.body14NormalMedium`
+  - 색상: `WdsColors.textNormal`
+  - 제한: maxLine 1, ellipsis
+  - 구조: Expanded
+- description (필수)
+  - 스타일: `WdsTypography.body13NormalRegular`
+  - 색상: `WdsColors.textAlternative`
+  - 제한: maxLine 1, ellipsis
+- trailing (선택사항)
+
+**product 위젯 트리**
+```
+Option
+├ OptionItem (gap: 10px)
+⎮  ├ Row (gap: 4px, fixedSize: 86px * 64px, crossAxisAlignment: .start)
+⎮  ⎮  ├ index (required, fixed size: 18 * 20 px)
+⎮  ⎮  ├ thumbnail (required, fixed size)
+⎮  ├ Column(gap: 4px, crossAxisAlignment: .stretch)
+⎮  ⎮  ├ Row (gap: 4px) 
+⎮  ⎮  ⎮  ├ title (required, WdsTypography.body14NormalMedium, WdsColors.textNormal, maxLine: 1, .ellipsis, expanded)
+⎮  ⎮  ⎮  ├ trailing (optional)
+⎮  ⎮  ├ description (required, WdsTypography.body13NormalRegular, WdsColors.textAlternative, maxLine: 1, .ellipsis)
+```
+
+### Option - 공통 규칙
+
+- 부모 위젯이 Row/Column이고 자식 위젯이 1개인 경우: Row/Column 없이 바로 자식 return
+- 고정 높이: OptionItem 개수에 비례
+- 최대 높이: power 6개, product 5개
+- 스크롤: 최대 높이 초과 시 고정 높이 내 스크롤 영역 생성
+- 유동 높이: 최대 높이 미만 시 wrap 높이만큼 고정 높이 생성
+
 ## MenuItem
 
 > 텍스트 기반 선택 요소 정보를 섹션 또는 그룹으로 나눌 수 있는 연속적인 수직 집합체입니다. 대량의 정보를 목록 형태로 깨끗하고 효율적으로 정리할 수 있습니다.
