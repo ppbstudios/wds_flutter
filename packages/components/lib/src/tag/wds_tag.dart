@@ -50,7 +50,7 @@ class WdsTag extends StatelessWidget {
         hasRadius = false;
 
   const WdsTag.$soldOut({super.key})
-      : label = '임시품절',
+      : label = '일시품절',
         color = WdsColors.white,
         backgroundColor = WdsColors.coolNeutral300,
         hasRadius = true;
