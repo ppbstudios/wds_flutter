@@ -18,7 +18,7 @@ import 'package:wds_foundation/wds_foundation.dart';
 part 'src/action_area/wds_action_area.dart';
 part 'src/badge/wds_badge.dart';
 part 'src/badge/wds_dot_badge.dart';
-part 'src/button/button.dart';
+part 'src/button/wds_button.dart';
 part 'src/button/wds_square_button.dart';
 part 'src/button/wds_text_button.dart';
 part 'src/checkbox/wds_checkbox.dart';
