@@ -47,20 +47,12 @@ Widget _buildPlaygroundSection(BuildContext context) {
     description: '오른쪽 아이콘이 바뀌어요',
   );
 
-  final variant = context.knobs.object.dropdown<WdsSelectVariant>(
-    label: 'variant',
-    options: WdsSelectVariant.values,
-    initialOption: WdsSelectVariant.normal,
-    labelBuilder: (v) => v.name,
-  );
-
   final select = WdsSelect(
     selected: selected.isEmpty ? null : selected,
     title: title.isEmpty ? null : title,
     hintText: hint,
     isEnabled: enabled,
     isExpanded: expanded,
-    variant: variant,
     onTap: () => debugPrint('Select tapped'),
   );
 
@@ -79,97 +71,53 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 }
 
+typedef _SelectState = (
+  String? selected,
+  bool isEnabled,
+  String? title,
+  bool isExpanded,
+);
+
 Widget _buildDemonstrationSection(BuildContext context) {
-  return const WidgetbookSection(
+  List<_SelectState> states = [
+    (null, true, null, false), // inactive
+    ('-0.50', true, null, false), // active
+    ('-0.50', true, null, true), // selected
+    (null, false, null, false), // disabled
+    (null, true, '옵션 선택', false), // inactive
+    ('-0.50', true, '옵션 선택', false), // active
+    ('-0.50', true, '옵션 선택', true), // selected
+    (null, false, '옵션 선택', false), // disabled
+  ];
+
+  return WidgetbookSection(
     title: 'Select',
     children: [
       WidgetbookSubsection(
-        title: 'variant',
-        labels: ['normal', 'blocked'],
-        content: Wrap(
-          spacing: 16,
-          runSpacing: 16,
-          children: [
-            _SelectDemo(variant: WdsSelectVariant.normal, enabled: true),
-            _SelectDemo(variant: WdsSelectVariant.blocked, enabled: true),
-          ],
-        ),
-      ),
-      SizedBox(height: 24),
-      WidgetbookSubsection(
         title: 'state',
-        labels: ['enabled', 'disabled'],
+        labels: ['inactive', 'active', 'selected', 'disabled'],
         content: Wrap(
           spacing: 16,
           runSpacing: 16,
-          children: [
-            _SelectDemo(
-              variant: WdsSelectVariant.normal,
-              enabled: true,
-            ),
-            _SelectDemo(
-              variant: WdsSelectVariant.blocked,
-              enabled: true,
-            ),
-            _SelectDemo(
-              variant: WdsSelectVariant.normal,
-              enabled: false,
-            ),
-            _SelectDemo(
-              variant: WdsSelectVariant.blocked,
-              enabled: false,
-            ),
-            _SelectDemo(
-              variant: WdsSelectVariant.normal,
-              enabled: true,
-              title: '주제',
-            ),
-            _SelectDemo(
-              variant: WdsSelectVariant.blocked,
-              enabled: true,
-              title: '주제',
-            ),
-            _SelectDemo(
-              variant: WdsSelectVariant.normal,
-              enabled: false,
-              title: '주제',
-            ),
-            _SelectDemo(
-              variant: WdsSelectVariant.blocked,
-              enabled: false,
-              title: '주제',
-            ),
-          ],
+          children: states
+              .map(
+                (state) => ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    minWidth: 250,
+                    maxWidth: 320,
+                  ),
+                  child: WdsSelect(
+                    selected: state.$1,
+                    isEnabled: state.$2,
+                    title: state.$3,
+                    isExpanded: state.$4,
+                    hintText: '옵션을 선택해 주세요',
+                  ),
+                ),
+              )
+              .toList(),
         ),
       ),
     ],
   );
-}
-
-class _SelectDemo extends StatelessWidget {
-  const _SelectDemo({
-    required this.variant,
-    required this.enabled,
-    this.title,
-  });
-
-  final WdsSelectVariant variant;
-
-  final bool enabled;
-
-  final String? title;
-
-  @override
-  Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(minWidth: 250, maxWidth: 320),
-      child: WdsSelect(
-        title: title,
-        selected: null,
-        hintText: '옵션을 선택해 주세요',
-        isEnabled: enabled,
-        variant: variant,
-      ),
-    );
-  }
 }

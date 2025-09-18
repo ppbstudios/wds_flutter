@@ -1,7 +1,5 @@
 part of '../../wds_components.dart';
 
-enum WdsSelectVariant { normal, blocked }
-
 /// 드롭다운 Select
 /// - padding: EdgeInsets.fromLTRB(16, 12, 16, 12)
 /// - radius: WdsRadius.sm
@@ -16,19 +14,8 @@ class WdsSelect extends StatefulWidget {
     this.isEnabled = true,
     this.isExpanded = false,
     this.onTap,
-    this.variant = WdsSelectVariant.normal,
     super.key,
   });
-
-  const WdsSelect.blocked({
-    required this.selected,
-    required this.hintText,
-    this.title,
-    this.isEnabled = true,
-    this.isExpanded = false,
-    this.onTap,
-    super.key,
-  }) : variant = WdsSelectVariant.blocked;
 
   /// 좌측 상단 "주제"
   ///
@@ -48,8 +35,6 @@ class WdsSelect extends StatefulWidget {
 
   /// 셀 탭 콜백
   final VoidCallback? onTap;
-
-  final WdsSelectVariant variant;
 
   @override
   State<WdsSelect> createState() => _WdsSelectState();
@@ -89,11 +74,7 @@ class _WdsSelectState extends State<WdsSelect> {
 
     final arrowIcon =
         (widget.isExpanded ? WdsIcon.chevronUp : WdsIcon.chevronDown).build(
-      color: widget.variant == WdsSelectVariant.blocked
-          ? WdsColors.textNeutral.withAlpha(
-              WdsOpacity.opacity40.toAlpha(),
-            )
-          : WdsColors.neutral500,
+      color: widget.isEnabled ? WdsColors.neutral600 : WdsColors.neutral100,
     );
 
     final field = Padding(
@@ -143,18 +124,16 @@ class _WdsSelectState extends State<WdsSelect> {
   }
 
   Color _titleColor() {
-    return (!widget.isEnabled && widget.variant == WdsSelectVariant.blocked)
-        ? WdsColors.textDisable
-        : WdsColors.textNormal;
+    if (!widget.isEnabled) {
+      return WdsColors.textDisable;
+    }
+
+    return WdsColors.textNormal;
   }
 
   Color _textColor() {
     if (!widget.isEnabled) {
       return WdsColors.textDisable;
-    }
-
-    if (widget.variant == WdsSelectVariant.blocked) {
-      return WdsColors.textAlternative;
     }
 
     if (widget.selected?.isEmpty ?? true) {
@@ -165,17 +144,18 @@ class _WdsSelectState extends State<WdsSelect> {
   }
 
   Color _backgroundColor() {
-    return switch (widget.variant) {
-      WdsSelectVariant.normal => WdsColors.white,
-      WdsSelectVariant.blocked => WdsColors.neutral50,
-    };
+    if (!widget.isEnabled) {
+      return WdsColors.neutral50;
+    }
+
+    return WdsColors.white;
   }
 
   BorderSide _borderSide() {
-    return switch (widget.variant) {
-      WdsSelectVariant.normal => const BorderSide(color: WdsColors.primary),
-      WdsSelectVariant.blocked =>
-        const BorderSide(color: WdsColors.borderAlternative),
-    };
+    if (!widget.isEnabled) {
+      return const BorderSide(color: WdsColors.borderAlternative);
+    }
+
+    return const BorderSide(color: WdsColors.primary);
   }
 }
