@@ -239,18 +239,43 @@ Row(
 
 ## SquareButton
 
-버튼과 다르게 SquareButton은 단일 size, typography (색상 제외), padding 이 같은 버튼입니다. 단, state는 아래 2가지로 구분됩니다.
+버튼과 다르게 SquareButton은 단일 size, typography (색상 제외), padding 이 같은 버튼입니다. variant에 따라 레이아웃이 달라지며, state는 아래 2가지로 구분됩니다.
 - `enabled`
 - `disabled`
 
 여기서 `pressed` 는 웹인 경우 hovered 상태도 포함되며 #Button에 구현되어 있는 pressed(hover)와 같은 메커니즘으로 구성됩니다. disabled 일 때 opacity 설정하는 방법도 같습니다.
 
+### SquareButton - variant
+
+정해진 Variant만 사용할 수 있습니다.
+
+- `normal`: 단일 버튼 형태
+- `step`: 3개 버튼이 연결된 형태 (minus, text, plus)
+
 ### SquareButton - 고정된 속성
 속성 | 값
 --- | ---
 size | `Size(double.infinity, 32)`
+radius | `WdsRadius.xs`
+borderSide | `BorderSide(color: WdsColors.borderAlternative)`
 typography | `WdsTypography.caption12Medium`
-padding | `EdgeInsets.symmetric(horizontal: 17, vertical: 8)`
+
+### SquareButton - step variant
+속성 | 값 
+--- | --- 
+padding | `EdgeInsets.symmetric(horizontal: 17, vertical: 8)` 
+
+### SquareButton - step variant
+
+step variant는 3개의 버튼이 연결된 형태로, 좌측부터 minus, text, plus 순서입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+padding | `EdgeInsets.symmetric(horizontal: 12, vertical: 8)` | -
+spacing | 12px | minus, text, plus 간 간격
+minus icon | `WdsIcon.minus` | 16x16px, `WdsColors.cta`
+plus icon | `WdsIcon.plus` | 16x16px, `WdsColors.cta`
+
 
 ### SquareButton - state
 
@@ -258,6 +283,25 @@ state | backgroundColor | color | radius | borderSide
 --- | --- | --- | --- | --- 
 enabled | WdsColors.white(#FFFFFF) | WdsColors.textNeutral(#4E4E4E) | .v4 | BorderSide(color: WdsColors.borderAlternative)
 disabled | WdsColors.white(#FFFFFF) | WdsColors.textNeutral(#4E4E4E) | .v4 | BorderSide(color: WdsColors.borderAlternative)
+
+### SquareButton - 생성 방법
+
+named constructor로 생성할 수 있습니다.
+
+``` dart
+// 단일 버튼
+WdsSquareButton.normal(
+  text: '텍스트',
+  onTap: () => print('버튼 선택'),
+)
+
+// 3개 연결된 버튼
+WdsSquareButton.step(
+  text: '텍스트',
+  onMinusTap: () => print('-'),
+  onPlusTap: () => print('+'),
+)
+```
 
 ## IconButton
 
