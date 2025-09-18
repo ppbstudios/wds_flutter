@@ -6,12 +6,12 @@ library;
 
 class WdsAtomicRadius {
   const WdsAtomicRadius._();
-  static const double full = 9999;
-  static const double lg = 16;
-  static const double md = 12;
-  static const double none = 0;
-  static const double sm = 8;
-  static const double xl = 20;
-  static const double xs = 4;
-  static const double xxl = 30;
+  static const double v0 = 0;
+  static const double v12 = 12;
+  static const double v16 = 16;
+  static const double v20 = 20;
+  static const double v30 = 30;
+  static const double v4 = 4;
+  static const double v8 = 8;
+  static const double v9999 = 9999;
 }

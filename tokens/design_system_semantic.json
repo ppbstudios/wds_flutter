@@ -93,11 +93,11 @@
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.sm}"
+            "$value": "{blur.12}"
           },
           "offstY": {
             "$type": "number",
-            "$value": "{offsetY.xs}"
+            "$value": "{offsetY.2}"
           }
         },
         "shadow2": {
@@ -107,17 +107,7 @@
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.xs}"
-          }
-        },
-        "shadow3": {
-          "color": {
-            "$type": "color",
-            "$value": "#819bff14"
-          },
-          "blur": {
-            "$type": "number",
-            "$value": "{blur.xs}"
+            "$value": "{blur.1}"
           }
         }
       },
@@ -129,11 +119,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.sm}"
+            "$value": "{offsetY.2}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.lg}"
+            "$value": "{blur.8}"
           }
         },
         "shadow2": {
@@ -143,11 +133,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.xs}"
+            "$value": "{offsetY.1}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.md}"
+            "$value": "{blur.4}"
           }
         },
         "shadow3": {
@@ -157,7 +147,7 @@
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.xs}"
+            "$value": "{blur.1}"
           }
         }
       },
@@ -169,11 +159,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.lg}"
+            "$value": "{offsetY.6}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.xl}"
+            "$value": "{blur.12}"
           }
         },
         "shadow2": {
@@ -183,11 +173,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.md}"
+            "$value": "{offsetY.4}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.lg}"
+            "$value": "{blur.8}"
           }
         },
         "shadow3": {
@@ -197,7 +187,7 @@
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.md}"
+            "$value": "{blur.4}"
           }
         }
       },
@@ -209,11 +199,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.xxl}"
+            "$value": "{offsetY.16}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.full}"
+            "$value": "{blur.20}"
           }
         },
         "shadow2": {
@@ -223,11 +213,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.xl}"
+            "$value": "{offsetY.8}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.xxl}"
+            "$value": "{blur.16}"
           }
         },
         "shadow3": {
@@ -237,7 +227,7 @@
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.lg}"
+            "$value": "{blur.8}"
           }
         }
       }
@@ -251,11 +241,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.sm}"
+            "$value": "{offsetY.2}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.lg}"
+            "$value": "{blur.8}"
           }
         },
         "shadow2": {
@@ -265,11 +255,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.xs}"
+            "$value": "{offsetY.1}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.md}"
+            "$value": "{blur.4}"
           }
         },
         "shadow3": {
@@ -279,21 +269,11 @@
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.xs}"
+            "$value": "{blur.1}"
           }
         }
       },
       "normal": {
-        "shadow3": {
-          "color": {
-            "$type": "color",
-            "$value": "#00000014"
-          },
-          "blur": {
-            "$type": "number",
-            "$value": "{blur.xs}"
-          }
-        },
         "shadow2": {
           "Color": {
             "$type": "color",
@@ -301,7 +281,7 @@
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.xs}"
+            "$value": "{blur.1}"
           }
         },
         "shadow1": {
@@ -311,11 +291,11 @@
           },
           "offstY": {
             "$type": "number",
-            "$value": "{offsetY.xs}"
+            "$value": "{offsetY.2}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.sm}"
+            "$value": "{space.12}"
           }
         }
       },
@@ -327,11 +307,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.lg}"
+            "$value": "{offsetY.6}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.xl}"
+            "$value": "{blur.12}"
           }
         },
         "shadow2": {
@@ -341,11 +321,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.md}"
+            "$value": "{offsetY.4}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.lg}"
+            "$value": "{blur.8}"
           }
         },
         "shadow3": {
@@ -355,7 +335,7 @@
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.md}"
+            "$value": "{blur.4}"
           }
         }
       },
@@ -367,11 +347,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.xxl}"
+            "$value": "{offsetY.16}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.full}"
+            "$value": "{blur.20}"
           }
         },
         "shadow2": {
@@ -381,11 +361,11 @@
           },
           "offsetY": {
             "$type": "number",
-            "$value": "{offsetY.xl}"
+            "$value": "{offsetY.8}"
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.xxl}"
+            "$value": "{blur.16}"
           }
         },
         "shadow3": {
@@ -395,7 +375,7 @@
           },
           "blur": {
             "$type": "number",
-            "$value": "{blur.lg}"
+            "$value": "{blur.8}"
           }
         }
       }
@@ -410,7 +390,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.extraBold}"
+          "$value": "{font.weight.800}"
         },
         "lineHeight": {
           "$type": "number",
@@ -428,7 +408,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.600}"
         },
         "lineHeight": {
           "$type": "number",
@@ -446,7 +426,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.medium}"
+          "$value": "{font.weight.500}"
         },
         "lineHeight": {
           "$type": "number",
@@ -464,7 +444,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.regular}"
+          "$value": "{font.weight.400}"
         },
         "lineHeight": {
           "$type": "number",
@@ -484,7 +464,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.medium}"
+          "$value": "{font.weight.500}"
         },
         "lineHeight": {
           "$type": "number",
@@ -502,7 +482,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.600}"
         },
         "lineHeight": {
           "$type": "number",
@@ -520,7 +500,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.regular}"
+          "$value": "{font.weight.400}"
         },
         "lineHeight": {
           "$type": "number",
@@ -540,7 +520,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.600}"
         },
         "lineHeight": {
           "$type": "number",
@@ -558,7 +538,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.medium}"
+          "$value": "{font.weight.500}"
         },
         "lineHeight": {
           "$type": "number",
@@ -576,7 +556,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.regular}"
+          "$value": "{font.weight.400}"
         },
         "lineHeight": {
           "$type": "number",
@@ -596,7 +576,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.600}"
         },
         "lineHeight": {
           "$type": "number",
@@ -614,7 +594,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.medium}"
+          "$value": "{font.weight.500}"
         },
         "lineHeight": {
           "$type": "number",
@@ -632,7 +612,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.regular}"
+          "$value": "{font.weight.400}"
         },
         "lineHeight": {
           "$type": "number",
@@ -652,7 +632,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.extraBold}"
+          "$value": "{font.weight.800}"
         },
         "lineHeight": {
           "$type": "number",
@@ -670,7 +650,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.600}"
         },
         "lineHeight": {
           "$type": "number",
@@ -688,7 +668,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.medium}"
+          "$value": "{font.weight.500}"
         },
         "lineHeight": {
           "$type": "number",
@@ -706,7 +686,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.regular}"
+          "$value": "{font.weight.400}"
         },
         "lineHeight": {
           "$type": "number",
@@ -726,7 +706,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.600}"
         },
         "lineHeight": {
           "$type": "number",
@@ -744,7 +724,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.medium}"
+          "$value": "{font.weight.500}"
         },
         "lineHeight": {
           "$type": "number",
@@ -762,7 +742,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.regular}"
+          "$value": "{font.weight.400}"
         },
         "lineHeight": {
           "$type": "number",
@@ -783,7 +763,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.bold}"
+            "$value": "{font.weight.600}"
           },
           "lineHeight": {
             "$type": "number",
@@ -801,7 +781,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.medium}"
+            "$value": "{font.weight.500}"
           },
           "lineHeight": {
             "$type": "number",
@@ -819,7 +799,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.regular}"
+            "$value": "{font.weight.400}"
           },
           "lineHeight": {
             "$type": "number",
@@ -839,7 +819,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.bold}"
+            "$value": "{font.weight.600}"
           },
           "lineHeight": {
             "$type": "number",
@@ -857,7 +837,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.medium}"
+            "$value": "{font.weight.500}"
           },
           "lineHeight": {
             "$type": "number",
@@ -875,7 +855,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.regular}"
+            "$value": "{font.weight.400}"
           },
           "lineHeight": {
             "$type": "number",
@@ -897,7 +877,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.bold}"
+            "$value": "{font.weight.600}"
           },
           "lineHeight": {
             "$type": "number",
@@ -915,7 +895,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.medium}"
+            "$value": "{font.weight.500}"
           },
           "lineHeight": {
             "$type": "number",
@@ -933,7 +913,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.regular}"
+            "$value": "{font.weight.400}"
           },
           "lineHeight": {
             "$type": "number",
@@ -953,7 +933,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.bold}"
+            "$value": "{font.weight.600}"
           },
           "lineHeight": {
             "$type": "number",
@@ -971,7 +951,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.medium}"
+            "$value": "{font.weight.500}"
           },
           "lineHeight": {
             "$type": "number",
@@ -989,7 +969,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.regular}"
+            "$value": "{font.weight.400}"
           },
           "lineHeight": {
             "$type": "number",
@@ -1011,7 +991,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.bold}"
+            "$value": "{font.weight.600}"
           },
           "lineHeight": {
             "$type": "number",
@@ -1029,7 +1009,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.medium}"
+            "$value": "{font.weight.500}"
           },
           "lineHeight": {
             "$type": "number",
@@ -1047,7 +1027,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.regular}"
+            "$value": "{font.weight.400}"
           },
           "lineHeight": {
             "$type": "number",
@@ -1067,7 +1047,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.bold}"
+            "$value": "{font.weight.600}"
           },
           "lineHeight": {
             "$type": "number",
@@ -1085,7 +1065,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.medium}"
+            "$value": "{font.weight.500}"
           },
           "lineHeight": {
             "$type": "number",
@@ -1103,7 +1083,7 @@
           },
           "weight": {
             "$type": "number",
-            "$value": "{font.weight.regular}"
+            "$value": "{font.weight.400}"
           },
           "lineHeight": {
             "$type": "number",
@@ -1117,58 +1097,116 @@
       }
     },
     "caption12": {
-      "bold": {
-        "family": {
-          "$type": "text",
-          "$value": "{font.family.pretendard}"
+      "normal": {
+        "bold": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.600}"
+          },
+          "lineHeight": {
+            "$type": "number",
+            "$value": "{font.lineHeight.16}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.12}"
+          }
         },
-        "weight": {
-          "$type": "number",
-          "$value": "{font.weight.bold}"
+        "medium": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.500}"
+          },
+          "lineHeight": {
+            "$type": "number",
+            "$value": "{font.lineHeight.16}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.12}"
+          }
         },
-        "lineHeight": {
-          "$type": "number",
-          "$value": "{font.lineHeight.16}"
-        },
-        "size": {
-          "$type": "number",
-          "$value": "{font.size.12}"
+        "regular": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.400}"
+          },
+          "lineHeight": {
+            "$type": "number",
+            "$value": "{font.lineHeight.16}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.12}"
+          }
         }
       },
-      "medium": {
-        "family": {
-          "$type": "text",
-          "$value": "{font.family.pretendard}"
+      "reading": {
+        "bold": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.600}"
+          },
+          "lineHeight": {
+            "$type": "number",
+            "$value": "{font.lineHeight.18}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.12}"
+          }
         },
-        "weight": {
-          "$type": "number",
-          "$value": "{font.weight.medium}"
+        "medium": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.500}"
+          },
+          "lineHeight": {
+            "$type": "number",
+            "$value": "{font.lineHeight.18}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.12}"
+          }
         },
-        "lineHeight": {
-          "$type": "number",
-          "$value": "{font.lineHeight.16}"
-        },
-        "size": {
-          "$type": "number",
-          "$value": "{font.size.12}"
-        }
-      },
-      "regular": {
-        "family": {
-          "$type": "text",
-          "$value": "{font.family.pretendard}"
-        },
-        "weight": {
-          "$type": "number",
-          "$value": "{font.weight.regular}"
-        },
-        "lineHeight": {
-          "$type": "number",
-          "$value": "{font.lineHeight.16}"
-        },
-        "size": {
-          "$type": "number",
-          "$value": "{font.size.12}"
+        "regular": {
+          "family": {
+            "$type": "text",
+            "$value": "{font.family.pretendard}"
+          },
+          "weight": {
+            "$type": "number",
+            "$value": "{font.weight.400}"
+          },
+          "lineHeight": {
+            "$type": "number",
+            "$value": "{font.lineHeight.18}"
+          },
+          "size": {
+            "$type": "number",
+            "$value": "{font.size.12}"
+          }
         }
       }
     },
@@ -1180,7 +1218,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.600}"
         },
         "lineHeight": {
           "$type": "number",
@@ -1198,7 +1236,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.medium}"
+          "$value": "{font.weight.500}"
         },
         "lineHeight": {
           "$type": "number",
@@ -1216,7 +1254,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.regular}"
+          "$value": "{font.weight.400}"
         },
         "lineHeight": {
           "$type": "number",
@@ -1236,7 +1274,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.bold}"
+          "$value": "{font.weight.600}"
         },
         "lineHeight": {
           "$type": "number",
@@ -1254,7 +1292,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.medium}"
+          "$value": "{font.weight.500}"
         },
         "lineHeight": {
           "$type": "number",
@@ -1272,7 +1310,7 @@
         },
         "weight": {
           "$type": "number",
-          "$value": "{font.weight.regular}"
+          "$value": "{font.weight.400}"
         },
         "lineHeight": {
           "$type": "number",

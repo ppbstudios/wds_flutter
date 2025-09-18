@@ -6,8 +6,8 @@ part of '../wds_atomic_font.dart';
 
 class WdsAtomicFontWeight {
   const WdsAtomicFontWeight._();
-  static const FontWeight bold = FontWeight.w600;
-  static const FontWeight extraBold = FontWeight.w800;
-  static const FontWeight medium = FontWeight.w500;
-  static const FontWeight regular = FontWeight.w400;
+  static const FontWeight v400 = FontWeight.w400;
+  static const FontWeight v500 = FontWeight.w500;
+  static const FontWeight v600 = FontWeight.w600;
+  static const FontWeight v800 = FontWeight.w800;
 }

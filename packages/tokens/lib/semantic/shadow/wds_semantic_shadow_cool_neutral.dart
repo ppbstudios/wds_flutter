@@ -8,50 +8,49 @@ class WdsSemanticShadowCoolNeutral {
   const WdsSemanticShadowCoolNeutral._();
   static const List<BoxShadow> emphasize = [
     BoxShadow(
-      offset: Offset(0, WdsAtomicOffsetY.sm),
-      blurRadius: WdsAtomicBlur.lg,
+      offset: Offset(0, WdsAtomicOffsetY.v2),
+      blurRadius: WdsAtomicBlur.v8,
       color: Color(0x1F819BFF),
     ),
     BoxShadow(
-      offset: Offset(0, WdsAtomicOffsetY.xs),
-      blurRadius: WdsAtomicBlur.md,
+      offset: Offset(0, WdsAtomicOffsetY.v1),
+      blurRadius: WdsAtomicBlur.v4,
       color: Color(0x14819BFF),
     ),
-    BoxShadow(blurRadius: WdsAtomicBlur.xs, color: Color(0x14819BFF)),
+    BoxShadow(blurRadius: WdsAtomicBlur.v1, color: Color(0x14819BFF)),
   ];
   static const List<BoxShadow> heavy = [
     BoxShadow(
-      offset: Offset(0, WdsAtomicOffsetY.xxl),
-      blurRadius: WdsAtomicBlur.full,
+      offset: Offset(0, WdsAtomicOffsetY.v16),
+      blurRadius: WdsAtomicBlur.v20,
       color: Color(0x1F819BFF),
     ),
     BoxShadow(
-      offset: Offset(0, WdsAtomicOffsetY.xl),
-      blurRadius: WdsAtomicBlur.xxl,
+      offset: Offset(0, WdsAtomicOffsetY.v8),
+      blurRadius: WdsAtomicBlur.v16,
       color: Color(0x14819BFF),
     ),
-    BoxShadow(blurRadius: WdsAtomicBlur.lg, color: Color(0x14819BFF)),
+    BoxShadow(blurRadius: WdsAtomicBlur.v8, color: Color(0x14819BFF)),
   ];
   static const List<BoxShadow> normal = [
     BoxShadow(
-      offset: Offset(0, WdsAtomicOffsetY.xs),
-      blurRadius: WdsAtomicBlur.sm,
+      offset: Offset(0, WdsAtomicOffsetY.v2),
+      blurRadius: WdsAtomicBlur.v12,
       color: Color(0x1F819BFF),
     ),
-    BoxShadow(blurRadius: WdsAtomicBlur.xs, color: Color(0x14819BFF)),
-    BoxShadow(blurRadius: WdsAtomicBlur.xs, color: Color(0x14819BFF)),
+    BoxShadow(blurRadius: WdsAtomicBlur.v1, color: Color(0x14819BFF)),
   ];
   static const List<BoxShadow> strong = [
     BoxShadow(
-      offset: Offset(0, WdsAtomicOffsetY.lg),
-      blurRadius: WdsAtomicBlur.xl,
+      offset: Offset(0, WdsAtomicOffsetY.v6),
+      blurRadius: WdsAtomicBlur.v12,
       color: Color(0x1F819BFF),
     ),
     BoxShadow(
-      offset: Offset(0, WdsAtomicOffsetY.md),
-      blurRadius: WdsAtomicBlur.lg,
+      offset: Offset(0, WdsAtomicOffsetY.v4),
+      blurRadius: WdsAtomicBlur.v8,
       color: Color(0x14819BFF),
     ),
-    BoxShadow(blurRadius: WdsAtomicBlur.md, color: Color(0x14819BFF)),
+    BoxShadow(blurRadius: WdsAtomicBlur.v4, color: Color(0x14819BFF)),
   ];
 }
