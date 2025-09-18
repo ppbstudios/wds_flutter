@@ -44,6 +44,8 @@ import 'package:wds_widgetbook/src/component/loading_use_case.dart'
     as _wds_widgetbook_src_component_loading_use_case;
 import 'package:wds_widgetbook/src/component/option_use_case.dart'
     as _wds_widgetbook_src_component_option_use_case;
+import 'package:wds_widgetbook/src/component/menu_item_use_case.dart'
+    as _wds_widgetbook_src_component_menu_item_use_case;
 import 'package:wds_widgetbook/src/component/radio_use_case.dart'
     as _wds_widgetbook_src_component_radio_use_case;
 import 'package:wds_widgetbook/src/component/search_field_use_case.dart'
@@ -204,6 +206,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'Option',
           builder: _wds_widgetbook_src_component_option_use_case
               .buildWdsOptionUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'MenuItem',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'MenuItem',
+          builder: _wds_widgetbook_src_component_menu_item_use_case
+              .buildWdsMenuItemUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(

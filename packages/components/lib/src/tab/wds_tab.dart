@@ -9,9 +9,9 @@ enum WdsTextTabVariant {
   featured,
 }
 
-/// WdsTextTabs의 컨트롤러
-class WdsTextTabsController extends ChangeNotifier {
-  WdsTextTabsController({
+/// WdsTextTabs & WdsLineTabs의 컨트롤러
+class WdsTabsController extends ChangeNotifier {
+  WdsTabsController({
     required this.length,
     this.initialIndex = 0,
   })  : assert(length > 0),
@@ -243,7 +243,7 @@ class WdsTextTabs extends StatefulWidget {
   final List<WdsTextTab> tabs;
 
   /// 탭 컨트롤러 (선택사항)
-  final WdsTextTabsController? controller;
+  final WdsTabsController? controller;
 
   /// 탭 선택 시 호출되는 콜백
   final ValueChanged<int>? onTap;
@@ -253,13 +253,13 @@ class WdsTextTabs extends StatefulWidget {
 }
 
 class _WdsTextTabsState extends State<WdsTextTabs> {
-  late WdsTextTabsController _controller;
+  late WdsTabsController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ??
-        WdsTextTabsController(
+        WdsTabsController(
           length: widget.tabs.length,
         );
   }
@@ -269,7 +269,7 @@ class _WdsTextTabsState extends State<WdsTextTabs> {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       _controller = widget.controller ??
-          WdsTextTabsController(
+          WdsTabsController(
             length: widget.tabs.length,
           );
     }
@@ -323,6 +323,29 @@ class _WdsTextTabsState extends State<WdsTextTabs> {
   }
 }
 
+/// WdsLineTabs에서 사용할 개별 탭 데이터 클래스
+class WdsLineTab {
+  const WdsLineTab({
+    required this.title,
+    this.count,
+  });
+
+  /// 탭에 표시할 제목
+  final String title;
+
+  /// 탭에 표시할 카운트 (선택사항)
+  final int? count;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is WdsLineTab && other.title == title && other.count == count;
+  }
+
+  @override
+  int get hashCode => Object.hash(title, count);
+}
+
 /// 균등 너비 + 선택 탭에 언더라인이 표시되는 탭
 class WdsLineTabs extends StatefulWidget {
   const WdsLineTabs({
@@ -330,12 +353,13 @@ class WdsLineTabs extends StatefulWidget {
     this.controller,
     this.onTap,
     super.key,
-  }) : assert(tabs.length == 2 || tabs.length == 3);
+  });
 
-  final List<String> tabs;
+  /// 표시할 탭들의 리스트
+  final List<WdsLineTab> tabs;
 
   /// 탭 컨트롤러 (선택사항)
-  final WdsTextTabsController? controller;
+  final WdsTabsController? controller;
 
   /// 탭 선택 시 호출되는 콜백
   final ValueChanged<int>? onTap;
@@ -345,13 +369,13 @@ class WdsLineTabs extends StatefulWidget {
 }
 
 class _WdsLineTabsState extends State<WdsLineTabs> {
-  late WdsTextTabsController _controller;
+  late WdsTabsController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ??
-        WdsTextTabsController(
+        WdsTabsController(
           length: widget.tabs.length,
         );
   }
@@ -361,7 +385,7 @@ class _WdsLineTabsState extends State<WdsLineTabs> {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       _controller = widget.controller ??
-          WdsTextTabsController(
+          WdsTabsController(
             length: widget.tabs.length,
           );
     }
@@ -387,6 +411,7 @@ class _WdsLineTabsState extends State<WdsLineTabs> {
 
   Expanded _buildItem(int index) {
     final isSelected = index == _controller.index;
+    final tab = widget.tabs[index];
 
     final labelStyle = isSelected
         ? WdsTypography.body15ReadingBold.copyWith(
@@ -395,6 +420,11 @@ class _WdsLineTabsState extends State<WdsLineTabs> {
         : WdsTypography.body15ReadingMedium.copyWith(
             color: WdsColors.textNeutral,
           );
+
+    /// 최종 표시할 텍스트
+    final displayText = tab.count != null
+        ? '${tab.title}(${tab.count!.toFormat()})'
+        : tab.title;
 
     return Expanded(
       child: GestureDetector(
@@ -416,8 +446,8 @@ class _WdsLineTabsState extends State<WdsLineTabs> {
             ),
             Align(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 11, 16, 10),
-                child: Text(widget.tabs[index], style: labelStyle),
+                padding: const EdgeInsets.fromLTRB(0, 11, 0, 10),
+                child: Text(displayText, style: labelStyle),
               ),
             ),
             if (isSelected)

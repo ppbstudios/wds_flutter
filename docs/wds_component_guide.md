@@ -874,10 +874,10 @@ onTap | `ValueChanged<int>?` | 탭 선택 시 호출되는 콜백
 --- | --- | --- | ---
 label.typography | 선택됨 | `WdsTypography.body15ReadingBold` |
 label.color | 선택됨 | `WdsColors.textNormal` |
-label.padding | 선택됨 | `EdgeInsets.fromLTRB(16, 11, 16, 9)` | underline 2px 고려
+label.padding | 선택됨 | `EdgeInsets.fromLTRB(0, 11, 0, 9)` | underline 2px 고려
 label.typography | 선택 안됨 | `WdsTypography.body15ReadingMedium` |
 label.color | 선택 안됨 | `WdsColors.textNeutral` |
-label.padding | 선택 안됨 | `EdgeInsets.fromLTRB(16, 11, 16, 10)` |
+label.padding | 선택 안됨 | `EdgeInsets.fromLTRB(0, 11, 0, 10)` |
 underline | 선택됨 | 높이 2px, 너비 탭 full, color `WdsColors.black` |
 underline | 선택 안됨 | 1px solid `WdsColors.borderAlternative` |
 탭 개수 | - | 2개 또는 3개 |
@@ -2684,3 +2684,68 @@ Option
 - 최대 높이: power 6개, product 5개
 - 스크롤: 최대 높이 초과 시 고정 높이 내 스크롤 영역 생성
 - 유동 높이: 최대 높이 미만 시 wrap 높이만큼 고정 높이 생성
+
+## MenuItem
+
+> 텍스트 기반 선택 요소 정보를 섹션 또는 그룹으로 나눌 수 있는 연속적인 수직 집합체입니다. 대량의 정보를 목록 형태로 깨끗하고 효율적으로 정리할 수 있습니다.
+
+MenuItem은 아래 속성으로 이루어집니다.
+
+속성 | Type | 비고
+--- | --- | --- 
+text | `String` | 메뉴 아이템에 표시될 텍스트 내용
+icon | `bool` | 아이콘 표시 여부 (`true` 시 chevron 아이콘 표시)
+onTap | `VoidCallback?` | 메뉴 아이템이 눌렸을 때 콜백 (선택사항)
+
+### MenuItem - 고정된 속성
+
+모든 MenuItem은 동일한 시각적 속성을 갖습니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+padding | `EdgeInsets.symmetric(horizontal: 16, vertical: 14)` | 고정
+typography | `WdsTypography.body15NormalMedium` | 
+textColor | `WdsColors.textNormal` | enabled 상태
+
+### MenuItem - icon
+
+아이콘이 표시되는 경우의 속성입니다.
+
+속성 | 값 | 비고
+--- | --- | ---
+iconSize | 20x20px | 고정 크기
+iconColor | `WdsColors.neutral300` | 아이콘 색상
+iconSpacing | 16px | 텍스트와 아이콘 사이 간격
+
+### MenuItem - layout
+
+icon 여부에 따라 레이아웃 구조가 달라집니다.
+
+**icon = false**
+```
+DecoratedBox > Padding > (Expanded > Text)
+```
+
+**icon = true**
+```
+DecoratedBox > Padding > Row: (Expanded > Text) + SizedBox(16px) + WdsIcon
+```
+
+### MenuItem - 생성 방법
+
+named constructor로 생성할 수 있습니다.
+
+``` dart
+// 아이콘 없는 메뉴 아이템
+WdsMenuItem.text(
+  text: '텍스트',
+  onTap: () => print('메뉴 선택'),
+)
+
+// 아이콘 있는 메뉴 아이템
+WdsMenuItem.icon(
+  text: '텍스트',
+  onTap: () => print('메뉴 선택'),
+)
+
+```
