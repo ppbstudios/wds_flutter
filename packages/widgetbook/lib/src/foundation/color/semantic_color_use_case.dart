@@ -147,7 +147,7 @@ class _SemanticColorShowcase extends StatelessWidget {
         Text(
           'Neutral',
           textAlign: TextAlign.center,
-          style: WdsTypography.caption12Bold.copyWith(
+          style: WdsTypography.caption12NormalBold.copyWith(
             color: WdsColors.textStrong,
           ),
         ),
@@ -174,7 +174,7 @@ class _SemanticColorShowcase extends StatelessWidget {
         Text(
           'Cool Neutral',
           textAlign: TextAlign.center,
-          style: WdsTypography.caption12Bold.copyWith(
+          style: WdsTypography.caption12NormalBold.copyWith(
             color: WdsColors.textStrong,
           ),
         ),
