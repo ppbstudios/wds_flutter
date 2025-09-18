@@ -19,6 +19,13 @@ Widget buildWdsSquareButtonUseCase(BuildContext context) {
 }
 
 Widget _buildPlaygroundSection(BuildContext context) {
+  final variant = context.knobs.object.dropdown(
+    label: 'variant',
+    options: ['normal', 'step'],
+    initialOption: 'normal',
+    description: '버튼의 variant를 선택해요',
+  );
+
   final isEnabled = context.knobs.boolean(
     label: 'isEnabled',
     initialValue: true,
@@ -31,22 +38,46 @@ Widget _buildPlaygroundSection(BuildContext context) {
     description: '버튼의 텍스트를 정의해요',
   );
 
-  final button = WdsSquareButton(
-    onTap: () => debugPrint('SquareButton pressed'),
-    isEnabled: isEnabled,
-    child: Text(
-      text,
-      style: WdsTypography.caption12Medium,
-    ),
-  );
+  final Widget button;
+
+  final List<String> info;
+
+  if (variant == 'step') {
+    button = WdsSquareButton.step(
+      leadingButton: InkWell(
+        onTap: () => debugPrint('Minus button pressed'),
+        child: WdsIcon.minus.build(
+          color: WdsColors.cta,
+          width: 16,
+          height: 16,
+        ),
+      ),
+      trailingButton: InkWell(
+        onTap: () => debugPrint('Plus button pressed'),
+        child: WdsIcon.plus.build(
+          color: WdsColors.cta,
+          width: 16,
+          height: 16,
+        ),
+      ),
+      isEnabled: isEnabled,
+      child: Text(text),
+    );
+  } else {
+    button = WdsSquareButton.normal(
+      onTap: () => debugPrint('Normal SquareButton pressed'),
+      isEnabled: isEnabled,
+      child: Text(text),
+    );
+  }
+
+  info = [
+    'state: ${isEnabled ? 'enabled' : 'disabled'}',
+    'variant: step',
+  ];
 
   return WidgetbookPlayground(
-    info: [
-      'size: height32 @fixed',
-      'typography: caption12Medium @fixed',
-      'padding: horizontal17, vertical8 @fixed',
-      'state: ${isEnabled ? 'enabled' : 'disabled'}',
-    ],
+    info: info,
     child: button,
   );
 }
@@ -63,13 +94,46 @@ Widget _buildDemonstrationSection(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
           children: [
-            WdsSquareButton(
-              onTap: () => debugPrint('Square enabled'),
+            WdsSquareButton.normal(
+              onTap: () => debugPrint('Normal enabled'),
               child: const Text('텍스트'),
             ),
-            WdsSquareButton(
-              onTap: () => debugPrint('Square disabled'),
+            WdsSquareButton.normal(
+              onTap: () => debugPrint('Normal disabled'),
               isEnabled: false,
+              child: const Text('텍스트'),
+            ),
+          ],
+        ),
+      ),
+      WidgetbookSubsection(
+        title: 'variant',
+        labels: ['normal', 'step'],
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 16,
+          children: [
+            WdsSquareButton.normal(
+              onTap: () => debugPrint('Normal variant'),
+              child: const Text('텍스트'),
+            ),
+            WdsSquareButton.step(
+              leadingButton: InkWell(
+                onTap: () => debugPrint('Step minus'),
+                child: WdsIcon.minus.build(
+                  color: WdsColors.cta,
+                  width: 16,
+                  height: 16,
+                ),
+              ),
+              trailingButton: InkWell(
+                onTap: () => debugPrint('Step plus'),
+                child: WdsIcon.plus.build(
+                  color: WdsColors.cta,
+                  width: 16,
+                  height: 16,
+                ),
+              ),
               child: const Text('텍스트'),
             ),
           ],
