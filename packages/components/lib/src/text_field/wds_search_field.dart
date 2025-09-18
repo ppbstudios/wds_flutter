@@ -120,32 +120,38 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
       padding: const EdgeInsets.symmetric(vertical: 1),
       child: LimitedBox(
         maxHeight: 22,
-        child: TextField(
-          controller: _controller,
-          enabled: widget.enabled,
-          autofocus: widget.autofocus,
-          onChanged: widget.onChanged,
-          onSubmitted: widget.onSubmitted,
-          style: textStyle,
-          cursorColor: WdsColors.textNormal,
-          decoration: InputDecoration(
-            isDense: true,
-            contentPadding: EdgeInsets.zero,
-            hintText: widget.hintText,
-            hintStyle: WdsTypography.body15NormalRegular.copyWith(
-              color: WdsColors.textAlternative,
+        child: TextSelectionTheme(
+          data: TextSelectionThemeData(
+            selectionHandleColor: WdsColors.primary,
+            selectionColor: WdsColors.primary.withAlpha(40),
+          ),
+          child: TextField(
+            controller: _controller,
+            enabled: widget.enabled,
+            autofocus: widget.autofocus,
+            onChanged: widget.onChanged,
+            onSubmitted: widget.onSubmitted,
+            style: textStyle,
+            cursorColor: WdsColors.textNormal,
+            decoration: InputDecoration(
+              isDense: true,
+              contentPadding: EdgeInsets.zero,
+              hintText: widget.hintText,
+              hintStyle: WdsTypography.body15NormalRegular.copyWith(
+                color: WdsColors.textAlternative,
+              ),
+              prefixIcon: icon?.build(
+                color: WdsColors.cta,
+              ),
+              prefixIconConstraints: const BoxConstraints(
+                minWidth: 24,
+                minHeight: 24,
+              ),
+              border: noBorder,
+              enabledBorder: noBorder,
+              focusedBorder: noBorder,
+              disabledBorder: noBorder,
             ),
-            prefixIcon: icon?.build(
-              color: WdsColors.cta,
-            ),
-            prefixIconConstraints: const BoxConstraints(
-              minWidth: 24,
-              minHeight: 24,
-            ),
-            border: noBorder,
-            enabledBorder: noBorder,
-            focusedBorder: noBorder,
-            disabledBorder: noBorder,
           ),
         ),
       ),
