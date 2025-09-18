@@ -19,6 +19,15 @@ Widget buildWdsSearchFieldUseCase(BuildContext context) {
 }
 
 Widget _buildPlaygroundSection(BuildContext context) {
+  final size = context.knobs.object.dropdown(
+    label: 'size',
+    options: [
+      WdsSearchFieldSize.small,
+      WdsSearchFieldSize.medium,
+    ],
+    labelBuilder: (value) => value.name,
+  );
+
   final enabled = context.knobs.boolean(
     label: 'isEnabled',
     initialValue: true,
@@ -31,12 +40,14 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 
   final widget = WdsSearchField(
+    size: size,
     hintText: hint,
     enabled: enabled,
   );
 
   return WidgetbookPlayground(
     info: [
+      'size: ${size.name}',
       'state: ${enabled ? 'enabled' : 'disabled'}',
       'hint: $hint',
     ],
@@ -51,6 +62,29 @@ Widget _buildDemonstrationSection(BuildContext context) {
   return const WidgetbookSection(
     title: 'SearchField',
     children: [
+      WidgetbookSubsection(
+        title: 'size',
+        labels: ['small', 'medium'],
+        content: Wrap(
+          spacing: 16,
+          runSpacing: 16,
+          children: [
+            SizedBox(
+              width: 280,
+              child: WdsSearchField(
+                hintText: '검색어를 입력하세요',
+              ),
+            ),
+            SizedBox(
+              width: 280,
+              child: WdsSearchField(
+                hintText: '검색어를 입력하세요',
+                size: WdsSearchFieldSize.medium,
+              ),
+            ),
+          ],
+        ),
+      ),
       WidgetbookSubsection(
         title: 'state',
         labels: ['enabled', 'disabled'],
