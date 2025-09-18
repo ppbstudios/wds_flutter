@@ -45,6 +45,11 @@ Widget _buildPlaygroundSection(BuildContext context) {
     description: '버튼의 텍스트를 정의해요',
   );
 
+  final isLoading = context.knobs.boolean(
+    label: 'isLoading',
+    description: '버튼의 로딩 상태를 정의해요',
+  );
+
   final styleBySize = <String, TextStyle>{
     'xlarge': WdsTypography.body15NormalBold,
     'large': WdsTypography.body15NormalBold,
@@ -77,6 +82,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     isEnabled: isEnabled,
     variant: variantValue,
     size: sizeValue,
+    isLoading: isLoading,
     child: child,
   );
 
@@ -85,6 +91,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
       'variant: $variant',
       'size: $size',
       'state: ${isEnabled ? 'enabled' : 'disabled'}',
+      'loading: $isLoading',
     ],
     child: button,
   );
@@ -224,6 +231,113 @@ Widget _buildDemonstrationSection(BuildContext context) {
                 ),
                 // Square 는 별도 SquareButton 컴포넌트로 분리됨
               ],
+            ),
+          ],
+        ),
+      ),
+      WidgetbookSubsection(
+        title: 'loading',
+        labels: ['xlarge', 'large', 'medium', 'small', 'tiny'],
+        content: Wrap(
+          runSpacing: 24,
+          spacing: 24,
+          children: [
+            WdsButton(
+              onTap: () => debugPrint('XL pressed'),
+              size: WdsButtonSize.xlarge,
+              isLoading: true,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('L pressed'),
+              size: WdsButtonSize.large,
+              isLoading: true,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('M pressed'),
+              isLoading: true,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('S pressed'),
+              size: WdsButtonSize.small,
+              isLoading: true,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('TY pressed'),
+              size: WdsButtonSize.tiny,
+              isLoading: true,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('XL pressed'),
+              size: WdsButtonSize.xlarge,
+              isLoading: true,
+              variant: WdsButtonVariant.primary,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('L pressed'),
+              size: WdsButtonSize.large,
+              isLoading: true,
+              variant: WdsButtonVariant.primary,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('M pressed'),
+              isLoading: true,
+              variant: WdsButtonVariant.primary,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('S pressed'),
+              size: WdsButtonSize.small,
+              isLoading: true,
+              variant: WdsButtonVariant.primary,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('TY pressed'),
+              size: WdsButtonSize.tiny,
+              isLoading: true,
+              variant: WdsButtonVariant.primary,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('XL pressed'),
+              size: WdsButtonSize.xlarge,
+              isLoading: true,
+              variant: WdsButtonVariant.secondary,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('L pressed'),
+              size: WdsButtonSize.large,
+              isLoading: true,
+              variant: WdsButtonVariant.secondary,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('M pressed'),
+              isLoading: true,
+              variant: WdsButtonVariant.secondary,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('S pressed'),
+              size: WdsButtonSize.small,
+              isLoading: true,
+              variant: WdsButtonVariant.secondary,
+              child: const Text('텍스트'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('TY pressed'),
+              size: WdsButtonSize.tiny,
+              isLoading: true,
+              variant: WdsButtonVariant.secondary,
+              child: const Text('텍스트'),
             ),
           ],
         ),
