@@ -70,22 +70,60 @@ Widget _buildLineTabsDemonstrationSection(BuildContext context) {
     title: 'LineTabs',
     children: [
       WidgetbookSubsection(
-        title: 'variant',
-        labels: const ['length == 2', 'length == 3'],
+        title: 'columns',
+        labels: const ['2', '3', '4'],
         content: Column(
           spacing: 24,
           children: [
             WdsLineTabs(
-              tabs: const ['텍스트', '텍스트'],
-              controller: WdsTextTabsController(length: 2),
+              tabs: const [
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+              ],
+              controller: WdsTabsController(length: 2),
             ),
             WdsLineTabs(
-              tabs: const ['텍스트', '텍스트'],
-              controller: WdsTextTabsController(length: 2, initialIndex: 1),
+              tabs: const [
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+              ],
+              controller: WdsTabsController(length: 3, initialIndex: 1),
             ),
             WdsLineTabs(
-              tabs: const ['텍스트', '텍스트', '텍스트'],
-              controller: WdsTextTabsController(length: 3, initialIndex: 1),
+              tabs: const [
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+              ],
+              controller: WdsTabsController(length: 4, initialIndex: 1),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(height: 24),
+      WidgetbookSubsection(
+        title: 'count',
+        labels: const ['true', 'false'],
+        content: Column(
+          spacing: 24,
+          children: [
+            WdsLineTabs(
+              tabs: const [
+                WdsLineTab(title: '텍스트', count: 10000),
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+              ],
+              controller: WdsTabsController(length: 3, initialIndex: 1),
+            ),
+            WdsLineTabs(
+              tabs: const [
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+                WdsLineTab(title: '텍스트'),
+              ],
+              controller: WdsTabsController(length: 3, initialIndex: 1),
             ),
           ],
         ),
@@ -102,12 +140,12 @@ class _TextTabsPlayground extends StatefulWidget {
 }
 
 class _TextTabsPlaygroundState extends State<_TextTabsPlayground> {
-  late WdsTextTabsController _controller;
+  late WdsTabsController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = WdsTextTabsController(length: 6, initialIndex: 1);
+    _controller = WdsTabsController(length: 6, initialIndex: 1);
   }
 
   @override
@@ -122,7 +160,7 @@ class _TextTabsPlaygroundState extends State<_TextTabsPlayground> {
     );
 
     if (_controller.length != count) {
-      _controller = WdsTextTabsController(length: count, initialIndex: 1);
+      _controller = WdsTabsController(length: count, initialIndex: 1);
     }
 
     final List<String> tabs = List.generate(count, (i) => '추천 ${i + 1}');
@@ -167,29 +205,37 @@ class _LineTabsPlayground extends StatefulWidget {
 }
 
 class _LineTabsPlaygroundState extends State<_LineTabsPlayground> {
-  late WdsTextTabsController _controller;
+  late WdsTabsController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = WdsTextTabsController(length: 2);
+    _controller = WdsTabsController(length: 2);
   }
 
   @override
   Widget build(BuildContext context) {
     final int count = context.knobs.object.dropdown<int>(
       label: '두번째 Playground: LineTabs',
-      description: '탭의 개수를 조절할 수 있어요.',
+      description: '탭의 개수를 조절할 수 있어요.\n\u2022 count: 1번째',
       options: const [2, 3],
       initialOption: 2,
     );
 
     if (_controller.length != count) {
-      _controller = WdsTextTabsController(length: count);
+      _controller = WdsTabsController(length: count);
     }
 
-    final List<String> tabs =
-        count == 2 ? const ['첫번째', '두번째'] : const ['첫번째', '두번째', '세번째'];
+    final List<WdsLineTab> tabs = count == 2
+        ? [
+            const WdsLineTab(title: '전체', count: 1234),
+            const WdsLineTab(title: '진행중'),
+          ]
+        : [
+            const WdsLineTab(title: '전체', count: 10000),
+            const WdsLineTab(title: '진행중'),
+            const WdsLineTab(title: '완료'),
+          ];
 
     return WidgetbookPlayground(
       info: [

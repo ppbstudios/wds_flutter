@@ -49,6 +49,30 @@ class WdsTag extends StatelessWidget {
         backgroundColor = WdsColors.secondary,
         hasRadius = false;
 
+  const WdsTag.$soldOut({super.key})
+      : label = '일시품절',
+        color = WdsColors.white,
+        backgroundColor = WdsColors.coolNeutral300,
+        hasRadius = true;
+
+  const WdsTag.$myPower({super.key})
+      : label = '내 도수',
+        color = WdsColors.textNeutral,
+        backgroundColor = WdsColors.neutral50,
+        hasRadius = true;
+
+  const WdsTag.$barodrim({super.key})
+      : label = '바로드림',
+        color = WdsColors.statusPositive,
+        backgroundColor = WdsColors.neutral50,
+        hasRadius = true;
+
+  const WdsTag.$upto2days({super.key})
+      : label = '1~2일예상',
+        color = WdsColors.textNeutral,
+        backgroundColor = WdsColors.neutral50,
+        hasRadius = true;
+
   static const double fixedHeight = 18;
 
   static const EdgeInsets fixedPadding = EdgeInsets.symmetric(

@@ -115,3 +115,6 @@ class Thumbnail {}
 
 /// 컴포넌트 path 관리를 위한 클래스
 class Tag {}
+
+/// 컴포넌트 path 관리를 위한 클래스
+class Option {}

@@ -11,7 +11,8 @@ import 'package:flutter/material.dart'
         UnderlineInputBorder,
         TextSelectionTheme,
         TextSelectionThemeData,
-        CircularProgressIndicator;
+        CircularProgressIndicator,
+        Colors;
 import 'package:flutter/widgets.dart';
 import 'package:wds_foundation/wds_foundation.dart';
 
@@ -30,7 +31,9 @@ part 'src/heading/wds_heading.dart';
 part 'src/icon/wds_icon_button.dart';
 part 'src/item_card/wds_item_card.dart';
 part 'src/loading/wds_loading.dart';
+part 'src/menu_item/wds_menu_item.dart';
 part 'src/navigation/wds_bottom_navigation.dart';
+part 'src/option/wds_option.dart';
 part 'src/pagination/wds_count_pagination.dart';
 part 'src/pagination/wds_dot_pagination.dart';
 part 'src/radio/wds_radio.dart';
