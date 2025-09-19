@@ -5,7 +5,7 @@
 # 개요
 
 윙크(WINC) 디자인 시스템(WDS)에서 컴포넌트를 어떻게 정리하는 지 정의한 문서입니다.
-Foundation 관련 생성 규칙은 @design_token_generation_guide.md 에서 확인할 수 있고, 모든 컴포넌트는 생성된 디자인토큰을 기반으로 합니다. 단, 디자인 토큰으로 정의되어 있지 않은 내용은 enum 혹은 static class 변수들로 관리합니다.
+Foundation 관련 생성 규칙은 @design_token_generation_guide.medium 에서 확인할 수 있고, 모든 컴포넌트는 생성된 디자인토큰을 기반으로 합니다. 단, 디자인 토큰으로 정의되어 있지 않은 내용은 enum 혹은 static class 변수들로 관리합니다.
 
 # WDS 컴포넌트 규칙
 
@@ -256,7 +256,7 @@ Row(
 속성 | 값
 --- | ---
 size | `Size(double.infinity, 32)`
-radius | `WdsRadius.xs`
+radius | `WdsRadius.xsmall`
 borderSide | `BorderSide(color: WdsColors.borderAlternative)`
 typography | `WdsTypography.caption12Medium`
 
@@ -292,14 +292,14 @@ named constructor로 생성할 수 있습니다.
 // 단일 버튼
 WdsSquareButton.normal(
   text: '텍스트',
-  onTap: () => print('버튼 선택'),
+  onTap: () => debugPrint('버튼 선택'),
 )
 
 // 3개 연결된 버튼
 WdsSquareButton.step(
   text: '텍스트',
-  onMinusTap: () => print('-'),
-  onPlusTap: () => print('+'),
+  onMinusTap: () => debugPrint('-'),
+  onPlusTap: () => debugPrint('+'),
 )
 ```
 
@@ -1181,7 +1181,7 @@ true | 체크 상태, 체크 마크 표기 및 배경 채움
 
 - `true`: `border = null`
 - `false`: `border = BorderSide(color: WdsColors.borderNeutral, width: 1.5)`
-- `borderRadius`: `WdsRadius.xs` (size와 무관하게 동일)
+- `borderRadius`: `WdsRadius.xsmall` (size와 무관하게 동일)
 
 ### Checkbox - check mark
 
@@ -1204,7 +1204,7 @@ true | 체크 상태, 체크 마크 표기 및 배경 채움
 ```
 SizedBox(spec)
   > Padding(margin)
-    > ClipRRect(borderRadius: WdsRadius.xs)
+    > ClipRRect(borderRadius: WdsRadius.xsmall)
       > CustomPaint(size: 20x20)
 ```
 
@@ -2187,7 +2187,7 @@ Thumbnail은 아래 속성으로 이루어집니다.
 속성 | Type | 비고
 --- | --- | --- 
 imagePath | `String` | 이미지 경로 (URL 또는 에셋 경로)
-size | `WdsThumbnailSize` | 썸네일 크기 (xxs, xs, sm, md, lg, xl, xxl)
+size | `WdsThumbnailSize` | 썸네일 크기 (xxsmall, xsmall, sm, medium, large, xlarge, xxlarge)
 hasRadius | `bool` | 모서리 둥글기 적용 여부
 
 ### Thumbnail - 자동 감지
@@ -2203,24 +2203,24 @@ px 단위로 이루어집니다. 모든 크기는 정사각형이며, xl만 179x
 
 속성 | size | 비고
 --- | --- | ---
-xxs | Size(64, 64) | 가장 작은 크기
-xs | Size(74, 74) | 작은 크기
+xxsmall | Size(64, 64) | 가장 작은 크기
+xsmall | Size(74, 74) | 작은 크기
 sm | Size(90, 90) | 작은-중간 크기
-md | Size(106, 106) | 중간 크기
-lg | Size(140, 140) | 큰 크기
-xl | Size(179, 250) | 가로형 직사각형
-xxl | Size(200, 200) | 가장 큰 정사각형
+medium | Size(106, 106) | 중간 크기
+large | Size(140, 140) | 큰 크기
+xlarge | Size(179, 250) | 가로형 직사각형
+xxlarge | Size(200, 200) | 가장 큰 정사각형
 
 e.g. enum
 ``` dart
 enum WdsThumbnailSize {
-  xxs(size: Size(64, 64)),
-  xs(size: Size(74, 74)),
+  xxsmall(size: Size(64, 64)),
+  xsmall(size: Size(74, 74)),
   sm(size: Size(90, 90)),
-  md(size: Size(106, 106)),
-  lg(size: Size(140, 140)),
-  xl(size: Size(179, 250)),
-  xxl(size: Size(200, 200));
+  medium(size: Size(106, 106)),
+  large(size: Size(140, 140)),
+  xlarge(size: Size(179, 250)),
+  xxlarge(size: Size(200, 200));
 
   const WdsThumbnailSize({
     required this.size,
@@ -2236,7 +2236,7 @@ enum WdsThumbnailSize {
 
 속성 | 값 | 비고
 --- | --- | ---
-true | `BorderRadius.all(Radius.circular(WdsRadius.xs))` | 둥근 모서리 적용
+true | `BorderRadius.all(Radius.circular(WdsRadius.xsmall))` | 둥근 모서리 적용
 false | `null` | 직각 모서리
 
 ### Thumbnail - 네트워크 이미지 처리
@@ -2262,14 +2262,14 @@ placeholder | `WdsColors.coolNeutral100` 배경의 회색 사각형 | 고정, �
 // 네트워크 이미지 (자동 감지)
 WdsThumbnail(
   imagePath: 'https://example.com/image.jpg',
-  size: WdsThumbnailSize.md,
+  size: WdsThumbnailSize.medium,
   hasRadius: true,
 )
 
 // 에셋 이미지 (자동 감지)
 WdsThumbnail(
   imagePath: 'assets/images/thumbnail.png',
-  size: WdsThumbnailSize.lg,
+  size: WdsThumbnailSize.large,
   hasRadius: false,
 )
 ```
@@ -2296,7 +2296,7 @@ WdsThumbnail(
 
 **공통요소**
 - padding: horizontal 4px
-- borderRadius: `WdsRadius.xs` (4px)
+- borderRadius: `WdsRadius.xsmall` (4px)
 - typography: `WdsTypography.caption10Medium
 - height: 18px, 고정 높이
 
@@ -2327,7 +2327,7 @@ ItemCard는 아래 속성으로 이루어집니다.
 --- | --- | --- 
 onLiked | `VoidCallback` | 좋아요 버튼이 눌렸을 때 콜백
 thumbnailImageUrl | `String` | 썸네일 이미지 URL
-brandName | `String` | 브랜드명 (xs 크기에서는 표시되지 않음)
+brandName | `String` | 브랜드명 (xsmall 크기에서는 표시되지 않음)
 productName | `String` | 상품명
 lensType | `String` | 렌즈 유형
 diameter | `String` | 직경
@@ -2341,22 +2341,22 @@ tags | `List<WdsTag>` | 태그 목록 (기본값: 빈 리스트)
 
 ### ItemCard - size
 
-px 단위로 이루어집니다. 크기에 따라 레이아웃이 세로형(xl, lg)과 가로형(md, xs)으로 구분됩니다.
+px 단위로 이루어집니다. 크기에 따라 레이아웃이 세로형(xlarge, large)과 가로형(medium, xsmall)으로 구분됩니다.
 
 속성 | layout | thumbnail size | 비고
 --- | --- | --- | ---
-xl | 세로형 | WdsThumbnailSize.xl | 가장 큰 크기, 세로 배치
-lg | 세로형 | WdsThumbnailSize.lg | 큰 크기, 세로 배치
-md | 가로형 | WdsThumbnailSize.md | 중간 크기, 가로 배치
-xs | 가로형 | WdsThumbnailSize.xs | 가장 작은 크기, 가로 배치
+xlarge | 세로형 | WdsThumbnailSize.xlarge | 가장 큰 크기, 세로 배치
+large | 세로형 | WdsThumbnailSize.large | 큰 크기, 세로 배치
+medium | 가로형 | WdsThumbnailSize.medium | 중간 크기, 가로 배치
+xsmall | 가로형 | WdsThumbnailSize.xsmall | 가장 작은 크기, 가로 배치
 
 e.g. enum
 ``` dart
 enum WdsItemCardSize {
-  xl,
-  lg,
-  md,
-  xs;
+  xlarge,
+  large,
+  medium,
+  xsmall;
 }
 ```
 
@@ -2364,15 +2364,15 @@ enum WdsItemCardSize {
 
 크기에 따라 두 가지 레이아웃으로 구분됩니다.
 
-**세로형 레이아웃 (xl, lg)**
+**세로형 레이아웃 (xlarge, large)**
 - 썸네일이 상단에 위치
 - 상품 정보가 썸네일 하단에 세로로 배치
 - 브랜드명, 상품명, 렌즈 정보, 가격, 태그, 평점/좋아요 정보 순서로 배치
 
-**가로형 레이아웃 (md, xs)**
+**가로형 레이아웃 (medium, xsmall)**
 - 썸네일이 좌측에 위치
 - 상품 정보가 썸네일 우측에 세로로 배치
-- md: 브랜드명 포함, xs: 브랜드명 제외
+- medium: 브랜드명 포함, xsmall: 브랜드명 제외
 
 ### ItemCard - thumbnail
 
@@ -2380,34 +2380,34 @@ enum WdsItemCardSize {
 
 속성 | thumbnail size | hasRadius | 비고
 --- | --- | --- | ---
-xl | WdsThumbnailSize.xl | false | 둥근 모서리 없음
-lg | WdsThumbnailSize.lg | true | 둥근 모서리 적용
-md | WdsThumbnailSize.md | true | 둥근 모서리 적용
-xs | WdsThumbnailSize.xs | true | 둥근 모서리 적용
+xlarge | WdsThumbnailSize.xlarge | false | 둥근 모서리 없음
+large | WdsThumbnailSize.large | true | 둥근 모서리 적용
+medium | WdsThumbnailSize.medium | true | 둥근 모서리 적용
+xsmall | WdsThumbnailSize.xsmall | true | 둥근 모서리 적용
 
 ### ItemCard - typography
 
 크기별로 다른 타이포그래피를 사용합니다.
 
 **브랜드명**
-- xl/lg: `WdsTypography.body13NormalRegular`, `WdsColors.textNeutral`
-- md: `WdsTypography.caption12Regular`, `WdsColors.textNeutral`
-- xs: 표시되지 않음
+- xlarge/large: `WdsTypography.body13NormalRegular`, `WdsColors.textNeutral`
+- medium: `WdsTypography.caption12Regular`, `WdsColors.textNeutral`
+- xsmall: 표시되지 않음
 
 **상품명**
-- xl: `WdsTypography.body13NormalRegular`, `WdsColors.textNormal`, 최대 2줄
-- lg: `WdsTypography.body13NormalRegular`, `WdsColors.textNormal`, 최대 1줄
-- md: `WdsTypography.body13NormalRegular`, `WdsColors.textNormal`, 최대 1줄
-- xs: `WdsTypography.caption12Medium`, `WdsColors.textNormal`, 최대 1줄
+- xlarge: `WdsTypography.body13NormalRegular`, `WdsColors.textNormal`, 최대 2줄
+- large: `WdsTypography.body13NormalRegular`, `WdsColors.textNormal`, 최대 1줄
+- medium: `WdsTypography.body13NormalRegular`, `WdsColors.textNormal`, 최대 1줄
+- xsmall: `WdsTypography.caption12Medium`, `WdsColors.textNormal`, 최대 1줄
 
 **렌즈 정보**
-- xl/lg/md: `WdsTypography.caption12Regular`, `WdsColors.textAlternative`
-- xs: `WdsTypography.caption11Regular`, `WdsColors.textAlternative`
+- xlarge/large/medium: `WdsTypography.caption12Regular`, `WdsColors.textAlternative`
+- xsmall: `WdsTypography.caption11Regular`, `WdsColors.textAlternative`
 
 **가격 정보**
-- xl/lg: `WdsTypography.body15NormalBold`, `WdsColors.textNormal`
-- md: `WdsTypography.body13NormalBold`, `WdsColors.textNormal`
-- xs: `WdsTypography.caption12Bold`, `WdsColors.textNormal`
+- xlarge/large: `WdsTypography.body15NormalBold`, `WdsColors.textNormal`
+- medium: `WdsTypography.body13NormalBold`, `WdsColors.textNormal`
+- xsmall: `WdsTypography.caption12Bold`, `WdsColors.textNormal`
 
 ### ItemCard - price display
 
@@ -2417,8 +2417,8 @@ xs | WdsThumbnailSize.xs | true | 둥근 모서리 적용
 - 판매가만 표시
 
 **할인이 있는 경우**
-- xl: 정가(취소선) + 할인율 + 판매가를 세로로 배치
-- lg/md/xs: 할인율 + 판매가를 가로로 배치
+- xlarge: 정가(취소선) + 할인율 + 판매가를 세로로 배치
+- large/medium/xsmall: 할인율 + 판매가를 가로로 배치
 
 할인율은 `WdsColors.secondary` 색상으로 강조 표시됩니다.
 
@@ -2450,7 +2450,7 @@ position | 가격 정보 하단 | 세로형 레이아웃에서만 표시
 
 좋아요 버튼의 위치와 형태가 크기에 따라 다릅니다.
 
-속성 | xl/lg | md | xs
+속성 | xlarge/large | medium | xsmall
 --- | --- | --- | ---
 position | 우측 상단 | 우측 하단 | 우측 하단
 layout | 아이콘만 | 아이콘만 | 아이콘 + 개수 (세로 배치)
@@ -2462,7 +2462,7 @@ color (inactive) | `WdsColors.neutral200` | `WdsColors.neutral200` | `WdsColors.
 
 크기별로 다른 간격을 사용합니다.
 
-속성 | xl | lg | md | xs
+속성 | xlarge | large | medium | xsmall
 --- | --- | --- | --- | ---
 thumbnail-content | 10px | 10px | 16px | 12px
 element spacing | 4px | 4px | 4px | 2px
@@ -2473,9 +2473,9 @@ horizontal padding | 12px | 0px | 0px | 0px
 named constructor로 생성할 수 있습니다.
 
 ``` dart
-// 세로형 레이아웃 (xl)
-WdsItemCard.xl(
-  onLiked: () => print('좋아요'),
+// 세로형 레이아웃 (xlarge)
+WdsItemCard.xlarge(
+  onLiked: () => debugPrint('좋아요'),
   thumbnailImageUrl: 'https://example.com/image.jpg',
   brandName: '브랜드명',
   productName: '상품명',
@@ -2490,9 +2490,9 @@ WdsItemCard.xl(
   tags: [WdsTag.normal('태그1'), WdsTag.filled('태그2')],
 )
 
-// 가로형 레이아웃 (xs)
-WdsItemCard.xs(
-  onLiked: () => print('좋아요'),
+// 가로형 레이아웃 (xsmall)
+WdsItemCard.xsmall(
+  onLiked: () => debugPrint('좋아요'),
   thumbnailImageUrl: 'https://example.com/image.jpg',
   productName: '상품명',
   lensType: '렌즈유형',
@@ -2543,8 +2543,8 @@ class _WdsItemCardState extends State<WdsItemCard> {
 
 ### Heading - size
 
-- lg
-- md
+- large
+- medium
 
 lg일 때는 `WdsTextButtonVariant.text`와 `WdsTextButtonSize.small` 이 쓰입니다. 그리고 타이틀은 최대 2줄까지 작성 가능해요. `Row`로 감싸게되면 `CrossAxisAlignment.start`로 상단(top)에 맞춰서 정렬합니다.
 
@@ -2672,7 +2672,7 @@ Option은 variant와 isSoldOut 로 조합될 수 있습니다.
   - isSoldOut true일 때: 맨 앞에 `WdsTag.$soldOut` 추가
 - trailing (선택사항)
   - 조건: `isSoldOut`이 true일 때만 표시
-  - Widget: `WdsChip.pill(variant: .outline, size: .xs)`
+  - Widget: `WdsChip.pill(variant: .outline, size: .xsmall)`
   - 간격: label + tags와 10px
   - 높이: `WdsChip` 속성 존중 (고정 20px 아님)
 
@@ -2783,13 +2783,13 @@ named constructor로 생성할 수 있습니다.
 // 아이콘 없는 메뉴 아이템
 WdsMenuItem.text(
   text: '텍스트',
-  onTap: () => print('메뉴 선택'),
+  onTap: () => debugPrint('메뉴 선택'),
 )
 
 // 아이콘 있는 메뉴 아이템
 WdsMenuItem.icon(
   text: '텍스트',
-  onTap: () => print('메뉴 선택'),
+  onTap: () => debugPrint('메뉴 선택'),
 )
 
 ```
