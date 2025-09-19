@@ -346,7 +346,9 @@ class _WdsTextFieldState extends State<WdsTextField> {
                 if (showClear)
                   GestureDetector(
                     onTap: _clear,
-                    child: WdsIcon.circleClose.build(),
+                    child: WdsIcon.circleCloseFilled.build(
+                      color: WdsColors.neutral200,
+                    ),
                   ),
               ],
             ),
