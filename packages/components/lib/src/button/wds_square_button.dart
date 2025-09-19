@@ -86,7 +86,7 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
     const double height = 32;
 
     final BorderRadius borderRadius =
-        const BorderRadius.all(Radius.circular(WdsRadius.xs));
+        const BorderRadius.all(Radius.circular(WdsRadius.radius4));
 
     // variant에 따라 content만 다르게 생성
     final Widget content = _buildContent();

@@ -2,11 +2,13 @@ part of '../../wds_components.dart';
 
 class WdsBottomNavigationItem {
   const WdsBottomNavigationItem({
-    required this.icon,
+    required this.activeIcon,
+    required this.inactiveIcon,
     required this.label,
   });
 
-  final WdsNavigationIcon icon;
+  final WdsIcon activeIcon;
+  final WdsIcon inactiveIcon;
   final String label;
 }
 
@@ -84,6 +86,8 @@ class _BottomNavigationItemWidget extends StatelessWidget {
       color: WdsColors.cta,
     );
 
+    final icon = isActive ? item.activeIcon : item.inactiveIcon;
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -94,7 +98,7 @@ class _BottomNavigationItemWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             spacing: 2,
             children: [
-              item.icon.build(isActive: isActive),
+              icon.build(),
               Text(
                 item.label,
                 style: isActive ? activeTextStyle : inactiveTextStyle,

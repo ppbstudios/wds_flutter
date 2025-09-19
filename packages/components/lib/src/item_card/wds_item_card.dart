@@ -1,21 +1,21 @@
 part of '../../wds_components.dart';
 
 enum WdsItemCardSize {
-  xl(
+  xlarge(
     cardHeight: 340,
-    thumbnailSize: WdsThumbnailSize.xl,
+    thumbnailSize: WdsThumbnailSize.xlarge,
   ),
-  lg(
+  large(
     cardHeight: 287,
-    thumbnailSize: WdsThumbnailSize.lg,
+    thumbnailSize: WdsThumbnailSize.large,
   ),
-  md(
+  medium(
     cardHeight: 328,
-    thumbnailSize: WdsThumbnailSize.md,
+    thumbnailSize: WdsThumbnailSize.medium,
   ),
-  xs(
+  xsmall(
     cardHeight: 328,
-    thumbnailSize: WdsThumbnailSize.xs,
+    thumbnailSize: WdsThumbnailSize.xsmall,
   ),
   ;
 
@@ -28,17 +28,19 @@ enum WdsItemCardSize {
   final WdsThumbnailSize thumbnailSize;
 
   Size? get lensPatternSize => switch (this) {
-        WdsItemCardSize.xl || WdsItemCardSize.lg => const Size.square(40),
-        WdsItemCardSize.md => const Size.square(30),
-        WdsItemCardSize.xs => null,
+        WdsItemCardSize.xlarge ||
+        WdsItemCardSize.large =>
+          const Size.square(40),
+        WdsItemCardSize.medium => const Size.square(30),
+        WdsItemCardSize.xsmall => null,
       };
 }
 
 class WdsItemCard extends StatefulWidget {
-  /// [WdsThumbnailSize.xl]과 함께 세로로 구성되는 상품 정보
+  /// [WdsThumbnailSize.xlarge]과 함께 세로로 구성되는 상품 정보
   ///
   /// '세트상품'일 때만 상품명 2줄 처리
-  const WdsItemCard.xl({
+  const WdsItemCard.xlarge({
     required this.onLiked,
     required this.thumbnailImageUrl,
     required this.brandName,
@@ -59,15 +61,15 @@ class WdsItemCard extends StatefulWidget {
     this.rightThumbnailTag,
     this.scaleFactor = 1,
     super.key,
-  })  : size = WdsItemCardSize.xl,
+  })  : size = WdsItemCardSize.xlarge,
         indexTag = null,
         assert(
           productNameMaxLines == 1,
           '세트상품일 때만 상품명 2줄 처리하고 나머지는 1줄 처리해야 합니다.',
         );
 
-  /// [WdsThumbnailSize.lg]와 함께 세로로 구성되는 상품 정보
-  const WdsItemCard.lg({
+  /// [WdsThumbnailSize.large]와 함께 세로로 구성되는 상품 정보
+  const WdsItemCard.large({
     required this.onLiked,
     required this.thumbnailImageUrl,
     required this.brandName,
@@ -89,10 +91,10 @@ class WdsItemCard extends StatefulWidget {
     this.indexTag,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsItemCardSize.lg;
+  }) : size = WdsItemCardSize.large;
 
-  /// [WdsThumbnailSize.md]와 함께 가로로 구성되는 상품 정보
-  const WdsItemCard.md({
+  /// [WdsThumbnailSize.medium]와 함께 가로로 구성되는 상품 정보
+  const WdsItemCard.medium({
     required this.onLiked,
     required this.thumbnailImageUrl,
     required this.brandName,
@@ -110,14 +112,14 @@ class WdsItemCard extends StatefulWidget {
     this.isSoldOut = false,
     this.scaleFactor = 1,
     super.key,
-  })  : size = WdsItemCardSize.md,
+  })  : size = WdsItemCardSize.medium,
         productNameMaxLines = 1,
         indexTag = null,
         leftThumbnailTags = const [],
         rightThumbnailTag = null;
 
-  /// [WdsThumbnailSize.xs]와 함께 가로로 구성되는 상품 정보
-  const WdsItemCard.xs({
+  /// [WdsThumbnailSize.xsmall]와 함께 가로로 구성되는 상품 정보
+  const WdsItemCard.xsmall({
     required this.onLiked,
     required this.thumbnailImageUrl,
     required this.productName,
@@ -134,7 +136,7 @@ class WdsItemCard extends StatefulWidget {
     this.productNameMaxLines = 1,
     this.scaleFactor = 1,
     super.key,
-  })  : size = WdsItemCardSize.xs,
+  })  : size = WdsItemCardSize.xsmall,
         brandName = '',
         lensPatternImageUrl = null,
         indexTag = null,
@@ -200,21 +202,21 @@ class _WdsItemCardState extends State<WdsItemCard> {
   @override
   Widget build(BuildContext context) {
     final thumbnail = switch (widget.size) {
-      WdsItemCardSize.xl => WdsThumbnail.xl(
+      WdsItemCardSize.xlarge => WdsThumbnail.xlarge(
           imagePath: widget.thumbnailImageUrl,
           scaleFactor: widget.scaleFactor,
         ),
-      WdsItemCardSize.lg => WdsThumbnail.lg(
-          imagePath: widget.thumbnailImageUrl,
-          hasRadius: true,
-          scaleFactor: widget.scaleFactor,
-        ),
-      WdsItemCardSize.md => WdsThumbnail.md(
+      WdsItemCardSize.large => WdsThumbnail.large(
           imagePath: widget.thumbnailImageUrl,
           hasRadius: true,
           scaleFactor: widget.scaleFactor,
         ),
-      WdsItemCardSize.xs => WdsThumbnail.xs(
+      WdsItemCardSize.medium => WdsThumbnail.medium(
+          imagePath: widget.thumbnailImageUrl,
+          hasRadius: true,
+          scaleFactor: widget.scaleFactor,
+        ),
+      WdsItemCardSize.xsmall => WdsThumbnail.xsmall(
           imagePath: widget.thumbnailImageUrl,
           hasRadius: true,
           scaleFactor: widget.scaleFactor,
@@ -226,14 +228,14 @@ class _WdsItemCardState extends State<WdsItemCard> {
       children: [
         thumbnail,
 
-        /// LEFT TOP, [WdsItemCardSize.lg] 만 사용
-        if (widget.size == WdsItemCardSize.lg && widget.indexTag != null)
+        /// LEFT TOP, [WdsItemCardSize.large] 만 사용
+        if (widget.size == WdsItemCardSize.large && widget.indexTag != null)
           Positioned(
             left: 0,
             top: 0,
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(WdsRadius.xs),
+                topLeft: Radius.circular(WdsRadius.radius4),
               ),
               child: SizedBox.square(
                 dimension: 18,
@@ -292,8 +294,8 @@ class _WdsItemCardState extends State<WdsItemCard> {
       ],
     );
 
-    if (widget.size == WdsItemCardSize.xl ||
-        widget.size == WdsItemCardSize.lg) {
+    if (widget.size == WdsItemCardSize.xlarge ||
+        widget.size == WdsItemCardSize.large) {
       return _VerticalLayout(
         thumbnail: thumbnailImageWithLensPattern,
         brandName: widget.brandName,
@@ -457,7 +459,7 @@ class _VerticalLayout extends StatelessWidget {
         thumbnail,
 
         /// 상품 정보
-        if (size == WdsItemCardSize.xl)
+        if (size == WdsItemCardSize.xlarge)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: information,
@@ -504,8 +506,8 @@ class _HorizontalLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final verticalSpacing = size == WdsItemCardSize.md ? 4.0 : 2.0;
-    final horizontalSpacing = size == WdsItemCardSize.md ? 16.0 : 12.0;
+    final verticalSpacing = size == WdsItemCardSize.medium ? 4.0 : 2.0;
+    final horizontalSpacing = size == WdsItemCardSize.medium ? 16.0 : 12.0;
 
     return SizedBox(
       height: size.thumbnailSize.size.height,
@@ -520,7 +522,7 @@ class _HorizontalLayout extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 /// 브랜드명
-                if (size == WdsItemCardSize.md) ...[
+                if (size == WdsItemCardSize.medium) ...[
                   Text(
                     brandName,
                     style: WdsTypography.caption12NormalRegular.copyWith(
@@ -576,8 +578,8 @@ class _HorizontalLayout extends StatelessWidget {
           __LikeButton(
             onTap: onLiked,
             hasLiked: hasLiked,
-            isVertical: size == WdsItemCardSize.xs,
-            likeCount: size == WdsItemCardSize.xs ? likeCount : null,
+            isVertical: size == WdsItemCardSize.xsmall,
+            likeCount: size == WdsItemCardSize.xsmall ? likeCount : null,
           ),
         ],
       ),
@@ -601,7 +603,7 @@ class __LensInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = switch (size) {
-      WdsItemCardSize.xs => WdsTypography.caption11Regular,
+      WdsItemCardSize.xsmall => WdsTypography.caption11Regular,
       _ => WdsTypography.caption12NormalRegular,
     }
         .copyWith(
@@ -665,11 +667,11 @@ class __PriceInfo extends StatelessWidget {
     final finalSalePrice = Text(
       salePrice.toKRWFormat(),
       style: switch (size) {
-        WdsItemCardSize.xl ||
-        WdsItemCardSize.lg =>
+        WdsItemCardSize.xlarge ||
+        WdsItemCardSize.large =>
           WdsTypography.body15NormalBold,
-        WdsItemCardSize.md => WdsTypography.body13NormalBold,
-        WdsItemCardSize.xs => WdsTypography.caption12NormalBold
+        WdsItemCardSize.medium => WdsTypography.body13NormalBold,
+        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold
       }
           .copyWith(color: WdsColors.textNormal),
     );
@@ -681,11 +683,11 @@ class __PriceInfo extends StatelessWidget {
     final discountRate = Text(
       '$rate%',
       style: switch (size) {
-        WdsItemCardSize.xl ||
-        WdsItemCardSize.lg =>
+        WdsItemCardSize.xlarge ||
+        WdsItemCardSize.large =>
           WdsTypography.body15NormalBold,
-        WdsItemCardSize.md => WdsTypography.body13NormalBold,
-        WdsItemCardSize.xs => WdsTypography.caption12NormalBold
+        WdsItemCardSize.medium => WdsTypography.body13NormalBold,
+        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold
       }
           .copyWith(color: WdsColors.secondary),
     );
@@ -699,7 +701,7 @@ class __PriceInfo extends StatelessWidget {
       ],
     );
 
-    if (size != WdsItemCardSize.xl) {
+    if (size != WdsItemCardSize.xlarge) {
       return salePriceAndDiscountRate;
     }
 
@@ -770,7 +772,7 @@ class __LikeInfo extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         spacing: 2,
         children: [
-          WdsNavigationIcon.like.build(
+          WdsIcon.like.build(
             color: WdsColors.neutral200,
             width: 10,
             height: 10,
@@ -805,12 +807,17 @@ class __LikeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final icon = WdsNavigationIcon.like.build(
-      color: hasLiked ? WdsColors.secondary : WdsColors.neutral200,
-      isActive: hasLiked,
-      width: 18,
-      height: 18,
-    );
+    final icon = hasLiked
+        ? WdsIcon.likeFilled.build(
+            color: WdsColors.secondary,
+            width: 18,
+            height: 18,
+          )
+        : WdsIcon.like.build(
+            color: WdsColors.neutral200,
+            width: 18,
+            height: 18,
+          );
 
     if (isVertical && likeCount != null) {
       return GestureDetector(

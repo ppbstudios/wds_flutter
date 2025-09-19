@@ -36,7 +36,7 @@ class WdsBadge extends StatelessWidget {
       return DecoratedBox(
         decoration: const BoxDecoration(
           color: WdsColors.primary,
-          borderRadius: BorderRadius.all(Radius.circular(WdsRadius.full)),
+          borderRadius: BorderRadius.all(Radius.circular(WdsRadius.radius9999)),
         ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),

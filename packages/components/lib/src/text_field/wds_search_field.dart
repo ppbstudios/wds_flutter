@@ -103,7 +103,7 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
     final WdsIcon? icon = _SearchFieldIconBySize.of(widget.size);
 
     const BorderRadius borderRadius = BorderRadius.all(
-      Radius.circular(WdsRadius.full),
+      Radius.circular(WdsRadius.radius9999),
     );
 
     final TextStyle textStyle = WdsTypography.body15NormalRegular.copyWith(
@@ -176,7 +176,7 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
               if (showTrailing)
                 GestureDetector(
                   onTap: _clearText,
-                  child: WdsIcon.circleFilledClose.build(),
+                  child: WdsIcon.circleClose.build(),
                 ),
             ],
           ),

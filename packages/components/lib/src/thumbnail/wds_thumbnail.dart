@@ -2,13 +2,13 @@ part of '../../wds_components.dart';
 
 /// 썸네일 크기를 정의하는 열거형
 enum WdsThumbnailSize {
-  xxs(size: Size(64, 64)),
-  xs(size: Size(74, 74)),
-  sm(size: Size(90, 90)),
-  md(size: Size(106, 106)),
-  lg(size: Size(140, 140)),
-  xl(size: Size(179, 179)),
-  xxl(size: Size(200, 200));
+  xxsmall(size: Size(64, 64)),
+  xsmall(size: Size(74, 74)),
+  small(size: Size(90, 90)),
+  medium(size: Size(106, 106)),
+  large(size: Size(140, 140)),
+  xlarge(size: Size(179, 179)),
+  xxlarge(size: Size(200, 200));
 
   const WdsThumbnailSize({
     required this.size,
@@ -28,54 +28,54 @@ class WdsThumbnail extends StatelessWidget {
     super.key,
   });
 
-  const WdsThumbnail.xxs({
+  const WdsThumbnail.xxsmall({
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsThumbnailSize.xxs;
+  }) : size = WdsThumbnailSize.xxsmall;
 
-  const WdsThumbnail.xs({
+  const WdsThumbnail.xsmall({
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsThumbnailSize.xs;
+  }) : size = WdsThumbnailSize.xsmall;
 
-  const WdsThumbnail.sm({
+  const WdsThumbnail.small({
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsThumbnailSize.sm;
+  }) : size = WdsThumbnailSize.small;
 
-  const WdsThumbnail.md({
+  const WdsThumbnail.medium({
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsThumbnailSize.md;
+  }) : size = WdsThumbnailSize.medium;
 
-  const WdsThumbnail.lg({
+  const WdsThumbnail.large({
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsThumbnailSize.lg;
+  }) : size = WdsThumbnailSize.large;
 
-  const WdsThumbnail.xl({
+  const WdsThumbnail.xlarge({
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsThumbnailSize.xl;
+  }) : size = WdsThumbnailSize.xlarge;
 
-  const WdsThumbnail.xxl({
+  const WdsThumbnail.xxlarge({
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsThumbnailSize.xxl;
+  }) : size = WdsThumbnailSize.xxlarge;
 
   static const double _placeholderIconScale = 0.3;
 
@@ -105,7 +105,7 @@ class WdsThumbnail extends StatelessWidget {
       child: hasRadius
           ? ClipRRect(
               borderRadius:
-                  const BorderRadius.all(Radius.circular(WdsRadius.xs)),
+                  const BorderRadius.all(Radius.circular(WdsRadius.radius4)),
               child: imageWidget,
             )
           : imageWidget,

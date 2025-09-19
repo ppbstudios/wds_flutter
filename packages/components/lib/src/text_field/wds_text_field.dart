@@ -256,7 +256,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
                   enabled: widget.isEnabled,
                   autofocus: widget.autofocus,
                   cursorColor: WdsColors.textNormal,
-                  cursorRadius: const Radius.circular(WdsRadius.full),
+                  cursorRadius: const Radius.circular(WdsRadius.radius9999),
                   style: _inputStyle.copyWith(color: inputColor),
                   onChanged: widget.onChanged,
                   onSubmitted: widget.onSubmitted,
@@ -274,7 +274,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   Widget _buildBox(BuildContext context) {
-    const radius = BorderRadius.all(Radius.circular(WdsRadius.sm));
+    const radius = BorderRadius.all(Radius.circular(WdsRadius.radius8));
     const contentPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 10);
     const noBorder = OutlineInputBorder(
       borderSide: BorderSide(style: BorderStyle.none, width: 0),
@@ -324,7 +324,8 @@ class _WdsTextFieldState extends State<WdsTextField> {
                         enabled: widget.isEnabled,
                         autofocus: widget.autofocus,
                         cursorColor: WdsColors.textNormal,
-                        cursorRadius: const Radius.circular(WdsRadius.full),
+                        cursorRadius:
+                            const Radius.circular(WdsRadius.radius9999),
                         style: _inputStyle.copyWith(color: inputColor),
                         onChanged: widget.onChanged,
                         onSubmitted: widget.onSubmitted,
@@ -345,7 +346,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
                 if (showClear)
                   GestureDetector(
                     onTap: _clear,
-                    child: WdsIcon.circleFilledClose.build(),
+                    child: WdsIcon.circleClose.build(),
                   ),
               ],
             ),

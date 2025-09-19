@@ -1,14 +1,14 @@
 part of '../../wds_components.dart';
 
-enum WdsHeadingSize { lg, md }
+enum WdsHeadingSize { large, medium }
 
 class _HeadingMaxLinesBySize {
   const _HeadingMaxLinesBySize._();
 
   static int of(WdsHeadingSize size) {
     return switch (size) {
-      WdsHeadingSize.lg => 2,
-      WdsHeadingSize.md => 1,
+      WdsHeadingSize.large => 2,
+      WdsHeadingSize.medium => 1,
     };
   }
 }
@@ -18,27 +18,27 @@ class _HeadingTextButtonVariantBySize {
 
   static WdsTextButtonVariant of(WdsHeadingSize size) {
     return switch (size) {
-      WdsHeadingSize.lg => WdsTextButtonVariant.text,
-      WdsHeadingSize.md => WdsTextButtonVariant.icon,
+      WdsHeadingSize.large => WdsTextButtonVariant.text,
+      WdsHeadingSize.medium => WdsTextButtonVariant.icon,
     };
   }
 }
 
 /// 페이지 및 템플릿의 역할 및 기능을 나타내는 헤딩 컴포넌트
 class WdsHeading extends StatelessWidget {
-  const WdsHeading.lg({
+  const WdsHeading.large({
     required this.title,
     this.moreText,
     this.onMoreTap,
     super.key,
-  }) : size = WdsHeadingSize.lg;
+  }) : size = WdsHeadingSize.large;
 
-  const WdsHeading.md({
+  const WdsHeading.medium({
     required this.title,
     this.moreText,
     this.onMoreTap,
     super.key,
-  }) : size = WdsHeadingSize.md;
+  }) : size = WdsHeadingSize.medium;
 
   final String title;
 
@@ -66,8 +66,8 @@ class WdsHeading extends StatelessWidget {
         maxLines: maxLines,
         overflow: TextOverflow.ellipsis,
         style: switch (size) {
-          WdsHeadingSize.lg => WdsTypography.heading17Bold,
-          WdsHeadingSize.md => WdsTypography.heading16Bold,
+          WdsHeadingSize.large => WdsTypography.heading17Bold,
+          WdsHeadingSize.medium => WdsTypography.heading16Bold,
         }
             .copyWith(color: WdsColors.textNormal),
       ),

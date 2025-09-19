@@ -62,8 +62,8 @@ class WdsOption extends StatelessWidget {
       bottom: BorderSide(color: WdsColors.primary),
     ),
     borderRadius: BorderRadius.only(
-      bottomLeft: Radius.circular(WdsRadius.sm),
-      bottomRight: Radius.circular(WdsRadius.sm),
+      bottomLeft: Radius.circular(WdsRadius.radius8),
+      bottomRight: Radius.circular(WdsRadius.radius8),
     ),
   );
 
@@ -165,8 +165,8 @@ class WdsOptionItemWrapper extends StatelessWidget {
       top: BorderSide(color: WdsColors.borderAlternative),
     ),
     borderRadius: BorderRadius.only(
-      bottomLeft: Radius.circular(WdsRadius.sm),
-      bottomRight: Radius.circular(WdsRadius.sm),
+      bottomLeft: Radius.circular(WdsRadius.radius8),
+      bottomRight: Radius.circular(WdsRadius.radius8),
     ),
   );
 
@@ -403,6 +403,7 @@ class WdsProductOptionItem extends WdsOptionItem {
               children: [
                 /// Title + Trailing
                 Row(
+                  spacing: 4,
                   children: [
                     Flexible(
                       child: Text(

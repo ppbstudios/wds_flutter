@@ -211,8 +211,8 @@ class __SheetContainer extends StatelessWidget {
           decoration: const BoxDecoration(
             color: WdsColors.white,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(WdsRadius.lg),
-              topRight: Radius.circular(WdsRadius.lg),
+              topLeft: Radius.circular(WdsRadius.radius16),
+              topRight: Radius.circular(WdsRadius.radius16),
             ),
           ),
           child: child,
@@ -233,7 +233,7 @@ class __SheetHandle extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: WdsColors.borderAlternative,
-            borderRadius: BorderRadius.all(Radius.circular(WdsRadius.full)),
+            borderRadius: BorderRadius.all(Radius.circular(WdsRadius.radius9999)),
           ),
           child: SizedBox(
             width: _SheetDimensions.handleWidth,

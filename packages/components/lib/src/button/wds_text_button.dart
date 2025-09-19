@@ -42,8 +42,8 @@ class _TextButtonIconSizeBySize {
 
   static (double width, double height) of(WdsTextButtonSize size) {
     return switch (size) {
-      WdsTextButtonSize.medium => (20, 20),
-      WdsTextButtonSize.small => (16, 16),
+      WdsTextButtonSize.medium => (18, 18),
+      WdsTextButtonSize.small => (14, 14),
     };
   }
 }
@@ -125,7 +125,7 @@ class _WdsTextButtonState extends State<WdsTextButton>
         _TextButtonTypographyBySize.of(widget.size).copyWith(
       color: effectiveColor,
     );
-    final BorderRadius borderRadius = BorderRadius.circular(WdsRadius.xs);
+    final BorderRadius borderRadius = BorderRadius.circular(WdsRadius.radius4);
 
     // Compose child: force typography for Text
     Widget content = Padding(padding: padding, child: widget.child);
