@@ -76,7 +76,6 @@ class WdsActionArea extends StatelessWidget {
       builder: (context, constraints) {
         return SizedBox(
           width: constraints.maxWidth,
-          height: 81,
           child: DecoratedBox(
             decoration: const BoxDecoration(
               color: WdsColors.white,
@@ -84,9 +83,11 @@ class WdsActionArea extends StatelessWidget {
                 top: BorderSide(color: WdsColors.borderAlternative),
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: content,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                child: content,
+              ),
             ),
           ),
         );

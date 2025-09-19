@@ -1,8 +1,8 @@
 part of '../../wds_components.dart';
 
 enum WdsChipShape {
-  pill(radius: WdsRadius.full),
-  square(radius: WdsRadius.sm);
+  pill(radius: WdsRadius.radius9999),
+  square(radius: WdsRadius.radius8);
 
   const WdsChipShape({required this.radius});
 
@@ -233,6 +233,7 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
     final double radius = widget.shape.radius;
     final borderRadius = BorderRadius.all(Radius.circular(radius));
     final backgroundColor = _getBackgroundColor();
+    const double iconSize = 14;
 
     // Get current text style and icon color based on focus state
     final currentTypography = isFocused ? _focusedTypography : _typography;
@@ -246,8 +247,8 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
       contentChildren.add(
         widget.leading!.build(
           color: currentIconColor,
-          width: 16,
-          height: 16,
+          width: iconSize,
+          height: iconSize,
         ),
       );
     }
@@ -265,8 +266,8 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
       contentChildren.add(
         widget.trailing!.build(
           color: currentIconColor,
-          width: 16,
-          height: 16,
+          width: iconSize,
+          height: iconSize,
         ),
       );
     }

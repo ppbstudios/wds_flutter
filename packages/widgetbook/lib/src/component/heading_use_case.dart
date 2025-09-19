@@ -23,7 +23,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   final size = context.knobs.object.dropdown<WdsHeadingSize>(
     label: 'size',
     options: WdsHeadingSize.values,
-    initialOption: WdsHeadingSize.lg,
+    initialOption: WdsHeadingSize.large,
     labelBuilder: (value) => value.name,
     description: '크기를 선택할 수 있어요',
   );
@@ -56,12 +56,12 @@ Widget _buildPlaygroundSection(BuildContext context) {
       if (enableMore) 'moreText: $moreText',
     ],
     child: switch (size) {
-      WdsHeadingSize.lg => WdsHeading.lg(
+      WdsHeadingSize.large => WdsHeading.large(
           title: title,
           moreText: effectiveMoreText,
           onMoreTap: onMoreTap,
         ),
-      WdsHeadingSize.md => WdsHeading.md(
+      WdsHeadingSize.medium => WdsHeading.medium(
           title: title,
           moreText: effectiveMoreText,
           onMoreTap: onMoreTap,
@@ -77,17 +77,17 @@ Widget _buildDemonstrationSection(BuildContext context) {
     children: [
       WidgetbookSubsection(
         title: 'size',
-        labels: ['lg', 'md'],
+        labels: ['large', 'medium'],
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 16,
           children: [
-            WdsHeading.lg(
+            WdsHeading.large(
               title: '타이틀은 최대 2줄까지 작성해요',
               moreText: '더보기',
               onMoreTap: () => debugPrint('more tapped'),
             ),
-            WdsHeading.md(
+            WdsHeading.medium(
               title: '타이틀은 최대 2줄까지 작성해요',
               moreText: '더보기',
               onMoreTap: () => debugPrint('more tapped'),
@@ -102,12 +102,12 @@ Widget _buildDemonstrationSection(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 16,
           children: [
-            WdsHeading.lg(
+            WdsHeading.large(
               title: '더보기 버튼이 있는 헤딩',
               moreText: '더보기',
               onMoreTap: () => debugPrint('more tapped'),
             ),
-            const WdsHeading.lg(
+            const WdsHeading.large(
               title: '더보기 버튼이 없는 헤딩',
             ),
           ],

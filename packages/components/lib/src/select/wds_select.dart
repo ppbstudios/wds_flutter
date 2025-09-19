@@ -14,6 +14,7 @@ class WdsSelect extends StatefulWidget {
     this.isEnabled = true,
     this.isExpanded = false,
     this.onTap,
+    this.borderColor = WdsColors.primary,
     super.key,
   });
 
@@ -36,6 +37,9 @@ class WdsSelect extends StatefulWidget {
   /// 셀 탭 콜백
   final VoidCallback? onTap;
 
+  /// 테두리 색상
+  final Color borderColor;
+
   @override
   State<WdsSelect> createState() => _WdsSelectState();
 }
@@ -52,7 +56,7 @@ class _WdsSelectState extends State<WdsSelect> {
     );
 
     final borderSide = _borderSide();
-    const radius = Radius.circular(WdsRadius.sm);
+    const radius = Radius.circular(WdsRadius.radius8);
 
     final decoration = BoxDecoration(
       color: _backgroundColor(),
@@ -156,6 +160,6 @@ class _WdsSelectState extends State<WdsSelect> {
       return const BorderSide(color: WdsColors.borderAlternative);
     }
 
-    return const BorderSide(color: WdsColors.primary);
+    return BorderSide(color: widget.borderColor);
   }
 }

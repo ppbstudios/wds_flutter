@@ -332,9 +332,18 @@ class WdsSemanticTypography {
     "coolNeutral": {
       "normal": {
         "shadow1": {
-          "color": {"$type": "color", "$value": "#819bff1f"},
-          "blur": {"$type": "number", "$value": "{blur.sm}"},
-          "offsetY": {"$type": "number", "$value": "{offsetY.xs}"}
+          "color": {
+            "$type": "color",
+            "$value": "#819bff1f"
+          },
+          "blur": {
+            "$type": "number",
+            "$value": "{blur.12}"
+          },
+          "offstY": {
+            "$type": "number",
+            "$value": "{offsetY.2}"
+          }
         }
       }
     }
@@ -358,7 +367,7 @@ class WdsSemanticShadowCoolNeutral {
 
   static const List<BoxShadow> normal = [
     BoxShadow(
-      offset: Offset(0, WdsAtomicOffsetY.xs),
+      offset: Offset(0, WdsAtomicOffsetY.v2),
       blurRadius: WdsAtomicBlur.sm,
       spreadRadius: 0.0,
       color: Color(0x1F819BFF),

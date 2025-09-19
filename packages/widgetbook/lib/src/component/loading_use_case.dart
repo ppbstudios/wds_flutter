@@ -46,8 +46,9 @@ Widget _buildPlaygroundSection(BuildContext context) {
   };
 
   final double dotSize = sizeValue == WdsLoadingSize.small ? 8 : 18;
-  final double spacing =
-      sizeValue == WdsLoadingSize.small ? WdsSpacing.md2 : WdsSpacing.md5;
+  final double spacing = sizeValue == WdsLoadingSize.small
+      ? WdsSpacing.spacing6
+      : WdsSpacing.spacing16;
 
   final loadingWidget = sizeValue == WdsLoadingSize.small
       ? WdsLoading.small(color: colorValue)

@@ -54,11 +54,6 @@ Widget _buildDemonstrationSection(BuildContext context) {
         content: _IconGrid(),
       ),
       WidgetbookSubsection(
-        title: 'navigation',
-        labels: const ['24 x 24'],
-        content: _NavigationIconGrid(),
-      ),
-      WidgetbookSubsection(
         title: 'order status',
         labels: const ['30 x 30'],
         content: _OrderStatusIconGrid(),
@@ -88,60 +83,6 @@ class _IconGrid extends StatelessWidget {
                     width: 96,
                     child: Text(
                       icon.name,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: WdsTypography.caption11Bold,
-                    ),
-                  ),
-                ],
-              ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _NavigationIconGrid extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final icons = WdsNavigationIcon.values;
-
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Wrap(
-          spacing: 16,
-          runSpacing: 24,
-          children: [
-            for (int i = 0; i < icons.length; i++)
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 8,
-                children: [
-                  icons[i].build(),
-                  SizedBox(
-                    width: 96,
-                    child: Text(
-                      icons[i].name,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: WdsTypography.caption11Bold,
-                    ),
-                  ),
-                ],
-              ),
-            for (int i = 0; i < icons.length; i++)
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 8,
-                children: [
-                  icons[i].build(isActive: true),
-                  SizedBox(
-                    width: 96,
-                    child: Text(
-                      icons[i].name,
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

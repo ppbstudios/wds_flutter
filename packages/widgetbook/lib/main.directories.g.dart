@@ -42,10 +42,10 @@ import 'package:wds_widgetbook/src/component/item_card_use_case.dart'
     as _wds_widgetbook_src_component_item_card_use_case;
 import 'package:wds_widgetbook/src/component/loading_use_case.dart'
     as _wds_widgetbook_src_component_loading_use_case;
-import 'package:wds_widgetbook/src/component/option_use_case.dart'
-    as _wds_widgetbook_src_component_option_use_case;
 import 'package:wds_widgetbook/src/component/menu_item_use_case.dart'
     as _wds_widgetbook_src_component_menu_item_use_case;
+import 'package:wds_widgetbook/src/component/option_use_case.dart'
+    as _wds_widgetbook_src_component_option_use_case;
 import 'package:wds_widgetbook/src/component/radio_use_case.dart'
     as _wds_widgetbook_src_component_radio_use_case;
 import 'package:wds_widgetbook/src/component/search_field_use_case.dart'
@@ -145,14 +145,6 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
-        name: 'Circular',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'Circular',
-          builder: _wds_widgetbook_src_component_circular_use_case
-              .buildCircularUseCase,
-        ),
-      ),
-      _widgetbook.WidgetbookLeafComponent(
         name: 'Divider',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Divider',
@@ -209,14 +201,6 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
-        name: 'MenuItem',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'MenuItem',
-          builder: _wds_widgetbook_src_component_menu_item_use_case
-              .buildWdsMenuItemUseCase,
-        ),
-      ),
-      _widgetbook.WidgetbookLeafComponent(
         name: 'PaginationCount',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'CountPagination',
@@ -246,14 +230,6 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'SearchField',
           builder: _wds_widgetbook_src_component_search_field_use_case
               .buildWdsSearchFieldUseCase,
-        ),
-      ),
-      _widgetbook.WidgetbookLeafComponent(
-        name: 'SegmentedControl',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'SegmentedControl',
-          builder: _wds_widgetbook_src_component_segmented_control_use_case
-              .buildWdsSegmentedControlUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
@@ -368,11 +344,35 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'WdsCircular',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Circular',
+          builder: _wds_widgetbook_src_component_circular_use_case
+              .buildCircularUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'WdsLoading',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Loading',
           builder: _wds_widgetbook_src_component_loading_use_case
               .buildLoadingUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'WdsMenuItem',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'MenuItem',
+          builder: _wds_widgetbook_src_component_menu_item_use_case
+              .buildWdsMenuItemUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'WdsSegmentedControl',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'SegmentedControl',
+          builder: _wds_widgetbook_src_component_segmented_control_use_case
+              .buildWdsSegmentedControlUseCase,
         ),
       ),
     ],

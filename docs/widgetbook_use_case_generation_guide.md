@@ -54,7 +54,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     child: YourComponent(
       parameter1: parameter1,
       parameter2: parameter2,
-      onAction: () => print('Component action triggered'),
+      onAction: () => debugPrint('Component action triggered'),
     ),
     info: [
       'Parameter1: $parameter1',
@@ -82,7 +82,7 @@ Use this recipe whenever a new component is added to the design guide:
    - Variants (e.g., primary/secondary/tertiary)
    - Sizes (e.g., large/medium/small)
    - States (e.g., enabled/pressed/disabled)
-4. Ensure callbacks print useful debug messages for quick verification.
+4. Ensure callbacks debugPrint useful debug messages for quick verification.
 5. Keep composition consistent using `WidgetbookPageLayout`, `WidgetbookSection`, and `WidgetbookSubsection`.
 6. For WDS, ensure typography and colors are derived from tokens (no hard-coded values).
 
@@ -101,11 +101,11 @@ Widget _buildDemonstrationSection(BuildContext context) {
         content: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            YourComponent.primary(onPressed: () => print('Primary')),
+            YourComponent.primary(onPressed: () => debugPrint('Primary')),
             const SizedBox(width: 16),
-            YourComponent.secondary(onPressed: () => print('Secondary')),
+            YourComponent.secondary(onPressed: () => debugPrint('Secondary')),
             const SizedBox(width: 16),
-            YourComponent.tertiary(onPressed: () => print('Tertiary')),
+            YourComponent.tertiary(onPressed: () => debugPrint('Tertiary')),
           ],
         ),
       ),
@@ -116,11 +116,11 @@ Widget _buildDemonstrationSection(BuildContext context) {
         content: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            YourComponent.large(onPressed: () => print('Large')),
+            YourComponent.large(onPressed: () => debugPrint('Large')),
             const SizedBox(width: 16),
-            YourComponent.medium(onPressed: () => print('Medium')),
+            YourComponent.medium(onPressed: () => debugPrint('Medium')),
             const SizedBox(width: 16),
-            YourComponent.small(onPressed: () => print('Small')),
+            YourComponent.small(onPressed: () => debugPrint('Small')),
           ],
         ),
       ),
@@ -180,7 +180,7 @@ Widget build[ComponentName][VariantName]UseCase(BuildContext context) {
 1. **Critical parameters** (required, affects core functionality): Always use knobs
 2. **Visual parameters** (colors, sizes, styles): Use knobs when they demonstrate component flexibility
 3. **Behavioral parameters** (enabled/disabled, loading states): Use knobs for interactive demonstration
-4. **Callback parameters**: Implement with descriptive print statements
+4. **Callback parameters**: Implement with descriptive debugPrint statements
 5. **Complex objects**: Hardcode with meaningful defaults, add TODO comments
 
 ### Knob Selection Logic
@@ -257,7 +257,7 @@ Widget buildDataWidgetWithDataUseCase(BuildContext context) {
   return MockDataProvider(
     data: _generateMockData(),
     child: DataWidget(
-      onItemSelected: (item) => print('Selected item: ${item.id}'),
+      onItemSelected: (item) => debugPrint('Selected item: ${item.id}'),
       showLoading: context.knobs.boolean(label: 'showLoading', initialValue: false),
     ),
   );
@@ -282,23 +282,23 @@ final iconPath = 'assets/icons/star.svg'; // Verify asset exists in pubspec.yaml
 
 ```dart
 // Simple callbacks
-onPressed: () => print('Button pressed'),
+onPressed: () => debugPrint('Button pressed'),
 
 // Callbacks with data
-onChanged: (value) => print('Value changed to: $value'),
+onChanged: (value) => debugPrint('Value changed to: $value'),
 
 // Complex callbacks
 onFormSubmitted: (formData) {
-  print('Form submitted with data:');
-  print('  - Name: ${formData.name}');
-  print('  - Email: ${formData.email}');
+  debugPrint('Form submitted with data:');
+  debugPrint('  - Name: ${formData.name}');
+  debugPrint('  - Email: ${formData.email}');
 },
 
 // Async callbacks
 onSave: () async {
-  print('Save operation started');
+  debugPrint('Save operation started');
   await Future.delayed(const Duration(seconds: 1));
-  print('Save operation completed');
+  debugPrint('Save operation completed');
 },
 ```
 
@@ -461,9 +461,9 @@ Widget _buildPlaygroundSection(BuildContext context) {
       value: value,
       enabled: enabled,
       showLabels: showLabels,
-      onChanged: (value) => print('Slider value changed to: $value'),
-      onChangeStart: (value) => print('Slider interaction started at: $value'),
-      onChangeEnd: (value) => print('Slider interaction ended at: $value'),
+      onChanged: (value) => debugPrint('Slider value changed to: $value'),
+      onChangeStart: (value) => debugPrint('Slider interaction started at: $value'),
+      onChangeEnd: (value) => debugPrint('Slider interaction ended at: $value'),
     ),
     info: [
       'Value: ${value.toStringAsFixed(2)}',
@@ -486,7 +486,7 @@ Widget _buildVariantsSection(BuildContext context) {
             CustomSlider(
               value: 0.3,
               enabled: true,
-              onChanged: (value) => print('Enabled slider: $value'),
+              onChanged: (value) => debugPrint('Enabled slider: $value'),
             ),
             CustomSlider(
               value: 0.7,

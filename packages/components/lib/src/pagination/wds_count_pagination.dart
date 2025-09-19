@@ -28,7 +28,7 @@ class WdsCountPagination extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
       decoration: BoxDecoration(
         color: WdsColors.cta.withAlpha(WdsOpacity.opacity80.toAlpha()),
-        borderRadius: BorderRadius.circular(WdsRadius.full),
+        borderRadius: BorderRadius.circular(WdsRadius.radius9999),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

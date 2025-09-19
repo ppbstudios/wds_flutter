@@ -100,7 +100,7 @@ class _SliderPlaygroundState extends State<_SliderPlayground> {
         onChanged: enabled
             ? (newValues) {
                 setState(() => _values = newValues);
-                print(
+                debugPrint(
                   'Slider values changed: ${newValues.start.round()}~${newValues.end.round()}',
                 );
               }
@@ -166,7 +166,7 @@ class _SliderStatesDemoState extends State<_SliderStatesDemo> {
           divisions: 10,
           onChanged: (values) {
             setState(() => _enabledValues = values);
-            print(
+            debugPrint(
               'Enabled slider: ${values.start.round()}~${values.end.round()}',
             );
           },
@@ -211,7 +211,9 @@ class _SliderTitleDemoState extends State<_SliderTitleDemo> {
           divisions: 10,
           onChanged: (values) {
             setState(() => _valuesWithTitle = values);
-            print('With title: ${values.start.round()}~${values.end.round()}');
+            debugPrint(
+              'With title: ${values.start.round()}~${values.end.round()}',
+            );
           },
         ),
         // Without title
@@ -222,7 +224,7 @@ class _SliderTitleDemoState extends State<_SliderTitleDemo> {
           divisions: 10,
           onChanged: (values) {
             setState(() => _valuesWithoutTitle = values);
-            print(
+            debugPrint(
               'Without title: ${values.start.round()}~${values.end.round()}',
             );
           },
@@ -258,7 +260,9 @@ class _SliderRangeDemoState extends State<_SliderRangeDemo> {
           divisions: 10,
           onChanged: (values) {
             setState(() => _range1Values = values);
-            print('Range 0-100: ${values.start.round()}~${values.end.round()}');
+            debugPrint(
+              'Range 0-100: ${values.start.round()}~${values.end.round()}',
+            );
           },
         ),
         // 0-1000 range
@@ -270,7 +274,7 @@ class _SliderRangeDemoState extends State<_SliderRangeDemo> {
           divisions: 20,
           onChanged: (values) {
             setState(() => _range2Values = values);
-            print(
+            debugPrint(
               'Range 0-1000: ${values.start.round()}~${values.end.round()}',
             );
           },
@@ -284,7 +288,7 @@ class _SliderRangeDemoState extends State<_SliderRangeDemo> {
           divisions: 5,
           onChanged: (values) {
             setState(() => _range3Values = values);
-            print(
+            debugPrint(
               'Range -50~50: ${values.start.round()}~${values.end.round()}',
             );
           },
@@ -323,7 +327,7 @@ class _SliderTapDemoState extends State<_SliderTapDemo> {
           divisions: 100,
           onChanged: (values) {
             setState(() => _tapDemoValues = values);
-            print(
+            debugPrint(
               'Tap demo: ${values.start.round()}~${values.end.round()}',
             );
           },

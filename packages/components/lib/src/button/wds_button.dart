@@ -10,11 +10,11 @@ class _ButtonPaddingBySize {
   static EdgeInsets of(WdsButtonSize size) {
     // 문서 기준: xL(16,13), L(16,11), M(16,10), S(16,7), TY(16,6)
     return switch (size) {
-      WdsButtonSize.xlarge => const EdgeInsets.fromLTRB(16, 13, 16, 13),
-      WdsButtonSize.large => const EdgeInsets.fromLTRB(16, 11, 16, 11),
-      WdsButtonSize.medium => const EdgeInsets.fromLTRB(16, 9, 16, 9),
-      WdsButtonSize.small => const EdgeInsets.fromLTRB(12, 7, 12, 7),
-      WdsButtonSize.tiny => const EdgeInsets.fromLTRB(12, 6, 12, 6),
+      WdsButtonSize.xlarge => const EdgeInsets.symmetric(horizontal: 16),
+      WdsButtonSize.large => const EdgeInsets.symmetric(horizontal: 16),
+      WdsButtonSize.medium => const EdgeInsets.symmetric(horizontal: 16),
+      WdsButtonSize.small => const EdgeInsets.symmetric(horizontal: 12),
+      WdsButtonSize.tiny => const EdgeInsets.symmetric(horizontal: 12),
     };
   }
 
@@ -96,19 +96,19 @@ class _ButtonStyleByVariant {
       WdsButtonVariant.cta => (
           background: WdsColors.cta,
           foreground: WdsColors.white,
-          radius: WdsRadius.full,
+          radius: WdsRadius.radius9999,
           border: null,
         ),
       WdsButtonVariant.primary => (
           background: WdsColors.primary,
           foreground: WdsColors.white,
-          radius: WdsRadius.full,
+          radius: WdsRadius.radius9999,
           border: null,
         ),
       WdsButtonVariant.secondary => (
           background: WdsColors.white,
           foreground: WdsColors.textNormal,
-          radius: WdsRadius.full,
+          radius: WdsRadius.radius9999,
           border: const BorderSide(color: WdsColors.borderNeutral),
         ),
     };

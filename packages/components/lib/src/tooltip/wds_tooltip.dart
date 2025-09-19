@@ -103,13 +103,14 @@ class WdsTooltip extends StatelessWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints(minWidth: 64),
         child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(WdsRadius.sm)),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(WdsRadius.radius8)),
           child: DecoratedBox(
             decoration: const BoxDecoration(
               color: backgroundColor,
             ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+              padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
               child: hasCloseButton
                   ? _buildContentWithCloseButton()
                   : _buildContent(),
@@ -128,7 +129,7 @@ class WdsTooltip extends StatelessWidget {
         style: const TextStyle(color: WdsColors.white),
         child: Text(
           message,
-          style: WdsTypography.body14NormalMedium,
+          style: WdsTypography.body14ReadingRegular,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -149,7 +150,7 @@ class WdsTooltip extends StatelessWidget {
               style: const TextStyle(color: WdsColors.white),
               child: Text(
                 message,
-                style: WdsTypography.body14NormalMedium,
+                style: WdsTypography.body14ReadingRegular,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

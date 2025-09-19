@@ -46,24 +46,24 @@ class _SectionMessageStyleByVariant {
 class WdsSectionMessage extends StatelessWidget {
   /// 기본 정보 메시지
   const WdsSectionMessage.normal({
-    required this.leadingIcon,
     required this.message,
     super.key,
-  }) : variant = WdsSectionMessageVariant.normal;
+  })  : variant = WdsSectionMessageVariant.normal,
+        leadingIcon = WdsIcon.info;
 
   /// 긍정적 메시지
   const WdsSectionMessage.highlight({
-    required this.leadingIcon,
     required this.message,
     super.key,
-  }) : variant = WdsSectionMessageVariant.highlight;
+  })  : variant = WdsSectionMessageVariant.highlight,
+        leadingIcon = WdsIcon.info;
 
   /// 경고 메시지
   const WdsSectionMessage.warning({
-    required this.leadingIcon,
     required this.message,
     super.key,
-  }) : variant = WdsSectionMessageVariant.warning;
+  })  : variant = WdsSectionMessageVariant.warning,
+        leadingIcon = WdsIcon.info;
 
   /// 메시지에 표시될 텍스트 내용
   final String message;
@@ -84,10 +84,10 @@ class WdsSectionMessage extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16), // 모든 variant 고정
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          spacing: 4,
+          spacing: 6,
           children: [
             leadingIcon.build(
               width: 16, // 16x16 고정

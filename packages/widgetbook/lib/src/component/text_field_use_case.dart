@@ -85,7 +85,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   return WidgetbookPlayground(
     info: [
       'variant: ${variant.name}',
-      'state: ${enabled ? 'enabled' : 'disabled'}',
+      'state: ${enabled ? 'inactive(아무것도 입력되지 않은 상태)' : 'disabled'}',
       'label: $label',
       'hint: $hint',
       if (helper.isNotEmpty) 'helper: $helper',
@@ -104,7 +104,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
     children: [
       WidgetbookSubsection(
         title: 'outlined',
-        labels: const ['enabled', 'focused', 'active', 'error', 'disabled'],
+        labels: const ['inactive', 'focused', 'active', 'error', 'disabled'],
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 24,
@@ -167,7 +167,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
       ),
       WidgetbookSubsection(
         title: 'box',
-        labels: const ['enabled', 'focused', 'active', 'error', 'disabled'],
+        labels: const ['inactive', 'focused', 'active', 'error', 'disabled'],
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 24,

@@ -18,8 +18,8 @@ class _LoadingSpacingBySize {
 
   static double of(WdsLoadingSize size) {
     return switch (size) {
-      WdsLoadingSize.small => WdsSpacing.md2,
-      WdsLoadingSize.medium => WdsSpacing.md5,
+      WdsLoadingSize.small => WdsSpacing.spacing6,
+      WdsLoadingSize.medium => WdsSpacing.spacing16,
     };
   }
 }

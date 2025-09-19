@@ -138,7 +138,7 @@ class _StylesSection extends StatelessWidget {
         // Title 32
         const _TypographyRow(
           label: 'Title 32',
-          tokenName: 'WdsSemanticTypography.title32Medium',
+          tokenName: 'WdsTypography.title32Medium',
           fontSize: tokens.WdsAtomicFontSize.v32,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v42,
           styles: [
@@ -151,7 +151,7 @@ class _StylesSection extends StatelessWidget {
         // Title 22
         const _TypographyRow(
           label: 'Title 22',
-          tokenName: 'WdsSemanticTypography.title22Medium',
+          tokenName: 'WdsTypography.title22Medium',
           fontSize: tokens.WdsAtomicFontSize.v22,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v30,
           styles: [
@@ -164,7 +164,7 @@ class _StylesSection extends StatelessWidget {
         // Title 20
         const _TypographyRow(
           label: 'Title 20',
-          tokenName: 'WdsSemanticTypography.title20Medium',
+          tokenName: 'WdsTypography.title20Medium',
           fontSize: tokens.WdsAtomicFontSize.v20,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v28,
           styles: [
@@ -177,7 +177,7 @@ class _StylesSection extends StatelessWidget {
         // Heading 18
         const _TypographyRow(
           label: 'Heading 18',
-          tokenName: 'WdsSemanticTypography.heading18Medium',
+          tokenName: 'WdsTypography.heading18Medium',
           fontSize: tokens.WdsAtomicFontSize.v18,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v26,
           styles: [
@@ -191,7 +191,7 @@ class _StylesSection extends StatelessWidget {
         // Heading 17
         const _TypographyRow(
           label: 'Heading 17',
-          tokenName: 'WdsSemanticTypography.heading17Medium',
+          tokenName: 'WdsTypography.heading17Medium',
           fontSize: tokens.WdsAtomicFontSize.v17,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v24,
           styles: [
@@ -205,7 +205,7 @@ class _StylesSection extends StatelessWidget {
         // Heading 16
         const _TypographyRow(
           label: 'Heading 16',
-          tokenName: 'WdsSemanticTypography.heading16Medium',
+          tokenName: 'WdsTypography.heading16Medium',
           fontSize: tokens.WdsAtomicFontSize.v16,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v24,
           styles: [
@@ -218,7 +218,7 @@ class _StylesSection extends StatelessWidget {
         // Body 15 Normal
         const _TypographyRow(
           label: 'Body 15 Normal',
-          tokenName: 'WdsSemanticTypography.body15NormalMedium',
+          tokenName: 'WdsTypography.body15NormalMedium',
           fontSize: tokens.WdsAtomicFontSize.v15,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v22,
           styles: [
@@ -231,7 +231,7 @@ class _StylesSection extends StatelessWidget {
         // Body 15 Reading
         const _TypographyRow(
           label: 'Body 15 Reading',
-          tokenName: 'WdsSemanticTypography.body15ReadingMedium',
+          tokenName: 'WdsTypography.body15ReadingMedium',
           fontSize: tokens.WdsAtomicFontSize.v15,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v24,
           styles: [
@@ -244,7 +244,7 @@ class _StylesSection extends StatelessWidget {
         // Body 14 Normal
         const _TypographyRow(
           label: 'Body 14 Normal',
-          tokenName: 'WdsSemanticTypography.body14NormalMedium',
+          tokenName: 'WdsTypography.body14NormalMedium',
           fontSize: tokens.WdsAtomicFontSize.v14,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v20,
           styles: [
@@ -257,7 +257,7 @@ class _StylesSection extends StatelessWidget {
         // Body 14 Reading
         const _TypographyRow(
           label: 'Body 14 Reading',
-          tokenName: 'WdsSemanticTypography.body14ReadingMedium',
+          tokenName: 'WdsTypography.body14ReadingMedium',
           fontSize: tokens.WdsAtomicFontSize.v14,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v22,
           styles: [
@@ -270,7 +270,7 @@ class _StylesSection extends StatelessWidget {
         // Body 13 Normal
         const _TypographyRow(
           label: 'Body 13 Normal',
-          tokenName: 'WdsSemanticTypography.body13NormalMedium',
+          tokenName: 'WdsTypography.body13NormalMedium',
           fontSize: tokens.WdsAtomicFontSize.v13,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v18,
           styles: [
@@ -283,7 +283,7 @@ class _StylesSection extends StatelessWidget {
         // Body 13 Reading
         const _TypographyRow(
           label: 'Body 13 Reading',
-          tokenName: 'WdsSemanticTypography.body13ReadingMedium',
+          tokenName: 'WdsTypography.body13ReadingMedium',
           fontSize: tokens.WdsAtomicFontSize.v13,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v20,
           styles: [
@@ -296,7 +296,7 @@ class _StylesSection extends StatelessWidget {
         // Caption 12
         const _TypographyRow(
           label: 'Caption 12 Normal',
-          tokenName: 'WdsSemanticTypography.caption12NormalMedium',
+          tokenName: 'WdsTypography.caption12NormalMedium',
           fontSize: tokens.WdsAtomicFontSize.v12,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v16,
           styles: [
@@ -310,7 +310,7 @@ class _StylesSection extends StatelessWidget {
           label: 'Caption 12 Reading',
           tokenName: 'WdsSemanticTypography.caption12ReadingMedium',
           fontSize: tokens.WdsAtomicFontSize.v12,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v16,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v18,
           styles: [
             tokens.WdsSemanticTypography.caption12ReadingBold,
             tokens.WdsSemanticTypography.caption12ReadingMedium,
@@ -321,7 +321,7 @@ class _StylesSection extends StatelessWidget {
         // Caption 11
         const _TypographyRow(
           label: 'Caption 11',
-          tokenName: 'WdsSemanticTypography.caption11Medium',
+          tokenName: 'WdsTypography.caption11Medium',
           fontSize: tokens.WdsAtomicFontSize.v11,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v14,
           styles: [
@@ -334,7 +334,7 @@ class _StylesSection extends StatelessWidget {
         // Caption 10
         const _TypographyRow(
           label: 'Caption 10',
-          tokenName: 'WdsSemanticTypography.caption10Medium',
+          tokenName: 'WdsTypography.caption10Medium',
           fontSize: tokens.WdsAtomicFontSize.v10,
           lineHeightPx: tokens.WdsAtomicFontLineHeight.v13,
           styles: [
@@ -434,8 +434,17 @@ class _TypographyRow extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(
-                '${lineHeightPx.toStringAsFixed(0)}px\n(${ratio.toStringAsFixed(2)}%)',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${lineHeightPx.toStringAsFixed(0)}px',
+                  ),
+                  Text(
+                    '(${ratio.toStringAsFixed(2)}%)',
+                    style: tokens.WdsSemanticTypography.caption10Regular,
+                  ),
+                ],
               ),
             ),
             Padding(

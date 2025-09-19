@@ -66,7 +66,7 @@ class _CheckboxPlaygroundState extends State<_CheckboxPlayground> {
         'state: ${enabled ? 'enabled' : 'disabled'}',
         'value: $_value',
         'backgroundColor: ${_value ? 'cta' : 'null'}',
-        'border: ${_value ? 'null' : 'neutral'} / radius: xs',
+        'border: ${_value ? 'null' : 'neutral'} / radius: 4px',
       ],
       child: child,
     );
