@@ -50,6 +50,19 @@ Widget _buildPlaygroundSection(BuildContext context) {
     description: '버튼의 로딩 상태를 정의해요',
   );
 
+  final hasLeadingIcon = context.knobs.boolean(
+    label: 'hasLeadingIcon',
+    description: '버튼의 아이콘 표시 여부를 정의해요',
+  );
+
+  final leadingIcon = context.knobs.object.dropdown<WdsIcon>(
+    label: 'leadingIcon',
+    initialOption: WdsIcon.blank,
+    options: WdsIcon.values,
+    labelBuilder: (v) => v.name,
+    description: '표시할 아이콘을 선택해요',
+  );
+
   final styleBySize = <String, TextStyle>{
     'xlarge': WdsTypography.body15NormalBold,
     'large': WdsTypography.body15NormalBold,
@@ -83,6 +96,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     variant: variantValue,
     size: sizeValue,
     isLoading: isLoading,
+    leadingIcon: hasLeadingIcon ? leadingIcon : null,
     child: child,
   );
 
@@ -92,6 +106,8 @@ Widget _buildPlaygroundSection(BuildContext context) {
       'size: $size',
       'state: ${isEnabled ? 'enabled' : 'disabled'}',
       'loading: $isLoading',
+      'hasLeadingIcon: $hasLeadingIcon',
+      'leadingIcon: $leadingIcon',
     ],
     child: button,
   );
@@ -338,6 +354,45 @@ Widget _buildDemonstrationSection(BuildContext context) {
               isLoading: true,
               variant: WdsButtonVariant.secondary,
               child: const Text('텍스트'),
+            ),
+          ],
+        ),
+      ),
+      WidgetbookSubsection(
+        title: 'leadingIcon',
+        labels: ['xlarge', 'large', 'medium', 'small', 'tiny'],
+        content: Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 16,
+          children: [
+            WdsButton(
+              onTap: () => debugPrint('xlarge icon pressed'),
+              leadingIcon: WdsIcon.blank,
+              size: WdsButtonSize.xlarge,
+              child: const Text('추가'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('large icon pressed'),
+              leadingIcon: WdsIcon.blank,
+              size: WdsButtonSize.large,
+              child: const Text('검색'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('medium icon pressed'),
+              leadingIcon: WdsIcon.blank,
+              child: const Text('설정'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('small icon pressed'),
+              leadingIcon: WdsIcon.blank,
+              size: WdsButtonSize.small,
+              child: const Text('장바구니'),
+            ),
+            WdsButton(
+              onTap: () => debugPrint('tiny icon pressed'),
+              leadingIcon: WdsIcon.blank,
+              size: WdsButtonSize.tiny,
+              child: const Text('장바구니'),
             ),
           ],
         ),
