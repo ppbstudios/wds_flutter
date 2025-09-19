@@ -49,7 +49,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     description: 'Sheet의 제목을 입력해 주세요',
   );
 
-  final actionTitle = context.knobs.string(
+  final actionTitle = context.knobs.stringOrNull(
     label: 'actionTitle',
     initialValue: '메인액션',
   );
@@ -91,17 +91,19 @@ Widget _buildSheetContent(
   BuildContext context, {
   required WdsSheetVariant variant,
   required String title,
-  required String actionTitle,
+  required String? actionTitle,
   required List<Color> blueColors,
   required double deviceHeight,
 }) {
   return switch (variant) {
     WdsSheetVariant.fixed => WdsSheet.fixed(
         onClose: () => Navigator.of(context).pop(),
-        onAction: () {
-          debugPrint('onAction');
-          Navigator.of(context).pop();
-        },
+        onAction: actionTitle != null
+            ? () {
+                debugPrint('onAction');
+                Navigator.of(context).pop();
+              }
+            : null,
         headerTitle: title,
         content: SingleChildScrollView(
           child: Column(
@@ -112,9 +114,12 @@ Widget _buildSheetContent(
         actionTitle: actionTitle,
       ),
     WdsSheetVariant.draggable => WdsSheet.draggable(
-        onAction: () {
-          debugPrint('onAction');
-        },
+        onAction: actionTitle != null
+            ? () {
+                debugPrint('onAction');
+                Navigator.of(context).pop();
+              }
+            : null,
         actionTitle: actionTitle,
         headerTitle: title,
         children: _buildBlueColors(),

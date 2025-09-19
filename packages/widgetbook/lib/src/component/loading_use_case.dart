@@ -4,7 +4,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(
   name: 'Loading',
-  type: WdsLoading,
+  type: Loading,
   path: '[component]/',
 )
 Widget buildLoadingUseCase(BuildContext context) {

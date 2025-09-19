@@ -4,7 +4,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart';
 
 @UseCase(
   name: 'Circular',
-  type: WdsCircular,
+  type: Circular,
   path: '[component]/',
 )
 Widget buildCircularUseCase(BuildContext context) {

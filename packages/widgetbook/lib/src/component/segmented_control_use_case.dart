@@ -4,7 +4,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(
   name: 'SegmentedControl',
-  type: WdsSegmentedControl,
+  type: SegmentedControl,
   path: '[component]/',
 )
 Widget buildWdsSegmentedControlUseCase(BuildContext context) {
