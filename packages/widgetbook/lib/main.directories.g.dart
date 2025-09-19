@@ -70,6 +70,8 @@ import 'package:wds_widgetbook/src/component/tab_use_case.dart'
     as _wds_widgetbook_src_component_tab_use_case;
 import 'package:wds_widgetbook/src/component/tag_use_case.dart'
     as _wds_widgetbook_src_component_tag_use_case;
+import 'package:wds_widgetbook/src/component/text_area_use_case.dart'
+    as _wds_widgetbook_src_component_text_area_use_case;
 import 'package:wds_widgetbook/src/component/text_button_use_case.dart'
     as _wds_widgetbook_src_component_text_button_use_case;
 import 'package:wds_widgetbook/src/component/text_field_use_case.dart'
@@ -333,6 +335,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Tag',
           builder: _wds_widgetbook_src_component_tag_use_case.buildTagUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'TextArea',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'TextArea',
+          builder: _wds_widgetbook_src_component_text_area_use_case
+              .buildWdsTextAreaUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
