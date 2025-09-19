@@ -1,7 +1,7 @@
 # wds_flutter
 Flutter를 위한 WDS(WINC Design System)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f703ba3d-6c1d-4fdf-a236-5324b31d9a09/deploy-status)](https://app.netlify.com/projects/winc-design-system/deploys)
+[![Netlify Status](https://github.com/ppbstudios/wds_flutter/actions/workflows/deploy-widgetbook.yml/badge.svg?branch=main)](https://github.com/ppbstudios/wds_flutter/actions/workflows/deploy-widgetbook.yml)
 
 ### Token Generator 사용법 (`tools/token_generator`)
 
