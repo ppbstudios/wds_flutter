@@ -85,20 +85,15 @@ Widget _buildSectionMessage({
   required bool hasIcon,
   required WdsIcon icon,
 }) {
-  final leadingIcon = hasIcon ? icon : WdsIcon.blank;
-
   return switch (variant) {
     WdsSectionMessageVariant.normal => WdsSectionMessage.normal(
         message: message,
-        leadingIcon: leadingIcon,
       ),
     WdsSectionMessageVariant.highlight => WdsSectionMessage.highlight(
         message: message,
-        leadingIcon: leadingIcon,
       ),
     WdsSectionMessageVariant.warning => WdsSectionMessage.warning(
         message: message,
-        leadingIcon: leadingIcon,
       ),
   };
 }
@@ -116,17 +111,14 @@ Widget _buildDemonstrationSection(BuildContext context) {
           children: [
             WdsSectionMessage.normal(
               message: '기본 정보를 확인해주세요',
-              leadingIcon: WdsIcon.info,
             ),
             SizedBox(height: 16),
             WdsSectionMessage.highlight(
               message: '상품을 게시글에 태그했어요',
-              leadingIcon: WdsIcon.productTag,
             ),
             SizedBox(height: 16),
             WdsSectionMessage.warning(
               message: '장바구니에 상품이 없어요',
-              leadingIcon: WdsIcon.cart,
             ),
           ],
         ),
@@ -141,15 +133,12 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 16,
           children: [
             WdsSectionMessage.normal(
-              leadingIcon: WdsIcon.blank,
               message: '아이콘 없이 표시되는 메시지입니다',
             ),
             WdsSectionMessage.highlight(
-              leadingIcon: WdsIcon.blank,
               message: '성공 메시지입니다',
             ),
             WdsSectionMessage.warning(
-              leadingIcon: WdsIcon.blank,
               message: '경고 메시지입니다',
             ),
           ],

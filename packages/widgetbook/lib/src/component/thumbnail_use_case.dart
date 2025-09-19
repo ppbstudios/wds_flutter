@@ -24,7 +24,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     label: 'size',
     options: WdsThumbnailSize.values,
     labelBuilder: (value) => value.name,
-    initialOption: WdsThumbnailSize.md,
+    initialOption: WdsThumbnailSize.medium,
   );
 
   final hasRadius = context.knobs.boolean(
@@ -69,13 +69,13 @@ Widget _buildDemonstrationSection(BuildContext context) {
           children: [
             WdsThumbnail(
               imagePath: 'https://picsum.photos/200/200?random=1',
-              size: WdsThumbnailSize.lg,
+              size: WdsThumbnailSize.large,
               hasRadius: true,
             ),
             SizedBox(width: 24),
             WdsThumbnail(
               imagePath: 'assets/images/placeholder.png',
-              size: WdsThumbnailSize.lg,
+              size: WdsThumbnailSize.large,
               hasRadius: true,
             ),
           ],
@@ -84,7 +84,15 @@ Widget _buildDemonstrationSection(BuildContext context) {
 
       WidgetbookSubsection(
         title: 'size',
-        labels: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'],
+        labels: [
+          'xxsmall',
+          'xsmall',
+          'small',
+          'medium',
+          'large',
+          'xlarge',
+          'xxlarge',
+        ],
         content: Wrap(
           spacing: 16,
           runSpacing: 16,
@@ -94,10 +102,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
               children: [
                 WdsThumbnail(
                   imagePath: 'https://picsum.photos/64/64?random=1',
-                  size: WdsThumbnailSize.xxs,
+                  size: WdsThumbnailSize.xxsmall,
                   hasRadius: true,
                 ),
-                Text('xxs (64x64)'),
+                Text('xxsmall (64x64)'),
               ],
             ),
             Column(
@@ -105,10 +113,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
               children: [
                 WdsThumbnail(
                   imagePath: 'https://picsum.photos/74/74?random=2',
-                  size: WdsThumbnailSize.xs,
+                  size: WdsThumbnailSize.xsmall,
                   hasRadius: true,
                 ),
-                Text('xs (74x74)'),
+                Text('xsmall (74x74)'),
               ],
             ),
             Column(
@@ -116,10 +124,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
               children: [
                 WdsThumbnail(
                   imagePath: 'https://picsum.photos/90/90?random=3',
-                  size: WdsThumbnailSize.sm,
+                  size: WdsThumbnailSize.small,
                   hasRadius: true,
                 ),
-                Text('sm (90x90)'),
+                Text('small (90x90)'),
               ],
             ),
             Column(
@@ -127,10 +135,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
               children: [
                 WdsThumbnail(
                   imagePath: 'https://picsum.photos/106/106?random=4',
-                  size: WdsThumbnailSize.md,
+                  size: WdsThumbnailSize.medium,
                   hasRadius: true,
                 ),
-                Text('md (106x106)'),
+                Text('medium (106x106)'),
               ],
             ),
             Column(
@@ -138,10 +146,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
               children: [
                 WdsThumbnail(
                   imagePath: 'https://picsum.photos/140/140?random=5',
-                  size: WdsThumbnailSize.lg,
+                  size: WdsThumbnailSize.large,
                   hasRadius: true,
                 ),
-                Text('lg (140x140)'),
+                Text('large (140x140)'),
               ],
             ),
             Column(
@@ -149,10 +157,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
               children: [
                 WdsThumbnail(
                   imagePath: 'https://picsum.photos/179/250?random=6',
-                  size: WdsThumbnailSize.xl,
+                  size: WdsThumbnailSize.xlarge,
                   hasRadius: true,
                 ),
-                Text('xl (179x179)'),
+                Text('xlarge (179x179)'),
               ],
             ),
             Column(
@@ -160,10 +168,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
               children: [
                 WdsThumbnail(
                   imagePath: 'https://picsum.photos/200/200?random=7',
-                  size: WdsThumbnailSize.xxl,
+                  size: WdsThumbnailSize.xxlarge,
                   hasRadius: true,
                 ),
-                Text('xxl (200x200)'),
+                Text('xxlarge (200x200)'),
               ],
             ),
           ],
@@ -179,13 +187,13 @@ Widget _buildDemonstrationSection(BuildContext context) {
           children: [
             WdsThumbnail(
               imagePath: 'https://picsum.photos/120/120?random=11',
-              size: WdsThumbnailSize.md,
+              size: WdsThumbnailSize.medium,
               hasRadius: true,
             ),
             SizedBox(width: 24),
             WdsThumbnail(
               imagePath: 'https://picsum.photos/120/120?random=12',
-              size: WdsThumbnailSize.md,
+              size: WdsThumbnailSize.medium,
             ),
           ],
         ),
@@ -201,7 +209,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
             /// 로딩 상태 (빠른 네트워크로 인해 보이지 않을 수 있음)
             WdsThumbnail(
               imagePath: 'https://httpbin.org/delay/2',
-              size: WdsThumbnailSize.md,
+              size: WdsThumbnailSize.medium,
               hasRadius: true,
             ),
 
@@ -209,14 +217,14 @@ Widget _buildDemonstrationSection(BuildContext context) {
             WdsThumbnail(
               imagePath:
                   'https://invalid-url-that-does-not-exist.com/image.jpg',
-              size: WdsThumbnailSize.md,
+              size: WdsThumbnailSize.medium,
               hasRadius: true,
             ),
 
             /// 성공 상태
             WdsThumbnail(
               imagePath: 'https://picsum.photos/120/120?random=13',
-              size: WdsThumbnailSize.md,
+              size: WdsThumbnailSize.medium,
               hasRadius: true,
             ),
           ],

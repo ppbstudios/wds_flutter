@@ -108,8 +108,8 @@ Widget _buildDemonstrationSection(BuildContext context) {
                   index: '1',
                   thumbnail: const ClipRRect(
                     borderRadius:
-                        BorderRadius.all(Radius.circular(WdsRadius.xs)),
-                    child: WdsThumbnail.xxs(
+                        BorderRadius.all(Radius.circular(WdsRadius.radius4)),
+                    child: WdsThumbnail.xxsmall(
                       imagePath: imagePath,
                     ),
                   ),
@@ -121,8 +121,8 @@ Widget _buildDemonstrationSection(BuildContext context) {
                   index: '2',
                   thumbnail: const ClipRRect(
                     borderRadius:
-                        BorderRadius.all(Radius.circular(WdsRadius.xs)),
-                    child: WdsThumbnail.xxs(
+                        BorderRadius.all(Radius.circular(WdsRadius.radius4)),
+                    child: WdsThumbnail.xxsmall(
                       imagePath: imagePath,
                     ),
                   ),
@@ -177,8 +177,8 @@ List<WdsOptionItem> _generateOptionItems(
       return WdsProductOptionItem(
         index: '${index + 1}',
         thumbnail: const ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(WdsRadius.xs)),
-          child: WdsThumbnail.xxs(
+          borderRadius: BorderRadius.all(Radius.circular(WdsRadius.radius4)),
+          child: WdsThumbnail.xxsmall(
             imagePath: imagePath,
           ),
         ),

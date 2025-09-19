@@ -152,7 +152,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
                         color: WdsColors.neutral50,
                         border: Border.all(color: WdsColors.borderNeutral),
                         borderRadius: const BorderRadius.all(
-                          Radius.circular(WdsRadius.xs),
+                          Radius.circular(WdsRadius.radius4),
                         ),
                       ),
                       child: SizedBox(

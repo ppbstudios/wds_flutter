@@ -27,44 +27,44 @@ class RadiusUseCase extends StatelessWidget {
   Widget _buildRadiusTable() {
     final radiusTokens = [
       {
-        'name': 'none',
-        'value': WdsRadius.none,
+        'name': '0',
+        'value': WdsRadius.radius0,
         'label': '0px',
       },
       {
-        'name': 'xs',
-        'value': WdsRadius.xs,
+        'name': '4',
+        'value': WdsRadius.radius4,
         'label': '4px',
       },
       {
-        'name': 'sm',
-        'value': WdsRadius.sm,
+        'name': '8',
+        'value': WdsRadius.radius8,
         'label': '8px',
       },
       {
-        'name': 'md',
-        'value': WdsRadius.md,
+        'name': '12',
+        'value': WdsRadius.radius12,
         'label': '12px',
       },
       {
-        'name': 'lg',
-        'value': WdsRadius.lg,
+        'name': '16',
+        'value': WdsRadius.radius16,
         'label': '16px',
       },
       {
-        'name': 'xl',
-        'value': WdsRadius.xl,
+        'name': '20',
+        'value': WdsRadius.radius20,
         'label': '20px',
       },
       {
-        'name': 'xxl',
-        'value': WdsRadius.xxl,
+        'name': '30',
+        'value': WdsRadius.radius30,
         'label': '30px',
       },
       {
-        'name': 'full',
-        'value': WdsRadius.full,
-        'label': '99999px',
+        'name': '9999',
+        'value': WdsRadius.radius9999,
+        'label': '9999px',
       },
     ];
 

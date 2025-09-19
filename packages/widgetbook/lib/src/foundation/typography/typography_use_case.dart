@@ -310,7 +310,7 @@ class _StylesSection extends StatelessWidget {
           label: 'Caption 12 Reading',
           tokenName: 'WdsSemanticTypography.caption12ReadingMedium',
           fontSize: tokens.WdsAtomicFontSize.v12,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v16,
+          lineHeightPx: tokens.WdsAtomicFontLineHeight.v18,
           styles: [
             tokens.WdsSemanticTypography.caption12ReadingBold,
             tokens.WdsSemanticTypography.caption12ReadingMedium,

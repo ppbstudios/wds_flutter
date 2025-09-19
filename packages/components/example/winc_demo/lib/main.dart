@@ -102,23 +102,28 @@ class _WDSDemoState extends State<WDSDemo> {
       bottomNavigationBar: WdsBottomNavigation(
         items: [
           const WdsBottomNavigationItem(
-            icon: WdsNavigationIcon.home,
+            activeIcon: WdsIcon.homeFilled,
+            inactiveIcon: WdsIcon.home,
             label: '홈',
           ),
           const WdsBottomNavigationItem(
-            icon: WdsNavigationIcon.store,
+            activeIcon: WdsIcon.storeFilled,
+            inactiveIcon: WdsIcon.store,
             label: '내 예약매장',
           ),
           const WdsBottomNavigationItem(
-            icon: WdsNavigationIcon.category,
+            activeIcon: WdsIcon.categoryFilled,
+            inactiveIcon: WdsIcon.category,
             label: '카테고리',
           ),
           const WdsBottomNavigationItem(
-            icon: WdsNavigationIcon.like,
+            activeIcon: WdsIcon.likeFilled,
+            inactiveIcon: WdsIcon.like,
             label: '좋아요',
           ),
           const WdsBottomNavigationItem(
-            icon: WdsNavigationIcon.my,
+            activeIcon: WdsIcon.myFilled,
+            inactiveIcon: WdsIcon.my,
             label: '마이윙크',
           ),
         ],
@@ -154,13 +159,13 @@ class _HomeViewState extends State<HomeView>
         actions: [
           WdsIconButton(
             onTap: () {
-              print('search');
+              debugPrint('search');
             },
             icon: WdsIcon.search.build(),
           ),
           WdsIconButton(
             onTap: () {
-              print('cart');
+              debugPrint('cart');
             },
             icon: WdsIcon.cart.build(),
           ),
@@ -311,7 +316,7 @@ class _HomeTabState extends State<HomeTab> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: ClipRRect(
               borderRadius: const BorderRadius.all(
-                Radius.circular(WdsRadius.lg),
+                Radius.circular(WdsRadius.radius16),
               ),
               child: SizedBox(
                 height: fixedCarouselHeight,
@@ -405,10 +410,10 @@ class _HomeTabState extends State<HomeTab> {
 
         /// HEADING: 키워드로 보는 인기 렌즈
         SliverToBoxAdapter(
-          child: WdsHeading.lg(
+          child: WdsHeading.large(
             title: '키워드로 보는 인기렌즈',
             moreText: '더보기',
-            onMoreTap: () => print('more tapped'),
+            onMoreTap: () => debugPrint('more tapped'),
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 6)),
@@ -464,14 +469,15 @@ class _HomeTabState extends State<HomeTab> {
 
             final scaleFactor =
                 width /
-                (WdsItemCardSize.xl.thumbnailSize.size.width * crossAxisCount);
+                (WdsItemCardSize.xlarge.thumbnailSize.size.width *
+                    crossAxisCount);
 
             final scaledThumnailHeight =
-                WdsItemCardSize.xl.thumbnailSize.size.height * scaleFactor;
+                WdsItemCardSize.xlarge.thumbnailSize.size.height * scaleFactor;
 
             final otherElementHeight =
-                WdsItemCardSize.xl.cardHeight -
-                WdsItemCardSize.xl.thumbnailSize.size.height;
+                WdsItemCardSize.xlarge.cardHeight -
+                WdsItemCardSize.xlarge.thumbnailSize.size.height;
 
             final totalCardHeight = scaledThumnailHeight + otherElementHeight;
 
@@ -486,7 +492,7 @@ class _HomeTabState extends State<HomeTab> {
               crossAxisSpacing: 2,
               children: $dummyProducts
                   .map(
-                    (product) => WdsItemCard.xl(
+                    (product) => WdsItemCard.xlarge(
                       onLiked: () {},
                       thumbnailImageUrl: product.thumbnailImageUrl,
                       lensPatternImageUrl: product.lensPatternImageUrl,
@@ -516,10 +522,10 @@ class _HomeTabState extends State<HomeTab> {
 
         /// HEADING2: 키워드로 보는 인기 렌즈
         SliverToBoxAdapter(
-          child: WdsHeading.lg(
+          child: WdsHeading.large(
             title: '키워드로 보는 인기렌즈2',
             moreText: '더보기',
-            onMoreTap: () => print('more tapped'),
+            onMoreTap: () => debugPrint('more tapped'),
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 6)),
@@ -572,7 +578,7 @@ class _HomeTabState extends State<HomeTab> {
               return SliverToBoxAdapter(
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(
-                    Radius.circular(WdsRadius.lg),
+                    Radius.circular(WdsRadius.radius16),
                   ),
                   child: Stack(
                     children: [
@@ -603,7 +609,7 @@ class _HomeTabState extends State<HomeTab> {
                               mainAxisSize: MainAxisSize.min,
                               spacing: 4,
                               children: [
-                                WdsNavigationIcon.like.build(
+                                WdsIcon.like.build(
                                   width: 12,
                                   height: 12,
                                   color: WdsColors.white,
@@ -645,7 +651,7 @@ class _HomeTabState extends State<HomeTab> {
                 itemBuilder: (context, index) {
                   final product = $dummyProducts[index];
 
-                  return WdsItemCard.xs(
+                  return WdsItemCard.xsmall(
                     onLiked: () {},
                     thumbnailImageUrl: product.thumbnailImageUrl,
                     productName: product.productName,
@@ -677,7 +683,7 @@ class _DefaultQuickItem extends StatelessWidget {
     return const DecoratedBox(
       decoration: BoxDecoration(
         color: WdsColors.neutral50,
-        borderRadius: BorderRadius.all(Radius.circular(WdsRadius.lg)),
+        borderRadius: BorderRadius.all(Radius.circular(WdsRadius.radius16)),
       ),
       child: SizedBox.square(dimension: 62),
     );
