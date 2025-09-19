@@ -4,7 +4,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(
   name: 'MenuItem',
-  type: WdsMenuItem,
+  type: MenuItem,
   path: '[component]/',
 )
 Widget buildWdsMenuItemUseCase(BuildContext context) {

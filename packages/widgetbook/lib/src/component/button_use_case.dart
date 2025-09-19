@@ -109,7 +109,12 @@ Widget _buildPlaygroundSection(BuildContext context) {
       'hasLeadingIcon: $hasLeadingIcon',
       'leadingIcon: $leadingIcon',
     ],
-    child: button,
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        button,
+      ],
+    ),
   );
 }
 

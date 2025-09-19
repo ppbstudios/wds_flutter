@@ -145,6 +145,14 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'Circular',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Circular',
+          builder: _wds_widgetbook_src_component_circular_use_case
+              .buildCircularUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'Divider',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Divider',
@@ -193,6 +201,22 @@ final directories = <_widgetbook.WidgetbookNode>[
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
+        name: 'Loading',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Loading',
+          builder: _wds_widgetbook_src_component_loading_use_case
+              .buildLoadingUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'MenuItem',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'MenuItem',
+          builder: _wds_widgetbook_src_component_menu_item_use_case
+              .buildWdsMenuItemUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
         name: 'Option',
         useCase: _widgetbook.WidgetbookUseCase(
           name: 'Option',
@@ -238,6 +262,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'SectionMessage',
           builder: _wds_widgetbook_src_component_section_message_use_case
               .buildWdsSectionMessageUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'SegmentedControl',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'SegmentedControl',
+          builder: _wds_widgetbook_src_component_segmented_control_use_case
+              .buildWdsSegmentedControlUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(
@@ -341,38 +373,6 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'Tooltip',
           builder: _wds_widgetbook_src_component_tooltip_use_case
               .buildWdsTooltipUseCase,
-        ),
-      ),
-      _widgetbook.WidgetbookLeafComponent(
-        name: 'WdsCircular',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'Circular',
-          builder: _wds_widgetbook_src_component_circular_use_case
-              .buildCircularUseCase,
-        ),
-      ),
-      _widgetbook.WidgetbookLeafComponent(
-        name: 'WdsLoading',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'Loading',
-          builder: _wds_widgetbook_src_component_loading_use_case
-              .buildLoadingUseCase,
-        ),
-      ),
-      _widgetbook.WidgetbookLeafComponent(
-        name: 'WdsMenuItem',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'MenuItem',
-          builder: _wds_widgetbook_src_component_menu_item_use_case
-              .buildWdsMenuItemUseCase,
-        ),
-      ),
-      _widgetbook.WidgetbookLeafComponent(
-        name: 'WdsSegmentedControl',
-        useCase: _widgetbook.WidgetbookUseCase(
-          name: 'SegmentedControl',
-          builder: _wds_widgetbook_src_component_segmented_control_use_case
-              .buildWdsSegmentedControlUseCase,
         ),
       ),
     ],

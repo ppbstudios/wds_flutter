@@ -89,13 +89,11 @@ class WidgetbookPlayground extends StatelessWidget {
                     ),
                   PlaygroundLayout.center => SizedBox(
                       width: double.infinity,
-                      child: Center(
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth: constraints.maxWidth,
-                          ),
-                          child: content,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: constraints.maxWidth,
                         ),
+                        child: Center(child: content),
                       ),
                     ),
                 },

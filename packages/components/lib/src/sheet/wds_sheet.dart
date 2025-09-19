@@ -44,10 +44,10 @@ abstract class WdsSheet extends StatelessWidget {
 
   factory WdsSheet.fixed({
     required VoidCallback onClose,
-    required VoidCallback onAction,
     required String headerTitle,
     required Widget content,
-    required String actionTitle,
+    VoidCallback? onAction,
+    String? actionTitle,
     Key? key,
   }) =>
       _FixedSheet(
@@ -60,10 +60,10 @@ abstract class WdsSheet extends StatelessWidget {
       );
 
   factory WdsSheet.draggable({
-    required VoidCallback onAction,
     required String headerTitle,
-    required String actionTitle,
     required List<Widget> children,
+    VoidCallback? onAction,
+    String? actionTitle,
     Key? key,
   }) =>
       _DraggableSheet(
@@ -233,7 +233,8 @@ class __SheetHandle extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: WdsColors.borderAlternative,
-            borderRadius: BorderRadius.all(Radius.circular(WdsRadius.radius9999)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(WdsRadius.radius9999)),
           ),
           child: SizedBox(
             width: _SheetDimensions.handleWidth,

@@ -237,6 +237,7 @@ class _WdsButtonState extends State<WdsButton>
         child: Padding(
           padding: padding,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (widget.leadingIcon != null) ...[
                 widget.leadingIcon!.build(
