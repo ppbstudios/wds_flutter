@@ -21,5 +21,4 @@ flutter:
   assets:
     - assets/
     - assets/vector/
-    - assets/vector/navigation/
     - assets/vector/order_status/
