@@ -12,7 +12,9 @@ import 'package:flutter/material.dart'
         TextSelectionTheme,
         TextSelectionThemeData,
         CircularProgressIndicator,
-        Colors;
+        Colors,
+        VisualDensity;
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wds_foundation/wds_foundation.dart';
 
@@ -46,6 +48,7 @@ part 'src/snackbar/wds_snackbar.dart';
 part 'src/switch/wds_switch.dart';
 part 'src/tab/wds_tab.dart';
 part 'src/tag/wds_tag.dart';
+part 'src/text_area/wds_text_area.dart';
 part 'src/text_field/wds_search_field.dart';
 part 'src/text_field/wds_text_field.dart';
 part 'src/thumbnail/wds_thumbnail.dart';
