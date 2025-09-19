@@ -123,12 +123,12 @@ class WdsButton extends StatefulWidget {
     this.isEnabled = true,
     this.variant = WdsButtonVariant.cta,
     this.size = WdsButtonSize.medium,
-    this.icon,
+    this.leadingIcon,
     this.isLoading = false,
     super.key,
   }) : assert(
-          icon == null || child is Text,
-          'icon은 자식 위젯이 Text인 경우에만 사용 가능합니다.',
+          leadingIcon == null || child is Text,
+          'leadingIcon은 자식 위젯이 Text인 경우에만 사용 가능합니다.',
         );
 
   final VoidCallback? onTap;
@@ -136,7 +136,7 @@ class WdsButton extends StatefulWidget {
   final bool isEnabled;
   final WdsButtonVariant variant;
   final WdsButtonSize size;
-  final WdsIcon? icon;
+  final WdsIcon? leadingIcon;
   final bool isLoading;
 
   @override
@@ -238,8 +238,8 @@ class _WdsButtonState extends State<WdsButton>
           padding: padding,
           child: Row(
             children: [
-              if (widget.icon != null) ...[
-                widget.icon!.build(
+              if (widget.leadingIcon != null) ...[
+                widget.leadingIcon!.build(
                   color: style.foreground,
                   width: _ButtonIconBySize.ofSize(widget.size),
                   height: _ButtonIconBySize.ofSize(widget.size),
