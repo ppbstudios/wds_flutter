@@ -242,16 +242,50 @@ class _SwatchRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      runSpacing: 12,
-      children: [
-        for (final item in items)
-          _ColorSwatch(
-            item: item,
-            showHex: showHex,
-            valueSuffix: valueSuffix,
-          ),
-      ],
+    if (items.length <= 3) {
+      return Row(
+        children: [
+          for (final item in items)
+            Expanded(
+              child: _ColorSwatch(
+                item: item,
+                showHex: showHex,
+                valueSuffix: valueSuffix,
+              ),
+            ),
+        ],
+      );
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth > 767) {
+          return Row(
+            children: [
+              for (final item in items)
+                Expanded(
+                  child: _ColorSwatch(
+                    item: item,
+                    showHex: showHex,
+                    valueSuffix: valueSuffix,
+                  ),
+                ),
+            ],
+          );
+        }
+
+        return Wrap(
+          runSpacing: 12,
+          children: [
+            for (final item in items)
+              _ColorSwatch(
+                item: item,
+                showHex: showHex,
+                valueSuffix: valueSuffix,
+              ),
+          ],
+        );
+      },
     );
   }
 }
@@ -274,14 +308,14 @@ class _ColorSwatch extends StatelessWidget {
     final valueText =
         showHex ? hex.substring(2) : '${item.label}${valueSuffix ?? ''}';
 
-    return SizedBox(
-      width: 96,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minWidth: 96),
       child: Column(
         children: [
-          Container(
-            height: 56,
-            decoration: BoxDecoration(
-              color: item.color,
+          ColoredBox(
+            color: item.color,
+            child: SizedBox.fromSize(
+              size: const Size.fromHeight(64),
             ),
           ),
           const SizedBox(height: 8),

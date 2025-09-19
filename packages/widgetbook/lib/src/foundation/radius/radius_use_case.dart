@@ -27,48 +27,49 @@ class RadiusUseCase extends StatelessWidget {
   Widget _buildRadiusTable() {
     final radiusTokens = [
       {
-        'name': '0',
+        'name': 'v0',
         'value': WdsRadius.radius0,
         'label': '0px',
       },
       {
-        'name': '4',
+        'name': 'v4',
         'value': WdsRadius.radius4,
         'label': '4px',
       },
       {
-        'name': '8',
+        'name': 'v8',
         'value': WdsRadius.radius8,
         'label': '8px',
       },
       {
-        'name': '12',
+        'name': 'v12',
         'value': WdsRadius.radius12,
         'label': '12px',
       },
       {
-        'name': '16',
+        'name': 'v16',
         'value': WdsRadius.radius16,
         'label': '16px',
       },
       {
-        'name': '20',
+        'name': 'v20',
         'value': WdsRadius.radius20,
         'label': '20px',
       },
       {
-        'name': '30',
+        'name': 'v30',
         'value': WdsRadius.radius30,
         'label': '30px',
       },
       {
-        'name': '9999',
+        'name': 'v9999',
         'value': WdsRadius.radius9999,
         'label': '9999px',
       },
     ];
 
     return Table(
+      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       columnWidths: const {
         0: FlexColumnWidth(2),
         1: FlexColumnWidth(),
@@ -122,25 +123,12 @@ class RadiusUseCase extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      token['name']! as String,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Primitive',
-                      style: TextStyle(
-                        color: Colors.grey.shade600,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
+                child: Text(
+                  token['name']! as String,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
                 ),
               ),
               Padding(
