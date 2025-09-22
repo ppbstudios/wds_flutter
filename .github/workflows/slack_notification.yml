@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - token-studio-for-figma
+    paths:
+      - 'tokens/**'
 
 jobs:
   send-slack-notification:
