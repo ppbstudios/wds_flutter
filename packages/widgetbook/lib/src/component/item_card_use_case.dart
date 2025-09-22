@@ -101,10 +101,10 @@ Widget _buildPlaygroundSection(BuildContext context) {
     initialValue: 4492,
     description: '리뷰 개수를 설정해요',
   );
-
+  const int initialLikeCount = 2374;
   int likeCount = context.knobs.int.input(
     label: 'likeCount',
-    initialValue: 2374,
+    initialValue: initialLikeCount,
     description: '좋아요 개수를 설정해요',
   );
 
@@ -132,15 +132,19 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
     final state = WidgetbookState.maybeOf(context);
 
+    likeCount = initialLikeCount + (hasLiked ? 1 : 0);
+    hasLiked = !hasLiked;
+
     state?.updateQueryField(
       group: 'knobs',
       field: 'hasLiked',
-      value: (!hasLiked).toString(),
+      value: hasLiked.toString(),
     );
+
     state?.updateQueryField(
       group: 'knobs',
       field: 'likeCount',
-      value: (likeCount + (hasLiked ? 1 : 0)).toString(),
+      value: likeCount.toString(),
     );
   }
 
@@ -262,8 +266,43 @@ class __BuildDemonstrationSectionState
     WdsItemCardSize.xsmall: false,
   };
 
-  int getLikeCount(WdsItemCardSize size) {
-    return 9878 + ((hasLikedMap[size] ?? false) ? 1 : 0);
+  late final likedMapByTitle = {
+    'variant': Map<WdsItemCardSize, bool>.from(hasLikedMap),
+    'case_0': Map<WdsItemCardSize, bool>.from(hasLikedMap),
+    'case_1': Map<WdsItemCardSize, bool>.from(hasLikedMap),
+    'case_2': Map<WdsItemCardSize, bool>.from(hasLikedMap),
+    'case_3': Map<WdsItemCardSize, bool>.from(hasLikedMap),
+    'case_4': Map<WdsItemCardSize, bool>.from(hasLikedMap),
+  };
+
+  int getLikeCount(String key, WdsItemCardSize size) {
+    if (!likedMapByTitle.containsKey(key) ||
+        !likedMapByTitle[key]!.containsKey(size)) {
+      return 0;
+    }
+
+    final hasLiked = likedMapByTitle[key]![size] ?? false;
+
+    return 9878 + (hasLiked ? 1 : 0);
+  }
+
+  bool getHasLiked(String key, WdsItemCardSize size) {
+    if (!likedMapByTitle.containsKey(key) ||
+        !likedMapByTitle[key]!.containsKey(size)) {
+      return false;
+    }
+
+    return likedMapByTitle[key]![size] ?? false;
+  }
+
+  void onLiked(String key, WdsItemCardSize size) {
+    if (!likedMapByTitle.containsKey(key) ||
+        !likedMapByTitle[key]!.containsKey(size)) {
+      return;
+    }
+
+    final hasLiked = likedMapByTitle[key]![size] ?? false;
+    setState(() => likedMapByTitle[key]![size] = !hasLiked);
   }
 
   @override
@@ -281,11 +320,8 @@ class __BuildDemonstrationSectionState
               SizedBox(
                 width: WdsThumbnailSize.xlarge.size.width,
                 child: WdsItemCard.xlarge(
-                  onLiked: () => setState(
-                    () => hasLikedMap[WdsItemCardSize.xlarge] =
-                        !(hasLikedMap[WdsItemCardSize.xlarge] ?? false),
-                  ),
-                  hasLiked: hasLikedMap[WdsItemCardSize.xlarge] ?? false,
+                  onLiked: () => onLiked('variant', WdsItemCardSize.xlarge),
+                  hasLiked: getHasLiked('variant', WdsItemCardSize.xlarge),
                   thumbnailImageUrl: productThumbnailUrl,
                   lensPatternImageUrl: productLensPatternImageUrl,
                   brandName: '하파크리스틴',
@@ -296,7 +332,7 @@ class __BuildDemonstrationSectionState
                   salePrice: 19900,
                   rating: 4.5,
                   reviewCount: 4342,
-                  likeCount: getLikeCount(WdsItemCardSize.xlarge),
+                  likeCount: getLikeCount('variant', WdsItemCardSize.xlarge),
                   tags: const [
                     WdsTag.normal(label: 'NEW'),
                     WdsTag(
@@ -311,11 +347,8 @@ class __BuildDemonstrationSectionState
               SizedBox(
                 width: WdsThumbnailSize.large.size.width,
                 child: WdsItemCard.large(
-                  onLiked: () => setState(
-                    () => hasLikedMap[WdsItemCardSize.large] =
-                        !(hasLikedMap[WdsItemCardSize.large] ?? false),
-                  ),
-                  hasLiked: hasLikedMap[WdsItemCardSize.large] ?? false,
+                  onLiked: () => onLiked('variant', WdsItemCardSize.large),
+                  hasLiked: getHasLiked('variant', WdsItemCardSize.large),
                   thumbnailImageUrl: productThumbnailUrl,
                   lensPatternImageUrl: productLensPatternImageUrl,
                   brandName: '하파크리스틴',
@@ -326,7 +359,7 @@ class __BuildDemonstrationSectionState
                   salePrice: 19900,
                   rating: 4.5,
                   reviewCount: 4342,
-                  likeCount: getLikeCount(WdsItemCardSize.large),
+                  likeCount: getLikeCount('variant', WdsItemCardSize.large),
                   tags: const [
                     WdsTag.normal(label: '신상품'),
                   ],
@@ -336,11 +369,8 @@ class __BuildDemonstrationSectionState
                 width: 300,
                 height: WdsThumbnailSize.medium.size.height,
                 child: WdsItemCard.medium(
-                  onLiked: () => setState(
-                    () => hasLikedMap[WdsItemCardSize.medium] =
-                        !(hasLikedMap[WdsItemCardSize.medium] ?? false),
-                  ),
-                  hasLiked: hasLikedMap[WdsItemCardSize.medium] ?? false,
+                  onLiked: () => onLiked('variant', WdsItemCardSize.medium),
+                  hasLiked: getHasLiked('variant', WdsItemCardSize.medium),
                   thumbnailImageUrl: productThumbnailUrl,
                   lensPatternImageUrl: productLensPatternImageUrl,
                   brandName: '하파크리스틴',
@@ -351,7 +381,7 @@ class __BuildDemonstrationSectionState
                   salePrice: 19900,
                   rating: 4.5,
                   reviewCount: 1234,
-                  likeCount: getLikeCount(WdsItemCardSize.medium),
+                  likeCount: getLikeCount('variant', WdsItemCardSize.medium),
                   tags: const [
                     WdsTag.filled(label: '베스트'),
                   ],
@@ -361,11 +391,8 @@ class __BuildDemonstrationSectionState
                 width: 300,
                 height: WdsThumbnailSize.xsmall.size.height,
                 child: WdsItemCard.xsmall(
-                  onLiked: () => setState(
-                    () => hasLikedMap[WdsItemCardSize.xsmall] =
-                        !(hasLikedMap[WdsItemCardSize.xsmall] ?? false),
-                  ),
-                  hasLiked: hasLikedMap[WdsItemCardSize.xsmall] ?? false,
+                  onLiked: () => onLiked('variant', WdsItemCardSize.xsmall),
+                  hasLiked: getHasLiked('variant', WdsItemCardSize.xsmall),
                   thumbnailImageUrl: productThumbnailUrl,
                   productName: '빈 크리스틴 원데이 드립브라운',
                   lensType: '하루용',
@@ -374,7 +401,7 @@ class __BuildDemonstrationSectionState
                   salePrice: 19900,
                   rating: 4.5,
                   reviewCount: 127,
-                  likeCount: getLikeCount(WdsItemCardSize.xsmall),
+                  likeCount: getLikeCount('variant', WdsItemCardSize.xsmall),
                 ),
               ),
             ],
@@ -397,7 +424,7 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: WdsThumbnailSize.xlarge.size.width,
                     child: WdsItemCard.xlarge(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_0', WdsItemCardSize.xlarge),
                       thumbnailImageUrl: productThumbnailUrl,
                       lensPatternImageUrl: productLensPatternImageUrl,
                       brandName: '하파크리스틴',
@@ -408,7 +435,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 29900,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_0', WdsItemCardSize.xlarge),
+                      likeCount: getLikeCount('case_0', WdsItemCardSize.xlarge),
                       tags: [
                         const WdsTag.normal(label: '내 도수보유'),
                         const WdsTag(label: '바로드림', color: WdsColors.primary),
@@ -418,7 +446,7 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: WdsThumbnailSize.large.size.width,
                     child: WdsItemCard.large(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_0', WdsItemCardSize.large),
                       thumbnailImageUrl: productThumbnailUrl,
                       lensPatternImageUrl: productLensPatternImageUrl,
                       brandName: '하파크리스틴',
@@ -429,7 +457,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 29900,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_0', WdsItemCardSize.large),
+                      likeCount: getLikeCount('case_0', WdsItemCardSize.large),
                       tags: [
                         const WdsTag.normal(label: '내 도수보유'),
                         const WdsTag(label: '바로드림', color: WdsColors.primary),
@@ -440,7 +469,7 @@ class __BuildDemonstrationSectionState
                     width: 300,
                     height: WdsThumbnailSize.medium.size.height,
                     child: WdsItemCard.medium(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_0', WdsItemCardSize.medium),
                       thumbnailImageUrl: productThumbnailUrl,
                       lensPatternImageUrl: productLensPatternImageUrl,
                       brandName: '하파크리스틴',
@@ -451,7 +480,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 29900,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_0', WdsItemCardSize.medium),
+                      likeCount: getLikeCount('case_0', WdsItemCardSize.medium),
                       tags: [
                         const WdsTag.normal(label: '내 도수보유'),
                         const WdsTag(label: '바로드림', color: WdsColors.primary),
@@ -462,7 +492,7 @@ class __BuildDemonstrationSectionState
                     width: 300,
                     height: WdsThumbnailSize.xsmall.size.height,
                     child: WdsItemCard.xsmall(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_0', WdsItemCardSize.xsmall),
                       thumbnailImageUrl: productThumbnailUrl,
                       productName: '빈 크리스틴 원데이 드립브라운',
                       lensType: '하루용',
@@ -471,7 +501,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 29900,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_0', WdsItemCardSize.xsmall),
+                      likeCount: getLikeCount('case_0', WdsItemCardSize.xsmall),
                     ),
                   ),
                 ],
@@ -485,7 +516,7 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: WdsThumbnailSize.xlarge.size.width,
                     child: WdsItemCard.xlarge(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_1', WdsItemCardSize.xlarge),
                       thumbnailImageUrl: productThumbnailUrl,
                       lensPatternImageUrl: productLensPatternImageUrl,
                       brandName: '하파크리스틴',
@@ -496,7 +527,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 29900,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_1', WdsItemCardSize.xlarge),
+                      likeCount: getLikeCount('case_1', WdsItemCardSize.xlarge),
                       tags: const [
                         WdsTag.normal(label: '내 도수보유'),
                         WdsTag(label: '바로드림', color: WdsColors.primary),
@@ -512,7 +544,7 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: WdsThumbnailSize.large.size.width,
                     child: WdsItemCard.large(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_1', WdsItemCardSize.large),
                       thumbnailImageUrl: productThumbnailUrl,
                       lensPatternImageUrl: productLensPatternImageUrl,
                       brandName: '하파크리스틴',
@@ -523,7 +555,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 29900,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_1', WdsItemCardSize.large),
+                      likeCount: getLikeCount('case_1', WdsItemCardSize.large),
                       tags: const [
                         WdsTag.normal(label: '내 도수보유'),
                         WdsTag(label: '바로드림', color: WdsColors.primary),
@@ -540,7 +573,7 @@ class __BuildDemonstrationSectionState
                     width: 300,
                     height: WdsThumbnailSize.medium.size.height,
                     child: WdsItemCard.medium(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_1', WdsItemCardSize.medium),
                       thumbnailImageUrl: productThumbnailUrl,
                       lensPatternImageUrl: productLensPatternImageUrl,
                       brandName: '하파크리스틴',
@@ -551,7 +584,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 29900,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_1', WdsItemCardSize.medium),
+                      likeCount: getLikeCount('case_1', WdsItemCardSize.medium),
                       tags: [
                         const WdsTag.normal(label: '내 도수보유'),
                         const WdsTag(label: '바로드림', color: WdsColors.primary),
@@ -562,7 +596,7 @@ class __BuildDemonstrationSectionState
                     width: 300,
                     height: WdsThumbnailSize.xsmall.size.height,
                     child: WdsItemCard.xsmall(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_1', WdsItemCardSize.xsmall),
                       thumbnailImageUrl: productThumbnailUrl,
                       productName: '빈 크리스틴 원데이 드립브라운',
                       lensType: '하루용',
@@ -571,7 +605,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 29900,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_1', WdsItemCardSize.xsmall),
+                      likeCount: getLikeCount('case_1', WdsItemCardSize.xsmall),
                       tags: [
                         const WdsTag.normal(label: '내 도수보유'),
                         const WdsTag(label: '바로드림', color: WdsColors.primary),
@@ -589,7 +624,7 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: WdsThumbnailSize.xlarge.size.width,
                     child: WdsItemCard.xlarge(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_2', WdsItemCardSize.xlarge),
                       thumbnailImageUrl: productThumbnailUrl,
                       lensPatternImageUrl: productLensPatternImageUrl,
                       brandName: '하파크리스틴',
@@ -601,7 +636,8 @@ class __BuildDemonstrationSectionState
                       isSoldOut: true,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_2', WdsItemCardSize.xlarge),
+                      likeCount: getLikeCount('case_2', WdsItemCardSize.xlarge),
                       tags: const [
                         WdsTag.normal(label: '내 도수보유'),
                         WdsTag(label: '바로드림', color: WdsColors.primary),
@@ -617,7 +653,7 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: WdsThumbnailSize.large.size.width,
                     child: WdsItemCard.large(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_2', WdsItemCardSize.large),
                       thumbnailImageUrl: productThumbnailUrl,
                       lensPatternImageUrl: productLensPatternImageUrl,
                       brandName: '하파크리스틴',
@@ -629,7 +665,8 @@ class __BuildDemonstrationSectionState
                       isSoldOut: true,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_2', WdsItemCardSize.large),
+                      likeCount: getLikeCount('case_2', WdsItemCardSize.large),
                       leftThumbnailTags: const [
                         WdsTag.$new(),
                       ],
@@ -640,7 +677,7 @@ class __BuildDemonstrationSectionState
                     width: 300,
                     height: WdsThumbnailSize.medium.size.height,
                     child: WdsItemCard.medium(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_2', WdsItemCardSize.medium),
                       thumbnailImageUrl: productThumbnailUrl,
                       lensPatternImageUrl: productLensPatternImageUrl,
                       brandName: '하파크리스틴',
@@ -652,14 +689,15 @@ class __BuildDemonstrationSectionState
                       isSoldOut: true,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_2', WdsItemCardSize.medium),
+                      likeCount: getLikeCount('case_2', WdsItemCardSize.medium),
                     ),
                   ),
                   SizedBox(
                     width: 300,
                     height: WdsThumbnailSize.xsmall.size.height,
                     child: WdsItemCard.xsmall(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_2', WdsItemCardSize.xsmall),
                       thumbnailImageUrl: productThumbnailUrl,
                       productName: '빈 크리스틴 원데이 드립브라운',
                       lensType: '하루용',
@@ -669,7 +707,8 @@ class __BuildDemonstrationSectionState
                       isSoldOut: true,
                       rating: 4.51,
                       reviewCount: 12345,
-                      likeCount: 18239,
+                      hasLiked: getHasLiked('case_2', WdsItemCardSize.xsmall),
+                      likeCount: getLikeCount('case_2', WdsItemCardSize.xsmall),
                     ),
                   ),
                 ],
@@ -683,7 +722,7 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: WdsThumbnailSize.xlarge.size.width,
                     child: WdsItemCard.xlarge(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_3', WdsItemCardSize.xlarge),
                       thumbnailImageUrl: etcProductThumbnailUrl,
                       brandName: '젬아워',
                       productName: '젬아워 렌즈케이스 퍼플',
@@ -693,13 +732,14 @@ class __BuildDemonstrationSectionState
                       salePrice: 3000,
                       rating: 4.23,
                       reviewCount: 123,
-                      likeCount: 312,
+                      hasLiked: getHasLiked('case_3', WdsItemCardSize.xlarge),
+                      likeCount: getLikeCount('case_3', WdsItemCardSize.xlarge),
                     ),
                   ),
                   SizedBox(
                     width: WdsThumbnailSize.large.size.width,
                     child: WdsItemCard.large(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_3', WdsItemCardSize.large),
                       thumbnailImageUrl: etcProductThumbnailUrl,
                       brandName: '젬아워',
                       productName: '젬아워 렌즈케이스 퍼플',
@@ -709,14 +749,15 @@ class __BuildDemonstrationSectionState
                       salePrice: 3000,
                       rating: 4.23,
                       reviewCount: 123,
-                      likeCount: 312,
+                      hasLiked: getHasLiked('case_3', WdsItemCardSize.large),
+                      likeCount: getLikeCount('case_3', WdsItemCardSize.large),
                     ),
                   ),
                   SizedBox(
                     width: 300,
                     height: WdsThumbnailSize.medium.size.height,
                     child: WdsItemCard.medium(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_3', WdsItemCardSize.medium),
                       thumbnailImageUrl: etcProductThumbnailUrl,
                       brandName: '젬아워',
                       productName: '젬아워 렌즈케이스 퍼플',
@@ -726,14 +767,15 @@ class __BuildDemonstrationSectionState
                       salePrice: 3000,
                       rating: 4.23,
                       reviewCount: 123,
-                      likeCount: 312,
+                      hasLiked: getHasLiked('case_3', WdsItemCardSize.medium),
+                      likeCount: getLikeCount('case_3', WdsItemCardSize.medium),
                     ),
                   ),
                   SizedBox(
                     width: 300,
                     height: WdsThumbnailSize.xsmall.size.height,
                     child: WdsItemCard.xsmall(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_3', WdsItemCardSize.xsmall),
                       thumbnailImageUrl: etcProductThumbnailUrl,
                       productName: '젬아워 렌즈케이스 퍼플',
                       lensType: null,
@@ -742,7 +784,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 3000,
                       rating: 4.23,
                       reviewCount: 123,
-                      likeCount: 312,
+                      hasLiked: getHasLiked('case_3', WdsItemCardSize.xsmall),
+                      likeCount: getLikeCount('case_3', WdsItemCardSize.xsmall),
                     ),
                   ),
                 ],
@@ -756,7 +799,7 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: WdsThumbnailSize.xlarge.size.width,
                     child: WdsItemCard.xlarge(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_4', WdsItemCardSize.xlarge),
                       thumbnailImageUrl: setProductThumbnailUrl,
                       brandName: '윙크',
                       productName: '[원데이] 첫사랑 렌즈 2팩 골라담기',
@@ -766,14 +809,15 @@ class __BuildDemonstrationSectionState
                       salePrice: 50000,
                       rating: 3.95,
                       reviewCount: 99,
-                      likeCount: 128,
+                      hasLiked: getHasLiked('case_4', WdsItemCardSize.xlarge),
+                      likeCount: getLikeCount('case_4', WdsItemCardSize.xlarge),
                       rightThumbnailTag: const WdsTag.$coupon(),
                     ),
                   ),
                   SizedBox(
                     width: WdsThumbnailSize.large.size.width,
                     child: WdsItemCard.large(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_4', WdsItemCardSize.large),
                       thumbnailImageUrl: setProductThumbnailUrl,
                       brandName: '윙크',
                       productName: '[원데이] 첫사랑 렌즈 2팩 골라담기',
@@ -783,7 +827,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 50000,
                       rating: 3.95,
                       reviewCount: 99,
-                      likeCount: 128,
+                      hasLiked: getHasLiked('case_4', WdsItemCardSize.large),
+                      likeCount: getLikeCount('case_4', WdsItemCardSize.large),
                       rightThumbnailTag: const WdsTag.$coupon(),
                     ),
                   ),
@@ -791,7 +836,7 @@ class __BuildDemonstrationSectionState
                     width: 300,
                     height: WdsThumbnailSize.medium.size.height,
                     child: WdsItemCard.medium(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_4', WdsItemCardSize.medium),
                       thumbnailImageUrl: setProductThumbnailUrl,
                       brandName: '윙크',
                       productName: '[원데이] 첫사랑 렌즈 2팩 골라담기',
@@ -801,14 +846,15 @@ class __BuildDemonstrationSectionState
                       salePrice: 50000,
                       rating: 3.95,
                       reviewCount: 99,
-                      likeCount: 128,
+                      hasLiked: getHasLiked('case_4', WdsItemCardSize.medium),
+                      likeCount: getLikeCount('case_4', WdsItemCardSize.medium),
                     ),
                   ),
                   SizedBox(
                     width: 300,
                     height: WdsThumbnailSize.xsmall.size.height,
                     child: WdsItemCard.xsmall(
-                      onLiked: () {},
+                      onLiked: () => onLiked('case_4', WdsItemCardSize.xsmall),
                       thumbnailImageUrl: setProductThumbnailUrl,
                       productName: '[원데이] 첫사랑 렌즈 2팩 골라담기',
                       lensType: null,
@@ -817,7 +863,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 50000,
                       rating: 3.95,
                       reviewCount: 99,
-                      likeCount: 128,
+                      hasLiked: getHasLiked('case_4', WdsItemCardSize.xsmall),
+                      likeCount: getLikeCount('case_4', WdsItemCardSize.xsmall),
                     ),
                   ),
                 ],
