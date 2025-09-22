@@ -1,0 +1,46 @@
+name: Slack Notification on Token Update
+
+on:
+  push:
+    branches:
+      - token-studio-for-figma
+
+jobs:
+  send-slack-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          # Sending a simple message. You can customize this message further.
+          payload: |
+            {
+              "username": "FigmaBot",
+              "icon_emoji": ":art:",
+              "text": "🎨 Figma 토큰이 업데이트되었습니다. 최신 변경사항을 확인해주세요!",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "🎨 *Figma 토큰 업데이트*\n<${{ github.server_url }}/${{ github.repository }}/tree/token-studio-for-figma|token-studio-for-figma> 브랜치에 새로운 변경사항이 푸시되었습니다. 확인 후 라이브러리를 업데이트해주세요."
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Repository:* ${{ github.repository }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Actor:* ${{ github.actor }}"
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
