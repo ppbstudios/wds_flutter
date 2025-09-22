@@ -58,6 +58,8 @@ import 'package:wds_widgetbook/src/component/select_use_case.dart'
     as _wds_widgetbook_src_component_select_use_case;
 import 'package:wds_widgetbook/src/component/sheet_use_case.dart'
     as _wds_widgetbook_src_component_sheet_use_case;
+import 'package:wds_widgetbook/src/component/skeleton_use_case.dart'
+    as _wds_widgetbook_src_component_skeleton_use_case;
 import 'package:wds_widgetbook/src/component/slider_use_case.dart'
     as _wds_widgetbook_src_component_slider_use_case;
 import 'package:wds_widgetbook/src/component/snackbar_use_case.dart'
@@ -288,6 +290,14 @@ final directories = <_widgetbook.WidgetbookNode>[
           name: 'Sheet',
           builder:
               _wds_widgetbook_src_component_sheet_use_case.buildWdsSheetUseCase,
+        ),
+      ),
+      _widgetbook.WidgetbookLeafComponent(
+        name: 'Skeleton',
+        useCase: _widgetbook.WidgetbookUseCase(
+          name: 'Skeleton',
+          builder: _wds_widgetbook_src_component_skeleton_use_case
+              .buildSkeletonUseCase,
         ),
       ),
       _widgetbook.WidgetbookLeafComponent(

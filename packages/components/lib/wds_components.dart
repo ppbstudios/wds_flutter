@@ -43,6 +43,7 @@ part 'src/section_message/wds_section_message.dart';
 part 'src/segmented_control/wds_segmented_control.dart';
 part 'src/select/wds_select.dart';
 part 'src/sheet/wds_sheet.dart';
+part 'src/skeleton/wds_skeleton.dart';
 part 'src/slider/wds_slider.dart';
 part 'src/snackbar/wds_snackbar.dart';
 part 'src/switch/wds_switch.dart';

@@ -69,6 +69,8 @@ class Select {}
 
 class Sheet {}
 
+class Skeleton {}
+
 class Snackbar {}
 
 class SquareButton {}
