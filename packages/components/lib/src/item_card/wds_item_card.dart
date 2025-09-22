@@ -742,8 +742,8 @@ class __ReviewInfo extends StatelessWidget {
         children: [
           WdsIcon.starFilled.build(
             color: WdsColors.neutral200,
-            width: 10,
-            height: 10,
+            width: 12,
+            height: 12,
           ),
           Text(
             '${rating.clamp(0.0, 5.0).toStringAsFixed(1)} (${reviewCount.clamp(0, 999999).toFormat()})',
@@ -772,10 +772,10 @@ class __LikeInfo extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         spacing: 2,
         children: [
-          WdsIcon.like.build(
+          WdsIcon.likeFilled.build(
             color: WdsColors.neutral200,
-            width: 10,
-            height: 10,
+            width: 12,
+            height: 12,
           ),
           Text(
             likeCount.clamp(0, 999999).toFormat(),
