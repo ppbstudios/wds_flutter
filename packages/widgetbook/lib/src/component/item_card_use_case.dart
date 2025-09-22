@@ -132,8 +132,8 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
     final state = WidgetbookState.maybeOf(context);
 
-    likeCount = initialLikeCount + (hasLiked ? 1 : 0);
     hasLiked = !hasLiked;
+    likeCount = initialLikeCount + (hasLiked ? 1 : 0);
 
     state?.updateQueryField(
       group: 'knobs',
