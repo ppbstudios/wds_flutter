@@ -1,8 +1,15 @@
-name: wds_flutter_workspace
+name: wds
 publish_to: none
-version: 0.0.0
+version: 0.0.1
+description: WINC Design System
 environment:
   sdk: ">=3.2.0 <4.0.0"
+
+dependencies:
+  wds_components:
+    path: packages/components
+  wds_foundation:
+    path: packages/foundation
 
 dev_dependencies:
   flutter_lints: ^5.0.0
