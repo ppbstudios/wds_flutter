@@ -136,213 +136,309 @@ class _StylesSection extends StatelessWidget {
         _StyleTableHeader(),
         const WdsDivider(),
         // Title 32
-        const _TypographyRow(
-          label: 'Title 32',
-          tokenName: 'WdsTypography.title32Medium',
-          fontSize: tokens.WdsAtomicFontSize.v32,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v42,
-          styles: [
-            tokens.WdsSemanticTypography.title32Medium,
-            tokens.WdsSemanticTypography.title32Bold,
-            tokens.WdsSemanticTypography.title32Regular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.title32Bold;
+
+            return _TypographyRow(
+              label: 'Title 32',
+              tokenName: 'WdsTypography.title32Medium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.title32Bold,
+                tokens.WdsSemanticTypography.title32Medium,
+                tokens.WdsSemanticTypography.title32Regular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Title 22
-        const _TypographyRow(
-          label: 'Title 22',
-          tokenName: 'WdsTypography.title22Medium',
-          fontSize: tokens.WdsAtomicFontSize.v22,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v30,
-          styles: [
-            tokens.WdsSemanticTypography.title22Bold,
-            tokens.WdsSemanticTypography.title22Medium,
-            tokens.WdsSemanticTypography.title22Regular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.title22Bold;
+
+            return _TypographyRow(
+              label: 'Title 22',
+              tokenName: 'WdsTypography.title22Medium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.title22Bold,
+                tokens.WdsSemanticTypography.title22Medium,
+                tokens.WdsSemanticTypography.title22Regular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Title 20
-        const _TypographyRow(
-          label: 'Title 20',
-          tokenName: 'WdsTypography.title20Medium',
-          fontSize: tokens.WdsAtomicFontSize.v20,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v28,
-          styles: [
-            tokens.WdsSemanticTypography.title20Bold,
-            tokens.WdsSemanticTypography.title20Medium,
-            tokens.WdsSemanticTypography.title20Regular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.title20Bold;
+
+            return _TypographyRow(
+              label: 'Title 20',
+              tokenName: 'WdsTypography.title20Medium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.title20Bold,
+                tokens.WdsSemanticTypography.title20Medium,
+                tokens.WdsSemanticTypography.title20Regular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Heading 18
-        const _TypographyRow(
-          label: 'Heading 18',
-          tokenName: 'WdsTypography.heading18Medium',
-          fontSize: tokens.WdsAtomicFontSize.v18,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v26,
-          styles: [
-            tokens.WdsSemanticTypography.heading18ExtraBold,
-            tokens.WdsSemanticTypography.heading18Bold,
-            tokens.WdsSemanticTypography.heading18Medium,
-            tokens.WdsSemanticTypography.heading18Regular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.heading18ExtraBold;
+
+            return _TypographyRow(
+              label: 'Heading 18',
+              tokenName: 'WdsTypography.heading18Medium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.heading18ExtraBold,
+                tokens.WdsSemanticTypography.heading18Bold,
+                tokens.WdsSemanticTypography.heading18Medium,
+                tokens.WdsSemanticTypography.heading18Regular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Heading 17
-        const _TypographyRow(
-          label: 'Heading 17',
-          tokenName: 'WdsTypography.heading17Medium',
-          fontSize: tokens.WdsAtomicFontSize.v17,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v24,
-          styles: [
-            tokens.WdsSemanticTypography.heading17ExtraBold,
-            tokens.WdsSemanticTypography.heading17Bold,
-            tokens.WdsSemanticTypography.heading17Medium,
-            tokens.WdsSemanticTypography.heading17Regular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.heading17ExtraBold;
+
+            return _TypographyRow(
+              label: 'Heading 17',
+              tokenName: 'WdsTypography.heading17Medium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.heading17ExtraBold,
+                tokens.WdsSemanticTypography.heading17Bold,
+                tokens.WdsSemanticTypography.heading17Medium,
+                tokens.WdsSemanticTypography.heading17Regular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Heading 16
-        const _TypographyRow(
-          label: 'Heading 16',
-          tokenName: 'WdsTypography.heading16Medium',
-          fontSize: tokens.WdsAtomicFontSize.v16,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v24,
-          styles: [
-            tokens.WdsSemanticTypography.heading16Bold,
-            tokens.WdsSemanticTypography.heading16Medium,
-            tokens.WdsSemanticTypography.heading16Regular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.heading16Bold;
+
+            return _TypographyRow(
+              label: 'Heading 16',
+              tokenName: 'WdsTypography.heading16Medium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.heading16Bold,
+                tokens.WdsSemanticTypography.heading16Medium,
+                tokens.WdsSemanticTypography.heading16Regular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Body 15 Normal
-        const _TypographyRow(
-          label: 'Body 15 Normal',
-          tokenName: 'WdsTypography.body15NormalMedium',
-          fontSize: tokens.WdsAtomicFontSize.v15,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v22,
-          styles: [
-            tokens.WdsSemanticTypography.body15NormalBold,
-            tokens.WdsSemanticTypography.body15NormalMedium,
-            tokens.WdsSemanticTypography.body15NormalRegular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.body15NormalBold;
+
+            return _TypographyRow(
+              label: 'Body 15 Normal',
+              tokenName: 'WdsTypography.body15NormalMedium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.body15NormalBold,
+                tokens.WdsSemanticTypography.body15NormalMedium,
+                tokens.WdsSemanticTypography.body15NormalRegular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Body 15 Reading
-        const _TypographyRow(
-          label: 'Body 15 Reading',
-          tokenName: 'WdsTypography.body15ReadingMedium',
-          fontSize: tokens.WdsAtomicFontSize.v15,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v24,
-          styles: [
-            tokens.WdsSemanticTypography.body15ReadingBold,
-            tokens.WdsSemanticTypography.body15ReadingMedium,
-            tokens.WdsSemanticTypography.body15ReadingRegular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.body15ReadingBold;
+
+            return _TypographyRow(
+              label: 'Body 15 Reading',
+              tokenName: 'WdsTypography.body15ReadingMedium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.body15ReadingBold,
+                tokens.WdsSemanticTypography.body15ReadingMedium,
+                tokens.WdsSemanticTypography.body15ReadingRegular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Body 14 Normal
-        const _TypographyRow(
-          label: 'Body 14 Normal',
-          tokenName: 'WdsTypography.body14NormalMedium',
-          fontSize: tokens.WdsAtomicFontSize.v14,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v20,
-          styles: [
-            tokens.WdsSemanticTypography.body14NormalBold,
-            tokens.WdsSemanticTypography.body14NormalMedium,
-            tokens.WdsSemanticTypography.body14NormalRegular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.body14NormalBold;
+
+            return _TypographyRow(
+              label: 'Body 14 Normal',
+              tokenName: 'WdsTypography.body14NormalMedium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.body14NormalBold,
+                tokens.WdsSemanticTypography.body14NormalMedium,
+                tokens.WdsSemanticTypography.body14NormalRegular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Body 14 Reading
-        const _TypographyRow(
-          label: 'Body 14 Reading',
-          tokenName: 'WdsTypography.body14ReadingMedium',
-          fontSize: tokens.WdsAtomicFontSize.v14,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v22,
-          styles: [
-            tokens.WdsSemanticTypography.body14ReadingBold,
-            tokens.WdsSemanticTypography.body14ReadingMedium,
-            tokens.WdsSemanticTypography.body14ReadingRegular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.body14ReadingBold;
+
+            return _TypographyRow(
+              label: 'Body 14 Reading',
+              tokenName: 'WdsTypography.body14ReadingMedium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.body14ReadingBold,
+                tokens.WdsSemanticTypography.body14ReadingMedium,
+                tokens.WdsSemanticTypography.body14ReadingRegular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Body 13 Normal
-        const _TypographyRow(
-          label: 'Body 13 Normal',
-          tokenName: 'WdsTypography.body13NormalMedium',
-          fontSize: tokens.WdsAtomicFontSize.v13,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v18,
-          styles: [
-            tokens.WdsSemanticTypography.body13NormalBold,
-            tokens.WdsSemanticTypography.body13NormalMedium,
-            tokens.WdsSemanticTypography.body13NormalRegular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.body13NormalBold;
+
+            return _TypographyRow(
+              label: 'Body 13 Normal',
+              tokenName: 'WdsTypography.body13NormalMedium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.body13NormalBold,
+                tokens.WdsSemanticTypography.body13NormalMedium,
+                tokens.WdsSemanticTypography.body13NormalRegular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Body 13 Reading
-        const _TypographyRow(
-          label: 'Body 13 Reading',
-          tokenName: 'WdsTypography.body13ReadingMedium',
-          fontSize: tokens.WdsAtomicFontSize.v13,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v20,
-          styles: [
-            tokens.WdsSemanticTypography.body13ReadingBold,
-            tokens.WdsSemanticTypography.body13ReadingMedium,
-            tokens.WdsSemanticTypography.body13ReadingRegular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.body13ReadingBold;
+
+            return _TypographyRow(
+              label: 'Body 13 Reading',
+              tokenName: 'WdsTypography.body13ReadingMedium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.body13ReadingBold,
+                tokens.WdsSemanticTypography.body13ReadingMedium,
+                tokens.WdsSemanticTypography.body13ReadingRegular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Caption 12
-        const _TypographyRow(
-          label: 'Caption 12 Normal',
-          tokenName: 'WdsTypography.caption12NormalMedium',
-          fontSize: tokens.WdsAtomicFontSize.v12,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v16,
-          styles: [
-            tokens.WdsSemanticTypography.caption12NormalBold,
-            tokens.WdsSemanticTypography.caption12NormalMedium,
-            tokens.WdsSemanticTypography.caption12NormalRegular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.caption12NormalBold;
+
+            return _TypographyRow(
+              label: 'Caption 12 Normal',
+              tokenName: 'WdsTypography.caption12NormalMedium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.caption12NormalBold,
+                tokens.WdsSemanticTypography.caption12NormalMedium,
+                tokens.WdsSemanticTypography.caption12NormalRegular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
-        const _TypographyRow(
-          label: 'Caption 12 Reading',
-          tokenName: 'WdsSemanticTypography.caption12ReadingMedium',
-          fontSize: tokens.WdsAtomicFontSize.v12,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v18,
-          styles: [
-            tokens.WdsSemanticTypography.caption12ReadingBold,
-            tokens.WdsSemanticTypography.caption12ReadingMedium,
-            tokens.WdsSemanticTypography.caption12ReadingRegular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.caption12ReadingBold;
+
+            return _TypographyRow(
+              label: 'Caption 12 Reading',
+              tokenName: 'WdsSemanticTypography.caption12ReadingMedium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.caption12ReadingBold,
+                tokens.WdsSemanticTypography.caption12ReadingMedium,
+                tokens.WdsSemanticTypography.caption12ReadingRegular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Caption 11
-        const _TypographyRow(
-          label: 'Caption 11',
-          tokenName: 'WdsTypography.caption11Medium',
-          fontSize: tokens.WdsAtomicFontSize.v11,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v14,
-          styles: [
-            tokens.WdsSemanticTypography.caption11Bold,
-            tokens.WdsSemanticTypography.caption11Medium,
-            tokens.WdsSemanticTypography.caption11Regular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.caption11Bold;
+
+            return _TypographyRow(
+              label: 'Caption 11',
+              tokenName: 'WdsTypography.caption11Medium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.caption11Bold,
+                tokens.WdsSemanticTypography.caption11Medium,
+                tokens.WdsSemanticTypography.caption11Regular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
         // Caption 10
-        const _TypographyRow(
-          label: 'Caption 10',
-          tokenName: 'WdsTypography.caption10Medium',
-          fontSize: tokens.WdsAtomicFontSize.v10,
-          lineHeightPx: tokens.WdsAtomicFontLineHeight.v13,
-          styles: [
-            tokens.WdsSemanticTypography.caption10Bold,
-            tokens.WdsSemanticTypography.caption10Medium,
-            tokens.WdsSemanticTypography.caption10Regular,
-          ],
-          previewText: kDefaultTypographyText,
+        Builder(
+          builder: (context) {
+            final style = tokens.WdsSemanticTypography.caption10Bold;
+
+            return _TypographyRow(
+              label: 'Caption 10',
+              tokenName: 'WdsTypography.caption10Medium',
+              fontSize: style.fontSize!,
+              lineHeightPx: style.height! * style.fontSize!,
+              styles: [
+                tokens.WdsSemanticTypography.caption10Bold,
+                tokens.WdsSemanticTypography.caption10Medium,
+                tokens.WdsSemanticTypography.caption10Regular,
+              ],
+              previewText: kDefaultTypographyText,
+            );
+          },
         ),
       ],
     );
