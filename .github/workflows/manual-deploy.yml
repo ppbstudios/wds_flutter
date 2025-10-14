@@ -37,7 +37,7 @@ jobs:
           echo "Permission: $PERMISSION"
           
           # Check if user has admin or maintain permissions
-          if [[ "$PERMISSION" == "admin" || "$PERMISSION" == "maintain" ]]; then
+          if [[ "$PERMISSION" == "admin" || "$PERMISSION" == "maintain" || "$PERMISSION" == "write" ]]; then
             echo "✅ User has sufficient permissions to deploy"
           else
             echo "❌ User does not have sufficient permissions to deploy"
