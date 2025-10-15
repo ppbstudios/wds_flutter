@@ -1109,7 +1109,7 @@
           },
           "lineHeight": {
             "$type": "number",
-            "$value": "{font.lineHeight.16}"
+            "$value": "{font.lineHeight.18}"
           },
           "size": {
             "$type": "number",
@@ -1127,7 +1127,7 @@
           },
           "lineHeight": {
             "$type": "number",
-            "$value": "{font.lineHeight.16}"
+            "$value": "{font.lineHeight.18}"
           },
           "size": {
             "$type": "number",
@@ -1145,7 +1145,7 @@
           },
           "lineHeight": {
             "$type": "number",
-            "$value": "{font.lineHeight.16}"
+            "$value": "{font.lineHeight.18}"
           },
           "size": {
             "$type": "number",
@@ -1165,7 +1165,7 @@
           },
           "lineHeight": {
             "$type": "number",
-            "$value": "{font.lineHeight.18}"
+            "$value": "{font.lineHeight.20}"
           },
           "size": {
             "$type": "number",
@@ -1183,7 +1183,7 @@
           },
           "lineHeight": {
             "$type": "number",
-            "$value": "{font.lineHeight.18}"
+            "$value": "{font.lineHeight.20}"
           },
           "size": {
             "$type": "number",
@@ -1201,7 +1201,7 @@
           },
           "lineHeight": {
             "$type": "number",
-            "$value": "{font.lineHeight.18}"
+            "$value": "{font.lineHeight.20}"
           },
           "size": {
             "$type": "number",
@@ -1222,7 +1222,7 @@
         },
         "lineHeight": {
           "$type": "number",
-          "$value": "{font.lineHeight.14}"
+          "$value": "{font.lineHeight.16}"
         },
         "size": {
           "$type": "number",
@@ -1240,7 +1240,7 @@
         },
         "lineHeight": {
           "$type": "number",
-          "$value": "{font.lineHeight.14}"
+          "$value": "{font.lineHeight.16}"
         },
         "size": {
           "$type": "number",
@@ -1258,7 +1258,7 @@
         },
         "lineHeight": {
           "$type": "number",
-          "$value": "{font.lineHeight.14}"
+          "$value": "{font.lineHeight.16}"
         },
         "size": {
           "$type": "number",
@@ -1278,7 +1278,7 @@
         },
         "lineHeight": {
           "$type": "number",
-          "$value": "{font.lineHeight.13}"
+          "$value": "{font.lineHeight.14}"
         },
         "size": {
           "$type": "number",
@@ -1296,7 +1296,7 @@
         },
         "lineHeight": {
           "$type": "number",
-          "$value": "{font.lineHeight.13}"
+          "$value": "{font.lineHeight.14}"
         },
         "size": {
           "$type": "number",
@@ -1314,7 +1314,7 @@
         },
         "lineHeight": {
           "$type": "number",
-          "$value": "{font.lineHeight.13}"
+          "$value": "{font.lineHeight.14}"
         },
         "size": {
           "$type": "number",

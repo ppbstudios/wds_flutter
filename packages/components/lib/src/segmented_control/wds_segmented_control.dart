@@ -50,7 +50,8 @@ class _WdsSegmentedControlState extends State<WdsSegmentedControl> {
             height: _segmentHeight,
             decoration: const BoxDecoration(
               color: WdsColors.coolNeutral100,
-              borderRadius: BorderRadius.all(Radius.circular(WdsRadius.radius9999)),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(WdsRadius.radius9999)),
             ),
             child: Stack(
               children: [
@@ -89,8 +90,9 @@ class _WdsSegmentedControlState extends State<WdsSegmentedControl> {
                     height: _segmentHeight,
                     decoration: const BoxDecoration(
                       color: WdsColors.neutral900,
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(WdsRadius.radius9999)),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(WdsRadius.radius9999),
+                      ),
                     ),
                     child: Center(
                       child: Text(
