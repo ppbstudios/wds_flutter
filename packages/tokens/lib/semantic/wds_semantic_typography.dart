@@ -5,6 +5,7 @@ library;
 
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 import 'package:flutter/material.dart';
+
 import '../atomic/atomic.dart';
 
 class WdsSemanticTypography {
@@ -279,84 +280,84 @@ class WdsSemanticTypography {
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v600,
     fontSize: WdsAtomicFontSize.v12,
-    height: (WdsAtomicFontLineHeight.v16) / (WdsAtomicFontSize.v12),
+    height: (WdsAtomicFontLineHeight.v18) / (WdsAtomicFontSize.v12),
     letterSpacing: 0,
   );
   static const TextStyle caption12NormalMedium = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v500,
     fontSize: WdsAtomicFontSize.v12,
-    height: (WdsAtomicFontLineHeight.v16) / (WdsAtomicFontSize.v12),
+    height: (WdsAtomicFontLineHeight.v18) / (WdsAtomicFontSize.v12),
     letterSpacing: 0,
   );
   static const TextStyle caption12NormalRegular = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v400,
     fontSize: WdsAtomicFontSize.v12,
-    height: (WdsAtomicFontLineHeight.v16) / (WdsAtomicFontSize.v12),
+    height: (WdsAtomicFontLineHeight.v18) / (WdsAtomicFontSize.v12),
     letterSpacing: 0,
   );
   static const TextStyle caption12ReadingBold = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v600,
     fontSize: WdsAtomicFontSize.v12,
-    height: (WdsAtomicFontLineHeight.v18) / (WdsAtomicFontSize.v12),
+    height: (WdsAtomicFontLineHeight.v20) / (WdsAtomicFontSize.v12),
     letterSpacing: 0,
   );
   static const TextStyle caption12ReadingMedium = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v500,
     fontSize: WdsAtomicFontSize.v12,
-    height: (WdsAtomicFontLineHeight.v18) / (WdsAtomicFontSize.v12),
+    height: (WdsAtomicFontLineHeight.v20) / (WdsAtomicFontSize.v12),
     letterSpacing: 0,
   );
   static const TextStyle caption12ReadingRegular = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v400,
     fontSize: WdsAtomicFontSize.v12,
-    height: (WdsAtomicFontLineHeight.v18) / (WdsAtomicFontSize.v12),
+    height: (WdsAtomicFontLineHeight.v20) / (WdsAtomicFontSize.v12),
     letterSpacing: 0,
   );
   static const TextStyle caption11Bold = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v600,
     fontSize: WdsAtomicFontSize.v11,
-    height: (WdsAtomicFontLineHeight.v14) / (WdsAtomicFontSize.v11),
+    height: (WdsAtomicFontLineHeight.v16) / (WdsAtomicFontSize.v11),
     letterSpacing: 0,
   );
   static const TextStyle caption11Medium = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v500,
     fontSize: WdsAtomicFontSize.v11,
-    height: (WdsAtomicFontLineHeight.v14) / (WdsAtomicFontSize.v11),
+    height: (WdsAtomicFontLineHeight.v16) / (WdsAtomicFontSize.v11),
     letterSpacing: 0,
   );
   static const TextStyle caption11Regular = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v400,
     fontSize: WdsAtomicFontSize.v11,
-    height: (WdsAtomicFontLineHeight.v14) / (WdsAtomicFontSize.v11),
+    height: (WdsAtomicFontLineHeight.v16) / (WdsAtomicFontSize.v11),
     letterSpacing: 0,
   );
   static const TextStyle caption10Bold = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v600,
     fontSize: WdsAtomicFontSize.v10,
-    height: (WdsAtomicFontLineHeight.v13) / (WdsAtomicFontSize.v10),
+    height: (WdsAtomicFontLineHeight.v14) / (WdsAtomicFontSize.v10),
     letterSpacing: 0,
   );
   static const TextStyle caption10Medium = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v500,
     fontSize: WdsAtomicFontSize.v10,
-    height: (WdsAtomicFontLineHeight.v13) / (WdsAtomicFontSize.v10),
+    height: (WdsAtomicFontLineHeight.v14) / (WdsAtomicFontSize.v10),
     letterSpacing: 0,
   );
   static const TextStyle caption10Regular = TextStyle(
     fontFamily: WdsAtomicFontFamily.pretendard,
     fontWeight: WdsAtomicFontWeight.v400,
     fontSize: WdsAtomicFontSize.v10,
-    height: (WdsAtomicFontLineHeight.v13) / (WdsAtomicFontSize.v10),
+    height: (WdsAtomicFontLineHeight.v14) / (WdsAtomicFontSize.v10),
     letterSpacing: 0,
   );
 }

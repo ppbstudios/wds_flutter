@@ -32,7 +32,7 @@ class _TextButtonTypographyBySize {
   static TextStyle of(WdsTextButtonSize size) {
     return switch (size) {
       WdsTextButtonSize.medium => WdsTypography.body15NormalMedium,
-      WdsTextButtonSize.small => WdsTypography.body13NormalMedium,
+      WdsTextButtonSize.small => WdsTypography.caption12NormalMedium,
     };
   }
 }
