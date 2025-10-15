@@ -132,6 +132,10 @@ class WdsTooltip extends StatelessWidget {
           style: WdsTypography.body14ReadingRegular,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+          strutStyle: StrutStyle.fromTextStyle(
+            WdsTypography.body14ReadingRegular,
+            forceStrutHeight: true,
+          ),
         ),
       ),
     );
@@ -153,6 +157,10 @@ class WdsTooltip extends StatelessWidget {
                 style: WdsTypography.body14ReadingRegular,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
+                strutStyle: StrutStyle.fromTextStyle(
+                  WdsTypography.body14ReadingRegular,
+                  forceStrutHeight: true,
+                ),
               ),
             ),
           ),
