@@ -70,7 +70,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
   }
   // 고정 스펙
   static const Size fixedSize = Size(double.infinity, 50);
-  static const EdgeInsets fixedPadding = EdgeInsets.fromLTRB(16, 5, 8, 5);
+  static const EdgeInsets fixedPadding = EdgeInsets.fromLTRB(8, 5, 8, 5);
   static const TextStyle fixedTypography = WdsTypography.heading17Bold;
   static const Color fixedBackground = WdsColors.backgroundNormal;
 
@@ -155,12 +155,15 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
             Align(
               alignment:
                   hasCenterTitle ? Alignment.center : Alignment.centerLeft,
-              child: isSearch
-                  ? FractionallySizedBox(
-                      widthFactor: 0.567,
-                      child: titleWidget,
-                    )
-                  : titleWidget,
+              child: switch ((isSearch, isLogo)) {
+                (true, _) =>
+                  FractionallySizedBox(widthFactor: 0.567, child: titleWidget),
+                (false, true) => Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: titleWidget,
+                  ),
+                (false, false) => titleWidget,
+              },
             ),
 
             // Actions 영역: 비어있어도 최소 40x40 확보, 우측 정렬

@@ -160,8 +160,8 @@ class _WdsSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
     Widget titleWidget = title;
     if (titleWidget is Text) {
       final Text t = titleWidget;
-      final TextStyle merged =
-          t.style?.merge(WdsHeader.fixedTypography) ?? WdsHeader.fixedTypography;
+      final TextStyle merged = t.style?.merge(WdsHeader.fixedTypography) ??
+          WdsHeader.fixedTypography;
       titleWidget = Text(
         t.data ?? '',
         key: t.key,
@@ -215,12 +215,15 @@ class _WdsSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
             Align(
               alignment:
                   hasCenterTitle ? Alignment.center : Alignment.centerLeft,
-              child: isSearch
-                  ? FractionallySizedBox(
-                      widthFactor: 0.567,
-                      child: titleWidget,
-                    )
-                  : titleWidget,
+              child: switch ((isSearch, isLogo)) {
+                (true, _) =>
+                  FractionallySizedBox(widthFactor: 0.567, child: titleWidget),
+                (false, true) => Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: titleWidget,
+                  ),
+                (false, false) => titleWidget,
+              },
             ),
             Align(
               alignment: Alignment.centerRight,
