@@ -1,3 +1,6 @@
+### 0.0.3
+- WdsDivider 추가
+
 ### 0.0.2
 
 - WdsSliverHeader 추가
