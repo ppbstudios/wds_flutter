@@ -26,34 +26,16 @@ class WdsSliverDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isVertical) {
       return const SliverToBoxAdapter(
-        child: SizedBox(
-          width: 1,
-          height: double.infinity,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: WdsColors.borderAlternative),
-          ),
-        ),
+        child: WdsDivider.vertical(),
       );
     }
 
     return switch (variant) {
       WdsDividerVariant.normal => const SliverToBoxAdapter(
-          child: SizedBox(
-            width: double.infinity,
-            height: 1,
-            child: DecoratedBox(
-              decoration: BoxDecoration(color: WdsColors.borderAlternative),
-            ),
-          ),
+          child: WdsDivider(),
         ),
       WdsDividerVariant.thick => const SliverToBoxAdapter(
-          child: SizedBox(
-            width: double.infinity,
-            height: 6,
-            child: DecoratedBox(
-              decoration: BoxDecoration(color: WdsColors.backgroundAlternative),
-            ),
-          ),
+          child: WdsDivider(variant: WdsDividerVariant.thick),
         ),
     };
   }
