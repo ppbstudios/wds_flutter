@@ -1,5 +1,5 @@
 ### 0.0.3
-- WdsDivider 추가
+- WdsSliverDivider 추가
 
 ### 0.0.2
 
