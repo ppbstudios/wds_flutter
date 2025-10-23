@@ -2402,8 +2402,7 @@ xsmall | WdsThumbnailSize.xsmall | true | 둥근 모서리 적용
 크기별로 다른 타이포그래피를 사용합니다.
 
 **브랜드명**
-- xlarge/large: `WdsTypography.body13NormalRegular`, `WdsColors.textNeutral`
-- medium: `WdsTypography.caption12Regular`, `WdsColors.textNeutral`
+- xlarge/large/medium: `WdsTypography.caption11Regular`, `WdsColors.textNeutral`
 - xsmall: 표시되지 않음
 
 **상품명**
@@ -2417,8 +2416,7 @@ xsmall | WdsThumbnailSize.xsmall | true | 둥근 모서리 적용
 - xsmall: `WdsTypography.caption11Regular`, `WdsColors.textAlternative`
 
 **가격 정보**
-- xlarge/large: `WdsTypography.body15NormalBold`, `WdsColors.textNormal`
-- medium: `WdsTypography.body13NormalBold`, `WdsColors.textNormal`
+- xlarge/large/medium: `WdsTypography.body14NormalBold`, `WdsColors.textNormal`
 - xsmall: `WdsTypography.caption12Bold`, `WdsColors.textNormal`
 
 ### ItemCard - price display
@@ -2477,7 +2475,7 @@ color (inactive) | `WdsColors.neutral200` | `WdsColors.neutral200` | `WdsColors.
 속성 | xlarge | large | medium | xsmall
 --- | --- | --- | --- | ---
 thumbnail-content | 10px | 10px | 16px | 12px
-element spacing | 4px | 4px | 4px | 2px
+element spacing | 8px | 8px |4px | 2px
 horizontal padding | 12px | 0px | 0px | 0px
 
 ### ItemCard - 생성 방법
