@@ -2582,14 +2582,13 @@ SegmentedControl는 상품 상세 페이지에서 렌즈 종류(예: 하루용, 
 
 상태 | typography | text color | container background | container radius
 --- | --- | --- | --- | ---
-Default (선택 안 됨) | `WdsTypography.body13NormalRegular` | `WdsColors.textNormal` | 없음 | 없음
-Selected (선택됨) | `WdsTypography.body13NormalBold` | `WdsColors.white` | `WdsColors.neutral900` | `WdsRadius.full`
+Default (선택 안 됨) | `WdsTypography.caption12NormalRegular` | `WdsColors.textNormal` | 없음 | 없음
+Selected (선택됨) | `WdsTypography.caption12NormalMedium` | `WdsColors.white` | `WdsColors.neutral50` | `WdsRadius.full`
 
 
 ### SegmentedControl - disabled state
 
-- Enabled state의 스타일을 그대로 따르되, 전체 컴포넌트에 `WdsOpacity.opacity40` 적용  
-- 즉, **"선택됨"과 "선택 안 됨" 모두 동일하게 불투명도 40% 처리**
+- Enabled state의 스타일을 그대로 따르되, 선택 안 된 selected text와 background에 `WdsOpacity.opacity40` 적용  
 - 사용자는 비활성화된 SegmentedControl에서 선택 변경이 불가능함
 
 ## Loading
