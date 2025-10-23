@@ -963,18 +963,34 @@ PaginationCount는 아래 속성으로 이루어집니다.
 | currentPage | `int` | 현재 페이지
 | totalPage | `int` | 전체 페이지
 
-
 ### PaginationCount - style
 
 항목 | 상태/조건 | 값 | 비고
 --- | --- | --- | ---
-width      | - | `Hug` | 페이지 수에 따라 유동적 
 background | - | `WdsColors.cta` | 배경 색
 background.opacity | - | `WdsOpacity.opacity80` | 배경 투명도
 radius  | - | `WdsRadius.full` | pill 형태 유지
-padding | - | `EdgeInsets.fromLTRB(10, 4, 10, 4)` | 내부 여백 설정
 
-### PaginationCount - textStyle (current / total)
+### PaginationCount - size
+
+속성 | padding | 비고
+--- | --- | --- | --- | ---
+small |  EdgeInsets.symmetric(horizontal: 6, vertical: 2) | -
+medium | EdgeInsets.symmetric(horizontal: 10, vertical: 4) | -
+
+### PaginationCount - Small textStyle (current / total)
+항목 | 상태 | 값 | 비고
+--- | --- | --- | ---
+text.typography | - | `WdsSemanticTypography.caption10Regular` | 텍스트 타이포그래피 
+text.color | current | `WdsColors.white` | 현재 페이지 텍스트 색상
+text.color | total | `WdsColors.textAssistive` | 전체 페이지 텍스트 색상
+text.opacity | - | `WdsOpacity.opacity80` | 전체 페이지 텍스트 투명도
+separator.spacing | - | 3px | current/total 시각적 구분 확보
+separator.text | - | `/` |   구분 텍스트
+separator.text.typography | - | `WdsSemanticTypography.caption10Regular` | 텍스트 타이포그래피 
+separator.text.color | - | `WdsColors.textAlternative` |  구분 텍스트 색상
+
+### PaginationCount -  Medium textStyle (current / total)
 항목 | 상태 | 값 | 비고
 --- | --- | --- | ---
 text.typography | - | `WdsSemanticTypography.caption11Regular` | 텍스트 타이포그래피 
@@ -982,13 +998,9 @@ text.color | current | `WdsColors.white` | 현재 페이지 텍스트 색상
 text.color | total | `WdsColors.textAssistive` | 전체 페이지 텍스트 색상
 text.opacity | - | `WdsOpacity.opacity80` | 전체 페이지 텍스트 투명도
 separator.spacing | - | 3px | current/total 시각적 구분 확보
-
-### PaginationCount - textStyle (separator)
-항목 | 상태 | 값 | 비고
---- | --- | --- | ---
-text | - | `/` |   구분 텍스트
-text.typography | - | `WdsSemanticTypography.caption11Regular` | 텍스트 타이포그래피 
-text.color | - | `WdsColors.textAlternative` |  구분 텍스트 색상
+separator.text | - | `/` |   구분 텍스트
+separator.text.typography | - | `WdsSemanticTypography.caption11Regular` | 텍스트 타이포그래피 
+separator.text.color | - | `WdsColors.textAlternative` |  구분 텍스트 색상
 
 ---
 
