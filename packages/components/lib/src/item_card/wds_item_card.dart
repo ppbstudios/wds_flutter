@@ -264,6 +264,7 @@ class _WdsItemCardState extends State<WdsItemCard> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: 1,
               children: widget.leftThumbnailTags,
             ),
           ),
@@ -533,7 +534,7 @@ class _HorizontalLayout extends StatelessWidget {
                 /// 상품명
                 Text(
                   productName,
-                  style: WdsTypography.caption12NormalMedium.copyWith(
+                  style: WdsTypography.body13NormalMedium.copyWith(
                     color: WdsColors.textNormal,
                   ),
                   maxLines: productNameMaxLines,
@@ -686,7 +687,7 @@ class __PriceInfo extends StatelessWidget {
         WdsItemCardSize.xlarge ||
         WdsItemCardSize.large =>
           WdsTypography.body15NormalBold,
-        WdsItemCardSize.medium => WdsTypography.body13NormalBold,
+        WdsItemCardSize.medium => WdsTypography.body14NormalBold,
         WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold
       }
           .copyWith(color: WdsColors.secondary),
@@ -735,7 +736,7 @@ class __ReviewInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 13,
+      height: 16,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         spacing: 2,
@@ -767,7 +768,7 @@ class __LikeInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 13,
+      height: 16,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         spacing: 2,
@@ -814,7 +815,7 @@ class __LikeButton extends StatelessWidget {
             height: 18,
           )
         : WdsIcon.like.build(
-            color: WdsColors.neutral200,
+            color: WdsColors.neutral500,
             width: 18,
             height: 18,
           );
