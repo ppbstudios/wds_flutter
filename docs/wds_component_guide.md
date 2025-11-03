@@ -963,18 +963,34 @@ PaginationCount는 아래 속성으로 이루어집니다.
 | currentPage | `int` | 현재 페이지
 | totalPage | `int` | 전체 페이지
 
-
 ### PaginationCount - style
 
 항목 | 상태/조건 | 값 | 비고
 --- | --- | --- | ---
-width      | - | `Hug` | 페이지 수에 따라 유동적 
 background | - | `WdsColors.cta` | 배경 색
 background.opacity | - | `WdsOpacity.opacity80` | 배경 투명도
 radius  | - | `WdsRadius.full` | pill 형태 유지
-padding | - | `EdgeInsets.fromLTRB(10, 4, 10, 4)` | 내부 여백 설정
 
-### PaginationCount - textStyle (current / total)
+### PaginationCount - size
+
+속성 | padding | 비고
+--- | --- | --- | --- | ---
+small |  EdgeInsets.symmetric(horizontal: 6, vertical: 2) | -
+medium | EdgeInsets.symmetric(horizontal: 10, vertical: 4) | -
+
+### PaginationCount - Small textStyle (current / total)
+항목 | 상태 | 값 | 비고
+--- | --- | --- | ---
+text.typography | - | `WdsSemanticTypography.caption10Regular` | 텍스트 타이포그래피 
+text.color | current | `WdsColors.white` | 현재 페이지 텍스트 색상
+text.color | total | `WdsColors.textAssistive` | 전체 페이지 텍스트 색상
+text.opacity | - | `WdsOpacity.opacity80` | 전체 페이지 텍스트 투명도
+separator.spacing | - | 3px | current/total 시각적 구분 확보
+separator.text | - | `/` |   구분 텍스트
+separator.text.typography | - | `WdsSemanticTypography.caption10Regular` | 텍스트 타이포그래피 
+separator.text.color | - | `WdsColors.textAlternative` |  구분 텍스트 색상
+
+### PaginationCount -  Medium textStyle (current / total)
 항목 | 상태 | 값 | 비고
 --- | --- | --- | ---
 text.typography | - | `WdsSemanticTypography.caption11Regular` | 텍스트 타이포그래피 
@@ -982,13 +998,9 @@ text.color | current | `WdsColors.white` | 현재 페이지 텍스트 색상
 text.color | total | `WdsColors.textAssistive` | 전체 페이지 텍스트 색상
 text.opacity | - | `WdsOpacity.opacity80` | 전체 페이지 텍스트 투명도
 separator.spacing | - | 3px | current/total 시각적 구분 확보
-
-### PaginationCount - textStyle (separator)
-항목 | 상태 | 값 | 비고
---- | --- | --- | ---
-text | - | `/` |   구분 텍스트
-text.typography | - | `WdsSemanticTypography.caption11Regular` | 텍스트 타이포그래피 
-text.color | - | `WdsColors.textAlternative` |  구분 텍스트 색상
+separator.text | - | `/` |   구분 텍스트
+separator.text.typography | - | `WdsSemanticTypography.caption11Regular` | 텍스트 타이포그래피 
+separator.text.color | - | `WdsColors.textAlternative` |  구분 텍스트 색상
 
 ---
 
@@ -2390,8 +2402,7 @@ xsmall | WdsThumbnailSize.xsmall | true | 둥근 모서리 적용
 크기별로 다른 타이포그래피를 사용합니다.
 
 **브랜드명**
-- xlarge/large: `WdsTypography.body13NormalRegular`, `WdsColors.textNeutral`
-- medium: `WdsTypography.caption12Regular`, `WdsColors.textNeutral`
+- xlarge/large/medium: `WdsTypography.caption11Regular`, `WdsColors.textNeutral`
 - xsmall: 표시되지 않음
 
 **상품명**
@@ -2405,8 +2416,7 @@ xsmall | WdsThumbnailSize.xsmall | true | 둥근 모서리 적용
 - xsmall: `WdsTypography.caption11Regular`, `WdsColors.textAlternative`
 
 **가격 정보**
-- xlarge/large: `WdsTypography.body15NormalBold`, `WdsColors.textNormal`
-- medium: `WdsTypography.body13NormalBold`, `WdsColors.textNormal`
+- xlarge/large/medium: `WdsTypography.body14NormalBold`, `WdsColors.textNormal`
 - xsmall: `WdsTypography.caption12Bold`, `WdsColors.textNormal`
 
 ### ItemCard - price display
@@ -2465,7 +2475,7 @@ color (inactive) | `WdsColors.neutral200` | `WdsColors.neutral200` | `WdsColors.
 속성 | xlarge | large | medium | xsmall
 --- | --- | --- | --- | ---
 thumbnail-content | 10px | 10px | 16px | 12px
-element spacing | 4px | 4px | 4px | 2px
+element spacing | 8px | 8px |4px | 2px
 horizontal padding | 12px | 0px | 0px | 0px
 
 ### ItemCard - 생성 방법
@@ -2570,14 +2580,13 @@ SegmentedControl는 상품 상세 페이지에서 렌즈 종류(예: 하루용, 
 
 상태 | typography | text color | container background | container radius
 --- | --- | --- | --- | ---
-Default (선택 안 됨) | `WdsTypography.body13NormalRegular` | `WdsColors.textNormal` | 없음 | 없음
-Selected (선택됨) | `WdsTypography.body13NormalBold` | `WdsColors.white` | `WdsColors.neutral900` | `WdsRadius.full`
+Default (선택 안 됨) | `WdsTypography.caption12NormalRegular` | `WdsColors.textNormal` | 없음 | 없음
+Selected (선택됨) | `WdsTypography.caption12NormalMedium` | `WdsColors.white` | `WdsColors.neutral50` | `WdsRadius.full`
 
 
 ### SegmentedControl - disabled state
 
-- Enabled state의 스타일을 그대로 따르되, 전체 컴포넌트에 `WdsOpacity.opacity40` 적용  
-- 즉, **"선택됨"과 "선택 안 됨" 모두 동일하게 불투명도 40% 처리**
+- Enabled state의 스타일을 그대로 따르되, 선택 안 된 selected text와 background에 `WdsOpacity.opacity40` 적용  
 - 사용자는 비활성화된 SegmentedControl에서 선택 변경이 불가능함
 
 ## Loading

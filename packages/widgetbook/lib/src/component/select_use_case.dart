@@ -76,18 +76,19 @@ typedef _SelectState = (
   bool isEnabled,
   String? title,
   bool isExpanded,
+  Color? borderColor,
 );
 
 Widget _buildDemonstrationSection(BuildContext context) {
   List<_SelectState> states = [
-    (null, true, null, false), // inactive
-    ('-0.50', true, null, false), // active
-    ('-0.50', true, null, true), // selected
-    (null, false, null, false), // disabled
-    (null, true, '옵션 선택', false), // inactive
-    ('-0.50', true, '옵션 선택', false), // active
-    ('-0.50', true, '옵션 선택', true), // selected
-    (null, false, '옵션 선택', false), // disabled
+    (null, true, null, false, WdsColors.borderAlternative), // inactive
+    ('-0.50', true, null, false, null), // active
+    ('-0.50', true, null, true, null), // selected
+    (null, false, null, false, null), // disabled
+    (null, true, '옵션 선택', false, WdsColors.borderAlternative), // inactive
+    ('-0.50', true, '옵션 선택', false, null), // active
+    ('-0.50', true, '옵션 선택', true, null), // selected
+    (null, false, '옵션 선택', false, null), // disabled
   ];
 
   return WidgetbookSection(
@@ -112,6 +113,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
                     title: state.$3,
                     isExpanded: state.$4,
                     hintText: '옵션을 선택해 주세요',
+                    borderColor: state.$5,
                   ),
                 ),
               )

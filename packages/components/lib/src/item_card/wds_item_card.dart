@@ -14,7 +14,7 @@ enum WdsItemCardSize {
     thumbnailSize: WdsThumbnailSize.medium,
   ),
   xsmall(
-    cardHeight: 328,
+    cardHeight: 329,
     thumbnailSize: WdsThumbnailSize.xsmall,
   );
 
@@ -261,6 +261,7 @@ class _WdsItemCardState extends State<WdsItemCard> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: 1,
               children: widget.leftThumbnailTags,
             ),
           ),
@@ -382,7 +383,7 @@ class _VerticalLayout extends StatelessWidget {
             Expanded(
               child: Text(
                 brandName,
-                style: WdsTypography.body13NormalRegular.copyWith(
+                style: WdsTypography.caption11Regular.copyWith(
                   color: WdsColors.textNeutral,
                 ),
               ),
@@ -430,7 +431,7 @@ class _VerticalLayout extends StatelessWidget {
         /// 태그 정보
         if (tags.isNotEmpty) ...[
           Row(spacing: 2, children: tags),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
         ],
 
         /// 평점/좋아요 정보
@@ -503,7 +504,7 @@ class _HorizontalLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final verticalSpacing = size == WdsItemCardSize.medium ? 4.0 : 2.0;
+    final verticalSpacing = 2.0;
     final horizontalSpacing = size == WdsItemCardSize.medium ? 16.0 : 12.0;
 
     return SizedBox(
@@ -519,20 +520,18 @@ class _HorizontalLayout extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 /// 브랜드명
-                if (size == WdsItemCardSize.medium) ...[
+                if (size == WdsItemCardSize.medium)
                   Text(
                     brandName,
-                    style: WdsTypography.caption12NormalRegular.copyWith(
+                    style: WdsTypography.caption11Regular.copyWith(
                       color: WdsColors.textNeutral,
                     ),
                   ),
-                  const SizedBox(height: 4),
-                ],
 
                 /// 상품명
                 Text(
                   productName,
-                  style: WdsTypography.caption12NormalMedium.copyWith(
+                  style: WdsTypography.body13NormalMedium.copyWith(
                     color: WdsColors.textNormal,
                   ),
                   maxLines: productNameMaxLines,
@@ -540,12 +539,14 @@ class _HorizontalLayout extends StatelessWidget {
                 ),
 
                 /// 렌즈 정보
-                if (lensType != null && diameter != null)
+                if (lensType != null && diameter != null) ...[
+                  if (size == WdsItemCardSize.medium) const SizedBox(height: 1),
                   __LensInfo.bySize(
                     size: size,
                     lensType: lensType!,
                     diameter: diameter!,
                   ),
+                ],
 
                 SizedBox(height: verticalSpacing),
 
@@ -665,10 +666,12 @@ class __PriceInfo extends StatelessWidget {
       salePrice.toKRWFormat(),
       style: switch (size) {
         WdsItemCardSize.xlarge ||
-        WdsItemCardSize.large => WdsTypography.body15NormalBold,
-        WdsItemCardSize.medium => WdsTypography.body13NormalBold,
-        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold,
-      }.copyWith(color: WdsColors.textNormal),
+        WdsItemCardSize.large ||
+        WdsItemCardSize.medium =>
+          WdsTypography.body14NormalBold,
+        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold
+      }
+          .copyWith(color: WdsColors.textNormal),
     );
 
     if (rate <= 0) {
@@ -679,10 +682,12 @@ class __PriceInfo extends StatelessWidget {
       '$rate%',
       style: switch (size) {
         WdsItemCardSize.xlarge ||
-        WdsItemCardSize.large => WdsTypography.body15NormalBold,
-        WdsItemCardSize.medium => WdsTypography.body13NormalBold,
-        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold,
-      }.copyWith(color: WdsColors.secondary),
+        WdsItemCardSize.large =>
+          WdsTypography.body15NormalBold,
+        WdsItemCardSize.medium => WdsTypography.body14NormalBold,
+        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold
+      }
+          .copyWith(color: WdsColors.secondary),
     );
 
     final salePriceAndDiscountRate = Row(
@@ -728,7 +733,7 @@ class __ReviewInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 13,
+      height: 16,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         spacing: 2,
@@ -760,7 +765,7 @@ class __LikeInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 13,
+      height: 16,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         spacing: 2,
@@ -807,7 +812,7 @@ class __LikeButton extends StatelessWidget {
             height: 18,
           )
         : WdsIcon.like.build(
-            color: WdsColors.neutral200,
+            color: WdsColors.neutral500,
             width: 18,
             height: 18,
           );

@@ -1,5 +1,5 @@
 name: wds_components
-version: 0.1.2
+version: 0.1.3
 publish_to: none
 description: WINC Design System components package
 environment:
