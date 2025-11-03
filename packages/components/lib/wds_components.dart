@@ -13,7 +13,12 @@ import 'package:flutter/material.dart'
         TextSelectionThemeData,
         CircularProgressIndicator,
         Colors,
-        VisualDensity;
+        VisualDensity,
+        TabController,
+        TabBarIndicatorSize,
+        NoSplash,
+        TabAlignment,
+        TabBar;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wds_foundation/wds_foundation.dart';
@@ -49,6 +54,7 @@ part 'src/skeleton/wds_skeleton.dart';
 part 'src/slider/wds_slider.dart';
 part 'src/snackbar/wds_snackbar.dart';
 part 'src/switch/wds_switch.dart';
+part 'src/tab/wds_material_tab.dart';
 part 'src/tab/wds_tab.dart';
 part 'src/tag/wds_tag.dart';
 part 'src/text_area/wds_text_area.dart';

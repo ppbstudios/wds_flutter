@@ -1,3 +1,6 @@
+### 0.0.5
+- WdsMaterialTabController, WdsMaterialTextTabBar, WdsMaterialLineTabBar 추가
+
 ### 0.0.4
 - PaginationCount small/medium 사이즈 세분화
 - SegmentedControl state별 폰트 사이즈 변경
