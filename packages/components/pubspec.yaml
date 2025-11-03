@@ -1,9 +1,10 @@
 name: wds_components
 version: 0.1.3
-publish_to: "none"
+publish_to: none
 description: WINC Design System components package
 environment:
-  sdk: ">=3.2.0 <4.0.0"
+  sdk: ^3.9.0
+resolution: workspace
 
 dependencies:
   cached_network_image: ^3.4.1
@@ -13,4 +14,4 @@ dependencies:
     path: ../foundation
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0

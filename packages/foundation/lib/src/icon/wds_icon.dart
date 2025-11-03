@@ -53,8 +53,7 @@ enum WdsIcon implements IconBuilder {
   support(path: 'assets/vector/support.svg'),
   thumbnail(path: 'assets/vector/thumbnail.svg'),
   wincLogo(path: 'assets/vector/winc_logo.svg'),
-  wincLogoKo(path: 'assets/vector/winc_logo_ko.svg'),
-  ;
+  wincLogoKo(path: 'assets/vector/winc_logo_ko.svg');
 
   const WdsIcon({
     required this.path,
@@ -74,8 +73,9 @@ enum WdsIcon implements IconBuilder {
     return SvgPicture.asset(
       path,
       package: 'wds_foundation',
-      colorFilter:
-          color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
+      colorFilter: color != null
+          ? ColorFilter.mode(color, BlendMode.srcIn)
+          : null,
       width: iconWidth,
       height: iconHeight,
     );

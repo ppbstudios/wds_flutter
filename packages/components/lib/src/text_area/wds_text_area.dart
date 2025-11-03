@@ -169,17 +169,21 @@ class _WdsTextAreaState extends State<WdsTextArea> {
       borderRadius: BorderRadius.all(Radius.circular(0)),
     );
 
-    final labelColor =
-        widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable;
+    final labelColor = widget.isEnabled
+        ? WdsColors.textNormal
+        : WdsColors.textDisable;
 
-    final inputColor =
-        widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable;
+    final inputColor = widget.isEnabled
+        ? WdsColors.textNormal
+        : WdsColors.textDisable;
 
-    final hintColor =
-        !widget.isEnabled ? WdsColors.textDisable : WdsColors.textAlternative;
+    final hintColor = !widget.isEnabled
+        ? WdsColors.textDisable
+        : WdsColors.textAlternative;
 
-    final filledColor =
-        widget.isEnabled ? WdsColors.backgroundNormal : WdsColors.neutral50;
+    final filledColor = widget.isEnabled
+        ? WdsColors.backgroundNormal
+        : WdsColors.neutral50;
 
     final borderColor = switch ((_hasError, _hasFocus)) {
       (true, _) => WdsColors.statusDestructive,

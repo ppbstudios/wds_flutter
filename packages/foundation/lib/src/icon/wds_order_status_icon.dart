@@ -28,8 +28,7 @@ enum WdsOrderStatusIcon implements IconBuilder {
   paid(
     activePath: 'assets/vector/order_status/6_paid_active.svg',
     inactivePath: 'assets/vector/order_status/6_paid_inactive.svg',
-  ),
-  ;
+  );
 
   const WdsOrderStatusIcon({
     required this.activePath,
@@ -43,9 +42,8 @@ enum WdsOrderStatusIcon implements IconBuilder {
   @override
   Widget build({
     bool isActive = false,
-  }) =>
-      SvgPicture.asset(
-        isActive ? activePath : inactivePath,
-        package: 'wds_foundation',
-      );
+  }) => SvgPicture.asset(
+    isActive ? activePath : inactivePath,
+    package: 'wds_foundation',
+  );
 }

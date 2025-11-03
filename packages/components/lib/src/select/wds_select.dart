@@ -78,8 +78,8 @@ class _WdsSelectState extends State<WdsSelect> {
 
     final arrowIcon =
         (widget.isExpanded ? WdsIcon.chevronUp : WdsIcon.chevronDown).build(
-      color: widget.isEnabled ? WdsColors.neutral600 : WdsColors.neutral100,
-    );
+          color: widget.isEnabled ? WdsColors.neutral600 : WdsColors.neutral100,
+        );
 
     final field = Padding(
       padding: contentPadding,

@@ -30,17 +30,17 @@ class WdsSliverHeader extends StatelessWidget {
     bool safeArea = true,
     Key? key,
   }) : this._(
-          leading: null,
-          title: WdsIcon.wincLogo.build(width: 62, height: 17),
-          actions: actions,
-          hasCenterTitle: false,
-          isLogo: true,
-          isSearch: false,
-          pinned: pinned,
-          floating: floating,
-          safeArea: safeArea,
-          key: key,
-        );
+         leading: null,
+         title: WdsIcon.wincLogo.build(width: 62, height: 17),
+         actions: actions,
+         hasCenterTitle: false,
+         isLogo: true,
+         isSearch: false,
+         pinned: pinned,
+         floating: floating,
+         safeArea: safeArea,
+         key: key,
+       );
 
   /// Creates a title header.
   const WdsSliverHeader.title({
@@ -52,17 +52,17 @@ class WdsSliverHeader extends StatelessWidget {
     bool safeArea = true,
     Key? key,
   }) : this._(
-          leading: leading,
-          title: title,
-          actions: actions,
-          hasCenterTitle: true,
-          isLogo: false,
-          isSearch: false,
-          pinned: pinned,
-          floating: floating,
-          safeArea: safeArea,
-          key: key,
-        );
+         leading: leading,
+         title: title,
+         actions: actions,
+         hasCenterTitle: true,
+         isLogo: false,
+         isSearch: false,
+         pinned: pinned,
+         floating: floating,
+         safeArea: safeArea,
+         key: key,
+       );
 
   /// Creates a search header.
   factory WdsSliverHeader.search({
@@ -107,8 +107,9 @@ class WdsSliverHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double statusBarHeight =
-        safeArea ? MediaQuery.of(context).padding.top : 0.0;
+    final double statusBarHeight = safeArea
+        ? MediaQuery.of(context).padding.top
+        : 0.0;
 
     return SliverPersistentHeader(
       pinned: pinned,
@@ -160,7 +161,8 @@ class _WdsSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
     Widget titleWidget = title;
     if (titleWidget is Text) {
       final Text t = titleWidget;
-      final TextStyle merged = t.style?.merge(WdsHeader.fixedTypography) ??
+      final TextStyle merged =
+          t.style?.merge(WdsHeader.fixedTypography) ??
           WdsHeader.fixedTypography;
       titleWidget = Text(
         t.data ?? '',
@@ -213,15 +215,18 @@ class _WdsSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
                 ),
               ),
             Align(
-              alignment:
-                  hasCenterTitle ? Alignment.center : Alignment.centerLeft,
+              alignment: hasCenterTitle
+                  ? Alignment.center
+                  : Alignment.centerLeft,
               child: switch ((isSearch, isLogo)) {
-                (true, _) =>
-                  FractionallySizedBox(widthFactor: 0.567, child: titleWidget),
+                (true, _) => FractionallySizedBox(
+                  widthFactor: 0.567,
+                  child: titleWidget,
+                ),
                 (false, true) => Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: titleWidget,
-                  ),
+                  padding: const EdgeInsets.only(left: 8),
+                  child: titleWidget,
+                ),
                 (false, false) => titleWidget,
               },
             ),

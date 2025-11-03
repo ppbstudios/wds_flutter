@@ -20,8 +20,8 @@ class WdsSnackbar extends StatelessWidget {
     required this.action,
     this.leadingIcon,
     super.key,
-  })  : variant = WdsSnackbarVariant.normal,
-        description = null;
+  }) : variant = WdsSnackbarVariant.normal,
+       description = null;
 
   /// description variant: 메시지 + 보조 설명 + 액션 버튼
   const WdsSnackbar.description({
@@ -38,8 +38,8 @@ class WdsSnackbar extends StatelessWidget {
     this.action,
     this.leadingIcon,
     super.key,
-  })  : variant = WdsSnackbarVariant.multiLine,
-        description = null;
+  }) : variant = WdsSnackbarVariant.multiLine,
+       description = null;
 
   /// 주요 메시지
   final String message;

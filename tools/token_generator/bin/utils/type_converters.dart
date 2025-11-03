@@ -1,40 +1,40 @@
 part of '../main.dart';
 
 String? _convertValueByType(String type, dynamic value) => switch (type) {
-      'color' => _convertColorValue(value),
-      'dimension' => _convertDimensionValue(value),
-      'number' => _convertNumberValue(value),
-      'text' => _convertTextValue(value),
-      'boxShadow' => _convertBoxShadowValue(value),
-      'lineHeight' => _convertLineHeightValue(value),
-      'fontSize' => _convertFontSizeValue(value),
-      'letterSpacing' => _convertLetterSpacingValue(value),
-      'paragraphSpacing' => null,
-      _ => _convertTextValue(value),
-    };
+  'color' => _convertColorValue(value),
+  'dimension' => _convertDimensionValue(value),
+  'number' => _convertNumberValue(value),
+  'text' => _convertTextValue(value),
+  'boxShadow' => _convertBoxShadowValue(value),
+  'lineHeight' => _convertLineHeightValue(value),
+  'fontSize' => _convertFontSizeValue(value),
+  'letterSpacing' => _convertLetterSpacingValue(value),
+  'paragraphSpacing' => null,
+  _ => _convertTextValue(value),
+};
 
 String? _convertColorValue(dynamic value) =>
     value is String ? _hexToColorLiteral(value) : null;
 
 String? _convertDimensionValue(dynamic value) => switch (value) {
-      String s when s.endsWith('rem') => () {
-          final remValue = double.tryParse(s.replaceAll('rem', ''));
-          return remValue != null ? (remValue * 16.0).toString() : null;
-        }(),
-      String s when s.endsWith('px') => () {
-          final pxValue = double.tryParse(s.replaceAll('px', ''));
-          return pxValue?.toString();
-        }(),
-      String s when double.tryParse(s) != null => double.parse(s).toString(),
-      num n => n.toDouble().toString(),
-      _ => null,
-    };
+  String s when s.endsWith('rem') => () {
+    final remValue = double.tryParse(s.replaceAll('rem', ''));
+    return remValue != null ? (remValue * 16.0).toString() : null;
+  }(),
+  String s when s.endsWith('px') => () {
+    final pxValue = double.tryParse(s.replaceAll('px', ''));
+    return pxValue?.toString();
+  }(),
+  String s when double.tryParse(s) != null => double.parse(s).toString(),
+  num n => n.toDouble().toString(),
+  _ => null,
+};
 
 String? _convertNumberValue(dynamic value) => switch (value) {
-      num n => n.toDouble().toString(),
-      String s when double.tryParse(s) != null => double.parse(s).toString(),
-      _ => null,
-    };
+  num n => n.toDouble().toString(),
+  String s when double.tryParse(s) != null => double.parse(s).toString(),
+  _ => null,
+};
 
 String? _convertTextValue(dynamic value) {
   if (value is String) {
@@ -44,19 +44,19 @@ String? _convertTextValue(dynamic value) {
 }
 
 String? _convertBoxShadowValue(dynamic value) => switch (value) {
-      List list => () {
-          final shadows = [
-            for (final item in list)
-              if (item is Map<String, dynamic>) _convertSingleBoxShadow(item),
-          ].whereType<String>().toList();
-          return shadows.isNotEmpty ? '[${shadows.join(', ')}]' : null;
-        }(),
-      Map<String, dynamic> map => () {
-          final shadow = _convertSingleBoxShadow(map);
-          return shadow != null ? '[$shadow]' : null;
-        }(),
-      _ => null,
-    };
+  List list => () {
+    final shadows = [
+      for (final item in list)
+        if (item is Map<String, dynamic>) _convertSingleBoxShadow(item),
+    ].whereType<String>().toList();
+    return shadows.isNotEmpty ? '[${shadows.join(', ')}]' : null;
+  }(),
+  Map<String, dynamic> map => () {
+    final shadow = _convertSingleBoxShadow(map);
+    return shadow != null ? '[$shadow]' : null;
+  }(),
+  _ => null,
+};
 
 String? _convertSingleBoxShadow(Map<String, dynamic> shadowData) {
   final color = shadowData['color'];
@@ -74,29 +74,27 @@ String? _convertSingleBoxShadow(Map<String, dynamic> shadowData) {
 }
 
 String? _convertLineHeightValue(dynamic value) => switch (value) {
-      String s when s.toUpperCase() == 'AUTO' => '1.0',
-      String s when double.tryParse(s) != null => double.parse(s).toString(),
-      num n => n.toDouble().toString(),
-      _ => '1.0',
-    };
+  String s when s.toUpperCase() == 'AUTO' => '1.0',
+  String s when double.tryParse(s) != null => double.parse(s).toString(),
+  num n => n.toDouble().toString(),
+  _ => '1.0',
+};
 
 String? _convertFontSizeValue(dynamic value) => switch (value) {
-      num n => n.toDouble().toString(),
-      String s when double.tryParse(s) != null => double.parse(s).toString(),
-      _ => null,
-    };
+  num n => n.toDouble().toString(),
+  String s when double.tryParse(s) != null => double.parse(s).toString(),
+  _ => null,
+};
 
 String? _convertLetterSpacingValue(dynamic value) => switch (value) {
-      String s when s.endsWith('%') => () {
-          final percentValue = double.tryParse(s.replaceAll('%', ''));
-          return percentValue != null
-              ? (percentValue / 100.0).toString()
-              : null;
-        }(),
-      String s when double.tryParse(s) != null => double.parse(s).toString(),
-      num n => n.toDouble().toString(),
-      _ => null,
-    };
+  String s when s.endsWith('%') => () {
+    final percentValue = double.tryParse(s.replaceAll('%', ''));
+    return percentValue != null ? (percentValue / 100.0).toString() : null;
+  }(),
+  String s when double.tryParse(s) != null => double.parse(s).toString(),
+  num n => n.toDouble().toString(),
+  _ => null,
+};
 
 String _hexToColorLiteral(String hex) {
   final cleaned = hex.replaceFirst('#', '').toUpperCase();

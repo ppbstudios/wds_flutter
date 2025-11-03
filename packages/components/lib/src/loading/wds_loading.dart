@@ -127,8 +127,9 @@ class _LoadingDot extends StatelessWidget {
       animation: controller,
       builder: (context, child) {
         final double phaseShift = index * 1.2;
-        final double wave =
-            math.sin(2 * math.pi * controller.value - phaseShift);
+        final double wave = math.sin(
+          2 * math.pi * controller.value - phaseShift,
+        );
         final double scale = 1.0 + (wave + 1) * 0.25;
 
         return Transform.scale(

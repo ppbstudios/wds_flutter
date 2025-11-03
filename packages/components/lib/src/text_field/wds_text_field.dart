@@ -197,20 +197,27 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   Widget _buildOutlined(BuildContext context) {
-    final inputColor =
-        widget.isEnabled ? WdsColors.textNormal : WdsColors.textAlternative;
+    final inputColor = widget.isEnabled
+        ? WdsColors.textNormal
+        : WdsColors.textAlternative;
 
-    final hintColor =
-        widget.isEnabled ? WdsColors.textAlternative : WdsColors.textDisable;
+    final hintColor = widget.isEnabled
+        ? WdsColors.textAlternative
+        : WdsColors.textDisable;
 
-    final labelColor =
-        widget.isEnabled ? WdsColors.textAlternative : WdsColors.textDisable;
+    final labelColor = widget.isEnabled
+        ? WdsColors.textAlternative
+        : WdsColors.textDisable;
 
     final borderSide = switch ((_hasError, _hasFocus)) {
-      (true, _) =>
-        const BorderSide(color: WdsColors.statusDestructive, width: 2),
-      (false, true) =>
-        const BorderSide(color: WdsColors.statusPositive, width: 2),
+      (true, _) => const BorderSide(
+        color: WdsColors.statusDestructive,
+        width: 2,
+      ),
+      (false, true) => const BorderSide(
+        color: WdsColors.statusPositive,
+        width: 2,
+      ),
       (false, false) => const BorderSide(color: WdsColors.borderAlternative),
     };
 
@@ -281,11 +288,13 @@ class _WdsTextFieldState extends State<WdsTextField> {
       borderRadius: BorderRadius.all(Radius.circular(0)),
     );
 
-    final inputColor =
-        widget.isEnabled ? WdsColors.textNormal : WdsColors.textAlternative;
+    final inputColor = widget.isEnabled
+        ? WdsColors.textNormal
+        : WdsColors.textAlternative;
 
-    final hintColor =
-        !widget.isEnabled ? WdsColors.textDisable : WdsColors.textAlternative;
+    final hintColor = !widget.isEnabled
+        ? WdsColors.textDisable
+        : WdsColors.textAlternative;
 
     final borderColor = switch ((_hasError, _hasFocus)) {
       (true, _) => WdsColors.statusDestructive,
@@ -324,8 +333,9 @@ class _WdsTextFieldState extends State<WdsTextField> {
                         enabled: widget.isEnabled,
                         autofocus: widget.autofocus,
                         cursorColor: WdsColors.textNormal,
-                        cursorRadius:
-                            const Radius.circular(WdsRadius.radius9999),
+                        cursorRadius: const Radius.circular(
+                          WdsRadius.radius9999,
+                        ),
                         style: _inputStyle.copyWith(color: inputColor),
                         onChanged: widget.onChanged,
                         onSubmitted: widget.onSubmitted,

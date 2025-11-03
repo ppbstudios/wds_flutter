@@ -88,29 +88,30 @@ class _ButtonStyleByVariant {
     Color background,
     Color foreground,
     double radius,
-    BorderSide? border
-  }) of(
+    BorderSide? border,
+  })
+  of(
     WdsButtonVariant variant,
   ) {
     return switch (variant) {
       WdsButtonVariant.cta => (
-          background: WdsColors.cta,
-          foreground: WdsColors.white,
-          radius: WdsRadius.radius9999,
-          border: null,
-        ),
+        background: WdsColors.cta,
+        foreground: WdsColors.white,
+        radius: WdsRadius.radius9999,
+        border: null,
+      ),
       WdsButtonVariant.primary => (
-          background: WdsColors.primary,
-          foreground: WdsColors.white,
-          radius: WdsRadius.radius9999,
-          border: null,
-        ),
+        background: WdsColors.primary,
+        foreground: WdsColors.white,
+        radius: WdsRadius.radius9999,
+        border: null,
+      ),
       WdsButtonVariant.secondary => (
-          background: WdsColors.white,
-          foreground: WdsColors.textNormal,
-          radius: WdsRadius.radius9999,
-          border: const BorderSide(color: WdsColors.borderNeutral),
-        ),
+        background: WdsColors.white,
+        foreground: WdsColors.textNormal,
+        radius: WdsRadius.radius9999,
+        border: const BorderSide(color: WdsColors.borderNeutral),
+      ),
     };
   }
 }
@@ -127,9 +128,9 @@ class WdsButton extends StatefulWidget {
     this.isLoading = false,
     super.key,
   }) : assert(
-          leadingIcon == null || child is Text,
-          'leadingIcon은 자식 위젯이 Text인 경우에만 사용 가능합니다.',
-        );
+         leadingIcon == null || child is Text,
+         'leadingIcon은 자식 위젯이 Text인 경우에만 사용 가능합니다.',
+       );
 
   final VoidCallback? onTap;
   final Widget child;
@@ -196,8 +197,9 @@ class _WdsButtonState extends State<WdsButton>
     final style = _ButtonStyleByVariant.of(widget.variant);
     final double height = _ButtonHeightBySize.of(widget.size);
     final EdgeInsets padding = _ButtonPaddingBySize.of(widget.size);
-    final TextStyle fixedTypography = _ButtonTypographyBySize.of(widget.size)
-        .copyWith(color: style.foreground);
+    final TextStyle fixedTypography = _ButtonTypographyBySize.of(
+      widget.size,
+    ).copyWith(color: style.foreground);
     final borderRadius = BorderRadius.all(Radius.circular(style.radius));
 
     Widget content = IconTheme(
@@ -226,7 +228,6 @@ class _WdsButtonState extends State<WdsButton>
         ),
       );
     }
-
     /// Text 자식일 경우 강제 타이포그래피 적용
     else if (widget.child is Text) {
       final Text childText = widget.child as Text;

@@ -40,20 +40,20 @@ enum WdsTooltipAlignment {
 
   /// 화살표가 위치할 방향을 반환
   ArrowDirection get arrowDirection => switch (this) {
-        topLeft || topCenter || topRight => ArrowDirection.bottom,
-        rightTop || rightCenter || rightBottom => ArrowDirection.left,
-        bottomLeft || bottomCenter || bottomRight => ArrowDirection.top,
-        leftTop || leftCenter || leftBottom => ArrowDirection.right,
-      };
+    topLeft || topCenter || topRight => ArrowDirection.bottom,
+    rightTop || rightCenter || rightBottom => ArrowDirection.left,
+    bottomLeft || bottomCenter || bottomRight => ArrowDirection.top,
+    leftTop || leftCenter || leftBottom => ArrowDirection.right,
+  };
 
   /// - 0: 왼쪽(상)에 위치
   /// - 0.5: 중앙(중)에 위치
   /// - 1: 오른쪽(하)에 위치
   double get arrowFraction => switch (this) {
-        topLeft || bottomLeft || leftTop || rightTop => 0,
-        topCenter || bottomCenter || leftCenter || rightCenter => 0.5,
-        topRight || bottomRight || leftBottom || rightBottom => 1,
-      };
+    topLeft || bottomLeft || leftTop || rightTop => 0,
+    topCenter || bottomCenter || leftCenter || rightCenter => 0.5,
+    topRight || bottomRight || leftBottom || rightBottom => 1,
+  };
 }
 
 /// 화살표 방향 - 내부적으로 사용되는 enum
@@ -72,9 +72,9 @@ class WdsTooltip extends StatelessWidget {
     this.onClose,
     super.key,
   }) : assert(
-          !hasCloseButton || onClose != null,
-          '닫기 버튼이 활성화된 경우 onClose 콜백이 필요합니다.',
-        );
+         !hasCloseButton || onClose != null,
+         '닫기 버튼이 활성화된 경우 onClose 콜백이 필요합니다.',
+       );
 
   static const Color backgroundColor = WdsColors.cta;
 
@@ -103,8 +103,9 @@ class WdsTooltip extends StatelessWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints(minWidth: 64),
         child: ClipRRect(
-          borderRadius:
-              const BorderRadius.all(Radius.circular(WdsRadius.radius8)),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(WdsRadius.radius8),
+          ),
           child: DecoratedBox(
             decoration: const BoxDecoration(
               color: backgroundColor,
@@ -259,25 +260,25 @@ class _TooltipPainter extends CustomPainter {
 
     final (Offset baseStart, Offset baseEnd, Offset tip) = switch (direction) {
       ArrowDirection.top => (
-          Offset(center - triangleWidth / 2, overlap),
-          Offset(center + triangleWidth / 2, overlap),
-          Offset(center, -arrowHeight + tipPadding)
-        ),
+        Offset(center - triangleWidth / 2, overlap),
+        Offset(center + triangleWidth / 2, overlap),
+        Offset(center, -arrowHeight + tipPadding),
+      ),
       ArrowDirection.bottom => (
-          Offset(center - triangleWidth / 2, size.height - overlap),
-          Offset(center + triangleWidth / 2, size.height - overlap),
-          Offset(center, size.height + arrowHeight - tipPadding)
-        ),
+        Offset(center - triangleWidth / 2, size.height - overlap),
+        Offset(center + triangleWidth / 2, size.height - overlap),
+        Offset(center, size.height + arrowHeight - tipPadding),
+      ),
       ArrowDirection.left => (
-          Offset(overlap, center - triangleWidth / 2),
-          Offset(overlap, center + triangleWidth / 2),
-          Offset(-arrowHeight + tipPadding, center)
-        ),
+        Offset(overlap, center - triangleWidth / 2),
+        Offset(overlap, center + triangleWidth / 2),
+        Offset(-arrowHeight + tipPadding, center),
+      ),
       ArrowDirection.right => (
-          Offset(size.width - overlap, center - triangleWidth / 2),
-          Offset(size.width - overlap, center + triangleWidth / 2),
-          Offset(size.width + arrowHeight - tipPadding, center)
-        ),
+        Offset(size.width - overlap, center - triangleWidth / 2),
+        Offset(size.width - overlap, center + triangleWidth / 2),
+        Offset(size.width + arrowHeight - tipPadding, center),
+      ),
     };
 
     const tipRoundT = 0.8;

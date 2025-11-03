@@ -36,12 +36,12 @@ class WdsCountPagination extends StatelessWidget {
     required this.totalPage,
     this.size = WdsPaginationCountSize.medium,
     super.key,
-  })  : assert(currentPage > 0, 'currentPage는 1보다 커야 합니다'),
-        assert(totalPage > 0, 'totalPage는 1보다 커야 합니다'),
-        assert(
-          currentPage <= totalPage,
-          'currentPage는 totalPage보다 작거나 같아야 합니다',
-        );
+  }) : assert(currentPage > 0, 'currentPage는 1보다 커야 합니다'),
+       assert(totalPage > 0, 'totalPage는 1보다 커야 합니다'),
+       assert(
+         currentPage <= totalPage,
+         'currentPage는 totalPage보다 작거나 같아야 합니다',
+       );
 
   final WdsPaginationCountSize size;
 

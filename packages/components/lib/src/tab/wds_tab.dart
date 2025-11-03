@@ -14,8 +14,8 @@ class WdsTabsController extends ChangeNotifier {
   WdsTabsController({
     required this.length,
     this.initialIndex = 0,
-  })  : assert(length > 0),
-        assert(initialIndex >= 0 && initialIndex < length);
+  }) : assert(length > 0),
+       assert(initialIndex >= 0 && initialIndex < length);
 
   /// 탭의 개수
   final int length;
@@ -55,25 +55,24 @@ class WdsTextTabThemeData {
   static TextStyle getDefaultStyle(
     WdsTextTabVariant variant,
     bool isSelected,
-  ) =>
-      switch ((variant, isSelected)) {
-        (WdsTextTabVariant.enabled, false) =>
-          WdsTypography.body15NormalMedium.copyWith(
-            color: WdsColors.textAlternative,
-          ),
-        (WdsTextTabVariant.enabled, true) =>
-          WdsTypography.body15NormalBold.copyWith(
-            color: WdsColors.textNormal,
-          ),
-        (WdsTextTabVariant.featured, false) =>
-          WdsTypography.body15NormalBold.copyWith(
-            color: WdsColors.textNormal,
-          ),
-        (WdsTextTabVariant.featured, true) =>
-          WdsTypography.body15NormalBold.copyWith(
-            color: WdsColors.textNormal,
-          ),
-      };
+  ) => switch ((variant, isSelected)) {
+    (WdsTextTabVariant.enabled, false) =>
+      WdsTypography.body15NormalMedium.copyWith(
+        color: WdsColors.textAlternative,
+      ),
+    (WdsTextTabVariant.enabled, true) =>
+      WdsTypography.body15NormalBold.copyWith(
+        color: WdsColors.textNormal,
+      ),
+    (WdsTextTabVariant.featured, false) =>
+      WdsTypography.body15NormalBold.copyWith(
+        color: WdsColors.textNormal,
+      ),
+    (WdsTextTabVariant.featured, true) =>
+      WdsTypography.body15NormalBold.copyWith(
+        color: WdsColors.textNormal,
+      ),
+  };
 
   /// variant와 선택 상태에 따른 최종 스타일 계산
   TextStyle getStyle(
@@ -133,8 +132,8 @@ class WdsTextTabTheme extends InheritedTheme {
 
   /// 현재 context에서 WdsTextTabTheme 가져오기
   static WdsTextTabThemeData of(BuildContext context) {
-    final WdsTextTabTheme? theme =
-        context.dependOnInheritedWidgetOfExactType<WdsTextTabTheme>();
+    final WdsTextTabTheme? theme = context
+        .dependOnInheritedWidgetOfExactType<WdsTextTabTheme>();
     return theme?.data ?? const WdsTextTabThemeData();
   }
 
@@ -188,8 +187,8 @@ class WdsTextTab extends StatelessWidget with WdsBadgeMixin {
     this.badgeAlignment,
     super.key,
   }) : variant = featuredColor != null
-            ? WdsTextTabVariant.featured
-            : WdsTextTabVariant.enabled;
+           ? WdsTextTabVariant.featured
+           : WdsTextTabVariant.enabled;
 
   /// 탭에 표시할 텍스트
   final String label;
@@ -209,7 +208,8 @@ class WdsTextTab extends StatelessWidget with WdsBadgeMixin {
     final WdsTextTabThemeData theme = WdsTextTabTheme.of(context);
 
     // 현재 탭이 선택되었는지 확인 (controller에서 관리)
-    final bool isSelected = theme.selectedIndex != null &&
+    final bool isSelected =
+        theme.selectedIndex != null &&
         theme.selectedIndex == theme.currentTabIndex;
 
     // WdsTextTabStyle을 사용하여 스타일 처리
@@ -258,7 +258,8 @@ class _WdsTextTabsState extends State<WdsTextTabs> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ??
+    _controller =
+        widget.controller ??
         WdsTabsController(
           length: widget.tabs.length,
         );
@@ -268,7 +269,8 @@ class _WdsTextTabsState extends State<WdsTextTabs> {
   void didUpdateWidget(WdsTextTabs oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
-      _controller = widget.controller ??
+      _controller =
+          widget.controller ??
           WdsTabsController(
             length: widget.tabs.length,
           );
@@ -374,7 +376,8 @@ class _WdsLineTabsState extends State<WdsLineTabs> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ??
+    _controller =
+        widget.controller ??
         WdsTabsController(
           length: widget.tabs.length,
         );
@@ -384,7 +387,8 @@ class _WdsLineTabsState extends State<WdsLineTabs> {
   void didUpdateWidget(WdsLineTabs oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
-      _controller = widget.controller ??
+      _controller =
+          widget.controller ??
           WdsTabsController(
             length: widget.tabs.length,
           );

@@ -89,21 +89,21 @@ class _WdsSkeletonState extends State<WdsSkeleton>
 /// 이 그라데이션은 제공된 컨트롤러의 값을 기반으로 위치가 계산됩니다.
 class _ShimmerGradient extends LinearGradient {
   _ShimmerGradient({required this.controllerValue})
-      : super(
-          colors: const [
-            Color(0x00FFFFFF),
-            Color(0x80FFFFFF), // 50% opacity white
-            Color(0x00FFFFFF),
-          ],
-          stops: const [
-            0.0,
-            0.5,
-            1.0,
-          ],
-          begin: Alignment.centerRight,
-          end: Alignment.centerLeft,
-          transform: _ShimmerGradientTransform(controllerValue),
-        );
+    : super(
+        colors: const [
+          Color(0x00FFFFFF),
+          Color(0x80FFFFFF), // 50% opacity white
+          Color(0x00FFFFFF),
+        ],
+        stops: const [
+          0.0,
+          0.5,
+          1.0,
+        ],
+        begin: Alignment.centerRight,
+        end: Alignment.centerLeft,
+        transform: _ShimmerGradientTransform(controllerValue),
+      );
   final double controllerValue;
 }
 

@@ -172,8 +172,9 @@ class WdsOptionItemWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final decoration =
-        isLast ? _topBottomBorderDecoration : _topBorderDecoration;
+    final decoration = isLast
+        ? _topBottomBorderDecoration
+        : _topBorderDecoration;
 
     return RepaintBoundary(
       child: DecoratedBox(

@@ -16,73 +16,73 @@ class WdsTag extends StatelessWidget {
     this.hasRadius = true,
     this.leadingIcon,
     super.key,
-  })  : backgroundColor = WdsColors.neutral50,
-        color = WdsColors.textNeutral;
+  }) : backgroundColor = WdsColors.neutral50,
+       color = WdsColors.textNeutral;
 
   const WdsTag.filled({
     required this.label,
     this.hasRadius = true,
     this.leadingIcon,
     super.key,
-  })  : backgroundColor = WdsColors.primary,
-        color = WdsColors.white;
+  }) : backgroundColor = WdsColors.primary,
+       color = WdsColors.white;
 
   /// 자주쓰이는 컴포넌트: NEW
   const WdsTag.$new({super.key})
-      : label = 'NEW',
-        color = WdsColors.white,
-        backgroundColor = WdsColors.primary,
-        hasRadius = false,
-        leadingIcon = null;
+    : label = 'NEW',
+      color = WdsColors.white,
+      backgroundColor = WdsColors.primary,
+      hasRadius = false,
+      leadingIcon = null;
 
   const WdsTag.$sale({super.key})
-      : label = 'SALE',
-        color = WdsColors.white,
-        backgroundColor = WdsColors.secondary,
-        hasRadius = false,
-        leadingIcon = null;
+    : label = 'SALE',
+      color = WdsColors.white,
+      backgroundColor = WdsColors.secondary,
+      hasRadius = false,
+      leadingIcon = null;
 
   const WdsTag.$best({super.key})
-      : label = 'BEST',
-        color = WdsColors.white,
-        backgroundColor = WdsColors.coolNeutral700,
-        hasRadius = false,
-        leadingIcon = null;
+    : label = 'BEST',
+      color = WdsColors.white,
+      backgroundColor = WdsColors.coolNeutral700,
+      hasRadius = false,
+      leadingIcon = null;
 
   const WdsTag.$coupon({super.key})
-      : label = '쿠폰사용가능',
-        color = WdsColors.white,
-        backgroundColor = WdsColors.secondary,
-        hasRadius = false,
-        leadingIcon = null;
+    : label = '쿠폰사용가능',
+      color = WdsColors.white,
+      backgroundColor = WdsColors.secondary,
+      hasRadius = false,
+      leadingIcon = null;
 
   const WdsTag.$soldOut({super.key})
-      : label = '일시품절',
-        color = WdsColors.white,
-        backgroundColor = WdsColors.coolNeutral300,
-        hasRadius = true,
-        leadingIcon = null;
+    : label = '일시품절',
+      color = WdsColors.white,
+      backgroundColor = WdsColors.coolNeutral300,
+      hasRadius = true,
+      leadingIcon = null;
 
   const WdsTag.$myPower({super.key})
-      : label = '내 도수',
-        color = WdsColors.textNeutral,
-        backgroundColor = WdsColors.neutral50,
-        hasRadius = true,
-        leadingIcon = null;
+    : label = '내 도수',
+      color = WdsColors.textNeutral,
+      backgroundColor = WdsColors.neutral50,
+      hasRadius = true,
+      leadingIcon = null;
 
   const WdsTag.$barodrim({super.key})
-      : label = '바로드림',
-        color = WdsColors.statusPositive,
-        backgroundColor = WdsColors.neutral50,
-        hasRadius = true,
-        leadingIcon = null;
+    : label = '바로드림',
+      color = WdsColors.statusPositive,
+      backgroundColor = WdsColors.neutral50,
+      hasRadius = true,
+      leadingIcon = null;
 
   const WdsTag.$upto2days({super.key})
-      : label = '1~2일예상',
-        color = WdsColors.textNeutral,
-        backgroundColor = WdsColors.neutral50,
-        hasRadius = true,
-        leadingIcon = null;
+    : label = '1~2일예상',
+      color = WdsColors.textNeutral,
+      backgroundColor = WdsColors.neutral50,
+      hasRadius = true,
+      leadingIcon = null;
 
   static const double fixedHeight = 18;
 
