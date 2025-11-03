@@ -237,8 +237,9 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
 
     // Get current text style and icon color based on focus state
     final currentTypography = isFocused ? _focusedTypography : _typography;
-    final currentIconColor =
-        isFocused ? WdsColors.white : widget.variant.foreground;
+    final currentIconColor = isFocused
+        ? WdsColors.white
+        : widget.variant.foreground;
 
     // Build content row with current text style
     final List<Widget> contentChildren = [];

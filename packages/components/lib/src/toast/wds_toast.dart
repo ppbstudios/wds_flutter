@@ -17,8 +17,8 @@ class WdsToast extends StatelessWidget {
   const WdsToast.text({
     required this.message,
     super.key,
-  })  : leadingIcon = null,
-        variant = WdsToastVariant.text;
+  }) : leadingIcon = null,
+       variant = WdsToastVariant.text;
 
   /// 아이콘과 텍스트를 함께 표시하는 토스트
   const WdsToast.icon({

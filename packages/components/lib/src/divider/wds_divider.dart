@@ -14,11 +14,11 @@ class WdsDivider extends StatelessWidget {
   const WdsDivider.vertical({
     this.variant = WdsDividerVariant.normal,
     super.key,
-  })  : isVertical = true,
-        assert(
-          variant == WdsDividerVariant.normal,
-          '세로 Divider는 normal variant만 지원합니다.',
-        );
+  }) : isVertical = true,
+       assert(
+         variant == WdsDividerVariant.normal,
+         '세로 Divider는 normal variant만 지원합니다.',
+       );
 
   final WdsDividerVariant variant;
   final bool isVertical;
@@ -37,19 +37,19 @@ class WdsDivider extends StatelessWidget {
 
     return switch (variant) {
       WdsDividerVariant.normal => const SizedBox(
-          width: double.infinity,
-          height: 1,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: WdsColors.borderAlternative),
-          ),
+        width: double.infinity,
+        height: 1,
+        child: DecoratedBox(
+          decoration: BoxDecoration(color: WdsColors.borderAlternative),
         ),
+      ),
       WdsDividerVariant.thick => const SizedBox(
-          width: double.infinity,
-          height: 6,
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: WdsColors.backgroundAlternative),
-          ),
+        width: double.infinity,
+        height: 6,
+        child: DecoratedBox(
+          decoration: BoxDecoration(color: WdsColors.backgroundAlternative),
         ),
+      ),
     };
   }
 }

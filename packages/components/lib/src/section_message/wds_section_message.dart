@@ -15,27 +15,25 @@ enum WdsSectionMessageVariant {
 class _SectionMessageStyleByVariant {
   const _SectionMessageStyleByVariant._();
 
-  static ({
-    Color background,
-    Color text,
-    Color icon,
-  }) of(WdsSectionMessageVariant variant) {
+  static ({Color background, Color text, Color icon}) of(
+    WdsSectionMessageVariant variant,
+  ) {
     return switch (variant) {
       WdsSectionMessageVariant.normal => (
-          background: WdsColors.backgroundAlternative,
-          text: WdsColors.textNeutral,
-          icon: WdsColors.neutral500,
-        ),
+        background: WdsColors.backgroundAlternative,
+        text: WdsColors.textNeutral,
+        icon: WdsColors.neutral500,
+      ),
       WdsSectionMessageVariant.highlight => (
-          background: WdsColors.blue50,
-          text: WdsColors.statusPositive,
-          icon: WdsColors.primary,
-        ),
+        background: WdsColors.blue50,
+        text: WdsColors.statusPositive,
+        icon: WdsColors.primary,
+      ),
       WdsSectionMessageVariant.warning => (
-          background: WdsColors.orange50,
-          text: WdsColors.statusCautionaty,
-          icon: WdsColors.statusCautionaty,
-        ),
+        background: WdsColors.orange50,
+        text: WdsColors.statusCautionaty,
+        icon: WdsColors.statusCautionaty,
+      ),
     };
   }
 }
@@ -48,22 +46,22 @@ class WdsSectionMessage extends StatelessWidget {
   const WdsSectionMessage.normal({
     required this.message,
     super.key,
-  })  : variant = WdsSectionMessageVariant.normal,
-        leadingIcon = WdsIcon.info;
+  }) : variant = WdsSectionMessageVariant.normal,
+       leadingIcon = WdsIcon.info;
 
   /// 긍정적 메시지
   const WdsSectionMessage.highlight({
     required this.message,
     super.key,
-  })  : variant = WdsSectionMessageVariant.highlight,
-        leadingIcon = WdsIcon.info;
+  }) : variant = WdsSectionMessageVariant.highlight,
+       leadingIcon = WdsIcon.info;
 
   /// 경고 메시지
   const WdsSectionMessage.warning({
     required this.message,
     super.key,
-  })  : variant = WdsSectionMessageVariant.warning,
-        leadingIcon = WdsIcon.info;
+  }) : variant = WdsSectionMessageVariant.warning,
+       leadingIcon = WdsIcon.info;
 
   /// 메시지에 표시될 텍스트 내용
   final String message;

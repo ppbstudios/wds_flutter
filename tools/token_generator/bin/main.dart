@@ -60,7 +60,7 @@ void main(List<String> arguments) async {
   final sync = argResult['sync'] as bool;
   final baseFontSize =
       double.tryParse((argResult['base-font-size'] as String?) ?? '16.0') ??
-          16.0;
+      16.0;
 
   if (inputPath == null || outDir == null) {
     stderr.writeln('사용법:');
@@ -169,12 +169,15 @@ Future<void> _generateSemantic({
     final colorDir = Directory(p.join(semanticDir.path, 'color'));
     await colorDir.create(recursive: true);
 
-    final partsMeta = <(
-      String className,
-      String fieldName,
-      String partRelativePath,
-      String partFileName
-    )>[];
+    final partsMeta =
+        <
+          (
+            String className,
+            String fieldName,
+            String partRelativePath,
+            String partFileName,
+          )
+        >[];
 
     if (colorGroup != null) {
       final groupKeys = colorGroup.keys.toList()
@@ -236,8 +239,9 @@ Future<void> _generateSemantic({
     }
     colorLib.writeln();
     // 최상위 색상 토큰을 개별 const로 노출 (클래스 없이)
-    for (final (k, node) in topLevelColorEntries
-      ..sort((a, b) => a.$1.toLowerCase().compareTo(b.$1.toLowerCase()))) {
+    for (final (k, node)
+        in topLevelColorEntries
+          ..sort((a, b) => a.$1.toLowerCase().compareTo(b.$1.toLowerCase()))) {
       final expr = _convertSemanticColorValue(node[r'$value']);
       if (expr != null) {
         colorLib.writeln('const Color \$${_identifierFromKey(k)} = $expr;');
@@ -245,8 +249,9 @@ Future<void> _generateSemantic({
     }
     // 그룹 클래스는 part 파일로만 제공
 
-    final colorLibFile =
-        File(p.join(semanticDir.path, 'wds_semantic_color.dart'));
+    final colorLibFile = File(
+      p.join(semanticDir.path, 'wds_semantic_color.dart'),
+    );
     await colorLibFile.create(recursive: true);
     await colorLibFile.writeAsString(colorLib.toString());
     state.generatedSemanticColor = true;
@@ -271,20 +276,23 @@ Future<void> _generateSemantic({
     sb.writeln('class WdsSemanticTypography {');
     sb.writeln('  const WdsSemanticTypography._();');
 
-    for (final MapEntry(:key, :value)
-        in tyMap.entries.where((e) => e.value is Map<String, dynamic>)) {
+    for (final MapEntry(:key, :value) in tyMap.entries.where(
+      (e) => e.value is Map<String, dynamic>,
+    )) {
       final styleName = key; // e.g., Heading18, Body15
       final variants = value as Map<String, dynamic>;
 
-      for (final MapEntry(:key, :value)
-          in variants.entries.where((e) => e.value is Map<String, dynamic>)) {
+      for (final MapEntry(:key, :value) in variants.entries.where(
+        (e) => e.value is Map<String, dynamic>,
+      )) {
         final variantOrGroupName = key; // e.g., bold or Normal/Reading
         final propsOrGroup = value as Map<String, dynamic>;
 
         // Body 계열 예외: Normal/Reading과 같은 중첩 그룹 지원
         if (!_isTypographyLeafNode(propsOrGroup)) {
-          for (final MapEntry(:key, :value) in propsOrGroup.entries
-              .where((e) => e.value is Map<String, dynamic>)) {
+          for (final MapEntry(:key, :value) in propsOrGroup.entries.where(
+            (e) => e.value is Map<String, dynamic>,
+          )) {
             final innerVariantName = key; // e.g., bold/medium/regular
             final innerProps = value as Map<String, dynamic>;
             if (!_isTypographyLeafNode(innerProps)) continue;

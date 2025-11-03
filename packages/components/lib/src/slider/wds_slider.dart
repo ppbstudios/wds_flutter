@@ -113,9 +113,11 @@ class _WdsSliderState extends State<WdsSlider> {
 
     final step = (widget.maxValue - widget.minValue) / widget.divisions;
     final finalValues = WdsRangeValues(
-      start: widget.minValue +
+      start:
+          widget.minValue +
           (((adjustedValues.start - widget.minValue) / step).round() * step),
-      end: widget.minValue +
+      end:
+          widget.minValue +
           (((adjustedValues.end - widget.minValue) / step).round() * step),
     );
 
@@ -205,8 +207,10 @@ class _WdsSliderState extends State<WdsSlider> {
 
     final deltaX = dx - _dragStartX!;
     final deltaValue = (deltaX / trackWidth) * range;
-    final newValue =
-        (_dragStartValue! + deltaValue).clamp(widget.minValue, widget.maxValue);
+    final newValue = (_dragStartValue! + deltaValue).clamp(
+      widget.minValue,
+      widget.maxValue,
+    );
 
     final minRange = _getMinRange();
     final maxStartValue = widget.values.end - minRange;
@@ -241,8 +245,10 @@ class _WdsSliderState extends State<WdsSlider> {
 
     final deltaX = dx - _dragStartX!;
     final deltaValue = (deltaX / trackWidth) * range;
-    final newValue =
-        (_dragStartValue! + deltaValue).clamp(widget.minValue, widget.maxValue);
+    final newValue = (_dragStartValue! + deltaValue).clamp(
+      widget.minValue,
+      widget.maxValue,
+    );
 
     final minRange = _getMinRange();
     final minEndValue = widget.values.start + minRange;
@@ -437,11 +443,11 @@ class _WdsSliderTrack extends StatelessWidget {
   final VoidCallback onMouseExitEnd;
   final ValueChanged<DragStartDetails> onPanStartStart;
   final void Function(double dx, double trackWidth, double range)
-      onPanUpdateStart;
+  onPanUpdateStart;
   final VoidCallback onPanEndStart;
   final ValueChanged<DragStartDetails> onPanStartEnd;
   final void Function(double dx, double trackWidth, double range)
-      onPanUpdateEnd;
+  onPanUpdateEnd;
   final VoidCallback onPanEndEnd;
   final ValueChanged<WdsRangeValues> onTrackTap;
 
@@ -532,8 +538,9 @@ class _WdsSliderTrack extends StatelessWidget {
         final startPosition = _valueToPosition(values.start, trackWidth, range);
         final endPosition = _valueToPosition(values.end, trackWidth, range);
 
-        final activeTrackStart =
-            startPosition < endPosition ? startPosition : endPosition;
+        final activeTrackStart = startPosition < endPosition
+            ? startPosition
+            : endPosition;
         final activeTrackWidth = (startPosition - endPosition).abs();
 
         return SizedBox(
@@ -583,8 +590,9 @@ class _WdsSliderTrack extends StatelessWidget {
                 isEnabled: isEnabled,
                 knobColor: knobColor,
                 borderColor: knobBorderColor,
-                interactionColor:
-                    _getInteractionColor(isDraggingStart || isHoveringStart),
+                interactionColor: _getInteractionColor(
+                  isDraggingStart || isHoveringStart,
+                ),
                 onMouseEnter: onMouseEnterStart,
                 onMouseExit: onMouseExitStart,
                 onPanStart: onPanStartStart,
@@ -599,8 +607,9 @@ class _WdsSliderTrack extends StatelessWidget {
                 isEnabled: isEnabled,
                 knobColor: knobColor,
                 borderColor: knobBorderColor,
-                interactionColor:
-                    _getInteractionColor(isDraggingEnd || isHoveringEnd),
+                interactionColor: _getInteractionColor(
+                  isDraggingEnd || isHoveringEnd,
+                ),
                 onMouseEnter: onMouseEnterEnd,
                 onMouseExit: onMouseExitEnd,
                 onPanStart: onPanStartEnd,

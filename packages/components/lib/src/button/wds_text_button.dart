@@ -117,14 +117,15 @@ class _WdsTextButtonState extends State<WdsTextButton>
 
   @override
   Widget build(BuildContext context) {
-    final Color effectiveColor =
-        widget.isEnabled ? widget.color : WdsColors.textDisable;
+    final Color effectiveColor = widget.isEnabled
+        ? widget.color
+        : WdsColors.textDisable;
     final double height = _TextButtonHeightBySize.of(widget.size);
     final EdgeInsets padding = _TextButtonPaddingBySize.of(widget.size);
-    final TextStyle baseTypography =
-        _TextButtonTypographyBySize.of(widget.size).copyWith(
-      color: effectiveColor,
-    );
+    final TextStyle baseTypography = _TextButtonTypographyBySize.of(widget.size)
+        .copyWith(
+          color: effectiveColor,
+        );
     final BorderRadius borderRadius = BorderRadius.circular(WdsRadius.radius4);
 
     // Compose child: force typography for Text

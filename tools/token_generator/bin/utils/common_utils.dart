@@ -137,18 +137,17 @@ int _keyCompare(String a, String b) {
 }
 
 String _getDartTypeForToken(String type) => switch (type) {
-      'color' => 'Color',
-      'dimension' ||
-      'number' ||
-      'fontSize' ||
-      'fontSizes' ||
-      'lineHeight' ||
-      'letterSpacing' =>
-        'double',
-      'text' => 'String',
-      'boxShadow' => 'List<BoxShadow>',
-      _ => 'String',
-    };
+  'color' => 'Color',
+  'dimension' ||
+  'number' ||
+  'fontSize' ||
+  'fontSizes' ||
+  'lineHeight' ||
+  'letterSpacing' => 'double',
+  'text' => 'String',
+  'boxShadow' => 'List<BoxShadow>',
+  _ => 'String',
+};
 
 bool _hasFontRootKey(Map<String, dynamic> jsonMap) {
   return jsonMap.keys.whereType<String>().any((k) => k.toLowerCase() == 'font');

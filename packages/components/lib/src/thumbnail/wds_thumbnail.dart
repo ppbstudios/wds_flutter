@@ -92,8 +92,9 @@ class WdsThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageWidget =
-        _isNetworkImage(imagePath) ? _buildNetworkImage() : _buildAssetImage();
+    final imageWidget = _isNetworkImage(imagePath)
+        ? _buildNetworkImage()
+        : _buildAssetImage();
 
     return _buildImageWidget(imageWidget);
   }
@@ -104,8 +105,9 @@ class WdsThumbnail extends StatelessWidget {
       size: size.size * scaleFactor,
       child: hasRadius
           ? ClipRRect(
-              borderRadius:
-                  const BorderRadius.all(Radius.circular(WdsRadius.radius4)),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(WdsRadius.radius4),
+              ),
               child: imageWidget,
             )
           : imageWidget,

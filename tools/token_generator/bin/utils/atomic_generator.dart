@@ -8,8 +8,9 @@ Future<void> _processAtomicTokens({
   required bool hasFontRoot,
   required _AtomicGenerationState state,
 }) async {
-  for (final MapEntry(:key, :value)
-      in jsonMap.entries.where((e) => e.value is Map<String, dynamic>)) {
+  for (final MapEntry(:key, :value) in jsonMap.entries.where(
+    (e) => e.value is Map<String, dynamic>,
+  )) {
     final rootKey = key;
     final rootMap = value as Map<String, dynamic>;
 
@@ -150,8 +151,11 @@ Future<void> _generateTokenFamily(
         final type = child[r'$type'] as String;
         final value = child[r'$value'];
         String? convertedValue = _convertValueByType(type, value);
-        final normalizedOpacity =
-            _normalizeOpacityIfNeeded(rootKey, type, value);
+        final normalizedOpacity = _normalizeOpacityIfNeeded(
+          rootKey,
+          type,
+          value,
+        );
         if (normalizedOpacity != null) convertedValue = normalizedOpacity;
         final identifier = _identifierFromKey(k);
         if (exposedTopLevelNames.add(identifier)) {
@@ -161,8 +165,9 @@ Future<void> _generateTokenFamily(
         }
       } else {
         final groupClassBase = _pascalCase(k);
-        final groupClass =
-            groupClassBase.isEmpty ? '' : '$rootPrefix$groupClassBase';
+        final groupClass = groupClassBase.isEmpty
+            ? ''
+            : '$rootPrefix$groupClassBase';
         if (groupClass.isNotEmpty && exposedGroupClassNames.add(groupClass)) {
           buf.writeln(
             '  static const $groupClass ${_camelCase(k)} = $groupClass._();',
@@ -181,8 +186,9 @@ Future<void> _generateTokenFamily(
     if (child is Map<String, dynamic> &&
         !(child.containsKey(r'$value') && child.containsKey(r'$type'))) {
       final classNameBase = _pascalCase(k);
-      final className =
-          classNameBase.isEmpty ? '' : '$rootPrefix$classNameBase';
+      final className = classNameBase.isEmpty
+          ? ''
+          : '$rootPrefix$classNameBase';
       if (className.isEmpty || !generatedGroupClassNames.add(className)) {
         continue;
       }
@@ -200,8 +206,11 @@ Future<void> _generateTokenFamily(
           final type = v[r'$type'] as String;
           final value = v[r'$value'];
           String? convertedValue = _convertValueByType(type, value);
-          final normalizedOpacity =
-              _normalizeOpacityIfNeeded(rootKey, type, value);
+          final normalizedOpacity = _normalizeOpacityIfNeeded(
+            rootKey,
+            type,
+            value,
+          );
           if (normalizedOpacity != null) convertedValue = normalizedOpacity;
           final identifier = _identifierFromKey(e.key);
           if (fieldNames.add(identifier)) {
@@ -217,8 +226,12 @@ Future<void> _generateTokenFamily(
     }
   }
 
-  final outPath =
-      p.join(outDir, 'lib', 'atomic', 'wds_atomic_${_toSnake(rootKey)}.dart');
+  final outPath = p.join(
+    outDir,
+    'lib',
+    'atomic',
+    'wds_atomic_${_toSnake(rootKey)}.dart',
+  );
   final outFile = File(outPath);
   await outFile.create(recursive: true);
   await outFile.writeAsString(buf.toString());
@@ -240,12 +253,14 @@ Future<void> _generateColorLibrary({
     ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
   final Set<String> generatedClassNames = {};
   final List<
-      (
-        String className,
-        String fieldName,
-        String partRelativePath,
-        String partFileName
-      )> partsMeta = [];
+    (
+      String className,
+      String fieldName,
+      String partRelativePath,
+      String partFileName,
+    )
+  >
+  partsMeta = [];
 
   for (final key in keys) {
     final value = rootMap[key];
@@ -368,12 +383,14 @@ Future<void> _generateFontLibrary({
     ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
 
   final List<
-      (
-        String className,
-        String fieldName,
-        String partRelativePath,
-        String partFileName
-      )> partsMeta = [];
+    (
+      String className,
+      String fieldName,
+      String partRelativePath,
+      String partFileName,
+    )
+  >
+  partsMeta = [];
 
   for (final key in keys) {
     final value = rootMap[key];
@@ -469,7 +486,8 @@ Future<void> _syncAtomicOutputs({
         // 최신 메인 라이브러리 보존
         final isNewMainColorLib = name == 'wds_atomic_color.dart';
         final isNewMainFontLib = name == 'wds_atomic_font.dart';
-        final shouldKeep = (isNewMainColorLib && state.generatedColorLibrary) ||
+        final shouldKeep =
+            (isNewMainColorLib && state.generatedColorLibrary) ||
             (isNewMainFontLib && state.generatedFontLibrary) ||
             state.generatedBasenames.contains(name);
 
@@ -519,8 +537,9 @@ Future<void> _syncAtomicOutputs({
     }
   }
 
-  final fontPartsDir =
-      Directory(p.join(outDir, 'lib', 'atomic', 'wds_atomic_font'));
+  final fontPartsDir = Directory(
+    p.join(outDir, 'lib', 'atomic', 'wds_atomic_font'),
+  );
   if (await fontPartsDir.exists()) {
     await for (final entity in fontPartsDir.list(followLinks: false)) {
       if (entity is File) {

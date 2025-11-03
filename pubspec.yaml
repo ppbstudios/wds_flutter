@@ -1,9 +1,14 @@
 name: wds
-publish_to: none
 version: 0.0.3
+publish_to: none
 description: WINC Design System
 environment:
-  sdk: ">=3.2.0 <4.0.0"
+  sdk: ^3.9.0
+workspace:
+  - packages/components
+  - packages/foundation
+  - packages/tokens
+  - tools/token_generator
 
 dependencies:
   wds_components:
@@ -12,5 +17,27 @@ dependencies:
     path: packages/foundation
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
-  melos: ^6.3.2
+  flutter_lints: ^6.0.0
+  melos: ^7.3.0
+
+melos:
+  name: wds_flutter
+  packages:
+    - packages/**
+    - tools/**
+
+  scripts:
+    # Install: flutter pub get
+    install:
+      description: "Install all the dependencies"
+      run: flutter pub get && melos exec -c 1 -- "flutter pub get"
+
+    # Build: Widgetbook
+    build-widgetbook:
+      description: "Build Widgetbook"
+      run: cd packages/widgetbook && fvm exec dart run build_runner build --delete-conflicting-outputs && cd ../..
+
+    # Format: All
+    format:
+      description: "Format all the files"
+      run: fvm exec melos exec -c 2 -- "dart fix --apply && dart format ."

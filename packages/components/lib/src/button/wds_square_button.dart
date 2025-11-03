@@ -9,9 +9,9 @@ class WdsSquareButton extends StatefulWidget {
     required this.onTap,
     this.isEnabled = true,
     super.key,
-  })  : variant = WdsSquareButtonVariant.normal,
-        leadingButton = null,
-        trailingButton = null;
+  }) : variant = WdsSquareButtonVariant.normal,
+       leadingButton = null,
+       trailingButton = null;
 
   const WdsSquareButton.step({
     required this.child,
@@ -19,8 +19,8 @@ class WdsSquareButton extends StatefulWidget {
     required this.trailingButton,
     this.isEnabled = true,
     super.key,
-  })  : variant = WdsSquareButtonVariant.step,
-        onTap = null;
+  }) : variant = WdsSquareButtonVariant.step,
+       onTap = null;
 
   final WdsSquareButtonVariant variant;
 
@@ -85,8 +85,9 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
   Widget build(BuildContext context) {
     const double height = 32;
 
-    final BorderRadius borderRadius =
-        const BorderRadius.all(Radius.circular(WdsRadius.radius4));
+    final BorderRadius borderRadius = const BorderRadius.all(
+      Radius.circular(WdsRadius.radius4),
+    );
 
     // variant에 따라 content만 다르게 생성
     final Widget content = _buildContent();
@@ -221,29 +222,29 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
 
     return switch (widget.variant) {
       WdsSquareButtonVariant.normal => () {
-          const EdgeInsets padding = EdgeInsets.fromLTRB(17, 8, 17, 8);
+        const EdgeInsets padding = EdgeInsets.fromLTRB(17, 8, 17, 8);
 
-          return Padding(
-            padding: padding,
-            child: content,
-          );
-        }(),
+        return Padding(
+          padding: padding,
+          child: content,
+        );
+      }(),
       WdsSquareButtonVariant.step => () {
-          const EdgeInsets padding = EdgeInsets.fromLTRB(16, 8, 16, 8);
+        const EdgeInsets padding = EdgeInsets.fromLTRB(16, 8, 16, 8);
 
-          return Padding(
-            padding: padding,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              spacing: 12,
-              children: [
-                widget.leadingButton!,
-                content,
-                widget.trailingButton!,
-              ],
-            ),
-          );
-        }(),
+        return Padding(
+          padding: padding,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            spacing: 12,
+            children: [
+              widget.leadingButton!,
+              content,
+              widget.trailingButton!,
+            ],
+          ),
+        );
+      }(),
     };
   }
 }

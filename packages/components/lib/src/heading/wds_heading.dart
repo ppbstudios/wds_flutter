@@ -68,8 +68,7 @@ class WdsHeading extends StatelessWidget {
         style: switch (size) {
           WdsHeadingSize.large => WdsTypography.heading17Bold,
           WdsHeadingSize.medium => WdsTypography.heading16Bold,
-        }
-            .copyWith(color: WdsColors.textNormal),
+        }.copyWith(color: WdsColors.textNormal),
       ),
     );
 

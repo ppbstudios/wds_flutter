@@ -226,8 +226,9 @@ Future<void> _generateSemanticShadow({
   for (final part in shadowPartFiles..sort()) {
     shadowLib.writeln("part 'shadow/$part';");
   }
-  final shadowLibFile =
-      File(p.join(semanticDir.path, 'wds_semantic_shadow.dart'));
+  final shadowLibFile = File(
+    p.join(semanticDir.path, 'wds_semantic_shadow.dart'),
+  );
   await shadowLibFile.create(recursive: true);
   await shadowLibFile.writeAsString(shadowLib.toString());
   state.generatedSemanticShadow = true;
@@ -239,8 +240,9 @@ Future<void> _syncSemanticOutputs({
   required _SemanticGenerationState state,
   required bool verbose,
 }) async {
-  final semanticColorDir =
-      Directory(p.join(outDir, 'lib', 'semantic', 'color'));
+  final semanticColorDir = Directory(
+    p.join(outDir, 'lib', 'semantic', 'color'),
+  );
   if (await semanticColorDir.exists()) {
     await for (final entity in semanticColorDir.list(followLinks: false)) {
       if (entity is File) {
@@ -256,8 +258,9 @@ Future<void> _syncSemanticOutputs({
   }
 
   // cleanup shadow parts
-  final semanticShadowDir =
-      Directory(p.join(outDir, 'lib', 'semantic', 'shadow'));
+  final semanticShadowDir = Directory(
+    p.join(outDir, 'lib', 'semantic', 'shadow'),
+  );
   if (await semanticShadowDir.exists()) {
     await for (final entity in semanticShadowDir.list(followLinks: false)) {
       if (entity is File) {

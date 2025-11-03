@@ -2,10 +2,7 @@ name: wds_flutter
 packages:
   - packages/**
   - tools/**
-ide:
-  intellij: false
-  vscode:
-    useWorkspaces: true
+
 scripts:
   # Install: flutter pub get
   install:

@@ -74,8 +74,9 @@ class _WdsCheckboxState extends State<WdsCheckbox>
   @override
   Widget build(BuildContext context) {
     final Size boxSize = widget.size.spec;
-    final BorderRadius radius =
-        const BorderRadius.all(Radius.circular(WdsRadius.radius4));
+    final BorderRadius radius = const BorderRadius.all(
+      Radius.circular(WdsRadius.radius4),
+    );
     final EdgeInsets outerMargin = widget.size.margin;
     final Size innerSize = Size(
       boxSize.width - outerMargin.left - outerMargin.right,
@@ -167,9 +168,9 @@ class _CheckboxPainter extends CustomPainter {
 
       Path mark = Path();
       Offset p(Offset offset) => Offset(
-            offset.dx * scale,
-            offset.dy * scale,
-          );
+        offset.dx * scale,
+        offset.dy * scale,
+      );
       mark.moveTo(p(markPath[0]).dx, p(markPath[0]).dy);
       mark.lineTo(p(markPath[1]).dx, p(markPath[1]).dy);
       mark.lineTo(p(markPath[2]).dx, p(markPath[2]).dy);

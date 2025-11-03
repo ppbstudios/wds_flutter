@@ -18,10 +18,14 @@ class _SearchFieldPaddingBySize {
 
   static EdgeInsets of(WdsSearchFieldSize size) {
     return switch (size) {
-      WdsSearchFieldSize.small =>
-        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      WdsSearchFieldSize.medium =>
-        const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
+      WdsSearchFieldSize.small => const EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 6,
+      ),
+      WdsSearchFieldSize.medium => const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 11,
+      ),
     };
   }
 }

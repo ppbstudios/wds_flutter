@@ -20,15 +20,15 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
     bool safeArea = true,
     Key? key,
   }) : this._(
-          leading: null,
-          title: WdsIcon.wincLogo.build(width: 62, height: 17),
-          actions: actions,
-          hasCenterTitle: false,
-          isLogo: true,
-          isSearch: false,
-          safeArea: safeArea,
-          key: key,
-        );
+         leading: null,
+         title: WdsIcon.wincLogo.build(width: 62, height: 17),
+         actions: actions,
+         hasCenterTitle: false,
+         isLogo: true,
+         isSearch: false,
+         safeArea: safeArea,
+         key: key,
+       );
 
   /// 타이틀 헤더: title 필수, leading 유무에 따라 가운데 정렬 여부 결정
   const WdsHeader.title({
@@ -38,15 +38,15 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
     bool safeArea = true,
     Key? key,
   }) : this._(
-          leading: leading,
-          title: title,
-          actions: actions,
-          hasCenterTitle: true,
-          isLogo: false,
-          isSearch: false,
-          safeArea: safeArea,
-          key: key,
-        );
+         leading: leading,
+         title: title,
+         actions: actions,
+         hasCenterTitle: true,
+         isLogo: false,
+         isSearch: false,
+         safeArea: safeArea,
+         key: key,
+       );
 
   /// 검색 헤더: title 자리에 SearchField 등, 가운데 정렬, actions 최대 1개
   factory WdsHeader.search({
@@ -87,8 +87,9 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double statusBarHeight =
-        safeArea ? MediaQuery.of(context).padding.top : 0.0;
+    final double statusBarHeight = safeArea
+        ? MediaQuery.of(context).padding.top
+        : 0.0;
 
     // Text 타입 title 에 고정 타이포 적용
     Widget titleWidget = title;
@@ -153,15 +154,18 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
 
             // Title: 항상 전체 헤더 영역 기준으로 가운데 또는 좌측 정렬
             Align(
-              alignment:
-                  hasCenterTitle ? Alignment.center : Alignment.centerLeft,
+              alignment: hasCenterTitle
+                  ? Alignment.center
+                  : Alignment.centerLeft,
               child: switch ((isSearch, isLogo)) {
-                (true, _) =>
-                  FractionallySizedBox(widthFactor: 0.567, child: titleWidget),
+                (true, _) => FractionallySizedBox(
+                  widthFactor: 0.567,
+                  child: titleWidget,
+                ),
                 (false, true) => Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: titleWidget,
-                  ),
+                  padding: const EdgeInsets.only(left: 8),
+                  child: titleWidget,
+                ),
                 (false, false) => titleWidget,
               },
             ),

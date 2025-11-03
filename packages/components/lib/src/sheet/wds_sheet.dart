@@ -49,15 +49,14 @@ abstract class WdsSheet extends StatelessWidget {
     VoidCallback? onAction,
     String? actionTitle,
     Key? key,
-  }) =>
-      _FixedSheet(
-        onClose: onClose,
-        onAction: onAction,
-        headerTitle: headerTitle,
-        content: content,
-        actionTitle: actionTitle,
-        key: key,
-      );
+  }) => _FixedSheet(
+    onClose: onClose,
+    onAction: onAction,
+    headerTitle: headerTitle,
+    content: content,
+    actionTitle: actionTitle,
+    key: key,
+  );
 
   factory WdsSheet.draggable({
     required String headerTitle,
@@ -65,14 +64,13 @@ abstract class WdsSheet extends StatelessWidget {
     VoidCallback? onAction,
     String? actionTitle,
     Key? key,
-  }) =>
-      _DraggableSheet(
-        onAction: onAction,
-        headerTitle: headerTitle,
-        actionTitle: actionTitle,
-        key: key,
-        children: children,
-      );
+  }) => _DraggableSheet(
+    onAction: onAction,
+    headerTitle: headerTitle,
+    actionTitle: actionTitle,
+    key: key,
+    children: children,
+  );
 
   final WdsSheetVariant variant;
   final VoidCallback? onClose;
@@ -140,9 +138,9 @@ class _DraggableSheet extends WdsSheet {
     super.actionTitle,
     super.key,
   }) : super(
-          onClose: null,
-          variant: WdsSheetVariant.draggable,
-        );
+         onClose: null,
+         variant: WdsSheetVariant.draggable,
+       );
 
   final List<Widget> children;
 
@@ -233,8 +231,9 @@ class __SheetHandle extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: WdsColors.borderAlternative,
-            borderRadius:
-                BorderRadius.all(Radius.circular(WdsRadius.radius9999)),
+            borderRadius: BorderRadius.all(
+              Radius.circular(WdsRadius.radius9999),
+            ),
           ),
           child: SizedBox(
             width: _SheetDimensions.handleWidth,

@@ -5,9 +5,9 @@ extension WdsNumX on num {
   String toKRWFormat() {
     final intValue = toInt();
     final formatted = intValue.toString().replaceAllMapped(
-          RegExp(r'\B(?=(\d{3})+(?!\d))'),
-          (match) => ',',
-        );
+      RegExp(r'\B(?=(\d{3})+(?!\d))'),
+      (match) => ',',
+    );
     return '$formatted원';
   }
 

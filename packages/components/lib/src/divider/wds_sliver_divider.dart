@@ -13,11 +13,11 @@ class WdsSliverDivider extends StatelessWidget {
   const WdsSliverDivider.vertical({
     this.variant = WdsDividerVariant.normal,
     super.key,
-  })  : isVertical = true,
-        assert(
-          variant == WdsDividerVariant.normal,
-          '세로 Divider는 normal variant만 지원합니다.',
-        );
+  }) : isVertical = true,
+       assert(
+         variant == WdsDividerVariant.normal,
+         '세로 Divider는 normal variant만 지원합니다.',
+       );
 
   final WdsDividerVariant variant;
   final bool isVertical;
@@ -32,11 +32,11 @@ class WdsSliverDivider extends StatelessWidget {
 
     return switch (variant) {
       WdsDividerVariant.normal => const SliverToBoxAdapter(
-          child: WdsDivider(),
-        ),
+        child: WdsDivider(),
+      ),
       WdsDividerVariant.thick => const SliverToBoxAdapter(
-          child: WdsDivider(variant: WdsDividerVariant.thick),
-        ),
+        child: WdsDivider(variant: WdsDividerVariant.thick),
+      ),
     };
   }
 }

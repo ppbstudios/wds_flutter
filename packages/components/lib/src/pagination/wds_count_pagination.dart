@@ -9,12 +9,12 @@ class WdsCountPagination extends StatelessWidget {
     required this.currentPage,
     required this.totalPage,
     super.key,
-  })  : assert(currentPage > 0, 'currentPage는 1보다 커야 합니다'),
-        assert(totalPage > 0, 'totalPage는 1보다 커야 합니다'),
-        assert(
-          currentPage <= totalPage,
-          'currentPage는 totalPage보다 작거나 같아야 합니다',
-        );
+  }) : assert(currentPage > 0, 'currentPage는 1보다 커야 합니다'),
+       assert(totalPage > 0, 'totalPage는 1보다 커야 합니다'),
+       assert(
+         currentPage <= totalPage,
+         'currentPage는 totalPage보다 작거나 같아야 합니다',
+       );
 
   /// 현재 페이지 번호 (1부터 시작)
   final int currentPage;
@@ -54,8 +54,9 @@ class WdsCountPagination extends StatelessWidget {
           Text(
             totalPage.toString(),
             style: WdsTypography.caption11Regular.copyWith(
-              color: WdsColors.textAssistive
-                  .withAlpha(WdsOpacity.opacity80.toAlpha()),
+              color: WdsColors.textAssistive.withAlpha(
+                WdsOpacity.opacity80.toAlpha(),
+              ),
             ),
           ),
         ],
