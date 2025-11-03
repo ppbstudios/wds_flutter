@@ -167,7 +167,24 @@ class WdsTextTabStyle extends StatelessWidget {
   Widget build(BuildContext context) {
     final WdsTextTabThemeData theme = WdsTextTabTheme.of(context);
 
-    // 테마에서 최종 스타일 계산
+    // Material TabBar 컨텍스트인지 확인 (selectedIndex가 null이면 Material 사용 중)
+    final bool isInMaterialContext = theme.selectedIndex == null;
+
+    if (isInMaterialContext) {
+      // Material TabBar를 사용하는 경우
+      if (variant == WdsTextTabVariant.featured && featuredColor != null) {
+        // featured variant는 색상만 오버라이드
+        // Material의 DefaultTextStyle에서 현재 색상을 featuredColor로 교체
+        return DefaultTextStyle.merge(
+          style: TextStyle(color: featuredColor),
+          child: child,
+        );
+      }
+      // enabled variant는 Material의 labelStyle을 그대로 사용
+      return child;
+    }
+
+    // WdsTextTabs를 사용하는 경우, 커스텀 스타일 적용
     final TextStyle style = theme.getStyle(variant, isSelected, featuredColor);
 
     // DefaultTextStyle.merge를 사용하여 상위 스타일과 병합
@@ -207,24 +224,80 @@ class WdsTextTab extends StatelessWidget with WdsBadgeMixin {
     // InheritedTheme에서 테마 데이터 가져오기
     final WdsTextTabThemeData theme = WdsTextTabTheme.of(context);
 
+    // Material TabBar 컨텍스트인지 확인
+    final bool isInMaterialContext = theme.selectedIndex == null;
+
     // 현재 탭이 선택되었는지 확인 (controller에서 관리)
     final bool isSelected =
         theme.selectedIndex != null &&
         theme.selectedIndex == theme.currentTabIndex;
 
-    // WdsTextTabStyle을 사용하여 스타일 처리
-    Widget textWidget = WdsTextTabStyle(
-      variant: variant,
-      isSelected: isSelected,
-      featuredColor: featuredColor,
-      child: Text(label),
-    );
+    // featuredColor를 가진 탭은 _WdsFeaturedMaterialTab 사용 (성능 최적화)
+    Widget textWidget;
+    if (isInMaterialContext &&
+        variant == WdsTextTabVariant.featured &&
+        featuredColor != null) {
+      // Material에서 featuredColor를 사용하는 경우 - 최적화된 위젯 사용
+      textWidget = _WdsFeaturedMaterialTab(
+        label: label,
+        featuredColor: featuredColor!,
+      );
+    } else {
+      // WdsTextTabStyle을 사용하여 스타일 처리
+      textWidget = WdsTextTabStyle(
+        variant: variant,
+        isSelected: isSelected,
+        featuredColor: featuredColor,
+        child: Text(label),
+      );
+    }
 
     // WdsBadgeMixin의 addDotBadge 메서드로 배지 기능 추가
     return buildWidgetWithDotBadge(
       child: textWidget,
       alignment: badgeAlignment,
     );
+  }
+}
+
+/// Material TabBar에서 featuredColor를 효율적으로 처리하는 내부 위젯
+/// AnimatedWidget을 사용하여 color 변경 시에만 rebuild
+class _WdsFeaturedMaterialTab extends StatelessWidget {
+  const _WdsFeaturedMaterialTab({
+    required this.label,
+    required this.featuredColor,
+  });
+
+  final String label;
+  final Color featuredColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle parentStyle = DefaultTextStyle.of(context).style;
+    final Color? parentColor = parentStyle.color;
+
+    // Material의 색상이 textNormal에 가까우면 선택된 상태
+    // 성능 최적화: 거리 계산 대신 단순 비교 (애니메이션 중간값 무시)
+    final bool looksSelected = parentColor != null &&
+        _isSimilarColor(parentColor, WdsColors.textNormal);
+
+    // 선택된 경우: Material의 스타일 그대로 사용 (textNormal)
+    // 선택되지 않은 경우: featuredColor 적용
+    return Text(
+      label,
+      style: looksSelected
+          ? parentStyle
+          : parentStyle.copyWith(color: featuredColor),
+    );
+  }
+
+  /// 두 색상이 유사한지 간단히 비교 (정확한 거리 계산보다 빠름)
+  static bool _isSimilarColor(Color a, Color b, {double threshold = 30.0}) {
+    final double dr = (a.r * 255.0) - (b.r * 255.0);
+    final double dg = (a.g * 255.0) - (b.g * 255.0);
+    final double db = (a.b * 255.0) - (b.b * 255.0);
+    final double distanceSquared = dr * dr + dg * dg + db * db;
+    return distanceSquared < threshold * threshold;
   }
 }
 
@@ -325,11 +398,12 @@ class _WdsTextTabsState extends State<WdsTextTabs> {
   }
 }
 
-/// WdsLineTabs에서 사용할 개별 탭 데이터 클래스
-class WdsLineTab {
+/// WdsLineTabs에서 사용할 개별 탭 위젯
+class WdsLineTab extends StatelessWidget {
   const WdsLineTab({
     required this.title,
     this.count,
+    super.key,
   });
 
   /// 탭에 표시할 제목
@@ -339,13 +413,14 @@ class WdsLineTab {
   final int? count;
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is WdsLineTab && other.title == title && other.count == count;
-  }
+  Widget build(BuildContext context) {
+    /// 최종 표시할 텍스트
+    final displayText = count != null
+        ? '$title(${count!.toFormat()})'
+        : title;
 
-  @override
-  int get hashCode => Object.hash(title, count);
+    return Text(displayText);
+  }
 }
 
 /// 균등 너비 + 선택 탭에 언더라인이 표시되는 탭
@@ -425,11 +500,6 @@ class _WdsLineTabsState extends State<WdsLineTabs> {
             color: WdsColors.textNeutral,
           );
 
-    /// 최종 표시할 텍스트
-    final displayText = tab.count != null
-        ? '${tab.title}(${tab.count!.toFormat()})'
-        : tab.title;
-
     return Expanded(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -451,7 +521,10 @@ class _WdsLineTabsState extends State<WdsLineTabs> {
             Align(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 11, 0, 10),
-                child: Text(displayText, style: labelStyle),
+                child: DefaultTextStyle(
+                  style: labelStyle,
+                  child: tab,
+                ),
               ),
             ),
             if (isSelected)
