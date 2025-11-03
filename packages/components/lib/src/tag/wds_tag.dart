@@ -64,7 +64,7 @@ class WdsTag extends StatelessWidget {
       leadingIcon = null;
 
   const WdsTag.$myPower({super.key})
-    : label = '내 도수',
+    : label = '내 도수보유',
       color = WdsColors.textNeutral,
       backgroundColor = WdsColors.neutral50,
       hasRadius = true,
