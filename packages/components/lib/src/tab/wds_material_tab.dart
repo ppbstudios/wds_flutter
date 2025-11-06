@@ -1,7 +1,12 @@
 part of '../../wds_components.dart';
 
 class WdsMaterialTabController extends TabController {
-  WdsMaterialTabController({required super.length, required super.vsync});
+  WdsMaterialTabController({
+    required super.length,
+    required super.vsync,
+    super.initialIndex,
+    super.animationDuration,
+  });
 }
 
 /// Material TabBar styled like WdsTextTabs
