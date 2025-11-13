@@ -7,10 +7,14 @@ class _PaginationCountPaddingBySize {
 
   static EdgeInsets of(WdsPaginationCountSize size) {
     return switch (size) {
-      WdsPaginationCountSize.small =>
-        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      WdsPaginationCountSize.medium =>
-        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      WdsPaginationCountSize.small => const EdgeInsets.symmetric(
+        horizontal: 6,
+        vertical: 2,
+      ),
+      WdsPaginationCountSize.medium => const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 4,
+      ),
     };
   }
 }
@@ -86,8 +90,9 @@ class WdsCountPagination extends StatelessWidget {
           Text(
             totalPage.toString(),
             style: textStyle.copyWith(
-              color: WdsColors.textAssistive
-                  .withAlpha(WdsOpacity.opacity80.toAlpha()),
+              color: WdsColors.textAssistive.withAlpha(
+                WdsOpacity.opacity80.toAlpha(),
+              ),
             ),
           ),
         ],

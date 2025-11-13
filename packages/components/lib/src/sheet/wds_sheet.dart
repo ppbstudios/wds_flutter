@@ -39,26 +39,24 @@ abstract class WdsSheet extends StatelessWidget {
     Widget? header,
     Widget? actionArea,
     Key? key,
-  }) =>
-      _FixedSheet(
-        header: header,
-        content: content,
-        actionArea: actionArea,
-        key: key,
-      );
+  }) => _FixedSheet(
+    header: header,
+    content: content,
+    actionArea: actionArea,
+    key: key,
+  );
 
   factory WdsSheet.draggable({
     required List<Widget> children,
     Widget? header,
     Widget? actionArea,
     Key? key,
-  }) =>
-      _DraggableSheet(
-        header: header,
-        actionArea: actionArea,
-        key: key,
-        children: children,
-      );
+  }) => _DraggableSheet(
+    header: header,
+    actionArea: actionArea,
+    key: key,
+    children: children,
+  );
 
   final WdsSheetVariant variant;
   final Widget? header;
@@ -116,8 +114,8 @@ class _DraggableSheet extends WdsSheet {
     super.actionArea,
     super.key,
   }) : super(
-          variant: WdsSheetVariant.draggable,
-        );
+         variant: WdsSheetVariant.draggable,
+       );
 
   final List<Widget> children;
 
