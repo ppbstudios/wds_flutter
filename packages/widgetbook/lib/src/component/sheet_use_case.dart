@@ -74,11 +74,17 @@ Widget _buildPlaygroundSection(BuildContext context) {
     labelBuilder: (value) => value.displayName,
   );
 
+  final backgroundColor = context.knobs.color(
+    label: 'backgroundColor',
+    description: 'Sheet의 배경색을 설정해 주세요',
+  );
+
   return WidgetbookPlayground(
     info: [
       'Variant: ${variant.name}',
       'Title: $title',
       'Action Area: ${actionAreaOption.displayName}',
+      'Background Color: ${backgroundColor.toString()}',
     ],
     child: material.LayoutBuilder(
       builder: (context, constraints) {
@@ -94,6 +100,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
                 variant: variant,
                 title: title,
                 actionAreaOption: actionAreaOption,
+                backgroundColor: backgroundColor,
                 blueColors: blueColors,
                 deviceHeight: deviceHeight,
               ),
@@ -112,11 +119,13 @@ Widget _buildSheetContent(
   required WdsSheetVariant variant,
   required String title,
   required _ActionAreaOption actionAreaOption,
+  required Color backgroundColor,
   required List<Color> blueColors,
   required double deviceHeight,
 }) {
   return switch (variant) {
     WdsSheetVariant.fixed => WdsSheet.fixed(
+        backgroundColor: backgroundColor,
         header: _buildHeader(context, title),
         content: SingleChildScrollView(
           child: Column(
@@ -132,6 +141,7 @@ Widget _buildSheetContent(
             : null,
       ),
     WdsSheetVariant.draggable => WdsSheet.draggable(
+        backgroundColor: backgroundColor,
         header: _buildHeader(context, title),
         actionArea: actionAreaOption.variant != null
             ? _buildActionArea(

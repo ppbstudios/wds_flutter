@@ -29,6 +29,7 @@ class _SheetDimensions {
 abstract class WdsSheet extends StatelessWidget {
   const WdsSheet({
     required this.variant,
+    this.backgroundColor = WdsColors.white,
     this.header,
     this.actionArea,
     super.key,
@@ -38,27 +39,34 @@ abstract class WdsSheet extends StatelessWidget {
     required Widget content,
     Widget? header,
     Widget? actionArea,
+    Color backgroundColor = WdsColors.white,
     Key? key,
-  }) => _FixedSheet(
-    header: header,
-    content: content,
-    actionArea: actionArea,
-    key: key,
-  );
+  }) =>
+      _FixedSheet(
+        backgroundColor: backgroundColor,
+        header: header,
+        content: content,
+        actionArea: actionArea,
+        key: key,
+      );
 
   factory WdsSheet.draggable({
     required List<Widget> children,
     Widget? header,
     Widget? actionArea,
+    Color backgroundColor = WdsColors.white,
     Key? key,
-  }) => _DraggableSheet(
-    header: header,
-    actionArea: actionArea,
-    key: key,
-    children: children,
-  );
+  }) =>
+      _DraggableSheet(
+        backgroundColor: backgroundColor,
+        header: header,
+        actionArea: actionArea,
+        key: key,
+        children: children,
+      );
 
   final WdsSheetVariant variant;
+  final Color backgroundColor;
   final Widget? header;
   final Widget? actionArea;
 }
@@ -66,6 +74,7 @@ abstract class WdsSheet extends StatelessWidget {
 class _FixedSheet extends WdsSheet {
   const _FixedSheet({
     required this.content,
+    super.backgroundColor = WdsColors.white,
     super.header,
     super.actionArea,
     super.key,
@@ -77,6 +86,7 @@ class _FixedSheet extends WdsSheet {
   Widget build(BuildContext context) {
     return __SheetContainer(
       variant: variant,
+      backgroundColor: backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
@@ -110,12 +120,13 @@ class _FixedSheet extends WdsSheet {
 class _DraggableSheet extends WdsSheet {
   const _DraggableSheet({
     required this.children,
+    super.backgroundColor = WdsColors.white,
     super.header,
     super.actionArea,
     super.key,
   }) : super(
-         variant: WdsSheetVariant.draggable,
-       );
+          variant: WdsSheetVariant.draggable,
+        );
 
   final List<Widget> children;
 
@@ -127,6 +138,7 @@ class _DraggableSheet extends WdsSheet {
       builder: (context, scrollController) {
         return __SheetContainer(
           variant: variant,
+          backgroundColor: backgroundColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -169,10 +181,12 @@ class _DraggableSheet extends WdsSheet {
 class __SheetContainer extends StatelessWidget {
   const __SheetContainer({
     required this.variant,
+    required this.backgroundColor,
     required this.child,
   });
 
   final WdsSheetVariant variant;
+  final Color backgroundColor;
   final Widget child;
 
   @override
@@ -185,9 +199,9 @@ class __SheetContainer extends StatelessWidget {
           minWidth: constraints.minWidth,
         ),
         child: DecoratedBox(
-          decoration: const BoxDecoration(
-            color: WdsColors.white,
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(WdsRadius.radius16),
               topRight: Radius.circular(WdsRadius.radius16),
             ),
