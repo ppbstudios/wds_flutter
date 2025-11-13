@@ -36,17 +36,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
     description: '아무것도 입력되지 않을 때 보여질 텍스트를 입력해 주세요',
   );
 
-  final helper = context.knobs.string(
-    label: 'helper',
-    initialValue: '비밀번호는 8~16자 이내로 입력해 주세요',
-    description: '텍스트 입력란 아래에 표시될 헬퍼 텍스트를 입력해 주세요',
-  );
-
-  final error = context.knobs.string(
-    label: 'error',
-    description: '텍스트 입력란 아래에 표시될 에러 텍스트를 입력해 주세요. 작성하면 error 상태로 바뀝니다.',
-  );
-
   final text = context.knobs.string(
     label: 'initial text',
     description: '텍스트 입력란에 초기 값을 입력해 주세요',
@@ -58,8 +47,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
     isEnabled: enabled,
     label: label,
     hintText: hint,
-    helperText: helper,
-    errorText: error,
     controller: controller,
   );
 
@@ -68,8 +55,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
       'state: ${enabled ? 'inactive(아무것도 입력되지 않은 상태)' : 'disabled'}',
       'label: $label',
       'hint: $hint',
-      if (helper.isNotEmpty) 'helper: $helper',
-      if (error.isNotEmpty) 'error: $error',
     ],
     child: SizedBox(width: 360, child: area),
   );
@@ -77,7 +62,6 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
 Widget _buildDemonstrationSection(BuildContext context) {
   final activeController = TextEditingController(text: '입력된 내용');
-  final errorController = TextEditingController(text: '에러가 발생할 내용');
 
   return WidgetbookSection(
     title: 'TextArea',
@@ -85,7 +69,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
     children: [
       WidgetbookSubsection(
         title: 'state',
-        labels: ['inactive', 'active', 'focused', 'error', 'disabled'],
+        labels: ['inactive', 'active', 'focused', 'disabled'],
         content: Wrap(
           spacing: 24,
           runSpacing: 24,
@@ -107,16 +91,6 @@ Widget _buildDemonstrationSection(BuildContext context) {
               child: WdsTextArea(
                 label: '주제',
                 hintText: '텍스트를 입력해 주세요',
-                controller: errorController,
-                validator: (_) => '에러는 이렇게 발생해요',
-              ),
-            ),
-            SizedBox(
-              width: 320,
-              child: WdsTextArea(
-                label: '주제',
-                hintText: '텍스트를 입력해 주세요',
-                helperText: '설명',
                 controller: activeController,
                 isEnabled: false,
               ),

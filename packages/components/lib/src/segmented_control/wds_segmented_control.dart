@@ -52,8 +52,9 @@ class _WdsSegmentedControlState extends State<WdsSegmentedControl> {
                 : WdsColors.coolNeutral50.withAlpha(
                     WdsOpacity.opacity40.toAlpha(),
                   ),
-            borderRadius:
-                const BorderRadius.all(Radius.circular(WdsRadius.radius9999)),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(WdsRadius.radius9999),
+            ),
           ),
           child: Stack(
             children: [
@@ -89,7 +90,8 @@ class _WdsSegmentedControlState extends State<WdsSegmentedControl> {
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 150),
                 curve: Curves.decelerate,
-                left: widget.selectedIndex * segmentWidth -
+                left:
+                    widget.selectedIndex * segmentWidth -
                     (widget.selectedIndex > 0 ? _slidingButtonOverlap : 0),
                 child: Container(
                   width: segmentWidth + _slidingButtonOverlap,

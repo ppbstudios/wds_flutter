@@ -10,6 +10,7 @@ enum WdsActionAreaVariant { normal, filter, division }
 class WdsActionArea extends StatelessWidget {
   WdsActionArea.normal({
     required this.primary,
+    this.showBorder = true,
     super.key,
   }) : variant = WdsActionAreaVariant.normal,
        secondary = null,
@@ -21,6 +22,7 @@ class WdsActionArea extends StatelessWidget {
   WdsActionArea.filter({
     required this.secondary,
     required this.primary,
+    this.showBorder = true,
     super.key,
   }) : variant = WdsActionAreaVariant.filter,
        assert(secondary != null),
@@ -40,6 +42,7 @@ class WdsActionArea extends StatelessWidget {
   WdsActionArea.division({
     required this.secondary,
     required this.primary,
+    this.showBorder = true,
     super.key,
   }) : variant = WdsActionAreaVariant.division,
        assert(secondary != null),
@@ -63,6 +66,9 @@ class WdsActionArea extends StatelessWidget {
   final WdsButton primary;
 
   final WdsActionAreaVariant variant;
+
+  /// 상단 경계선 표시 여부
+  final bool showBorder;
 
   @override
   Widget build(BuildContext context) {

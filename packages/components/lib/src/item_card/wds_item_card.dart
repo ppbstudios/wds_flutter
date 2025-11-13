@@ -667,11 +667,9 @@ class __PriceInfo extends StatelessWidget {
       style: switch (size) {
         WdsItemCardSize.xlarge ||
         WdsItemCardSize.large ||
-        WdsItemCardSize.medium =>
-          WdsTypography.body14NormalBold,
-        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold
-      }
-          .copyWith(color: WdsColors.textNormal),
+        WdsItemCardSize.medium => WdsTypography.body14NormalBold,
+        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold,
+      }.copyWith(color: WdsColors.textNormal),
     );
 
     if (rate <= 0) {
@@ -682,12 +680,10 @@ class __PriceInfo extends StatelessWidget {
       '$rate%',
       style: switch (size) {
         WdsItemCardSize.xlarge ||
-        WdsItemCardSize.large =>
-          WdsTypography.body15NormalBold,
+        WdsItemCardSize.large => WdsTypography.body15NormalBold,
         WdsItemCardSize.medium => WdsTypography.body14NormalBold,
-        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold
-      }
-          .copyWith(color: WdsColors.secondary),
+        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold,
+      }.copyWith(color: WdsColors.secondary),
     );
 
     final salePriceAndDiscountRate = Row(
