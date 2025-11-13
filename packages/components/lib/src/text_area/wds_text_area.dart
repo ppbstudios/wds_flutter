@@ -9,8 +9,6 @@ class WdsTextArea extends StatefulWidget {
     this.isEnabled = true,
     this.autofocus = false,
     this.hintText,
-    this.helperText,
-    this.errorText,
     this.validator,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.onChanged,
@@ -30,12 +28,6 @@ class WdsTextArea extends StatefulWidget {
 
   /// 힌트 텍스트
   final String? hintText;
-
-  /// 하단 보조 텍스트 (error 미노출 시)
-  final String? helperText;
-
-  /// 오류 메시지 (우선 노출)
-  final String? errorText;
 
   final ValueChanged<String>? onChanged;
 
@@ -64,8 +56,6 @@ class _WdsTextAreaState extends State<WdsTextArea> {
   TextStyle _inputStyle = const TextStyle();
   TextStyle _hintStyle = const TextStyle();
   TextStyle _labelStyle = const TextStyle();
-  TextStyle _helperStyle = const TextStyle();
-  TextStyle _errorStyle = const TextStyle();
 
   String? _internalErrorText;
   bool _userInteracted = false;
@@ -93,8 +83,6 @@ class _WdsTextAreaState extends State<WdsTextArea> {
     _inputStyle = WdsTypography.body13ReadingRegular;
     _hintStyle = WdsTypography.body13ReadingRegular;
     _labelStyle = WdsTypography.body13NormalRegular;
-    _helperStyle = WdsTypography.caption12NormalRegular;
-    _errorStyle = WdsTypography.caption12NormalRegular;
   }
 
   void _onChangedInternal() {
@@ -112,10 +100,6 @@ class _WdsTextAreaState extends State<WdsTextArea> {
   }
 
   bool get _hasFocus => _focusNode.hasFocus;
-  String? get _effectiveErrorText => widget.errorText?.isNotEmpty == true
-      ? widget.errorText
-      : _internalErrorText;
-  bool get _hasError => _effectiveErrorText?.isNotEmpty == true;
 
   void _runValidation({bool force = false}) {
     if (widget.validator == null) return;
@@ -132,35 +116,6 @@ class _WdsTextAreaState extends State<WdsTextArea> {
     _internalErrorText = widget.validator!.call(_controller.text);
   }
 
-  Widget _buildHelperErrorText() {
-    final hasError = _effectiveErrorText?.isNotEmpty == true;
-    final hasHelper = widget.helperText?.isNotEmpty == true;
-
-    if (hasError) {
-      return Text(
-        _effectiveErrorText!,
-        style: _errorStyle.copyWith(color: WdsColors.statusDestructive),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      );
-    }
-
-    if (hasHelper) {
-      return Text(
-        widget.helperText!,
-        style: _helperStyle.copyWith(
-          color: widget.isEnabled
-              ? WdsColors.textAlternative
-              : WdsColors.textDisable,
-        ),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      );
-    }
-
-    return const SizedBox.shrink();
-  }
-
   @override
   Widget build(BuildContext context) {
     const radius = BorderRadius.all(Radius.circular(WdsRadius.radius8));
@@ -169,26 +124,21 @@ class _WdsTextAreaState extends State<WdsTextArea> {
       borderRadius: BorderRadius.all(Radius.circular(0)),
     );
 
-    final labelColor = widget.isEnabled
-        ? WdsColors.textNormal
-        : WdsColors.textDisable;
+    final labelColor =
+        widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable;
 
-    final inputColor = widget.isEnabled
-        ? WdsColors.textNormal
-        : WdsColors.textDisable;
+    final inputColor =
+        widget.isEnabled ? WdsColors.textNormal : WdsColors.textDisable;
 
-    final hintColor = !widget.isEnabled
-        ? WdsColors.textDisable
-        : WdsColors.textAlternative;
+    final hintColor =
+        !widget.isEnabled ? WdsColors.textDisable : WdsColors.textAlternative;
 
-    final filledColor = widget.isEnabled
-        ? WdsColors.backgroundNormal
-        : WdsColors.neutral50;
+    final filledColor =
+        widget.isEnabled ? WdsColors.backgroundNormal : WdsColors.neutral50;
 
-    final borderColor = switch ((_hasError, _hasFocus)) {
-      (true, _) => WdsColors.statusDestructive,
-      (false, true) => WdsColors.statusPositive,
-      (false, false) => WdsColors.borderAlternative,
+    final borderColor = switch (_hasFocus) {
+      true => WdsColors.statusPositive,
+      false => WdsColors.borderAlternative,
     };
 
     final area = RepaintBoundary(
@@ -252,29 +202,6 @@ class _WdsTextAreaState extends State<WdsTextArea> {
                   ),
                 ),
               ),
-
-              /// COUNTER
-              Positioned(
-                left: 16,
-                bottom: 13,
-                child: ValueListenableBuilder(
-                  valueListenable: _controller,
-                  builder: (_, value, __) {
-                    if (value.text.isEmpty) {
-                      return const SizedBox.shrink();
-                    }
-
-                    return Text(
-                      '${value.text.length.toFormat()}/${_$maxLength.toFormat()}',
-                      style: WdsTypography.body13NormalRegular.copyWith(
-                        color: widget.isEnabled
-                            ? WdsColors.textAssistive
-                            : WdsColors.textDisable,
-                      ),
-                    );
-                  },
-                ),
-              ),
             ],
           ),
         ),
@@ -297,9 +224,27 @@ class _WdsTextAreaState extends State<WdsTextArea> {
             ),
           ),
           ClipRRect(borderRadius: radius, child: area),
-          // Helper/Error text
-          if (_hasError || widget.helperText?.isNotEmpty == true)
-            RepaintBoundary(child: _buildHelperErrorText()),
+          // COUNTER
+          Align(
+            alignment: Alignment.centerRight,
+            child: ValueListenableBuilder(
+              valueListenable: _controller,
+              builder: (_, value, __) {
+                if (value.text.isEmpty) {
+                  return const SizedBox.shrink();
+                }
+
+                return Text(
+                  '${value.text.length.toFormat()}/${_$maxLength.toFormat()}',
+                  style: WdsTypography.body13NormalRegular.copyWith(
+                    color: widget.isEnabled
+                        ? WdsColors.textAssistive
+                        : WdsColors.textDisable,
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
