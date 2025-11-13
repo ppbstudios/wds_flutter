@@ -10,51 +10,54 @@ enum WdsActionAreaVariant { normal, filter, division }
 class WdsActionArea extends StatelessWidget {
   WdsActionArea.normal({
     required this.primary,
+    this.showBorder = true,
     super.key,
-  }) : variant = WdsActionAreaVariant.normal,
-       secondary = null,
-       assert(
-         primary.size == WdsButtonSize.xlarge,
-         'primary 버튼은 size xlarge 여야 합니다.',
-       );
+  })  : variant = WdsActionAreaVariant.normal,
+        secondary = null,
+        assert(
+          primary.size == WdsButtonSize.xlarge,
+          'primary 버튼은 size xlarge 여야 합니다.',
+        );
 
   WdsActionArea.filter({
     required this.secondary,
     required this.primary,
+    this.showBorder = true,
     super.key,
-  }) : variant = WdsActionAreaVariant.filter,
-       assert(secondary != null),
-       assert(
-         secondary!.variant == WdsButtonVariant.secondary,
-         'filter 변형의 좌측 버튼은 secondary 여야 합니다.',
-       ),
-       assert(
-         secondary!.size == WdsButtonSize.xlarge,
-         '좌측 secondary 버튼은 size xlarge 여야 합니다.',
-       ),
-       assert(
-         primary.size == WdsButtonSize.xlarge,
-         'primary 버튼은 size xlarge 여야 합니다.',
-       );
+  })  : variant = WdsActionAreaVariant.filter,
+        assert(secondary != null),
+        assert(
+          secondary!.variant == WdsButtonVariant.secondary,
+          'filter 변형의 좌측 버튼은 secondary 여야 합니다.',
+        ),
+        assert(
+          secondary!.size == WdsButtonSize.xlarge,
+          '좌측 secondary 버튼은 size xlarge 여야 합니다.',
+        ),
+        assert(
+          primary.size == WdsButtonSize.xlarge,
+          'primary 버튼은 size xlarge 여야 합니다.',
+        );
 
   WdsActionArea.division({
     required this.secondary,
     required this.primary,
+    this.showBorder = true,
     super.key,
-  }) : variant = WdsActionAreaVariant.division,
-       assert(secondary != null),
-       assert(
-         secondary!.variant == WdsButtonVariant.secondary,
-         'division 변형의 좌측 버튼은 secondary 여야 합니다.',
-       ),
-       assert(
-         secondary!.size == WdsButtonSize.xlarge,
-         '좌측 secondary 버튼은 size xlarge 여야 합니다.',
-       ),
-       assert(
-         primary.size == WdsButtonSize.xlarge,
-         'primary 버튼은 size xlarge 여야 합니다.',
-       );
+  })  : variant = WdsActionAreaVariant.division,
+        assert(secondary != null),
+        assert(
+          secondary!.variant == WdsButtonVariant.secondary,
+          'division 변형의 좌측 버튼은 secondary 여야 합니다.',
+        ),
+        assert(
+          secondary!.size == WdsButtonSize.xlarge,
+          '좌측 secondary 버튼은 size xlarge 여야 합니다.',
+        ),
+        assert(
+          primary.size == WdsButtonSize.xlarge,
+          'primary 버튼은 size xlarge 여야 합니다.',
+        );
 
   /// 좌측 보조 버튼 (.secondary, xlarge)
   final WdsButton? secondary;
@@ -63,6 +66,9 @@ class WdsActionArea extends StatelessWidget {
   final WdsButton primary;
 
   final WdsActionAreaVariant variant;
+
+  /// 상단 경계선 표시 여부
+  final bool showBorder;
 
   @override
   Widget build(BuildContext context) {
