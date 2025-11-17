@@ -3,6 +3,23 @@ import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.d
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart';
 
+enum _ActionAreaOption {
+  none('없음'),
+  normal('normal'),
+  filter('filter'),
+  division('division');
+
+  const _ActionAreaOption(this.displayName);
+  final String displayName;
+
+  WdsActionAreaVariant? get variant => switch (this) {
+        _ActionAreaOption.none => null,
+        _ActionAreaOption.normal => WdsActionAreaVariant.normal,
+        _ActionAreaOption.filter => WdsActionAreaVariant.filter,
+        _ActionAreaOption.division => WdsActionAreaVariant.division,
+      };
+}
+
 const List<Color> blueColors = [
   WdsColors.blue50,
   WdsColors.blue100,
@@ -49,16 +66,25 @@ Widget _buildPlaygroundSection(BuildContext context) {
     description: 'Sheet의 제목을 입력해 주세요',
   );
 
-  final actionTitle = context.knobs.stringOrNull(
-    label: 'actionTitle',
-    initialValue: '메인액션',
+  final actionAreaOption = context.knobs.object.dropdown<_ActionAreaOption>(
+    label: 'actionArea',
+    description: 'ActionArea 외에도 다양한 위젯이 추가될 수 있어요',
+    options: _ActionAreaOption.values,
+    initialOption: _ActionAreaOption.normal,
+    labelBuilder: (value) => value.displayName,
+  );
+
+  final backgroundColor = context.knobs.color(
+    label: 'backgroundColor',
+    description: 'Sheet의 배경색을 설정해 주세요',
   );
 
   return WidgetbookPlayground(
     info: [
       'Variant: ${variant.name}',
       'Title: $title',
-      'Action Title: $actionTitle',
+      'Action Area: ${actionAreaOption.displayName}',
+      'Background Color: ${backgroundColor.toString()}',
     ],
     child: material.LayoutBuilder(
       builder: (context, constraints) {
@@ -73,7 +99,8 @@ Widget _buildPlaygroundSection(BuildContext context) {
                 context,
                 variant: variant,
                 title: title,
-                actionTitle: actionTitle,
+                actionAreaOption: actionAreaOption,
+                backgroundColor: backgroundColor,
                 blueColors: blueColors,
                 deviceHeight: deviceHeight,
               ),
@@ -91,40 +118,72 @@ Widget _buildSheetContent(
   BuildContext context, {
   required WdsSheetVariant variant,
   required String title,
-  required String? actionTitle,
+  required _ActionAreaOption actionAreaOption,
+  required Color backgroundColor,
   required List<Color> blueColors,
   required double deviceHeight,
 }) {
   return switch (variant) {
     WdsSheetVariant.fixed => WdsSheet.fixed(
-        onClose: () => Navigator.of(context).pop(),
-        onAction: actionTitle != null
-            ? () {
-                debugPrint('onAction');
-                Navigator.of(context).pop();
-              }
+        backgroundColor: backgroundColor,
+        header: _buildHeader(context, title),
+        content: _buildFixedSheetContent(),
+        actionArea: actionAreaOption.variant != null
+            ? _buildActionArea(
+                context,
+                actionAreaVariant: actionAreaOption.variant!,
+              )
             : null,
-        headerTitle: title,
-        content: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: _buildBlueColors(),
-          ),
-        ),
-        actionTitle: actionTitle,
       ),
     WdsSheetVariant.draggable => WdsSheet.draggable(
-        onAction: actionTitle != null
-            ? () {
-                debugPrint('onAction');
-                Navigator.of(context).pop();
-              }
+        backgroundColor: backgroundColor,
+        header: _buildHeader(context, title),
+        actionArea: actionAreaOption.variant != null
+            ? _buildActionArea(
+                context,
+                actionAreaVariant: actionAreaOption.variant!,
+              )
             : null,
-        actionTitle: actionTitle,
-        headerTitle: title,
-        children: _buildBlueColors(),
+        children: _buildDraggableSheetContent(),
       ),
   };
+}
+
+Widget _buildHeader(BuildContext context, String title) {
+  return SizedBox(
+    height: 50,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox.square(dimension: 24),
+          Flexible(
+            child: Text(
+              title,
+              style: WdsTypography.heading17Bold.copyWith(
+                color: WdsColors.textNormal,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          SizedBox.square(
+            dimension: 24,
+            child: GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Semantics(
+                label: 'Close sheet',
+                button: true,
+                child: WdsIcon.close.build(),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 Widget _buildDemonstrationSection(BuildContext context) {
@@ -144,20 +203,17 @@ Widget _buildDemonstrationSection(BuildContext context) {
             __SheetFrame(
               size: size,
               child: WdsSheet.fixed(
-                onClose: () {
-                  debugPrint('onClose');
-                },
-                onAction: () {
-                  debugPrint('onAction');
-                },
-                headerTitle: '텍스트',
-                content: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: _buildBlueColors(),
+                header: _buildFixedDemoHeader(context, '알림'),
+                content: _buildFixedSheetContent(),
+                actionArea: WdsActionArea.normal(
+                  primary: WdsButton(
+                    onTap: () {
+                      debugPrint('onAction');
+                    },
+                    size: WdsButtonSize.xlarge,
+                    child: const Text('메인액션'),
                   ),
                 ),
-                actionTitle: '메인액션',
               ),
             ),
 
@@ -165,12 +221,17 @@ Widget _buildDemonstrationSection(BuildContext context) {
             __SheetFrame(
               size: size,
               child: WdsSheet.draggable(
-                onAction: () {
-                  debugPrint('onAction');
-                },
-                actionTitle: '메인액션',
-                headerTitle: '텍스트',
-                children: _buildBlueColors(),
+                header: _buildDraggableDemoHeader(context, '텍스트'),
+                actionArea: WdsActionArea.normal(
+                  primary: WdsButton(
+                    onTap: () {
+                      debugPrint('onAction');
+                    },
+                    size: WdsButtonSize.xlarge,
+                    child: const Text('메인액션'),
+                  ),
+                ),
+                children: _buildDraggableSheetContent(),
               ),
             ),
           ],
@@ -180,7 +241,92 @@ Widget _buildDemonstrationSection(BuildContext context) {
   );
 }
 
-List<Widget> _buildBlueColors() {
+Widget _buildFixedSheetContent() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 24),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          '작업이 완료되었습니다',
+          style: WdsTypography.heading17Bold.copyWith(
+            color: WdsColors.textNormal,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          '요청하신 작업이 성공적으로 처리되었습니다.\n확인 후 다음 단계로 진행해 주세요.',
+          style: WdsTypography.body14NormalRegular.copyWith(
+            color: WdsColors.textAlternative,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildFixedDemoHeader(BuildContext context, String title) {
+  return SizedBox(
+    height: 50,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox.square(dimension: 24),
+          Flexible(
+            child: Text(
+              title,
+              style: WdsTypography.heading17Bold.copyWith(
+                color: WdsColors.textNormal,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          SizedBox.square(
+            dimension: 24,
+            child: GestureDetector(
+              onTap: () {
+                debugPrint('onClose');
+              },
+              child: Semantics(
+                label: 'Close sheet',
+                button: true,
+                child: WdsIcon.close.build(),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _buildDraggableDemoHeader(BuildContext context, String title) {
+  return SizedBox(
+    height: 50,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+      child: Center(
+        child: Text(
+          title,
+          style: WdsTypography.heading17Bold.copyWith(
+            color: WdsColors.textNormal,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+    ),
+  );
+}
+
+List<Widget> _buildDraggableSheetContent() {
   return blueColors
       .map(
         (color) => ColoredBox(
@@ -189,6 +335,44 @@ List<Widget> _buildBlueColors() {
         ),
       )
       .toList();
+}
+
+Widget _buildActionArea(
+  BuildContext context, {
+  required WdsActionAreaVariant actionAreaVariant,
+}) {
+  final primaryButton = WdsButton(
+    onTap: () {
+      debugPrint('Primary action');
+      Navigator.of(context).pop();
+    },
+    size: WdsButtonSize.xlarge,
+    child: const Text('메인 액션'),
+  );
+
+  final secondaryButton = WdsButton(
+    onTap: () {
+      debugPrint('Secondary action');
+      Navigator.of(context).pop();
+    },
+    variant: WdsButtonVariant.secondary,
+    size: WdsButtonSize.xlarge,
+    child: const Text('취소'),
+  );
+
+  return switch (actionAreaVariant) {
+    WdsActionAreaVariant.normal => WdsActionArea.normal(
+        primary: primaryButton,
+      ),
+    WdsActionAreaVariant.filter => WdsActionArea.filter(
+        secondary: secondaryButton,
+        primary: primaryButton,
+      ),
+    WdsActionAreaVariant.division => WdsActionArea.division(
+        secondary: secondaryButton,
+        primary: primaryButton,
+      ),
+  };
 }
 
 class __SheetFrame extends material.StatelessWidget {

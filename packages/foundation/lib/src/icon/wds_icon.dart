@@ -19,6 +19,7 @@ enum WdsIcon implements IconBuilder {
   circleCloseFilled(path: 'assets/vector/circle_close_filled.svg'),
   clock(path: 'assets/vector/clock.svg'),
   close(path: 'assets/vector/close.svg'),
+  circle(path: 'assets/vector/circle.svg'),
   comment(path: 'assets/vector/comment.svg'),
   download(path: 'assets/vector/download.svg'),
   home(path: 'assets/vector/home.svg'),

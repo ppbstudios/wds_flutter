@@ -278,7 +278,8 @@ class _WdsFeaturedMaterialTab extends StatelessWidget {
 
     // Material의 색상이 textNormal에 가까우면 선택된 상태
     // 성능 최적화: 거리 계산 대신 단순 비교 (애니메이션 중간값 무시)
-    final bool looksSelected = parentColor != null &&
+    final bool looksSelected =
+        parentColor != null &&
         _isSimilarColor(parentColor, WdsColors.textNormal);
 
     // 선택된 경우: Material의 스타일 그대로 사용 (textNormal)
@@ -415,9 +416,7 @@ class WdsLineTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// 최종 표시할 텍스트
-    final displayText = count != null
-        ? '$title(${count!.toFormat()})'
-        : title;
+    final displayText = count != null ? '$title(${count!.toFormat()})' : title;
 
     return Text(displayText);
   }

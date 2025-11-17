@@ -14,12 +14,7 @@ enum WdsSheetVariant {
 class _SheetPaddingByArea {
   const _SheetPaddingByArea._();
 
-  static const EdgeInsets header = EdgeInsets.symmetric(
-    horizontal: 16,
-    vertical: 13,
-  );
   static const EdgeInsets view = EdgeInsets.all(16);
-  static const EdgeInsets bottom = EdgeInsets.all(16);
 }
 
 class _SheetDimensions {
@@ -27,65 +22,61 @@ class _SheetDimensions {
 
   static const double handleWidth = 40;
   static const double handleHeight = 5;
-  static const double handlePaddingTop = 7;
-  static const double headerHeight = 50;
+  static const double handlePaddingVertical = 8.5;
 }
 
 /// 디자인 시스템 규칙을 따르는 시트
 abstract class WdsSheet extends StatelessWidget {
   const WdsSheet({
     required this.variant,
-    required this.headerTitle,
-    this.onClose,
-    this.onAction,
-    this.actionTitle,
+    this.backgroundColor = WdsColors.white,
+    this.header,
+    this.actionArea,
     super.key,
   });
 
   factory WdsSheet.fixed({
-    required VoidCallback onClose,
-    required String headerTitle,
     required Widget content,
-    VoidCallback? onAction,
-    String? actionTitle,
+    Widget? header,
+    Widget? actionArea,
+    Color backgroundColor = WdsColors.white,
     Key? key,
-  }) => _FixedSheet(
-    onClose: onClose,
-    onAction: onAction,
-    headerTitle: headerTitle,
-    content: content,
-    actionTitle: actionTitle,
-    key: key,
-  );
+  }) =>
+      _FixedSheet(
+        backgroundColor: backgroundColor,
+        header: header,
+        content: content,
+        actionArea: actionArea,
+        key: key,
+      );
 
   factory WdsSheet.draggable({
-    required String headerTitle,
     required List<Widget> children,
-    VoidCallback? onAction,
-    String? actionTitle,
+    Widget? header,
+    Widget? actionArea,
+    Color backgroundColor = WdsColors.white,
     Key? key,
-  }) => _DraggableSheet(
-    onAction: onAction,
-    headerTitle: headerTitle,
-    actionTitle: actionTitle,
-    key: key,
-    children: children,
-  );
+  }) =>
+      _DraggableSheet(
+        backgroundColor: backgroundColor,
+        header: header,
+        actionArea: actionArea,
+        key: key,
+        children: children,
+      );
 
   final WdsSheetVariant variant;
-  final VoidCallback? onClose;
-  final VoidCallback? onAction;
-  final String headerTitle;
-  final String? actionTitle;
+  final Color backgroundColor;
+  final Widget? header;
+  final Widget? actionArea;
 }
 
 class _FixedSheet extends WdsSheet {
   const _FixedSheet({
-    required super.onClose,
-    required super.headerTitle,
     required this.content,
-    super.onAction,
-    super.actionTitle,
+    super.backgroundColor = WdsColors.white,
+    super.header,
+    super.actionArea,
     super.key,
   }) : super(variant: WdsSheetVariant.fixed);
 
@@ -93,54 +84,47 @@ class _FixedSheet extends WdsSheet {
 
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      initialChildSize: variant.maxHeightRatio,
-      maxChildSize: variant.maxHeightRatio,
-      builder: (context, _) {
-        return __SheetContainer(
-          variant: variant,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              RepaintBoundary(
-                child: __SheetHeader(
-                  title: headerTitle,
-                  onClose: onClose,
-                ),
+    return __SheetContainer(
+      variant: variant,
+      backgroundColor: backgroundColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (header != null)
+            RepaintBoundary(
+              child: __SheetHeader(
+                header: header!,
               ),
-              Flexible(
-                child: Padding(
-                  padding: _SheetPaddingByArea.view,
-                  child: content,
-                ),
-              ),
-              if (onAction != null && actionTitle != null)
-                RepaintBoundary(
-                  child: __SheetBottom(
-                    onTap: onAction!,
-                    title: actionTitle!,
-                  ),
-                ),
-            ],
+            )
+          else
+            const SizedBox(height: 12),
+          Padding(
+            padding: _SheetPaddingByArea.view,
+            child: content,
           ),
-        );
-      },
+          if (actionArea != null)
+            RepaintBoundary(
+              child: __SheetBottom(
+                actionArea: actionArea!,
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
 
 class _DraggableSheet extends WdsSheet {
   const _DraggableSheet({
-    required super.headerTitle,
     required this.children,
-    super.onAction,
-    super.actionTitle,
+    super.backgroundColor = WdsColors.white,
+    super.header,
+    super.actionArea,
     super.key,
   }) : super(
-         onClose: null,
-         variant: WdsSheetVariant.draggable,
-       );
+          variant: WdsSheetVariant.draggable,
+        );
 
   final List<Widget> children;
 
@@ -152,6 +136,7 @@ class _DraggableSheet extends WdsSheet {
       builder: (context, scrollController) {
         return __SheetContainer(
           variant: variant,
+          backgroundColor: backgroundColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -159,7 +144,12 @@ class _DraggableSheet extends WdsSheet {
               const RepaintBoundary(child: __SheetHandle()),
 
               /// HEADER
-              RepaintBoundary(child: __SheetHeader(title: headerTitle)),
+              if (header != null)
+                RepaintBoundary(
+                  child: __SheetHeader(
+                    header: header!,
+                  ),
+                ),
 
               /// CONTENT
               Flexible(
@@ -171,11 +161,10 @@ class _DraggableSheet extends WdsSheet {
               ),
 
               /// ACTION
-              if (onAction != null && actionTitle != null)
+              if (actionArea != null)
                 RepaintBoundary(
                   child: __SheetBottom(
-                    onTap: onAction!,
-                    title: actionTitle!,
+                    actionArea: actionArea!,
                   ),
                 ),
             ],
@@ -190,10 +179,12 @@ class _DraggableSheet extends WdsSheet {
 class __SheetContainer extends StatelessWidget {
   const __SheetContainer({
     required this.variant,
+    required this.backgroundColor,
     required this.child,
   });
 
   final WdsSheetVariant variant;
+  final Color backgroundColor;
   final Widget child;
 
   @override
@@ -206,9 +197,9 @@ class __SheetContainer extends StatelessWidget {
           minWidth: constraints.minWidth,
         ),
         child: DecoratedBox(
-          decoration: const BoxDecoration(
-            color: WdsColors.white,
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(WdsRadius.radius16),
               topRight: Radius.circular(WdsRadius.radius16),
             ),
@@ -226,7 +217,9 @@ class __SheetHandle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.only(top: _SheetDimensions.handlePaddingTop),
+      padding: EdgeInsets.symmetric(
+        vertical: _SheetDimensions.handlePaddingVertical,
+      ),
       child: Center(
         child: DecoratedBox(
           decoration: BoxDecoration(
@@ -247,80 +240,28 @@ class __SheetHandle extends StatelessWidget {
 
 class __SheetHeader extends StatelessWidget {
   const __SheetHeader({
-    this.title,
-    this.onClose,
+    required this.header,
   });
 
-  final String? title;
-  final VoidCallback? onClose;
+  final Widget header;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: _SheetDimensions.headerHeight,
-      child: Padding(
-        padding: _SheetPaddingByArea.header,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox.square(dimension: 24),
-
-            /// Title
-            if (title?.isNotEmpty == true)
-              Flexible(
-                child: Text(
-                  title!,
-                  style: WdsTypography.heading17Bold.copyWith(
-                    color: WdsColors.textNormal,
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-
-            /// Close Button
-            if (onClose != null)
-              SizedBox.square(
-                dimension: 24,
-                child: GestureDetector(
-                  onTap: onClose,
-                  child: Semantics(
-                    label: 'Close sheet',
-                    button: true,
-                    child: WdsIcon.close.build(),
-                  ),
-                ),
-              )
-            else
-              const SizedBox.square(dimension: 24),
-          ],
-        ),
-      ),
-    );
+    return header;
   }
 }
 
 class __SheetBottom extends StatelessWidget {
   const __SheetBottom({
-    required this.onTap,
-    required this.title,
+    required this.actionArea,
   });
 
-  final VoidCallback onTap;
-  final String title;
+  final Widget actionArea;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: _SheetPaddingByArea.bottom,
-        child: WdsButton(
-          onTap: onTap,
-          size: WdsButtonSize.xlarge,
-          child: Text(title),
-        ),
-      ),
+      child: actionArea,
     );
   }
 }
