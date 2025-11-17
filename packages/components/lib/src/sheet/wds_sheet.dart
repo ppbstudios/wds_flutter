@@ -1,12 +1,21 @@
 part of '../../wds_components.dart';
 
 enum WdsSheetVariant {
-  fixed(maxHeightRatio: 0.88),
-  draggable(maxHeightRatio: 0.93);
+  fixed(
+    initialHeightRatio: 0.5,
+    maxHeightRatio: 0.88,
+  ),
+  draggable(
+    initialHeightRatio: 0.65,
+    maxHeightRatio: 0.93,
+  );
 
   const WdsSheetVariant({
+    required this.initialHeightRatio,
     required this.maxHeightRatio,
   });
+
+  final double initialHeightRatio;
 
   final double maxHeightRatio;
 }
@@ -131,7 +140,7 @@ class _DraggableSheet extends WdsSheet {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: variant.maxHeightRatio,
+      initialChildSize: variant.initialHeightRatio,
       maxChildSize: variant.maxHeightRatio,
       builder: (context, scrollController) {
         return __SheetContainer(
