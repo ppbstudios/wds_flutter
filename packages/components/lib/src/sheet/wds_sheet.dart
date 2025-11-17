@@ -99,11 +99,9 @@ class _FixedSheet extends WdsSheet {
             )
           else
             const SizedBox(height: 12),
-          Flexible(
-            child: Padding(
-              padding: _SheetPaddingByArea.view,
-              child: content,
-            ),
+          Padding(
+            padding: _SheetPaddingByArea.view,
+            child: content,
           ),
           if (actionArea != null)
             RepaintBoundary(

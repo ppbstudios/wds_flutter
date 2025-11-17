@@ -127,12 +127,7 @@ Widget _buildSheetContent(
     WdsSheetVariant.fixed => WdsSheet.fixed(
         backgroundColor: backgroundColor,
         header: _buildHeader(context, title),
-        content: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: _buildBlueColors(),
-          ),
-        ),
+        content: _buildFixedSheetContent(),
         actionArea: actionAreaOption.variant != null
             ? _buildActionArea(
                 context,
@@ -149,7 +144,7 @@ Widget _buildSheetContent(
                 actionAreaVariant: actionAreaOption.variant!,
               )
             : null,
-        children: _buildBlueColors(),
+        children: _buildDraggableSheetContent(),
       ),
   };
 }
@@ -208,13 +203,8 @@ Widget _buildDemonstrationSection(BuildContext context) {
             __SheetFrame(
               size: size,
               child: WdsSheet.fixed(
-                header: _buildDemoHeader(context, '텍스트'),
-                content: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: _buildBlueColors(),
-                  ),
-                ),
+                header: _buildFixedDemoHeader(context, '알림'),
+                content: _buildFixedSheetContent(),
                 actionArea: WdsActionArea.normal(
                   primary: WdsButton(
                     onTap: () {
@@ -231,7 +221,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
             __SheetFrame(
               size: size,
               child: WdsSheet.draggable(
-                header: _buildDemoHeader(context, '텍스트'),
+                header: _buildDraggableDemoHeader(context, '텍스트'),
                 actionArea: WdsActionArea.normal(
                   primary: WdsButton(
                     onTap: () {
@@ -241,7 +231,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
                     child: const Text('메인액션'),
                   ),
                 ),
-                children: _buildBlueColors(),
+                children: _buildDraggableSheetContent(),
               ),
             ),
           ],
@@ -251,7 +241,33 @@ Widget _buildDemonstrationSection(BuildContext context) {
   );
 }
 
-Widget _buildDemoHeader(BuildContext context, String title) {
+Widget _buildFixedSheetContent() {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 24),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          '작업이 완료되었습니다',
+          style: WdsTypography.heading17Bold.copyWith(
+            color: WdsColors.textNormal,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          '요청하신 작업이 성공적으로 처리되었습니다.\n확인 후 다음 단계로 진행해 주세요.',
+          style: WdsTypography.body14NormalRegular.copyWith(
+            color: WdsColors.textAlternative,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildFixedDemoHeader(BuildContext context, String title) {
   return SizedBox(
     height: 50,
     child: Padding(
@@ -290,6 +306,37 @@ Widget _buildDemoHeader(BuildContext context, String title) {
   );
 }
 
+Widget _buildDraggableDemoHeader(BuildContext context, String title) {
+  return SizedBox(
+    height: 50,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+      child: Center(
+        child: Text(
+          title,
+          style: WdsTypography.heading17Bold.copyWith(
+            color: WdsColors.textNormal,
+          ),
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+    ),
+  );
+}
+
+List<Widget> _buildDraggableSheetContent() {
+  return blueColors
+      .map(
+        (color) => ColoredBox(
+          color: color,
+          child: const SizedBox(height: 100),
+        ),
+      )
+      .toList();
+}
+
 Widget _buildActionArea(
   BuildContext context, {
   required WdsActionAreaVariant actionAreaVariant,
@@ -326,17 +373,6 @@ Widget _buildActionArea(
         primary: primaryButton,
       ),
   };
-}
-
-List<Widget> _buildBlueColors() {
-  return blueColors
-      .map(
-        (color) => ColoredBox(
-          color: color,
-          child: const SizedBox(height: 100),
-        ),
-      )
-      .toList();
 }
 
 class __SheetFrame extends material.StatelessWidget {
