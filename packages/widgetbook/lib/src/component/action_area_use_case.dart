@@ -33,6 +33,10 @@ Widget _buildFixedPlayground(BuildContext context) {
     label: 'secondary label',
     initialValue: '대체액션',
   );
+  final showBorder = context.knobs.boolean(
+    label: 'showBorder',
+    initialValue: true,
+  );
 
   final area = switch (variant) {
     'filter' => WdsActionArea.filter(
@@ -47,6 +51,7 @@ Widget _buildFixedPlayground(BuildContext context) {
           size: WdsButtonSize.xlarge,
           child: Text(labelPrimary),
         ),
+        showBorder: showBorder,
       ),
     'division' => WdsActionArea.division(
         secondary: WdsButton(
@@ -60,6 +65,7 @@ Widget _buildFixedPlayground(BuildContext context) {
           size: WdsButtonSize.xlarge,
           child: Text(labelPrimary),
         ),
+        showBorder: showBorder,
       ),
     _ => WdsActionArea.normal(
         primary: WdsButton(
@@ -67,6 +73,7 @@ Widget _buildFixedPlayground(BuildContext context) {
           size: WdsButtonSize.xlarge,
           child: Text(labelPrimary),
         ),
+        showBorder: showBorder,
       ),
   };
 
