@@ -13,7 +13,7 @@ enum WdsItemCardSize {
     cardHeight: 328,
     thumbnailSize: WdsThumbnailSize.medium,
   ),
-  xsmall(
+  small(
     cardHeight: 329,
     thumbnailSize: WdsThumbnailSize.xsmall,
   );
@@ -29,7 +29,7 @@ enum WdsItemCardSize {
   Size? get lensPatternSize => switch (this) {
     WdsItemCardSize.xlarge || WdsItemCardSize.large => const Size.square(40),
     WdsItemCardSize.medium => const Size.square(30),
-    WdsItemCardSize.xsmall => null,
+    WdsItemCardSize.small => null,
   };
 }
 
@@ -116,7 +116,7 @@ class WdsItemCard extends StatefulWidget {
        rightThumbnailTag = null;
 
   /// [WdsThumbnailSize.xsmall]와 함께 가로로 구성되는 상품 정보
-  const WdsItemCard.xsmall({
+  const WdsItemCard.small({
     required this.onLiked,
     required this.thumbnailImageUrl,
     required this.productName,
@@ -133,7 +133,7 @@ class WdsItemCard extends StatefulWidget {
     this.productNameMaxLines = 1,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsItemCardSize.xsmall,
+  }) : size = WdsItemCardSize.small,
        brandName = '',
        lensPatternImageUrl = null,
        indexTag = null,
@@ -213,7 +213,7 @@ class _WdsItemCardState extends State<WdsItemCard> {
         hasRadius: true,
         scaleFactor: widget.scaleFactor,
       ),
-      WdsItemCardSize.xsmall => WdsThumbnail.xsmall(
+      WdsItemCardSize.small => WdsThumbnail.xsmall(
         imagePath: widget.thumbnailImageUrl,
         hasRadius: true,
         scaleFactor: widget.scaleFactor,
@@ -576,8 +576,8 @@ class _HorizontalLayout extends StatelessWidget {
           __LikeButton(
             onTap: onLiked,
             hasLiked: hasLiked,
-            isVertical: size == WdsItemCardSize.xsmall,
-            likeCount: size == WdsItemCardSize.xsmall ? likeCount : null,
+            isVertical: size == WdsItemCardSize.small,
+            likeCount: size == WdsItemCardSize.small ? likeCount : null,
           ),
         ],
       ),
@@ -602,7 +602,7 @@ class __LensInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final textStyle =
         switch (size) {
-          WdsItemCardSize.xsmall => WdsTypography.caption11Regular,
+          WdsItemCardSize.small => WdsTypography.caption11Regular,
           _ => WdsTypography.caption12NormalRegular,
         }.copyWith(
           color: WdsColors.textAlternative,
@@ -668,7 +668,7 @@ class __PriceInfo extends StatelessWidget {
         WdsItemCardSize.xlarge ||
         WdsItemCardSize.large ||
         WdsItemCardSize.medium => WdsTypography.body14NormalBold,
-        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold,
+        WdsItemCardSize.small => WdsTypography.caption12NormalBold,
       }.copyWith(color: WdsColors.textNormal),
     );
 
@@ -682,7 +682,7 @@ class __PriceInfo extends StatelessWidget {
         WdsItemCardSize.xlarge ||
         WdsItemCardSize.large => WdsTypography.body15NormalBold,
         WdsItemCardSize.medium => WdsTypography.body14NormalBold,
-        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold,
+        WdsItemCardSize.small => WdsTypography.caption12NormalBold,
       }.copyWith(color: WdsColors.secondary),
     );
 
@@ -816,17 +816,21 @@ class __LikeButton extends StatelessWidget {
     if (isVertical && likeCount != null) {
       return GestureDetector(
         onTap: onTap,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            icon,
-            Text(
-              likeCount!.clamp(0, 999999).toFormat(),
-              style: WdsTypography.caption10Regular.copyWith(
-                color: WdsColors.textAlternative,
+        child: SizedBox(
+          width: 34,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              icon,
+              Text(
+                likeCount!.clamp(0, 999999).toFormat(),
+                style: WdsTypography.caption10Regular.copyWith(
+                  color: WdsColors.textAlternative,
+                ),
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     }

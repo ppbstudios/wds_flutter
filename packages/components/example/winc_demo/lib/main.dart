@@ -651,7 +651,7 @@ class _HomeTabState extends State<HomeTab> {
                 itemBuilder: (context, index) {
                   final product = $dummyProducts[index];
 
-                  return WdsItemCard.xsmall(
+                  return WdsItemCard.small(
                     onLiked: () {},
                     thumbnailImageUrl: product.thumbnailImageUrl,
                     productName: product.productName,
