@@ -13,7 +13,7 @@ enum WdsItemCardSize {
     cardHeight: 328,
     thumbnailSize: WdsThumbnailSize.medium,
   ),
-  xsmall(
+  small(
     cardHeight: 329,
     thumbnailSize: WdsThumbnailSize.xsmall,
   );
@@ -27,10 +27,12 @@ enum WdsItemCardSize {
   final WdsThumbnailSize thumbnailSize;
 
   Size? get lensPatternSize => switch (this) {
-    WdsItemCardSize.xlarge || WdsItemCardSize.large => const Size.square(40),
-    WdsItemCardSize.medium => const Size.square(30),
-    WdsItemCardSize.xsmall => null,
-  };
+        WdsItemCardSize.xlarge ||
+        WdsItemCardSize.large =>
+          const Size.square(40),
+        WdsItemCardSize.medium => const Size.square(30),
+        WdsItemCardSize.small => null,
+      };
 }
 
 class WdsItemCard extends StatefulWidget {
@@ -58,12 +60,12 @@ class WdsItemCard extends StatefulWidget {
     this.rightThumbnailTag,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsItemCardSize.xlarge,
-       indexTag = null,
-       assert(
-         productNameMaxLines == 1,
-         '세트상품일 때만 상품명 2줄 처리하고 나머지는 1줄 처리해야 합니다.',
-       );
+  })  : size = WdsItemCardSize.xlarge,
+        indexTag = null,
+        assert(
+          productNameMaxLines == 1,
+          '세트상품일 때만 상품명 2줄 처리하고 나머지는 1줄 처리해야 합니다.',
+        );
 
   /// [WdsThumbnailSize.large]와 함께 세로로 구성되는 상품 정보
   const WdsItemCard.large({
@@ -109,14 +111,14 @@ class WdsItemCard extends StatefulWidget {
     this.isSoldOut = false,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsItemCardSize.medium,
-       productNameMaxLines = 1,
-       indexTag = null,
-       leftThumbnailTags = const [],
-       rightThumbnailTag = null;
+  })  : size = WdsItemCardSize.medium,
+        productNameMaxLines = 1,
+        indexTag = null,
+        leftThumbnailTags = const [],
+        rightThumbnailTag = null;
 
   /// [WdsThumbnailSize.xsmall]와 함께 가로로 구성되는 상품 정보
-  const WdsItemCard.xsmall({
+  const WdsItemCard.small({
     required this.onLiked,
     required this.thumbnailImageUrl,
     required this.productName,
@@ -133,12 +135,12 @@ class WdsItemCard extends StatefulWidget {
     this.productNameMaxLines = 1,
     this.scaleFactor = 1,
     super.key,
-  }) : size = WdsItemCardSize.xsmall,
-       brandName = '',
-       lensPatternImageUrl = null,
-       indexTag = null,
-       leftThumbnailTags = const [],
-       rightThumbnailTag = null;
+  })  : size = WdsItemCardSize.small,
+        brandName = '',
+        lensPatternImageUrl = null,
+        indexTag = null,
+        leftThumbnailTags = const [],
+        rightThumbnailTag = null;
 
   final VoidCallback onLiked;
 
@@ -200,24 +202,24 @@ class _WdsItemCardState extends State<WdsItemCard> {
   Widget build(BuildContext context) {
     final thumbnail = switch (widget.size) {
       WdsItemCardSize.xlarge => WdsThumbnail.xlarge(
-        imagePath: widget.thumbnailImageUrl,
-        scaleFactor: widget.scaleFactor,
-      ),
+          imagePath: widget.thumbnailImageUrl,
+          scaleFactor: widget.scaleFactor,
+        ),
       WdsItemCardSize.large => WdsThumbnail.large(
-        imagePath: widget.thumbnailImageUrl,
-        hasRadius: true,
-        scaleFactor: widget.scaleFactor,
-      ),
+          imagePath: widget.thumbnailImageUrl,
+          hasRadius: true,
+          scaleFactor: widget.scaleFactor,
+        ),
       WdsItemCardSize.medium => WdsThumbnail.medium(
-        imagePath: widget.thumbnailImageUrl,
-        hasRadius: true,
-        scaleFactor: widget.scaleFactor,
-      ),
-      WdsItemCardSize.xsmall => WdsThumbnail.xsmall(
-        imagePath: widget.thumbnailImageUrl,
-        hasRadius: true,
-        scaleFactor: widget.scaleFactor,
-      ),
+          imagePath: widget.thumbnailImageUrl,
+          hasRadius: true,
+          scaleFactor: widget.scaleFactor,
+        ),
+      WdsItemCardSize.small => WdsThumbnail.xsmall(
+          imagePath: widget.thumbnailImageUrl,
+          hasRadius: true,
+          scaleFactor: widget.scaleFactor,
+        ),
     };
 
     /// Thumnbnail 가공
@@ -576,8 +578,8 @@ class _HorizontalLayout extends StatelessWidget {
           __LikeButton(
             onTap: onLiked,
             hasLiked: hasLiked,
-            isVertical: size == WdsItemCardSize.xsmall,
-            likeCount: size == WdsItemCardSize.xsmall ? likeCount : null,
+            isVertical: size == WdsItemCardSize.small,
+            likeCount: size == WdsItemCardSize.small ? likeCount : null,
           ),
         ],
       ),
@@ -600,13 +602,13 @@ class __LensInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle =
-        switch (size) {
-          WdsItemCardSize.xsmall => WdsTypography.caption11Regular,
-          _ => WdsTypography.caption12NormalRegular,
-        }.copyWith(
-          color: WdsColors.textAlternative,
-        );
+    final textStyle = switch (size) {
+      WdsItemCardSize.small => WdsTypography.caption11Regular,
+      _ => WdsTypography.caption12NormalRegular,
+    }
+        .copyWith(
+      color: WdsColors.textAlternative,
+    );
 
     return SizedBox(
       height: 16,
@@ -637,9 +639,9 @@ class __PriceInfo extends StatelessWidget {
 
   const __PriceInfo.soldOut({
     required this.size,
-  }) : isSoldOut = true,
-       originalPrice = 0,
-       salePrice = 0;
+  })  : isSoldOut = true,
+        originalPrice = 0,
+        salePrice = 0;
 
   final double originalPrice;
 
@@ -667,9 +669,11 @@ class __PriceInfo extends StatelessWidget {
       style: switch (size) {
         WdsItemCardSize.xlarge ||
         WdsItemCardSize.large ||
-        WdsItemCardSize.medium => WdsTypography.body14NormalBold,
-        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold,
-      }.copyWith(color: WdsColors.textNormal),
+        WdsItemCardSize.medium =>
+          WdsTypography.body14NormalBold,
+        WdsItemCardSize.small => WdsTypography.caption12NormalBold,
+      }
+          .copyWith(color: WdsColors.textNormal),
     );
 
     if (rate <= 0) {
@@ -680,10 +684,12 @@ class __PriceInfo extends StatelessWidget {
       '$rate%',
       style: switch (size) {
         WdsItemCardSize.xlarge ||
-        WdsItemCardSize.large => WdsTypography.body15NormalBold,
+        WdsItemCardSize.large =>
+          WdsTypography.body15NormalBold,
         WdsItemCardSize.medium => WdsTypography.body14NormalBold,
-        WdsItemCardSize.xsmall => WdsTypography.caption12NormalBold,
-      }.copyWith(color: WdsColors.secondary),
+        WdsItemCardSize.small => WdsTypography.caption12NormalBold,
+      }
+          .copyWith(color: WdsColors.secondary),
     );
 
     final salePriceAndDiscountRate = Row(
@@ -816,17 +822,21 @@ class __LikeButton extends StatelessWidget {
     if (isVertical && likeCount != null) {
       return GestureDetector(
         onTap: onTap,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            icon,
-            Text(
-              likeCount!.clamp(0, 999999).toFormat(),
-              style: WdsTypography.caption10Regular.copyWith(
-                color: WdsColors.textAlternative,
+        child: SizedBox(
+          width: 34,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              icon,
+              Text(
+                likeCount!.clamp(0, 999999).toFormat(),
+                style: WdsTypography.caption10Regular.copyWith(
+                  color: WdsColors.textAlternative,
+                ),
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     }

@@ -35,7 +35,7 @@ Widget buildWdsItemCardUseCase(BuildContext context) {
 Widget _buildPlaygroundSection(BuildContext context) {
   final size = context.knobs.object.dropdown<String>(
     label: 'size',
-    options: ['xlarge', 'large', 'medium', 'xsmall'],
+    options: ['xlarge', 'large', 'medium', 'small'],
     initialOption: 'large',
     description: '카드의 크기와 레이아웃을 정의해요',
   );
@@ -152,7 +152,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     'xlarge' => WdsItemCardSize.xlarge,
     'large' => WdsItemCardSize.large,
     'medium' => WdsItemCardSize.medium,
-    'xsmall' => WdsItemCardSize.xsmall,
+    'small' => WdsItemCardSize.small,
     _ => WdsItemCardSize.large,
   };
 
@@ -205,7 +205,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
         hasLiked: hasLiked,
         tags: tags,
       ),
-    WdsItemCardSize.xsmall => WdsItemCard.xsmall(
+    WdsItemCardSize.small => WdsItemCard.small(
         onLiked: onLiked,
         thumbnailImageUrl: thumbnailImageUrl,
         productName: productName,
@@ -263,7 +263,7 @@ class __BuildDemonstrationSectionState
     WdsItemCardSize.xlarge: false,
     WdsItemCardSize.large: false,
     WdsItemCardSize.medium: false,
-    WdsItemCardSize.xsmall: false,
+    WdsItemCardSize.small: false,
   };
 
   late final likedMapByTitle = {
@@ -312,7 +312,7 @@ class __BuildDemonstrationSectionState
       children: [
         WidgetbookSubsection(
           title: 'variant',
-          labels: ['xlarge', 'large', 'medium', 'xsmall'],
+          labels: ['xlarge', 'large', 'medium', 'small'],
           content: Wrap(
             runSpacing: 24,
             spacing: 24,
@@ -390,9 +390,9 @@ class __BuildDemonstrationSectionState
               SizedBox(
                 width: 300,
                 height: WdsThumbnailSize.xsmall.size.height,
-                child: WdsItemCard.xsmall(
-                  onLiked: () => onLiked('variant', WdsItemCardSize.xsmall),
-                  hasLiked: getHasLiked('variant', WdsItemCardSize.xsmall),
+                child: WdsItemCard.small(
+                  onLiked: () => onLiked('variant', WdsItemCardSize.small),
+                  hasLiked: getHasLiked('variant', WdsItemCardSize.small),
                   thumbnailImageUrl: productThumbnailUrl,
                   productName: '빈 크리스틴 원데이 드립브라운',
                   lensType: '하루용',
@@ -401,7 +401,7 @@ class __BuildDemonstrationSectionState
                   salePrice: 19900,
                   rating: 4.5,
                   reviewCount: 127,
-                  likeCount: getLikeCount('variant', WdsItemCardSize.xsmall),
+                  likeCount: getLikeCount('variant', WdsItemCardSize.small),
                 ),
               ),
             ],
@@ -491,8 +491,8 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: 300,
                     height: WdsThumbnailSize.xsmall.size.height,
-                    child: WdsItemCard.xsmall(
-                      onLiked: () => onLiked('case_0', WdsItemCardSize.xsmall),
+                    child: WdsItemCard.small(
+                      onLiked: () => onLiked('case_0', WdsItemCardSize.small),
                       thumbnailImageUrl: productThumbnailUrl,
                       productName: '빈 크리스틴 원데이 드립브라운',
                       lensType: '하루용',
@@ -501,8 +501,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 29900,
                       rating: 4.51,
                       reviewCount: 12345,
-                      hasLiked: getHasLiked('case_0', WdsItemCardSize.xsmall),
-                      likeCount: getLikeCount('case_0', WdsItemCardSize.xsmall),
+                      hasLiked: getHasLiked('case_0', WdsItemCardSize.small),
+                      likeCount: getLikeCount('case_0', WdsItemCardSize.small),
                     ),
                   ),
                 ],
@@ -595,8 +595,8 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: 300,
                     height: WdsThumbnailSize.xsmall.size.height,
-                    child: WdsItemCard.xsmall(
-                      onLiked: () => onLiked('case_1', WdsItemCardSize.xsmall),
+                    child: WdsItemCard.small(
+                      onLiked: () => onLiked('case_1', WdsItemCardSize.small),
                       thumbnailImageUrl: productThumbnailUrl,
                       productName: '빈 크리스틴 원데이 드립브라운',
                       lensType: '하루용',
@@ -605,11 +605,14 @@ class __BuildDemonstrationSectionState
                       salePrice: 29900,
                       rating: 4.51,
                       reviewCount: 12345,
-                      hasLiked: getHasLiked('case_1', WdsItemCardSize.xsmall),
-                      likeCount: getLikeCount('case_1', WdsItemCardSize.xsmall),
+                      hasLiked: getHasLiked('case_1', WdsItemCardSize.small),
+                      likeCount: getLikeCount('case_1', WdsItemCardSize.small),
                       tags: [
                         const WdsTag.normal(label: '내 도수보유'),
-                        const WdsTag(label: '바로드림', color: WdsColors.primary),
+                        const WdsTag(
+                          label: '바로드림',
+                          color: WdsColors.primary,
+                        ),
                       ],
                     ),
                   ),
@@ -696,8 +699,8 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: 300,
                     height: WdsThumbnailSize.xsmall.size.height,
-                    child: WdsItemCard.xsmall(
-                      onLiked: () => onLiked('case_2', WdsItemCardSize.xsmall),
+                    child: WdsItemCard.small(
+                      onLiked: () => onLiked('case_2', WdsItemCardSize.small),
                       thumbnailImageUrl: productThumbnailUrl,
                       productName: '빈 크리스틴 원데이 드립브라운',
                       lensType: '하루용',
@@ -707,8 +710,8 @@ class __BuildDemonstrationSectionState
                       isSoldOut: true,
                       rating: 4.51,
                       reviewCount: 12345,
-                      hasLiked: getHasLiked('case_2', WdsItemCardSize.xsmall),
-                      likeCount: getLikeCount('case_2', WdsItemCardSize.xsmall),
+                      hasLiked: getHasLiked('case_2', WdsItemCardSize.small),
+                      likeCount: getLikeCount('case_2', WdsItemCardSize.small),
                     ),
                   ),
                 ],
@@ -774,8 +777,8 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: 300,
                     height: WdsThumbnailSize.xsmall.size.height,
-                    child: WdsItemCard.xsmall(
-                      onLiked: () => onLiked('case_3', WdsItemCardSize.xsmall),
+                    child: WdsItemCard.small(
+                      onLiked: () => onLiked('case_3', WdsItemCardSize.small),
                       thumbnailImageUrl: etcProductThumbnailUrl,
                       productName: '젬아워 렌즈케이스 퍼플',
                       lensType: null,
@@ -784,8 +787,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 3000,
                       rating: 4.23,
                       reviewCount: 123,
-                      hasLiked: getHasLiked('case_3', WdsItemCardSize.xsmall),
-                      likeCount: getLikeCount('case_3', WdsItemCardSize.xsmall),
+                      hasLiked: getHasLiked('case_3', WdsItemCardSize.small),
+                      likeCount: getLikeCount('case_3', WdsItemCardSize.small),
                     ),
                   ),
                 ],
@@ -853,8 +856,8 @@ class __BuildDemonstrationSectionState
                   SizedBox(
                     width: 300,
                     height: WdsThumbnailSize.xsmall.size.height,
-                    child: WdsItemCard.xsmall(
-                      onLiked: () => onLiked('case_4', WdsItemCardSize.xsmall),
+                    child: WdsItemCard.small(
+                      onLiked: () => onLiked('case_4', WdsItemCardSize.small),
                       thumbnailImageUrl: setProductThumbnailUrl,
                       productName: '[원데이] 첫사랑 렌즈 2팩 골라담기',
                       lensType: null,
@@ -863,8 +866,8 @@ class __BuildDemonstrationSectionState
                       salePrice: 50000,
                       rating: 3.95,
                       reviewCount: 99,
-                      hasLiked: getHasLiked('case_4', WdsItemCardSize.xsmall),
-                      likeCount: getLikeCount('case_4', WdsItemCardSize.xsmall),
+                      hasLiked: getHasLiked('case_4', WdsItemCardSize.small),
+                      likeCount: getLikeCount('case_4', WdsItemCardSize.small),
                     ),
                   ),
                 ],
