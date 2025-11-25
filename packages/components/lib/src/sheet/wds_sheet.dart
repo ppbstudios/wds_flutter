@@ -50,14 +50,13 @@ abstract class WdsSheet extends StatelessWidget {
     Widget? actionArea,
     Color backgroundColor = WdsColors.white,
     Key? key,
-  }) =>
-      _FixedSheet(
-        backgroundColor: backgroundColor,
-        header: header,
-        content: content,
-        actionArea: actionArea,
-        key: key,
-      );
+  }) => _FixedSheet(
+    backgroundColor: backgroundColor,
+    header: header,
+    content: content,
+    actionArea: actionArea,
+    key: key,
+  );
 
   factory WdsSheet.draggable({
     required List<Widget> children,
@@ -65,14 +64,13 @@ abstract class WdsSheet extends StatelessWidget {
     Widget? actionArea,
     Color backgroundColor = WdsColors.white,
     Key? key,
-  }) =>
-      _DraggableSheet(
-        backgroundColor: backgroundColor,
-        header: header,
-        actionArea: actionArea,
-        key: key,
-        children: children,
-      );
+  }) => _DraggableSheet(
+    backgroundColor: backgroundColor,
+    header: header,
+    actionArea: actionArea,
+    key: key,
+    children: children,
+  );
 
   final WdsSheetVariant variant;
   final Color backgroundColor;
@@ -132,8 +130,8 @@ class _DraggableSheet extends WdsSheet {
     super.actionArea,
     super.key,
   }) : super(
-          variant: WdsSheetVariant.draggable,
-        );
+         variant: WdsSheetVariant.draggable,
+       );
 
   final List<Widget> children;
 
