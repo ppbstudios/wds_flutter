@@ -31,7 +31,7 @@ class WdsTag extends StatelessWidget {
   const WdsTag.$new({super.key})
     : label = 'NEW',
       color = WdsColors.white,
-      backgroundColor = WdsColors.primary,
+      backgroundColor = WdsColors.coolNeutral700,
       hasRadius = false,
       leadingIcon = null;
 
