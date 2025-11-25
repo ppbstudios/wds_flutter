@@ -2,6 +2,7 @@
 - WdsItemCard > xsmall에서 small로 명칭 수정
 - WdsItemCard > __LikeButton 내 LikeCount 존재 시, 고정 사이즈로 지정
 - WdsHeading > moreTextButton 내 Varaint를 Custom할 수 있게끔 수정
+- WdsTag > 'NEW' Tag > 배경색 수정
 
 ### 0.0.6
 - WdsIcon > circle 추가
