@@ -42,6 +42,13 @@ Widget _buildPlaygroundSection(BuildContext context) {
     initialValue: '더보기',
     description: '더보기 버튼의 텍스트예요',
   );
+  final moreVariant = context.knobs.object.dropdown<WdsTextButtonVariant>(
+    label: 'moreVariant',
+    options: WdsTextButtonVariant.values,
+    initialOption: WdsTextButtonVariant.text,
+    labelBuilder: (value) => value.name,
+    description: '더보기 버튼의 스타일을 선택할 수 있어요',
+  );
 
   String? effectiveMoreText = enableMore ? moreText : null;
   VoidCallback? onMoreTap = enableMore ? () => debugPrint('more tapped') : null;
@@ -59,11 +66,13 @@ Widget _buildPlaygroundSection(BuildContext context) {
       WdsHeadingSize.large => WdsHeading.large(
           title: title,
           moreText: effectiveMoreText,
+          moreVariant: moreVariant,
           onMoreTap: onMoreTap,
         ),
       WdsHeadingSize.medium => WdsHeading.medium(
           title: title,
           moreText: effectiveMoreText,
+          moreVariant: moreVariant,
           onMoreTap: onMoreTap,
         ),
     },

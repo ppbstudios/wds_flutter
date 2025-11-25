@@ -13,22 +13,12 @@ class _HeadingMaxLinesBySize {
   }
 }
 
-class _HeadingTextButtonVariantBySize {
-  const _HeadingTextButtonVariantBySize._();
-
-  static WdsTextButtonVariant of(WdsHeadingSize size) {
-    return switch (size) {
-      WdsHeadingSize.large => WdsTextButtonVariant.text,
-      WdsHeadingSize.medium => WdsTextButtonVariant.icon,
-    };
-  }
-}
-
 /// 페이지 및 템플릿의 역할 및 기능을 나타내는 헤딩 컴포넌트
 class WdsHeading extends StatelessWidget {
   const WdsHeading.large({
     required this.title,
     this.moreText,
+    this.moreVariant,
     this.onMoreTap,
     super.key,
   }) : size = WdsHeadingSize.large;
@@ -36,6 +26,7 @@ class WdsHeading extends StatelessWidget {
   const WdsHeading.medium({
     required this.title,
     this.moreText,
+    this.moreVariant,
     this.onMoreTap,
     super.key,
   }) : size = WdsHeadingSize.medium;
@@ -45,6 +36,8 @@ class WdsHeading extends StatelessWidget {
   final WdsHeadingSize size;
 
   final String? moreText;
+
+  final WdsTextButtonVariant? moreVariant;
 
   final VoidCallback? onMoreTap;
 
@@ -57,7 +50,7 @@ class WdsHeading extends StatelessWidget {
     const EdgeInsets titlePadding = EdgeInsets.symmetric(vertical: 2);
     final int maxLines = _HeadingMaxLinesBySize.of(size);
     final WdsTextButtonVariant buttonVariant =
-        _HeadingTextButtonVariantBySize.of(size);
+        moreVariant ?? WdsTextButtonVariant.text;
 
     Widget titleWidget = Padding(
       padding: titlePadding,
@@ -68,7 +61,8 @@ class WdsHeading extends StatelessWidget {
         style: switch (size) {
           WdsHeadingSize.large => WdsTypography.heading17Bold,
           WdsHeadingSize.medium => WdsTypography.heading16Bold,
-        }.copyWith(color: WdsColors.textNormal),
+        }
+            .copyWith(color: WdsColors.textNormal),
       ),
     );
 
