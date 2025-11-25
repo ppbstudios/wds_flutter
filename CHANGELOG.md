@@ -1,3 +1,7 @@
+### 0.0.7
+- WdsItemCard > xsmall에서 small로 명칭 수정
+- WdsItemCard > __LikeButton 내 LikeCount 존재 시, 고정 사이즈로 지정
+
 ### 0.0.6
 - WdsIcon > circle 추가
 - WdsTextArea > helper, error 삭제 및 counter 노출 위치 수정
