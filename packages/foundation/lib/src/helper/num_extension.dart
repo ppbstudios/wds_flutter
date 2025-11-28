@@ -13,7 +13,7 @@ extension WdsNumX on num {
 
   /// 할인율 계산
   int getDiscountRate(num salePrice) {
-    return ((1 - salePrice / this) * 100).toInt();
+    return ((1 - salePrice / this) * 100).round();
   }
 
   /// 천 단위 표기법, `NumberFormat('#,###')` 사용
