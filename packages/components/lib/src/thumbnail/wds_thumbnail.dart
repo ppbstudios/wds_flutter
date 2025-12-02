@@ -164,15 +164,6 @@ class WdsThumbnail extends StatelessWidget {
 
   /// 고정 placeholder 빌드 (Container 대신 const 위젯 사용)
   Widget _buildPlaceholder() {
-    return ColoredBox(
-      color: WdsColors.coolNeutral100,
-      child: Center(
-        child: WdsIcon.thumbnail.build(
-          color: WdsColors.coolNeutral200,
-          width: size.size.width * _placeholderIconScale,
-          height: size.size.height * _placeholderIconScale,
-        ),
-      ),
-    );
+    return const ColoredBox(color: WdsColors.coolNeutral100);
   }
 }
