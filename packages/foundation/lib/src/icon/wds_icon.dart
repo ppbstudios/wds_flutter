@@ -54,7 +54,8 @@ enum WdsIcon implements IconBuilder {
   support(path: 'assets/vector/support.svg'),
   thumbnail(path: 'assets/vector/thumbnail.svg'),
   wincLogo(path: 'assets/vector/winc_logo.svg'),
-  wincLogoKo(path: 'assets/vector/winc_logo_ko.svg');
+  wincLogoKo(path: 'assets/vector/winc_logo_ko.svg'),
+  officialWincLogo(path: 'assets/vector/official_winc_logo.svg');
 
   const WdsIcon({
     required this.path,
