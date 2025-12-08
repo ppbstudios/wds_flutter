@@ -1,6 +1,7 @@
 ### 0.0.8
 
 - WdsThumbnail 내 placeholder 에서 icon 제거
+- WdsTextField > keyboardType & inputFormatters 파라미터로 받을 수 있게끔 추가
 
 ### 0.0.7
 
