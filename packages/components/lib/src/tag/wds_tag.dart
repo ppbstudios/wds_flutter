@@ -72,8 +72,8 @@ class WdsTag extends StatelessWidget {
 
   const WdsTag.$barodrim({super.key})
     : label = '바로드림',
-      color = WdsColors.statusPositive,
-      backgroundColor = WdsColors.neutral50,
+      color = WdsColors.white,
+      backgroundColor = WdsColors.primary,
       hasRadius = true,
       leadingIcon = null;
 
