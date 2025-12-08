@@ -13,6 +13,8 @@ class WdsTextField extends StatefulWidget {
     this.hintText,
     this.helperText,
     this.errorText,
+    this.keyboardType,
+    this.inputFormatters,
     this.validator,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.onChanged,
@@ -29,6 +31,8 @@ class WdsTextField extends StatefulWidget {
     this.hintText,
     this.helperText,
     this.errorText,
+    this.keyboardType,
+    this.inputFormatters,
     this.validator,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.onChanged,
@@ -57,6 +61,12 @@ class WdsTextField extends StatefulWidget {
 
   /// 오류 메시지 (우선 노출)
   final String? errorText;
+
+  /// 키보드 타입
+  final TextInputType? keyboardType;
+
+  /// 입력 포맷
+  final List<TextInputFormatter>? inputFormatters;
 
   final ValueChanged<String>? onChanged;
 
@@ -268,6 +278,8 @@ class _WdsTextFieldState extends State<WdsTextField> {
                   onChanged: widget.onChanged,
                   onSubmitted: widget.onSubmitted,
                   decoration: decoration,
+                  keyboardType: widget.keyboardType,
+                  inputFormatters: widget.inputFormatters,
                 ),
               ),
             ),
@@ -349,6 +361,8 @@ class _WdsTextFieldState extends State<WdsTextField> {
                           focusedBorder: noBorder,
                           disabledBorder: noBorder,
                         ),
+                        keyboardType: widget.keyboardType,
+                        inputFormatters: widget.inputFormatters,
                       ),
                     ),
                   ),
