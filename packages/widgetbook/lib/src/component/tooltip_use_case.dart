@@ -20,8 +20,8 @@ Widget buildWdsTooltipUseCase(BuildContext context) {
 }
 
 Widget _buildPlaygroundSection(BuildContext context) {
-  final message = context.knobs.string(
-    label: 'message',
+  final label = context.knobs.string(
+    label: 'label',
     description: '툴팁에 표시될 메시지를 입력해 주세요',
     initialValue: '툴팁 메시지입니다.',
   );
@@ -46,7 +46,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   return WidgetbookPlayground(
     info: [
-      'message: "$message"',
+      'label: "$label"',
       'hasArrow: $hasArrow',
       'hasCloseButton: $hasCloseButton',
       'alignment: ${alignment.name}',
@@ -65,7 +65,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
       height: 200,
       child: Center(
         child: WdsTooltip(
-          message: Text(message),
+          label: Text(label),
           hasArrow: hasArrow,
           hasCloseButton: hasCloseButton,
           alignment: alignment,
@@ -88,10 +88,10 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 24,
           children: [
             WdsTooltip(
-              message: Text('화살표가 있는 툴팁'),
+              label: Text('화살표가 있는 툴팁'),
             ),
             WdsTooltip(
-              message: Text('화살표가 없는 툴팁'),
+              label: Text('화살표가 없는 툴팁'),
               hasArrow: false,
             ),
           ],
@@ -106,7 +106,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
           runSpacing: 16,
           children: [
             WdsTooltip(
-              message: const Text.rich(
+              label: const Text.rich(
                 TextSpan(
                   children: [
                     TextSpan(text: '화살표가 있고 '),
@@ -122,7 +122,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
               onClose: () {},
             ),
             const WdsTooltip(
-              message: Text.rich(
+              label: Text.rich(
                 TextSpan(
                   children: [
                     TextSpan(text: '화살표가 있고 '),
@@ -136,7 +136,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
               ),
             ),
             WdsTooltip(
-              message: const Text.rich(
+              label: const Text.rich(
                 TextSpan(
                   children: [
                     TextSpan(text: '화살표가 있고 '),
@@ -153,7 +153,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
               hasArrow: false,
             ),
             const WdsTooltip(
-              message: Text.rich(
+              label: Text.rich(
                 TextSpan(
                   children: [
                     TextSpan(text: '화살표가 있고 '),
@@ -219,12 +219,12 @@ Widget _buildDemonstrationSection(BuildContext context) {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             WdsTooltip(
-                              message: Text('topLeft'),
+                              label: Text('topLeft'),
                               alignment: WdsTooltipAlignment.topLeft,
                             ),
-                            WdsTooltip(message: Text('topCenter')),
+                            WdsTooltip(label: Text('topCenter')),
                             WdsTooltip(
-                              message: Text('topRight'),
+                              label: Text('topRight'),
                               alignment: WdsTooltipAlignment.topRight,
                             ),
                           ],
@@ -238,15 +238,15 @@ Widget _buildDemonstrationSection(BuildContext context) {
                               spacing: 16,
                               children: [
                                 WdsTooltip(
-                                  message: Text('leftTop'),
+                                  label: Text('leftTop'),
                                   alignment: WdsTooltipAlignment.leftTop,
                                 ),
                                 WdsTooltip(
-                                  message: Text('leftCenter'),
+                                  label: Text('leftCenter'),
                                   alignment: WdsTooltipAlignment.leftCenter,
                                 ),
                                 WdsTooltip(
-                                  message: Text('leftBottom'),
+                                  label: Text('leftBottom'),
                                   alignment: WdsTooltipAlignment.leftBottom,
                                 ),
                               ],
@@ -256,15 +256,15 @@ Widget _buildDemonstrationSection(BuildContext context) {
                               spacing: 16,
                               children: [
                                 WdsTooltip(
-                                  message: Text('rightTop'),
+                                  label: Text('rightTop'),
                                   alignment: WdsTooltipAlignment.rightTop,
                                 ),
                                 WdsTooltip(
-                                  message: Text('rightCenter'),
+                                  label: Text('rightCenter'),
                                   alignment: WdsTooltipAlignment.rightCenter,
                                 ),
                                 WdsTooltip(
-                                  message: Text('rightBottom'),
+                                  label: Text('rightBottom'),
                                   alignment: WdsTooltipAlignment.rightBottom,
                                 ),
                               ],
@@ -276,15 +276,15 @@ Widget _buildDemonstrationSection(BuildContext context) {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             WdsTooltip(
-                              message: Text('bottomLeft'),
+                              label: Text('bottomLeft'),
                               alignment: WdsTooltipAlignment.bottomLeft,
                             ),
                             WdsTooltip(
-                              message: Text('bottomCenter'),
+                              label: Text('bottomCenter'),
                               alignment: WdsTooltipAlignment.bottomCenter,
                             ),
                             WdsTooltip(
-                              message: Text('bottomRight'),
+                              label: Text('bottomRight'),
                               alignment: WdsTooltipAlignment.bottomRight,
                             ),
                           ],
