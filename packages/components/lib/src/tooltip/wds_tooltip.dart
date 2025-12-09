@@ -131,8 +131,6 @@ class WdsTooltip extends StatelessWidget {
         child: Text(
           message,
           style: WdsTypography.body14ReadingRegular,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
         ),
       ),
     );
@@ -152,8 +150,6 @@ class WdsTooltip extends StatelessWidget {
               child: Text(
                 message,
                 style: WdsTypography.body14ReadingRegular,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),

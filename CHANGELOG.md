@@ -3,6 +3,7 @@
 - WdsThumbnail 내 placeholder 에서 icon 제거
 - WdsTextField > keyboardType & inputFormatters 파라미터로 받을 수 있게끔 추가
 - WdsTag > '바로드림' 태그 배경색과 글자색 변경
+- WdsToolTip > 제한해둔 최대 라인 삭제
 
 ### 0.0.7
 
