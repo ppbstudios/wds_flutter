@@ -1,3 +1,7 @@
+### 0.0.9
+- WdsToolTip > 'message'에서 'label'로 변경
+- WdsToolTip > 'message' 파라미터 String에서 Text로 형변환
+
 ### 0.0.8
 
 - WdsThumbnail 내 placeholder 에서 icon 제거
