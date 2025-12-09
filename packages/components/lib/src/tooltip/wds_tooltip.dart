@@ -79,7 +79,7 @@ class WdsTooltip extends StatelessWidget {
   static const Color backgroundColor = WdsColors.cta;
 
   /// 툴팁에 표시될 메시지
-  final String message;
+  final Text message;
 
   /// 화살표 표시 여부
   final bool hasArrow;
@@ -127,11 +127,10 @@ class WdsTooltip extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2),
       child: DefaultTextStyle.merge(
-        style: const TextStyle(color: WdsColors.white),
-        child: Text(
-          message,
-          style: WdsTypography.body14ReadingRegular,
+        style: WdsTypography.body14ReadingRegular.copyWith(
+          color: WdsColors.white,
         ),
+        child: message,
       ),
     );
   }
@@ -146,11 +145,10 @@ class WdsTooltip extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 2),
             child: DefaultTextStyle.merge(
-              style: const TextStyle(color: WdsColors.white),
-              child: Text(
-                message,
-                style: WdsTypography.body14ReadingRegular,
+              style: WdsTypography.body14ReadingRegular.copyWith(
+                color: WdsColors.white,
               ),
+              child: message,
             ),
           ),
         ),
