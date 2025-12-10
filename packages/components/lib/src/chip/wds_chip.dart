@@ -11,7 +11,7 @@ enum WdsChipShape {
 
 enum WdsChipVariant {
   outline(
-    background: Color(0x00000000), // null/transparent
+    background: WdsColors.white,
     foreground: WdsColors.textNormal,
     border: BorderSide(color: WdsColors.borderAlternative),
   ),
