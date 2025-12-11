@@ -2,6 +2,7 @@
 - WdsToolTip > 'message'에서 'label'로 변경
 - WdsToolTip > 'message' 파라미터 String에서 Text로 형변환
 - WdsChip > outline 'backgroundColor' > WdsColors.white로 변경
+- WdsIcon > barcode 아이콘 추가
 
 ### 0.0.8
 

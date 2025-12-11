@@ -3,6 +3,7 @@ part of '../wds_icon.dart';
 enum WdsIcon implements IconBuilder {
   ask(path: 'assets/vector/ask.svg'),
   blank(path: 'assets/vector/blank.svg'),
+  barcode(path: 'assets/vector/barcode.svg'),
   call(path: 'assets/vector/call.svg'),
   camera(path: 'assets/vector/camera.svg'),
   card(path: 'assets/vector/card.svg'),
