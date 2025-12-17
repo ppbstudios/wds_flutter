@@ -1,3 +1,7 @@
+### 0.0.10
+- WdsTextArea > 최소 높이 60px / 최대 높이 320px 대응될 수 있게끔 개선
+
+
 ### 0.0.9
 - WdsToolTip > 'message'에서 'label'로 변경
 - WdsToolTip > 'message' 파라미터 String에서 Text로 형변환
