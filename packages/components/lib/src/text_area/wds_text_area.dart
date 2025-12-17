@@ -44,8 +44,10 @@ class WdsTextArea extends StatefulWidget {
 
 class _WdsTextAreaState extends State<WdsTextArea> {
   static const int _$maxLength = 2000;
-  static const double _$maxHeight = 120;
-  static const double _$maxContentHeight = 64;
+  static const double _$minHeight = 60;
+  static const double _$maxHeight = 320;
+  static const double _$horizontalPadding = 16;
+  static const double _$verticalPadding = 13;
 
   late final TextEditingController _controller =
       widget.controller ?? TextEditingController();
@@ -146,67 +148,55 @@ class _WdsTextAreaState extends State<WdsTextArea> {
     };
 
     final area = RepaintBoundary(
-      child: DecoratedBox(
-        decoration: ShapeDecoration(
-          color: filledColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: radius,
-            side: BorderSide(color: borderColor),
-          ),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          minHeight: _$minHeight,
+          maxHeight: _$maxHeight,
         ),
-        child: SizedBox(
-          height: _$maxHeight,
-          child: Stack(
-            children: [
-              Positioned(
-                left: 16,
-                top: 5,
-                right: 3,
-                bottom: 31,
-                child: TextField(
-                  controller: _controller,
-                  focusNode: _focusNode,
-                  enabled: widget.isEnabled,
-                  autofocus: widget.autofocus,
-                  cursorColor: WdsColors.textNormal,
-                  cursorRadius: const Radius.circular(WdsRadius.radius9999),
-                  scrollPadding: const EdgeInsets.all(3),
-                  textAlignVertical: TextAlignVertical.top,
-                  style: _inputStyle.copyWith(color: inputColor),
-                  onChanged: widget.onChanged,
-                  onSubmitted: widget.onSubmitted,
-                  maxLengthEnforcement:
-                      MaxLengthEnforcement.truncateAfterCompositionEnds,
-                  maxLines: null,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(_$maxLength),
-                  ],
-                  textInputAction: TextInputAction.newline,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    isDense: true,
-                    isCollapsed: true,
-                    visualDensity: VisualDensity.compact,
-                    contentPadding: const EdgeInsets.only(
-                      top: 8,
-                      bottom: 12,
-                    ),
-                    constraints: const BoxConstraints(
-                      maxHeight: _$maxContentHeight,
-                      minHeight: _$maxContentHeight,
-                    ),
-                    hintText: widget.hintText,
-                    hintStyle: _hintStyle.copyWith(color: hintColor),
-                    border: noBorder,
-                    enabledBorder: noBorder,
-                    focusedBorder: noBorder,
-                    disabledBorder: noBorder,
-                    // filled: filledColor != null,
-                    // fillColor: filledColor,
-                  ),
-                ),
+        child: DecoratedBox(
+          decoration: ShapeDecoration(
+            color: filledColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: radius,
+              side: BorderSide(color: borderColor),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: _$horizontalPadding,
+              vertical: _$verticalPadding,
+            ),
+            child: TextField(
+              controller: _controller,
+              focusNode: _focusNode,
+              enabled: widget.isEnabled,
+              autofocus: widget.autofocus,
+              cursorColor: WdsColors.textNormal,
+              cursorRadius: const Radius.circular(WdsRadius.radius9999),
+              textAlignVertical: TextAlignVertical.top,
+              style: _inputStyle.copyWith(color: inputColor),
+              onChanged: widget.onChanged,
+              onSubmitted: widget.onSubmitted,
+              maxLengthEnforcement:
+                  MaxLengthEnforcement.truncateAfterCompositionEnds,
+              minLines: 1,
+              maxLines: null,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(_$maxLength),
+              ],
+              textInputAction: TextInputAction.newline,
+              keyboardType: TextInputType.multiline,
+              decoration: InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.zero,
+                hintText: widget.hintText,
+                hintStyle: _hintStyle.copyWith(color: hintColor),
+                border: noBorder,
+                enabledBorder: noBorder,
+                focusedBorder: noBorder,
+                disabledBorder: noBorder,
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -233,7 +223,7 @@ class _WdsTextAreaState extends State<WdsTextArea> {
             alignment: Alignment.centerRight,
             child: ValueListenableBuilder(
               valueListenable: _controller,
-              builder: (_, value, __) {
+              builder: (_, value, _) {
                 if (value.text.isEmpty) {
                   return const SizedBox.shrink();
                 }

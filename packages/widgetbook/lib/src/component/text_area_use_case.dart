@@ -63,6 +63,16 @@ Widget _buildPlaygroundSection(BuildContext context) {
 Widget _buildDemonstrationSection(BuildContext context) {
   final activeController = TextEditingController(text: '입력된 내용');
 
+  // 최소 높이(60px)를 보여주기 위한 빈 컨트롤러
+  final minHeightController = TextEditingController();
+  // 최대 높이(320px)를 보여주기 위한 충분히 긴 텍스트
+  // 320px 높이에 도달하려면 약 2000자 정도의 텍스트가 필요
+  final maxHeightText = List.generate(
+    100,
+    (_) => '긴 텍스트를 입력하면 높이가 자동으로 확장됩니다. 최대 높이는 320px까지 확장 가능합니다. ',
+  ).join();
+  final maxHeightController = TextEditingController(text: maxHeightText);
+
   return WidgetbookSection(
     title: 'TextArea',
     spacing: 32,
@@ -93,6 +103,32 @@ Widget _buildDemonstrationSection(BuildContext context) {
                 hintText: '텍스트를 입력해 주세요',
                 controller: activeController,
                 isEnabled: false,
+              ),
+            ),
+          ],
+        ),
+      ),
+      WidgetbookSubsection(
+        title: 'height',
+        labels: ['최소 높이 (60px)', '최대 높이 (320px)'],
+        content: Wrap(
+          spacing: 24,
+          runSpacing: 24,
+          children: [
+            SizedBox(
+              width: 320,
+              child: WdsTextArea(
+                label: '주제',
+                hintText: '텍스트를 입력해 주세요',
+                controller: minHeightController,
+              ),
+            ),
+            SizedBox(
+              width: 320,
+              child: WdsTextArea(
+                label: '주제',
+                hintText: '텍스트를 입력해 주세요',
+                controller: maxHeightController,
               ),
             ),
           ],
