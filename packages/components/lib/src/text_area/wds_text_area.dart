@@ -24,7 +24,7 @@ class WdsTextArea extends StatefulWidget {
 
   final bool autofocus;
 
-  final String label;
+  final Text label;
 
   /// 힌트 텍스트
   final String? hintText;
@@ -212,9 +212,9 @@ class _WdsTextAreaState extends State<WdsTextArea> {
         spacing: 8,
         children: [
           RepaintBoundary(
-            child: Text(
-              widget.label,
+            child: DefaultTextStyle.merge(
               style: _labelStyle.copyWith(color: labelColor),
+              child: widget.label,
             ),
           ),
           ClipRRect(borderRadius: radius, child: area),

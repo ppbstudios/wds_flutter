@@ -45,7 +45,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   final WdsTextArea area = WdsTextArea(
     isEnabled: enabled,
-    label: label,
+    label: Text(label),
     hintText: hint,
     controller: controller,
   );
@@ -73,6 +73,23 @@ Widget _buildDemonstrationSection(BuildContext context) {
   ).join();
   final maxHeightController = TextEditingController(text: maxHeightText);
 
+  final label = const Text.rich(
+    TextSpan(
+      children: [
+        TextSpan(
+          text: '주제',
+        ),
+        TextSpan(
+          text: '*',
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: WdsColors.statusDestructive,
+          ),
+        ),
+      ],
+    ),
+  );
+
   return WidgetbookSection(
     title: 'TextArea',
     spacing: 32,
@@ -84,14 +101,17 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 24,
           runSpacing: 24,
           children: [
-            const SizedBox(
+            SizedBox(
               width: 320,
-              child: WdsTextArea(label: '주제', hintText: '텍스트를 입력해 주세요'),
+              child: WdsTextArea(
+                label: label,
+                hintText: '텍스트를 입력해 주세요',
+              ),
             ),
             SizedBox(
               width: 320,
               child: WdsTextArea(
-                label: '주제',
+                label: label,
                 hintText: '텍스트를 입력해 주세요',
                 controller: activeController,
               ),
@@ -99,7 +119,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
             SizedBox(
               width: 320,
               child: WdsTextArea(
-                label: '주제',
+                label: label,
                 hintText: '텍스트를 입력해 주세요',
                 controller: activeController,
                 isEnabled: false,
@@ -118,7 +138,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
             SizedBox(
               width: 320,
               child: WdsTextArea(
-                label: '주제',
+                label: const Text('주제'),
                 hintText: '텍스트를 입력해 주세요',
                 controller: minHeightController,
               ),
@@ -126,7 +146,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
             SizedBox(
               width: 320,
               child: WdsTextArea(
-                label: '주제',
+                label: const Text('주제'),
                 hintText: '텍스트를 입력해 주세요',
                 controller: maxHeightController,
               ),
