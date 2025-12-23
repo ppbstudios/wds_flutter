@@ -60,21 +60,15 @@ class WdsToast extends StatelessWidget {
 
     if (variant == WdsToastVariant.text || leadingIcon == null) {
       // text variant: DecoratedBox > Padding > Text
-      // 최소 넓이를 최대로 설정
-      //
-      return ConstrainedBox(
-        constraints: const BoxConstraints(
-          minWidth: double.infinity,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5),
-          child: text,
-        ),
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        child: text,
       );
     }
 
     // icon variant: DecoratedBox > Padding > Row: (Padding > WdsIcon + Padding > Text)
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 3),
@@ -85,11 +79,9 @@ class WdsToast extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 6), // 6px spacing between icon and text
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: text,
-          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: text,
         ),
       ],
     );
