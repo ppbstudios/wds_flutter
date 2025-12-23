@@ -1,3 +1,4 @@
+import 'package:wds/wds.dart';
 import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
@@ -70,7 +71,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
       'backgroundColor: cta (#121212)',
       'borderRadius: 8px',
     ],
-    child: _buildSnackbarExample(
+    child: _SnackbarPlaygroundControls(
       variant: variant,
       message: message,
       description: description,
@@ -81,44 +82,107 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 }
 
-Widget _buildSnackbarExample({
-  required WdsSnackbarVariant variant,
-  required String message,
-  required String description,
-  required bool hasIcon,
-  required WdsIcon icon,
-  required WdsTextButtonVariant actionVariant,
-}) {
-  final WdsTextButton actionButton = WdsTextButton(
-    variant: actionVariant,
-    size: WdsTextButtonSize.small,
-    onTap: () => debugPrint('Snackbar action pressed'),
-    child: Text(
-      actionVariant == WdsTextButtonVariant.underline ? '실행취소' : '보기',
-      style: const TextStyle(color: WdsColors.white),
-    ),
-  );
+class _SnackbarPlaygroundControls extends StatefulWidget {
+  const _SnackbarPlaygroundControls({
+    required this.variant,
+    required this.message,
+    required this.description,
+    required this.hasIcon,
+    required this.icon,
+    required this.actionVariant,
+  });
 
-  switch (variant) {
-    case WdsSnackbarVariant.normal:
-      return WdsSnackbar.normal(
-        message: message,
-        action: actionButton,
-        leadingIcon: hasIcon ? icon : null,
-      );
-    case WdsSnackbarVariant.description:
-      return WdsSnackbar.description(
-        message: message,
-        description: description,
-        action: actionButton,
-        leadingIcon: hasIcon ? icon : null,
-      );
-    case WdsSnackbarVariant.multiLine:
-      return WdsSnackbar.multiLine(
-        message: '$message. 메시지가 두 줄 이상 길어지는 경우 예외적으로 사용해요.',
-        action: actionButton,
-        leadingIcon: hasIcon ? icon : null,
-      );
+  final WdsSnackbarVariant variant;
+  final String message;
+  final String description;
+  final bool hasIcon;
+  final WdsIcon icon;
+  final WdsTextButtonVariant actionVariant;
+
+  @override
+  State<_SnackbarPlaygroundControls> createState() =>
+      _SnackbarPlaygroundControlsState();
+}
+
+class _SnackbarPlaygroundControlsState
+    extends State<_SnackbarPlaygroundControls> {
+  WdsMessageController? _controller;
+
+  @override
+  void dispose() {
+    _controller?.dismiss();
+    super.dispose();
+  }
+
+  void _showSnackbar() {
+    _controller?.dismiss();
+    final snackbar = _buildSnackbar(
+      variant: widget.variant,
+      message: widget.message,
+      description: widget.description,
+      hasIcon: widget.hasIcon,
+      icon: widget.icon,
+      actionVariant: widget.actionVariant,
+    );
+    _controller = context.onMessage(snackbar);
+    setState(() {});
+  }
+
+  Widget _buildSnackbar({
+    required WdsSnackbarVariant variant,
+    required String message,
+    required String description,
+    required bool hasIcon,
+    required WdsIcon icon,
+    required WdsTextButtonVariant actionVariant,
+  }) {
+    final WdsTextButton actionButton = WdsTextButton(
+      variant: actionVariant,
+      size: WdsTextButtonSize.small,
+      onTap: () => debugPrint('Snackbar action pressed'),
+      child: Text(
+        actionVariant == WdsTextButtonVariant.underline ? '실행취소' : '보기',
+        style: const TextStyle(color: WdsColors.white),
+      ),
+    );
+
+    switch (variant) {
+      case WdsSnackbarVariant.normal:
+        return WdsSnackbar.normal(
+          message: message,
+          action: actionButton,
+          leadingIcon: hasIcon ? icon : null,
+        );
+      case WdsSnackbarVariant.description:
+        return WdsSnackbar.description(
+          message: message,
+          description: description,
+          action: actionButton,
+          leadingIcon: hasIcon ? icon : null,
+        );
+      case WdsSnackbarVariant.multiLine:
+        return WdsSnackbar.multiLine(
+          message: '$message. 메시지가 두 줄 이상 길어지는 경우 예외적으로 사용해요.',
+          action: actionButton,
+          leadingIcon: hasIcon ? icon : null,
+        );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      spacing: 12,
+      children: [
+        WdsSquareButton.normal(
+          onTap: _showSnackbar,
+          child: const Text(
+            'Snackbar 띄우기',
+          ),
+        ),
+      ],
+    );
   }
 }
 

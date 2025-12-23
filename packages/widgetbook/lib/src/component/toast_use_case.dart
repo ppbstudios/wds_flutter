@@ -148,17 +148,13 @@ class _ToastPlaygroundControlsState extends State<_ToastPlaygroundControls> {
       mainAxisSize: MainAxisSize.min,
       spacing: 12,
       children: [
-        WdsButton(
-          variant: WdsButtonVariant.primary,
-          size: WdsButtonSize.large,
+        WdsSquareButton.normal(
           onTap: _showToast,
           child: const Text(
             'Toast 띄우기',
           ),
         ),
-        WdsButton(
-          variant: WdsButtonVariant.secondary,
-          size: WdsButtonSize.large,
+        WdsSquareButton.normal(
           onTap: () => setState(() => _controller?.dismiss()),
           child: const Text(
             'Toast 닫기',
