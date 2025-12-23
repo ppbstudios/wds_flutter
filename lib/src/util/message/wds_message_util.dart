@@ -74,14 +74,27 @@ extension WdsMessageUtilExtension on BuildContext {
                 right: 12,
                 bottom: bottomOffset,
               ),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  minWidth: double.infinity,
-                ),
-                child: Material(
-                  type: MaterialType.transparency,
-                  child: widget,
-                ),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  // 화면 너비에 따라 최대 너비 결정
+                  /// 데스크탑/태블릿: 최대 420px, 모바일: 전체 너비
+                  /// 최대 420px인 이유는 윙크 웹 max-width가 420px이기 때문
+                  ///
+                  final maxWidth = constraints.maxWidth > 600
+                      ? 420.0
+                      : double.infinity; // 모바일: 전체 너비
+
+                  return ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minWidth: maxWidth,
+                      maxWidth: maxWidth,
+                    ),
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: widget,
+                    ),
+                  );
+                },
               ),
             ),
           ),
