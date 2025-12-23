@@ -11,6 +11,8 @@ workspace:
   - tools/token_generator
 
 dependencies:
+  flutter:
+    sdk: flutter
   wds_components:
     path: packages/components
   wds_foundation:
