@@ -8,6 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  wds:
+    path: ../..
   wds_components:
     path: ../components
   wds_foundation:
