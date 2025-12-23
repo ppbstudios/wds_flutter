@@ -1,5 +1,5 @@
+import 'package:wds/wds.dart';
 import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.dart';
-import 'package:wds_widgetbook/src/widgetbook_utils/wds_toast_util.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
@@ -116,7 +116,7 @@ class _ToastPlaygroundControls extends StatefulWidget {
 }
 
 class _ToastPlaygroundControlsState extends State<_ToastPlaygroundControls> {
-  WdsToastController? _controller;
+  WdsMessageController? _controller;
 
   @override
   void dispose() {
@@ -128,13 +128,15 @@ class _ToastPlaygroundControlsState extends State<_ToastPlaygroundControls> {
     _controller?.dismiss();
     final Duration duration = Duration(milliseconds: widget.durationMs);
     _controller = widget.variant == WdsToastVariant.text
-        ? context.showWdsToastText(
-            widget.message,
+        ? context.onMessage(
+            WdsToast.text(message: widget.message),
             duration: duration,
           )
-        : context.showWdsToastIcon(
-            widget.message,
-            icon: widget.icon,
+        : context.onMessage(
+            WdsToast.icon(
+              message: widget.message,
+              leadingIcon: widget.icon,
+            ),
             duration: duration,
           );
     setState(() {});
@@ -146,17 +148,13 @@ class _ToastPlaygroundControlsState extends State<_ToastPlaygroundControls> {
       mainAxisSize: MainAxisSize.min,
       spacing: 12,
       children: [
-        WdsButton(
-          variant: WdsButtonVariant.primary,
-          size: WdsButtonSize.large,
+        WdsSquareButton.normal(
           onTap: _showToast,
           child: const Text(
             'Toast 띄우기',
           ),
         ),
-        WdsButton(
-          variant: WdsButtonVariant.secondary,
-          size: WdsButtonSize.large,
+        WdsSquareButton.normal(
           onTap: () => setState(() => _controller?.dismiss()),
           child: const Text(
             'Toast 닫기',

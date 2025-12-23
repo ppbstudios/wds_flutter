@@ -1,3 +1,4 @@
+import 'package:wds/wds.dart';
 import 'package:wds_widgetbook/src/widgetbook_components/widgetbook_components.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
@@ -35,35 +36,19 @@ Widget _buildPlaygroundSection(BuildContext context) {
     initialValue: '정보를 확인해주세요',
   );
 
-  final hasIcon = context.knobs.boolean(
-    label: 'hasIcon',
-    description: '아이콘을 표시할지 선택하세요',
-  );
-
-  final icon = context.knobs.object.dropdown<WdsIcon>(
-    label: 'icon',
-    initialOption: WdsIcon.info,
-    options: WdsIcon.values,
-    labelBuilder: (v) => v.name,
-  );
-
   return WidgetbookPlayground(
     info: [
       'variant: ${variant.name}',
       'message: "$message"',
-      'hasIcon: $hasIcon',
-      if (hasIcon) 'icon: ${icon.name}',
       'padding: EdgeInsets.all(16)',
       'iconSize: 16x16',
       'iconSpacing: 4px',
       'textStyle: body14NormalMedium',
       _getVariantInfo(variant),
     ],
-    child: _buildSectionMessage(
+    child: _SectionMessagePlaygroundControls(
       variant: variant,
       message: message,
-      hasIcon: hasIcon,
-      icon: icon,
     ),
   );
 }
@@ -79,23 +64,72 @@ String _getVariantInfo(WdsSectionMessageVariant variant) {
   };
 }
 
-Widget _buildSectionMessage({
-  required WdsSectionMessageVariant variant,
-  required String message,
-  required bool hasIcon,
-  required WdsIcon icon,
-}) {
-  return switch (variant) {
-    WdsSectionMessageVariant.normal => WdsSectionMessage.normal(
-        message: message,
-      ),
-    WdsSectionMessageVariant.highlight => WdsSectionMessage.highlight(
-        message: message,
-      ),
-    WdsSectionMessageVariant.warning => WdsSectionMessage.warning(
-        message: message,
-      ),
-  };
+class _SectionMessagePlaygroundControls extends StatefulWidget {
+  const _SectionMessagePlaygroundControls({
+    required this.variant,
+    required this.message,
+  });
+
+  final WdsSectionMessageVariant variant;
+  final String message;
+
+  @override
+  State<_SectionMessagePlaygroundControls> createState() =>
+      _SectionMessagePlaygroundControlsState();
+}
+
+class _SectionMessagePlaygroundControlsState
+    extends State<_SectionMessagePlaygroundControls> {
+  WdsMessageController? _controller;
+
+  @override
+  void dispose() {
+    _controller?.dismiss();
+    super.dispose();
+  }
+
+  void _showSectionMessage() {
+    _controller?.dismiss();
+    final sectionMessage = _buildSectionMessage(
+      variant: widget.variant,
+      message: widget.message,
+    );
+    _controller = context.onMessage(sectionMessage);
+    setState(() {});
+  }
+
+  Widget _buildSectionMessage({
+    required WdsSectionMessageVariant variant,
+    required String message,
+  }) {
+    return switch (variant) {
+      WdsSectionMessageVariant.normal => WdsSectionMessage.normal(
+          message: message,
+        ),
+      WdsSectionMessageVariant.highlight => WdsSectionMessage.highlight(
+          message: message,
+        ),
+      WdsSectionMessageVariant.warning => WdsSectionMessage.warning(
+          message: message,
+        ),
+    };
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      spacing: 12,
+      children: [
+        WdsSquareButton.normal(
+          onTap: _showSectionMessage,
+          child: const Text(
+            'SectionMessage 띄우기',
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 Widget _buildDemonstrationSection(BuildContext context) {

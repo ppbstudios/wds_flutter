@@ -1,5 +1,5 @@
 name: wds
-version: 0.0.10
+version: 0.0.11
 publish_to: none
 description: WINC Design System
 environment:
@@ -11,6 +11,8 @@ workspace:
   - tools/token_generator
 
 dependencies:
+  flutter:
+    sdk: flutter
   wds_components:
     path: packages/components
   wds_foundation:
