@@ -68,33 +68,37 @@ extension WdsMessageUtilExtension on BuildContext {
           right: false,
           child: Align(
             alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 12,
-                right: 12,
-                bottom: bottomOffset,
-              ),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  // 화면 너비에 따라 최소 너비 결정
-                  /// 데스크탑/태블릿: 최대 420px, 모바일: 최대 너비
-                  /// 최대 420px인 이유는 윙크 웹 max-width가 420px이기 때문
-                  ///
-                  final minWidth = constraints.maxWidth > 600
-                      ? 420.0
-                      : constraints.maxWidth;
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                const fixedWidth = 420.0;
+                const horizontalPadding = 16.0;
 
-                  return ConstrainedBox(
+                // 모바일 크기 내에서는 양옆 padding을 고려한 너비 사용
+                // 그보다 큰 경우에는 고정 너비 사용
+                final isMobile = constraints.maxWidth <= fixedWidth;
+                final availableWidth =
+                    constraints.maxWidth - (horizontalPadding * 2);
+                final maxWidth = isMobile ? availableWidth : fixedWidth;
+                final minWidth = isMobile ? availableWidth : fixedWidth;
+
+                return Padding(
+                  padding: EdgeInsets.only(
+                    left: horizontalPadding,
+                    right: horizontalPadding,
+                    bottom: bottomOffset,
+                  ),
+                  child: ConstrainedBox(
                     constraints: BoxConstraints(
                       minWidth: minWidth,
+                      maxWidth: maxWidth,
                     ),
                     child: Material(
                       type: MaterialType.transparency,
                       child: widget,
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
           ),
         );
