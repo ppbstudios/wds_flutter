@@ -159,7 +159,7 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
                   : Alignment.centerLeft,
               child: switch ((isSearch, isLogo)) {
                 (true, _) => FractionallySizedBox(
-                  widthFactor: 0.567,
+                  widthFactor: 0.827,
                   child: titleWidget,
                 ),
                 (false, true) => Padding(
