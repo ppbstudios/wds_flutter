@@ -118,7 +118,7 @@ class WdsChip<T> extends StatefulWidget {
 
   final String label;
 
-  final WdsIcon? leading;
+  final Widget? leading;
 
   final WdsIcon? trailing;
 
@@ -246,10 +246,9 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
 
     if (widget.leading != null) {
       contentChildren.add(
-        widget.leading!.build(
-          color: currentIconColor,
-          width: iconSize,
-          height: iconSize,
+        SizedBox.square(
+          dimension: 14,
+          child: widget.leading!,
         ),
       );
     }

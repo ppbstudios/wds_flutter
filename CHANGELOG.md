@@ -1,6 +1,7 @@
 ### 0.0.11
 - 메세지 UI (WdsToast, WdsSnackbar, WdsSectionMessage) 공통 컨트롤러 도입
 - WdsHeader.search > widthFactor 수정
+- WdsChip > leading 형변환 (WdsIcon > Widget)
 
 ### 0.0.10
 - WdsTextArea > 최소 높이 60px / 최대 높이 320px 대응될 수 있게끔 개선

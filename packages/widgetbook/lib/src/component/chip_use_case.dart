@@ -85,7 +85,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
             size: size,
             isEnabled: isEnabled,
             variant: variant,
-            leading: hasLeading ? _icon : null,
+            leading: hasLeading ? _icon.build() : null,
             trailing: hasTrailing ? _icon : null,
             onTap: () {
               debugPrint('Chip tapped: $label');
@@ -101,7 +101,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
             size: size,
             isEnabled: isEnabled,
             variant: variant,
-            leading: hasLeading ? _icon : null,
+            leading: hasLeading ? _icon.build() : null,
             trailing: hasTrailing ? _icon : null,
             onTap: () {
               debugPrint('Chip tapped: $label');
@@ -366,7 +366,7 @@ Widget _buildStateSection() {
                   label: '아이콘',
                   value: 6,
                   groupValues: groupValues,
-                  leading: _icon,
+                  leading: _icon.build(),
                   trailing: _icon,
                   onTap: () {
                     debugPrint('Outline chip with icons');
@@ -376,7 +376,7 @@ Widget _buildStateSection() {
                 WdsChip.pill(
                   label: '아이콘',
                   variant: WdsChipVariant.solid,
-                  leading: _icon,
+                  leading: _icon.build(),
                   trailing: _icon,
                   value: 7,
                   groupValues: groupValues,
