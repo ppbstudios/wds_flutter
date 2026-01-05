@@ -1,3 +1,6 @@
+### 0.0.12
+- WdsOption > WdsOptionVaraint.normal 추가
+
 ### 0.0.11
 - 메세지 UI (WdsToast, WdsSnackbar, WdsSectionMessage) 공통 컨트롤러 도입
 - WdsHeader.search > widthFactor 수정
