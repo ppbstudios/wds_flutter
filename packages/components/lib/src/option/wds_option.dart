@@ -1,6 +1,12 @@
 part of '../../wds_components.dart';
 
 enum WdsOptionVariant {
+  normal(
+    maxHeight: 521,
+    scrollThreshold: 6,
+    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+    itemHeight: 44,
+  ),
   power(
     maxHeight: 289,
     scrollThreshold: 6,
@@ -38,6 +44,11 @@ enum WdsOptionVariant {
 /// 이 때, Option은 left, right, 그리고 bottom에 `WdsColors.primary`로 칠해진 stroke를 가지며,
 /// 배경 색상은 `WdsColors.backgroundNormal`을 가집니다.
 class WdsOption extends StatelessWidget {
+  const WdsOption.normal({
+    required this.items,
+    super.key,
+  }) : variant = WdsOptionVariant.normal;
+
   const WdsOption.power({
     required this.items,
     super.key,
@@ -48,7 +59,7 @@ class WdsOption extends StatelessWidget {
     super.key,
   }) : variant = WdsOptionVariant.product;
 
-  /// Option의 variant (power 또는 product)
+  /// Option의 variant
   final WdsOptionVariant variant;
 
   /// OptionItem들의 리스트
@@ -197,6 +208,46 @@ abstract class WdsOptionItem {
 
   /// OptionItem을 렌더링하는 메서드
   Widget build(BuildContext context, WdsOptionVariant variant);
+}
+
+/// Normal variant용 OptionItem
+class WdsNormalOptionItem extends WdsOptionItem {
+  const WdsNormalOptionItem({
+    required this.label,
+    this.onTap,
+  });
+
+  /// 필수 라벨
+  final String label;
+
+  /// 탭 콜백
+  final VoidCallback? onTap;
+
+  static const TextStyle _labelStyle = WdsTypography.body14NormalRegular;
+
+  @override
+  Widget build(BuildContext context, WdsOptionVariant variant) {
+    assert(
+      variant == WdsOptionVariant.normal,
+      'NormalOptionItem은 normal variant에서만 사용 가능합니다',
+    );
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              label,
+              style: _labelStyle.copyWith(
+                color: WdsColors.textNormal,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 /// Power variant용 OptionItem
