@@ -24,7 +24,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
   final variant = context.knobs.object.dropdown<WdsOptionVariant>(
     label: 'variant',
     options: WdsOptionVariant.values,
-    initialOption: WdsOptionVariant.power,
+    initialOption: WdsOptionVariant.normal,
     labelBuilder: (v) => v.name,
   );
 
@@ -47,9 +47,11 @@ Widget _buildPlaygroundSection(BuildContext context) {
       'Scroll Threshold: ${variant.scrollThreshold}',
       'Item Height: ${variant.itemHeight}px',
     ],
-    child: variant == WdsOptionVariant.power
-        ? WdsOption.power(items: items)
-        : WdsOption.product(items: items),
+    child: switch (variant) {
+      WdsOptionVariant.normal => WdsOption.normal(items: items),
+      WdsOptionVariant.power => WdsOption.power(items: items),
+      WdsOptionVariant.product => WdsOption.product(items: items),
+    },
   );
 }
 
@@ -62,10 +64,26 @@ Widget _buildDemonstrationSection(BuildContext context) {
     children: [
       WidgetbookSubsection(
         title: 'variant',
-        labels: ['power', 'product'],
+        labels: ['normal', 'power', 'product'],
         content: Column(
           spacing: 16,
           children: [
+            WdsOption.normal(
+              items: [
+                WdsNormalOptionItem(
+                  label: '옵션 1',
+                  onTap: () => debugPrint('Normal option 1 tapped'),
+                ),
+                WdsNormalOptionItem(
+                  label: '옵션 2',
+                  onTap: () => debugPrint('Normal option 2 tapped'),
+                ),
+                WdsNormalOptionItem(
+                  label: '옵션 3',
+                  onTap: () => debugPrint('Normal option 3 tapped'),
+                ),
+              ],
+            ),
             WdsOption.power(
               items: [
                 WdsPowerOptionItem(
@@ -148,7 +166,14 @@ List<WdsOptionItem> _generateOptionItems(
   const String imagePath =
       'https://cdn.winc.app/uploads/ppb/image/src/99824/ppb_image_file-c9a9df.jpg';
 
-  if (variant == WdsOptionVariant.power) {
+  if (variant == WdsOptionVariant.normal) {
+    return List.generate(count, (index) {
+      return WdsNormalOptionItem(
+        label: '옵션 ${index + 1}',
+        onTap: () => debugPrint('Normal option ${index + 1} tapped'),
+      );
+    });
+  } else if (variant == WdsOptionVariant.power) {
     return List.generate(count, (index) {
       final label = index == 0 ? '0.00' : (-0.5 * index).toStringAsFixed(2);
       final hasTags = index % 3 == 1;
@@ -173,6 +198,7 @@ List<WdsOptionItem> _generateOptionItems(
       );
     });
   } else {
+    // WdsOptionVariant.product
     return List.generate(count, (index) {
       return WdsProductOptionItem(
         index: '${index + 1}',
