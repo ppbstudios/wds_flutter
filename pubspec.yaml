@@ -3,7 +3,7 @@ version: 0.0.12
 publish_to: none
 description: WINC Design System
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.10.0
 workspace:
   - packages/components
   - packages/foundation
