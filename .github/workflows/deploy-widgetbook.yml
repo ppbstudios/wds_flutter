@@ -21,7 +21,7 @@ on:
   workflow_dispatch:  # Manual trigger for maintainers
 
 env:
-  FLUTTER_VERSION: '3.35.4'
+  FLUTTER_VERSION: '3.38.5'
 
 jobs:
   build-and-deploy:
@@ -42,7 +42,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: 'stable'  # 3.35.1 is from stable channel
+          channel: 'stable'
           cache: true
           
       - name: Enable Flutter web
