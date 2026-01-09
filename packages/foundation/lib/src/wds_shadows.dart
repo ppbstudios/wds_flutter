@@ -3,8 +3,8 @@ library;
 import 'package:flutter/widgets.dart';
 import 'package:wds_tokens/semantic/wds_semantic_shadow.dart';
 
-class WdsShaows {
-  const WdsShaows._();
+class WdsShadows {
+  const WdsShadows._();
 
   static const List<BoxShadow> normal = WdsSemanticShadowNeutral.normal;
   static const List<BoxShadow> emphasize = WdsSemanticShadowNeutral.emphasize;

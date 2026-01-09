@@ -155,19 +155,19 @@ class _SemanticColorShowcase extends StatelessWidget {
           items: [
             _SwatchItem(
               label: 'Normal',
-              shadows: WdsShaows.normal,
+              shadows: WdsShadows.normal,
             ),
             _SwatchItem(
               label: 'Emphasize',
-              shadows: WdsShaows.emphasize,
+              shadows: WdsShadows.emphasize,
             ),
             _SwatchItem(
               label: 'Strong',
-              shadows: WdsShaows.strong,
+              shadows: WdsShadows.strong,
             ),
             _SwatchItem(
               label: 'Heavy',
-              shadows: WdsShaows.heavy,
+              shadows: WdsShadows.heavy,
             ),
           ],
         ),
@@ -182,19 +182,19 @@ class _SemanticColorShowcase extends StatelessWidget {
           items: [
             _SwatchItem(
               label: 'Normal',
-              shadows: WdsShaows.normalCoolNeutral,
+              shadows: WdsShadows.normalCoolNeutral,
             ),
             _SwatchItem(
               label: 'Emphasize',
-              shadows: WdsShaows.emphasizeCoolNeutral,
+              shadows: WdsShadows.emphasizeCoolNeutral,
             ),
             _SwatchItem(
               label: 'Strong',
-              shadows: WdsShaows.strongCoolNeutral,
+              shadows: WdsShadows.strongCoolNeutral,
             ),
             _SwatchItem(
               label: 'Heavy',
-              shadows: WdsShaows.heavyCoolNeutral,
+              shadows: WdsShadows.heavyCoolNeutral,
             ),
           ],
         ),
