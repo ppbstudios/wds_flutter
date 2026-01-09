@@ -18,7 +18,7 @@ on:
         type: string
 
 env:
-  FLUTTER_VERSION: '3.35.4'
+  FLUTTER_VERSION: '3.38.5'
 
 jobs:
   check-permissions:
