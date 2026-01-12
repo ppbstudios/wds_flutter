@@ -228,11 +228,75 @@ class _WdsButtonState extends State<WdsButton>
         ),
       );
     }
-    /// Text 자식일 경우 강제 타이포그래피 적용
+    /// Text 자식일 경우 타이포그래피 적용
     else if (widget.child is Text) {
       final Text childText = widget.child as Text;
-      final TextStyle merged =
-          childText.style?.merge(fixedTypography) ?? fixedTypography;
+      final TextStyle merged = fixedTypography.merge(childText.style);
+
+      // TextSpan을 재귀적으로 처리하여 부모의 타이포그래피를 적용하되, 각 TextSpan의 특정 속성(color 등)은 유지
+      InlineSpan? processInlineSpan(InlineSpan? span) {
+        if (span == null) return null;
+        if (span is! TextSpan) return span;
+        final textSpan = span;
+        // fixedTypography를 기본으로 하고, textSpan.style의 특정 속성(color 등)만 오버라이드
+        final TextStyle mergedStyle = fixedTypography.merge(textSpan.style);
+        return TextSpan(
+          text: textSpan.text,
+          children: textSpan.children
+              ?.map((child) => processInlineSpan(child))
+              .whereType<InlineSpan>()
+              .toList(),
+          style: mergedStyle,
+          recognizer: textSpan.recognizer,
+          semanticsLabel: textSpan.semanticsLabel,
+          locale: textSpan.locale,
+          spellOut: textSpan.spellOut,
+        );
+      }
+
+      Widget textWidget;
+      if (childText.textSpan != null) {
+        // Text.rich인 경우
+        final processedTextSpan =
+            processInlineSpan(childText.textSpan) as TextSpan?;
+        textWidget = Text.rich(
+          processedTextSpan!,
+          key: childText.key,
+          style: merged,
+          strutStyle: childText.strutStyle,
+          textAlign: childText.textAlign,
+          textDirection: childText.textDirection,
+          locale: childText.locale,
+          softWrap: childText.softWrap,
+          overflow: childText.overflow,
+          textScaler: childText.textScaler,
+          maxLines: 1, // 스펙: 최대 1줄
+          semanticsLabel: childText.semanticsLabel,
+          textWidthBasis: childText.textWidthBasis,
+          textHeightBehavior: childText.textHeightBehavior,
+          selectionColor: childText.selectionColor,
+        );
+      } else {
+        // 일반 Text인 경우
+        textWidget = Text(
+          childText.data ?? '',
+          key: childText.key,
+          style: merged,
+          strutStyle: childText.strutStyle,
+          textAlign: childText.textAlign,
+          textDirection: childText.textDirection,
+          locale: childText.locale,
+          softWrap: childText.softWrap,
+          overflow: childText.overflow,
+          textScaler: childText.textScaler,
+          maxLines: 1, // 스펙: 최대 1줄
+          semanticsLabel: childText.semanticsLabel,
+          textWidthBasis: childText.textWidthBasis,
+          textHeightBehavior: childText.textHeightBehavior,
+          selectionColor: childText.selectionColor,
+        );
+      }
+
       content = IconTheme(
         data: IconThemeData(color: style.foreground),
         child: Padding(
@@ -248,23 +312,7 @@ class _WdsButtonState extends State<WdsButton>
                 ),
                 _ButtonIconBySize.ofSpacing(widget.size),
               ],
-              Text(
-                childText.data ?? '',
-                key: childText.key,
-                style: merged,
-                strutStyle: childText.strutStyle,
-                textAlign: childText.textAlign,
-                textDirection: childText.textDirection,
-                locale: childText.locale,
-                softWrap: childText.softWrap,
-                overflow: childText.overflow,
-                textScaler: childText.textScaler,
-                maxLines: 1, // 스펙: 최대 1줄
-                semanticsLabel: childText.semanticsLabel,
-                textWidthBasis: childText.textWidthBasis,
-                textHeightBehavior: childText.textHeightBehavior,
-                selectionColor: childText.selectionColor,
-              ),
+              textWidget,
             ],
           ),
         ),

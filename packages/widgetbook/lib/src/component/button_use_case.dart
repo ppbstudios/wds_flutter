@@ -157,26 +157,76 @@ Widget _buildDemonstrationSection(BuildContext context) {
             WdsButton(
               onTap: () => debugPrint('XL pressed'),
               size: WdsButtonSize.xlarge,
-              child: const Text('텍스트'),
+              child: const Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(text: '리뷰'),
+                    TextSpan(
+                      text: ' +1,000원',
+                      style: TextStyle(color: WdsColors.primary),
+                    ),
+                  ],
+                ),
+              ),
             ),
             WdsButton(
               onTap: () => debugPrint('L pressed'),
               size: WdsButtonSize.large,
-              child: const Text('텍스트'),
+              child: const Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(text: '리뷰'),
+                    TextSpan(
+                      text: ' +1,000원',
+                      style: TextStyle(color: WdsColors.primary),
+                    ),
+                  ],
+                ),
+              ),
             ),
             WdsButton(
               onTap: () => debugPrint('M pressed'),
-              child: const Text('텍스트'),
+              child: const Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(text: '리뷰'),
+                    TextSpan(
+                      text: ' +1,000원',
+                      style: TextStyle(color: WdsColors.primary),
+                    ),
+                  ],
+                ),
+              ),
             ),
             WdsButton(
               onTap: () => debugPrint('S pressed'),
               size: WdsButtonSize.small,
-              child: const Text('텍스트'),
+              child: const Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(text: '리뷰'),
+                    TextSpan(
+                      text: ' +1,000원',
+                      style: TextStyle(color: WdsColors.primary),
+                    ),
+                  ],
+                ),
+              ),
             ),
             WdsButton(
               onTap: () => debugPrint('TY pressed'),
               size: WdsButtonSize.tiny,
-              child: const Text('텍스트'),
+              child: const Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(text: '리뷰'),
+                    TextSpan(
+                      text: ' +1,000원',
+                      style: TextStyle(color: WdsColors.primary),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
