@@ -282,7 +282,9 @@ class _WdsTextFieldState extends State<WdsTextField> {
                 child: TextField(
                   controller: _controller,
                   focusNode: _focusNode,
-                  enabled: widget.isEnabled,
+                  enabled:
+                      state != WdsTextFieldState.inactive &&
+                      state != WdsTextFieldState.disabled,
                   autofocus: widget.autofocus,
                   cursorColor: WdsColors.textNormal,
                   cursorRadius: const Radius.circular(WdsRadius.radius9999),
@@ -322,7 +324,9 @@ class _WdsTextFieldState extends State<WdsTextField> {
         height: 44,
         child: DecoratedBox(
           decoration: ShapeDecoration(
-            color: WdsColors.neutral50,
+            color: state == WdsTextFieldState.disabled
+                ? WdsColors.neutral50
+                : WdsColors.white,
             shape: RoundedRectangleBorder(
               borderRadius: radius,
               side: BorderSide(color: state.borderColor),
@@ -342,7 +346,9 @@ class _WdsTextFieldState extends State<WdsTextField> {
                       child: TextField(
                         controller: _controller,
                         focusNode: _focusNode,
-                        enabled: widget.isEnabled,
+                        enabled:
+                            state != WdsTextFieldState.inactive &&
+                            state != WdsTextFieldState.disabled,
                         autofocus: widget.autofocus,
                         cursorColor: WdsColors.textNormal,
                         cursorRadius: const Radius.circular(
