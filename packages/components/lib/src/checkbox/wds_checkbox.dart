@@ -2,7 +2,8 @@ part of '../../wds_components.dart';
 
 enum WdsCheckboxSize {
   small(spec: Size(20, 20), margin: EdgeInsets.all(2)),
-  large(spec: Size(24, 24), margin: EdgeInsets.all(3));
+  medium(spec: Size(24, 24), margin: EdgeInsets.all(3))
+  ;
 
   const WdsCheckboxSize({
     required this.spec,
@@ -26,7 +27,7 @@ class WdsCheckbox extends StatefulWidget {
     required this.onChanged,
     this.isEnabled = true,
     super.key,
-  }) : size = WdsCheckboxSize.large;
+  }) : size = WdsCheckboxSize.medium;
 
   final bool value;
   final ValueChanged<bool>? onChanged;

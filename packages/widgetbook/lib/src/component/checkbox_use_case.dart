@@ -84,7 +84,7 @@ Widget _buildDemonstrationSection(BuildContext context) {
           spacing: 32,
           children: [
             _CheckboxDemo(size: WdsCheckboxSize.small, enabled: true),
-            _CheckboxDemo(size: WdsCheckboxSize.large, enabled: true),
+            _CheckboxDemo(size: WdsCheckboxSize.medium, enabled: true),
           ],
         ),
       ),
@@ -101,9 +101,9 @@ Widget _buildDemonstrationSection(BuildContext context) {
               enabled: false,
               value: true,
             ),
-            _CheckboxDemo(size: WdsCheckboxSize.large, enabled: true),
+            _CheckboxDemo(size: WdsCheckboxSize.medium, enabled: true),
             _CheckboxFixedValue(
-              size: WdsCheckboxSize.large,
+              size: WdsCheckboxSize.medium,
               enabled: false,
               value: true,
             ),
@@ -128,12 +128,12 @@ Widget _buildDemonstrationSection(BuildContext context) {
               value: true,
             ),
             _CheckboxFixedValue(
-              size: WdsCheckboxSize.large,
+              size: WdsCheckboxSize.medium,
               enabled: true,
               value: false,
             ),
             _CheckboxFixedValue(
-              size: WdsCheckboxSize.large,
+              size: WdsCheckboxSize.medium,
               enabled: true,
               value: true,
             ),
