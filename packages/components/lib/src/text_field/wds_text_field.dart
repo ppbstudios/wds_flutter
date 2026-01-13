@@ -7,6 +7,7 @@ class WdsTextField extends StatefulWidget {
   const WdsTextField.outlined({
     this.controller,
     this.focusNode,
+    this.state = WdsTextFieldState.active,
     this.isEnabled = true,
     this.autofocus = false,
     this.label,
@@ -25,6 +26,7 @@ class WdsTextField extends StatefulWidget {
   const WdsTextField.box({
     this.controller,
     this.focusNode,
+    this.state = WdsTextFieldState.active,
     this.isEnabled = true,
     this.autofocus = false,
     this.label,
@@ -45,6 +47,12 @@ class WdsTextField extends StatefulWidget {
   final TextEditingController? controller;
 
   final FocusNode? focusNode;
+
+  /// 컴포넌트 상태
+  /// - [WdsTextFieldState.inactive], [WdsTextFieldState.disabled]: 고정 (입력 불가)
+  /// - [WdsTextFieldState.active], [WdsTextFieldState.focused]: 에러 발생 시 error로 전환
+  /// - [WdsTextFieldState.error]: 에러 해결 시 focused/active로 복귀
+  final WdsTextFieldState state;
 
   final bool isEnabled;
 
@@ -148,13 +156,26 @@ class _WdsTextFieldState extends State<WdsTextField> {
       : _internalErrorText;
   bool get _hasError => _effectiveErrorText?.isNotEmpty == true;
 
-  /// 현재 TextField의 상태 계산
+  /// 현재 TextField의 상태
+  /// - inactive, disabled: 고정 (입력 불가)
+  /// - active, focused, error: 조건에 따라 상태 전환
   WdsTextFieldState get _currentState {
+    // inactive, disabled는 고정
+    if (widget.state == WdsTextFieldState.inactive ||
+        widget.state == WdsTextFieldState.disabled) {
+      return widget.state;
+    }
+
+    // isEnabled가 false면 disabled
     if (!widget.isEnabled) return WdsTextFieldState.disabled;
+
+    // active, focused, error는 조건에 따라 전환
     if (_hasError) return WdsTextFieldState.error;
     if (_hasFocus) return WdsTextFieldState.focused;
     if (_hasValue) return WdsTextFieldState.active;
-    return WdsTextFieldState.inactive;
+
+    // 기본값은 widget.state 유지
+    return widget.state;
   }
 
   void _runValidation({bool force = false}) {
