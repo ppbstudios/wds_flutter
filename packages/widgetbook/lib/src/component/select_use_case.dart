@@ -36,23 +36,18 @@ Widget _buildPlaygroundSection(BuildContext context) {
     initialValue: '텍스트를 입력해주세요.',
   );
 
-  final enabled = context.knobs.boolean(
-    label: 'isEnabled',
-    initialValue: true,
-    description: '누를 수 있는 지 여부를 결정해요',
-  );
-
-  final expanded = context.knobs.boolean(
-    label: 'isExpanded',
-    description: '오른쪽 아이콘이 바뀌어요',
+  final state = context.knobs.list<WdsSelectState>(
+    label: 'state',
+    options: WdsSelectState.values,
+    initialOption: WdsSelectState.active,
+    description: '컴포넌트의 상태를 선택해 주세요',
   );
 
   final select = WdsSelect(
     selected: selected.isEmpty ? null : selected,
     title: title.isEmpty ? null : title,
     hintText: hint,
-    isEnabled: enabled,
-    isExpanded: expanded,
+    state: state,
     onTap: () => debugPrint('Select tapped'),
   );
 
@@ -60,7 +55,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     info: const [
       'padding: 16,12,16,12',
       'radius: v8',
-      'border: 1px alternative',
+      'height: 48px',
       'icon spacing: 10px',
       'hint vertical padding: 2px',
     ],
@@ -71,24 +66,18 @@ Widget _buildPlaygroundSection(BuildContext context) {
   );
 }
 
-typedef _SelectState = (
-  String? selected,
-  bool isEnabled,
-  String? title,
-  bool isExpanded,
-  Color? borderColor,
-);
+typedef _SelectState = (String? selected, WdsSelectState state, String? title);
 
 Widget _buildDemonstrationSection(BuildContext context) {
   List<_SelectState> states = [
-    (null, true, null, false, WdsColors.borderAlternative), // inactive
-    ('-0.50', true, null, false, null), // active
-    ('-0.50', true, null, true, null), // selected
-    (null, false, null, false, null), // disabled
-    (null, true, '옵션 선택', false, WdsColors.borderAlternative), // inactive
-    ('-0.50', true, '옵션 선택', false, null), // active
-    ('-0.50', true, '옵션 선택', true, null), // selected
-    (null, false, '옵션 선택', false, null), // disabled
+    (null, WdsSelectState.inactive, null), // inactive
+    ('-0.50', WdsSelectState.active, null), // active
+    ('-0.50', WdsSelectState.selected, null), // selected
+    (null, WdsSelectState.disabled, null), // disabled
+    (null, WdsSelectState.inactive, '옵션 선택'), // inactive
+    ('-0.50', WdsSelectState.active, '옵션 선택'), // active
+    ('-0.50', WdsSelectState.selected, '옵션 선택'), // selected
+    (null, WdsSelectState.disabled, '옵션 선택'), // disabled
   ];
 
   return WidgetbookSection(
@@ -109,11 +98,9 @@ Widget _buildDemonstrationSection(BuildContext context) {
                   ),
                   child: WdsSelect(
                     selected: state.$1,
-                    isEnabled: state.$2,
+                    state: state.$2,
                     title: state.$3,
-                    isExpanded: state.$4,
                     hintText: '옵션을 선택해 주세요',
-                    borderColor: state.$5,
                   ),
                 ),
               )
