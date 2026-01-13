@@ -88,7 +88,6 @@ class _WdsTextFieldState extends State<WdsTextField> {
   late final FocusNode _focusNode = widget.focusNode ?? FocusNode();
 
   // Cache expensive computations - using non-nullable fields to avoid memory overhead
-  TextStyle _inputStyle = const TextStyle();
   TextStyle _hintStyle = const TextStyle();
   TextStyle _labelStyle = const TextStyle();
   TextStyle _helperStyle = const TextStyle();
@@ -118,10 +117,6 @@ class _WdsTextFieldState extends State<WdsTextField> {
 
   void _precomputeStyles() {
     final isOutlined = widget.variant == WdsTextFieldVariant.outlined;
-
-    _inputStyle = isOutlined
-        ? WdsTypography.body15NormalRegular
-        : WdsTypography.body13NormalRegular;
 
     _hintStyle = isOutlined
         ? WdsTypography.body15NormalRegular
@@ -153,6 +148,15 @@ class _WdsTextFieldState extends State<WdsTextField> {
       : _internalErrorText;
   bool get _hasError => _effectiveErrorText?.isNotEmpty == true;
 
+  /// 현재 TextField의 상태 계산
+  WdsTextFieldState get _currentState {
+    if (!widget.isEnabled) return WdsTextFieldState.disabled;
+    if (_hasError) return WdsTextFieldState.error;
+    if (_hasFocus) return WdsTextFieldState.focused;
+    if (_hasValue) return WdsTextFieldState.active;
+    return WdsTextFieldState.inactive;
+  }
+
   void _runValidation({bool force = false}) {
     if (widget.validator == null) return;
 
@@ -174,13 +178,14 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   Widget _buildHelperErrorText() {
+    final state = _currentState;
     final hasError = _effectiveErrorText?.isNotEmpty == true;
     final hasHelper = widget.helperText?.isNotEmpty == true;
 
     if (hasError) {
       return Text(
         _effectiveErrorText!,
-        style: _errorStyle.copyWith(color: WdsColors.statusDestructive),
+        style: _errorStyle.copyWith(color: state.helperColor),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
@@ -189,7 +194,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
     if (hasHelper) {
       return Text(
         widget.helperText!,
-        style: _helperStyle.copyWith(color: WdsColors.textAlternative),
+        style: _helperStyle.copyWith(color: state.helperColor),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       );
@@ -207,35 +212,21 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   Widget _buildOutlined(BuildContext context) {
-    final inputColor = widget.isEnabled
-        ? WdsColors.textNormal
-        : WdsColors.textAlternative;
+    final state = _currentState;
 
-    final hintColor = widget.isEnabled
-        ? WdsColors.textAlternative
-        : WdsColors.textDisable;
-
-    final labelColor = widget.isEnabled
-        ? WdsColors.textAlternative
-        : WdsColors.textDisable;
-
-    final borderSide = switch ((_hasError, _hasFocus)) {
-      (true, _) => const BorderSide(
-        color: WdsColors.statusDestructive,
-        width: 2,
-      ),
-      (false, true) => const BorderSide(
-        color: WdsColors.statusPositive,
-        width: 2,
-      ),
-      (false, false) => const BorderSide(color: WdsColors.borderAlternative),
-    };
+    final borderSide = BorderSide(
+      color: state.borderColor,
+      width:
+          state == WdsTextFieldState.focused || state == WdsTextFieldState.error
+          ? 2
+          : 1,
+    );
 
     final decoration = InputDecoration(
       isDense: true,
       contentPadding: const EdgeInsets.symmetric(vertical: 7),
       hintText: widget.hintText,
-      hintStyle: _hintStyle.copyWith(color: hintColor),
+      hintStyle: _hintStyle.copyWith(color: state.hintColor),
       border: UnderlineInputBorder(borderSide: borderSide),
       enabledBorder: UnderlineInputBorder(borderSide: borderSide),
       focusedBorder: UnderlineInputBorder(borderSide: borderSide),
@@ -257,7 +248,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
               RepaintBoundary(
                 child: Text(
                   widget.label!,
-                  style: _labelStyle.copyWith(color: labelColor),
+                  style: _labelStyle.copyWith(color: state.labelColor),
                 ),
               ),
             // TextField with height stabilization
@@ -274,7 +265,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
                   autofocus: widget.autofocus,
                   cursorColor: WdsColors.textNormal,
                   cursorRadius: const Radius.circular(WdsRadius.radius9999),
-                  style: _inputStyle.copyWith(color: inputColor),
+                  style: state.inputTextStyle.copyWith(color: state.inputColor),
                   onChanged: widget.onChanged,
                   onSubmitted: widget.onSubmitted,
                   decoration: decoration,
@@ -293,26 +284,14 @@ class _WdsTextFieldState extends State<WdsTextField> {
   }
 
   Widget _buildBox(BuildContext context) {
+    final state = _currentState;
+
     const radius = BorderRadius.all(Radius.circular(WdsRadius.radius8));
     const contentPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 10);
     const noBorder = OutlineInputBorder(
       borderSide: BorderSide(style: BorderStyle.none, width: 0),
       borderRadius: BorderRadius.all(Radius.circular(0)),
     );
-
-    final inputColor = widget.isEnabled
-        ? WdsColors.textNormal
-        : WdsColors.textAlternative;
-
-    final hintColor = !widget.isEnabled
-        ? WdsColors.textDisable
-        : WdsColors.textAlternative;
-
-    final borderColor = switch ((_hasError, _hasFocus)) {
-      (true, _) => WdsColors.statusDestructive,
-      (false, true) => WdsColors.statusPositive,
-      (false, false) => WdsColors.borderAlternative,
-    };
 
     final showClear = (_hasValue || _hasFocus) && widget.isEnabled;
 
@@ -322,10 +301,10 @@ class _WdsTextFieldState extends State<WdsTextField> {
         height: 44,
         child: DecoratedBox(
           decoration: ShapeDecoration(
-            color: WdsColors.backgroundNormal,
+            color: WdsColors.neutral50,
             shape: RoundedRectangleBorder(
               borderRadius: radius,
-              side: BorderSide(color: borderColor),
+              side: BorderSide(color: state.borderColor),
             ),
           ),
           child: Padding(
@@ -348,14 +327,18 @@ class _WdsTextFieldState extends State<WdsTextField> {
                         cursorRadius: const Radius.circular(
                           WdsRadius.radius9999,
                         ),
-                        style: _inputStyle.copyWith(color: inputColor),
+                        style: state.inputTextStyle.copyWith(
+                          color: state.inputColor,
+                        ),
                         onChanged: widget.onChanged,
                         onSubmitted: widget.onSubmitted,
                         decoration: InputDecoration(
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
                           hintText: widget.hintText,
-                          hintStyle: _hintStyle.copyWith(color: hintColor),
+                          hintStyle: _hintStyle.copyWith(
+                            color: state.hintColor,
+                          ),
                           border: noBorder,
                           enabledBorder: noBorder,
                           focusedBorder: noBorder,
@@ -389,6 +372,14 @@ class _WdsTextFieldState extends State<WdsTextField> {
           mainAxisSize: MainAxisSize.min,
           spacing: 8,
           children: [
+            // Label
+            if (widget.label?.isNotEmpty == true)
+              RepaintBoundary(
+                child: Text(
+                  widget.label!,
+                  style: _labelStyle.copyWith(color: state.labelColor),
+                ),
+              ),
             ClipRRect(borderRadius: radius, child: textField),
             // Helper/Error text
             if (_hasError || widget.helperText?.isNotEmpty == true)
