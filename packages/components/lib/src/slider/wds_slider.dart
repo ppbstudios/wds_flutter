@@ -112,13 +112,17 @@ class _WdsSliderState extends State<WdsSlider> {
     );
 
     final step = (widget.maxValue - widget.minValue) / widget.divisions;
+
+    final rawStart =
+        widget.minValue +
+        (((adjustedValues.start - widget.minValue) / step).round() * step);
+    final rawEnd =
+        widget.minValue +
+        (((adjustedValues.end - widget.minValue) / step).round() * step);
+
     final finalValues = WdsRangeValues(
-      start:
-          widget.minValue +
-          (((adjustedValues.start - widget.minValue) / step).round() * step),
-      end:
-          widget.minValue +
-          (((adjustedValues.end - widget.minValue) / step).round() * step),
+      start: rawStart.clamp(widget.minValue, widget.maxValue),
+      end: rawEnd.clamp(widget.minValue, widget.maxValue),
     );
 
     final minRange = step;
