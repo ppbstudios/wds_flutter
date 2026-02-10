@@ -1,3 +1,6 @@
+# 0.0.13
+- WdsSlider > start, end clamp 함수 추가
+
 ### 0.0.12
 - WdsOption > WdsOptionVaraint.normal 추가
 - WdsButton > widget.child > Text.rich 대응 로직 추가 
