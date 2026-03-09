@@ -1,3 +1,6 @@
+### 0.1.4
+- WdsSliverHeader.logo에 외부 로고 탭 콜백 추가
+
 # 0.0.13
 - WdsSlider > start, end clamp 함수 추가
 
