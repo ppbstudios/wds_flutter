@@ -16,6 +16,7 @@ class WdsSliverHeader extends StatelessWidget {
     required this.hasCenterTitle,
     required this.isLogo,
     required this.isSearch,
+    required this.onLogoTap,
     required this.pinned,
     required this.floating,
     required this.safeArea,
@@ -25,6 +26,7 @@ class WdsSliverHeader extends StatelessWidget {
   /// Creates a logo header.
   WdsSliverHeader.logo({
     List<Widget> actions = const [],
+    VoidCallback? onLogoTap,
     bool pinned = true,
     bool floating = false,
     bool safeArea = true,
@@ -36,6 +38,7 @@ class WdsSliverHeader extends StatelessWidget {
          hasCenterTitle: false,
          isLogo: true,
          isSearch: false,
+         onLogoTap: onLogoTap,
          pinned: pinned,
          floating: floating,
          safeArea: safeArea,
@@ -58,6 +61,7 @@ class WdsSliverHeader extends StatelessWidget {
          hasCenterTitle: true,
          isLogo: false,
          isSearch: false,
+         onLogoTap: null,
          pinned: pinned,
          floating: floating,
          safeArea: safeArea,
@@ -82,6 +86,7 @@ class WdsSliverHeader extends StatelessWidget {
       hasCenterTitle: true,
       isLogo: false,
       isSearch: true,
+      onLogoTap: null,
       pinned: pinned,
       floating: floating,
       safeArea: safeArea,
@@ -95,6 +100,7 @@ class WdsSliverHeader extends StatelessWidget {
   final bool hasCenterTitle;
   final bool isLogo;
   final bool isSearch;
+  final VoidCallback? onLogoTap;
 
   /// Whether the header should remain visible at the start of the scroll view.
   final bool pinned;
@@ -121,6 +127,7 @@ class WdsSliverHeader extends StatelessWidget {
         hasCenterTitle: hasCenterTitle,
         isLogo: isLogo,
         isSearch: isSearch,
+        onLogoTap: onLogoTap,
         statusBarHeight: statusBarHeight,
       ),
     );
@@ -135,6 +142,7 @@ class _WdsSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
     required this.hasCenterTitle,
     required this.isLogo,
     required this.isSearch,
+    required this.onLogoTap,
     required this.statusBarHeight,
   });
 
@@ -144,6 +152,7 @@ class _WdsSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   final bool hasCenterTitle;
   final bool isLogo;
   final bool isSearch;
+  final VoidCallback? onLogoTap;
   final double statusBarHeight;
 
   @override
@@ -200,6 +209,14 @@ class _WdsSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
                 .toList(),
           );
 
+    final Widget logoTitleWidget = onLogoTap == null
+        ? titleWidget
+        : GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onLogoTap,
+            child: titleWidget,
+          );
+
     final Widget headerContent = SizedBox(
       height: WdsHeader.fixedSize.height,
       child: Padding(
@@ -225,7 +242,7 @@ class _WdsSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
                 ),
                 (false, true) => Padding(
                   padding: const EdgeInsets.only(left: 8),
-                  child: titleWidget,
+                  child: logoTitleWidget,
                 ),
                 (false, false) => titleWidget,
               },
@@ -256,6 +273,7 @@ class _WdsSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
         hasCenterTitle != oldDelegate.hasCenterTitle ||
         isLogo != oldDelegate.isLogo ||
         isSearch != oldDelegate.isSearch ||
+        onLogoTap != oldDelegate.onLogoTap ||
         statusBarHeight != oldDelegate.statusBarHeight;
   }
 }
