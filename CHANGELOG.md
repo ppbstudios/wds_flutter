@@ -1,20 +1,29 @@
-# 0.0.13
+### 0.0.14
+
+- WdsSliverHeader.logo에 외부 로고 탭 콜백 추가
+
+### 0.0.13
+
 - WdsSlider > start, end clamp 함수 추가
 
 ### 0.0.12
+
 - WdsOption > WdsOptionVaraint.normal 추가
-- WdsButton > widget.child > Text.rich 대응 로직 추가 
+- WdsButton > widget.child > Text.rich 대응 로직 추가
 
 ### 0.0.11
+
 - 메세지 UI (WdsToast, WdsSnackbar, WdsSectionMessage) 공통 컨트롤러 도입
 - WdsHeader.search > widthFactor 수정
 - WdsChip > leading 형변환 (WdsIcon > Widget)
 
 ### 0.0.10
+
 - WdsTextArea > 최소 높이 60px / 최대 높이 320px 대응될 수 있게끔 개선
-- WdsTextArea > 'label' 파라미터 String에서 Text로 형변환 
+- WdsTextArea > 'label' 파라미터 String에서 Text로 형변환
 
 ### 0.0.9
+
 - WdsToolTip > 'message'에서 'label'로 변경
 - WdsToolTip > 'message' 파라미터 String에서 Text로 형변환
 - WdsChip > outline 'backgroundColor' > WdsColors.white로 변경
