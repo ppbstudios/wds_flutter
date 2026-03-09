@@ -1,4 +1,4 @@
-### 0.1.4
+### 0.0.14
 
 - WdsSliverHeader.logo에 외부 로고 탭 콜백 추가
 
