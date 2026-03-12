@@ -36,7 +36,7 @@ class _ButtonHeightBySize {
     return switch (size) {
       WdsButtonSize.xlarge => 48,
       WdsButtonSize.large => 44,
-      WdsButtonSize.medium => 38,
+      WdsButtonSize.medium => 40,
       WdsButtonSize.small => 30,
       WdsButtonSize.tiny => 28,
     };
@@ -50,7 +50,7 @@ class _ButtonTypographyBySize {
     return switch (size) {
       WdsButtonSize.xlarge => WdsTypography.body15NormalBold,
       WdsButtonSize.large => WdsTypography.body15NormalBold,
-      WdsButtonSize.medium => WdsTypography.body13NormalMedium,
+      WdsButtonSize.medium => WdsTypography.body14ReadingRegular,
       WdsButtonSize.small => WdsTypography.caption12NormalMedium,
       WdsButtonSize.tiny => WdsTypography.caption12NormalMedium,
     };
