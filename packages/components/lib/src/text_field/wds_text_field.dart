@@ -185,7 +185,7 @@ class _WdsTextFieldState extends State<WdsTextField> {
       AutovalidateMode.disabled => force,
       AutovalidateMode.always => true,
       AutovalidateMode.onUserInteraction => _userInteracted,
-      AutovalidateMode.onUnfocus => false,
+      _ => false,
     };
 
     if (!shouldValidate) return;

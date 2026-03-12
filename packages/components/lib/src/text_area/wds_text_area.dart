@@ -110,7 +110,7 @@ class _WdsTextAreaState extends State<WdsTextArea> {
       AutovalidateMode.disabled => force,
       AutovalidateMode.always => true,
       AutovalidateMode.onUserInteraction => _userInteracted,
-      AutovalidateMode.onUnfocus => false,
+      _ => false,
     };
 
     if (!shouldValidate) return;
