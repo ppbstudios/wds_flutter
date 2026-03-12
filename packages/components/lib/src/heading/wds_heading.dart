@@ -68,7 +68,6 @@ class WdsHeading extends StatelessWidget {
     Widget content;
     if (moreText != null && onMoreTap != null) {
       content = Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 16,
         children: [
           Expanded(child: titleWidget),
