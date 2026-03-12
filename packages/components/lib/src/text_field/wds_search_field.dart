@@ -1,6 +1,6 @@
 part of '../../wds_components.dart';
 
-enum WdsSearchFieldSize { small, medium }
+enum WdsSearchFieldSize { small, medium, large }
 
 class _SearchFieldHeightBySize {
   const _SearchFieldHeightBySize._();
@@ -8,7 +8,8 @@ class _SearchFieldHeightBySize {
   static double of(WdsSearchFieldSize size) {
     return switch (size) {
       WdsSearchFieldSize.small => 36,
-      WdsSearchFieldSize.medium => 46,
+      WdsSearchFieldSize.medium => 40,
+      WdsSearchFieldSize.large => 48,
     };
   }
 }
@@ -24,7 +25,11 @@ class _SearchFieldPaddingBySize {
       ),
       WdsSearchFieldSize.medium => const EdgeInsets.symmetric(
         horizontal: 16,
-        vertical: 11,
+        vertical: 8,
+      ),
+      WdsSearchFieldSize.large => const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 12,
       ),
     };
   }
@@ -37,6 +42,7 @@ class _SearchFieldIconBySize {
     return switch (size) {
       WdsSearchFieldSize.small => null,
       WdsSearchFieldSize.medium => WdsIcon.search,
+      WdsSearchFieldSize.large => WdsIcon.search,
     };
   }
 }
@@ -145,7 +151,7 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
                 color: WdsColors.textAlternative,
               ),
               prefixIcon: icon?.build(
-                color: WdsColors.cta,
+                color: WdsColors.neutral500,
               ),
               prefixIconConstraints: const BoxConstraints(
                 minWidth: 24,
