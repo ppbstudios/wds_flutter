@@ -16,7 +16,8 @@ enum WdsItemCardSize {
   small(
     cardHeight: 329,
     thumbnailSize: WdsThumbnailSize.xsmall,
-  );
+  )
+  ;
 
   const WdsItemCardSize({
     required this.cardHeight,
@@ -256,7 +257,7 @@ class _WdsItemCardState extends State<WdsItemCard> {
           Positioned(
             left: 0,
             bottom: 0,
-            width: 33,
+            width: 36,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -271,7 +272,7 @@ class _WdsItemCardState extends State<WdsItemCard> {
           Positioned(
             right: 0,
             top: 0,
-            height: 18,
+            height: 20,
             child: widget.rightThumbnailTag!,
           ),
 
