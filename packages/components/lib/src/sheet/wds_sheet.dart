@@ -69,11 +69,9 @@ abstract class WdsSheet extends StatelessWidget {
     Widget? header,
     Widget? actionArea,
     Color backgroundColor = WdsColors.white,
-    Color handleBackgroundColor = Colors.transparent,
     Key? key,
   }) => _DraggableSheet(
     backgroundColor: backgroundColor,
-    handleBackgroundColor: handleBackgroundColor,
     header: header,
     actionArea: actionArea,
     key: key,
@@ -134,7 +132,6 @@ class _DraggableSheet extends WdsSheet {
   const _DraggableSheet({
     required this.children,
     super.backgroundColor = WdsColors.white,
-    this.handleBackgroundColor = Colors.transparent,
     super.header,
     super.actionArea,
     super.key,
@@ -144,10 +141,14 @@ class _DraggableSheet extends WdsSheet {
 
   final List<Widget> children;
 
-  final Color handleBackgroundColor;
-
   @override
   Widget build(BuildContext context) {
+    // Header 있으면 흰색으로
+    // Header 없으면 backgroundColor로 지정
+    final handleBackgroundColor = header != null
+        ? WdsColors.white
+        : backgroundColor;
+
     return DraggableScrollableSheet(
       initialChildSize: variant.initialHeightRatio,
       maxChildSize: variant.maxHeightRatio,
