@@ -79,12 +79,20 @@ Widget _buildPlaygroundSection(BuildContext context) {
     description: 'Sheet의 배경색을 설정해 주세요',
   );
 
+  final handleBackgroundColor = context.knobs.color(
+    label: 'handleColor',
+    description: 'draggable일 때 손잡이 막대 색상을 설정해 주세요',
+    initialValue: Colors.transparent,
+  );
+
   return WidgetbookPlayground(
     info: [
       'Variant: ${variant.name}',
       'Title: $title',
       'Action Area: ${actionAreaOption.displayName}',
       'Background Color: ${backgroundColor.toString()}',
+      if (variant == WdsSheetVariant.draggable)
+        'Handle Background Color: ${handleBackgroundColor.toString()}',
     ],
     child: material.LayoutBuilder(
       builder: (context, constraints) {
@@ -101,6 +109,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
                 title: title,
                 actionAreaOption: actionAreaOption,
                 backgroundColor: backgroundColor,
+                handleBackgroundColor: handleBackgroundColor,
                 blueColors: blueColors,
                 deviceHeight: deviceHeight,
               ),
@@ -120,6 +129,7 @@ Widget _buildSheetContent(
   required String title,
   required _ActionAreaOption actionAreaOption,
   required Color backgroundColor,
+  required Color handleBackgroundColor,
   required List<Color> blueColors,
   required double deviceHeight,
 }) {
@@ -137,6 +147,7 @@ Widget _buildSheetContent(
       ),
     WdsSheetVariant.draggable => WdsSheet.draggable(
         backgroundColor: backgroundColor,
+        handleBackgroundColor: handleBackgroundColor,
         header: _buildHeader(context, title),
         actionArea: actionAreaOption.variant != null
             ? _buildActionArea(

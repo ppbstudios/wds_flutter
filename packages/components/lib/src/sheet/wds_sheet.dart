@@ -8,7 +8,8 @@ enum WdsSheetVariant {
   draggable(
     initialHeightRatio: 0.65,
     maxHeightRatio: 0.93,
-  );
+  )
+  ;
 
   const WdsSheetVariant({
     required this.initialHeightRatio,
@@ -32,6 +33,11 @@ class _SheetDimensions {
   static const double handleWidth = 40;
   static const double handleHeight = 5;
   static const double handlePaddingVertical = 8.5;
+
+  static const BorderRadius topBorderRadius = BorderRadius.only(
+    topLeft: Radius.circular(WdsRadius.radius16),
+    topRight: Radius.circular(WdsRadius.radius16),
+  );
 }
 
 /// 디자인 시스템 규칙을 따르는 시트
@@ -63,9 +69,11 @@ abstract class WdsSheet extends StatelessWidget {
     Widget? header,
     Widget? actionArea,
     Color backgroundColor = WdsColors.white,
+    Color handleBackgroundColor = Colors.transparent,
     Key? key,
   }) => _DraggableSheet(
     backgroundColor: backgroundColor,
+    handleBackgroundColor: handleBackgroundColor,
     header: header,
     actionArea: actionArea,
     key: key,
@@ -126,6 +134,7 @@ class _DraggableSheet extends WdsSheet {
   const _DraggableSheet({
     required this.children,
     super.backgroundColor = WdsColors.white,
+    this.handleBackgroundColor = Colors.transparent,
     super.header,
     super.actionArea,
     super.key,
@@ -134,6 +143,8 @@ class _DraggableSheet extends WdsSheet {
        );
 
   final List<Widget> children;
+
+  final Color handleBackgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +159,12 @@ class _DraggableSheet extends WdsSheet {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               /// HANDLE
-              const RepaintBoundary(child: __SheetHandle()),
+              RepaintBoundary(
+                child: ColoredBox(
+                  color: handleBackgroundColor,
+                  child: const __SheetHandle(),
+                ),
+              ),
 
               /// HEADER
               if (header != null)
@@ -206,12 +222,12 @@ class __SheetContainer extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(WdsRadius.radius16),
-              topRight: Radius.circular(WdsRadius.radius16),
-            ),
+            borderRadius: _SheetDimensions.topBorderRadius,
           ),
-          child: child,
+          child: ClipRRect(
+            borderRadius: _SheetDimensions.topBorderRadius,
+            child: child,
+          ),
         ),
       ),
     );

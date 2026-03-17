@@ -1,3 +1,6 @@
+### 0.0.16
+- WdsSheet.draggable > Header에 backgroundColor 영역은 별도로 받을 수 있게끔 추가
+
 ### 0.0.14
 
 - WdsSliverHeader.logo에 외부 로고 탭 콜백 추가
