@@ -121,7 +121,7 @@ class WdsButton extends StatefulWidget {
   const WdsButton({
     required this.onTap,
     required this.child,
-    this.isEnabled = true,
+    this.isActive = true,
     this.variant = WdsButtonVariant.cta,
     this.size = WdsButtonSize.medium,
     this.leadingIcon,
@@ -134,7 +134,7 @@ class WdsButton extends StatefulWidget {
 
   final VoidCallback? onTap;
   final Widget child;
-  final bool isEnabled;
+  final bool isActive;
   final WdsButtonVariant variant;
   final WdsButtonSize size;
   final WdsIcon? leadingIcon;
@@ -153,7 +153,6 @@ class _WdsButtonState extends State<WdsButton>
 
   // Interaction handlers
   void _handleTapDown(TapDownDetails details) {
-    if (!widget.isEnabled) return;
     if (!mounted) return;
     if (!_isPressed) {
       setState(() {
@@ -163,7 +162,6 @@ class _WdsButtonState extends State<WdsButton>
   }
 
   void _handleTapUp(TapUpDetails details) {
-    if (!widget.isEnabled) return;
     if (!mounted) return;
     if (_isPressed) {
       setState(() {
@@ -173,7 +171,6 @@ class _WdsButtonState extends State<WdsButton>
   }
 
   void _handleTapCancel() {
-    if (!widget.isEnabled) return;
     if (!mounted) return;
     if (_isPressed) {
       setState(() {
@@ -341,10 +338,10 @@ class _WdsButtonState extends State<WdsButton>
 
     // Gestures and hover (MouseRegion only on web)
     final coreGesture = GestureDetector(
-      onTapDown: widget.isEnabled ? _handleTapDown : null,
-      onTapUp: widget.isEnabled ? _handleTapUp : null,
-      onTapCancel: widget.isEnabled ? _handleTapCancel : null,
-      onTap: widget.isEnabled ? widget.onTap : null,
+      onTapDown: _handleTapDown,
+      onTapUp: _handleTapUp,
+      onTapCancel: _handleTapCancel,
+      onTap: widget.onTap,
       behavior: HitTestBehavior.opaque,
       child: ClipRRect(
         borderRadius: borderRadius,
@@ -386,14 +383,12 @@ class _WdsButtonState extends State<WdsButton>
     final gestureChild = kIsWeb
         ? MouseRegion(
             onEnter: (_) {
-              if (!widget.isEnabled) return;
               if (!mounted) return;
               if (!_isHovered) {
                 setState(() => _isHovered = true);
               }
             },
             onExit: (_) {
-              if (!widget.isEnabled) return;
               if (!mounted) return;
               if (_isHovered) {
                 setState(() => _isHovered = false);
@@ -403,14 +398,9 @@ class _WdsButtonState extends State<WdsButton>
           )
         : coreGesture;
 
-    final Widget result = IgnorePointer(
-      ignoring: !widget.isEnabled,
-      child: gestureChild,
-    );
-
-    if (!widget.isEnabled) {
-      return Opacity(opacity: 0.4, child: result);
+    if (!widget.isActive) {
+      return Opacity(opacity: 0.4, child: gestureChild);
     }
-    return result;
+    return gestureChild;
   }
 }

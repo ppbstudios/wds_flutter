@@ -295,7 +295,7 @@ Widget _buildVerifiedSection(BuildContext context) {
           ),
           WdsButton(
             onTap: null,
-            isEnabled: false,
+            isActive: false,
             size: WdsButtonSize.small,
             variant: WdsButtonVariant.secondary,
             child: Text('텍스트'),

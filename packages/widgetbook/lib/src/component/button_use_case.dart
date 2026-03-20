@@ -33,8 +33,8 @@ Widget _buildPlaygroundSection(BuildContext context) {
     description: '버튼의 크기(size, padding, typography)를 정의해요',
   );
 
-  final isEnabled = context.knobs.boolean(
-    label: 'isEnabled',
+  final isActive = context.knobs.boolean(
+    label: 'isActive',
     initialValue: true,
     description: '버튼의 활성화 상태를 정의해요',
   );
@@ -92,7 +92,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   final button = WdsButton(
     onTap: onTap,
-    isEnabled: isEnabled,
+    isActive: isActive,
     variant: variantValue,
     size: sizeValue,
     isLoading: isLoading,
@@ -104,7 +104,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     info: [
       'variant: $variant',
       'size: $size',
-      'state: ${isEnabled ? 'enabled' : 'disabled'}',
+      'state: ${isActive ? 'active' : 'inactive'}',
       'loading: $isLoading',
       'hasLeadingIcon: $hasLeadingIcon',
       'leadingIcon: $leadingIcon',
@@ -285,19 +285,19 @@ Widget _buildDemonstrationSection(BuildContext context) {
               children: [
                 WdsButton(
                   onTap: () => debugPrint('CTA disabled'),
-                  isEnabled: false,
+                  isActive: false,
                   child: const Text('텍스트'),
                 ),
                 WdsButton(
                   onTap: () => debugPrint('Primary disabled'),
                   variant: WdsButtonVariant.primary,
-                  isEnabled: false,
+                  isActive: false,
                   child: const Text('텍스트'),
                 ),
                 WdsButton(
                   onTap: () => debugPrint('Secondary disabled'),
                   variant: WdsButtonVariant.secondary,
-                  isEnabled: false,
+                  isActive: false,
                   child: const Text('텍스트'),
                 ),
                 // Square 는 별도 SquareButton 컴포넌트로 분리됨
