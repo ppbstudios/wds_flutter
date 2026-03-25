@@ -91,7 +91,7 @@ class WdsTag extends StatelessWidget {
     vertical: 2,
   );
 
-  static const TextStyle fixedTypography = WdsTypography.caption11Regular;
+  static const TextStyle fixedTypography = WdsTypography.caption10Medium;
 
   static const BorderRadius fixedBorderRadius = BorderRadius.all(
     Radius.circular(WdsRadius.radius4),
