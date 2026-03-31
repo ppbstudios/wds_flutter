@@ -44,14 +44,16 @@ class WdsDotBadge extends StatelessWidget {
           right: -2,
           bottom: -2,
           left: -2,
-          child: Align(
-            alignment: alignment!,
-            child: SizedBox.square(
-              dimension: size,
-              child: DecoratedBox(
-                decoration: ShapeDecoration(
-                  shape: const CircleBorder(),
-                  color: color ?? WdsColors.orange600,
+          child: ExcludeSemantics(
+            child: Align(
+              alignment: alignment!,
+              child: SizedBox.square(
+                dimension: size,
+                child: DecoratedBox(
+                  decoration: ShapeDecoration(
+                    shape: const CircleBorder(),
+                    color: color ?? WdsColors.orange600,
+                  ),
                 ),
               ),
             ),
