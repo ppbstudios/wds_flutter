@@ -23,6 +23,7 @@ class WdsSwitch extends StatefulWidget {
     required this.value,
     required this.onChanged,
     this.isEnabled = true,
+    this.semanticLabel,
     super.key,
   }) : size = WdsSwitchSize.small;
 
@@ -30,6 +31,7 @@ class WdsSwitch extends StatefulWidget {
     required this.value,
     required this.onChanged,
     this.isEnabled = true,
+    this.semanticLabel,
     super.key,
   }) : size = WdsSwitchSize.large;
 
@@ -40,6 +42,8 @@ class WdsSwitch extends StatefulWidget {
   final bool isEnabled;
 
   final WdsSwitchSize size;
+
+  final String? semanticLabel;
 
   @override
   State<WdsSwitch> createState() => _WdsSwitchState();
@@ -98,10 +102,17 @@ class _WdsSwitchState extends State<WdsSwitch> {
       child: result,
     );
 
+    final Widget semanticResult = Semantics(
+      toggled: widget.value,
+      enabled: widget.isEnabled,
+      label: widget.semanticLabel,
+      child: result,
+    );
+
     if (!widget.isEnabled) {
-      return Opacity(opacity: 0.4, child: result);
+      return Opacity(opacity: 0.4, child: semanticResult);
     }
 
-    return result;
+    return semanticResult;
   }
 }

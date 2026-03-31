@@ -38,7 +38,9 @@ class _WdsSegmentedControlState extends State<WdsSegmentedControl> {
       return const SizedBox.shrink();
     }
 
-    return LayoutBuilder(
+    return Semantics(
+      label: widget.segments[widget.selectedIndex],
+      child: LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth > 0 ? constraints.maxWidth : 108.0;
         final segmentWidth = width / widget.segments.length;
@@ -116,6 +118,7 @@ class _WdsSegmentedControlState extends State<WdsSegmentedControl> {
           ),
         );
       },
+    ),
     );
   }
 }

@@ -80,7 +80,9 @@ class WdsOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
+    return Semantics(
+      label: '옵션 목록',
+      child: RepaintBoundary(
       child: DecoratedBox(
         decoration: _decoration,
         child: Padding(
@@ -88,6 +90,7 @@ class WdsOption extends StatelessWidget {
           child: _buildContent(),
         ),
       ),
+    ),
     );
   }
 

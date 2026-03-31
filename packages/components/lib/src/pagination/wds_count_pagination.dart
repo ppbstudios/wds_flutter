@@ -60,7 +60,9 @@ class WdsCountPagination extends StatelessWidget {
     final padding = _PaginationCountPaddingBySize.of(size);
     final textStyle = _PaginationCountTextStyleBySize.of(size);
 
-    return Container(
+    return Semantics(
+      label: '$currentPage / $totalPage',
+      child: Container(
       padding: padding,
       decoration: BoxDecoration(
         color: WdsColors.cta.withAlpha(WdsOpacity.opacity80.toAlpha()),
@@ -97,6 +99,7 @@ class WdsCountPagination extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }

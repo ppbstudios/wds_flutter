@@ -17,7 +17,8 @@ class WdsCircular extends StatelessWidget {
   Widget build(BuildContext context) {
     final strokeWidth = size * (3.0 / 28.0);
 
-    return SizedBox.square(
+    return ExcludeSemantics(
+      child: SizedBox.square(
       dimension: size,
       child: CircularProgressIndicator(
         strokeWidth: strokeWidth,
@@ -26,6 +27,7 @@ class WdsCircular extends StatelessWidget {
           color ?? WdsColors.borderNeutral,
         ),
       ),
+    ),
     );
   }
 }

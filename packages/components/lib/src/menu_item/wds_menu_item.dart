@@ -128,6 +128,10 @@ class _WdsMenuItemState extends State<WdsMenuItem> {
           )
         : coreGesture;
 
-    return gestureChild;
+    return Semantics(
+      button: true,
+      label: widget.text,
+      child: gestureChild,
+    );
   }
 }

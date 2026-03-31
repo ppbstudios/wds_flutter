@@ -89,7 +89,8 @@ class _WdsLoadingState extends State<WdsLoading> with TickerProviderStateMixin {
     final double dotSize = _LoadingDotSizeBySize.of(widget.size);
     final double spacing = _LoadingSpacingBySize.of(widget.size);
 
-    return RepaintBoundary(
+    return ExcludeSemantics(
+      child: RepaintBoundary(
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: List.generate(3, (index) {
@@ -104,6 +105,7 @@ class _WdsLoadingState extends State<WdsLoading> with TickerProviderStateMixin {
           );
         }),
       ),
+    ),
     );
   }
 }

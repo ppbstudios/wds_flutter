@@ -202,7 +202,10 @@ class _WdsTextAreaState extends State<WdsTextArea> {
       ),
     );
 
-    return ConstrainedBox(
+    return Semantics(
+      textField: true,
+      label: widget.label.data ?? widget.hintText,
+      child: ConstrainedBox(
       constraints: const BoxConstraints(
         minWidth: 250,
       ),
@@ -241,6 +244,7 @@ class _WdsTextAreaState extends State<WdsTextArea> {
           ),
         ],
       ),
+    ),
     );
   }
 }

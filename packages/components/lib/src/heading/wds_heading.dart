@@ -84,9 +84,13 @@ class WdsHeading extends StatelessWidget {
       content = titleWidget;
     }
 
-    return Padding(
-      padding: containerPadding,
-      child: content,
+    return Semantics(
+      header: true,
+      label: title,
+      child: Padding(
+        padding: containerPadding,
+        child: content,
+      ),
     );
   }
 }

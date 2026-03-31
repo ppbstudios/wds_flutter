@@ -58,14 +58,18 @@ class WdsSnackbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: WdsColors.cta,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 9, 16, 9),
-        child: _buildRow(),
+    return Semantics(
+      liveRegion: true,
+      label: description != null ? '$message $description' : message,
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
+          color: WdsColors.cta,
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 9, 16, 9),
+          child: _buildRow(),
+        ),
       ),
     );
   }

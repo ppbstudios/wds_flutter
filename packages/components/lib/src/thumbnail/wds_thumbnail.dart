@@ -25,6 +25,7 @@ class WdsThumbnail extends StatelessWidget {
     required this.size,
     this.hasRadius = false,
     this.scaleFactor = 1,
+    this.semanticLabel,
     super.key,
   });
 
@@ -32,6 +33,7 @@ class WdsThumbnail extends StatelessWidget {
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
+    this.semanticLabel,
     super.key,
   }) : size = WdsThumbnailSize.xxsmall;
 
@@ -39,6 +41,7 @@ class WdsThumbnail extends StatelessWidget {
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
+    this.semanticLabel,
     super.key,
   }) : size = WdsThumbnailSize.xsmall;
 
@@ -46,6 +49,7 @@ class WdsThumbnail extends StatelessWidget {
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
+    this.semanticLabel,
     super.key,
   }) : size = WdsThumbnailSize.small;
 
@@ -53,6 +57,7 @@ class WdsThumbnail extends StatelessWidget {
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
+    this.semanticLabel,
     super.key,
   }) : size = WdsThumbnailSize.medium;
 
@@ -60,6 +65,7 @@ class WdsThumbnail extends StatelessWidget {
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
+    this.semanticLabel,
     super.key,
   }) : size = WdsThumbnailSize.large;
 
@@ -67,6 +73,7 @@ class WdsThumbnail extends StatelessWidget {
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
+    this.semanticLabel,
     super.key,
   }) : size = WdsThumbnailSize.xlarge;
 
@@ -74,6 +81,7 @@ class WdsThumbnail extends StatelessWidget {
     required this.imagePath,
     this.hasRadius = false,
     this.scaleFactor = 1,
+    this.semanticLabel,
     super.key,
   }) : size = WdsThumbnailSize.xxlarge;
 
@@ -89,6 +97,9 @@ class WdsThumbnail extends StatelessWidget {
   final bool hasRadius;
 
   final double scaleFactor;
+
+  /// 접근성을 위한 시맨틱 라벨
+  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +124,11 @@ class WdsThumbnail extends StatelessWidget {
           : imageWidget,
     );
 
-    return RepaintBoundary(child: sizedWidget);
+    return Semantics(
+      image: true,
+      label: semanticLabel,
+      child: RepaintBoundary(child: sizedWidget),
+    );
   }
 
   /// 네트워크 이미지인지 확인

@@ -19,6 +19,7 @@ class WdsBadge extends StatelessWidget {
     }
 
     final displayText = _getDisplayText(count);
+    final semanticLabel = '$count개';
 
     final text = Text(
       displayText,
@@ -33,7 +34,9 @@ class WdsBadge extends StatelessWidget {
     );
 
     if (displayText.length > 2) {
-      return DecoratedBox(
+      return Semantics(
+        label: semanticLabel,
+        child: DecoratedBox(
         decoration: const BoxDecoration(
           color: WdsColors.primary,
           borderRadius: BorderRadius.all(Radius.circular(WdsRadius.radius9999)),
@@ -42,10 +45,13 @@ class WdsBadge extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(4, 2, 4, 2),
           child: text,
         ),
+      ),
       );
     }
 
-    return SizedBox.square(
+    return Semantics(
+      label: semanticLabel,
+      child: SizedBox.square(
       dimension: 16,
       child: DecoratedBox(
         decoration: const ShapeDecoration(
@@ -56,6 +62,7 @@ class WdsBadge extends StatelessWidget {
           child: text,
         ),
       ),
+    ),
     );
   }
 

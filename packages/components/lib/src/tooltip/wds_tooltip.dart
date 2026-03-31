@@ -95,7 +95,9 @@ class WdsTooltip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
+    return Semantics(
+      label: label.data,
+      child: CustomPaint(
       painter: _TooltipPainter(
         hasArrow: hasArrow,
         alignment: alignment,
@@ -119,6 +121,7 @@ class WdsTooltip extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
 

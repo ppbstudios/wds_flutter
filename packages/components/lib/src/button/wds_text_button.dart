@@ -275,9 +275,17 @@ class _WdsTextButtonState extends State<WdsTextButton>
       child: gestureChild,
     );
 
-    if (!widget.isEnabled) {
-      return result; // 색상으로 비활성 표현, 투명도 변경 없음
-    }
-    return result;
+    final String? semanticLabel = widget.child is Text
+        ? (widget.child as Text).data
+        : null;
+
+    final Widget semanticResult = Semantics(
+      button: true,
+      enabled: widget.isEnabled,
+      label: semanticLabel,
+      child: result,
+    );
+
+    return semanticResult;
   }
 }

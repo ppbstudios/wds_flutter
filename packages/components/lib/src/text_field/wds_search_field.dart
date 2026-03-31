@@ -194,7 +194,10 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
       ),
     );
 
-    return ClipRRect(
+    return Semantics(
+      textField: true,
+      label: widget.hintText,
+      child: ClipRRect(
       borderRadius: borderRadius,
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -204,6 +207,7 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
         ),
         child: core,
       ),
+    ),
     );
   }
 }

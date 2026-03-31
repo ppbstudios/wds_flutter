@@ -38,6 +38,7 @@ class WdsSlider extends StatefulWidget {
     required this.onChanged,
     this.hasTitle = false,
     this.isEnabled = true,
+    this.semanticLabel,
     super.key,
   });
 
@@ -61,6 +62,9 @@ class WdsSlider extends StatefulWidget {
 
   /// 활성화 상태
   final bool isEnabled;
+
+  /// 접근성을 위한 시맨틱 라벨
+  final String? semanticLabel;
 
   @override
   State<WdsSlider> createState() => _WdsSliderState();
@@ -303,7 +307,15 @@ class _WdsSliderState extends State<WdsSlider> {
       onTrackTap: _handleRangeChanged,
     );
 
-    if (!widget.hasTitle) return sliderTrack;
+    final Widget semanticSlider = Semantics(
+      slider: true,
+      enabled: widget.isEnabled,
+      label: widget.semanticLabel,
+      value: '${widget.values.start} - ${widget.values.end}',
+      child: sliderTrack,
+    );
+
+    if (!widget.hasTitle) return semanticSlider;
 
     return Column(
       spacing: 12,
@@ -313,7 +325,7 @@ class _WdsSliderState extends State<WdsSlider> {
           start: widget.values.start,
           end: widget.values.end,
         ),
-        sliderTrack,
+        semanticSlider,
       ],
     );
   }

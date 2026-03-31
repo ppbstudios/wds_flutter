@@ -81,7 +81,11 @@ class _BottomNavigationItemWidget extends StatelessWidget {
 
     final icon = isActive ? item.activeIcon : item.inactiveIcon;
 
-    return GestureDetector(
+    return Semantics(
+      button: true,
+      selected: isActive,
+      label: item.label,
+      child: GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: SizedBox(
@@ -100,6 +104,7 @@ class _BottomNavigationItemWidget extends StatelessWidget {
           ],
         ),
       ),
+    ),
     );
   }
 }

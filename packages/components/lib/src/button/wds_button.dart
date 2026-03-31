@@ -398,9 +398,20 @@ class _WdsButtonState extends State<WdsButton>
           )
         : coreGesture;
 
+    final String? semanticLabel = widget.child is Text
+        ? (widget.child as Text).data
+        : null;
+
+    Widget result = Semantics(
+      button: true,
+      enabled: widget.isActive,
+      label: semanticLabel,
+      child: gestureChild,
+    );
+
     if (!widget.isActive) {
-      return Opacity(opacity: 0.4, child: gestureChild);
+      return Opacity(opacity: 0.4, child: result);
     }
-    return gestureChild;
+    return result;
   }
 }

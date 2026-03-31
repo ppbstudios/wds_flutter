@@ -25,6 +25,7 @@ class WdsRadio<T> extends StatefulWidget {
     required this.groupValue,
     required this.onChanged,
     this.isEnabled = true,
+    this.semanticLabel,
     super.key,
   }) : size = WdsRadioSize.small;
 
@@ -33,6 +34,7 @@ class WdsRadio<T> extends StatefulWidget {
     required this.groupValue,
     required this.onChanged,
     this.isEnabled = true,
+    this.semanticLabel,
     super.key,
   }) : size = WdsRadioSize.large;
 
@@ -49,6 +51,8 @@ class WdsRadio<T> extends StatefulWidget {
   final bool isEnabled;
 
   final WdsRadioSize size;
+
+  final String? semanticLabel;
 
   /// 현재 이 Radio가 선택된 상태인지 확인
   bool get isSelected => value == groupValue;
@@ -98,11 +102,18 @@ class _WdsRadioState<T> extends State<WdsRadio<T>> {
       child: radio,
     );
 
+    final Widget semanticRadio = Semantics(
+      selected: widget.isSelected,
+      enabled: widget.isEnabled,
+      label: widget.semanticLabel,
+      child: radio,
+    );
+
     if (!widget.isEnabled) {
-      return Opacity(opacity: 0.4, child: radio);
+      return Opacity(opacity: 0.4, child: semanticRadio);
     }
 
-    return radio;
+    return semanticRadio;
   }
 }
 

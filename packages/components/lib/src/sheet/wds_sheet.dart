@@ -47,6 +47,7 @@ abstract class WdsSheet extends StatelessWidget {
     this.backgroundColor = WdsColors.white,
     this.header,
     this.actionArea,
+    this.semanticLabel,
     super.key,
   });
 
@@ -55,12 +56,14 @@ abstract class WdsSheet extends StatelessWidget {
     Widget? header,
     Widget? actionArea,
     Color backgroundColor = WdsColors.white,
+    String? semanticLabel,
     Key? key,
   }) => _FixedSheet(
     backgroundColor: backgroundColor,
     header: header,
     content: content,
     actionArea: actionArea,
+    semanticLabel: semanticLabel,
     key: key,
   );
 
@@ -69,11 +72,13 @@ abstract class WdsSheet extends StatelessWidget {
     Widget? header,
     Widget? actionArea,
     Color backgroundColor = WdsColors.white,
+    String? semanticLabel,
     Key? key,
   }) => _DraggableSheet(
     backgroundColor: backgroundColor,
     header: header,
     actionArea: actionArea,
+    semanticLabel: semanticLabel,
     key: key,
     children: children,
   );
@@ -82,6 +87,7 @@ abstract class WdsSheet extends StatelessWidget {
   final Color backgroundColor;
   final Widget? header;
   final Widget? actionArea;
+  final String? semanticLabel;
 }
 
 class _FixedSheet extends WdsSheet {
@@ -90,6 +96,7 @@ class _FixedSheet extends WdsSheet {
     super.backgroundColor = WdsColors.white,
     super.header,
     super.actionArea,
+    super.semanticLabel,
     super.key,
   }) : super(variant: WdsSheetVariant.fixed);
 
@@ -97,32 +104,36 @@ class _FixedSheet extends WdsSheet {
 
   @override
   Widget build(BuildContext context) {
-    return __SheetContainer(
-      variant: variant,
-      backgroundColor: backgroundColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (header != null)
-            RepaintBoundary(
-              child: __SheetHeader(
-                header: header!,
-              ),
-            )
-          else
-            const SizedBox(height: 12),
-          Padding(
-            padding: _SheetPaddingByArea.view,
-            child: content,
-          ),
-          if (actionArea != null)
-            RepaintBoundary(
-              child: __SheetBottom(
-                actionArea: actionArea!,
-              ),
+    return Semantics(
+      container: true,
+      label: semanticLabel,
+      child: __SheetContainer(
+        variant: variant,
+        backgroundColor: backgroundColor,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (header != null)
+              RepaintBoundary(
+                child: __SheetHeader(
+                  header: header!,
+                ),
+              )
+            else
+              const SizedBox(height: 12),
+            Padding(
+              padding: _SheetPaddingByArea.view,
+              child: content,
             ),
-        ],
+            if (actionArea != null)
+              RepaintBoundary(
+                child: __SheetBottom(
+                  actionArea: actionArea!,
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -134,6 +145,7 @@ class _DraggableSheet extends WdsSheet {
     super.backgroundColor = WdsColors.white,
     super.header,
     super.actionArea,
+    super.semanticLabel,
     super.key,
   }) : super(
          variant: WdsSheetVariant.draggable,
@@ -149,7 +161,10 @@ class _DraggableSheet extends WdsSheet {
         ? WdsColors.white
         : backgroundColor;
 
-    return DraggableScrollableSheet(
+    return Semantics(
+      container: true,
+      label: semanticLabel,
+      child: DraggableScrollableSheet(
       initialChildSize: variant.initialHeightRatio,
       maxChildSize: variant.maxHeightRatio,
       builder: (context, scrollController) {
@@ -195,6 +210,7 @@ class _DraggableSheet extends WdsSheet {
           ),
         );
       },
+    ),
     );
   }
 }

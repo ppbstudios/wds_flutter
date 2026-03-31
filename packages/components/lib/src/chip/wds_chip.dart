@@ -364,6 +364,11 @@ class _WdsChipState extends State<WdsChip> with SingleTickerProviderStateMixin {
       child: gestureChild,
     );
 
-    return result;
+    return Semantics(
+      button: true,
+      selected: isFocused,
+      label: widget.label,
+      child: result,
+    );
   }
 }

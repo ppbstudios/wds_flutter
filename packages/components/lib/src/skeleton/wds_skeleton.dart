@@ -54,7 +54,8 @@ class _WdsSkeletonState extends State<WdsSkeleton>
   Widget build(BuildContext context) {
     // RepaintBoundary는 쉬머 애니메이션을 분리하여 부모 위젯의 리페인트를 방지하는 데
     // 사용됩니다.
-    return RepaintBoundary(
+    return ExcludeSemantics(
+      child: RepaintBoundary(
       child: Padding(
         padding: widget._padding,
         child: AnimatedBuilder(
@@ -80,6 +81,7 @@ class _WdsSkeletonState extends State<WdsSkeleton>
           ),
         ),
       ),
+    ),
     );
   }
 }

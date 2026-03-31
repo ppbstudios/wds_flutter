@@ -38,14 +38,18 @@ class WdsToast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        color: WdsColors.cta,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
-        child: _buildContent(),
+    return Semantics(
+      liveRegion: true,
+      label: message,
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
+          color: WdsColors.cta,
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
+          child: _buildContent(),
+        ),
       ),
     );
   }

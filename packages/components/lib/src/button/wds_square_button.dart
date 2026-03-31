@@ -183,10 +183,21 @@ class _WdsSquareButtonState extends State<WdsSquareButton>
       child: gestureChild,
     );
 
+    final String? semanticLabel = widget.child is Text
+        ? (widget.child as Text).data
+        : null;
+
+    final Widget semanticResult = Semantics(
+      button: true,
+      enabled: widget.isEnabled,
+      label: semanticLabel,
+      child: result,
+    );
+
     if (!widget.isEnabled) {
-      return Opacity(opacity: 0.4, child: result);
+      return Opacity(opacity: 0.4, child: semanticResult);
     }
-    return result;
+    return semanticResult;
   }
 
   Widget _buildContent() {

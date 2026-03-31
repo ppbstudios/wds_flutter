@@ -22,13 +22,15 @@ class WdsDotPagination extends StatelessWidget {
         ? WdsColors.textNormal
         : WdsColors.textAssistive;
 
-    return Container(
+    return ExcludeSemantics(
+      child: Container(
       width: 6,
       height: 6,
       decoration: BoxDecoration(
         color: backgroundColor,
         shape: BoxShape.circle,
       ),
+    ),
     );
   }
 }
