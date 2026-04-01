@@ -26,16 +26,19 @@ class WdsDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isVertical) {
-      return const SizedBox(
+      return const ExcludeSemantics(
+        child: SizedBox(
         width: 1,
         height: double.infinity,
         child: DecoratedBox(
           decoration: BoxDecoration(color: WdsColors.borderAlternative),
         ),
+      ),
       );
     }
 
-    return switch (variant) {
+    return ExcludeSemantics(
+      child: switch (variant) {
       WdsDividerVariant.normal => const SizedBox(
         width: double.infinity,
         height: 1,
@@ -50,6 +53,7 @@ class WdsDivider extends StatelessWidget {
           decoration: BoxDecoration(color: WdsColors.backgroundAlternative),
         ),
       ),
-    };
+    },
+    );
   }
 }

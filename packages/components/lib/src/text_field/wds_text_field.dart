@@ -226,10 +226,14 @@ class _WdsTextFieldState extends State<WdsTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return switch (widget.variant) {
-      WdsTextFieldVariant.outlined => _buildOutlined(context),
-      WdsTextFieldVariant.box => _buildBox(context),
-    };
+    return Semantics(
+      textField: true,
+      label: widget.label ?? widget.hintText,
+      child: switch (widget.variant) {
+        WdsTextFieldVariant.outlined => _buildOutlined(context),
+        WdsTextFieldVariant.box => _buildBox(context),
+      },
+    );
   }
 
   Widget _buildOutlined(BuildContext context) {

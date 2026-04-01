@@ -19,6 +19,7 @@ class WdsCheckbox extends StatefulWidget {
     required this.value,
     required this.onChanged,
     this.isEnabled = true,
+    this.semanticLabel,
     super.key,
   }) : size = WdsCheckboxSize.small;
 
@@ -26,6 +27,7 @@ class WdsCheckbox extends StatefulWidget {
     required this.value,
     required this.onChanged,
     this.isEnabled = true,
+    this.semanticLabel,
     super.key,
   }) : size = WdsCheckboxSize.medium;
 
@@ -33,6 +35,7 @@ class WdsCheckbox extends StatefulWidget {
   final ValueChanged<bool>? onChanged;
   final bool isEnabled;
   final WdsCheckboxSize size;
+  final String? semanticLabel;
 
   @override
   State<WdsCheckbox> createState() => _WdsCheckboxState();
@@ -116,10 +119,17 @@ class _WdsCheckboxState extends State<WdsCheckbox>
       child: box,
     );
 
+    final Widget semanticBox = Semantics(
+      checked: widget.value,
+      enabled: widget.isEnabled,
+      label: widget.semanticLabel,
+      child: box,
+    );
+
     if (!widget.isEnabled) {
-      return Opacity(opacity: 0.4, child: box);
+      return Opacity(opacity: 0.4, child: semanticBox);
     }
-    return box;
+    return semanticBox;
   }
 }
 

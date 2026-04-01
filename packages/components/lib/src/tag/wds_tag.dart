@@ -135,7 +135,9 @@ class WdsTag extends StatelessWidget {
       child = label;
     }
 
-    return SizedBox(
+    return Semantics(
+      label: this.label,
+      child: SizedBox(
       height: fixedHeight,
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -147,6 +149,7 @@ class WdsTag extends StatelessWidget {
           child: child,
         ),
       ),
+    ),
     );
   }
 }

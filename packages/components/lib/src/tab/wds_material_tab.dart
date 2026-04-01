@@ -50,7 +50,9 @@ class _WdsMaterialTextTabBarState extends State<WdsMaterialTextTabBar> {
     final tabs = widget.tabs;
     final controller = widget.controller!;
 
-    return SizedBox(
+    return Semantics(
+      container: true,
+      child: SizedBox(
       height: 38,
       child: TabBar(
         controller: controller,
@@ -79,6 +81,7 @@ class _WdsMaterialTextTabBarState extends State<WdsMaterialTextTabBar> {
         unselectedLabelStyle: WdsTypography.body15NormalMedium.copyWith(
           color: WdsColors.textAlternative,
         ),
+      ),
       ),
     );
   }

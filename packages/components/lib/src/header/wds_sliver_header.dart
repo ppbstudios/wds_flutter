@@ -256,11 +256,15 @@ class _WdsSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
       ),
     );
 
-    return ColoredBox(
-      color: WdsHeader.fixedBackground,
-      child: Padding(
-        padding: EdgeInsets.only(top: statusBarHeight),
-        child: headerContent,
+    return Semantics(
+      container: true,
+      header: true,
+      child: ColoredBox(
+        color: WdsHeader.fixedBackground,
+        child: Padding(
+          padding: EdgeInsets.only(top: statusBarHeight),
+          child: headerContent,
+        ),
       ),
     );
   }

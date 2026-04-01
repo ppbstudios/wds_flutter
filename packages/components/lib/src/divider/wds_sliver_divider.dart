@@ -26,16 +26,22 @@ class WdsSliverDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isVertical) {
       return const SliverToBoxAdapter(
-        child: WdsDivider.vertical(),
+        child: ExcludeSemantics(
+          child: WdsDivider.vertical(),
+        ),
       );
     }
 
     return switch (variant) {
       WdsDividerVariant.normal => const SliverToBoxAdapter(
-        child: WdsDivider(),
+        child: ExcludeSemantics(
+          child: WdsDivider(),
+        ),
       ),
       WdsDividerVariant.thick => const SliverToBoxAdapter(
-        child: WdsDivider(variant: WdsDividerVariant.thick),
+        child: ExcludeSemantics(
+          child: WdsDivider(variant: WdsDividerVariant.thick),
+        ),
       ),
     };
   }

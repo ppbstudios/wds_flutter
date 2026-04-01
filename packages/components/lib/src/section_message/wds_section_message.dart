@@ -76,7 +76,9 @@ class WdsSectionMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = _SectionMessageStyleByVariant.of(variant);
 
-    return DecoratedBox(
+    return Semantics(
+      label: message,
+      child: DecoratedBox(
       decoration: BoxDecoration(
         color: style.background,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -101,6 +103,7 @@ class WdsSectionMessage extends StatelessWidget {
           ],
         ),
       ),
+    ),
     );
   }
 }

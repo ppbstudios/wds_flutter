@@ -6,12 +6,14 @@ class WdsIconButton extends StatefulWidget {
     required this.onTap,
     required this.icon,
     this.isEnabled = true,
+    this.semanticLabel,
     super.key,
   });
 
   final VoidCallback? onTap;
   final Widget icon; // 일반적으로 WdsIcon.xxx.build(width:24,height:24)
   final bool isEnabled;
+  final String? semanticLabel;
 
   @override
   State<WdsIconButton> createState() => _WdsIconButtonState();
@@ -113,9 +115,16 @@ class _WdsIconButtonState extends State<WdsIconButton>
       child: gestureChild,
     );
 
+    final Widget semanticResult = Semantics(
+      button: true,
+      enabled: widget.isEnabled,
+      label: widget.semanticLabel,
+      child: result,
+    );
+
     if (!widget.isEnabled) {
-      return Opacity(opacity: 0.4, child: result);
+      return Opacity(opacity: 0.4, child: semanticResult);
     }
-    return result;
+    return semanticResult;
   }
 }

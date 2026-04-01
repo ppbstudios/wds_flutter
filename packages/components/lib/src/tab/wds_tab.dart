@@ -253,9 +253,13 @@ class WdsTextTab extends StatelessWidget with WdsBadgeMixin {
     }
 
     // WdsBadgeMixin의 addDotBadge 메서드로 배지 기능 추가
-    return buildWidgetWithDotBadge(
+    return Semantics(
+      label: label,
+      selected: isSelected,
+      child: buildWidgetWithDotBadge(
       child: textWidget,
       alignment: badgeAlignment,
+    ),
     );
   }
 }

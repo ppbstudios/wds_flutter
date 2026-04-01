@@ -11,6 +11,7 @@ class WdsActionArea extends StatelessWidget {
   WdsActionArea.normal({
     required this.primary,
     this.showBorder = true,
+    this.semanticLabel,
     super.key,
   }) : variant = WdsActionAreaVariant.normal,
        secondary = null,
@@ -23,6 +24,7 @@ class WdsActionArea extends StatelessWidget {
     required this.secondary,
     required this.primary,
     this.showBorder = true,
+    this.semanticLabel,
     super.key,
   }) : variant = WdsActionAreaVariant.filter,
        assert(secondary != null),
@@ -43,6 +45,7 @@ class WdsActionArea extends StatelessWidget {
     required this.secondary,
     required this.primary,
     this.showBorder = true,
+    this.semanticLabel,
     super.key,
   }) : variant = WdsActionAreaVariant.division,
        assert(secondary != null),
@@ -70,6 +73,9 @@ class WdsActionArea extends StatelessWidget {
   /// 상단 경계선 표시 여부
   final bool showBorder;
 
+  /// 접근성을 위한 시맨틱 라벨
+  final String? semanticLabel;
+
   @override
   Widget build(BuildContext context) {
     final Widget content = switch (variant) {
@@ -78,7 +84,10 @@ class WdsActionArea extends StatelessWidget {
       WdsActionAreaVariant.division => _buildDivision(),
     };
 
-    return LayoutBuilder(
+    return Semantics(
+      container: true,
+      label: semanticLabel,
+      child: LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(
           width: constraints.maxWidth,
@@ -100,6 +109,7 @@ class WdsActionArea extends StatelessWidget {
           ),
         );
       },
+    ),
     );
   }
 

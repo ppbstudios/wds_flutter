@@ -115,6 +115,10 @@ class WdsSelect extends StatelessWidget {
       child: GestureDetector(onTap: onTap, child: column),
     );
 
-    return result;
+    return Semantics(
+      button: true,
+      label: title ?? selected ?? hintText,
+      child: result,
+    );
   }
 }

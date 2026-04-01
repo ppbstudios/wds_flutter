@@ -295,7 +295,9 @@ class _WdsItemCardState extends State<WdsItemCard> {
 
     if (widget.size == WdsItemCardSize.xlarge ||
         widget.size == WdsItemCardSize.large) {
-      return _VerticalLayout(
+      return Semantics(
+        label: widget.productName,
+        child: _VerticalLayout(
         thumbnail: thumbnailImageWithLensPattern,
         brandName: widget.brandName,
         productName: widget.productName,
@@ -312,10 +314,13 @@ class _WdsItemCardState extends State<WdsItemCard> {
         size: widget.size,
         isSoldOut: widget.isSoldOut,
         productNameMaxLines: widget.productNameMaxLines,
+      ),
       );
     }
 
-    return _HorizontalLayout(
+    return Semantics(
+      label: widget.productName,
+      child: _HorizontalLayout(
       thumbnail: thumbnailImageWithLensPattern,
       brandName: widget.brandName,
       productName: widget.productName,
@@ -330,6 +335,7 @@ class _WdsItemCardState extends State<WdsItemCard> {
       size: widget.size,
       isSoldOut: widget.isSoldOut,
       productNameMaxLines: widget.productNameMaxLines,
+    ),
     );
   }
 }

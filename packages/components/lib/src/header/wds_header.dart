@@ -180,11 +180,15 @@ class WdsHeader extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
 
-    return ColoredBox(
-      color: fixedBackground,
-      child: Padding(
-        padding: EdgeInsets.only(top: statusBarHeight),
-        child: content,
+    return Semantics(
+      container: true,
+      header: true,
+      child: ColoredBox(
+        color: fixedBackground,
+        child: Padding(
+          padding: EdgeInsets.only(top: statusBarHeight),
+          child: content,
+        ),
       ),
     );
   }
