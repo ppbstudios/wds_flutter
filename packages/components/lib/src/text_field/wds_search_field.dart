@@ -47,6 +47,25 @@ class _SearchFieldIconBySize {
   }
 }
 
+class _SearchFieldFontBySize {
+  const _SearchFieldFontBySize._();
+
+  static TextStyle? of(
+    WdsSearchFieldSize size, {
+    required bool enabled,
+  }) {
+    return switch (size) {
+      WdsSearchFieldSize.small ||
+      WdsSearchFieldSize.medium => WdsTypography.body14NormalRegular.copyWith(
+        color: enabled ? WdsColors.textNormal : WdsColors.textAlternative,
+      ),
+      WdsSearchFieldSize.large => WdsTypography.body15NormalRegular.copyWith(
+        color: enabled ? WdsColors.textNormal : WdsColors.textAlternative,
+      ),
+    };
+  }
+}
+
 /// 검색 입력에 사용하는 SearchField
 /// - 반경: WdsRadius.full
 /// - 배경: WdsColors.backgroundAlternative
@@ -112,12 +131,13 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
 
     final WdsIcon? icon = _SearchFieldIconBySize.of(widget.size);
 
-    const BorderRadius borderRadius = BorderRadius.all(
-      Radius.circular(WdsRadius.radius9999),
+    final TextStyle? textStyle = _SearchFieldFontBySize.of(
+      widget.size,
+      enabled: widget.enabled,
     );
 
-    final TextStyle textStyle = WdsTypography.body15NormalRegular.copyWith(
-      color: widget.enabled ? WdsColors.textNormal : WdsColors.textAlternative,
+    const BorderRadius borderRadius = BorderRadius.all(
+      Radius.circular(WdsRadius.radius9999),
     );
 
     const InputBorder noBorder = OutlineInputBorder(
@@ -198,16 +218,16 @@ class _WdsSearchFieldState extends State<WdsSearchField> {
       textField: true,
       label: widget.hintText,
       child: ClipRRect(
-      borderRadius: borderRadius,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          minWidth: 250,
-          minHeight: height,
-          maxHeight: height,
+        borderRadius: borderRadius,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth: 250,
+            minHeight: height,
+            maxHeight: height,
+          ),
+          child: core,
         ),
-        child: core,
       ),
-    ),
     );
   }
 }

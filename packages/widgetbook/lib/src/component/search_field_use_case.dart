@@ -24,6 +24,7 @@ Widget _buildPlaygroundSection(BuildContext context) {
     options: [
       WdsSearchFieldSize.small,
       WdsSearchFieldSize.medium,
+      WdsSearchFieldSize.large,
     ],
     labelBuilder: (value) => value.name,
   );
