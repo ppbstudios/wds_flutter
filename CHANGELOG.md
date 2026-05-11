@@ -1,3 +1,6 @@
+### 0.0.19
+- WDSSearchField > WdsSearchFieldSize별 FontSize 세분화 진행
+
 ### 0.0.17
 
 - WdsButton > isEnabled → isActive로 변경 (버튼 항상 누를 수 있도록, inactive 상태에서도 onTap 콜백 호출)
