@@ -13,6 +13,9 @@ extension WdsNumX on num {
 
   /// 할인율 계산
   int getDiscountRate(num salePrice) {
+    if (this == 0) {
+      return 0;
+    }
     return ((1 - salePrice / this) * 100).round();
   }
 
