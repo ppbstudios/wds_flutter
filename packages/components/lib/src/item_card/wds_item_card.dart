@@ -199,6 +199,12 @@ class _WdsItemCardState extends State<WdsItemCard> {
 
   @override
   Widget build(BuildContext context) {
+    final lensPatternSize = widget.size.lensPatternSize;
+    final lensPatternCacheSize = lensPatternSize == null
+        ? null
+        : (lensPatternSize.width * MediaQuery.devicePixelRatioOf(context))
+              .round();
+
     final thumbnail = switch (widget.size) {
       WdsItemCardSize.xlarge => WdsThumbnail.xlarge(
         imagePath: widget.thumbnailImageUrl,
@@ -279,15 +285,18 @@ class _WdsItemCardState extends State<WdsItemCard> {
         /// LENS PATTERN IMAGE
         if (widget.lensPatternImageUrl != null &&
             widget.lensPatternImageUrl!.isNotEmpty &&
-            widget.size.lensPatternSize != null)
+            lensPatternSize != null)
           Positioned(
             right: 6 * widget.scaleFactor,
             bottom: 6 * widget.scaleFactor,
             child: CachedNetworkImage(
               imageUrl: widget.lensPatternImageUrl!,
-              width: widget.size.lensPatternSize!.width,
-              height: widget.size.lensPatternSize!.height,
-              fit: BoxFit.cover,
+              width: lensPatternSize.width,
+              height: lensPatternSize.height,
+              memCacheWidth: lensPatternCacheSize,
+              memCacheHeight: lensPatternCacheSize,
+              fit: BoxFit.contain,
+              filterQuality: FilterQuality.medium,
             ),
           ),
       ],
