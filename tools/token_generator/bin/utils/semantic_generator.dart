@@ -90,8 +90,8 @@ String? _resolveTypographyLetterSpacing(
       }
     }
   }
-  // letterSpacing 값이 없는 경우 0으로 통일
-  return '0';
+  // letterSpacing 값이 없는 경우 TextStyle에서 생략 (폰트 기본값 사용)
+  return null;
 }
 
 bool _isTypographyLeafNode(dynamic node) {

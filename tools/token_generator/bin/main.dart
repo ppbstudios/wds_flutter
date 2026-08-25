@@ -326,8 +326,9 @@ Future<void> _generateSemantic({
               sizeExpr: sizeExpr,
             );
             if (heightExpr != null) lines.add('height: $heightExpr');
-            // letterSpacing은 항상 포함 (값이 없으면 0으로 설정됨)
-            lines.add('letterSpacing: $letterSpacingExpr');
+            if (letterSpacingExpr != null) {
+              lines.add('letterSpacing: $letterSpacingExpr');
+            }
 
             sb.writeln('  static const TextStyle $fieldName = TextStyle(');
             for (int i = 0; i < lines.length; i++) {
@@ -366,8 +367,9 @@ Future<void> _generateSemantic({
           sizeExpr: sizeExpr,
         );
         if (heightExpr != null) lines.add('height: $heightExpr');
-        // letterSpacing은 항상 포함 (값이 없으면 0으로 설정됨)
-        lines.add('letterSpacing: $letterSpacingExpr');
+        if (letterSpacingExpr != null) {
+          lines.add('letterSpacing: $letterSpacingExpr');
+        }
 
         sb.writeln('  static const TextStyle $fieldName = TextStyle(');
         for (int i = 0; i < lines.length; i++) {
