@@ -26,6 +26,7 @@ class WdsThumbnail extends StatelessWidget {
     this.hasRadius = false,
     this.scaleFactor = 1,
     this.semanticLabel,
+    this.imageProvider,
     super.key,
   });
 
@@ -34,6 +35,7 @@ class WdsThumbnail extends StatelessWidget {
     this.hasRadius = false,
     this.scaleFactor = 1,
     this.semanticLabel,
+    this.imageProvider,
     super.key,
   }) : size = WdsThumbnailSize.xxsmall;
 
@@ -42,6 +44,7 @@ class WdsThumbnail extends StatelessWidget {
     this.hasRadius = false,
     this.scaleFactor = 1,
     this.semanticLabel,
+    this.imageProvider,
     super.key,
   }) : size = WdsThumbnailSize.xsmall;
 
@@ -50,6 +53,7 @@ class WdsThumbnail extends StatelessWidget {
     this.hasRadius = false,
     this.scaleFactor = 1,
     this.semanticLabel,
+    this.imageProvider,
     super.key,
   }) : size = WdsThumbnailSize.small;
 
@@ -58,6 +62,7 @@ class WdsThumbnail extends StatelessWidget {
     this.hasRadius = false,
     this.scaleFactor = 1,
     this.semanticLabel,
+    this.imageProvider,
     super.key,
   }) : size = WdsThumbnailSize.medium;
 
@@ -66,6 +71,7 @@ class WdsThumbnail extends StatelessWidget {
     this.hasRadius = false,
     this.scaleFactor = 1,
     this.semanticLabel,
+    this.imageProvider,
     super.key,
   }) : size = WdsThumbnailSize.large;
 
@@ -74,6 +80,7 @@ class WdsThumbnail extends StatelessWidget {
     this.hasRadius = false,
     this.scaleFactor = 1,
     this.semanticLabel,
+    this.imageProvider,
     super.key,
   }) : size = WdsThumbnailSize.xlarge;
 
@@ -82,6 +89,7 @@ class WdsThumbnail extends StatelessWidget {
     this.hasRadius = false,
     this.scaleFactor = 1,
     this.semanticLabel,
+    this.imageProvider,
     super.key,
   }) : size = WdsThumbnailSize.xxlarge;
 
@@ -101,9 +109,17 @@ class WdsThumbnail extends StatelessWidget {
   /// 접근성을 위한 시맨틱 라벨
   final String? semanticLabel;
 
+  /// 네트워크 이미지 로더를 외부에서 주입할 때 사용
+  ///
+  /// 주어지면 [CachedNetworkImage] 대신 이 provider 로 이미지를 그린다.
+  /// 리사이즈는 provider 쪽 책임이며 [ResizeImage] 로 다시 감싸지 않는다.
+  final ImageProvider? imageProvider;
+
   @override
   Widget build(BuildContext context) {
-    final imageWidget = _isNetworkImage(imagePath)
+    final imageWidget = imageProvider != null
+        ? _buildProvidedImage(imageProvider!)
+        : _isNetworkImage(imagePath)
         ? _buildNetworkImage()
         : _buildAssetImage();
 
@@ -174,6 +190,34 @@ class WdsThumbnail extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  /// 주입된 [ImageProvider] 로 이미지 빌드
+  Widget _buildProvidedImage(ImageProvider provider) {
+    return Image(
+      image: provider,
+      width: size.size.width,
+      height: size.size.height,
+      fit: BoxFit.cover,
+      gaplessPlayback: true,
+      errorBuilder: (context, error, stackTrace) {
+        return _buildPlaceholder();
+      },
+      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+        if (wasSynchronouslyLoaded) return child;
+        return Stack(
+          fit: StackFit.expand,
+          children: [
+            _buildPlaceholder(),
+            AnimatedOpacity(
+              opacity: frame == null ? 0 : 1,
+              duration: const Duration(milliseconds: 200),
+              child: child,
+            ),
+          ],
+        );
+      },
     );
   }
 

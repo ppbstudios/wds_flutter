@@ -1,3 +1,8 @@
+### 0.0.20
+- WdsThumbnail > imageProvider 추가 (외부 ImageProvider 주입, 미주입 시 기존 CachedNetworkImage 유지)
+- WdsItemCard > thumbnailImageProvider, lensPatternImageProvider 추가
+- Widgetbook > Thumbnail Asset 예시 이미지 누락 수정
+
 ### 0.0.19
 - WDSSearchField > WdsSearchFieldSize별 FontSize 세분화 진행
 

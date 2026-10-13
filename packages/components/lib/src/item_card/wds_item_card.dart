@@ -53,11 +53,13 @@ class WdsItemCard extends StatefulWidget {
     this.hasLiked = false,
     this.tags = const [],
     this.lensPatternImageUrl,
+    this.lensPatternImageProvider,
     this.isSoldOut = false,
     this.productNameMaxLines = 1,
     this.leftThumbnailTags = const [],
     this.rightThumbnailTag,
     this.scaleFactor = 1,
+    this.thumbnailImageProvider,
     super.key,
   }) : size = WdsItemCardSize.xlarge,
        indexTag = null,
@@ -82,12 +84,14 @@ class WdsItemCard extends StatefulWidget {
     this.hasLiked = false,
     this.tags = const [],
     this.lensPatternImageUrl,
+    this.lensPatternImageProvider,
     this.isSoldOut = false,
     this.productNameMaxLines = 1,
     this.leftThumbnailTags = const [],
     this.rightThumbnailTag,
     this.indexTag,
     this.scaleFactor = 1,
+    this.thumbnailImageProvider,
     super.key,
   }) : size = WdsItemCardSize.large;
 
@@ -107,8 +111,10 @@ class WdsItemCard extends StatefulWidget {
     this.hasLiked = false,
     this.tags = const [],
     this.lensPatternImageUrl,
+    this.lensPatternImageProvider,
     this.isSoldOut = false,
     this.scaleFactor = 1,
+    this.thumbnailImageProvider,
     super.key,
   }) : size = WdsItemCardSize.medium,
        productNameMaxLines = 1,
@@ -133,10 +139,12 @@ class WdsItemCard extends StatefulWidget {
     this.isSoldOut = false,
     this.productNameMaxLines = 1,
     this.scaleFactor = 1,
+    this.thumbnailImageProvider,
     super.key,
   }) : size = WdsItemCardSize.small,
        brandName = '',
        lensPatternImageUrl = null,
+       lensPatternImageProvider = null,
        indexTag = null,
        leftThumbnailTags = const [],
        rightThumbnailTag = null;
@@ -146,6 +154,16 @@ class WdsItemCard extends StatefulWidget {
   final String thumbnailImageUrl;
 
   final String? lensPatternImageUrl;
+
+  /// 썸네일 이미지 로더 주입. 주어지면 [thumbnailImageUrl] 대신 사용
+  ///
+  /// 리사이즈는 provider 쪽 책임이며 [ResizeImage] 로 다시 감싸지 않는다.
+  final ImageProvider? thumbnailImageProvider;
+
+  /// 렌즈 패턴 이미지 로더 주입. 주어지면 [lensPatternImageUrl] 대신 사용
+  ///
+  /// 리사이즈는 provider 쪽 책임이며 [ResizeImage] 로 다시 감싸지 않는다.
+  final ImageProvider? lensPatternImageProvider;
 
   final List<WdsTag> leftThumbnailTags;
 
@@ -208,20 +226,24 @@ class _WdsItemCardState extends State<WdsItemCard> {
     final thumbnail = switch (widget.size) {
       WdsItemCardSize.xlarge => WdsThumbnail.xlarge(
         imagePath: widget.thumbnailImageUrl,
+        imageProvider: widget.thumbnailImageProvider,
         scaleFactor: widget.scaleFactor,
       ),
       WdsItemCardSize.large => WdsThumbnail.large(
         imagePath: widget.thumbnailImageUrl,
+        imageProvider: widget.thumbnailImageProvider,
         hasRadius: true,
         scaleFactor: widget.scaleFactor,
       ),
       WdsItemCardSize.medium => WdsThumbnail.medium(
         imagePath: widget.thumbnailImageUrl,
+        imageProvider: widget.thumbnailImageProvider,
         hasRadius: true,
         scaleFactor: widget.scaleFactor,
       ),
       WdsItemCardSize.small => WdsThumbnail.xsmall(
         imagePath: widget.thumbnailImageUrl,
+        imageProvider: widget.thumbnailImageProvider,
         hasRadius: true,
         scaleFactor: widget.scaleFactor,
       ),
@@ -283,7 +305,21 @@ class _WdsItemCardState extends State<WdsItemCard> {
           ),
 
         /// LENS PATTERN IMAGE
-        if (widget.lensPatternImageUrl != null &&
+        if (widget.lensPatternImageProvider != null && lensPatternSize != null)
+          Positioned(
+            right: 6 * widget.scaleFactor,
+            bottom: 6 * widget.scaleFactor,
+            child: Image(
+              image: widget.lensPatternImageProvider!,
+              width: lensPatternSize.width,
+              height: lensPatternSize.height,
+              fit: BoxFit.contain,
+              gaplessPlayback: true,
+              errorBuilder: (context, error, stackTrace) =>
+                  SizedBox.fromSize(size: lensPatternSize),
+            ),
+          )
+        else if (widget.lensPatternImageUrl != null &&
             widget.lensPatternImageUrl!.isNotEmpty &&
             lensPatternSize != null)
           Positioned(
