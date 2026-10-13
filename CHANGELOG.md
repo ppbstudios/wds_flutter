@@ -1,3 +1,7 @@
+### 0.0.21
+- WdsIcon > 불투명 color 지정 시 colorFilter(srcIn) 대신 ColorMapper로 파싱 단계에서 색을 입혀 아이콘마다 생기던 saveLayer 제거 (Impeller raster 비용 감소)
+- WdsIcon > 반투명 color는 기존 colorFilter 유지, color 미지정 시 동작 변경 없음
+
 ### 0.0.20
 - WdsThumbnail > imageProvider 추가 (외부 ImageProvider 주입, 미주입 시 기존 CachedNetworkImage 유지)
 - WdsItemCard > thumbnailImageProvider, lensPatternImageProvider 추가

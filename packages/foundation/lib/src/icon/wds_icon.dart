@@ -56,7 +56,8 @@ enum WdsIcon implements IconBuilder {
   thumbnail(path: 'assets/vector/thumbnail.svg'),
   wincLogo(path: 'assets/vector/winc_logo.svg'),
   wincLogoKo(path: 'assets/vector/winc_logo_ko.svg'),
-  officialWincLogo(path: 'assets/vector/official_winc_logo.svg');
+  officialWincLogo(path: 'assets/vector/official_winc_logo.svg')
+  ;
 
   const WdsIcon({
     required this.path,
@@ -73,14 +74,47 @@ enum WdsIcon implements IconBuilder {
     final iconWidth = width ?? 24.0;
     final iconHeight = height ?? 24.0;
 
+    // 불투명 색상은 파싱 단계에서 fill/stroke 를 치환해 saveLayer 없이 그린다.
+    // 반투명 색상은 겹치는 path 의 알파가 누적되어 srcIn 결과와 달라지므로
+    // 기존 colorFilter 방식을 유지한다.
+    final useColorMapper = color != null && color.a == 1.0;
+
     return SvgPicture.asset(
       path,
       package: 'wds_foundation',
-      colorFilter: color != null
+      colorMapper: useColorMapper ? _WdsIconColorMapper(color) : null,
+      colorFilter: color != null && !useColorMapper
           ? ColorFilter.mode(color, BlendMode.srcIn)
           : null,
       width: iconWidth,
       height: iconHeight,
     );
   }
+}
+
+/// SVG 의 모든 색상을 [color] 로 치환하고 원본 알파는 유지한다.
+/// `ColorFilter.mode(color, BlendMode.srcIn)` 와 같은 결과를 saveLayer 없이 낸다.
+///
+/// svg.cache 키로 쓰이므로 [color] 기준으로 ==/hashCode 를 구현해야
+/// 같은 색상의 아이콘이 매번 다시 파싱되지 않는다.
+@immutable
+class _WdsIconColorMapper extends ColorMapper {
+  const _WdsIconColorMapper(this.color);
+
+  final Color color;
+
+  @override
+  Color substitute(
+    String? id,
+    String elementName,
+    String attributeName,
+    Color color,
+  ) => this.color.withValues(alpha: color.a);
+
+  @override
+  bool operator ==(Object other) =>
+      other is _WdsIconColorMapper && other.color == color;
+
+  @override
+  int get hashCode => color.hashCode;
 }
