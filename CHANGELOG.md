@@ -1,3 +1,8 @@
+### 0.0.23
+- WdsIcon > 기존 info(느낌표) 아이콘을 alert / alertFilled로 이름 변경 (모양 동일)
+- WdsIcon > 새 i 아이콘을 info / infoFilled로 추가
+- WdsSectionMessage.warning > leadingIcon을 WdsIcon.alert로 변경 (normal / highlight는 info 유지)
+
 ### 0.0.22
 - onMessage > OverlayState 자신의 context(`navigatorKey.currentState.overlay.context`)로 호출해도 토스트가 뜨도록 수정
 - onMessage > Overlay 를 찾지 못하면 null check 크래시 대신 메시지를 띄우지 않고 넘어가도록 변경
