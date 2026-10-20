@@ -58,7 +58,7 @@ extension WdsMessageUtilExtension on BuildContext {
       'widget은 WdsSnackbar, WdsToast, WdsSectionMessage 중 하나여야 합니다.',
     );
 
-    final overlay = Overlay.of(this, rootOverlay: true);
+    final overlay = _findRootOverlay();
 
     final overlayEntry = OverlayEntry(
       builder: (BuildContext context) {
@@ -105,6 +105,9 @@ extension WdsMessageUtilExtension on BuildContext {
       },
     );
 
+    // Overlay 를 찾지 못하면 메시지 하나 때문에 앱이 죽지 않도록 띄우지 않고 넘어간다
+    if (overlay == null) return WdsMessageController(overlayEntry);
+
     overlay.insert(overlayEntry);
 
     Timer? timer;
@@ -115,5 +118,20 @@ extension WdsMessageUtilExtension on BuildContext {
     });
 
     return WdsMessageController(overlayEntry, timer);
+  }
+
+  /// [Overlay.maybeOf] 는 OverlayEntry 아래에서만 Overlay 를 찾으므로
+  /// `navigatorKey.currentState.overlay.context` 처럼 [OverlayState] 자신의 context 가
+  /// 들어오면 null 이 된다. 그 경우 조상 Overlay 가 없으면 자신을 root 로 쓴다.
+  OverlayState? _findRootOverlay() {
+    final overlay = Overlay.maybeOf(this, rootOverlay: true);
+    if (overlay != null) return overlay;
+
+    final self = this;
+    if (self is StatefulElement && self.state is OverlayState) {
+      return self.state as OverlayState;
+    }
+
+    return null;
   }
 }

@@ -1,3 +1,7 @@
+### 0.0.22
+- onMessage > OverlayState 자신의 context(`navigatorKey.currentState.overlay.context`)로 호출해도 토스트가 뜨도록 수정
+- onMessage > Overlay 를 찾지 못하면 null check 크래시 대신 메시지를 띄우지 않고 넘어가도록 변경
+
 ### 0.0.21
 - WdsIcon > 불투명 color 지정 시 colorFilter(srcIn) 대신 ColorMapper로 파싱 단계에서 색을 입혀 아이콘마다 생기던 saveLayer 제거 (Impeller raster 비용 감소)
 - WdsIcon > 반투명 color는 기존 colorFilter 유지, color 미지정 시 동작 변경 없음
