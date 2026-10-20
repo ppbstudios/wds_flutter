@@ -61,7 +61,7 @@ class WdsSectionMessage extends StatelessWidget {
     required this.message,
     super.key,
   }) : variant = WdsSectionMessageVariant.warning,
-       leadingIcon = WdsIcon.info;
+       leadingIcon = WdsIcon.alert;
 
   /// 메시지에 표시될 텍스트 내용
   final String message;
