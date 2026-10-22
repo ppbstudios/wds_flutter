@@ -1,5 +1,5 @@
 name: wds
-version: 0.0.23
+version: 0.1.0
 publish_to: none
 description: WINC Design System
 environment:
@@ -38,6 +38,11 @@ melos:
     build-widgetbook:
       description: "Build Widgetbook"
       run: cd packages/widgetbook && fvm exec dart run build_runner build --delete-conflicting-outputs && cd ../..
+
+    # Version: lockstep bump (melos run bump-version -- 0.1.1)
+    bump-version:
+      description: "Bump all package versions together"
+      run: ./tools/bump_version.sh
 
     # Format: All
     format:

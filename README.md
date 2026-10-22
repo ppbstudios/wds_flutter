@@ -3,6 +3,45 @@ Flutter를 위한 WDS(WINC Design System)
 
 [![Netlify Status](https://github.com/ppbstudios/wds_flutter/actions/workflows/deploy-widgetbook.yml/badge.svg?branch=main)](https://github.com/ppbstudios/wds_flutter/actions/workflows/deploy-widgetbook.yml)
 
+### 앱에서 설치하기
+
+`wds_components`, `wds_foundation`을 각각 git 의존성으로 추가하고, `ref`는 릴리스 태그가 가리키는 **전체 커밋 SHA(40자)** 로 고정합니다. 두 패키지의 `ref`는 항상 같은 SHA여야 합니다.
+
+```yaml
+dependencies:
+  wds_components:
+    git:
+      url: git@github.com:ppbstudios/wds_flutter.git
+      path: packages/components
+      ref: <v0.1.0 의 전체 SHA> # v0.1.0
+  wds_foundation:
+    git:
+      url: git@github.com:ppbstudios/wds_flutter.git
+      path: packages/foundation
+      ref: <v0.1.0 의 전체 SHA> # v0.1.0
+```
+
+SHA 확인: `git ls-remote git@github.com:ppbstudios/wds_flutter.git refs/tags/v0.1.0` (릴리스 태그 워크플로 Summary 에도 출력됩니다)
+
+> ⚠️ `ref`에 태그명(`v0.1.0`)이나 짧은 SHA를 쓰면 안 됩니다. `wds_components`가 `wds_foundation`을 `path: ../foundation`으로 참조하기 때문에 pub은 이를 **전체 SHA**로 해석하는데, 앱이 다른 형태의 ref로 `wds_foundation`을 직접 선언하면 서로 다른 소스로 판단해 version solving이 실패합니다.
+
+- 앱의 `pubspec.lock`을 커밋하고, CI에서는 `flutter pub get --enforce-lockfile`로 설치합니다.
+- 업데이트할 때는 두 `ref`를 새 태그의 SHA로 함께 바꾼 뒤 `flutter pub get`을 실행합니다.
+
+### 버전 관리 (lockstep)
+
+`wds`, `wds_tokens`, `wds_foundation`, `wds_components`, `wds_widgetbook`은 항상 **같은 버전**을 사용합니다.
+
+- 깨지는 변경(API 이름 변경·삭제 등): minor 업 (`0.1.0` → `0.2.0`)
+- 그 외 기능 추가·수정: patch 업 (`0.1.0` → `0.1.1`)
+
+릴리스 방법:
+1. `melos run bump-version -- 0.1.1` (또는 `./tools/bump_version.sh 0.1.1`)로 전체 pubspec 버전을 변경
+2. `CHANGELOG.md` 맨 위에 `### 0.1.1` 항목 작성
+3. PR 머지 → `main` 푸시 시 GitHub Actions가 `v0.1.1` 태그를 자동 생성
+
+PR에서는 패키지 간 버전 불일치나 CHANGELOG 누락이 있으면 `Version Check` 가 실패합니다 (`./tools/bump_version.sh --check`).
+
 ### Token Generator 사용법 (`tools/token_generator`)
 
 디자인 토큰 JSON을 Dart 코드로 변환합니다. 생성된 파일은 `packages/tokens/lib/atomic/*.g.dart`에 저장됩니다.
