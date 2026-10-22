@@ -1,3 +1,8 @@
+### 0.1.0
+- 버전 관리 > wds / wds_tokens / wds_foundation / wds_components / wds_widgetbook 버전을 하나로 통일 (lockstep)
+- 버전 관리 > main 머지 시 `vX.Y.Z` 태그 자동 생성, PR에서 패키지 간 버전 불일치 검사
+- 버전 관리 > 앞으로 깨지는 변경은 minor, 그 외는 patch 를 올림
+
 ### 0.0.23
 - WdsIcon > 기존 info(느낌표) 아이콘을 alert / alertFilled로 이름 변경 (모양 동일)
 - WdsIcon > 새 i 아이콘을 info / infoFilled로 추가

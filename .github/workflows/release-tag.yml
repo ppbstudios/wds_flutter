@@ -1,0 +1,53 @@
+name: Version Check & Release Tag
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check lockstep versions
+        run: ./tools/bump_version.sh --check
+
+  tag:
+    needs: version-check
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create tag if missing
+        run: |
+          VERSION=$(grep -m1 -E '^version:' pubspec.yaml | sed -E 's/^version:[[:space:]]*//')
+          TAG="v$VERSION"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists, skipping"
+            exit 0
+          fi
+          git tag "$TAG" "$GITHUB_SHA"
+          git push origin "$TAG"
+          {
+            echo "## 🏷️ Released $TAG"
+            echo ""
+            echo "앱 pubspec.yaml 의 wds_components / wds_foundation \`ref\` 에 아래 SHA를 사용하세요."
+            echo ""
+            echo "\`\`\`yaml"
+            echo "ref: $GITHUB_SHA # $TAG"
+            echo "\`\`\`"
+          } >> $GITHUB_STEP_SUMMARY
