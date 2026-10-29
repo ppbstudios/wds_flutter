@@ -19,7 +19,7 @@ extension on String {
     'SALE' => const WdsTag.$sale(),
     'BEST' => const WdsTag.$best(),
     '쿠폰사용가능' => const WdsTag.$coupon(),
-    _ => WdsTag(label: this),
+    _ => WdsTag.normal(label: this),
   };
 }
 

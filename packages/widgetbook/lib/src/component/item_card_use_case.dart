@@ -121,9 +121,9 @@ Widget _buildPlaygroundSection(BuildContext context) {
 
   final tags = showTags
       ? [
-          const WdsTag(label: 'NEW'),
+          const WdsTag.normal(label: 'NEW'),
           const WdsTag(label: 'HOT', color: WdsColors.secondary),
-          const WdsTag.service(label: '바로드림'),
+          const WdsTag.filled(label: '바로드림'),
         ]
       : <WdsTag>[];
 
@@ -334,17 +334,13 @@ class __BuildDemonstrationSectionState
                   reviewCount: 4342,
                   likeCount: getLikeCount('variant', WdsItemCardSize.xlarge),
                   tags: const [
-                    WdsTag(label: 'NEW'),
+                    WdsTag.normal(label: 'NEW'),
                     WdsTag(
                       label: '새학기',
                       color: WdsColors.blue400,
                       backgroundColor: WdsColors.coolNeutral50,
                     ),
-                    WdsTag(
-                      label: '베스트',
-                      backgroundColor: WdsColors.primary,
-                      color: WdsColors.white,
-                    ),
+                    WdsTag.filled(label: '베스트'),
                   ],
                 ),
               ),
@@ -365,7 +361,7 @@ class __BuildDemonstrationSectionState
                   reviewCount: 4342,
                   likeCount: getLikeCount('variant', WdsItemCardSize.large),
                   tags: const [
-                    WdsTag(label: '신상품'),
+                    WdsTag.normal(label: '신상품'),
                   ],
                 ),
               ),
@@ -387,11 +383,7 @@ class __BuildDemonstrationSectionState
                   reviewCount: 1234,
                   likeCount: getLikeCount('variant', WdsItemCardSize.medium),
                   tags: const [
-                    WdsTag(
-                      label: '베스트',
-                      backgroundColor: WdsColors.primary,
-                      color: WdsColors.white,
-                    ),
+                    WdsTag.filled(label: '베스트'),
                   ],
                 ),
               ),
@@ -446,8 +438,8 @@ class __BuildDemonstrationSectionState
                       hasLiked: getHasLiked('case_0', WdsItemCardSize.xlarge),
                       likeCount: getLikeCount('case_0', WdsItemCardSize.xlarge),
                       tags: [
-                        const WdsTag.info(label: '내 도수보유'),
-                        const WdsTag.service(label: '바로드림'),
+                        const WdsTag.normal(label: '내 도수보유'),
+                        const WdsTag(label: '바로드림', color: WdsColors.primary),
                       ],
                     ),
                   ),
@@ -468,8 +460,8 @@ class __BuildDemonstrationSectionState
                       hasLiked: getHasLiked('case_0', WdsItemCardSize.large),
                       likeCount: getLikeCount('case_0', WdsItemCardSize.large),
                       tags: [
-                        const WdsTag.info(label: '내 도수보유'),
-                        const WdsTag.service(label: '바로드림'),
+                        const WdsTag.normal(label: '내 도수보유'),
+                        const WdsTag(label: '바로드림', color: WdsColors.primary),
                       ],
                     ),
                   ),
@@ -491,8 +483,8 @@ class __BuildDemonstrationSectionState
                       hasLiked: getHasLiked('case_0', WdsItemCardSize.medium),
                       likeCount: getLikeCount('case_0', WdsItemCardSize.medium),
                       tags: [
-                        const WdsTag.info(label: '내 도수보유'),
-                        const WdsTag.service(label: '바로드림'),
+                        const WdsTag.normal(label: '내 도수보유'),
+                        const WdsTag(label: '바로드림', color: WdsColors.primary),
                       ],
                     ),
                   ),
@@ -538,8 +530,8 @@ class __BuildDemonstrationSectionState
                       hasLiked: getHasLiked('case_1', WdsItemCardSize.xlarge),
                       likeCount: getLikeCount('case_1', WdsItemCardSize.xlarge),
                       tags: const [
-                        WdsTag.info(label: '내 도수보유'),
-                        WdsTag.service(label: '바로드림'),
+                        WdsTag.normal(label: '내 도수보유'),
+                        WdsTag(label: '바로드림', color: WdsColors.primary),
                       ],
                       leftThumbnailTags: const [
                         WdsTag.$new(),
@@ -566,8 +558,8 @@ class __BuildDemonstrationSectionState
                       hasLiked: getHasLiked('case_1', WdsItemCardSize.large),
                       likeCount: getLikeCount('case_1', WdsItemCardSize.large),
                       tags: const [
-                        WdsTag.info(label: '내 도수보유'),
-                        WdsTag.service(label: '바로드림'),
+                        WdsTag.normal(label: '내 도수보유'),
+                        WdsTag(label: '바로드림', color: WdsColors.primary),
                       ],
                       leftThumbnailTags: const [
                         WdsTag.$new(),
@@ -595,8 +587,8 @@ class __BuildDemonstrationSectionState
                       hasLiked: getHasLiked('case_1', WdsItemCardSize.medium),
                       likeCount: getLikeCount('case_1', WdsItemCardSize.medium),
                       tags: [
-                        const WdsTag.info(label: '내 도수보유'),
-                        const WdsTag.service(label: '바로드림'),
+                        const WdsTag.normal(label: '내 도수보유'),
+                        const WdsTag(label: '바로드림', color: WdsColors.primary),
                       ],
                     ),
                   ),
@@ -616,7 +608,7 @@ class __BuildDemonstrationSectionState
                       hasLiked: getHasLiked('case_1', WdsItemCardSize.small),
                       likeCount: getLikeCount('case_1', WdsItemCardSize.small),
                       tags: [
-                        const WdsTag.info(label: '내 도수보유'),
+                        const WdsTag.normal(label: '내 도수보유'),
                         const WdsTag(
                           label: '바로드림',
                           color: WdsColors.primary,
@@ -650,8 +642,8 @@ class __BuildDemonstrationSectionState
                       hasLiked: getHasLiked('case_2', WdsItemCardSize.xlarge),
                       likeCount: getLikeCount('case_2', WdsItemCardSize.xlarge),
                       tags: const [
-                        WdsTag.info(label: '내 도수보유'),
-                        WdsTag.service(label: '바로드림'),
+                        WdsTag.normal(label: '내 도수보유'),
+                        WdsTag(label: '바로드림', color: WdsColors.primary),
                       ],
                       leftThumbnailTags: const [
                         WdsTag.$new(),

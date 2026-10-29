@@ -1,3 +1,10 @@
+### 0.0.24
+- WdsTag > 고정 Tag 색을 Figma(node 5050-7799)에 맞춤
+  - `$soldOut`: coolNeutral300 채움 + white 글자 → neutral/50 배경 + text/neutral 글자 (종료⋅완료)
+  - `$myPower` · `$upto2days`: neutral/50 배경 → white 배경 + border/neutral 테두리 (정보 속성)
+  - `$barodrim`: 변경 없음. 윙크 primary(blue/400, #5B7BF3) 유지
+- Widgetbook > Tag 에 고정 Tag 섹션 추가
+
 ### 0.0.23
 - WdsIcon > 기존 info(느낌표) 아이콘을 alert / alertFilled로 이름 변경 (모양 동일)
 - WdsIcon > 새 i 아이콘을 info / infoFilled로 추가

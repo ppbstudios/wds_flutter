@@ -24,77 +24,54 @@ Future<void> _pump(WidgetTester tester, WdsTag tag) => tester.pumpWidget(
 );
 
 void main() {
-  group('WdsTag 역할', () {
-    final cases = <(WdsTag, WdsTagRole, Color, Color)>[
+  group('WdsTag 고정 Tag', () {
+    final cases = <(WdsTag, Color, Color, Color?)>[
+      (const WdsTag.$barodrim(), WdsColors.primary, WdsColors.white, null),
       (
-        const WdsTag.service(label: '바로드림'),
-        WdsTagRole.service,
-        WdsColors.blue500,
-        WdsColors.white,
-      ),
-      (
-        const WdsTag.progress(label: '예약신청'),
-        WdsTagRole.progress,
-        WdsColors.neutral50,
-        WdsColors.blue500,
-      ),
-      (
-        const WdsTag.completed(label: '구매완료'),
-        WdsTagRole.completed,
+        const WdsTag.$soldOut(),
         WdsColors.neutral50,
         WdsColors.textNeutral,
+        null,
       ),
       (
-        const WdsTag.failed(label: '예약취소'),
-        WdsTagRole.failed,
-        WdsColors.neutral50,
-        WdsColors.orange700,
-      ),
-      (
-        const WdsTag.info(label: '무료검안'),
-        WdsTagRole.info,
+        const WdsTag.$myPower(),
         WdsColors.white,
         WdsColors.textNeutral,
+        WdsColors.borderNeutral,
+      ),
+      (
+        const WdsTag.$upto2days(),
+        WdsColors.white,
+        WdsColors.textNeutral,
+        WdsColors.borderNeutral,
       ),
     ];
 
-    for (final (tag, role, background, text) in cases) {
-      testWidgets('${role.name} 는 역할 토큰으로 그린다', (tester) async {
+    for (final (tag, background, text, border) in cases) {
+      testWidgets('${tag.label} 는 Figma 토큰으로 그린다', (tester) async {
         await _pump(tester, tag);
+        final decoration = _decorationOf(tester);
 
-        expect(tag.role, role);
-        expect(_decorationOf(tester).color, background);
+        expect(decoration.color, background);
         expect(_textColorOf(tester, tag.label), text);
+        expect(
+          decoration.border,
+          border == null ? isNull : Border.all(color: border),
+        );
       });
     }
 
-    testWidgets('info 만 테두리를 그린다', (tester) async {
-      for (final (tag, role, _, _) in cases) {
-        await _pump(tester, tag);
-        final border = _decorationOf(tester).border;
-
-        if (role == WdsTagRole.info) {
-          expect(border, Border.all(color: WdsColors.borderNeutral));
-        } else {
-          expect(border, isNull);
-        }
-      }
+    test('바로드림은 윙크 primary(#5B7BF3)로 칠한다', () {
+      expect(const WdsTag.$barodrim().backgroundColor, const Color(0xFF5B7BF3));
     });
 
-    testWidgets('역할 지정 라벨 생성자는 역할을 따른다', (tester) async {
-      expect(const WdsTag.$barodrim().role, WdsTagRole.service);
-      expect(const WdsTag.$soldOut().role, WdsTagRole.completed);
-      expect(const WdsTag.$myPower().role, WdsTagRole.info);
-      expect(const WdsTag.$upto2days().role, WdsTagRole.info);
-    });
-
-    test('머천다이징 태그와 색 직접 지정은 역할이 없다', () {
-      expect(const WdsTag.$new().role, isNull);
-      expect(const WdsTag.$coupon().role, isNull);
-      expect(
-        const WdsTag(label: 'HOT', color: WdsColors.secondary).role,
-        isNull,
+    testWidgets('색 직접 지정 Tag 는 테두리가 없다', (tester) async {
+      await _pump(
+        tester,
+        const WdsTag(label: 'HOT', color: WdsColors.secondary),
       );
+
+      expect(_decorationOf(tester).border, isNull);
     });
   });
 }
