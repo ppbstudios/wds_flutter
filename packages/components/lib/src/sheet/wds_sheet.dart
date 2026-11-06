@@ -47,6 +47,7 @@ abstract class WdsSheet extends StatelessWidget {
     this.backgroundColor = WdsColors.white,
     this.header,
     this.actionArea,
+    this.contentPadding = _SheetPaddingByArea.view,
     this.semanticLabel,
     super.key,
   });
@@ -56,6 +57,7 @@ abstract class WdsSheet extends StatelessWidget {
     Widget? header,
     Widget? actionArea,
     Color backgroundColor = WdsColors.white,
+    EdgeInsetsGeometry contentPadding = _SheetPaddingByArea.view,
     String? semanticLabel,
     Key? key,
   }) => _FixedSheet(
@@ -63,6 +65,7 @@ abstract class WdsSheet extends StatelessWidget {
     header: header,
     content: content,
     actionArea: actionArea,
+    contentPadding: contentPadding,
     semanticLabel: semanticLabel,
     key: key,
   );
@@ -72,12 +75,14 @@ abstract class WdsSheet extends StatelessWidget {
     Widget? header,
     Widget? actionArea,
     Color backgroundColor = WdsColors.white,
+    EdgeInsetsGeometry contentPadding = _SheetPaddingByArea.view,
     String? semanticLabel,
     Key? key,
   }) => _DraggableSheet(
     backgroundColor: backgroundColor,
     header: header,
     actionArea: actionArea,
+    contentPadding: contentPadding,
     semanticLabel: semanticLabel,
     key: key,
     children: children,
@@ -87,6 +92,13 @@ abstract class WdsSheet extends StatelessWidget {
   final Color backgroundColor;
   final Widget? header;
   final Widget? actionArea;
+
+  /// 콘텐츠 영역 여백
+  ///
+  /// 기본값은 WDS Sheet Contents 와 같은 `EdgeInsets.all(16)`.
+  /// Figma 인스턴스에서 Contents 패딩을 바꾼 화면만 지정한다.
+  final EdgeInsetsGeometry contentPadding;
+
   final String? semanticLabel;
 }
 
@@ -96,6 +108,7 @@ class _FixedSheet extends WdsSheet {
     super.backgroundColor = WdsColors.white,
     super.header,
     super.actionArea,
+    super.contentPadding,
     super.semanticLabel,
     super.key,
   }) : super(variant: WdsSheetVariant.fixed);
@@ -119,11 +132,9 @@ class _FixedSheet extends WdsSheet {
                 child: __SheetHeader(
                   header: header!,
                 ),
-              )
-            else
-              const SizedBox(height: 12),
+              ),
             Padding(
-              padding: _SheetPaddingByArea.view,
+              padding: contentPadding,
               child: content,
             ),
             if (actionArea != null)
@@ -145,6 +156,7 @@ class _DraggableSheet extends WdsSheet {
     super.backgroundColor = WdsColors.white,
     super.header,
     super.actionArea,
+    super.contentPadding,
     super.semanticLabel,
     super.key,
   }) : super(
@@ -194,7 +206,7 @@ class _DraggableSheet extends WdsSheet {
               Flexible(
                 child: ListView(
                   controller: scrollController,
-                  padding: _SheetPaddingByArea.view,
+                  padding: contentPadding,
                   children: children,
                 ),
               ),

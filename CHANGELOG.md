@@ -1,3 +1,8 @@
+### 0.0.24
+- WdsSheet > contentPadding 추가 (기본값 EdgeInsets.all(16) 유지). Figma 인스턴스에서 Contents 패딩을 바꾼 화면용
+- WdsSheet.fixed > header 가 없을 때 위에 붙던 12px 여백 제거. Figma WDS Sheet·core-ui WdsSheet 처럼 Contents 위 16 만 남김
+- WdsActionArea > padding 추가 (기본값 EdgeInsets.fromLTRB(16, 8, 16, 16) 유지)
+
 ### 0.0.23
 - WdsIcon > 기존 info(느낌표) 아이콘을 alert / alertFilled로 이름 변경 (모양 동일)
 - WdsIcon > 새 i 아이콘을 info / infoFilled로 추가
