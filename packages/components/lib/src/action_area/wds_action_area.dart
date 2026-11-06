@@ -4,13 +4,14 @@ enum WdsActionAreaVariant { normal, filter, division }
 
 /// 하단 고정 액션 영역
 /// - height: 81
-/// - padding: EdgeInsets.all(16)
+/// - padding: EdgeInsets.fromLTRB(16, 8, 16, 16) (padding 으로 변경 가능)
 /// - border(top): 1px alternative
 /// - background: white
 class WdsActionArea extends StatelessWidget {
   WdsActionArea.normal({
     required this.primary,
     this.showBorder = true,
+    this.padding = _defaultPadding,
     this.semanticLabel,
     super.key,
   }) : variant = WdsActionAreaVariant.normal,
@@ -24,6 +25,7 @@ class WdsActionArea extends StatelessWidget {
     required this.secondary,
     required this.primary,
     this.showBorder = true,
+    this.padding = _defaultPadding,
     this.semanticLabel,
     super.key,
   }) : variant = WdsActionAreaVariant.filter,
@@ -45,6 +47,7 @@ class WdsActionArea extends StatelessWidget {
     required this.secondary,
     required this.primary,
     this.showBorder = true,
+    this.padding = _defaultPadding,
     this.semanticLabel,
     super.key,
   }) : variant = WdsActionAreaVariant.division,
@@ -72,6 +75,14 @@ class WdsActionArea extends StatelessWidget {
 
   /// 상단 경계선 표시 여부
   final bool showBorder;
+
+  /// 버튼 영역 여백 (하단 SafeArea 안쪽)
+  ///
+  /// 기본값은 WDS Action 과 같은 `EdgeInsets.fromLTRB(16, 8, 16, 16)`.
+  /// Figma 인스턴스에서 Action 패딩을 바꾼 화면만 지정한다.
+  final EdgeInsetsGeometry padding;
+
+  static const EdgeInsets _defaultPadding = EdgeInsets.fromLTRB(16, 8, 16, 16);
 
   /// 접근성을 위한 시맨틱 라벨
   final String? semanticLabel;
@@ -102,7 +113,7 @@ class WdsActionArea extends StatelessWidget {
             ),
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                padding: padding,
                 child: content,
               ),
             ),
